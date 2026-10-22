@@ -1,0 +1,12 @@
+{
+  "paper_3d7f6db2183d736bbefdd973": {
+    "outcome": "target1_touched",
+    "reported_at_utc": "2026-10-21T22:15:00Z",
+    "first_touch_bar_utc": "2026-10-21T22:04:00Z"
+  },
+  "paper_ae0ef8cd437b434d3cd5d859": {
+    "first_touch_bar_utc": "2026-10-22T02:21:00Z",
+    "outcome": "invalidation_touched",
+    "reported_at_utc": "2026-10-22T03:17:00Z"
+  }
+}

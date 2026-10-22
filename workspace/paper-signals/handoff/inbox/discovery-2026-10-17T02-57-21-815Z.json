@@ -1,0 +1,31 @@
+{
+  "runId": "86",
+  "source": "crypto-market-discovery",
+  "completedAt": "2026-10-17T02:57:21.815Z",
+  "freezeVersion": "v2.1.5",
+  "candidates": [
+    {
+      "symbol": "BTC",
+      "coinId": "bitcoin",
+      "name": "Bitcoin",
+      "direction": "watch",
+      "score": 80,
+      "entryPrice": null,
+      "invalidation": null,
+      "target1": null,
+      "target2": null,
+      "signalDate": "2026-10-17",
+      "detectedAt": "2026-10-17T02:57:21.015Z",
+      "factorLedger": null,
+      "totalWeight": null,
+      "decisionEvidence": {
+        "signalDay": null,
+        "historyCloses": [],
+        "historyHighs": [],
+        "currentPrice": 81398,
+        "asOf": "2026-10-17T02:55:47.000Z",
+        "vetoBars": []
+      }
+    }
+  ]
+}

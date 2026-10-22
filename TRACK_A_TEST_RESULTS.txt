@@ -1,0 +1,40 @@
+Track A native verification — 2026-10-09
+
+Environment
+- Bun 1.4.2 (744846f84)
+- TypeScript strict client + server typecheck
+
+Commands
+1. bun run typecheck
+2. bun run test:freshness
+3. bun run test:module
+4. bun run test:integration
+5. bun run test:action
+6. bun run test:phase2a
+
+Results
+- Typecheck: PASS
+- Track A market-freshness tests: 11 passed, 0 failed, 21 assertions
+- Existing signal methodology tests: 23 passed, 0 failed, 66 assertions
+- Existing persistence integration tests: 7 passed, 0 failed, 26 assertions
+- Existing action/client contract tests: 2 passed, 0 failed, 6 assertions
+- Existing Phase 2A tests: 12 passed, 0 failed, 41 assertions
+- Total: 55 tests passed, 0 failed
+
+Track A checks covered
+- Expensive analysis throttled while market observations advance
+- Successful HTTP response carrying stale content
+- Forming candle later becoming completed by provider close time
+- Forming volume kept separate from completed-candle inputs
+- Outage retaining last-known observation
+- Concurrent refresh deduplication
+- Fresh price with stale funding
+- Immutable issued decision snapshot and levels
+- Barrier observed without adequate path remains unsettled
+- Repeated status observation idempotency
+- Provider correction receives a distinct observation identity
+
+Limitations
+- Outage/recovery and concurrency tests use deterministic fixtures/in-memory coordination.
+- Existing persistence tests use their documented test adapters and do not prove production database rollback.
+- Scheduled recovery cycles and production incident evidence remain pending until the installed jobs run in production.

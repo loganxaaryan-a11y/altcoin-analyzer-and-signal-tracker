@@ -1,0 +1,45 @@
+{
+ "invocation_completed": {
+  "run_ts_utc": "2026-10-21T12:00:00Z",
+  "started_utc": "2026-10-21T12:00:00Z",
+  "finished_utc": "2026-10-21T12:09:40Z",
+  "status": "succeeded",
+  "per_terminal_fetch": {
+   "altcoin-analyzer-and-signal-tracker": {
+    "listtheories": "ok (14 theories)",
+    "getmarketread": "ok, asOf 2026-10-21T12:01:47.214Z; ZEC/AAVE/PENDLE/NEAR absent from rows -> prediction-feed prices used"
+   },
+   "equity-analyzer-and-signal-tracker": {
+    "listtheories": "ok (50 theories, 3 pages: cursor 0/20/40)",
+    "getmarketread": "ok but cached/stored history asOf 2026-10-20T20:00:00Z (latest completed Monday session) -> prediction-feed session prints used"
+   }
+  },
+  "theories_seen": {
+   "crypto": 14,
+   "equity": 50
+  },
+  "transitions_found": 3,
+  "alerts_pre_committed": [
+   "altcoin-analyzer-and-signal-tracker/14/new-challenging-evidence",
+   "altcoin-analyzer-and-signal-tracker/13/tripwire:p4:hit",
+   "altcoin-analyzer-and-signal-tracker/10/tripwire:p1:hit"
+  ],
+  "learning_entries_appended": 0,
+  "new_theories_baselined_silently": [
+   "altcoin/16 (prediction-market composite)",
+   "equity/55 (NFLX post-earnings fade)"
+  ],
+  "bounce_watch_classifications": [
+   "equity/16/p2: fakeout (XLE re-breached 67.11 within window; 67.97 at classification)"
+  ],
+  "evidence_inventory_additions": [
+   "altcoin/15:+id63(confirming)",
+   "altcoin/14:+id62(challenging),+id58(confirming)",
+   "equity/49:+id215(confirming),+id214(challenging)"
+  ],
+  "errors": []
+ },
+ "scheduler_provenance": {
+  "origin": "origin_unverified"
+ }
+}

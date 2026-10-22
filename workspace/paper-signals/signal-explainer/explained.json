@@ -1,0 +1,55 @@
+{
+  "_doc": "Book of record for signal-explainer alerts. Keyed <terminal>:<signal_id>. Each signal explained exactly once. Written ONLY by the signal-explainer worker (cron job id: signal-explainer). Bootstrap: the 2026-10-15 first pass explained rows created in the last 48h (crypto ids 39, 40; no equity rows qualified) \u2014 see README.md.",
+  "chat_id": "a685c3e7-c8be-4137-8900-4e899008bca7",
+  "entries": {
+    "crypto:39": {
+      "asset": "S",
+      "bootstrap": true,
+      "created_at": "2026-10-13T10:07:29.474Z",
+      "direction": "long",
+      "explained_at_utc": "2026-10-15T06:38:00Z",
+      "note": "Replay row per 2026-10-14 reclassification (not a deployed-natural entry). Independently walked HIT on 2026-10-13 \u2014 explanation was retrospective.",
+      "signal_id": "39",
+      "terminal": "crypto"
+    },
+    "crypto:40": {
+      "asset": "HYPE",
+      "bootstrap": true,
+      "created_at": "2026-10-14T02:23:07.604Z",
+      "direction": "short",
+      "explained_at_utc": "2026-10-15T06:38:00Z",
+      "note": "Replay row per 2026-10-14 reclassification (not a deployed-natural entry). Row reliability block: 50-64 band, 0/2, killFlag true, status limited.",
+      "signal_id": "40",
+      "terminal": "crypto"
+    },
+    "crypto:44": {
+      "asset": "BTC",
+      "created_at": "2026-10-15T04:56:13.195Z",
+      "direction": "long",
+      "explained_at_utc": "2026-10-16T10:47:00Z",
+      "note": "Catch-up: issued 2026-10-15T04:56Z but never explained \u2014 missed at bootstrap (ledger start 2026-10-15T06:38Z) and skipped by every later run on the strict last_check_utc watermark. Explained once under the README's exactly-once contract; deviation from body \u00a73 logged in run-2026-10-16T10-47Z.json. Entry 81568, invalidation 78791.41, T1 85732.88, confidence 52.",
+      "signal_id": "44",
+      "terminal": "crypto"
+    },
+    "crypto:45": {
+      "asset": "ETH",
+      "created_at": "2026-10-15T04:56:13.857Z",
+      "direction": "long",
+      "explained_at_utc": "2026-10-16T10:47:00Z",
+      "note": "Catch-up: issued 2026-10-15T04:56Z but never explained \u2014 missed at bootstrap (ledger start 2026-10-15T06:38Z) and skipped by every later run on the strict last_check_utc watermark. Explained once under the README's exactly-once contract; deviation from body \u00a73 logged in run-2026-10-16T10-47Z.json. Entry 2383.41, invalidation 2267.48, T1 2557.30, confidence 52.",
+      "signal_id": "45",
+      "terminal": "crypto"
+    },
+    "crypto:46": {
+      "asset": "TEST",
+      "created_at": "2026-10-16T02:48:49.537Z",
+      "direction": "long",
+      "explained_at_utc": "2026-10-16T06:43:31Z",
+      "note": "TEST-harness fixture (kill-gate proof path); row name TEST_kgrace_mvadc7za_k1rrurv5; recordIntegrity malformed, no history rows. Explained once, marker named.",
+      "signal_id": "46",
+      "terminal": "crypto"
+    }
+  },
+  "job_id": "signal-explainer",
+  "last_check_utc": "2026-10-20T18:25:28Z"
+}

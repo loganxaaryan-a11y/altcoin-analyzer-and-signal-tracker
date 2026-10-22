@@ -1,0 +1,35 @@
+{
+ "invocation_completed": {
+  "run_ts_utc": "2026-10-18T22:44:53Z",
+  "started_utc": "2026-10-18T22:41:34Z",
+  "finished_utc": "2026-10-18T22:44:53Z",
+  "status": "succeeded",
+  "rows_seen": {
+   "crypto_open": 3,
+   "crypto_discovery": 0,
+   "equity_open": 12,
+   "equity_discovery": 0
+  },
+  "new_keys": [],
+  "explained_keys": [],
+  "skipped": "crypto:41 (SUI long, created 2026-10-14T13:00:09Z) is visible in open_signals but created before the watermark and has no ledger key — not due per §3 strict rule (same standing gap noted in prior runs; TEST fixture crypto:46 explained earlier no longer appears in open_signals). All 12 equity rows (MDLZ 48, WMT 47, SI=F 32, GC=F 31, CL=F 42, 6411.TWO 27, 0221.KL 41, META 52, BTC-USD 51, EMR 50, META 49, INFY 46) created 2026-10-01..2026-10-05, pre-watermark.",
+  "due_set_decision": "empty — no open_signals/discovery row on either side has created strictly after last_check_utc 2026-10-18T18:42:22Z with a missing ledger key. Crypto discovery (as_of 20:59:48Z, fresh, 0 rows) independently confirms nothing issued since the last run.",
+  "mirror_as_of": {
+   "crypto_open_signals": "2026-10-18T09:46:05.629Z (section ~13h old — STALE per section-level rule; no post-watermark rows visible; fresh discovery section confirms no new issuance)",
+   "crypto_discovery": "2026-10-18T20:59:48.997Z (fresh, 0 rows)",
+   "crypto_theories": "2026-10-18T11:52:49.607Z (0 rows)",
+   "crypto_market_read": "2026-10-18T21:44:33.498Z (fresh)",
+   "equity_open_signals": "2026-10-18T21:44:47.473Z (fresh, 12 rows, none post-watermark)",
+   "equity_discovery": "2026-10-16T19:38:30.188Z (section ~51h old — STALE per section-level rule; no rows newer than watermark)",
+   "equity_theories": "2026-10-18T21:44:53.383Z (0 rows)",
+   "equity_market_read": "2026-10-18T21:45:18.476Z (fresh)"
+  },
+  "mirror_generated_at": "2026-10-18T21:56:53Z (both sides, ~45m old — fresh)",
+  "exception_path_invocations": [],
+  "action_failures": [],
+  "note": "No exception-path terminal reads fired. Per evidence-reuse SPEC the mirror itself (generated_at 21:56Z) is the staleness gate and is fresh; the fresh crypto discovery section (0 signals) and fresh equity open_signals read independently cover the post-watermark window. Watch item carried from prior runs: crypto paper_pilot still reports 4 live_signals (2x BTC long, BAT long, NEAR long) while tracker open_signals shows 3 rows (41 SUI, 44 BTC, 45 ETH) — namespaces/ids do not reconcile in the mirror; read-only job, no action taken. Ledger last_check_utc advanced to 2026-10-18T22:44:03Z with zero explained keys. Per §8: no chat-facing output emitted."
+ },
+ "scheduler_provenance": {
+  "origin": "origin_unverified"
+ }
+}

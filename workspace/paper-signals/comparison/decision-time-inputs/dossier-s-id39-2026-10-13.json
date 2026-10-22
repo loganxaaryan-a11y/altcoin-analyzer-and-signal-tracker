@@ -1,0 +1,3494 @@
+{
+  "capture_correction_note": "CORRECTION 2026-10-15 (capture correction): this capture's evidence_class was defaulted to FRESH by the 2026-10-14 automatic run, which conflated capture time with decision time. The frozen dossier-cohort-v1 eligibility cutoff is 2026-10-14T18:35:00+00:00 on the DECISION instant; this issuance's decision_at (2026-10-13T10:07:29.474+00:00) predates the cutoff, so it is historical reproduction, not fresh prospective evidence. Label corrected FRESH -> REPLAY/REPRODUCTION (label correction only; the persisted decision-time inputs and arm results were not touched or re-scored). captured_at added, distinct from decision_at.",
+  "captured_at": "2026-10-15T00:58:35.228+00:00",
+  "decision_at": "2026-10-13T10:07:29.474+00:00",
+  "decision_at_ms": 1791886049474,
+  "entry_context": {
+    "atr14": 0.005599279160667309,
+    "atr_bar_count": 526,
+    "decision_reference": {
+      "entry": 0.057268,
+      "stop": 0.050268901049165864,
+      "target": 0.0677666484262512,
+      "target2": 0.07476574737708534
+    },
+    "entry_evidence": {
+      "price": 0.057268,
+      "priceConvention": "usd-spot-reference",
+      "provider": "CoinGecko markets",
+      "receivedAt": "2026-10-13T10:07:30.959Z",
+      "requestedAfterDecisionAt": "2026-10-13T10:07:29.474Z",
+      "rule": "first-post-decision-provider-quote"
+    },
+    "entry_price": 0.057268,
+    "funding": -0.0001829568,
+    "levels_recorded": {
+      "entry": 0.057268,
+      "invalidation": 0.050268901049165864,
+      "target1": 0.0677666484262512,
+      "target2": 0.07476574737708534
+    },
+    "oi_change": -0.01477891846939361,
+    "oi_usd": 2015149.7232,
+    "risk_method": "atr14_1_25x",
+    "risk_multiplier": 1.25,
+    "short_regime_check": null,
+    "signal_day_candle": {
+      "close": 0.056493,
+      "day": "2026-10-12",
+      "high": 0.062905,
+      "low": 0.055407,
+      "open": 0.06091,
+      "source": "CoinGecko OHLC \u2192 historical_daily_bars grading series"
+    },
+    "validation_status": "partially_testable_prospective"
+  },
+  "evidence_class": "REPLAY/REPRODUCTION",
+  "factors": [
+    {
+      "asOf": "2026-10-13T10:06:49.000Z",
+      "contribution": 2.5,
+      "label": "Trend cluster",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "50D: above \u00b7 200D: above \u00b7 90D: 125.1%",
+      "score": 1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "50D: above \u00b7 200D: above \u00b7 90D: 125.1%",
+      "weight": 2.5
+    },
+    {
+      "asOf": "2026-10-13T10:06:49.000Z",
+      "contribution": 1.5,
+      "label": "Momentum",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "RSI 68.9",
+      "score": 1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "RSI 68.9",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-13T10:06:49.000Z",
+      "contribution": 1.5,
+      "label": "MACD",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "positive cross-state",
+      "score": 1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "positive cross-state",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-13T10:07:29.432Z",
+      "contribution": 1.75,
+      "label": "Perp funding crowding",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "venue Hyperliquid \u00b7 8h-normalized -0.0183% \u00b7 shorts paying longs",
+      "score": 1,
+      "source": "Hyperliquid",
+      "status": "observed",
+      "value": "venue Hyperliquid \u00b7 8h-normalized -0.0183% \u00b7 shorts paying longs",
+      "weight": 1.75
+    },
+    {
+      "asOf": "2026-10-13T10:07:29.432Z",
+      "contribution": 0,
+      "label": "Open interest",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "OKX $2015149.72 \u00b7 24H -0.0% \u00b7 Hyperliquid cross-check $1337505.54",
+      "score": 0,
+      "source": "OKX OI + OKX 24H baseline",
+      "status": "observed",
+      "value": "OKX $2015149.72 \u00b7 24H -0.0% \u00b7 Hyperliquid cross-check $1337505.54",
+      "weight": 1
+    },
+    {
+      "asOf": "2026-10-13T10:07:18.718Z",
+      "contribution": 0,
+      "label": "Binance futures positioning",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 Binance Futures blocked artifact egress: Service unavailable from a restricted location according to 'b. Eligibility' in https://www.binance.com/en/terms. Please contact customer service if you believe you received this message in error.",
+      "score": 0,
+      "source": "Binance Futures",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 Binance Futures blocked artifact egress: Service unavailable from a restricted location according to 'b. Eligibility' in https://www.binance.com/en/terms. Please contact customer service if you believe you received this message in error.",
+      "weight": 1
+    },
+    {
+      "asOf": null,
+      "contribution": 0,
+      "label": "Cross-venue taker imbalance",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "score": 0,
+      "source": "Binance aggTrades + OKX spot trades",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "weight": 1.25
+    },
+    {
+      "asOf": "2026-10-13T10:07:29.432Z",
+      "contribution": 0,
+      "label": "TVL trend",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 no curated DeFiLlama protocol or chain mapping; no slug was guessed",
+      "score": 0,
+      "source": "DeFiLlama",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 no curated DeFiLlama protocol or chain mapping; no slug was guessed",
+      "weight": 2
+    },
+    {
+      "asOf": "2026-10-13T10:07:29.432Z",
+      "contribution": 0,
+      "label": "Revenue linkage",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 no verified 30-day fee/revenue series for this asset \u00b7 buybacks: NO_DATA \u2014 no verified buyback feed \u00b7 issuance overhang is scored separately in Supply overhang",
+      "score": 0,
+      "source": "DeFiLlama 30D fees + revenue",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 no verified 30-day fee/revenue series for this asset \u00b7 buybacks: NO_DATA \u2014 no verified buyback feed \u00b7 issuance overhang is scored separately in Supply overhang",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-13T10:06:49.000Z",
+      "contribution": 0,
+      "label": "Developer velocity",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 no curated canonical GitHub repository mapping.",
+      "score": 0,
+      "source": "GitHub commit activity",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 no curated canonical GitHub repository mapping.",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-13T10:06:49.000Z",
+      "contribution": 0,
+      "label": "Supply-overhang penalty (negative-only)",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "FDV/mcap 1.00\u00d7 \u2014 limited future supply; no penalty and no positive credit",
+      "score": 0,
+      "source": "CoinGecko",
+      "status": "observed",
+      "value": "FDV/mcap 1.00\u00d7 \u2014 limited future supply; no penalty and no positive credit",
+      "weight": 1.5
+    }
+  ],
+  "freshness_classification": {
+    "cutoff_utc": "2026-10-14T18:35:00+00:00",
+    "note": "decision_at 2026-10-13T10:07:29.474+00:00 before frozen cutoff 2026-10-14T18:35:00+00:00: historical reproduction, not fresh prospective evidence (capture time does not qualify)"
+  },
+  "issuance_key": "sonic-3|spot-reference|crypto-dossier-factor-agreement|2.0.0-measurement-contract|sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220|1791849600000",
+  "issuance_path": "getCryptoAnalysis \u2192 issueGeneratedSignalCandidate",
+  "issued_at": "2026-10-13T10:07:29.474+00:00",
+  "missing_inputs": [
+    {
+      "label": "Binance futures positioning",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Cross-venue taker imbalance",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "TVL trend",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Revenue linkage",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Developer velocity",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    }
+  ],
+  "model": {
+    "collector": "comparison/dossier_model_collector.py::capture_dossier_evaluation (single automatic write path)",
+    "cost_scenario": "modeled-roundtrip-18bps-funding-unverified-v1",
+    "entry_convention": "first-post-decision-provider-quote",
+    "evaluator_version": "crypto-evaluation-v4-cohort-contract",
+    "parameter_hash": "sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220",
+    "price_convention": "usd-spot-reference",
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+    "strategy_id": "crypto-dossier-factor-agreement",
+    "strategy_version": "2.0.0-measurement-contract",
+    "wiring": "comparison/intended_models.py (score_dossier_factors <- scoreDossierFactors, signal-methodology.ts:47)"
+  },
+  "opportunity_id": "dossier-s-id39-2026-10-13",
+  "persisted_at": "2026-10-15T00:58:35.228+00:00",
+  "provenance": {
+    "extracted_at": "2026-10-15T00:58:35.219+00:00",
+    "signal_id": 39,
+    "signal_table": "generated_signals",
+    "snapshot_id": 4109131422199245,
+    "snapshot_table": "signal_input_snapshots",
+    "source_db": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/app.db",
+    "source_db_role": "local workspace copy; read-only open (mode=ro); not a dump of the deployed runtime"
+  },
+  "provider_metadata": {
+    "buildId": "starting-build:c3217be9-7f13-4c20-ae29-01600474bbab|source:crypto-phase1-final-signoff-2026-10-09",
+    "providers": [
+      "CoinGeckoOHLC",
+      "historicalDailyBars",
+      "Hyperliquid",
+      "KrakenSpotOHLC",
+      "OKX"
+    ],
+    "sourceAsOf": "2026-10-13T10:06:49.000Z"
+  },
+  "raw_decision_inputs": {
+    "atrBars": [
+      {
+        "availableAt": 1746489600000,
+        "close": 0.5128,
+        "high": 0.5257,
+        "low": 0.5014
+      },
+      {
+        "availableAt": 1746576000000,
+        "close": 0.5109,
+        "high": 0.5393,
+        "low": 0.49
+      },
+      {
+        "availableAt": 1746662400000,
+        "close": 0.5087,
+        "high": 0.52,
+        "low": 0.45
+      },
+      {
+        "availableAt": 1746748800000,
+        "close": 0.5663,
+        "high": 0.575,
+        "low": 0.5089
+      },
+      {
+        "availableAt": 1746835200000,
+        "close": 0.5887,
+        "high": 0.6148,
+        "low": 0.563
+      },
+      {
+        "availableAt": 1746921600000,
+        "close": 0.6176,
+        "high": 0.6245,
+        "low": 0.5782
+      },
+      {
+        "availableAt": 1747008000000,
+        "close": 0.583,
+        "high": 0.6194,
+        "low": 0.5661
+      },
+      {
+        "availableAt": 1747094400000,
+        "close": 0.5893,
+        "high": 0.6238,
+        "low": 0.5624
+      },
+      {
+        "availableAt": 1747180800000,
+        "close": 0.6021,
+        "high": 0.6192,
+        "low": 0.5525
+      },
+      {
+        "availableAt": 1747267200000,
+        "close": 0.5736,
+        "high": 0.6105,
+        "low": 0.5663
+      },
+      {
+        "availableAt": 1747353600000,
+        "close": 0.5392,
+        "high": 0.5796,
+        "low": 0.5275
+      },
+      {
+        "availableAt": 1747440000000,
+        "close": 0.5218,
+        "high": 0.5497,
+        "low": 0.5187
+      },
+      {
+        "availableAt": 1747526400000,
+        "close": 0.4968,
+        "high": 0.5231,
+        "low": 0.486
+      },
+      {
+        "availableAt": 1747612800000,
+        "close": 0.511,
+        "high": 0.5835,
+        "low": 0.4839
+      },
+      {
+        "availableAt": 1747699200000,
+        "close": 0.4993,
+        "high": 0.5172,
+        "low": 0.4772
+      },
+      {
+        "availableAt": 1747785600000,
+        "close": 0.5024,
+        "high": 0.5086,
+        "low": 0.49
+      },
+      {
+        "availableAt": 1747872000000,
+        "close": 0.5083,
+        "high": 0.5225,
+        "low": 0.4955
+      },
+      {
+        "availableAt": 1747958400000,
+        "close": 0.5254,
+        "high": 0.5373,
+        "low": 0.508
+      },
+      {
+        "availableAt": 1748044800000,
+        "close": 0.4696,
+        "high": 0.5421,
+        "low": 0.4655
+      },
+      {
+        "availableAt": 1748131200000,
+        "close": 0.4716,
+        "high": 0.4804,
+        "low": 0.463
+      },
+      {
+        "availableAt": 1748217600000,
+        "close": 0.4581,
+        "high": 0.509,
+        "low": 0.435
+      },
+      {
+        "availableAt": 1748304000000,
+        "close": 0.4476,
+        "high": 0.5,
+        "low": 0.4405
+      },
+      {
+        "availableAt": 1748390400000,
+        "close": 0.4474,
+        "high": 0.4616,
+        "low": 0.4367
+      },
+      {
+        "availableAt": 1748476800000,
+        "close": 0.4455,
+        "high": 0.4523,
+        "low": 0.4268
+      },
+      {
+        "availableAt": 1748563200000,
+        "close": 0.435,
+        "high": 0.4591,
+        "low": 0.4339
+      },
+      {
+        "availableAt": 1748649600000,
+        "close": 0.3908,
+        "high": 0.4372,
+        "low": 0.3834
+      },
+      {
+        "availableAt": 1748736000000,
+        "close": 0.3941,
+        "high": 0.3985,
+        "low": 0.3741
+      },
+      {
+        "availableAt": 1748822400000,
+        "close": 0.3986,
+        "high": 0.4025,
+        "low": 0.3803
+      },
+      {
+        "availableAt": 1748908800000,
+        "close": 0.4144,
+        "high": 0.4182,
+        "low": 0.3911
+      },
+      {
+        "availableAt": 1748995200000,
+        "close": 0.4053,
+        "high": 0.4225,
+        "low": 0.404
+      },
+      {
+        "availableAt": 1749081600000,
+        "close": 0.3899,
+        "high": 0.4128,
+        "low": 0.387
+      },
+      {
+        "availableAt": 1749168000000,
+        "close": 0.364,
+        "high": 0.3964,
+        "low": 0.3528
+      },
+      {
+        "availableAt": 1749254400000,
+        "close": 0.3727,
+        "high": 0.383,
+        "low": 0.362
+      },
+      {
+        "availableAt": 1749340800000,
+        "close": 0.3824,
+        "high": 0.3863,
+        "low": 0.3723
+      },
+      {
+        "availableAt": 1749427200000,
+        "close": 0.3791,
+        "high": 0.3835,
+        "low": 0.3737
+      },
+      {
+        "availableAt": 1749513600000,
+        "close": 0.3986,
+        "high": 0.4,
+        "low": 0.3688
+      },
+      {
+        "availableAt": 1749600000000,
+        "close": 0.4059,
+        "high": 0.4094,
+        "low": 0.3863
+      },
+      {
+        "availableAt": 1749686400000,
+        "close": 0.374,
+        "high": 0.4076,
+        "low": 0.3703
+      },
+      {
+        "availableAt": 1749772800000,
+        "close": 0.3607,
+        "high": 0.3778,
+        "low": 0.3528
+      },
+      {
+        "availableAt": 1749859200000,
+        "close": 0.3334,
+        "high": 0.3595,
+        "low": 0.3006
+      },
+      {
+        "availableAt": 1749945600000,
+        "close": 0.3365,
+        "high": 0.3494,
+        "low": 0.33
+      },
+      {
+        "availableAt": 1750032000000,
+        "close": 0.3352,
+        "high": 0.3387,
+        "low": 0.3243
+      },
+      {
+        "availableAt": 1750118400000,
+        "close": 0.3384,
+        "high": 0.3586,
+        "low": 0.3268
+      },
+      {
+        "availableAt": 1750204800000,
+        "close": 0.3236,
+        "high": 0.3433,
+        "low": 0.3154
+      },
+      {
+        "availableAt": 1750291200000,
+        "close": 0.324,
+        "high": 0.3322,
+        "low": 0.3121
+      },
+      {
+        "availableAt": 1750377600000,
+        "close": 0.3223,
+        "high": 0.3286,
+        "low": 0.3169
+      },
+      {
+        "availableAt": 1750464000000,
+        "close": 0.2746,
+        "high": 0.3249,
+        "low": 0.2659
+      },
+      {
+        "availableAt": 1750550400000,
+        "close": 0.2621,
+        "high": 0.2834,
+        "low": 0.2502
+      },
+      {
+        "availableAt": 1750636800000,
+        "close": 0.266,
+        "high": 0.2806,
+        "low": 0.25
+      },
+      {
+        "availableAt": 1750723200000,
+        "close": 0.3171,
+        "high": 0.323,
+        "low": 0.266
+      },
+      {
+        "availableAt": 1750809600000,
+        "close": 0.3513,
+        "high": 0.3517,
+        "low": 0.3151
+      },
+      {
+        "availableAt": 1750896000000,
+        "close": 0.3127,
+        "high": 0.3558,
+        "low": 0.3104
+      },
+      {
+        "availableAt": 1750982400000,
+        "close": 0.3024,
+        "high": 0.3234,
+        "low": 0.297
+      },
+      {
+        "availableAt": 1751068800000,
+        "close": 0.3064,
+        "high": 0.3144,
+        "low": 0.3015
+      },
+      {
+        "availableAt": 1751155200000,
+        "close": 0.3111,
+        "high": 0.3159,
+        "low": 0.3024
+      },
+      {
+        "availableAt": 1751241600000,
+        "close": 0.3281,
+        "high": 0.3361,
+        "low": 0.3092
+      },
+      {
+        "availableAt": 1751328000000,
+        "close": 0.314,
+        "high": 0.3284,
+        "low": 0.3096
+      },
+      {
+        "availableAt": 1751414400000,
+        "close": 0.2995,
+        "high": 0.3157,
+        "low": 0.2971
+      },
+      {
+        "availableAt": 1751500800000,
+        "close": 0.3242,
+        "high": 0.3318,
+        "low": 0.2933
+      },
+      {
+        "availableAt": 1751587200000,
+        "close": 0.3318,
+        "high": 0.342,
+        "low": 0.3223
+      },
+      {
+        "availableAt": 1751673600000,
+        "close": 0.3109,
+        "high": 0.3325,
+        "low": 0.3013
+      },
+      {
+        "availableAt": 1751760000000,
+        "close": 0.3081,
+        "high": 0.3154,
+        "low": 0.3024
+      },
+      {
+        "availableAt": 1751846400000,
+        "close": 0.312,
+        "high": 0.3161,
+        "low": 0.3037
+      },
+      {
+        "availableAt": 1751932800000,
+        "close": 0.3076,
+        "high": 0.3174,
+        "low": 0.3046
+      },
+      {
+        "availableAt": 1752019200000,
+        "close": 0.3039,
+        "high": 0.3086,
+        "low": 0.2959
+      },
+      {
+        "availableAt": 1752105600000,
+        "close": 0.3224,
+        "high": 0.3245,
+        "low": 0.299
+      },
+      {
+        "availableAt": 1752192000000,
+        "close": 0.3454,
+        "high": 0.35,
+        "low": 0.3127
+      },
+      {
+        "availableAt": 1752278400000,
+        "close": 0.3584,
+        "high": 0.3803,
+        "low": 0.3344
+      },
+      {
+        "availableAt": 1752364800000,
+        "close": 0.3481,
+        "high": 0.366,
+        "low": 0.3375
+      },
+      {
+        "availableAt": 1752451200000,
+        "close": 0.3618,
+        "high": 0.3719,
+        "low": 0.3466
+      },
+      {
+        "availableAt": 1752537600000,
+        "close": 0.3487,
+        "high": 0.3765,
+        "low": 0.342
+      },
+      {
+        "availableAt": 1752624000000,
+        "close": 0.3569,
+        "high": 0.3578,
+        "low": 0.333
+      },
+      {
+        "availableAt": 1752710400000,
+        "close": 0.3782,
+        "high": 0.3912,
+        "low": 0.3525
+      },
+      {
+        "availableAt": 1752796800000,
+        "close": 0.3794,
+        "high": 0.3941,
+        "low": 0.3652
+      },
+      {
+        "availableAt": 1752883200000,
+        "close": 0.3798,
+        "high": 0.4194,
+        "low": 0.3707
+      },
+      {
+        "availableAt": 1752969600000,
+        "close": 0.3835,
+        "high": 0.385,
+        "low": 0.3708
+      },
+      {
+        "availableAt": 1753056000000,
+        "close": 0.3927,
+        "high": 0.4145,
+        "low": 0.3815
+      },
+      {
+        "availableAt": 1753142400000,
+        "close": 0.3961,
+        "high": 0.411,
+        "low": 0.3864
+      },
+      {
+        "availableAt": 1753228800000,
+        "close": 0.3823,
+        "high": 0.405,
+        "low": 0.3621
+      },
+      {
+        "availableAt": 1753315200000,
+        "close": 0.3451,
+        "high": 0.3833,
+        "low": 0.3326
+      },
+      {
+        "availableAt": 1753401600000,
+        "close": 0.3275,
+        "high": 0.3501,
+        "low": 0.3224
+      },
+      {
+        "availableAt": 1753488000000,
+        "close": 0.3347,
+        "high": 0.3358,
+        "low": 0.3166
+      },
+      {
+        "availableAt": 1753574400000,
+        "close": 0.3364,
+        "high": 0.3423,
+        "low": 0.3325
+      },
+      {
+        "availableAt": 1753660800000,
+        "close": 0.3378,
+        "high": 0.3421,
+        "low": 0.3288
+      },
+      {
+        "availableAt": 1753747200000,
+        "close": 0.3162,
+        "high": 0.3456,
+        "low": 0.3135
+      },
+      {
+        "availableAt": 1753833600000,
+        "close": 0.3079,
+        "high": 0.3222,
+        "low": 0.3
+      },
+      {
+        "availableAt": 1753920000000,
+        "close": 0.3173,
+        "high": 0.3173,
+        "low": 0.2883
+      },
+      {
+        "availableAt": 1754006400000,
+        "close": 0.3076,
+        "high": 0.355,
+        "low": 0.306
+      },
+      {
+        "availableAt": 1754092800000,
+        "close": 0.3028,
+        "high": 0.3212,
+        "low": 0.2948
+      },
+      {
+        "availableAt": 1754179200000,
+        "close": 0.2901,
+        "high": 0.3084,
+        "low": 0.28
+      },
+      {
+        "availableAt": 1754265600000,
+        "close": 0.3012,
+        "high": 0.3067,
+        "low": 0.2885
+      },
+      {
+        "availableAt": 1754352000000,
+        "close": 0.3059,
+        "high": 0.3095,
+        "low": 0.2936
+      },
+      {
+        "availableAt": 1754438400000,
+        "close": 0.2797,
+        "high": 0.3052,
+        "low": 0.2765
+      },
+      {
+        "availableAt": 1754524800000,
+        "close": 0.2787,
+        "high": 0.32,
+        "low": 0.2716
+      },
+      {
+        "availableAt": 1754611200000,
+        "close": 0.3045,
+        "high": 0.3045,
+        "low": 0.2768
+      },
+      {
+        "availableAt": 1754697600000,
+        "close": 0.3091,
+        "high": 0.3186,
+        "low": 0.2955
+      },
+      {
+        "availableAt": 1754784000000,
+        "close": 0.3173,
+        "high": 0.3234,
+        "low": 0.3037
+      },
+      {
+        "availableAt": 1754870400000,
+        "close": 0.3115,
+        "high": 0.3245,
+        "low": 0.3029
+      },
+      {
+        "availableAt": 1754956800000,
+        "close": 0.3008,
+        "high": 0.3227,
+        "low": 0.2974
+      },
+      {
+        "availableAt": 1755043200000,
+        "close": 0.3159,
+        "high": 0.3185,
+        "low": 0.2922
+      },
+      {
+        "availableAt": 1755129600000,
+        "close": 0.3297,
+        "high": 0.3331,
+        "low": 0.312
+      },
+      {
+        "availableAt": 1755216000000,
+        "close": 0.3036,
+        "high": 0.3361,
+        "low": 0.29
+      },
+      {
+        "availableAt": 1755302400000,
+        "close": 0.2987,
+        "high": 0.3132,
+        "low": 0.2914
+      },
+      {
+        "availableAt": 1755388800000,
+        "close": 0.3094,
+        "high": 0.3108,
+        "low": 0.298
+      },
+      {
+        "availableAt": 1755475200000,
+        "close": 0.3298,
+        "high": 0.3388,
+        "low": 0.3081
+      },
+      {
+        "availableAt": 1755561600000,
+        "close": 0.3253,
+        "high": 0.3321,
+        "low": 0.3088
+      },
+      {
+        "availableAt": 1755648000000,
+        "close": 0.3024,
+        "high": 0.3371,
+        "low": 0.3008
+      },
+      {
+        "availableAt": 1755734400000,
+        "close": 0.3307,
+        "high": 0.3334,
+        "low": 0.3008
+      },
+      {
+        "availableAt": 1755820800000,
+        "close": 0.3217,
+        "high": 0.3325,
+        "low": 0.3121
+      },
+      {
+        "availableAt": 1755907200000,
+        "close": 0.3489,
+        "high": 0.3547,
+        "low": 0.3136
+      },
+      {
+        "availableAt": 1755993600000,
+        "close": 0.3417,
+        "high": 0.3506,
+        "low": 0.3388
+      },
+      {
+        "availableAt": 1756080000000,
+        "close": 0.3381,
+        "high": 0.3584,
+        "low": 0.3314
+      },
+      {
+        "availableAt": 1756166400000,
+        "close": 0.3061,
+        "high": 0.3404,
+        "low": 0.3014
+      },
+      {
+        "availableAt": 1756252800000,
+        "close": 0.3205,
+        "high": 0.3252,
+        "low": 0.3025
+      },
+      {
+        "availableAt": 1756339200000,
+        "close": 0.3135,
+        "high": 0.3237,
+        "low": 0.3128
+      },
+      {
+        "availableAt": 1756425600000,
+        "close": 0.3286,
+        "high": 0.3326,
+        "low": 0.3119
+      },
+      {
+        "availableAt": 1756512000000,
+        "close": 0.3145,
+        "high": 0.3326,
+        "low": 0.3079
+      },
+      {
+        "availableAt": 1756598400000,
+        "close": 0.3154,
+        "high": 0.3195,
+        "low": 0.3087
+      },
+      {
+        "availableAt": 1756684800000,
+        "close": 0.3102,
+        "high": 0.3202,
+        "low": 0.3102
+      },
+      {
+        "availableAt": 1756771200000,
+        "close": 0.2981,
+        "high": 0.3169,
+        "low": 0.2927
+      },
+      {
+        "availableAt": 1756857600000,
+        "close": 0.3092,
+        "high": 0.3103,
+        "low": 0.2984
+      },
+      {
+        "availableAt": 1756944000000,
+        "close": 0.3088,
+        "high": 0.3131,
+        "low": 0.303
+      },
+      {
+        "availableAt": 1757030400000,
+        "close": 0.3019,
+        "high": 0.3098,
+        "low": 0.2981
+      },
+      {
+        "availableAt": 1757116800000,
+        "close": 0.3046,
+        "high": 0.3122,
+        "low": 0.3018
+      },
+      {
+        "availableAt": 1757203200000,
+        "close": 0.2995,
+        "high": 0.3039,
+        "low": 0.2984
+      },
+      {
+        "availableAt": 1757289600000,
+        "close": 0.3052,
+        "high": 0.3063,
+        "low": 0.2988
+      },
+      {
+        "availableAt": 1757376000000,
+        "close": 0.3114,
+        "high": 0.3158,
+        "low": 0.3037
+      },
+      {
+        "availableAt": 1757462400000,
+        "close": 0.307,
+        "high": 0.3179,
+        "low": 0.3029
+      },
+      {
+        "availableAt": 1757548800000,
+        "close": 0.3004,
+        "high": 0.3089,
+        "low": 0.2945
+      },
+      {
+        "availableAt": 1757635200000,
+        "close": 0.3051,
+        "high": 0.306,
+        "low": 0.2961
+      },
+      {
+        "availableAt": 1757721600000,
+        "close": 0.3133,
+        "high": 0.3146,
+        "low": 0.3054
+      },
+      {
+        "availableAt": 1757808000000,
+        "close": 0.3191,
+        "high": 0.3251,
+        "low": 0.306
+      },
+      {
+        "availableAt": 1757894400000,
+        "close": 0.307,
+        "high": 0.3213,
+        "low": 0.3035
+      },
+      {
+        "availableAt": 1757980800000,
+        "close": 0.2989,
+        "high": 0.3097,
+        "low": 0.2921
+      },
+      {
+        "availableAt": 1758067200000,
+        "close": 0.3033,
+        "high": 0.3076,
+        "low": 0.2964
+      },
+      {
+        "availableAt": 1758153600000,
+        "close": 0.3084,
+        "high": 0.31,
+        "low": 0.2968
+      },
+      {
+        "availableAt": 1758240000000,
+        "close": 0.31,
+        "high": 0.3147,
+        "low": 0.3039
+      },
+      {
+        "availableAt": 1758326400000,
+        "close": 0.2969,
+        "high": 0.315,
+        "low": 0.2955
+      },
+      {
+        "availableAt": 1758412800000,
+        "close": 0.2892,
+        "high": 0.2977,
+        "low": 0.2821
+      },
+      {
+        "availableAt": 1758499200000,
+        "close": 0.2864,
+        "high": 0.295,
+        "low": 0.2833
+      },
+      {
+        "availableAt": 1758585600000,
+        "close": 0.2499,
+        "high": 0.2871,
+        "low": 0.2329
+      },
+      {
+        "availableAt": 1758672000000,
+        "close": 0.2549,
+        "high": 0.2647,
+        "low": 0.2433
+      },
+      {
+        "availableAt": 1758758400000,
+        "close": 0.2502,
+        "high": 0.2583,
+        "low": 0.2472
+      },
+      {
+        "availableAt": 1758844800000,
+        "close": 0.2298,
+        "high": 0.2503,
+        "low": 0.2229
+      },
+      {
+        "availableAt": 1758931200000,
+        "close": 0.2395,
+        "high": 0.2422,
+        "low": 0.2307
+      },
+      {
+        "availableAt": 1759017600000,
+        "close": 0.237,
+        "high": 0.2403,
+        "low": 0.2347
+      },
+      {
+        "availableAt": 1759104000000,
+        "close": 0.2461,
+        "high": 0.2526,
+        "low": 0.2308
+      },
+      {
+        "availableAt": 1759190400000,
+        "close": 0.2468,
+        "high": 0.2561,
+        "low": 0.2371
+      },
+      {
+        "availableAt": 1759276800000,
+        "close": 0.2526,
+        "high": 0.2635,
+        "low": 0.2412
+      },
+      {
+        "availableAt": 1759363200000,
+        "close": 0.2813,
+        "high": 0.2875,
+        "low": 0.251
+      },
+      {
+        "availableAt": 1759449600000,
+        "close": 0.2783,
+        "high": 0.2919,
+        "low": 0.2766
+      },
+      {
+        "availableAt": 1759536000000,
+        "close": 0.2819,
+        "high": 0.2884,
+        "low": 0.2742
+      },
+      {
+        "availableAt": 1759622400000,
+        "close": 0.2783,
+        "high": 0.2837,
+        "low": 0.2711
+      },
+      {
+        "availableAt": 1759708800000,
+        "close": 0.2753,
+        "high": 0.2986,
+        "low": 0.2731
+      },
+      {
+        "availableAt": 1759795200000,
+        "close": 0.2815,
+        "high": 0.29,
+        "low": 0.2731
+      },
+      {
+        "availableAt": 1759881600000,
+        "close": 0.2965,
+        "high": 0.3099,
+        "low": 0.2804
+      },
+      {
+        "availableAt": 1759968000000,
+        "close": 0.2848,
+        "high": 0.3071,
+        "low": 0.2774
+      },
+      {
+        "availableAt": 1760054400000,
+        "close": 0.2732,
+        "high": 0.2845,
+        "low": 0.2595
+      },
+      {
+        "availableAt": 1760140800000,
+        "close": 0.217,
+        "high": 0.3,
+        "low": 0.0787
+      },
+      {
+        "availableAt": 1760227200000,
+        "close": 0.178,
+        "high": 0.2248,
+        "low": 0.1582
+      },
+      {
+        "availableAt": 1760313600000,
+        "close": 0.1967,
+        "high": 0.2049,
+        "low": 0.1728
+      },
+      {
+        "availableAt": 1760400000000,
+        "close": 0.2124,
+        "high": 0.2182,
+        "low": 0.191
+      },
+      {
+        "availableAt": 1760486400000,
+        "close": 0.2006,
+        "high": 0.2132,
+        "low": 0.1885
+      },
+      {
+        "availableAt": 1760572800000,
+        "close": 0.1881,
+        "high": 0.205,
+        "low": 0.1867
+      },
+      {
+        "availableAt": 1760659200000,
+        "close": 0.1813,
+        "high": 0.192,
+        "low": 0.1775
+      },
+      {
+        "availableAt": 1760745600000,
+        "close": 0.1718,
+        "high": 0.1833,
+        "low": 0.1624
+      },
+      {
+        "availableAt": 1760832000000,
+        "close": 0.1729,
+        "high": 0.1744,
+        "low": 0.1679
+      },
+      {
+        "availableAt": 1760918400000,
+        "close": 0.1765,
+        "high": 0.1814,
+        "low": 0.171
+      },
+      {
+        "availableAt": 1761004800000,
+        "close": 0.174,
+        "high": 0.1826,
+        "low": 0.1721
+      },
+      {
+        "availableAt": 1761091200000,
+        "close": 0.1652,
+        "high": 0.1825,
+        "low": 0.1647
+      },
+      {
+        "availableAt": 1761177600000,
+        "close": 0.161,
+        "high": 0.1696,
+        "low": 0.1552
+      },
+      {
+        "availableAt": 1761264000000,
+        "close": 0.1635,
+        "high": 0.167,
+        "low": 0.161
+      },
+      {
+        "availableAt": 1761350400000,
+        "close": 0.166,
+        "high": 0.169,
+        "low": 0.1626
+      },
+      {
+        "availableAt": 1761436800000,
+        "close": 0.167,
+        "high": 0.1671,
+        "low": 0.1634
+      },
+      {
+        "availableAt": 1761523200000,
+        "close": 0.1751,
+        "high": 0.1764,
+        "low": 0.1642
+      },
+      {
+        "availableAt": 1761609600000,
+        "close": 0.1673,
+        "high": 0.18,
+        "low": 0.1662
+      },
+      {
+        "availableAt": 1761696000000,
+        "close": 0.1617,
+        "high": 0.1719,
+        "low": 0.1589
+      },
+      {
+        "availableAt": 1761782400000,
+        "close": 0.1595,
+        "high": 0.1642,
+        "low": 0.1537
+      },
+      {
+        "availableAt": 1761868800000,
+        "close": 0.1436,
+        "high": 0.1608,
+        "low": 0.1392
+      },
+      {
+        "availableAt": 1761955200000,
+        "close": 0.138,
+        "high": 0.1459,
+        "low": 0.1368
+      },
+      {
+        "availableAt": 1762041600000,
+        "close": 0.1429,
+        "high": 0.1429,
+        "low": 0.1349
+      },
+      {
+        "availableAt": 1762128000000,
+        "close": 0.1407,
+        "high": 0.1437,
+        "low": 0.1337
+      },
+      {
+        "availableAt": 1762214400000,
+        "close": 0.1223,
+        "high": 0.1411,
+        "low": 0.1145
+      },
+      {
+        "availableAt": 1762300800000,
+        "close": 0.1259,
+        "high": 0.1264,
+        "low": 0.1104
+      },
+      {
+        "availableAt": 1762387200000,
+        "close": 0.1256,
+        "high": 0.1279,
+        "low": 0.1192
+      },
+      {
+        "availableAt": 1762473600000,
+        "close": 0.1229,
+        "high": 0.1286,
+        "low": 0.1188
+      },
+      {
+        "availableAt": 1762560000000,
+        "close": 0.1664,
+        "high": 0.1681,
+        "low": 0.123
+      },
+      {
+        "availableAt": 1762646400000,
+        "close": 0.1671,
+        "high": 0.1945,
+        "low": 0.1582
+      },
+      {
+        "availableAt": 1762732800000,
+        "close": 0.154,
+        "high": 0.1667,
+        "low": 0.1503
+      },
+      {
+        "availableAt": 1762819200000,
+        "close": 0.1519,
+        "high": 0.1618,
+        "low": 0.1486
+      },
+      {
+        "availableAt": 1762905600000,
+        "close": 0.1401,
+        "high": 0.1527,
+        "low": 0.1397
+      },
+      {
+        "availableAt": 1762992000000,
+        "close": 0.1411,
+        "high": 0.1591,
+        "low": 0.1397
+      },
+      {
+        "availableAt": 1763078400000,
+        "close": 0.1381,
+        "high": 0.1481,
+        "low": 0.1317
+      },
+      {
+        "availableAt": 1763164800000,
+        "close": 0.1316,
+        "high": 0.1374,
+        "low": 0.1285
+      },
+      {
+        "availableAt": 1763251200000,
+        "close": 0.1325,
+        "high": 0.136,
+        "low": 0.1307
+      },
+      {
+        "availableAt": 1763337600000,
+        "close": 0.1261,
+        "high": 0.1337,
+        "low": 0.1225
+      },
+      {
+        "availableAt": 1763424000000,
+        "close": 0.1198,
+        "high": 0.1286,
+        "low": 0.1165
+      },
+      {
+        "availableAt": 1763510400000,
+        "close": 0.1239,
+        "high": 0.1262,
+        "low": 0.1156
+      },
+      {
+        "availableAt": 1763596800000,
+        "close": 0.1203,
+        "high": 0.1239,
+        "low": 0.1148
+      },
+      {
+        "availableAt": 1763683200000,
+        "close": 0.1142,
+        "high": 0.1232,
+        "low": 0.112
+      },
+      {
+        "availableAt": 1763769600000,
+        "close": 0.1056,
+        "high": 0.1168,
+        "low": 0.0995
+      },
+      {
+        "availableAt": 1763856000000,
+        "close": 0.1048,
+        "high": 0.1058,
+        "low": 0.102
+      },
+      {
+        "availableAt": 1763942400000,
+        "close": 0.1042,
+        "high": 0.1077,
+        "low": 0.1038
+      },
+      {
+        "availableAt": 1764028800000,
+        "close": 0.1112,
+        "high": 0.1145,
+        "low": 0.1027
+      },
+      {
+        "availableAt": 1764115200000,
+        "close": 0.1128,
+        "high": 0.1138,
+        "low": 0.1077
+      },
+      {
+        "availableAt": 1764201600000,
+        "close": 0.112,
+        "high": 0.1134,
+        "low": 0.1075
+      },
+      {
+        "availableAt": 1764288000000,
+        "close": 0.1117,
+        "high": 0.114,
+        "low": 0.1109
+      },
+      {
+        "availableAt": 1764374400000,
+        "close": 0.1109,
+        "high": 0.1128,
+        "low": 0.1082
+      },
+      {
+        "availableAt": 1764460800000,
+        "close": 0.108,
+        "high": 0.1116,
+        "low": 0.1065
+      },
+      {
+        "availableAt": 1764547200000,
+        "close": 0.1052,
+        "high": 0.1087,
+        "low": 0.1052
+      },
+      {
+        "availableAt": 1764633600000,
+        "close": 0.0953,
+        "high": 0.1047,
+        "low": 0.0912
+      },
+      {
+        "availableAt": 1764720000000,
+        "close": 0.1043,
+        "high": 0.1051,
+        "low": 0.093
+      },
+      {
+        "availableAt": 1764806400000,
+        "close": 0.1055,
+        "high": 0.1061,
+        "low": 0.1013
+      },
+      {
+        "availableAt": 1764892800000,
+        "close": 0.1013,
+        "high": 0.1061,
+        "low": 0.0997
+      },
+      {
+        "availableAt": 1764979200000,
+        "close": 0.0959,
+        "high": 0.1018,
+        "low": 0.084
+      },
+      {
+        "availableAt": 1765065600000,
+        "close": 0.0953,
+        "high": 0.0968,
+        "low": 0.0948
+      },
+      {
+        "availableAt": 1765152000000,
+        "close": 0.0918,
+        "high": 0.0963,
+        "low": 0.0905
+      },
+      {
+        "availableAt": 1765238400000,
+        "close": 0.0962,
+        "high": 0.0976,
+        "low": 0.0916
+      },
+      {
+        "availableAt": 1765324800000,
+        "close": 0.099,
+        "high": 0.1017,
+        "low": 0.0929
+      },
+      {
+        "availableAt": 1765411200000,
+        "close": 0.0955,
+        "high": 0.1011,
+        "low": 0.0948
+      },
+      {
+        "availableAt": 1765497600000,
+        "close": 0.0946,
+        "high": 0.0966,
+        "low": 0.0908
+      },
+      {
+        "availableAt": 1765584000000,
+        "close": 0.0907,
+        "high": 0.0977,
+        "low": 0.0874
+      },
+      {
+        "availableAt": 1765670400000,
+        "close": 0.0919,
+        "high": 0.092,
+        "low": 0.0903
+      },
+      {
+        "availableAt": 1765756800000,
+        "close": 0.0874,
+        "high": 0.0916,
+        "low": 0.0863
+      },
+      {
+        "availableAt": 1765843200000,
+        "close": 0.083,
+        "high": 0.0906,
+        "low": 0.0809
+      },
+      {
+        "availableAt": 1765929600000,
+        "close": 0.0835,
+        "high": 0.0859,
+        "low": 0.0798
+      },
+      {
+        "availableAt": 1766016000000,
+        "close": 0.0788,
+        "high": 0.0839,
+        "low": 0.0777
+      },
+      {
+        "availableAt": 1766102400000,
+        "close": 0.0747,
+        "high": 0.0809,
+        "low": 0.0735
+      },
+      {
+        "availableAt": 1766188800000,
+        "close": 0.0796,
+        "high": 0.0806,
+        "low": 0.0735
+      },
+      {
+        "availableAt": 1766275200000,
+        "close": 0.0785,
+        "high": 0.08,
+        "low": 0.0781
+      },
+      {
+        "availableAt": 1766361600000,
+        "close": 0.0756,
+        "high": 0.0785,
+        "low": 0.074
+      },
+      {
+        "availableAt": 1766448000000,
+        "close": 0.0737,
+        "high": 0.0769,
+        "low": 0.0722
+      },
+      {
+        "availableAt": 1766534400000,
+        "close": 0.0712,
+        "high": 0.0742,
+        "low": 0.0697
+      },
+      {
+        "availableAt": 1766620800000,
+        "close": 0.076,
+        "high": 0.0787,
+        "low": 0.067
+      },
+      {
+        "availableAt": 1766707200000,
+        "close": 0.0714,
+        "high": 0.0788,
+        "low": 0.0712
+      },
+      {
+        "availableAt": 1766793600000,
+        "close": 0.0727,
+        "high": 0.074,
+        "low": 0.0711
+      },
+      {
+        "availableAt": 1766880000000,
+        "close": 0.0773,
+        "high": 0.0809,
+        "low": 0.0717
+      },
+      {
+        "availableAt": 1766966400000,
+        "close": 0.0776,
+        "high": 0.0827,
+        "low": 0.077
+      },
+      {
+        "availableAt": 1767052800000,
+        "close": 0.0747,
+        "high": 0.0807,
+        "low": 0.0747
+      },
+      {
+        "availableAt": 1767139200000,
+        "close": 0.077,
+        "high": 0.0795,
+        "low": 0.0739
+      },
+      {
+        "availableAt": 1767225600000,
+        "close": 0.0737,
+        "high": 0.0774,
+        "low": 0.073
+      },
+      {
+        "availableAt": 1767312000000,
+        "close": 0.0807,
+        "high": 0.0812,
+        "low": 0.0731
+      },
+      {
+        "availableAt": 1767398400000,
+        "close": 0.0828,
+        "high": 0.0833,
+        "low": 0.0792
+      },
+      {
+        "availableAt": 1767484800000,
+        "close": 0.0828,
+        "high": 0.0844,
+        "low": 0.0796
+      },
+      {
+        "availableAt": 1767571200000,
+        "close": 0.0916,
+        "high": 0.0941,
+        "low": 0.0831
+      },
+      {
+        "availableAt": 1767657600000,
+        "close": 0.0972,
+        "high": 0.0976,
+        "low": 0.0894
+      },
+      {
+        "availableAt": 1767744000000,
+        "close": 0.0977,
+        "high": 0.1014,
+        "low": 0.0945
+      },
+      {
+        "availableAt": 1767830400000,
+        "close": 0.0918,
+        "high": 0.0975,
+        "low": 0.0913
+      },
+      {
+        "availableAt": 1767916800000,
+        "close": 0.0894,
+        "high": 0.0919,
+        "low": 0.0864
+      },
+      {
+        "availableAt": 1768003200000,
+        "close": 0.0876,
+        "high": 0.0925,
+        "low": 0.0876
+      },
+      {
+        "availableAt": 1768089600000,
+        "close": 0.085,
+        "high": 0.0882,
+        "low": 0.0847
+      },
+      {
+        "availableAt": 1768176000000,
+        "close": 0.0844,
+        "high": 0.086,
+        "low": 0.0825
+      },
+      {
+        "availableAt": 1768262400000,
+        "close": 0.0819,
+        "high": 0.0863,
+        "low": 0.0812
+      },
+      {
+        "availableAt": 1768348800000,
+        "close": 0.0895,
+        "high": 0.0917,
+        "low": 0.0815
+      },
+      {
+        "availableAt": 1768435200000,
+        "close": 0.087,
+        "high": 0.0926,
+        "low": 0.0864
+      },
+      {
+        "availableAt": 1768521600000,
+        "close": 0.0819,
+        "high": 0.0876,
+        "low": 0.0805
+      },
+      {
+        "availableAt": 1768608000000,
+        "close": 0.0822,
+        "high": 0.0825,
+        "low": 0.0789
+      },
+      {
+        "availableAt": 1768694400000,
+        "close": 0.0811,
+        "high": 0.0831,
+        "low": 0.0807
+      },
+      {
+        "availableAt": 1768780800000,
+        "close": 0.0773,
+        "high": 0.0854,
+        "low": 0.0773
+      },
+      {
+        "availableAt": 1768867200000,
+        "close": 0.0771,
+        "high": 0.0776,
+        "low": 0.0681
+      },
+      {
+        "availableAt": 1768953600000,
+        "close": 0.0709,
+        "high": 0.0764,
+        "low": 0.0704
+      },
+      {
+        "availableAt": 1769040000000,
+        "close": 0.073,
+        "high": 0.0756,
+        "low": 0.0696
+      },
+      {
+        "availableAt": 1769126400000,
+        "close": 0.0719,
+        "high": 0.0748,
+        "low": 0.0708
+      },
+      {
+        "availableAt": 1769212800000,
+        "close": 0.0709,
+        "high": 0.0744,
+        "low": 0.07
+      },
+      {
+        "availableAt": 1769299200000,
+        "close": 0.0702,
+        "high": 0.0718,
+        "low": 0.07
+      },
+      {
+        "availableAt": 1769385600000,
+        "close": 0.0659,
+        "high": 0.0709,
+        "low": 0.0653
+      },
+      {
+        "availableAt": 1769472000000,
+        "close": 0.0675,
+        "high": 0.0688,
+        "low": 0.0657
+      },
+      {
+        "availableAt": 1769558400000,
+        "close": 0.0677,
+        "high": 0.0685,
+        "low": 0.0659
+      },
+      {
+        "availableAt": 1769644800000,
+        "close": 0.0685,
+        "high": 0.0697,
+        "low": 0.0662
+      },
+      {
+        "availableAt": 1769731200000,
+        "close": 0.0614,
+        "high": 0.0682,
+        "low": 0.0599
+      },
+      {
+        "availableAt": 1769817600000,
+        "close": 0.0611,
+        "high": 0.062,
+        "low": 0.0584
+      },
+      {
+        "availableAt": 1769904000000,
+        "close": 0.0523,
+        "high": 0.0615,
+        "low": 0.047
+      },
+      {
+        "availableAt": 1769990400000,
+        "close": 0.0499,
+        "high": 0.053,
+        "low": 0.0486
+      },
+      {
+        "availableAt": 1770076800000,
+        "close": 0.0527,
+        "high": 0.055,
+        "low": 0.0483
+      },
+      {
+        "availableAt": 1770163200000,
+        "close": 0.0505,
+        "high": 0.053,
+        "low": 0.0482
+      },
+      {
+        "availableAt": 1770249600000,
+        "close": 0.0479,
+        "high": 0.0521,
+        "low": 0.0472
+      },
+      {
+        "availableAt": 1770336000000,
+        "close": 0.0423,
+        "high": 0.0498,
+        "low": 0.0418
+      },
+      {
+        "availableAt": 1770422400000,
+        "close": 0.0478,
+        "high": 0.0497,
+        "low": 0.0369
+      },
+      {
+        "availableAt": 1770508800000,
+        "close": 0.0455,
+        "high": 0.0476,
+        "low": 0.0452
+      },
+      {
+        "availableAt": 1770595200000,
+        "close": 0.0421,
+        "high": 0.0456,
+        "low": 0.0414
+      },
+      {
+        "availableAt": 1770681600000,
+        "close": 0.0412,
+        "high": 0.0432,
+        "low": 0.0406
+      },
+      {
+        "availableAt": 1770768000000,
+        "close": 0.0405,
+        "high": 0.0417,
+        "low": 0.0395
+      },
+      {
+        "availableAt": 1770854400000,
+        "close": 0.0454,
+        "high": 0.0501,
+        "low": 0.0389
+      },
+      {
+        "availableAt": 1770940800000,
+        "close": 0.0448,
+        "high": 0.0502,
+        "low": 0.0432
+      },
+      {
+        "availableAt": 1771027200000,
+        "close": 0.0461,
+        "high": 0.0461,
+        "low": 0.0433
+      },
+      {
+        "availableAt": 1771113600000,
+        "close": 0.0505,
+        "high": 0.0522,
+        "low": 0.0454
+      },
+      {
+        "availableAt": 1771200000000,
+        "close": 0.0481,
+        "high": 0.0514,
+        "low": 0.0477
+      },
+      {
+        "availableAt": 1771286400000,
+        "close": 0.049,
+        "high": 0.055,
+        "low": 0.0474
+      },
+      {
+        "availableAt": 1771372800000,
+        "close": 0.0487,
+        "high": 0.0515,
+        "low": 0.0478
+      },
+      {
+        "availableAt": 1771459200000,
+        "close": 0.0438,
+        "high": 0.0491,
+        "low": 0.0437
+      },
+      {
+        "availableAt": 1771545600000,
+        "close": 0.0428,
+        "high": 0.0445,
+        "low": 0.0415
+      },
+      {
+        "availableAt": 1771632000000,
+        "close": 0.0436,
+        "high": 0.0448,
+        "low": 0.0416
+      },
+      {
+        "availableAt": 1771718400000,
+        "close": 0.0431,
+        "high": 0.0458,
+        "low": 0.043
+      },
+      {
+        "availableAt": 1771804800000,
+        "close": 0.0414,
+        "high": 0.0433,
+        "low": 0.0412
+      },
+      {
+        "availableAt": 1771891200000,
+        "close": 0.0398,
+        "high": 0.0412,
+        "low": 0.0386
+      },
+      {
+        "availableAt": 1771977600000,
+        "close": 0.0392,
+        "high": 0.0403,
+        "low": 0.0387
+      },
+      {
+        "availableAt": 1772064000000,
+        "close": 0.0425,
+        "high": 0.0446,
+        "low": 0.039
+      },
+      {
+        "availableAt": 1772150400000,
+        "close": 0.0407,
+        "high": 0.0429,
+        "low": 0.0396
+      },
+      {
+        "availableAt": 1772236800000,
+        "close": 0.0399,
+        "high": 0.0424,
+        "low": 0.0392
+      },
+      {
+        "availableAt": 1772323200000,
+        "close": 0.0401,
+        "high": 0.0427,
+        "low": 0.0367
+      },
+      {
+        "availableAt": 1772409600000,
+        "close": 0.0395,
+        "high": 0.0418,
+        "low": 0.0385
+      },
+      {
+        "availableAt": 1772496000000,
+        "close": 0.0404,
+        "high": 0.0421,
+        "low": 0.039
+      },
+      {
+        "availableAt": 1772582400000,
+        "close": 0.0412,
+        "high": 0.0419,
+        "low": 0.0396
+      },
+      {
+        "availableAt": 1772668800000,
+        "close": 0.0422,
+        "high": 0.0433,
+        "low": 0.0404
+      },
+      {
+        "availableAt": 1772755200000,
+        "close": 0.0414,
+        "high": 0.043,
+        "low": 0.0406
+      },
+      {
+        "availableAt": 1772841600000,
+        "close": 0.0397,
+        "high": 0.0418,
+        "low": 0.0392
+      },
+      {
+        "availableAt": 1772928000000,
+        "close": 0.0384,
+        "high": 0.0399,
+        "low": 0.0384
+      },
+      {
+        "availableAt": 1773014400000,
+        "close": 0.0386,
+        "high": 0.0391,
+        "low": 0.0377
+      },
+      {
+        "availableAt": 1773100800000,
+        "close": 0.0402,
+        "high": 0.0412,
+        "low": 0.0386
+      },
+      {
+        "availableAt": 1773187200000,
+        "close": 0.0414,
+        "high": 0.0425,
+        "low": 0.04
+      },
+      {
+        "availableAt": 1773273600000,
+        "close": 0.0419,
+        "high": 0.0427,
+        "low": 0.0412
+      },
+      {
+        "availableAt": 1773360000000,
+        "close": 0.0429,
+        "high": 0.0429,
+        "low": 0.0411
+      },
+      {
+        "availableAt": 1773446400000,
+        "close": 0.0426,
+        "high": 0.0443,
+        "low": 0.0422
+      },
+      {
+        "availableAt": 1773532800000,
+        "close": 0.0435,
+        "high": 0.0438,
+        "low": 0.0417
+      },
+      {
+        "availableAt": 1773619200000,
+        "close": 0.0464,
+        "high": 0.0517,
+        "low": 0.0436
+      },
+      {
+        "availableAt": 1773705600000,
+        "close": 0.0498,
+        "high": 0.0516,
+        "low": 0.0463
+      },
+      {
+        "availableAt": 1773792000000,
+        "close": 0.0493,
+        "high": 0.0502,
+        "low": 0.0479
+      },
+      {
+        "availableAt": 1773878400000,
+        "close": 0.045,
+        "high": 0.05,
+        "low": 0.0449
+      },
+      {
+        "availableAt": 1773964800000,
+        "close": 0.0445,
+        "high": 0.0459,
+        "low": 0.0432
+      },
+      {
+        "availableAt": 1774051200000,
+        "close": 0.0446,
+        "high": 0.0453,
+        "low": 0.0439
+      },
+      {
+        "availableAt": 1774137600000,
+        "close": 0.0429,
+        "high": 0.0453,
+        "low": 0.0429
+      },
+      {
+        "availableAt": 1774224000000,
+        "close": 0.0422,
+        "high": 0.0435,
+        "low": 0.0415
+      },
+      {
+        "availableAt": 1774310400000,
+        "close": 0.0439,
+        "high": 0.0445,
+        "low": 0.0416
+      },
+      {
+        "availableAt": 1774396800000,
+        "close": 0.0437,
+        "high": 0.0453,
+        "low": 0.0428
+      },
+      {
+        "availableAt": 1774483200000,
+        "close": 0.0434,
+        "high": 0.0449,
+        "low": 0.0434
+      },
+      {
+        "availableAt": 1774569600000,
+        "close": 0.0421,
+        "high": 0.0436,
+        "low": 0.0415
+      },
+      {
+        "availableAt": 1774656000000,
+        "close": 0.0405,
+        "high": 0.0426,
+        "low": 0.0396
+      },
+      {
+        "availableAt": 1774742400000,
+        "close": 0.0412,
+        "high": 0.0424,
+        "low": 0.0399
+      },
+      {
+        "availableAt": 1774828800000,
+        "close": 0.0398,
+        "high": 0.0414,
+        "low": 0.0392
+      },
+      {
+        "availableAt": 1774915200000,
+        "close": 0.0401,
+        "high": 0.0415,
+        "low": 0.0399
+      },
+      {
+        "availableAt": 1775001600000,
+        "close": 0.0407,
+        "high": 0.0413,
+        "low": 0.04
+      },
+      {
+        "availableAt": 1775088000000,
+        "close": 0.0456,
+        "high": 0.0471,
+        "low": 0.0407
+      },
+      {
+        "availableAt": 1775174400000,
+        "close": 0.0419,
+        "high": 0.0461,
+        "low": 0.0413
+      },
+      {
+        "availableAt": 1775260800000,
+        "close": 0.042,
+        "high": 0.043,
+        "low": 0.0414
+      },
+      {
+        "availableAt": 1775347200000,
+        "close": 0.0417,
+        "high": 0.042,
+        "low": 0.041
+      },
+      {
+        "availableAt": 1775433600000,
+        "close": 0.0408,
+        "high": 0.0417,
+        "low": 0.0397
+      },
+      {
+        "availableAt": 1775520000000,
+        "close": 0.0402,
+        "high": 0.0421,
+        "low": 0.0401
+      },
+      {
+        "availableAt": 1775606400000,
+        "close": 0.0441,
+        "high": 0.0443,
+        "low": 0.0395
+      },
+      {
+        "availableAt": 1775692800000,
+        "close": 0.0412,
+        "high": 0.0451,
+        "low": 0.0412
+      },
+      {
+        "availableAt": 1775779200000,
+        "close": 0.0415,
+        "high": 0.0425,
+        "low": 0.0407
+      },
+      {
+        "availableAt": 1775865600000,
+        "close": 0.0423,
+        "high": 0.0426,
+        "low": 0.041
+      },
+      {
+        "availableAt": 1775952000000,
+        "close": 0.042,
+        "high": 0.0428,
+        "low": 0.0417
+      },
+      {
+        "availableAt": 1776038400000,
+        "close": 0.0407,
+        "high": 0.042,
+        "low": 0.0403
+      },
+      {
+        "availableAt": 1776124800000,
+        "close": 0.0432,
+        "high": 0.0432,
+        "low": 0.04
+      },
+      {
+        "availableAt": 1776211200000,
+        "close": 0.041,
+        "high": 0.0432,
+        "low": 0.0406
+      },
+      {
+        "availableAt": 1776297600000,
+        "close": 0.0426,
+        "high": 0.0432,
+        "low": 0.0408
+      },
+      {
+        "availableAt": 1776384000000,
+        "close": 0.0463,
+        "high": 0.0464,
+        "low": 0.0426
+      },
+      {
+        "availableAt": 1776470400000,
+        "close": 0.047,
+        "high": 0.0477,
+        "low": 0.0449
+      },
+      {
+        "availableAt": 1776556800000,
+        "close": 0.0433,
+        "high": 0.0479,
+        "low": 0.0424
+      },
+      {
+        "availableAt": 1776643200000,
+        "close": 0.0416,
+        "high": 0.0429,
+        "low": 0.0413
+      },
+      {
+        "availableAt": 1776729600000,
+        "close": 0.0432,
+        "high": 0.044,
+        "low": 0.0414
+      },
+      {
+        "availableAt": 1776816000000,
+        "close": 0.0431,
+        "high": 0.0437,
+        "low": 0.0422
+      },
+      {
+        "availableAt": 1776902400000,
+        "close": 0.0434,
+        "high": 0.0453,
+        "low": 0.0431
+      },
+      {
+        "availableAt": 1776988800000,
+        "close": 0.044,
+        "high": 0.0445,
+        "low": 0.0427
+      },
+      {
+        "availableAt": 1777075200000,
+        "close": 0.0464,
+        "high": 0.0476,
+        "low": 0.0435
+      },
+      {
+        "availableAt": 1777161600000,
+        "close": 0.0463,
+        "high": 0.0481,
+        "low": 0.0456
+      },
+      {
+        "availableAt": 1777248000000,
+        "close": 0.0467,
+        "high": 0.0473,
+        "low": 0.0458
+      },
+      {
+        "availableAt": 1777334400000,
+        "close": 0.0454,
+        "high": 0.0474,
+        "low": 0.0447
+      },
+      {
+        "availableAt": 1777420800000,
+        "close": 0.046,
+        "high": 0.0481,
+        "low": 0.0454
+      },
+      {
+        "availableAt": 1777507200000,
+        "close": 0.0451,
+        "high": 0.048,
+        "low": 0.0444
+      },
+      {
+        "availableAt": 1777593600000,
+        "close": 0.0431,
+        "high": 0.0457,
+        "low": 0.0423
+      },
+      {
+        "availableAt": 1777680000000,
+        "close": 0.044,
+        "high": 0.0452,
+        "low": 0.043
+      },
+      {
+        "availableAt": 1777766400000,
+        "close": 0.0438,
+        "high": 0.0444,
+        "low": 0.043
+      },
+      {
+        "availableAt": 1777852800000,
+        "close": 0.0438,
+        "high": 0.0447,
+        "low": 0.043
+      },
+      {
+        "availableAt": 1777939200000,
+        "close": 0.0443,
+        "high": 0.0525,
+        "low": 0.0433
+      },
+      {
+        "availableAt": 1778025600000,
+        "close": 0.0454,
+        "high": 0.0457,
+        "low": 0.0443
+      },
+      {
+        "availableAt": 1778112000000,
+        "close": 0.0487,
+        "high": 0.05,
+        "low": 0.0453
+      },
+      {
+        "availableAt": 1778198400000,
+        "close": 0.0489,
+        "high": 0.0506,
+        "low": 0.0475
+      },
+      {
+        "availableAt": 1778284800000,
+        "close": 0.0541,
+        "high": 0.0549,
+        "low": 0.0484
+      },
+      {
+        "availableAt": 1778371200000,
+        "close": 0.0525,
+        "high": 0.0543,
+        "low": 0.0514
+      },
+      {
+        "availableAt": 1778457600000,
+        "close": 0.055,
+        "high": 0.0586,
+        "low": 0.0519
+      },
+      {
+        "availableAt": 1778544000000,
+        "close": 0.0532,
+        "high": 0.0552,
+        "low": 0.0522
+      },
+      {
+        "availableAt": 1778630400000,
+        "close": 0.0503,
+        "high": 0.053,
+        "low": 0.0493
+      },
+      {
+        "availableAt": 1778716800000,
+        "close": 0.0484,
+        "high": 0.0521,
+        "low": 0.0479
+      },
+      {
+        "availableAt": 1778803200000,
+        "close": 0.0494,
+        "high": 0.0505,
+        "low": 0.0477
+      },
+      {
+        "availableAt": 1778889600000,
+        "close": 0.0469,
+        "high": 0.0498,
+        "low": 0.0461
+      },
+      {
+        "availableAt": 1778976000000,
+        "close": 0.0456,
+        "high": 0.047,
+        "low": 0.0447
+      },
+      {
+        "availableAt": 1779062400000,
+        "close": 0.0439,
+        "high": 0.0457,
+        "low": 0.0426
+      },
+      {
+        "availableAt": 1779148800000,
+        "close": 0.0446,
+        "high": 0.0448,
+        "low": 0.043
+      },
+      {
+        "availableAt": 1779235200000,
+        "close": 0.0437,
+        "high": 0.0451,
+        "low": 0.0436
+      },
+      {
+        "availableAt": 1779321600000,
+        "close": 0.0445,
+        "high": 0.045,
+        "low": 0.0436
+      },
+      {
+        "availableAt": 1779408000000,
+        "close": 0.0484,
+        "high": 0.0494,
+        "low": 0.0446
+      },
+      {
+        "availableAt": 1779494400000,
+        "close": 0.0454,
+        "high": 0.0498,
+        "low": 0.0452
+      },
+      {
+        "availableAt": 1779580800000,
+        "close": 0.0468,
+        "high": 0.0473,
+        "low": 0.0437
+      },
+      {
+        "availableAt": 1779667200000,
+        "close": 0.0454,
+        "high": 0.0469,
+        "low": 0.0447
+      },
+      {
+        "availableAt": 1779753600000,
+        "close": 0.0461,
+        "high": 0.047,
+        "low": 0.0453
+      },
+      {
+        "availableAt": 1779840000000,
+        "close": 0.0447,
+        "high": 0.0467,
+        "low": 0.0445
+      },
+      {
+        "availableAt": 1779926400000,
+        "close": 0.0429,
+        "high": 0.0451,
+        "low": 0.0425
+      },
+      {
+        "availableAt": 1780012800000,
+        "close": 0.0404,
+        "high": 0.0429,
+        "low": 0.0396
+      },
+      {
+        "availableAt": 1780099200000,
+        "close": 0.0403,
+        "high": 0.041,
+        "low": 0.0394
+      },
+      {
+        "availableAt": 1780185600000,
+        "close": 0.0405,
+        "high": 0.0413,
+        "low": 0.0398
+      },
+      {
+        "availableAt": 1780272000000,
+        "close": 0.0398,
+        "high": 0.0408,
+        "low": 0.0393
+      },
+      {
+        "availableAt": 1780358400000,
+        "close": 0.0403,
+        "high": 0.0412,
+        "low": 0.039
+      },
+      {
+        "availableAt": 1780444800000,
+        "close": 0.0372,
+        "high": 0.0404,
+        "low": 0.0365
+      },
+      {
+        "availableAt": 1780531200000,
+        "close": 0.037,
+        "high": 0.039,
+        "low": 0.0365
+      },
+      {
+        "availableAt": 1780617600000,
+        "close": 0.0332,
+        "high": 0.0372,
+        "low": 0.0316
+      },
+      {
+        "availableAt": 1780704000000,
+        "close": 0.0296,
+        "high": 0.0331,
+        "low": 0.0286
+      },
+      {
+        "availableAt": 1780790400000,
+        "close": 0.0296,
+        "high": 0.0302,
+        "low": 0.0276
+      },
+      {
+        "availableAt": 1780876800000,
+        "close": 0.0298,
+        "high": 0.0307,
+        "low": 0.0287
+      },
+      {
+        "availableAt": 1780963200000,
+        "close": 0.03,
+        "high": 0.0306,
+        "low": 0.0292
+      },
+      {
+        "availableAt": 1781049600000,
+        "close": 0.0318,
+        "high": 0.0323,
+        "low": 0.0293
+      },
+      {
+        "availableAt": 1781136000000,
+        "close": 0.0294,
+        "high": 0.0319,
+        "low": 0.029
+      },
+      {
+        "availableAt": 1781222400000,
+        "close": 0.0306,
+        "high": 0.0313,
+        "low": 0.0296
+      },
+      {
+        "availableAt": 1781308800000,
+        "close": 0.0305,
+        "high": 0.0314,
+        "low": 0.0303
+      },
+      {
+        "availableAt": 1781395200000,
+        "close": 0.0308,
+        "high": 0.0312,
+        "low": 0.0298
+      },
+      {
+        "availableAt": 1781481600000,
+        "close": 0.0323,
+        "high": 0.0323,
+        "low": 0.0298
+      },
+      {
+        "availableAt": 1781568000000,
+        "close": 0.0325,
+        "high": 0.034,
+        "low": 0.032
+      },
+      {
+        "availableAt": 1781654400000,
+        "close": 0.0322,
+        "high": 0.0339,
+        "low": 0.0317
+      },
+      {
+        "availableAt": 1781740800000,
+        "close": 0.0321,
+        "high": 0.0333,
+        "low": 0.0317
+      },
+      {
+        "availableAt": 1781827200000,
+        "close": 0.0328,
+        "high": 0.0328,
+        "low": 0.0306
+      },
+      {
+        "availableAt": 1781913600000,
+        "close": 0.0307,
+        "high": 0.0327,
+        "low": 0.0305
+      },
+      {
+        "availableAt": 1782000000000,
+        "close": 0.0279,
+        "high": 0.0309,
+        "low": 0.0274
+      },
+      {
+        "availableAt": 1782086400000,
+        "close": 0.027,
+        "high": 0.0284,
+        "low": 0.027
+      },
+      {
+        "availableAt": 1782172800000,
+        "close": 0.025,
+        "high": 0.0278,
+        "low": 0.0246
+      },
+      {
+        "availableAt": 1782259200000,
+        "close": 0.0237,
+        "high": 0.0257,
+        "low": 0.0227
+      },
+      {
+        "availableAt": 1782345600000,
+        "close": 0.0209,
+        "high": 0.0241,
+        "low": 0.0202
+      },
+      {
+        "availableAt": 1782432000000,
+        "close": 0.0201,
+        "high": 0.0213,
+        "low": 0.0191
+      },
+      {
+        "availableAt": 1782518400000,
+        "close": 0.0203,
+        "high": 0.0206,
+        "low": 0.0194
+      },
+      {
+        "availableAt": 1782604800000,
+        "close": 0.0222,
+        "high": 0.0243,
+        "low": 0.0199
+      },
+      {
+        "availableAt": 1782691200000,
+        "close": 0.0242,
+        "high": 0.0285,
+        "low": 0.0216
+      },
+      {
+        "availableAt": 1782777600000,
+        "close": 0.0245,
+        "high": 0.0262,
+        "low": 0.0234
+      },
+      {
+        "availableAt": 1782864000000,
+        "close": 0.0228,
+        "high": 0.0252,
+        "low": 0.0224
+      },
+      {
+        "availableAt": 1782950400000,
+        "close": 0.023,
+        "high": 0.0233,
+        "low": 0.022
+      },
+      {
+        "availableAt": 1783036800000,
+        "close": 0.0249,
+        "high": 0.0254,
+        "low": 0.023
+      },
+      {
+        "availableAt": 1783123200000,
+        "close": 0.0272,
+        "high": 0.028,
+        "low": 0.0248
+      },
+      {
+        "availableAt": 1783209600000,
+        "close": 0.0267,
+        "high": 0.0284,
+        "low": 0.0266
+      },
+      {
+        "availableAt": 1783296000000,
+        "close": 0.0271,
+        "high": 0.0279,
+        "low": 0.0263
+      },
+      {
+        "availableAt": 1783382400000,
+        "close": 0.0266,
+        "high": 0.0272,
+        "low": 0.0255
+      },
+      {
+        "availableAt": 1783468800000,
+        "close": 0.0257,
+        "high": 0.0271,
+        "low": 0.0254
+      },
+      {
+        "availableAt": 1783555200000,
+        "close": 0.025,
+        "high": 0.0261,
+        "low": 0.0247
+      },
+      {
+        "availableAt": 1783641600000,
+        "close": 0.0253,
+        "high": 0.0258,
+        "low": 0.0247
+      },
+      {
+        "availableAt": 1783728000000,
+        "close": 0.026,
+        "high": 0.0264,
+        "low": 0.0251
+      },
+      {
+        "availableAt": 1783814400000,
+        "close": 0.026,
+        "high": 0.027,
+        "low": 0.0259
+      },
+      {
+        "availableAt": 1783900800000,
+        "close": 0.0253,
+        "high": 0.0265,
+        "low": 0.0252
+      },
+      {
+        "availableAt": 1783987200000,
+        "close": 0.0253,
+        "high": 0.0261,
+        "low": 0.0249
+      },
+      {
+        "availableAt": 1784073600000,
+        "close": 0.0255,
+        "high": 0.0259,
+        "low": 0.0249
+      },
+      {
+        "availableAt": 1784160000000,
+        "close": 0.0255,
+        "high": 0.026,
+        "low": 0.0254
+      },
+      {
+        "availableAt": 1784246400000,
+        "close": 0.0249,
+        "high": 0.0257,
+        "low": 0.0248
+      },
+      {
+        "availableAt": 1784332800000,
+        "close": 0.0248,
+        "high": 0.0259,
+        "low": 0.0247
+      },
+      {
+        "availableAt": 1784419200000,
+        "close": 0.0243,
+        "high": 0.0249,
+        "low": 0.0239
+      },
+      {
+        "availableAt": 1784505600000,
+        "close": 0.024,
+        "high": 0.0244,
+        "low": 0.0238
+      },
+      {
+        "availableAt": 1784592000000,
+        "close": 0.0251,
+        "high": 0.0253,
+        "low": 0.0232
+      },
+      {
+        "availableAt": 1784678400000,
+        "close": 0.0244,
+        "high": 0.0256,
+        "low": 0.0244
+      },
+      {
+        "availableAt": 1784764800000,
+        "close": 0.0247,
+        "high": 0.0248,
+        "low": 0.0241
+      },
+      {
+        "availableAt": 1784851200000,
+        "close": 0.0241,
+        "high": 0.0246,
+        "low": 0.0236
+      },
+      {
+        "availableAt": 1784937600000,
+        "close": 0.0234,
+        "high": 0.0241,
+        "low": 0.0234
+      },
+      {
+        "availableAt": 1785024000000,
+        "close": 0.0235,
+        "high": 0.0237,
+        "low": 0.0231
+      },
+      {
+        "availableAt": 1785110400000,
+        "close": 0.0233,
+        "high": 0.024,
+        "low": 0.023
+      },
+      {
+        "availableAt": 1785196800000,
+        "close": 0.0216,
+        "high": 0.0237,
+        "low": 0.0215
+      },
+      {
+        "availableAt": 1785283200000,
+        "close": 0.0217,
+        "high": 0.0219,
+        "low": 0.0213
+      },
+      {
+        "availableAt": 1785369600000,
+        "close": 0.021,
+        "high": 0.0218,
+        "low": 0.0207
+      },
+      {
+        "availableAt": 1785456000000,
+        "close": 0.0215,
+        "high": 0.0216,
+        "low": 0.0209
+      },
+      {
+        "availableAt": 1785542400000,
+        "close": 0.0214,
+        "high": 0.0219,
+        "low": 0.0207
+      },
+      {
+        "availableAt": 1785628800000,
+        "close": 0.0217,
+        "high": 0.0224,
+        "low": 0.0214
+      },
+      {
+        "availableAt": 1785715200000,
+        "close": 0.0217,
+        "high": 0.0221,
+        "low": 0.0214
+      },
+      {
+        "availableAt": 1785801600000,
+        "close": 0.0225,
+        "high": 0.0233,
+        "low": 0.0217
+      },
+      {
+        "availableAt": 1785888000000,
+        "close": 0.0224,
+        "high": 0.023,
+        "low": 0.0223
+      },
+      {
+        "availableAt": 1785974400000,
+        "close": 0.0219,
+        "high": 0.0226,
+        "low": 0.0219
+      },
+      {
+        "availableAt": 1786060800000,
+        "close": 0.0219,
+        "high": 0.0225,
+        "low": 0.0218
+      },
+      {
+        "availableAt": 1786147200000,
+        "close": 0.0217,
+        "high": 0.0222,
+        "low": 0.0217
+      },
+      {
+        "availableAt": 1786233600000,
+        "close": 0.0236,
+        "high": 0.024,
+        "low": 0.0217
+      },
+      {
+        "availableAt": 1786320000000,
+        "close": 0.0235,
+        "high": 0.0243,
+        "low": 0.0231
+      },
+      {
+        "availableAt": 1786406400000,
+        "close": 0.0235,
+        "high": 0.0244,
+        "low": 0.0232
+      },
+      {
+        "availableAt": 1786492800000,
+        "close": 0.023,
+        "high": 0.0243,
+        "low": 0.0228
+      },
+      {
+        "availableAt": 1786579200000,
+        "close": 0.0222,
+        "high": 0.0232,
+        "low": 0.0222
+      },
+      {
+        "availableAt": 1786665600000,
+        "close": 0.0226,
+        "high": 0.023,
+        "low": 0.0224
+      },
+      {
+        "availableAt": 1786752000000,
+        "close": 0.022,
+        "high": 0.0227,
+        "low": 0.0218
+      },
+      {
+        "availableAt": 1786838400000,
+        "close": 0.0223,
+        "high": 0.0225,
+        "low": 0.0221
+      },
+      {
+        "availableAt": 1786924800000,
+        "close": 0.022,
+        "high": 0.0232,
+        "low": 0.0219
+      },
+      {
+        "availableAt": 1787011200000,
+        "close": 0.022,
+        "high": 0.0222,
+        "low": 0.0217
+      },
+      {
+        "availableAt": 1787097600000,
+        "close": 0.0213,
+        "high": 0.0219,
+        "low": 0.021
+      },
+      {
+        "availableAt": 1787184000000,
+        "close": 0.0232,
+        "high": 0.0237,
+        "low": 0.0212
+      },
+      {
+        "availableAt": 1787270400000,
+        "close": 0.0251,
+        "high": 0.0252,
+        "low": 0.0234
+      },
+      {
+        "availableAt": 1787356800000,
+        "close": 0.0286,
+        "high": 0.029,
+        "low": 0.025
+      },
+      {
+        "availableAt": 1787443200000,
+        "close": 0.0271,
+        "high": 0.0312,
+        "low": 0.0269
+      },
+      {
+        "availableAt": 1787529600000,
+        "close": 0.028,
+        "high": 0.0285,
+        "low": 0.026
+      },
+      {
+        "availableAt": 1787616000000,
+        "close": 0.0286,
+        "high": 0.0292,
+        "low": 0.0272
+      },
+      {
+        "availableAt": 1787702400000,
+        "close": 0.0275,
+        "high": 0.0302,
+        "low": 0.027
+      },
+      {
+        "availableAt": 1787788800000,
+        "close": 0.0319,
+        "high": 0.0335,
+        "low": 0.0274
+      },
+      {
+        "availableAt": 1787875200000,
+        "close": 0.0304,
+        "high": 0.0323,
+        "low": 0.03
+      },
+      {
+        "availableAt": 1787961600000,
+        "close": 0.0299,
+        "high": 0.0317,
+        "low": 0.0294
+      },
+      {
+        "availableAt": 1788048000000,
+        "close": 0.0303,
+        "high": 0.0312,
+        "low": 0.0297
+      },
+      {
+        "availableAt": 1788134400000,
+        "close": 0.0276,
+        "high": 0.0305,
+        "low": 0.0273
+      },
+      {
+        "availableAt": 1788220800000,
+        "close": 0.0277,
+        "high": 0.0284,
+        "low": 0.0272
+      },
+      {
+        "availableAt": 1788307200000,
+        "close": 0.0277,
+        "high": 0.0285,
+        "low": 0.027
+      },
+      {
+        "availableAt": 1788393600000,
+        "close": 0.0266,
+        "high": 0.0276,
+        "low": 0.0262
+      },
+      {
+        "availableAt": 1788480000000,
+        "close": 0.0284,
+        "high": 0.0286,
+        "low": 0.0262
+      },
+      {
+        "availableAt": 1788566400000,
+        "close": 0.0296,
+        "high": 0.0302,
+        "low": 0.0279
+      },
+      {
+        "availableAt": 1788652800000,
+        "close": 0.0297,
+        "high": 0.0301,
+        "low": 0.0292
+      },
+      {
+        "availableAt": 1788739200000,
+        "close": 0.0309,
+        "high": 0.0311,
+        "low": 0.0292
+      },
+      {
+        "availableAt": 1788825600000,
+        "close": 0.0299,
+        "high": 0.0312,
+        "low": 0.0293
+      },
+      {
+        "availableAt": 1788912000000,
+        "close": 0.0298,
+        "high": 0.0308,
+        "low": 0.0293
+      },
+      {
+        "availableAt": 1788998400000,
+        "close": 0.0283,
+        "high": 0.0305,
+        "low": 0.0276
+      },
+      {
+        "availableAt": 1789084800000,
+        "close": 0.0266,
+        "high": 0.0282,
+        "low": 0.0263
+      },
+      {
+        "availableAt": 1789171200000,
+        "close": 0.0269,
+        "high": 0.0283,
+        "low": 0.0263
+      },
+      {
+        "availableAt": 1789257600000,
+        "close": 0.0275,
+        "high": 0.0276,
+        "low": 0.027
+      },
+      {
+        "availableAt": 1789344000000,
+        "close": 0.0264,
+        "high": 0.028,
+        "low": 0.0258
+      },
+      {
+        "availableAt": 1789430400000,
+        "close": 0.0268,
+        "high": 0.0273,
+        "low": 0.0264
+      },
+      {
+        "availableAt": 1789516800000,
+        "close": 0.0255,
+        "high": 0.0267,
+        "low": 0.0254
+      },
+      {
+        "availableAt": 1789603200000,
+        "close": 0.0257,
+        "high": 0.0259,
+        "low": 0.0249
+      },
+      {
+        "availableAt": 1789689600000,
+        "close": 0.0271,
+        "high": 0.0274,
+        "low": 0.0259
+      },
+      {
+        "availableAt": 1789776000000,
+        "close": 0.0324,
+        "high": 0.0338,
+        "low": 0.027
+      },
+      {
+        "availableAt": 1789862400000,
+        "close": 0.0335,
+        "high": 0.0344,
+        "low": 0.0317
+      },
+      {
+        "availableAt": 1789948800000,
+        "close": 0.0401,
+        "high": 0.0423,
+        "low": 0.032
+      },
+      {
+        "availableAt": 1790035200000,
+        "close": 0.0395,
+        "high": 0.0413,
+        "low": 0.0376
+      },
+      {
+        "availableAt": 1790121600000,
+        "close": 0.0432,
+        "high": 0.048,
+        "low": 0.039
+      },
+      {
+        "availableAt": 1790208000000,
+        "close": 0.0402,
+        "high": 0.044,
+        "low": 0.0391
+      },
+      {
+        "availableAt": 1790294400000,
+        "close": 0.0409,
+        "high": 0.0418,
+        "low": 0.039
+      },
+      {
+        "availableAt": 1790380800000,
+        "close": 0.0413,
+        "high": 0.0419,
+        "low": 0.0399
+      },
+      {
+        "availableAt": 1790467200000,
+        "close": 0.04,
+        "high": 0.0418,
+        "low": 0.0388
+      },
+      {
+        "availableAt": 1790553600000,
+        "close": 0.0405,
+        "high": 0.0407,
+        "low": 0.0391
+      },
+      {
+        "availableAt": 1790640000000,
+        "close": 0.0388,
+        "high": 0.0407,
+        "low": 0.0374
+      },
+      {
+        "availableAt": 1790726400000,
+        "close": 0.0375,
+        "high": 0.0394,
+        "low": 0.0369
+      },
+      {
+        "availableAt": 1790812800000,
+        "close": 0.0408,
+        "high": 0.0409,
+        "low": 0.0374
+      },
+      {
+        "availableAt": 1790899200000,
+        "close": 0.0386,
+        "high": 0.0419,
+        "low": 0.0382
+      },
+      {
+        "availableAt": 1790985600000,
+        "close": 0.0379,
+        "high": 0.0406,
+        "low": 0.0368
+      },
+      {
+        "availableAt": 1791072000000,
+        "close": 0.0434,
+        "high": 0.0434,
+        "low": 0.0378
+      },
+      {
+        "availableAt": 1791158400000,
+        "close": 0.0408,
+        "high": 0.044,
+        "low": 0.04
+      },
+      {
+        "availableAt": 1791244800000,
+        "close": 0.0434,
+        "high": 0.044,
+        "low": 0.0399
+      },
+      {
+        "availableAt": 1791331200000,
+        "close": 0.0436,
+        "high": 0.0452,
+        "low": 0.0422
+      },
+      {
+        "availableAt": 1791417600000,
+        "close": 0.0409,
+        "high": 0.0437,
+        "low": 0.039
+      },
+      {
+        "availableAt": 1791504000000,
+        "close": 0.0385,
+        "high": 0.0412,
+        "low": 0.0369
+      },
+      {
+        "availableAt": 1791590400000,
+        "close": 0.044,
+        "high": 0.0463,
+        "low": 0.0386
+      },
+      {
+        "availableAt": 1791676800000,
+        "close": 0.0473,
+        "high": 0.049,
+        "low": 0.0424
+      },
+      {
+        "availableAt": 1791763200000,
+        "close": 0.0609,
+        "high": 0.0694,
+        "low": 0.0463
+      },
+      {
+        "availableAt": 1791849600000,
+        "close": 0.0566,
+        "high": 0.0631,
+        "low": 0.0553
+      }
+    ],
+    "decisionAt": 1791886049474,
+    "entryPrice": 0.057268,
+    "factors": [
+      {
+        "label": "Trend cluster",
+        "score": 1,
+        "weight": 2.5
+      },
+      {
+        "label": "Momentum",
+        "score": 1,
+        "weight": 1.5
+      },
+      {
+        "label": "MACD",
+        "score": 1,
+        "weight": 1.5
+      },
+      {
+        "label": "Perp funding crowding",
+        "score": 1,
+        "weight": 1.75
+      },
+      {
+        "label": "Open interest",
+        "score": 0,
+        "weight": 1
+      },
+      {
+        "label": "Binance futures positioning",
+        "score": 0,
+        "weight": 1
+      },
+      {
+        "label": "Cross-venue taker imbalance",
+        "score": 0,
+        "weight": 1.25
+      },
+      {
+        "label": "TVL trend",
+        "score": 0,
+        "weight": 2
+      },
+      {
+        "label": "Revenue linkage",
+        "score": 0,
+        "weight": 1.5
+      },
+      {
+        "label": "Developer velocity",
+        "score": 0,
+        "weight": 1.5
+      },
+      {
+        "label": "Supply-overhang penalty (negative-only)",
+        "score": 0,
+        "weight": 1.5
+      }
+    ],
+    "riskMultiplier": 1.25
+  },
+  "replay_note": "REPLAY/REPRODUCTION: this is a recorded dossier issuance reproduced through the intended models, NOT a fresh evaluation.",
+  "snapshot": {
+    "available_at": "2026-10-13T10:07:30.959+00:00",
+    "captured_at": "2026-10-13T10:06:49.000+00:00",
+    "replay_at_issuance": {
+      "mismatches": [],
+      "status": "reconstructed"
+    },
+    "snapshot_id": 4109131422199245,
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window"
+  },
+  "source_as_of": "2026-10-13T10:06:49.000+00:00",
+  "store_rule": "missing decision-time inputs are marked UNKNOWN, never backfilled; a later correction is a new file, never an edit of this bundle",
+  "terminal": "crypto"
+}

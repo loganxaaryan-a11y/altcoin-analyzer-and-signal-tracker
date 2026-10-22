@@ -1,0 +1,42 @@
+{
+ "BTCUSDT": [
+  "2026-10-14 klines-1d 2 bars close 81790.00",
+  "aggTrades last id 30273156"
+ ],
+ "ETHUSDT": [
+  "2 bars close 2431.79",
+  "aggTrades last id 18104754"
+ ],
+ "SOLUSDT": [
+  "2 bars close 104.24",
+  "aggTrades last id 10997478"
+ ],
+ "LINKUSDT": [
+  "2 bars close 12.43",
+  "aggTrades last id 1331612"
+ ],
+ "SUIUSDT": [
+  "2 bars close 1.0246",
+  "aggTrades last id 521695"
+ ],
+ "DOGEUSDT": [
+  "2 bars close 0.08227",
+  "aggTrades last id 12727877"
+ ],
+ "XRPUSDT": [
+  "2 bars close 1.3254",
+  "aggTrades last id 2595594"
+ ],
+ "AVAXUSDT": [
+  "2 bars close 9.861",
+  "aggTrades last id 2496056"
+ ],
+ "ADAUSDT": [
+  "2 bars close 0.2286",
+  "aggTrades last id 9205892"
+ ],
+ "BATUSDT": [
+  "2 bars close 0.169",
+  "aggTrades last id 1259746"
+ ]
+}

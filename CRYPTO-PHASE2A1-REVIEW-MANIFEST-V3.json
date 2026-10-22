@@ -1,0 +1,985 @@
+{
+  "version": "crypto-phase2a1-v3-verification-2026-10-12",
+  "generatedAt": "2026-10-12T07:50:00Z",
+  "root": "crypto-phase2a1-v3-verification-2026-10-12",
+  "manifestSelfExcluded": true,
+  "manifestSelfExclusionReason": "A digest cannot stably include the manifest bytes that contain that digest. Every review payload file is listed below; the manifest file is verified by the adjacent archive-level checksum.",
+  "fileCount": 185,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 1258,
+      "sha256": "266047efdc7b7176e587685a0314122fb9fa002546c59389ef3920fe300dd90f"
+    },
+    {
+      "path": "DATA-PLAN.md",
+      "bytes": 47767,
+      "sha256": "1bfe03a982404bd4804f6ff685c9a1c831323ce73ff744d412326e0f5299b89b"
+    },
+    {
+      "path": "PHASE1_2_AUDIT.md",
+      "bytes": 3695,
+      "sha256": "346e1a68455d67d333b92c6eaf89da82baa7154523e867fa74104e1294aa70fa"
+    },
+    {
+      "path": "PHASE1_2_TEST_RESULTS.txt",
+      "bytes": 1267,
+      "sha256": "62731221245fa3bf476f3cccc7170f683adf40c4e19b9a45256c9b364d6eb1a7"
+    },
+    {
+      "path": "PHASE1_FINAL_ACTION_TEST_RESULTS.txt",
+      "bytes": 500,
+      "sha256": "c940f02a5a02d593fdcd3ad5934f8af5b2ab7ffc96802db19fbc8d7223561bec"
+    },
+    {
+      "path": "PHASE1_FINAL_AUDIT.md",
+      "bytes": 3662,
+      "sha256": "3cdcb6bb3d779ab02ce6749c2655d3fca5adaf61c9ea45cd4b91767d15b387df"
+    },
+    {
+      "path": "PHASE1_FINAL_MODULE_TEST_RESULTS.txt",
+      "bytes": 2868,
+      "sha256": "b0b57146a659b19dfc3d9044eefe25841ff8d2fdbfbaf55ee4a231fb3903bb2a"
+    },
+    {
+      "path": "PHASE1_FINAL_PERSISTENCE_TEST_RESULTS.txt",
+      "bytes": 1295,
+      "sha256": "8b79646ef5aad075276e0a14cc30d228671b49f4b9455181449761c741cb2dc3"
+    },
+    {
+      "path": "PHASE1_FINAL_TYPECHECK_RESULTS.txt",
+      "bytes": 91,
+      "sha256": "772c40b94a86a71230bdb7860f156c7362ae5aa39aa205d3455613b495816786"
+    },
+    {
+      "path": "PHASE2A-AUDIT.md",
+      "bytes": 4228,
+      "sha256": "334e997af5757d2fe06668a29d2b7f7fd9e404a251181e62500b951345160539"
+    },
+    {
+      "path": "PHASE2A-DATASET-PROVENANCE.md",
+      "bytes": 3614,
+      "sha256": "9706af3e287290d0f58fbf500a9c91281df4fa85e60baa730a7520098314914b"
+    },
+    {
+      "path": "PHASE2A-HOLDOUT-LOCK.md",
+      "bytes": 998,
+      "sha256": "413ce3c97333cb337cbdec675464393a14b2adfbef53e98bd40adc1d52a5487e"
+    },
+    {
+      "path": "PHASE2A-OPERATIONAL-APPENDIX.md",
+      "bytes": 1631,
+      "sha256": "450171a82e14b9eb09af1b0aba52f89985c855dac27e37c75843c394b2093c44"
+    },
+    {
+      "path": "PHASE2A-RESEARCH-SPEC.md",
+      "bytes": 7675,
+      "sha256": "d8037fc5ee33a0b734aee8374d4ab3598417fdb539e9ee3aa225452fe6787584"
+    },
+    {
+      "path": "PHASE2A-TEST-RESULTS.txt",
+      "bytes": 5940,
+      "sha256": "8b28110ae1c5e4b4fa86389fd9f7b546c946765a8da5c838c5a6057f5c66f0c3"
+    },
+    {
+      "path": "PHASE2A-VALIDATION-REPORT.md",
+      "bytes": 5064,
+      "sha256": "9eba8955d541f0f0e7278527930d72b12b686c60164e62fdbc38836c54d14808"
+    },
+    {
+      "path": "PHASE2A1-AUDIT.md",
+      "bytes": 3767,
+      "sha256": "a611649f4b3a6d36aed2f7d10257cc3d05b47aa6ff7372c6a8aaedceb9b07aea"
+    },
+    {
+      "path": "PHASE2A1-EQUITY-DATA-READINESS-PLAN.md",
+      "bytes": 2693,
+      "sha256": "8a5cf96e5a5ba36e6b4b4239a024747848a05384b5cb0bc7b1c82174ba8affeb"
+    },
+    {
+      "path": "PHASE2A1-ORIGINAL-VS-CORRECTED-V2.md",
+      "bytes": 2605,
+      "sha256": "ba9d95750e27874f9cd02020d26804b705524848a96cbe08d76c2c9e131a8c18"
+    },
+    {
+      "path": "PHASE2A1-ORIGINAL-VS-REPAIRED.md",
+      "bytes": 2013,
+      "sha256": "7d230116641762244c2ed2b67d14425351a7be77dde57549e28732f2188dbef3"
+    },
+    {
+      "path": "PHASE2A1-REPAIR-FINDINGS.md",
+      "bytes": 5551,
+      "sha256": "d87265fa294e41b6ad0fd9b8a3d42a33148560bc3db20cafa04ffba41654845f"
+    },
+    {
+      "path": "PHASE2A1-TEST-RESULTS-V2.txt",
+      "bytes": 8707,
+      "sha256": "20234430bb7f2ff5148d7575f0bb3b55db01f9b1289b0859f92d189bdd0b63b8"
+    },
+    {
+      "path": "PHASE2A1-TEST-RESULTS.txt",
+      "bytes": 7823,
+      "sha256": "49c71f25d2e45964b4572e2e6fca754a69182913fc2bfe95cdeb1e86e4c5c173"
+    },
+    {
+      "path": "PHASE2A1-TIMING-EVALUATION-PROTOCOL-V2.md",
+      "bytes": 3001,
+      "sha256": "8855191a3346827b10192b5c70dc028d44b2296500c1983d89e347399c57bafa"
+    },
+    {
+      "path": "PHASE2A1-TIMING-EVALUATION-PROTOCOL-V3.md",
+      "bytes": 3376,
+      "sha256": "1d70434db387f07820561e22041e673622f01a17933f0b19c49943ad39310a3c"
+    },
+    {
+      "path": "PHASE2A1-TIMING-EVALUATION-PROTOCOL.md",
+      "bytes": 2649,
+      "sha256": "023dc02df2d6ac86e7d6ade248e7bae45254f061ea1f1b40987cd6af91377dae"
+    },
+    {
+      "path": "REVIEW-MANIFEST-V2.json",
+      "bytes": 2681,
+      "sha256": "9cfee0ae42bebe96a109e7a5b62ea9d9e3db450dc031d5794df8060ab189368a"
+    },
+    {
+      "path": "TRACK_A_DEPLOYMENT-EVIDENCE-2026-10-09.md",
+      "bytes": 2003,
+      "sha256": "78971d2daf577625b93bf5e793809cca26128f525cd7ae8c9278ba16330dc517"
+    },
+    {
+      "path": "TRACK_A_FRESHNESS_AUDIT.md",
+      "bytes": 4679,
+      "sha256": "97fc9f76fd8647a48678df0e15c37169b7aea57ca16f7cbc8e1489579fa52eeb"
+    },
+    {
+      "path": "TRACK_A_REQUEST_BUDGET.md",
+      "bytes": 2069,
+      "sha256": "c1fd5d78ad5e9372d64e1443fe7915889dc12bad26fbb04f328a4f770c66e687"
+    },
+    {
+      "path": "TRACK_A_TEST_RESULTS.txt",
+      "bytes": 1617,
+      "sha256": "6a30c7dcfe4cb1156d7f6d9c4264ee12e60c37a83b60f28f4d301a76901b0dbc"
+    },
+    {
+      "path": "bun.lock",
+      "bytes": 19189,
+      "sha256": "e5c18a63d3d78b60cee71e7b07ce17956f6632b30a74f00efbce02523f7333ca"
+    },
+    {
+      "path": "bunfig.toml",
+      "bytes": 497,
+      "sha256": "77c99038fe2cbbdb274e3b324fc20cd0a02a3d3c1db2674d8703e0d2c8b7145e"
+    },
+    {
+      "path": "client/build.mjs",
+      "bytes": 361,
+      "sha256": "e828666e5d505cbc481c7ddddd0d16000832fc26faf4177f3e312db2fdf1c4cc"
+    },
+    {
+      "path": "client/dist/assets/index-r1sfphfz.js",
+      "bytes": 860531,
+      "sha256": "4b5aeae63417871727339685b20cb8788c13d017c70c771bf8606adc740873eb"
+    },
+    {
+      "path": "client/dist/assets/index-vs3sayms.css",
+      "bytes": 131738,
+      "sha256": "e1eb3a4aceb7253e8eac13579245aaa491b4f47c2f9eb998fc81f486cc8b3ccb"
+    },
+    {
+      "path": "client/src/App.tsx",
+      "bytes": 223051,
+      "sha256": "617957e94acee23099d5fca2d3c2044a9f51a9a36d07a982c08efb336b79d71f"
+    },
+    {
+      "path": "client/src/api.ts",
+      "bytes": 935,
+      "sha256": "b37eff4d0ae161ae983d7fe49eab48f352dd64b832deb93d6298d7e689885f69"
+    },
+    {
+      "path": "client/src/globals.d.ts",
+      "bytes": 24,
+      "sha256": "35d26ea66c86da9701e4f4b467913481ffeae910761cea34c775c5dacb7f8eaa"
+    },
+    {
+      "path": "client/src/main.tsx",
+      "bytes": 1151,
+      "sha256": "300d8cb852036ce595743f0941fe91a34f16714730d40718ff6712e6d9253b2a"
+    },
+    {
+      "path": "client/src/theme.css",
+      "bytes": 122317,
+      "sha256": "fa35490d0761981fad2f3ecb8e91edad5528c9015186152eff31991c99d093ac"
+    },
+    {
+      "path": "client/tsconfig.json",
+      "bytes": 430,
+      "sha256": "d9cc6609a832013b9cdb0d81c0c997a426e20b94c93fee3fa1472916bb42c971"
+    },
+    {
+      "path": "drizzle/0001_initial.sql",
+      "bytes": 118,
+      "sha256": "f80c5bf6f7a9bf54eda650a2ac2fcc4390051e8c56a52d5be51e5cbf641b7ba9"
+    },
+    {
+      "path": "drizzle/0002_add_trade_journal_rules_snapshots.sql",
+      "bytes": 1014,
+      "sha256": "49cf6c1c76bb3565b6635b155632f583c5998449192acad0d25c61f576641d91"
+    },
+    {
+      "path": "drizzle/0003_add_signals_alerts_watchlist_analytics.sql",
+      "bytes": 1440,
+      "sha256": "075f2246cdd57a73d00378f72199c529e9f9bc054e50012bbfee1887c26df490"
+    },
+    {
+      "path": "drizzle/0004_add_journal_outcome_fields.sql",
+      "bytes": 233,
+      "sha256": "7e439ee6efbab2861352b54e3614562abe82fd55900823a751f8392e30d78c81"
+    },
+    {
+      "path": "drizzle/0005_add_theories_predictions_and_evidence.sql",
+      "bytes": 885,
+      "sha256": "81ab6af52ba9027a4cd9176b3862a74b7530f097d2971739ee524b0652ed7a27"
+    },
+    {
+      "path": "drizzle/0006_add_theory_watch_engine.sql",
+      "bytes": 1068,
+      "sha256": "045accac32111899426d1ac4c21f58773ae95e8f52dfe1ae004be53d061b9dd7"
+    },
+    {
+      "path": "drizzle/0007_add_market_discovery_feed.sql",
+      "bytes": 1705,
+      "sha256": "16960b02b2d03759dbf74da3852501422cfa29c1ff7e4be11bbc1ac7c796af48"
+    },
+    {
+      "path": "drizzle/0008_add_five_dimension_signal_gates.sql",
+      "bytes": 420,
+      "sha256": "28d2d45340e29477c393cfc46508611903d7dd4660e960aaebd709f022923edf"
+    },
+    {
+      "path": "drizzle/0009_add_signal_invalidation_and_source_freshness.sql",
+      "bytes": 337,
+      "sha256": "d098b1803207b86f91161f6249617ca9d8f5a9aea24ed40e1f6d9b79d5b99fe7"
+    },
+    {
+      "path": "drizzle/0010_add_discovery_signal_outcome_tracking.sql",
+      "bytes": 450,
+      "sha256": "afd806a3ebcedc583ef9cc585b364a3c29a9c23fec72d24d745ba73a392d31b1"
+    },
+    {
+      "path": "drizzle/0011_purge_unrated_legacy_signals.sql",
+      "bytes": 157,
+      "sha256": "c8de63d523e6dd9c87ce87e2defdaf6d710780e2890dd9cbf2316dd742b517e9"
+    },
+    {
+      "path": "drizzle/0012_add_engine_hits_log.sql",
+      "bytes": 653,
+      "sha256": "a2526453c039341915ace8d9ab8c6d3bb3768fbafc412333215a245a0383b3bc"
+    },
+    {
+      "path": "drizzle/0013_add_full_history_cache_and_deep_analyses.sql",
+      "bytes": 1528,
+      "sha256": "02b69244af9fdb9b6ed1e27a7b224b6faf989b2e7641514703d64cee613c5e2e"
+    },
+    {
+      "path": "drizzle/0014_add_daily_signal_snapshots_and_briefs.sql",
+      "bytes": 1202,
+      "sha256": "22791d319d4a6b4ca30551bcbb8fbb59a2882fb928a562348669bedf3a77dcf9"
+    },
+    {
+      "path": "drizzle/0015_add_cross_market_syntheses.sql",
+      "bytes": 528,
+      "sha256": "1bfa3e279e3709646cd1ea0da4338616c55d41251d7deb70b90f6097de9eb6da"
+    },
+    {
+      "path": "drizzle/0016_add_query_path_indexes.sql",
+      "bytes": 752,
+      "sha256": "9fe2902cc2bd08bdb13d929211fb3a56ab06ca207d6a0b70a817e60777108c07"
+    },
+    {
+      "path": "drizzle/0017_add_signal_risk_methodology.sql",
+      "bytes": 248,
+      "sha256": "871e209426ad029d96bdcfce8c1c30fdee2a56d801679229777211fe160647ca"
+    },
+    {
+      "path": "drizzle/0018_dedupe_discovery_signals_by_coin.sql",
+      "bytes": 3660,
+      "sha256": "767a06ed25ed218107be4d37b05623e423e46c90d9cac3417a7d3cc19de0aacb"
+    },
+    {
+      "path": "drizzle/0019_add_onchain_flow_snapshots.sql",
+      "bytes": 465,
+      "sha256": "b7a25880c2665241ad861dc4c1b3b0d4a749e57743a6b962de6c7b5aca8270f0"
+    },
+    {
+      "path": "drizzle/0020_add_tiered_discovery_metadata.sql",
+      "bytes": 354,
+      "sha256": "d4ebc5dfdb835d1cc65b4ebc3cee4700392e9d54ef26178541a458fa716cf80d"
+    },
+    {
+      "path": "drizzle/0021_add_entry_verdict_self_test.sql",
+      "bytes": 217,
+      "sha256": "6703f38025fd342b45bd9d0c9a447c65c049f69f76beb4de65748431be25b27a"
+    },
+    {
+      "path": "drizzle/0022_add_measurement_foundation_evidence_dossier_reverse_mode.sql",
+      "bytes": 3229,
+      "sha256": "a7a887b68927f9d4558006249ffdc4498dc19b00611a277689bbba792f23ef48"
+    },
+    {
+      "path": "drizzle/0023_finalize_pass_bar_v1.sql",
+      "bytes": 2964,
+      "sha256": "76e76d393bc89b2aa3d007c8a04767689c6baaa87aa989241ab3d85e22492712"
+    },
+    {
+      "path": "drizzle/0024_align_final_pass_bar_definition.sql",
+      "bytes": 2822,
+      "sha256": "d47672fb5fb58485f5100d376b25466fe40c2165e50066b7b423c0c7b546f419"
+    },
+    {
+      "path": "drizzle/0025_add_theory_discovery_candidate_batches.sql",
+      "bytes": 554,
+      "sha256": "1cd7da89437c4cb12baea0adf06b418a152d1512b781c9362449248703ffd77f"
+    },
+    {
+      "path": "drizzle/0026_add_provider_budgets_and_discovery_lanes.sql",
+      "bytes": 725,
+      "sha256": "0b6a513e31abfb0b1458c254055a04e314b0c77b7161268b623393b67f24ceb0"
+    },
+    {
+      "path": "drizzle/0027_add_weekly_universe_tiers.sql",
+      "bytes": 2376,
+      "sha256": "a46ae3e42aea85ac9c25893a4e71bb45b79409b13d2c22547075da8f3617318c"
+    },
+    {
+      "path": "drizzle/0028_persist_universe_witness_evidence.sql",
+      "bytes": 327,
+      "sha256": "adf04eca4ab054f0e2ac4f7514cebc5a5ce3bf8be9320fff43901a087c9bca09"
+    },
+    {
+      "path": "drizzle/0029_add_near_structural_downtrend_flag.sql",
+      "bytes": 89,
+      "sha256": "aac2fe8895c542a41dde306cb578900cfe15ae68bba0b374a10f0dcb109e478a"
+    },
+    {
+      "path": "drizzle/0030_add_suppressed_signal_candidate_log.sql",
+      "bytes": 877,
+      "sha256": "d27af9b9db063fac0382f9d2fb431238c040ce39c1bd62b972221d33fa68a120"
+    },
+    {
+      "path": "drizzle/0031_phase1_signal_measurement_contract.sql",
+      "bytes": 5753,
+      "sha256": "1e5e23d2f9f1872fe89196489f57d64148ab03bb8c9e71903a779dffe28e8b1f"
+    },
+    {
+      "path": "drizzle/0032_phase1_1_evaluation_revisions.sql",
+      "bytes": 1565,
+      "sha256": "99e745e5e5e68e35f88c2bdafbca04ff8dd5472d9766383b1f8772c36ef65794"
+    },
+    {
+      "path": "drizzle/0033_phase1_2_integration_closure.sql",
+      "bytes": 549,
+      "sha256": "9728dd394ca70c48c011dc2a8f444add877e771f507eb8324f1a1c38e8698e97"
+    },
+    {
+      "path": "drizzle/0034_add_market_freshness_telemetry.sql",
+      "bytes": 2455,
+      "sha256": "ec407bdc81e76f79b56218c681247a66dd18760c50f0fabe5eea0953db271f45"
+    },
+    {
+      "path": "drizzle/0035_phase2a1_freshness_repair.sql",
+      "bytes": 1354,
+      "sha256": "2a2ae409b74b942b47d8708dcaa4286fceeac458befbf10ea9096ccea8ad5c9d"
+    },
+    {
+      "path": "drizzle/0036_add_meme_risk_validations.sql",
+      "bytes": 641,
+      "sha256": "16c647e1595d6a8e4eb3cbe932a7d0865f8591735c9510876dc57eadb1f19910"
+    },
+    {
+      "path": "drizzle/meta/_journal.json",
+      "bytes": 5794,
+      "sha256": "fa371b1a58e314710da52445bc21d29a19460a5c35375af5a47c9f487844199e"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1471,
+      "sha256": "5dcd4a9f3341e2f00a4e1c41918d6bf91cd751d31ae691ca2a3c5346831e1be7"
+    },
+    {
+      "path": "phase1-2-sanitized-fixture.json",
+      "bytes": 1836,
+      "sha256": "5f865e66195cf4287d7f7ec3cddee42940520c76eafcede9245bc9e0f104e417"
+    },
+    {
+      "path": "phase1-final-sanitized-fixture.json",
+      "bytes": 2559,
+      "sha256": "35366b07fd32aeb42be8ea54e11aef0f7b1c35001f30e56adc41962ad60a4f11"
+    },
+    {
+      "path": "research/phase2a/ARTIFACT-EXPORTS.json",
+      "bytes": 750,
+      "sha256": "f35f9f05c53e6e07135bb07ea7c4d4577d57480351c55313451fe89d5bd019ec"
+    },
+    {
+      "path": "research/phase2a/DATASET-HASHES.json",
+      "bytes": 549,
+      "sha256": "699b091e808577a76aa8e325e917fb4c6254ff84fa16d69fb272242b24ab36cb"
+    },
+    {
+      "path": "research/phase2a/FREEZE-HASHES.json",
+      "bytes": 449,
+      "sha256": "b2073f48f0d2c1ccabd7ab0acc06521170f27e55548eca3ff2c0f941d9aa8a89"
+    },
+    {
+      "path": "research/phase2a/REPRODUCE.md",
+      "bytes": 2365,
+      "sha256": "5fd053140d61e44c8edf6a2c99db061c35d7956b211eda7f020f3527f37429e0"
+    },
+    {
+      "path": "research/phase2a/cli.ts",
+      "bytes": 6525,
+      "sha256": "56be5568a651e34e39b233f75cc06b7fa60795fda95d96a47c2942d6a24c73ee"
+    },
+    {
+      "path": "research/phase2a/dataset-manifest.json",
+      "bytes": 2353,
+      "sha256": "3f99afb0615825c3f57c847e35b032c22026077cc4a41ae0885ff711bb0a532c"
+    },
+    {
+      "path": "research/phase2a/executable-freeze-v2-preserved.json",
+      "bytes": 549,
+      "sha256": "a859672da3810654bd7e838f3fd4bfe9edb94e0d154b3e0a6f326bc11715a1c9"
+    },
+    {
+      "path": "research/phase2a/executable-freeze.json",
+      "bytes": 679,
+      "sha256": "68d128f0c57fddf32cf0900d72491f9dea54f1c7d57e01d40a491455e6ee7f8e"
+    },
+    {
+      "path": "research/phase2a/frozen-config.json",
+      "bytes": 1715,
+      "sha256": "2333237a2662598534631e81ca4dd9d73e42cf7f156613653e4a94c70324ef1d"
+    },
+    {
+      "path": "research/phase2a/original/PHASE2A-TEST-RESULTS.txt",
+      "bytes": 5940,
+      "sha256": "8b28110ae1c5e4b4fa86389fd9f7b546c946765a8da5c838c5a6057f5c66f0c3"
+    },
+    {
+      "path": "research/phase2a/original/PHASE2A-VALIDATION-REPORT.md",
+      "bytes": 5064,
+      "sha256": "9eba8955d541f0f0e7278527930d72b12b686c60164e62fdbc38836c54d14808"
+    },
+    {
+      "path": "research/phase2a/original/cli-v1.ts",
+      "bytes": 4642,
+      "sha256": "daf3a97b724c03c7f4c89e692898cc5060e32cfdca3fe19f48d94f1e671ae5cc"
+    },
+    {
+      "path": "research/phase2a/original/phase2a-research-v1.test.ts.txt",
+      "bytes": 9138,
+      "sha256": "bf1002548f694ec5b8ab1db445a0457dc2efdf869de4995c8790a883cd4eb896"
+    },
+    {
+      "path": "research/phase2a/original/phase2a-research-v1.ts",
+      "bytes": 33213,
+      "sha256": "0cf54c294776da7c565dcc48b13b6cea93031560f4f5686123d5b189d7c302f7"
+    },
+    {
+      "path": "research/phase2a/output/COMMAND.txt",
+      "bytes": 277,
+      "sha256": "e1434ed116f9bbe2994c7e0f620078074eb12fc98ae044d82dd4442aa57a5f75"
+    },
+    {
+      "path": "research/phase2a/output/VALIDATION-REPORT.md",
+      "bytes": 2256,
+      "sha256": "40424a8d27df27ec6ff08f90960d253e83517e899bb04c13d6df2804e11b0563"
+    },
+    {
+      "path": "research/phase2a/output/dataset-manifest.json",
+      "bytes": 3554,
+      "sha256": "5851121db328356e66ed45086bfa4a32a31f1d2f9d572e0ddc19f326d25e3f22"
+    },
+    {
+      "path": "research/phase2a/output/executable-freeze.json",
+      "bytes": 872,
+      "sha256": "333bccf645d38c630b4add1ba711b0445e020aa9c9a7663e53c054de60fc6155"
+    },
+    {
+      "path": "research/phase2a/output/frozen-config.json",
+      "bytes": 3437,
+      "sha256": "77df9abf3c50c534c7c6afdecbdb36b6f8a59d163b48e99cbb00fc1618461a3a"
+    },
+    {
+      "path": "research/phase2a/output/holdout-lock.json",
+      "bytes": 249,
+      "sha256": "3dbd747b5316af19f72f6a6687ec4287c0f9eb78bac7fdd808c79e35bb17520d"
+    },
+    {
+      "path": "research/phase2a/output/pipeline-positive-control-report.json",
+      "bytes": 800,
+      "sha256": "9920a4fd9be64450bb91d4d1b9f918a6edc1ffde2a69b9e9908bcdfed94f0184"
+    },
+    {
+      "path": "research/phase2a/output/synthetic-control-observations.jsonl",
+      "bytes": 7606847,
+      "sha256": "e310fac69e0caa915405494042415c11268b359158c7b35f97f66c50099fb7c1"
+    },
+    {
+      "path": "research/phase2a/output/synthetic-control-report.json",
+      "bytes": 5070,
+      "sha256": "189fab8e1d7a7bd47bea57db93f7f3107e32ce744d09f0dd15ef6f04450b4a75"
+    },
+    {
+      "path": "research/phase2a/output/timing-structural-preflight.json",
+      "bytes": 4896,
+      "sha256": "f30d5d53a38daca479f3efaea6a2ef97f592de687430ec510790c5c25bdb16dc"
+    },
+    {
+      "path": "research/phase2a/output/validation-observations.jsonl",
+      "bytes": 9122769,
+      "sha256": "184c10e9bbfaf1a065dfc2a61c64e8a439d66e183eb4fc48a243ecef1da21bc0"
+    },
+    {
+      "path": "research/phase2a/output/validation-report.json",
+      "bytes": 61759,
+      "sha256": "f108608b7e1bf4b7ab50fa677ae050d4d31a566eb067e73d6e9a22770f2ac24f"
+    },
+    {
+      "path": "research/phase2a/trial-registry.json",
+      "bytes": 1493,
+      "sha256": "60491e613dbf75e13676e8953296b9808b96407405cf5ac4579054a8c340d205"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/CRYPTO-PHASE2A1-CLOSURE-V3.md",
+      "bytes": 7365,
+      "sha256": "0824aca42525ac52cc2303d90c717735529d04472fc8cdd9f8721d42dc8c3108"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/MEME-RISK-GAP-FIX-REPORT.md",
+      "bytes": 3752,
+      "sha256": "f41a8d1799fd0b3b7bcc3941cbfa4bf5407002d861565d97ca2160d2667a4ee0"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/MISSING-AND-PENDING.md",
+      "bytes": 1317,
+      "sha256": "dab6a38bc915f4f794df62b7bd082009b1ee8db494d36cacb4944f4c66e1b80a"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/V3-VERIFICATION-ARCHIVE-README.md",
+      "bytes": 4074,
+      "sha256": "c4fc3adf4099e3301cf685edbaf2545a13269650590b46fa7d1cfef92f9fbdc2"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/full-test-output-current.txt",
+      "bytes": 11241,
+      "sha256": "5c0b63fedd1eb81b12aba36630efe01668ea8742a90f99578fd1be0834050054"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/full-test-output.txt",
+      "bytes": 10324,
+      "sha256": "a08d634e454831ee30c27c2d74c4d64f42378babd38f6b3ab853e10c4289a396"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/manual-build-attempt-output.txt",
+      "bytes": 677,
+      "sha256": "328ee6b83e92441fd7012fae70f339d64fd84a6a35e34f2145ffd062d0ee309e"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/research-cli-output-current.txt",
+      "bytes": 2558,
+      "sha256": "cca22bfafa3675ad69909fa5ddcf450e500d9a3a212b7e6de0d612d7e25c4d35"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/typecheck-output-current.txt",
+      "bytes": 120,
+      "sha256": "99f38322ec13eeba2563cfbc6ca75781be9b9ac262a767b7dcee10b6bf017d3f"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/typecheck-output.txt",
+      "bytes": 91,
+      "sha256": "772c40b94a86a71230bdb7860f156c7362ae5aa39aa205d3455613b495816786"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-evidence/web-artifact-build-output.json",
+      "bytes": 580,
+      "sha256": "add0316c263405fa61d58fcca9197ab87c92723180c69082b51e361ef573e630"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/COMMAND.txt",
+      "bytes": 294,
+      "sha256": "c7a35cc1f2d9ae7450b5ff635c3c573819a6e94c2487e2d6b0bcb8695f6152cd"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/VALIDATION-REPORT.md",
+      "bytes": 2256,
+      "sha256": "93432625bdea6efc1eceabdd2a66367a39ee5f51b33e60964718a3d07dc255e9"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/dataset-manifest.json",
+      "bytes": 3554,
+      "sha256": "5851121db328356e66ed45086bfa4a32a31f1d2f9d572e0ddc19f326d25e3f22"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/executable-freeze.json",
+      "bytes": 872,
+      "sha256": "924c18e65cee7cf8bfc782fec594901f1c0967910dbe08a46e9d7138276ed557"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/frozen-config.json",
+      "bytes": 3437,
+      "sha256": "77df9abf3c50c534c7c6afdecbdb36b6f8a59d163b48e99cbb00fc1618461a3a"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/holdout-lock.json",
+      "bytes": 249,
+      "sha256": "3dbd747b5316af19f72f6a6687ec4287c0f9eb78bac7fdd808c79e35bb17520d"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/pipeline-positive-control-report.json",
+      "bytes": 800,
+      "sha256": "9920a4fd9be64450bb91d4d1b9f918a6edc1ffde2a69b9e9908bcdfed94f0184"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/synthetic-control-observations.jsonl",
+      "bytes": 7606847,
+      "sha256": "e310fac69e0caa915405494042415c11268b359158c7b35f97f66c50099fb7c1"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/synthetic-control-report.json",
+      "bytes": 5070,
+      "sha256": "0392382cbe093025dc44cbde7a756c140e071cbf8ca19222b982332e09cbda63"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/timing-structural-preflight.json",
+      "bytes": 13316705,
+      "sha256": "b64f3fbfdc52ddf35a1acf6425d19d971817ec97ab91d8bcce0a5a7c8803db78"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/validation-observations.jsonl",
+      "bytes": 9122769,
+      "sha256": "184c10e9bbfaf1a065dfc2a61c64e8a439d66e183eb4fc48a243ecef1da21bc0"
+    },
+    {
+      "path": "research/phase2a1/closure-v3-real-market/validation-report.json",
+      "bytes": 63304,
+      "sha256": "0b9ea9870c5c91e106e6fa75fa227c5fb5ee2d176907e910a11e2dd8bc319d37"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/COMMAND.txt",
+      "bytes": 275,
+      "sha256": "bf7d8a092df798f1546c469af83f32ad849f3b0e5f4fbc7c41a8de2a50b99cfb"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/VALIDATION-REPORT.md",
+      "bytes": 2247,
+      "sha256": "be2b7559f6ffc757be1424cd52903d9dfb5c7d85a9e4aa38fef42f1724166acb"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/dataset-manifest.json",
+      "bytes": 3400,
+      "sha256": "84869ff039ca9fc801841493f08b4aee6421ed22f5c55f1f6ccf33936b0e50c4"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/executable-freeze.json",
+      "bytes": 742,
+      "sha256": "0902f73f74bdee6e08f7476302a81d047cca60416e4bed8da332692c67cf49c1"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/frozen-config.json",
+      "bytes": 3437,
+      "sha256": "77df9abf3c50c534c7c6afdecbdb36b6f8a59d163b48e99cbb00fc1618461a3a"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/holdout-lock.json",
+      "bytes": 249,
+      "sha256": "1ca5032d153b798d6d106fa0e305e4a031fd9bc284b00c96ca344b61041ee961"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/pipeline-positive-control-report.json",
+      "bytes": 681,
+      "sha256": "ec4fe8095e08fac0e14260e2b8c47c4c6e016d21f551ad8253ecc5c6f1c6560d"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/synthetic-control-observations.jsonl",
+      "bytes": 7606847,
+      "sha256": "e310fac69e0caa915405494042415c11268b359158c7b35f97f66c50099fb7c1"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/synthetic-control-report.json",
+      "bytes": 5070,
+      "sha256": "1695a701a98ff5745e9965e637a99d694ff5efeb65b31a26a37f1715f5a795b1"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/validation-observations.jsonl",
+      "bytes": 2740487,
+      "sha256": "dc162d4c71dd3a9be9a0dc3e6aa898841a856353b9149f77512222360f4d44c1"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/validation-report.json",
+      "bytes": 58435,
+      "sha256": "9ebc9db13c749696df4cae492809f50002559a88e63643b36bea0b2c85b3c56e"
+    },
+    {
+      "path": "research/phase2a1/fixtures/synthetic-validation-bars.jsonl",
+      "bytes": 786912,
+      "sha256": "8c81bf69c062e2c772378cc00f946be104204eb782cfe65089362266e6a4c400"
+    },
+    {
+      "path": "research/phase2a1/output/COMMAND.txt",
+      "bytes": 262,
+      "sha256": "de8cb3c00066efabcf23d2dc5f5e7656f873f60136db0cb8cd97763ce9326698"
+    },
+    {
+      "path": "research/phase2a1/output/VALIDATION-REPORT.md",
+      "bytes": 2247,
+      "sha256": "8a512a794975caed42ef164b9c102ca9c5601d18a2c1927e6f83ce5bed15e53c"
+    },
+    {
+      "path": "research/phase2a1/output/dataset-manifest.json",
+      "bytes": 3358,
+      "sha256": "4664c893e47c7abbc86365063fca9fe913f0abb7658af614eded20e7835fb5db"
+    },
+    {
+      "path": "research/phase2a1/output/executable-freeze.json",
+      "bytes": 576,
+      "sha256": "1d2cf6f5e40d8908bce9aad23c709843d55415c58e9c509a8a2372e7a5ed5258"
+    },
+    {
+      "path": "research/phase2a1/output/frozen-config.json",
+      "bytes": 3437,
+      "sha256": "77df9abf3c50c534c7c6afdecbdb36b6f8a59d163b48e99cbb00fc1618461a3a"
+    },
+    {
+      "path": "research/phase2a1/output/holdout-lock.json",
+      "bytes": 249,
+      "sha256": "1ca5032d153b798d6d106fa0e305e4a031fd9bc284b00c96ca344b61041ee961"
+    },
+    {
+      "path": "research/phase2a1/output/synthetic-control-observations.jsonl",
+      "bytes": 7606847,
+      "sha256": "e310fac69e0caa915405494042415c11268b359158c7b35f97f66c50099fb7c1"
+    },
+    {
+      "path": "research/phase2a1/output/synthetic-control-report.json",
+      "bytes": 5070,
+      "sha256": "7df8010199112a8e61a6cf6f6a7f5bd82b4bfc463c003cb562c3e3c6308ec66f"
+    },
+    {
+      "path": "research/phase2a1/output/validation-observations.jsonl",
+      "bytes": 2740487,
+      "sha256": "dc162d4c71dd3a9be9a0dc3e6aa898841a856353b9149f77512222360f4d44c1"
+    },
+    {
+      "path": "research/phase2a1/output/validation-report.json",
+      "bytes": 55873,
+      "sha256": "e99e98516e305a8e33b1722beb8b92e1947f6e71375246b4f65dec5356521c94"
+    },
+    {
+      "path": "research/phase2a1/prior-real-market/build-metadata.json",
+      "bytes": 430,
+      "sha256": "fa8f89344399600857b80b53d2224cfd19b0cbb839d2cbff31da33667600b54b"
+    },
+    {
+      "path": "research/phase2a1/prior-real-market/repaired-review-report.json",
+      "bytes": 63222,
+      "sha256": "f3125a4320c0862ab6b8db0c6064fd7decb75cdc7ba3f9eacfd5f3f6be85bc65"
+    },
+    {
+      "path": "research/phase2a1/prior-real-market/source-runs.json",
+      "bytes": 1151,
+      "sha256": "bef867343214b6d24d78a8417e8c955adb592c2847e5b3c1b104c6902afb7945"
+    },
+    {
+      "path": "research/phase2a1/real-market-input/normalized-train-validation-bars.jsonl",
+      "bytes": 7280761,
+      "sha256": "d2d6230ed5b16fdb85a49f9e8bffcb05a31c99f3de59172542314ac24c1f1484"
+    },
+    {
+      "path": "server/.generated/privileged.contract.ts",
+      "bytes": 4667,
+      "sha256": "c2bab44fa7d4b1043a1368ac458674de88544d24fbc6c87f73ddff16910ab060"
+    },
+    {
+      "path": "server/dist/actions.js",
+      "bytes": 12895897,
+      "sha256": "cdb809c783ba88147b67563cfb1dcd58587d4be563794fb608b583782e5b7f53"
+    },
+    {
+      "path": "server/dist/privileged-contracts.js",
+      "bytes": 135725,
+      "sha256": "6dc3f6828eb1fb0df7a67d6bd90d1138e6ce79246bb78bf5d857f3f1c0d372e0"
+    },
+    {
+      "path": "server/dist/privileged-contracts.json",
+      "bytes": 20223,
+      "sha256": "3e1d5b9d9dc18d9f6c50f6e6909fd63f986f1536c879a6295df08699f1d43cb9"
+    },
+    {
+      "path": "server/dist/privileged.js",
+      "bytes": 158662,
+      "sha256": "1280d3fcac4a9688b1fe7af516653330df78aefbefb51ccd9636f8e7db3908aa"
+    },
+    {
+      "path": "server/src/actions.ts",
+      "bytes": 681897,
+      "sha256": "ba21c12a2d3d572bbad9e863d856927bc8dde8c3ce976b780b827d70b3af48c4"
+    },
+    {
+      "path": "server/src/issuance-persistence.ts",
+      "bytes": 1330,
+      "sha256": "4087b0639c4f332ea8ebee34f361e8ff19f0dfec5b5b13513cd933b5cec2707c"
+    },
+    {
+      "path": "server/src/market-freshness.test.ts",
+      "bytes": 11790,
+      "sha256": "8fbeda3a43f51aa9c4bd3aa57f7121d50e09890ce4696972ae11f49d934f61a8"
+    },
+    {
+      "path": "server/src/market-freshness.ts",
+      "bytes": 14571,
+      "sha256": "12fc9ab4fe4e488c30a778094df8545c5ffdb166f78b1f239a2f694c0898642a"
+    },
+    {
+      "path": "server/src/market-refresh-action.integration.test.ts",
+      "bytes": 13071,
+      "sha256": "564df14139898bb108fcf44e4df91e6f9a756a3000654214c3fc8bd559b7ea65"
+    },
+    {
+      "path": "server/src/meme-risk.test.ts",
+      "bytes": 3744,
+      "sha256": "66ae9b6a937c13c0373071aa1e0ca1276406de27f9bfdccb2af48883c5e80569"
+    },
+    {
+      "path": "server/src/meme-risk.ts",
+      "bytes": 7162,
+      "sha256": "14aa5bebfe8a3fa4a89c6ec40faef4fec1620d72b3ac1d01cb3c7aa117a2919f"
+    },
+    {
+      "path": "server/src/phase2a-controls.ts",
+      "bytes": 11546,
+      "sha256": "ba50f5a1f2c8a3cb1865349445d61986abb3415257336e1ce53bae850eb5b845"
+    },
+    {
+      "path": "server/src/phase2a-package-sources.ts",
+      "bytes": 12844378,
+      "sha256": "831eb9530db1d36347ceb9d005fe8083e855c0b005246e457b784158ca9586c4"
+    },
+    {
+      "path": "server/src/phase2a-package.ts",
+      "bytes": 2127,
+      "sha256": "eaad5e9928f8ac7e1878ddfc0a361cf3b1f5acfe702837ed22d553edf31629b9"
+    },
+    {
+      "path": "server/src/phase2a-research.test.ts",
+      "bytes": 13515,
+      "sha256": "c868c64f11e94ffb999f39972586e3a1f05056bcd1ede67a8715b7fe99114f50"
+    },
+    {
+      "path": "server/src/phase2a-research.ts",
+      "bytes": 41483,
+      "sha256": "09b8146145dbf8af8caa8629038bbdf713f2d96325be18e469cacef57dfb283d"
+    },
+    {
+      "path": "server/src/phase2a-timing-preflight.ts",
+      "bytes": 11920,
+      "sha256": "96e4358c4e66aec66b0b5a3bcb9e9e5fe0f28ef356253cce4ec28266e7683ba9"
+    },
+    {
+      "path": "server/src/privileged.ts",
+      "bytes": 26780,
+      "sha256": "013ff5cb7a168e9f4f73e738498bd947d86235fb6a2180bc09ca2a1e4eb19463"
+    },
+    {
+      "path": "server/src/schema.ts",
+      "bytes": 43888,
+      "sha256": "d9babb6e3024f844fcc1c048e744b1e9f872e4e5822610dfc54ca85d755d3207"
+    },
+    {
+      "path": "server/src/signal-action-contract.integration.test.ts",
+      "bytes": 2225,
+      "sha256": "3c4b31ec43d0619dbffb4075db066c3858cbcaa81d952c52c2c2a80c964e7e2a"
+    },
+    {
+      "path": "server/src/signal-methodology.test.ts",
+      "bytes": 13028,
+      "sha256": "e42e6c66139dcdd05809f8da17f6483bb39560a8cfb5b8f3587753c33d27c3c7"
+    },
+    {
+      "path": "server/src/signal-methodology.ts",
+      "bytes": 19204,
+      "sha256": "27170fee2422503d398883cd4feb0c5063929ad744ebfa58d30ed968f994cc68"
+    },
+    {
+      "path": "server/src/signal-persistence.integration.test.ts",
+      "bytes": 7492,
+      "sha256": "5e2dda7e0bd3942bddbb3f2dc9041dd13dbe1bd20196477eb21613a590eac8bd"
+    },
+    {
+      "path": "server/tsconfig.json",
+      "bytes": 343,
+      "sha256": "5698f6c130a85287640ab69e8ea859d49aba21266333a68494afc52e92c335a5"
+    },
+    {
+      "path": "space.json",
+      "bytes": 530,
+      "sha256": "9f2a0c8c8d0ac62d4aba10a2e886903d5264935bd10395a4985a0a26105b0990"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "bytes": 635,
+      "sha256": "1000b5fb48cee172a53a1ad37c821330b3f48b227f4fc580070b393e1d80ba1f"
+    }
+  ],
+  "engineFreezeBinding": {
+    "path": "server/src/phase2a-research.ts",
+    "sha256": "09b8146145dbf8af8caa8629038bbdf713f2d96325be18e469cacef57dfb283d",
+    "expectedSha256": "09b8146145dbf8af8caa8629038bbdf713f2d96325be18e469cacef57dfb283d",
+    "matches": true
+  },
+  "datasetBinding": {
+    "path": "research/phase2a1/real-market-input/normalized-train-validation-bars.jsonl",
+    "rows": 18223,
+    "bytes": 7280761,
+    "sha256": "d2d6230ed5b16fdb85a49f9e8bffcb05a31c99f3de59172542314ac24c1f1484",
+    "expectedRows": 18223
+  },
+  "observationExport": {
+    "path": "research/phase2a1/closure-v3-real-market/validation-observations.jsonl",
+    "rows": 8162,
+    "bytes": 9122769,
+    "sha256": "184c10e9bbfaf1a065dfc2a61c64e8a439d66e183eb4fc48a243ecef1da21bc0"
+  },
+  "holdout": {
+    "realReservedDataIncluded": false,
+    "lockedStart": "2025-01-01",
+    "lockedEnd": "2026-09-30",
+    "performanceOpened": false,
+    "syntheticBoundaryFixturesOnly": true
+  },
+  "timing": {
+    "performanceExecuted": false,
+    "usableComponents": 3,
+    "requiredComponents": 20,
+    "refusalPreserved": true,
+    "fullStructuralMatchesAndComponentsPath": "research/phase2a1/closure-v3-real-market/timing-structural-preflight.json"
+  },
+  "deployedEvidence": "PENDING",
+  "noPromotionDecisionPreserved": true,
+  "commands": {
+    "install": "bun install --frozen-lockfile",
+    "test": "bun test",
+    "typecheck": "bun run typecheck",
+    "research": "bun research/phase2a/cli.ts --input research/phase2a1/real-market-input/normalized-train-validation-bars.jsonl --out research/phase2a1/closure-v3-real-market",
+    "serverBuild": "bun run build:server",
+    "artifactBuild": "web_artifacts.build({})"
+  },
+  "logs": {
+    "test": "research/phase2a1/closure-v3-evidence/full-test-output-current.txt",
+    "typecheck": "research/phase2a1/closure-v3-evidence/typecheck-output-current.txt",
+    "research": "research/phase2a1/closure-v3-evidence/research-cli-output-current.txt",
+    "manualBuildAttempt": "research/phase2a1/closure-v3-evidence/manual-build-attempt-output.txt",
+    "platformBuild": "research/phase2a1/closure-v3-evidence/web-artifact-build-output.json"
+  }
+}

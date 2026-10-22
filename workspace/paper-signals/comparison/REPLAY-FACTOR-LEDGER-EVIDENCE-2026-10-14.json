@@ -1,0 +1,630 @@
+{
+ "replay": "run-5 replay with finished adapter",
+ "status_input": "/home/hatch/workspace/goals/research-terminal/paper-signals/comparison/live-paper-status-2026-10-14T2340Z.json",
+ "steps": [
+  {
+   "step": "adapter re-export (same status snapshot as run 5)",
+   "candidates_exported": 8,
+   "unique_candidate_ids": 8,
+   "intra_batch_duplicates": 0,
+   "excluded_pre_freeze": 0,
+   "all_decision_at_preserved": true
+  },
+  {
+   "step": "collect #1 (empty scratch vessel)",
+   "candidates_ingested": 8,
+   "candidates_eligible": 8,
+   "rejected_pre_freeze": [],
+   "rows_added": 8,
+   "rows_deduped": 0,
+   "vessel_rows_total": 8
+  },
+  {
+   "step": "collect #2 (same scratch vessel, idempotency check)",
+   "candidates_ingested": 8,
+   "rows_added": 0,
+   "rows_deduped": 8,
+   "vessel_rows_total": 8
+  }
+ ],
+ "per_id_scoring": [
+  {
+   "candidate_id": "live-paper-cand-1",
+   "symbol": "BTC",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  },
+  {
+   "candidate_id": "live-paper-cand-2",
+   "symbol": "BTW",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  },
+  {
+   "candidate_id": "live-paper-cand-3",
+   "symbol": "ZRO",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  },
+  {
+   "candidate_id": "live-paper-cand-4",
+   "symbol": "PRL",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  },
+  {
+   "candidate_id": "live-paper-cand-5",
+   "symbol": "Q",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  },
+  {
+   "candidate_id": "live-paper-cand-6",
+   "symbol": "PONS",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  },
+  {
+   "candidate_id": "live-paper-cand-7",
+   "symbol": "UMXM",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  },
+  {
+   "candidate_id": "live-paper-cand-8",
+   "symbol": "WAL",
+   "decision_at": "2026-10-14T20:26:29.411Z",
+   "decision_at_preserved": true,
+   "factor_ledger_available": true,
+   "decision_time_verified": false,
+   "decision_time_note": "asOf not recorded on 7 factor input(s); decision-time status labeled, not assumed",
+   "prod_disposition": "unscored",
+   "prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "c2_disposition": "unscored",
+   "c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "missing_for_production_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ],
+   "missing_for_c2_arm": [
+    "Trend cluster",
+    "MACD",
+    "Perp funding crowding",
+    "Open interest",
+    "Binance futures positioning",
+    "Cross-venue taker imbalance",
+    "TVL trend",
+    "Revenue linkage",
+    "Developer velocity",
+    "Supply-overhang penalty"
+   ]
+  }
+ ],
+ "cohort_verification": [
+  {
+   "candidate_id": "live-paper-cand-1",
+   "symbol": "BTC",
+   "deployed_id": "1",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "expired",
+    "deployed_reason_code": "entry_window_expired_before_observation",
+    "ambiguity": "operationalEvidenceJson carries a hypothetical 'legacy path would have suppressed (born-dead)' note; it is not a recorded legacy suppression decision and does not change the stage."
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  },
+  {
+   "candidate_id": "live-paper-cand-2",
+   "symbol": "BTW",
+   "deployed_id": "2",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "deferred",
+    "deployed_reason_code": "venue_mapping_unavailable",
+    "ambiguity": null
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  },
+  {
+   "candidate_id": "live-paper-cand-3",
+   "symbol": "ZRO",
+   "deployed_id": "3",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "deferred",
+    "deployed_reason_code": "venue_mapping_unavailable",
+    "ambiguity": null
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  },
+  {
+   "candidate_id": "live-paper-cand-4",
+   "symbol": "PRL",
+   "deployed_id": "4",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "deferred",
+    "deployed_reason_code": "venue_mapping_unavailable",
+    "ambiguity": null
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  },
+  {
+   "candidate_id": "live-paper-cand-5",
+   "symbol": "Q",
+   "deployed_id": "5",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "deferred",
+    "deployed_reason_code": "venue_mapping_unavailable",
+    "ambiguity": null
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  },
+  {
+   "candidate_id": "live-paper-cand-6",
+   "symbol": "PONS",
+   "deployed_id": "6",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "deferred",
+    "deployed_reason_code": "venue_mapping_unavailable",
+    "ambiguity": null
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  },
+  {
+   "candidate_id": "live-paper-cand-7",
+   "symbol": "UMXM",
+   "deployed_id": "7",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "deferred",
+    "deployed_reason_code": "venue_mapping_unavailable",
+    "ambiguity": null
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  },
+  {
+   "candidate_id": "live-paper-cand-8",
+   "symbol": "WAL",
+   "deployed_id": "8",
+   "checks": {
+    "decision_at_ge_cutoff": true,
+    "decision_at_exact": true,
+    "collector_stamp_is_active_freeze": true,
+    "deployed_freezeVersion": true,
+    "deployed_frozenAt": true,
+    "freezeHash_matches": true,
+    "productionHash_matches": true,
+    "challengerHash_matches": true,
+    "source_is_deployed_status": true
+   },
+   "checks_all_pass": true,
+   "stage": {
+    "discovery_candidate": true,
+    "dossier_recommendation": false,
+    "paper_issuance": false,
+    "deployed_substate": "deferred",
+    "deployed_reason_code": "venue_mapping_unavailable",
+    "ambiguity": null
+   },
+   "provenance_verdict": "PROSPECTIVE"
+  }
+ ],
+ "active_freeze_version": "2.1.5",
+ "active_manifest_ok": true,
+ "delta_vs_run5_vessel_rows": [
+  {
+   "candidate_id": "live-paper-cand-1",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  },
+  {
+   "candidate_id": "live-paper-cand-2",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  },
+  {
+   "candidate_id": "live-paper-cand-3",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  },
+  {
+   "candidate_id": "live-paper-cand-4",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  },
+  {
+   "candidate_id": "live-paper-cand-5",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  },
+  {
+   "candidate_id": "live-paper-cand-6",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  },
+  {
+   "candidate_id": "live-paper-cand-7",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  },
+  {
+   "candidate_id": "live-paper-cand-8",
+   "run5_factor_ledger_available": "False",
+   "replay_factor_ledger_available": true,
+   "run5_prod_disposition_reason": "unscored:no-factor-ledger",
+   "replay_prod_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_c2_disposition_reason": "unscored:no-factor-ledger",
+   "replay_c2_disposition_reason": "unscored:incomplete-factor-ledger",
+   "run5_decision_time_verified": "True",
+   "replay_decision_time_verified": false
+  }
+ ]
+}

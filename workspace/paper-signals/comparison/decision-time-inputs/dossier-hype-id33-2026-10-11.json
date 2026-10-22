@@ -1,0 +1,1872 @@
+{
+  "capture_correction_note": "CORRECTION 2026-10-15 (capture correction): this capture's evidence_class was defaulted to FRESH by the 2026-10-14 automatic run, which conflated capture time with decision time. The frozen dossier-cohort-v1 eligibility cutoff is 2026-10-14T18:35:00+00:00 on the DECISION instant; this issuance's decision_at (2026-10-11T13:06:44.241+00:00) predates the cutoff, so it is historical reproduction, not fresh prospective evidence. Label corrected FRESH -> REPLAY/REPRODUCTION (label correction only; the persisted decision-time inputs and arm results were not touched or re-scored). captured_at added, distinct from decision_at.",
+  "captured_at": "2026-10-15T00:58:34.961+00:00",
+  "decision_at": "2026-10-11T13:06:44.241+00:00",
+  "decision_at_ms": 1791724004241,
+  "entry_context": {
+    "atr14": 4.3975134422296,
+    "atr_bar_count": 256,
+    "decision_reference": {
+      "entry": 85.07,
+      "stop": 90.566891802787,
+      "target": 76.8246622958195,
+      "target2": 71.32777049303249
+    },
+    "entry_evidence": {
+      "price": 85.07,
+      "priceConvention": "usd-spot-reference",
+      "provider": "CoinGecko markets",
+      "receivedAt": "2026-10-11T13:06:44.983Z",
+      "requestedAfterDecisionAt": "2026-10-11T13:06:44.241Z",
+      "rule": "first-post-decision-provider-quote"
+    },
+    "entry_price": 85.07,
+    "funding": 0.0001,
+    "levels_recorded": {
+      "entry": 85.07,
+      "invalidation": 90.566891802787,
+      "target1": 76.8246622958195,
+      "target2": 71.32777049303249
+    },
+    "oi_change": 5.819956241770563,
+    "oi_usd": 98416237.4828,
+    "risk_method": "atr14_1_25x",
+    "risk_multiplier": 1.25,
+    "short_regime_check": {
+      "allowed": true,
+      "lowerHighs": false,
+      "priceBelowSma50": true,
+      "reason": "bearish daily structure confirmed: price below 50D MA and 20D trend is negative",
+      "sma50": 86.0428339669504,
+      "trend20Negative": true,
+      "trend20Pct": -9.550385942041261
+    },
+    "signal_day_candle": {
+      "close": 85.39,
+      "day": "2026-10-10",
+      "high": 86.62,
+      "low": 83.67,
+      "open": 84.14,
+      "source": "CoinGecko OHLC \u2192 historical_daily_bars grading series"
+    },
+    "validation_status": "partially_testable_prospective"
+  },
+  "evidence_class": "REPLAY/REPRODUCTION",
+  "factors": [
+    {
+      "asOf": "2026-10-11T13:05:57.000Z",
+      "contribution": 2.5,
+      "label": "Trend cluster",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "50D: below \u00b7 200D: above \u00b7 90D: 34.1%",
+      "score": 1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "50D: below \u00b7 200D: above \u00b7 90D: 34.1%",
+      "weight": 2.5
+    },
+    {
+      "asOf": "2026-10-11T13:05:57.000Z",
+      "contribution": 0,
+      "label": "Momentum",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "RSI 46.0",
+      "score": 0,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "RSI 46.0",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T13:05:57.000Z",
+      "contribution": -1.5,
+      "label": "MACD",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "negative cross-state",
+      "score": -1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "negative cross-state",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T13:06:36.259Z",
+      "contribution": -1.75,
+      "label": "Perp funding crowding",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "venue Hyperliquid \u00b7 8h-normalized 0.0100% \u00b7 longs paying shorts",
+      "score": -1,
+      "source": "Hyperliquid",
+      "status": "observed",
+      "value": "venue Hyperliquid \u00b7 8h-normalized 0.0100% \u00b7 longs paying shorts",
+      "weight": 1.75
+    },
+    {
+      "asOf": "2026-10-11T13:06:36.259Z",
+      "contribution": 0,
+      "label": "Open interest",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "OKX $98416237.48 \u00b7 24H 5.8% \u00b7 Hyperliquid cross-check $1707592382.33",
+      "score": 0,
+      "source": "OKX OI + OKX 24H baseline",
+      "status": "observed",
+      "value": "OKX $98416237.48 \u00b7 24H 5.8% \u00b7 Hyperliquid cross-check $1707592382.33",
+      "weight": 1
+    },
+    {
+      "asOf": "2026-10-11T13:06:29.722Z",
+      "contribution": 0,
+      "label": "Binance futures positioning",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 Binance Futures blocked artifact egress: Service unavailable from a restricted location according to 'b. Eligibility' in https://www.binance.com/en/terms. Please contact customer service if you believe you received this message in error.",
+      "score": 0,
+      "source": "Binance Futures",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 Binance Futures blocked artifact egress: Service unavailable from a restricted location according to 'b. Eligibility' in https://www.binance.com/en/terms. Please contact customer service if you believe you received this message in error.",
+      "weight": 1
+    },
+    {
+      "asOf": null,
+      "contribution": 0,
+      "label": "Cross-venue taker imbalance",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "score": 0,
+      "source": "Binance aggTrades + OKX spot trades",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "weight": 1.25
+    },
+    {
+      "asOf": "2026-10-11T13:06:36.259Z",
+      "contribution": 0,
+      "label": "TVL trend",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "TVL $7096393467.28 \u00b7 7D -3.1% \u00b7 30D 4.5% (protocol TVL)",
+      "score": 0,
+      "source": "DeFiLlama",
+      "status": "observed",
+      "value": "TVL $7096393467.28 \u00b7 7D -3.1% \u00b7 30D 4.5% (protocol TVL)",
+      "weight": 2
+    },
+    {
+      "asOf": "2026-10-11T13:06:36.259Z",
+      "contribution": 1.5,
+      "label": "Revenue linkage",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "30D avg fees $2931922.23/day \u00b7 30D avg revenue $2380282.17/day \u00b7 annualized revenue yield 4.59% on market cap \u00b7 latest fees $1601873.00 \u00b7 buybacks: NO_DATA \u2014 no verified feed",
+      "score": 1,
+      "source": "DeFiLlama 30D fees + revenue",
+      "status": "observed",
+      "value": "30D avg fees $2931922.23/day \u00b7 30D avg revenue $2380282.17/day \u00b7 annualized revenue yield 4.59% on market cap \u00b7 latest fees $1601873.00 \u00b7 buybacks: NO_DATA \u2014 no verified feed",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T13:05:57.000Z",
+      "contribution": 0,
+      "label": "Developer velocity",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 no curated canonical GitHub repository mapping.",
+      "score": 0,
+      "source": "GitHub commit activity",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 no curated canonical GitHub repository mapping.",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T13:05:57.000Z",
+      "contribution": -1.5,
+      "label": "Supply-overhang penalty (negative-only)",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "FDV/mcap 4.29\u00d7 \u2014 heavy future-supply overhang",
+      "score": -1,
+      "source": "CoinGecko",
+      "status": "observed",
+      "value": "FDV/mcap 4.29\u00d7 \u2014 heavy future-supply overhang",
+      "weight": 1.5
+    }
+  ],
+  "freshness_classification": {
+    "cutoff_utc": "2026-10-14T18:35:00+00:00",
+    "note": "decision_at 2026-10-11T13:06:44.241+00:00 before frozen cutoff 2026-10-14T18:35:00+00:00: historical reproduction, not fresh prospective evidence (capture time does not qualify)"
+  },
+  "issuance_key": "hyperliquid|spot-reference|crypto-dossier-factor-agreement|2.0.0-measurement-contract|sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220|1791676800000",
+  "issuance_path": "getCryptoAnalysis \u2192 issueGeneratedSignalCandidate",
+  "issued_at": "2026-10-11T13:06:44.241+00:00",
+  "missing_inputs": [
+    {
+      "label": "Binance futures positioning",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Cross-venue taker imbalance",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Developer velocity",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    }
+  ],
+  "model": {
+    "collector": "comparison/dossier_model_collector.py::capture_dossier_evaluation (single automatic write path)",
+    "cost_scenario": "modeled-roundtrip-18bps-funding-unverified-v1",
+    "entry_convention": "first-post-decision-provider-quote",
+    "evaluator_version": "crypto-evaluation-v4-cohort-contract",
+    "parameter_hash": "sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220",
+    "price_convention": "usd-spot-reference",
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+    "strategy_id": "crypto-dossier-factor-agreement",
+    "strategy_version": "2.0.0-measurement-contract",
+    "wiring": "comparison/intended_models.py (score_dossier_factors <- scoreDossierFactors, signal-methodology.ts:47)"
+  },
+  "opportunity_id": "dossier-hype-id33-2026-10-11",
+  "persisted_at": "2026-10-15T00:58:34.961+00:00",
+  "provenance": {
+    "extracted_at": "2026-10-15T00:58:34.956+00:00",
+    "signal_id": 33,
+    "signal_table": "generated_signals",
+    "snapshot_id": 4472200907020677,
+    "snapshot_table": "signal_input_snapshots",
+    "source_db": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/app.db",
+    "source_db_role": "local workspace copy; read-only open (mode=ro); not a dump of the deployed runtime"
+  },
+  "provider_metadata": {
+    "buildId": "starting-build:c3217be9-7f13-4c20-ae29-01600474bbab|source:crypto-phase1-final-signoff-2026-10-09",
+    "providers": [
+      "CoinGeckoOHLC",
+      "historicalDailyBars",
+      "Hyperliquid",
+      "KrakenSpotOHLC",
+      "OKX"
+    ],
+    "sourceAsOf": "2026-10-11T13:05:57.000Z"
+  },
+  "raw_decision_inputs": {
+    "atrBars": [
+      {
+        "availableAt": 1769644800000,
+        "close": 34.33,
+        "high": 34.51,
+        "low": 32.35
+      },
+      {
+        "availableAt": 1769731200000,
+        "close": 30.85,
+        "high": 34.77,
+        "low": 30.44
+      },
+      {
+        "availableAt": 1769817600000,
+        "close": 30.62,
+        "high": 32.86,
+        "low": 26.5
+      },
+      {
+        "availableAt": 1769904000000,
+        "close": 31,
+        "high": 32.1,
+        "low": 27.48
+      },
+      {
+        "availableAt": 1769990400000,
+        "close": 30.65,
+        "high": 32.55,
+        "low": 28.5
+      },
+      {
+        "availableAt": 1770076800000,
+        "close": 33.29,
+        "high": 34,
+        "low": 29.56
+      },
+      {
+        "availableAt": 1770163200000,
+        "close": 32.61,
+        "high": 38.36,
+        "low": 32.26
+      },
+      {
+        "availableAt": 1770249600000,
+        "close": 35.46,
+        "high": 36.36,
+        "low": 32.4
+      },
+      {
+        "availableAt": 1770336000000,
+        "close": 33.03,
+        "high": 35.49,
+        "low": 31.05
+      },
+      {
+        "availableAt": 1770422400000,
+        "close": 32.42,
+        "high": 37,
+        "low": 31.36
+      },
+      {
+        "availableAt": 1770508800000,
+        "close": 31.43,
+        "high": 34.44,
+        "low": 31.05
+      },
+      {
+        "availableAt": 1770595200000,
+        "close": 32.42,
+        "high": 32.99,
+        "low": 30.48
+      },
+      {
+        "availableAt": 1770681600000,
+        "close": 31.25,
+        "high": 33.53,
+        "low": 30.94
+      },
+      {
+        "availableAt": 1770768000000,
+        "close": 28.8,
+        "high": 31.53,
+        "low": 28.72
+      },
+      {
+        "availableAt": 1770854400000,
+        "close": 29.38,
+        "high": 30.21,
+        "low": 28.35
+      },
+      {
+        "availableAt": 1770940800000,
+        "close": 31.05,
+        "high": 31.8,
+        "low": 29.18
+      },
+      {
+        "availableAt": 1771027200000,
+        "close": 31.64,
+        "high": 32.33,
+        "low": 30
+      },
+      {
+        "availableAt": 1771113600000,
+        "close": 31.76,
+        "high": 32.31,
+        "low": 30.71
+      },
+      {
+        "availableAt": 1771200000000,
+        "close": 30.72,
+        "high": 31.98,
+        "low": 30.24
+      },
+      {
+        "availableAt": 1771286400000,
+        "close": 31.21,
+        "high": 31.21,
+        "low": 29.6
+      },
+      {
+        "availableAt": 1771372800000,
+        "close": 29.52,
+        "high": 31.38,
+        "low": 29.04
+      },
+      {
+        "availableAt": 1771459200000,
+        "close": 28.67,
+        "high": 29.76,
+        "low": 28.22
+      },
+      {
+        "availableAt": 1771545600000,
+        "close": 29.05,
+        "high": 29.37,
+        "low": 27.77
+      },
+      {
+        "availableAt": 1771632000000,
+        "close": 30.32,
+        "high": 30.41,
+        "low": 28.63
+      },
+      {
+        "availableAt": 1771718400000,
+        "close": 29.76,
+        "high": 30.55,
+        "low": 28.31
+      },
+      {
+        "availableAt": 1771804800000,
+        "close": 28.96,
+        "high": 29.92,
+        "low": 28.68
+      },
+      {
+        "availableAt": 1771891200000,
+        "close": 26.25,
+        "high": 29.01,
+        "low": 25.65
+      },
+      {
+        "availableAt": 1771977600000,
+        "close": 27.12,
+        "high": 27.4,
+        "low": 25.54
+      },
+      {
+        "availableAt": 1772064000000,
+        "close": 27.85,
+        "high": 29.09,
+        "low": 26.71
+      },
+      {
+        "availableAt": 1772150400000,
+        "close": 28.13,
+        "high": 29.37,
+        "low": 27.78
+      },
+      {
+        "availableAt": 1772236800000,
+        "close": 27.29,
+        "high": 29.9,
+        "low": 26.81
+      },
+      {
+        "availableAt": 1772323200000,
+        "close": 31.23,
+        "high": 31.37,
+        "low": 26.13
+      },
+      {
+        "availableAt": 1772409600000,
+        "close": 31.57,
+        "high": 32.26,
+        "low": 30.23
+      },
+      {
+        "availableAt": 1772496000000,
+        "close": 32.83,
+        "high": 33.71,
+        "low": 29.98
+      },
+      {
+        "availableAt": 1772582400000,
+        "close": 31.32,
+        "high": 33.6,
+        "low": 30.75
+      },
+      {
+        "availableAt": 1772668800000,
+        "close": 32.19,
+        "high": 33.23,
+        "low": 30.75
+      },
+      {
+        "availableAt": 1772755200000,
+        "close": 30.6,
+        "high": 32.3,
+        "low": 30.26
+      },
+      {
+        "availableAt": 1772841600000,
+        "close": 31.06,
+        "high": 31.32,
+        "low": 29.45
+      },
+      {
+        "availableAt": 1772928000000,
+        "close": 30.31,
+        "high": 31.12,
+        "low": 29.88
+      },
+      {
+        "availableAt": 1773014400000,
+        "close": 30.71,
+        "high": 31.19,
+        "low": 29.64
+      },
+      {
+        "availableAt": 1773100800000,
+        "close": 34.73,
+        "high": 35.37,
+        "low": 30.27
+      },
+      {
+        "availableAt": 1773187200000,
+        "close": 34.2,
+        "high": 35.23,
+        "low": 33.53
+      },
+      {
+        "availableAt": 1773273600000,
+        "close": 36.22,
+        "high": 37,
+        "low": 34.09
+      },
+      {
+        "availableAt": 1773360000000,
+        "close": 37.29,
+        "high": 38.04,
+        "low": 35.82
+      },
+      {
+        "availableAt": 1773446400000,
+        "close": 36.48,
+        "high": 38.54,
+        "low": 35.95
+      },
+      {
+        "availableAt": 1773532800000,
+        "close": 37.84,
+        "high": 38.86,
+        "low": 36.37
+      },
+      {
+        "availableAt": 1773619200000,
+        "close": 37.3,
+        "high": 38.26,
+        "low": 36.8
+      },
+      {
+        "availableAt": 1773705600000,
+        "close": 40.79,
+        "high": 41.45,
+        "low": 37.28
+      },
+      {
+        "availableAt": 1773792000000,
+        "close": 41.19,
+        "high": 42.13,
+        "low": 39.63
+      },
+      {
+        "availableAt": 1773878400000,
+        "close": 42.14,
+        "high": 43.78,
+        "low": 40.22
+      },
+      {
+        "availableAt": 1773964800000,
+        "close": 39.34,
+        "high": 42.25,
+        "low": 38.61
+      },
+      {
+        "availableAt": 1774051200000,
+        "close": 39.54,
+        "high": 40.7,
+        "low": 38.39
+      },
+      {
+        "availableAt": 1774137600000,
+        "close": 39.22,
+        "high": 40.46,
+        "low": 38.94
+      },
+      {
+        "availableAt": 1774224000000,
+        "close": 38.35,
+        "high": 39.51,
+        "low": 37.45
+      },
+      {
+        "availableAt": 1774310400000,
+        "close": 37.37,
+        "high": 39.48,
+        "low": 36.75
+      },
+      {
+        "availableAt": 1774396800000,
+        "close": 40.35,
+        "high": 40.44,
+        "low": 37.27
+      },
+      {
+        "availableAt": 1774483200000,
+        "close": 40.31,
+        "high": 41.59,
+        "low": 39.7
+      },
+      {
+        "availableAt": 1774569600000,
+        "close": 39.11,
+        "high": 40.35,
+        "low": 38.32
+      },
+      {
+        "availableAt": 1774656000000,
+        "close": 38.66,
+        "high": 39.37,
+        "low": 37.92
+      },
+      {
+        "availableAt": 1774742400000,
+        "close": 39.45,
+        "high": 40.27,
+        "low": 37.94
+      },
+      {
+        "availableAt": 1774828800000,
+        "close": 37.82,
+        "high": 40.03,
+        "low": 37.71
+      },
+      {
+        "availableAt": 1774915200000,
+        "close": 36.8,
+        "high": 38.79,
+        "low": 36.46
+      },
+      {
+        "availableAt": 1775001600000,
+        "close": 36.57,
+        "high": 37.63,
+        "low": 35.64
+      },
+      {
+        "availableAt": 1775088000000,
+        "close": 36.03,
+        "high": 37.77,
+        "low": 35.87
+      },
+      {
+        "availableAt": 1775174400000,
+        "close": 35.22,
+        "high": 36.26,
+        "low": 34.47
+      },
+      {
+        "availableAt": 1775260800000,
+        "close": 35.63,
+        "high": 36.11,
+        "low": 35.11
+      },
+      {
+        "availableAt": 1775347200000,
+        "close": 36.47,
+        "high": 36.54,
+        "low": 35.51
+      },
+      {
+        "availableAt": 1775433600000,
+        "close": 36.85,
+        "high": 36.99,
+        "low": 35.14
+      },
+      {
+        "availableAt": 1775520000000,
+        "close": 36.34,
+        "high": 37.74,
+        "low": 36.05
+      },
+      {
+        "availableAt": 1775606400000,
+        "close": 38.62,
+        "high": 39.17,
+        "low": 35.78
+      },
+      {
+        "availableAt": 1775692800000,
+        "close": 38.78,
+        "high": 39.79,
+        "low": 37.79
+      },
+      {
+        "availableAt": 1775779200000,
+        "close": 39.46,
+        "high": 40.38,
+        "low": 38.17
+      },
+      {
+        "availableAt": 1775865600000,
+        "close": 41.63,
+        "high": 42.27,
+        "low": 39.47
+      },
+      {
+        "availableAt": 1775952000000,
+        "close": 42.25,
+        "high": 43.17,
+        "low": 41.49
+      },
+      {
+        "availableAt": 1776038400000,
+        "close": 40.89,
+        "high": 42.82,
+        "low": 40.22
+      },
+      {
+        "availableAt": 1776124800000,
+        "close": 44.35,
+        "high": 46.68,
+        "low": 40.8
+      },
+      {
+        "availableAt": 1776211200000,
+        "close": 43.57,
+        "high": 45.29,
+        "low": 42.75
+      },
+      {
+        "availableAt": 1776297600000,
+        "close": 44.67,
+        "high": 46.68,
+        "low": 43.14
+      },
+      {
+        "availableAt": 1776384000000,
+        "close": 43.84,
+        "high": 45.79,
+        "low": 43.35
+      },
+      {
+        "availableAt": 1776470400000,
+        "close": 44.64,
+        "high": 45.55,
+        "low": 43.17
+      },
+      {
+        "availableAt": 1776556800000,
+        "close": 43.79,
+        "high": 45.46,
+        "low": 43.75
+      },
+      {
+        "availableAt": 1776643200000,
+        "close": 40.62,
+        "high": 43.99,
+        "low": 40.49
+      },
+      {
+        "availableAt": 1776729600000,
+        "close": 40.72,
+        "high": 41.81,
+        "low": 40.54
+      },
+      {
+        "availableAt": 1776816000000,
+        "close": 39.76,
+        "high": 41.4,
+        "low": 38.91
+      },
+      {
+        "availableAt": 1776902400000,
+        "close": 41.17,
+        "high": 41.79,
+        "low": 39.62
+      },
+      {
+        "availableAt": 1776988800000,
+        "close": 41.29,
+        "high": 41.88,
+        "low": 40.55
+      },
+      {
+        "availableAt": 1777075200000,
+        "close": 41.16,
+        "high": 41.51,
+        "low": 40.69
+      },
+      {
+        "availableAt": 1777161600000,
+        "close": 41.49,
+        "high": 41.88,
+        "low": 40.88
+      },
+      {
+        "availableAt": 1777248000000,
+        "close": 42.49,
+        "high": 42.59,
+        "low": 40.98
+      },
+      {
+        "availableAt": 1777334400000,
+        "close": 41.62,
+        "high": 43.59,
+        "low": 41.28
+      },
+      {
+        "availableAt": 1777420800000,
+        "close": 40.17,
+        "high": 41.85,
+        "low": 39.44
+      },
+      {
+        "availableAt": 1777507200000,
+        "close": 39.95,
+        "high": 40.88,
+        "low": 39.16
+      },
+      {
+        "availableAt": 1777593600000,
+        "close": 39.71,
+        "high": 40.34,
+        "low": 38.63
+      },
+      {
+        "availableAt": 1777680000000,
+        "close": 41.16,
+        "high": 41.21,
+        "low": 39.69
+      },
+      {
+        "availableAt": 1777766400000,
+        "close": 41.24,
+        "high": 42.43,
+        "low": 41.04
+      },
+      {
+        "availableAt": 1777852800000,
+        "close": 41.5,
+        "high": 41.69,
+        "low": 40.69
+      },
+      {
+        "availableAt": 1777939200000,
+        "close": 41.8,
+        "high": 42.55,
+        "low": 40.91
+      },
+      {
+        "availableAt": 1778025600000,
+        "close": 43.75,
+        "high": 44.65,
+        "low": 41.8
+      },
+      {
+        "availableAt": 1778112000000,
+        "close": 43.09,
+        "high": 44.78,
+        "low": 42.93
+      },
+      {
+        "availableAt": 1778198400000,
+        "close": 42.49,
+        "high": 43.52,
+        "low": 41.88
+      },
+      {
+        "availableAt": 1778284800000,
+        "close": 43.26,
+        "high": 43.51,
+        "low": 42.03
+      },
+      {
+        "availableAt": 1778371200000,
+        "close": 42.89,
+        "high": 44.35,
+        "low": 42.88
+      },
+      {
+        "availableAt": 1778457600000,
+        "close": 43,
+        "high": 43.69,
+        "low": 42.16
+      },
+      {
+        "availableAt": 1778544000000,
+        "close": 42.01,
+        "high": 43.14,
+        "low": 40.86
+      },
+      {
+        "availableAt": 1778630400000,
+        "close": 40.24,
+        "high": 42.06,
+        "low": 39.83
+      },
+      {
+        "availableAt": 1778716800000,
+        "close": 38.89,
+        "high": 40.66,
+        "low": 38.67
+      },
+      {
+        "availableAt": 1778803200000,
+        "close": 44.13,
+        "high": 44.78,
+        "low": 38.16
+      },
+      {
+        "availableAt": 1778889600000,
+        "close": 44.15,
+        "high": 47,
+        "low": 42.71
+      },
+      {
+        "availableAt": 1778976000000,
+        "close": 41.8,
+        "high": 44.52,
+        "low": 40.38
+      },
+      {
+        "availableAt": 1779062400000,
+        "close": 45.69,
+        "high": 48,
+        "low": 41.36
+      },
+      {
+        "availableAt": 1779148800000,
+        "close": 47.73,
+        "high": 47.9,
+        "low": 43.79
+      },
+      {
+        "availableAt": 1779235200000,
+        "close": 48.07,
+        "high": 48.9,
+        "low": 46.86
+      },
+      {
+        "availableAt": 1779321600000,
+        "close": 54.87,
+        "high": 55,
+        "low": 47.07
+      },
+      {
+        "availableAt": 1779408000000,
+        "close": 58.55,
+        "high": 64.23,
+        "low": 54.75
+      },
+      {
+        "availableAt": 1779494400000,
+        "close": 54.57,
+        "high": 61.95,
+        "low": 54.29
+      },
+      {
+        "availableAt": 1779580800000,
+        "close": 58.66,
+        "high": 59.98,
+        "low": 53.9
+      },
+      {
+        "availableAt": 1779667200000,
+        "close": 62.71,
+        "high": 64.56,
+        "low": 58.65
+      },
+      {
+        "availableAt": 1779753600000,
+        "close": 61.1,
+        "high": 64,
+        "low": 60.7
+      },
+      {
+        "availableAt": 1779840000000,
+        "close": 59.5,
+        "high": 64.8,
+        "low": 58.58
+      },
+      {
+        "availableAt": 1779926400000,
+        "close": 57.68,
+        "high": 63.32,
+        "low": 57.36
+      },
+      {
+        "availableAt": 1780012800000,
+        "close": 61.49,
+        "high": 62.18,
+        "low": 56.18
+      },
+      {
+        "availableAt": 1780099200000,
+        "close": 64.42,
+        "high": 67.48,
+        "low": 60.32
+      },
+      {
+        "availableAt": 1780185600000,
+        "close": 68.27,
+        "high": 68.57,
+        "low": 64
+      },
+      {
+        "availableAt": 1780272000000,
+        "close": 72.02,
+        "high": 73,
+        "low": 67.41
+      },
+      {
+        "availableAt": 1780358400000,
+        "close": 73.52,
+        "high": 75.56,
+        "low": 70.29
+      },
+      {
+        "availableAt": 1780444800000,
+        "close": 69.77,
+        "high": 75.61,
+        "low": 67.75
+      },
+      {
+        "availableAt": 1780531200000,
+        "close": 74.51,
+        "high": 75.61,
+        "low": 68.41
+      },
+      {
+        "availableAt": 1780617600000,
+        "close": 64.4,
+        "high": 75.41,
+        "low": 62.94
+      },
+      {
+        "availableAt": 1780704000000,
+        "close": 59.77,
+        "high": 65.97,
+        "low": 56.5
+      },
+      {
+        "availableAt": 1780790400000,
+        "close": 56.5,
+        "high": 61.16,
+        "low": 55.42
+      },
+      {
+        "availableAt": 1780876800000,
+        "close": 59.73,
+        "high": 60.45,
+        "low": 56.11
+      },
+      {
+        "availableAt": 1780963200000,
+        "close": 63.81,
+        "high": 65.75,
+        "low": 59.32
+      },
+      {
+        "availableAt": 1781049600000,
+        "close": 57.72,
+        "high": 63.98,
+        "low": 57.3
+      },
+      {
+        "availableAt": 1781136000000,
+        "close": 53.26,
+        "high": 58.25,
+        "low": 52.5
+      },
+      {
+        "availableAt": 1781222400000,
+        "close": 58.9,
+        "high": 59.62,
+        "low": 52.82
+      },
+      {
+        "availableAt": 1781308800000,
+        "close": 59.28,
+        "high": 62.5,
+        "low": 55.06
+      },
+      {
+        "availableAt": 1781395200000,
+        "close": 60.68,
+        "high": 60.87,
+        "low": 57.25
+      },
+      {
+        "availableAt": 1781481600000,
+        "close": 63.93,
+        "high": 64.15,
+        "low": 59.66
+      },
+      {
+        "availableAt": 1781568000000,
+        "close": 66.93,
+        "high": 68.75,
+        "low": 63.17
+      },
+      {
+        "availableAt": 1781654400000,
+        "close": 73.63,
+        "high": 76.9,
+        "low": 66.36
+      },
+      {
+        "availableAt": 1781740800000,
+        "close": 71.12,
+        "high": 76.63,
+        "low": 69.7
+      },
+      {
+        "availableAt": 1781827200000,
+        "close": 68.26,
+        "high": 73.63,
+        "low": 66.41
+      },
+      {
+        "availableAt": 1781913600000,
+        "close": 70.26,
+        "high": 71.35,
+        "low": 65.6
+      },
+      {
+        "availableAt": 1782000000000,
+        "close": 70.75,
+        "high": 71.38,
+        "low": 68.4
+      },
+      {
+        "availableAt": 1782086400000,
+        "close": 67.08,
+        "high": 70.84,
+        "low": 66.58
+      },
+      {
+        "availableAt": 1782172800000,
+        "close": 66.2,
+        "high": 69.54,
+        "low": 64.98
+      },
+      {
+        "availableAt": 1782259200000,
+        "close": 62.11,
+        "high": 67.37,
+        "low": 61.56
+      },
+      {
+        "availableAt": 1782345600000,
+        "close": 63.86,
+        "high": 64.24,
+        "low": 59
+      },
+      {
+        "availableAt": 1782432000000,
+        "close": 64.06,
+        "high": 65.35,
+        "low": 58.41
+      },
+      {
+        "availableAt": 1782518400000,
+        "close": 64.3,
+        "high": 65.47,
+        "low": 60.95
+      },
+      {
+        "availableAt": 1782604800000,
+        "close": 61.6,
+        "high": 64.72,
+        "low": 61.48
+      },
+      {
+        "availableAt": 1782691200000,
+        "close": 61.46,
+        "high": 63.45,
+        "low": 60.5
+      },
+      {
+        "availableAt": 1782777600000,
+        "close": 66.84,
+        "high": 67.74,
+        "low": 60.5
+      },
+      {
+        "availableAt": 1782864000000,
+        "close": 65.01,
+        "high": 66.89,
+        "low": 64.05
+      },
+      {
+        "availableAt": 1782950400000,
+        "close": 62.36,
+        "high": 65.9,
+        "low": 61.85
+      },
+      {
+        "availableAt": 1783036800000,
+        "close": 66.9,
+        "high": 67.17,
+        "low": 61.7
+      },
+      {
+        "availableAt": 1783123200000,
+        "close": 70.64,
+        "high": 71.15,
+        "low": 65.89
+      },
+      {
+        "availableAt": 1783209600000,
+        "close": 69.8,
+        "high": 72,
+        "low": 69.34
+      },
+      {
+        "availableAt": 1783296000000,
+        "close": 71.3,
+        "high": 71.68,
+        "low": 68.08
+      },
+      {
+        "availableAt": 1783382400000,
+        "close": 70.56,
+        "high": 72.6,
+        "low": 68.6
+      },
+      {
+        "availableAt": 1783468800000,
+        "close": 69.13,
+        "high": 72.97,
+        "low": 68.9
+      },
+      {
+        "availableAt": 1783555200000,
+        "close": 67.63,
+        "high": 69.68,
+        "low": 66.17
+      },
+      {
+        "availableAt": 1783641600000,
+        "close": 67.09,
+        "high": 68.67,
+        "low": 66.6
+      },
+      {
+        "availableAt": 1783728000000,
+        "close": 67.53,
+        "high": 69.53,
+        "low": 66.66
+      },
+      {
+        "availableAt": 1783814400000,
+        "close": 66.76,
+        "high": 68.2,
+        "low": 66.2
+      },
+      {
+        "availableAt": 1783900800000,
+        "close": 67.3,
+        "high": 68.32,
+        "low": 66.51
+      },
+      {
+        "availableAt": 1783987200000,
+        "close": 63.48,
+        "high": 68.17,
+        "low": 62.56
+      },
+      {
+        "availableAt": 1784073600000,
+        "close": 65.47,
+        "high": 66.05,
+        "low": 62.51
+      },
+      {
+        "availableAt": 1784160000000,
+        "close": 66.81,
+        "high": 68.96,
+        "low": 64.86
+      },
+      {
+        "availableAt": 1784246400000,
+        "close": 60.73,
+        "high": 67.17,
+        "low": 60.54
+      },
+      {
+        "availableAt": 1784332800000,
+        "close": 59.71,
+        "high": 61.65,
+        "low": 58.46
+      },
+      {
+        "availableAt": 1784419200000,
+        "close": 60.18,
+        "high": 60.59,
+        "low": 58.22
+      },
+      {
+        "availableAt": 1784505600000,
+        "close": 61.14,
+        "high": 61.5,
+        "low": 60.23
+      },
+      {
+        "availableAt": 1784592000000,
+        "close": 62.46,
+        "high": 62.91,
+        "low": 59.82
+      },
+      {
+        "availableAt": 1784678400000,
+        "close": 60.84,
+        "high": 63.37,
+        "low": 59.8
+      },
+      {
+        "availableAt": 1784764800000,
+        "close": 59.36,
+        "high": 61.2,
+        "low": 57.34
+      },
+      {
+        "availableAt": 1784851200000,
+        "close": 57.49,
+        "high": 60.04,
+        "low": 57.14
+      },
+      {
+        "availableAt": 1784937600000,
+        "close": 57.41,
+        "high": 59.23,
+        "low": 56.5
+      },
+      {
+        "availableAt": 1785024000000,
+        "close": 58.07,
+        "high": 59.98,
+        "low": 56.93
+      },
+      {
+        "availableAt": 1785110400000,
+        "close": 59.61,
+        "high": 59.85,
+        "low": 58.1
+      },
+      {
+        "availableAt": 1785196800000,
+        "close": 56.05,
+        "high": 60.45,
+        "low": 55.7
+      },
+      {
+        "availableAt": 1785283200000,
+        "close": 55.12,
+        "high": 56.42,
+        "low": 53.92
+      },
+      {
+        "availableAt": 1785369600000,
+        "close": 53.87,
+        "high": 55.55,
+        "low": 53.03
+      },
+      {
+        "availableAt": 1785456000000,
+        "close": 55.82,
+        "high": 56.09,
+        "low": 52.82
+      },
+      {
+        "availableAt": 1785542400000,
+        "close": 52.51,
+        "high": 56.08,
+        "low": 51.83
+      },
+      {
+        "availableAt": 1785628800000,
+        "close": 52.13,
+        "high": 52.65,
+        "low": 51.48
+      },
+      {
+        "availableAt": 1785715200000,
+        "close": 52.57,
+        "high": 53.01,
+        "low": 51.1
+      },
+      {
+        "availableAt": 1785801600000,
+        "close": 53.93,
+        "high": 54.8,
+        "low": 51.91
+      },
+      {
+        "availableAt": 1785888000000,
+        "close": 55.02,
+        "high": 55.84,
+        "low": 53.51
+      },
+      {
+        "availableAt": 1785974400000,
+        "close": 56.92,
+        "high": 57.93,
+        "low": 54.67
+      },
+      {
+        "availableAt": 1786060800000,
+        "close": 56.17,
+        "high": 57.19,
+        "low": 54.64
+      },
+      {
+        "availableAt": 1786147200000,
+        "close": 54.13,
+        "high": 57,
+        "low": 53.44
+      },
+      {
+        "availableAt": 1786233600000,
+        "close": 55.11,
+        "high": 55.26,
+        "low": 53.84
+      },
+      {
+        "availableAt": 1786320000000,
+        "close": 53.88,
+        "high": 55.32,
+        "low": 53.75
+      },
+      {
+        "availableAt": 1786406400000,
+        "close": 55.05,
+        "high": 56.06,
+        "low": 53.83
+      },
+      {
+        "availableAt": 1786492800000,
+        "close": 54.43,
+        "high": 55.58,
+        "low": 53.72
+      },
+      {
+        "availableAt": 1786579200000,
+        "close": 56.01,
+        "high": 56.88,
+        "low": 54.25
+      },
+      {
+        "availableAt": 1786665600000,
+        "close": 57.45,
+        "high": 58.43,
+        "low": 55.97
+      },
+      {
+        "availableAt": 1786752000000,
+        "close": 56.48,
+        "high": 57.61,
+        "low": 55.33
+      },
+      {
+        "availableAt": 1786838400000,
+        "close": 56.87,
+        "high": 57.32,
+        "low": 55.8
+      },
+      {
+        "availableAt": 1786924800000,
+        "close": 57.13,
+        "high": 57.97,
+        "low": 56.73
+      },
+      {
+        "availableAt": 1787011200000,
+        "close": 59.43,
+        "high": 59.87,
+        "low": 57.02
+      },
+      {
+        "availableAt": 1787097600000,
+        "close": 58.54,
+        "high": 60.44,
+        "low": 58.19
+      },
+      {
+        "availableAt": 1787184000000,
+        "close": 69.52,
+        "high": 72.58,
+        "low": 58.03
+      },
+      {
+        "availableAt": 1787270400000,
+        "close": 73.7,
+        "high": 75,
+        "low": 68.4
+      },
+      {
+        "availableAt": 1787356800000,
+        "close": 75.51,
+        "high": 78.1,
+        "low": 71.29
+      },
+      {
+        "availableAt": 1787443200000,
+        "close": 79.34,
+        "high": 82.55,
+        "low": 73
+      },
+      {
+        "availableAt": 1787529600000,
+        "close": 82.29,
+        "high": 83.43,
+        "low": 76.99
+      },
+      {
+        "availableAt": 1787616000000,
+        "close": 78.9,
+        "high": 82.3,
+        "low": 76.69
+      },
+      {
+        "availableAt": 1787702400000,
+        "close": 79.64,
+        "high": 83.25,
+        "low": 78.08
+      },
+      {
+        "availableAt": 1787788800000,
+        "close": 82.28,
+        "high": 83.78,
+        "low": 79.44
+      },
+      {
+        "availableAt": 1787875200000,
+        "close": 84.78,
+        "high": 86.79,
+        "low": 80.37
+      },
+      {
+        "availableAt": 1787961600000,
+        "close": 80.94,
+        "high": 85.25,
+        "low": 78.53
+      },
+      {
+        "availableAt": 1788048000000,
+        "close": 83.39,
+        "high": 83.56,
+        "low": 80.12
+      },
+      {
+        "availableAt": 1788134400000,
+        "close": 80.08,
+        "high": 84.17,
+        "low": 79.06
+      },
+      {
+        "availableAt": 1788220800000,
+        "close": 84.19,
+        "high": 85.29,
+        "low": 79.56
+      },
+      {
+        "availableAt": 1788307200000,
+        "close": 82.74,
+        "high": 84.54,
+        "low": 80.61
+      },
+      {
+        "availableAt": 1788393600000,
+        "close": 81.95,
+        "high": 83.69,
+        "low": 80.23
+      },
+      {
+        "availableAt": 1788480000000,
+        "close": 87.47,
+        "high": 88.15,
+        "low": 81.09
+      },
+      {
+        "availableAt": 1788566400000,
+        "close": 84.46,
+        "high": 87.89,
+        "low": 83.4
+      },
+      {
+        "availableAt": 1788652800000,
+        "close": 85.42,
+        "high": 86.16,
+        "low": 83.72
+      },
+      {
+        "availableAt": 1788739200000,
+        "close": 87.97,
+        "high": 89.66,
+        "low": 84.75
+      },
+      {
+        "availableAt": 1788825600000,
+        "close": 85.18,
+        "high": 88.35,
+        "low": 84.57
+      },
+      {
+        "availableAt": 1788912000000,
+        "close": 85.15,
+        "high": 85.47,
+        "low": 81.56
+      },
+      {
+        "availableAt": 1788998400000,
+        "close": 83.57,
+        "high": 87.18,
+        "low": 82.47
+      },
+      {
+        "availableAt": 1789084800000,
+        "close": 78.57,
+        "high": 84.4,
+        "low": 78.16
+      },
+      {
+        "availableAt": 1789171200000,
+        "close": 79.46,
+        "high": 83.85,
+        "low": 78.15
+      },
+      {
+        "availableAt": 1789257600000,
+        "close": 79.65,
+        "high": 80.82,
+        "low": 78.38
+      },
+      {
+        "availableAt": 1789344000000,
+        "close": 77.34,
+        "high": 79.66,
+        "low": 76.53
+      },
+      {
+        "availableAt": 1789430400000,
+        "close": 80.35,
+        "high": 82.45,
+        "low": 76.93
+      },
+      {
+        "availableAt": 1789516800000,
+        "close": 76.93,
+        "high": 80.58,
+        "low": 75.11
+      },
+      {
+        "availableAt": 1789603200000,
+        "close": 78.23,
+        "high": 80.27,
+        "low": 76.63
+      },
+      {
+        "availableAt": 1789689600000,
+        "close": 85.08,
+        "high": 85.2,
+        "low": 78.04
+      },
+      {
+        "availableAt": 1789776000000,
+        "close": 92.59,
+        "high": 93.15,
+        "low": 84.97
+      },
+      {
+        "availableAt": 1789862400000,
+        "close": 92.21,
+        "high": 94.52,
+        "low": 90.87
+      },
+      {
+        "availableAt": 1789948800000,
+        "close": 93.68,
+        "high": 93.97,
+        "low": 89.53
+      },
+      {
+        "availableAt": 1790035200000,
+        "close": 94.08,
+        "high": 96.08,
+        "low": 92.03
+      },
+      {
+        "availableAt": 1790121600000,
+        "close": 97.23,
+        "high": 97.83,
+        "low": 92.17
+      },
+      {
+        "availableAt": 1790208000000,
+        "close": 93.99,
+        "high": 98.02,
+        "low": 92.04
+      },
+      {
+        "availableAt": 1790294400000,
+        "close": 92.14,
+        "high": 94.87,
+        "low": 89.88
+      },
+      {
+        "availableAt": 1790380800000,
+        "close": 92.41,
+        "high": 94.34,
+        "low": 90.36
+      },
+      {
+        "availableAt": 1790467200000,
+        "close": 92.6,
+        "high": 92.7,
+        "low": 91.05
+      },
+      {
+        "availableAt": 1790553600000,
+        "close": 91.66,
+        "high": 94,
+        "low": 91.09
+      },
+      {
+        "availableAt": 1790640000000,
+        "close": 87.47,
+        "high": 92.08,
+        "low": 86.37
+      },
+      {
+        "availableAt": 1790726400000,
+        "close": 86.06,
+        "high": 89.05,
+        "low": 84.84
+      },
+      {
+        "availableAt": 1790812800000,
+        "close": 90.91,
+        "high": 91.83,
+        "low": 84.62
+      },
+      {
+        "availableAt": 1790899200000,
+        "close": 87.68,
+        "high": 91.07,
+        "low": 86.5
+      },
+      {
+        "availableAt": 1790985600000,
+        "close": 89.08,
+        "high": 91.48,
+        "low": 86.16
+      },
+      {
+        "availableAt": 1791072000000,
+        "close": 89.29,
+        "high": 90.03,
+        "low": 87.76
+      },
+      {
+        "availableAt": 1791158400000,
+        "close": 90.52,
+        "high": 91.23,
+        "low": 89.27
+      },
+      {
+        "availableAt": 1791244800000,
+        "close": 94.18,
+        "high": 95.22,
+        "low": 90
+      },
+      {
+        "availableAt": 1791331200000,
+        "close": 91.96,
+        "high": 94.92,
+        "low": 91.28
+      },
+      {
+        "availableAt": 1791417600000,
+        "close": 88.52,
+        "high": 92.32,
+        "low": 87.12
+      },
+      {
+        "availableAt": 1791504000000,
+        "close": 84.16,
+        "high": 88.83,
+        "low": 82.61
+      },
+      {
+        "availableAt": 1791590400000,
+        "close": 84.16,
+        "high": 86.56,
+        "low": 83.33
+      },
+      {
+        "availableAt": 1791676800000,
+        "close": 85.4,
+        "high": 86.7,
+        "low": 83.66
+      }
+    ],
+    "decisionAt": 1791724004241,
+    "entryPrice": 85.07,
+    "factors": [
+      {
+        "label": "Trend cluster",
+        "score": 1,
+        "weight": 2.5
+      },
+      {
+        "label": "Momentum",
+        "score": 0,
+        "weight": 1.5
+      },
+      {
+        "label": "MACD",
+        "score": -1,
+        "weight": 1.5
+      },
+      {
+        "label": "Perp funding crowding",
+        "score": -1,
+        "weight": 1.75
+      },
+      {
+        "label": "Open interest",
+        "score": 0,
+        "weight": 1
+      },
+      {
+        "label": "Binance futures positioning",
+        "score": 0,
+        "weight": 1
+      },
+      {
+        "label": "Cross-venue taker imbalance",
+        "score": 0,
+        "weight": 1.25
+      },
+      {
+        "label": "TVL trend",
+        "score": 0,
+        "weight": 2
+      },
+      {
+        "label": "Revenue linkage",
+        "score": 1,
+        "weight": 1.5
+      },
+      {
+        "label": "Developer velocity",
+        "score": 0,
+        "weight": 1.5
+      },
+      {
+        "label": "Supply-overhang penalty (negative-only)",
+        "score": -1,
+        "weight": 1.5
+      }
+    ],
+    "riskMultiplier": 1.25
+  },
+  "replay_note": "REPLAY/REPRODUCTION: this is a recorded dossier issuance reproduced through the intended models, NOT a fresh evaluation.",
+  "snapshot": {
+    "available_at": "2026-10-11T13:06:44.983+00:00",
+    "captured_at": "2026-10-11T13:05:57.000+00:00",
+    "replay_at_issuance": {
+      "mismatches": [],
+      "status": "reconstructed"
+    },
+    "snapshot_id": 4472200907020677,
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window"
+  },
+  "source_as_of": "2026-10-11T13:05:57.000+00:00",
+  "store_rule": "missing decision-time inputs are marked UNKNOWN, never backfilled; a later correction is a new file, never an edit of this bundle",
+  "terminal": "crypto"
+}

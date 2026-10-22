@@ -1,0 +1,17 @@
+[2026-10-14T06:44:39.544Z] WATCHER-RESUME DEMO — bounded ticks, fresh processes, DB-only resume
+[2026-10-14T06:44:39.551Z] DB: /home/hatch/workspace/goals/research-terminal/paper-signals/scheduling/watcher-demo/data/sched-demo.sqlite (fresh) | cycle: sched-demo-2026-10-14
+[2026-10-14T06:44:39.559Z] fresh DB created
+[2026-10-14T06:44:39.563Z] step 1: starting 'pilot run' (PID A) with 180s labeled pre-observation hold — backgrounded
+[2026-10-14T06:44:39.568Z] PID A = 22073
+[2026-10-14T06:44:39.575Z] waiting for qualification commit (poll status until awaiting-entry, 120s budget)
+[2026-10-14T06:44:44.776Z] candidate is awaiting-entry — qualification committed (contract pending, setup alert delivered)
+[2026-10-14T06:44:44.779Z] --- pre-gap state (separate status probe) ---
+candidate 53bb2a86d2e0fee1f36648122134e684 BTCUSD long status=awaiting-entry gate=- contract=ct_53bb2a86d2e0fee1f36648122134e684(pending) setupAlertAt=2026-10-14T06:44:43.646Z entryObservedAt=- signal=-
+alert setup_53bb2a86d2e0fee1f36648122134e684 kind=setup enqueued=2026-10-14T06:44:43.646Z delivered=2026-10-14T06:44:43.708Z status=delivered
+[2026-10-14T06:44:44.896Z] step 2: kill -9 PID A mid-hold — SIMULATED GAP begins (no pilot process alive)
+[2026-10-14T06:44:46.907Z] PID A dead (SIGKILL confirmed)
+[2026-10-14T06:44:46.915Z] gap start: 2026-10-14T06:44:46.912Z — sleeping 180s with zero pilot processes
+[2026-10-14T06:51:00Z] NOTE: the demo script's host service restarted during the 180s gap sleep; the script process was lost at "gap start". The gap itself (no pilot process alive, 06:44:46Z -> 06:51:51Z, ~7 min) completed as designed — longer than scripted. Continued manually with the identical commands the script would have run (fresh processes, same DB, same env semantics).
+[2026-10-14T06:51:51Z] Phase A: fresh 'pilot tick' with PILOT_MAX_POLLS=0 -> processed=1, awaiting=[53bb2a86d2e0fee1f36648122134e684]; outcome gate=poll-budget, status stayed awaiting-entry, contract still pending, nextReassessmentAt=2026-10-14T06:52:51.838Z. Poll-budget exhaustion is NOT an expiry. (cycle sched-demo-2026-10-14-phaseA)
+[2026-10-14T06:53:10Z] Phase B: fresh 'pilot tick' with PILOT_MAX_POLLS=40 -> processed=1, issued=[53bb2a86d2e0fee1f36648122134e684]. Resumed from the persisted DB row; bounded observation entered on a live in-window print. (cycle sched-demo-2026-10-14-phaseB)
+[2026-10-14T06:55:02Z] Entry alert enqueued+delivered (simulated ack, sandbox transport). Setup alert fired exactly once (no re-fire across the two resume ticks).

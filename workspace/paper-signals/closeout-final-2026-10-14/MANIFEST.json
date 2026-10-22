@@ -1,0 +1,60 @@
+{
+  "package": "closeout-final-2026-10-14",
+  "files": [
+    {
+      "path": "INDEX.md",
+      "sha256": "29b751401a67dd1ddc89c4c557becd4b9507335821a59835fe14747a1e33b552",
+      "bytes": 5864
+    },
+    {
+      "path": "01-intended-models/INTENDED-MODEL-WIRING-2026-10-14.md",
+      "sha256": "19f4757b44970356ef053cca89d4863cf968c3eb13ae276f374a90a541c03ae6",
+      "bytes": 5334
+    },
+    {
+      "path": "01-intended-models/PAIRED-INVERSION-RETROSPECTIVE-2026-10-14.md",
+      "sha256": "7f5ad24ac55cc759c6d8e5f3c6cf9535db05e8ea24b93a3f4caa27c25412e056",
+      "bytes": 4520
+    },
+    {
+      "path": "01-intended-models/decision-time-inputs-dossier-btc-id43-2026-10-14.json",
+      "sha256": "99e125ea5acb23dfa25d9b4f054d91c0048d0ad37eadccbae16f1604c1d0dc5b",
+      "bytes": 2283
+    },
+    {
+      "path": "01-intended-models/intended_models.py",
+      "sha256": "088781bfb54020eaf49ba1b2370c2dc4cb0deb6b2bb52e0b9ebe33d961a687fc",
+      "bytes": 15071
+    },
+    {
+      "path": "01-intended-models/wired-trial-evidence-dossier-btc-id43-2026-10-14.json",
+      "sha256": "99e125ea5acb23dfa25d9b4f054d91c0048d0ad37eadccbae16f1604c1d0dc5b",
+      "bytes": 2283
+    },
+    {
+      "path": "02-delivery/TRIGGERED-CHAIN-RECORD-2026-10-14.md",
+      "sha256": "1506d160c8388bc5a394a0a2d978f6ab789e7739a49a64a54a46447f789524c2",
+      "bytes": 5193
+    },
+    {
+      "path": "02-delivery/WRAPPER-FALLBACK-INSTALL-2026-10-14.md",
+      "sha256": "92840e8bdde5bcee5b1769d56e9064e8ffa05e26a53150a4519a3be5391e005c",
+      "bytes": 6849
+    },
+    {
+      "path": "03-grading-stats/SHADOW-COMPARISON-PROTOCOL-v2.md",
+      "sha256": "9f1f1a0e8ac4da51b331baed4e1eb4a2ea423d2e18012c6f3679d8ed1eb1bb3b",
+      "bytes": 6598
+    },
+    {
+      "path": "03-grading-stats/SPEC-A-CHART-SETUP-v5-AMENDMENT-2026-10-14.md",
+      "sha256": "de3cf527de05cbb98ac10cea04336e93f76df193e1ac8c8df21a076a4495d9d0",
+      "bytes": 8500
+    },
+    {
+      "path": "03-grading-stats/STATISTICAL-AMENDMENT-v1-2026-10-14.md",
+      "sha256": "865ba17fe9753ae169326b8cde60a2e103f693b8c10a060c120130866c51a5e5",
+      "bytes": 10331
+    }
+  ]
+}

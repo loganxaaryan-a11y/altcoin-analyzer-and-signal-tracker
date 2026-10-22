@@ -1,0 +1,7 @@
+{
+  "name": "theory-watch-ui-regressions",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test theory-watch.test.mjs" },
+  "devDependencies": { "esbuild": "0.25.12", "happy-dom": "20.8.4" }
+}

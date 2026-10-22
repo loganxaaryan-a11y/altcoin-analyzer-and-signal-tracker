@@ -1,0 +1,54 @@
+{
+  "exported_at": "2026-10-14T11:41:22Z",
+  "source": "deployed-artifact:altcoin-analyzer-and-signal-tracker:getpaperpilotstatus",
+  "status_file": "live-paper-status-2026-10-14.json",
+  "freeze_cutoff_iso": "2026-10-14T04:57:00+00:00",
+  "active_freeze_version": "2.1.5",
+  "deployed_runs": [
+    {
+      "id": 5,
+      "trigger": "manual",
+      "status": "complete",
+      "candidateCount": 0,
+      "issuedCount": 0,
+      "completedAt": "2026-10-14T09:09:25.075Z"
+    },
+    {
+      "id": 4,
+      "trigger": "manual",
+      "status": "complete",
+      "candidateCount": 0,
+      "issuedCount": 0,
+      "completedAt": "2026-10-14T08:32:19.313Z"
+    },
+    {
+      "id": 3,
+      "trigger": "manual",
+      "status": "complete",
+      "candidateCount": 0,
+      "issuedCount": 0,
+      "completedAt": "2026-10-14T05:18:02.347Z"
+    },
+    {
+      "id": 2,
+      "trigger": "manual",
+      "status": "complete",
+      "candidateCount": 0,
+      "issuedCount": 0,
+      "completedAt": "2026-10-14T04:54:56.285Z"
+    },
+    {
+      "id": 1,
+      "trigger": "scheduled",
+      "status": "complete",
+      "candidateCount": 0,
+      "issuedCount": 0,
+      "completedAt": "2026-10-14T04:54:12.675Z"
+    }
+  ],
+  "legacy_tracked_count": 31,
+  "candidates": [],
+  "n_candidates": 0,
+  "excluded_pre_freeze": 0,
+  "note": "stream connected to deployed paper tables; 0 paper opportunities present"
+}

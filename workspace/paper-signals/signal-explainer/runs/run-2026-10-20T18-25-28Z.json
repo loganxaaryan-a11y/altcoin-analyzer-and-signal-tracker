@@ -1,0 +1,42 @@
+{
+  "invocation_completed": {
+    "run_ts_utc": "2026-10-20T18:25:28Z",
+    "started_utc": "2026-10-20T18:23:57Z",
+    "finished_utc": "2026-10-20T18:25:28Z",
+    "status": "succeeded",
+    "rows_seen_per_terminal": {
+      "crypto": 36,
+      "equity": 12
+    },
+    "new_keys": [],
+    "explained_keys": [],
+    "skipped_plus_why": [],
+    "mirror_as_of": {
+      "crypto": {
+        "generated_at": "2026-10-20T17:50:22Z",
+        "open_signals": "2026-10-20T09:46:12.159Z",
+        "market_read": "2026-10-20T17:44:12.446Z",
+        "theories": "2026-10-20T11:53:36.209Z"
+      },
+      "equity": {
+        "generated_at": "2026-10-20T17:50:22Z",
+        "open_signals": "2026-10-20T17:45:33.653Z",
+        "market_read": "2026-10-20T13:44:06.540Z",
+        "theories": null
+      }
+    },
+    "exception_path_invocations": [
+      {
+        "action": "getsignaltracker",
+        "terminal": "altcoin-analyzer-and-signal-tracker",
+        "args": {
+          "limit": 200,
+          "cursor": 0
+        },
+        "why": "crypto mirror open_signals as_of 2026-10-20T09:46:12Z was 8.6h stale at run start (>2h); per SPEC exception path, fresh read to check for signals issued after ledger last_check_utc 2026-10-20T12:25:05Z. Fresh pull confirmed 36 rows (ids 10-45), latestBrief createdAt 2026-10-20T09:46:12Z, zero rows created after watermark."
+      }
+    ],
+    "action_failures": []
+  },
+  "scheduler_provenance": "origin_unverified"
+}

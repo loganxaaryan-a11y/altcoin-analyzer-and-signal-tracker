@@ -1,0 +1,22 @@
+== comparison report [crypto] freeze v1.0.0 ==
+rows: 55 | paired issued: 30
+
+-- PRODUCTION --
+coverage: issued 30/55 (54.5%), abstain 25 (45.5%), unscored 0 (0.0%)
+target-before-stop: n=0 (no graded rows) | barrier counts: {'not-graded': 30}
+direction d5: n=0 (no graded rows)
+direction d14: n=0 (no graded rows)
+direction d30: n=0 (no graded rows)
+net R (18bps modeled): n=0 (no graded rows) | missing outcome: 30
+alert delay (h): n=0 (no graded rows)
+
+-- CHALLENGER C-2 --
+coverage: issued 30/55 (54.5%), abstain 0 (0.0%), unscored 25 (45.5%)
+target-before-stop: n=0 (no graded rows) | barrier counts: {'not-graded': 30}
+direction d5: n=0 (no graded rows)
+direction d14: n=0 (no graded rows)
+direction d30: n=0 (no graded rows)
+net R (18bps modeled): n=0 (no graded rows) | missing outcome: 30
+alert delay (h): n=0 (no graded rows)
+
+note: SUPPORT/REJECT/INCONCLUSIVE per freeze manifest v1.0.0 readout criteria; needs n>=30 paired definitive rows with graded d30 outcomes

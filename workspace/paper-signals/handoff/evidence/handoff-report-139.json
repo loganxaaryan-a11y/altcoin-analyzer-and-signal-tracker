@@ -1,0 +1,20 @@
+{
+  "runId": "139",
+  "source": "crypto-market-discovery",
+  "completedAt": "2026-10-21T14:57:02.347Z",
+  "freezeVersion": "v2.1.5",
+  "demo": false,
+  "feedMode": "binance",
+  "feedLabel": "binance-spot (read-only public market data; paper only)",
+  "issuancePath": "processIntegratedCandidate(orchestrator/src/issuance/handler.ts) — entry-v1 + waiting-interval veto + venue mapping",
+  "activeFreeze": "v2.1.5",
+  "receivedAt": "2026-10-21T15:10:09.414Z",
+  "staleRun": false,
+  "candidates": [],
+  "counts": {
+    "qualified": 0,
+    "abstained": 0,
+    "deferred": 0,
+    "failed": 0
+  }
+}

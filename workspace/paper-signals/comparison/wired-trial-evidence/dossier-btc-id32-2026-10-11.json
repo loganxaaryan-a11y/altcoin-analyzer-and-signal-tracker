@@ -1,0 +1,73 @@
+{
+  "c2": {
+    "arm": "challenger",
+    "arm_disposition": {
+      "disposition": "scored",
+      "missing": [],
+      "reason": null
+    },
+    "direction": "long",
+    "ledger_complete": true,
+    "leg": "non-flipped",
+    "levels_match_production": true,
+    "levels_mode": "verified-shared: C-2 levels recomputed exactly from C-2's own entry inputs (direction matches; buildAtrLevels is direction-dependent); identical to production levels by construction, recorded per RULE 5",
+    "momentum_dropped": 1,
+    "score": 64,
+    "short_score": 36,
+    "strategy": "crypto-dossier-minus-momentum 0.1.0-shadow",
+    "total_weight": 15.5,
+    "weighted_net": 5.25,
+    "wired_function": "intended_models.c2_score_minus_momentum (Momentum contribution AND weight removed; denominator 15.5; not rescaled)"
+  },
+  "capture_correction_note": "CORRECTION 2026-10-15 (capture correction): this capture's evidence_class was defaulted to FRESH by the 2026-10-14 automatic run, which conflated capture time with decision time. The frozen dossier-cohort-v1 eligibility cutoff is 2026-10-14T18:35:00+00:00 on the DECISION instant; this issuance's decision_at (2026-10-11T09:56:46.741+00:00) predates the cutoff, so it is historical reproduction, not fresh prospective evidence. Label corrected FRESH -> REPLAY/REPRODUCTION (label correction only; the persisted decision-time inputs and arm results were not touched or re-scored). captured_at added, distinct from decision_at.",
+  "captured_at": "2026-10-15T00:58:34.948+00:00",
+  "collector": "comparison/dossier_model_collector.py::capture_dossier_evaluation (single automatic write path)",
+  "eligibility": {
+    "cohort": "historical-reproduction",
+    "cutoff_utc": "2026-10-14T18:35:00+00:00",
+    "eligible_for_fresh": false,
+    "reasons": [
+      "pre-cutoff -- decision_at 2026-10-11T09:56:46.741+00:00 before frozen cutoff 2026-10-14T18:35:00+00:00"
+    ]
+  },
+  "evaluated_at": "2026-10-15T00:58:34.948+00:00",
+  "evidence_class": "REPLAY/REPRODUCTION",
+  "input_bundle": "decision-time-inputs/dossier-btc-id32-2026-10-11.json",
+  "operational_dispositions": {
+    "c2_paper_issuance": {
+      "disposition": "UNKNOWN",
+      "reason": "no entry-observation evidence under the frozen paper entry convention for C-2's independent evaluation; RULE 6 -- missing C-2 evidence is UNKNOWN, never filled from production"
+    },
+    "prod_paper_issuance": {
+      "disposition": "UNKNOWN",
+      "reason": "no paper-pipeline issuance record for this opportunity; dossier-path issuance (recorded) uses a different entry convention and does not establish the paper operational gates"
+    }
+  },
+  "opportunity_id": "dossier-btc-id32-2026-10-11",
+  "prod": {
+    "arm": "production",
+    "arm_disposition": {
+      "disposition": "scored",
+      "missing": [],
+      "reason": null
+    },
+    "direction": "long",
+    "ledger_complete": true,
+    "recorded_fidelity": {
+      "levels_recomputed_exact": true,
+      "recomputed_matches_recorded_confidence": true,
+      "recomputed_matches_recorded_direction": true,
+      "recorded_confidence": 63.0,
+      "recorded_confidence_side": "long",
+      "recorded_direction": "long"
+    },
+    "score": 63,
+    "short_score": 37,
+    "strategy": "crypto-dossier-factor-agreement 2.0.0-measurement-contract",
+    "total_weight": 17.0,
+    "weighted_net": 5.25,
+    "wired_function": "intended_models.score_dossier_factors <- signal-methodology.ts:47 scoreDossierFactors"
+  },
+  "replay_note": "REPLAY/REPRODUCTION: this is a recorded dossier issuance reproduced through the intended models, NOT a fresh evaluation.",
+  "vessel_append": "none -- dossier captures are model-evaluation evidence, never prospective trial rows"
+}

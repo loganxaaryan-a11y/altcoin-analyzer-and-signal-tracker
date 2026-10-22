@@ -1,0 +1,1 @@
+{"dbPath":"data/paper-pilot.sqlite","direction":"long","entryMaxPolls":40,"entryPollIntervalMs":20000,"evidenceDir":"evidence","freshnessMs":1800000,"invalidationPctBelowEntry":0.015,"paper":true,"retryBackoffMs":60000,"score":0.62,"symbol":"BTCUSD","target1PctAboveEntry":0.02,"target2PctAboveEntry":0.04,"terminal":"crypto","venue":"binance.us (public market data, read-only)"}

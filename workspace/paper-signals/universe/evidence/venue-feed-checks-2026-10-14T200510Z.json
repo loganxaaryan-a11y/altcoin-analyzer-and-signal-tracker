@@ -1,0 +1,86 @@
+{
+ "generated_at": "2026-10-14T20:05:33.961777+00:00",
+ "exchangeinfo_serverTime": 1792008312768,
+ "results": [
+  {
+   "pair": "BTCUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 30273187,
+   "ok": true
+  },
+  {
+   "pair": "ETHUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 18104764,
+   "ok": true
+  },
+  {
+   "pair": "SOLUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 10997483,
+   "ok": true
+  },
+  {
+   "pair": "LINKUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 1331615,
+   "ok": true
+  },
+  {
+   "pair": "SUIUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 521695,
+   "ok": true
+  },
+  {
+   "pair": "DOGEUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 12727879,
+   "ok": true
+  },
+  {
+   "pair": "XRPUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 2595633,
+   "ok": true
+  },
+  {
+   "pair": "AVAXUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 2496056,
+   "ok": true
+  },
+  {
+   "pair": "ADAUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 9205892,
+   "ok": true
+  },
+  {
+   "pair": "BATUSDT",
+   "status": "TRADING",
+   "spotAllowed": true,
+   "klines_1d_bars": 2,
+   "aggTrades_last_id": 1259746,
+   "ok": true
+  }
+ ]
+}

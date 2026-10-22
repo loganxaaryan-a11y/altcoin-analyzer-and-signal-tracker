@@ -1,0 +1,30 @@
+{
+  "job_id": "thesis-watcher-morning",
+  "run_utc": "2026-10-20T11:59:52Z",
+  "invocation_completed": {
+    "run_ts_utc": "2026-10-20T11:59:52Z",
+    "started_utc": "2026-10-20T11:59:52Z",
+    "finished_utc": "2026-10-20T12:08:01Z",
+    "status": "succeeded",
+    "crypto_fetch": "ok (listtheories 13 theories; getmarketread BTC 81416.49 asOf 2026-10-20T12:01:22.850Z)",
+    "equity_fetch": "ok (listtheories 44 theories via cursor pagination page1+page2; getmarketread SPY query cached 2026-10-19 session, breadth15d=50)",
+    "theories_seen": {"crypto": 13, "equity": 44},
+    "transitions_found": 6,
+    "alerts_pre_committed": 5,
+    "alert_keys": [
+      "altcoin-analyzer-and-signal-tracker/14/status:confirming→challenged",
+      "altcoin-analyzer-and-signal-tracker/13/tripwire:p1:hit",
+      "altcoin-analyzer-and-signal-tracker/13/tripwire:p5:hit",
+      "equity-analyzer-and-signal-tracker/40/status:confirming→challenged",
+      "equity-analyzer-and-signal-tracker/27/status:confirming→challenged"
+    ],
+    "learning_entries_appended": 0,
+    "new_theories_baselined_silently": ["crypto/15 (BTC basing, confirming)", "equity/49 (CRWV AI-credit battleground, challenged)"],
+    "hit_to_unhit_reversions_bookkept_no_alert": ["equity/31/p1 SOXX", "equity/14/p2 USO", "equity/32/p2 QQQ", "equity/9/p2 VLO"],
+    "errors": [
+      "near-miss: script initially fired altcoin-analyzer-and-signal-tracker/9/tripwire:p1:hit for BTC below 81685.89; that breach pre-dates baseline_recorded_utc and was silently corrected at setup with an open bounce watch — alert reverted from ledger and state restored to unhit. Guard now matches 'corrected silently' note text."
+    ],
+    "notes": "pre-market 08:01 EDT; equity prediction-feed prints reflect Monday 2026-10-19 session (some updated intraday, e.g. TSM 412.61->420.22, SOXX 493.39->501.93). Bounce watches still open (classify later): crypto 6/p2 + 9/p1 + equity 3/p1 after 2026-10-20T23:59:33Z; equity 16/p2 after 2026-10-21T12:01:05Z. No dueDate expirations this run."
+  },
+  "scheduler_provenance": "origin_unverified"
+}

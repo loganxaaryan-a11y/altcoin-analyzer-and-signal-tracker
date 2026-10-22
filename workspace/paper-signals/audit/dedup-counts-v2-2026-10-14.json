@@ -1,0 +1,40 @@
+{
+  "_doc": "Deduplicated counts for the 120 audited paper entry records (v2, 2026-10-14). Definitions: unique_opportunities = distinct signal_id values (one trading idea, rows deduplicated); valid_entries = records measurement-eligible (Class C only: real venue data + genuinely deployed issuance); completed_outcomes = entries with a recorded outcome (close/exit/pnl) \u2014 none exist on any audited row.",
+  "definitions": {
+    "unique_opportunities": "distinct signal_id values; duplicate rows of the same opportunity collapse to one",
+    "valid_entries": "entry records eligible for prediction measurement: real data AND genuinely deployed-issued (Class C only)",
+    "completed_outcomes": "entries with a recorded outcome (close/exit/pnl); zero across all 120 rows"
+  },
+  "counts": {
+    "class_A": {
+      "records": 117,
+      "unique_opportunities": 47,
+      "valid_entries": 0,
+      "completed_outcomes": 0
+    },
+    "class_B": {
+      "records": 2,
+      "unique_opportunities": 1,
+      "valid_entries": 0,
+      "completed_outcomes": 0
+    },
+    "class_C": {
+      "records": 1,
+      "unique_opportunities": 1,
+      "valid_entries": 1,
+      "completed_outcomes": 0
+    },
+    "total_deduped": {
+      "records": 120,
+      "unique_opportunities": 48,
+      "valid_entries": 1,
+      "completed_outcomes": 0
+    }
+  },
+  "valid_entry": {
+    "signal_id": "sig_53bb2a86d2e0fee1f3664812",
+    "contract_id": "ct_53bb2a86d2e0fee1f36648122134e684",
+    "store_path": "pilot/data/paper-pilot.sqlite",
+    "class": "C"
+  }
+}

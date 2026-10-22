@@ -1,0 +1,31 @@
+{
+  "bundle": "directional-shadow-comparison",
+  "frozen": "2026-10-14",
+  "scope": "paper signals only; no brokerage; no model tuning",
+  "files": {
+    "DIAGNOSIS-WITH-WITHDRAWALS-2026-10-14.md": {
+      "sha256": "9e4fd61e7e2661f4e78dac5e84bb6b7eab747da7389c9fa8a21f1f12ee8cdbff",
+      "bytes": 8602
+    },
+    "PAIRED-INVERSION-RETROSPECTIVE-2026-10-14.csv": {
+      "sha256": "5127c1fa455a0441a0f34b0dc24f9834039eb80529e9f9acfe26ce98a63bcee0",
+      "bytes": 5400
+    },
+    "PAIRED-INVERSION-RETROSPECTIVE-2026-10-14.md": {
+      "sha256": "34e590422f20ae281528e2b0bbd6e8ae5ff14466746e644b7cdb31a5708cb970",
+      "bytes": 3979
+    },
+    "SHADOW-COMPARISON-PROTOCOL-v1.md": {
+      "sha256": "12c7103038d1e32ddff5d8753fd5719b4873ad6df50dc64b426ca0d5e2c0d960",
+      "bytes": 6133
+    },
+    "shadow-capture.py": {
+      "sha256": "9a7cfae6c8393f356a2c633e48914ace3f71336d82909218b36a9331e8a2a573",
+      "bytes": 6755
+    },
+    "test_shadow_capture.py": {
+      "sha256": "bce610fd914b2c30d136594e952f83ef4b17a8038a340327a187327e9db022fa",
+      "bytes": 7520
+    }
+  }
+}

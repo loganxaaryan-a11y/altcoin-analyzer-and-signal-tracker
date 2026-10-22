@@ -1,0 +1,61 @@
+{
+  "fixtureType": "synthetic_offline_acceptance_fixture",
+  "warning": "This is not a production signal, live issuance, or profitability evidence.",
+  "buildIdentity": "crypto-phase1-final-signoff-2026-10-09",
+  "schemaIdentity": "drizzle production table names and issuance columns",
+  "evaluatorIdentity": "crypto-evaluation-v4-cohort-contract",
+  "issuance": {
+    "signalId": "sig-synthetic-accepted",
+    "idempotencyKey": "synthetic|spot-reference|crypto-dossier-factor-agreement|2.0.0-measurement-contract|parameter-hash|decision-bar",
+    "issuanceState": "complete",
+    "entryRule": "first-post-decision-provider-quote",
+    "entry": 100,
+    "stop": 97.44366616007747,
+    "target1": 103.83450075988378,
+    "target2": 106.39083459980631
+  },
+  "rawSnapshot": {
+    "snapshotVersion": "crypto-input-snapshot-v3-canonical-atr-window",
+    "atrBars": 600,
+    "decisionAvailableBars": 600,
+    "atrPolicy": "complete decision-time window; arithmetic seed of first 14 true ranges; Wilder smoothing across all remaining true ranges",
+    "scoredLedgerRows": 1,
+    "rawProviderFactorAdaptersArchived": false
+  },
+  "replay": {
+    "liveFullWindowAtr": 2.0450670719380186,
+    "replayedFullWindowAtr": 2.0450670719380186,
+    "formerLast220Atr": 2.0450670634801584,
+    "formerDifference": 8.457860189992061e-9,
+    "oldPathMismatches": [
+      "stop:97.44366616007747->97.4436661706498",
+      "target:103.83450075988378->103.83450074402529",
+      "target2:106.39083459980631->106.3908345733755"
+    ],
+    "newPathMismatches": [],
+    "scope": {
+      "scoredLedger": "reconstructed",
+      "rawSourceFactors": "partial",
+      "gates": "partial",
+      "levels": "reconstructed"
+    }
+  },
+  "persistenceAcceptance": {
+    "faultBoundaries": 5,
+    "expectedAfterEachFailure": { "snapshots": 0, "contracts": 0, "generatedSignals": 0, "completeBundles": 0 },
+    "expectedAfterRetry": { "snapshots": 1, "contracts": 1, "generatedSignals": 1, "completeBundles": 1 },
+    "interleavedConnections": 2,
+    "competingSnapshotPolicy": "database-accepted original bundle returned; losing unreferenced snapshot removed"
+  },
+  "evaluationTrail": {
+    "originalEvaluation": null,
+    "improvedEvidenceRevision": null,
+    "trackerResult": null,
+    "reason": "This focused final crypto patch did not manufacture an outcome or revision; evaluation-revision behavior remains covered by prior Phase 1.1/1.2 tests."
+  },
+  "operationalVerification": {
+    "genuineIssuance": "pending",
+    "scheduledCycles": "pending",
+    "incidentLogs": "unavailable"
+  }
+}

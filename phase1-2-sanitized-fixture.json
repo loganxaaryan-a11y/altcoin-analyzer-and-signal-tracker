@@ -1,0 +1,27 @@
+{
+  "fixtureType": "synthetic_offline_acceptance_fixture",
+  "warning": "Not a real persisted signal or production regrade.",
+  "identifiers": {
+    "sourceVersion": "crypto-phase1-2-integration-closure-2026-10-09",
+    "schemaVersion": "0033",
+    "snapshotVersion": "crypto-input-snapshot-v2-raw-windows",
+    "evaluatorVersion": "crypto-evaluation-v4-cohort-contract",
+    "strategyId": "crypto-dossier-factor-agreement",
+    "strategyVersion": "2.0.0-measurement-contract",
+    "parameterHash": "sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220"
+  },
+  "lineage": {
+    "issuance": { "issuanceKey": "synthetic|spot-reference|strategy|version|parameter|bar-end", "state": "complete", "entryConvention": "first-post-decision-provider-quote", "priceConvention": "usd-spot-reference" },
+    "rawSnapshot": { "decisionAt": 20, "entryPrice": 115, "factorInputs": [{ "label": "trend", "score": 1, "weight": 0.6 }, { "label": "flow", "score": -0.25, "weight": 0.4 }], "atrBars": "16 finite decision-time OHLC rows; full values live in executable test" },
+    "replay": { "status": "reconstructed", "networkAccess": false, "mismatches": [] },
+    "originalEvaluation": { "revision": 1, "status": "unverified", "reason": "synthetic coverage gap" },
+    "improvedEvidenceRevision": { "revision": 2, "predecessorRevision": 1, "status": "resolved", "reason": "synthetic complete evidence", "costScenario": "modeled-roundtrip-18bps-funding-unverified-v1" },
+    "tracker": { "cohortMatched": true, "issued": 1, "open": 0, "resolved": 1, "ambiguous": 0, "unverified": 0 }
+  },
+  "oldVersusNewRegrade": {
+    "available": false,
+    "reason": "No production database regrade was run during this edit; legacy rows are preserved and v4 prospective rows do not yet exist.",
+    "changed": [],
+    "unresolvedCounts": null
+  }
+}

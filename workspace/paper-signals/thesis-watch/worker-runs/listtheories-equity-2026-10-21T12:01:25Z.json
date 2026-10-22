@@ -1,0 +1,2572 @@
+{
+  "data": {
+    "nextCursor": 20,
+    "refreshedAt": "2026-10-21T12:00:59.868Z",
+    "theories": [
+      {
+        "createdAt": "2026-10-21T00:03:49.033Z",
+        "evidence": [],
+        "horizon": "short",
+        "id": 55,
+        "linkedTickers": [
+          "NFLX"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 68.69000244140625,
+            "detail": "68.69 now · prediction below 64 by 2026-10-23",
+            "direction": "below",
+            "dueDate": "2026-10-23",
+            "id": 128,
+            "progress": 0,
+            "snapshotPrice": 68.69000244140625,
+            "status": "challenged",
+            "targetLevel": 64,
+            "ticker": "NFLX"
+          },
+          {
+            "currentPrice": 68.69000244140625,
+            "detail": "68.69 now · prediction above 68.69 by 2026-11-03",
+            "direction": "above",
+            "dueDate": "2026-11-03",
+            "id": 129,
+            "progress": 100,
+            "snapshotPrice": 68.69000244140625,
+            "status": "confirming",
+            "targetLevel": 68.69,
+            "ticker": "NFLX"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "guidance-not-results is the currency this earnings season; NFLX ad-cut reads into ad-spend health ahead of the midterms",
+            "from": "NFLX",
+            "id": 189,
+            "to": "consumer discretionary"
+          }
+        ],
+        "snapshots": {
+          "NFLX": 68.69000244140625
+        },
+        "statement": "[Muse theory] NFLX post-earnings fade: Q3 beat is spent, the story is the ad-revenue guide cut to ~$2.7B (from $3.0B), hours-viewed slowing on price increases, ~1,000 job cuts weighing ~120bp on Q4 margin, five prior prints averaging -6.9% declines, and no technical support (50-day at $75.04). Bearish short -- the beat-but-guide-down tax this earnings season. Tripwire: close below $64 within 3 sessions. Invalidation: reclaims the $68.69 regular close or management walks the ad cut back.",
+        "status": "challenged",
+        "updatedAt": "2026-10-21T00:03:49.033Z"
+      },
+      {
+        "createdAt": "2026-10-20T16:12:02.912Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T16:12:11.460Z",
+            "id": 222,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Linn's Leverage #1133 (via Stani Kulechov)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Push to borrow against tokenized stocks onchain via Aave/Base/Coinbase — the opposite force: venue demand exists",
+            "url": "https://linns.substack.com/p/linns-leverage-1133"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T16:12:08.662Z",
+            "id": 221,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Linn's Leverage #1133",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Tim Bukher: issuer vetoes reveal regulated financial infrastructure using blockchain, not permissionless finance",
+            "url": "https://linns.substack.com/p/linns-leverage-1133"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T16:12:06.192Z",
+            "id": 220,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Lucky Trader Morning Minute",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Nine Blue Chip Companies Say No to Tokenized Stocks",
+            "url": "https://luckytrader.substack.com/p/nine-blue-chip-companies-say-no-to"
+          }
+        ],
+        "horizon": "short",
+        "id": 54,
+        "linkedTickers": [
+          "CRWV",
+          "HOOD"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction below 42.75 by 2026-11-17",
+            "direction": "below",
+            "dueDate": "2026-11-17",
+            "id": 124,
+            "progress": -5.5,
+            "snapshotPrice": 61.119998931884766,
+            "status": "challenged",
+            "targetLevel": 42.75,
+            "ticker": "CRWV"
+          },
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction above 73.36 by 2026-11-17",
+            "direction": "above",
+            "dueDate": "2026-11-17",
+            "id": 125,
+            "progress": 8.25,
+            "snapshotPrice": 61.119998931884766,
+            "status": "confirming",
+            "targetLevel": 73.36,
+            "ticker": "CRWV"
+          },
+          {
+            "currentPrice": 98.20999908447266,
+            "detail": "98.21 now · prediction below 79.07 by 2026-11-17",
+            "direction": "below",
+            "dueDate": "2026-11-17",
+            "id": 126,
+            "progress": 2.2,
+            "snapshotPrice": 98.64019775390624,
+            "status": "confirming",
+            "targetLevel": 79.07,
+            "ticker": "HOOD"
+          },
+          {
+            "currentPrice": 98.20999908447266,
+            "detail": "98.21 now · prediction above 108.15 by 2026-11-17",
+            "direction": "above",
+            "dueDate": "2026-11-17",
+            "id": 127,
+            "progress": -4.52,
+            "snapshotPrice": 98.64019775390624,
+            "status": "challenged",
+            "targetLevel": 108.15,
+            "ticker": "HOOD"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "issuer vetoes shrink the tokenizable roster Robinhood Chain's meme-vs-stock pairs depend on",
+            "from": "OKXICE tokenized-stock venue",
+            "id": 186,
+            "to": "Robinhood Chain token-stock pairs (Long.xyz)"
+          },
+          {
+            "because": "same issuer-consent friction applies to every venue needing real shares behind tokens",
+            "from": "OKXICE roster loss",
+            "id": 187,
+            "to": "Kraken / Backed Finance stock tokens"
+          },
+          {
+            "because": "Uniswap v4 pools were expected to be the primary liquidity venue for OKXICE listings",
+            "from": "tokenized stock volumes",
+            "id": 188,
+            "to": "Uniswap LP fee income"
+          }
+        ],
+        "snapshots": {
+          "CRWV": 61.119998931884766,
+          "HOOD": 98.64019775390624
+        },
+        "statement": "[Muse theory] Issuer vetoes are becoming the binding constraint on tokenized-stock venues: nine blue-chip issuers (VZ, AVGO, UNH, Cerebras, APP, APLD, RKLB, CRWV, AOI) formally objected to OKXICE listing their shares — 14% of its planned 63-company roster — and Nasdaq is opting its own shares out over missing best-execution/tape duties. Issuer consent was the unpriced assumption in the tokenized-equity bull case; expect veto contagion to cap roster growth and weigh on tokenized-equity-adjacent plays over the next month.",
+        "status": "challenged",
+        "updatedAt": "2026-10-20T16:12:02.912Z"
+      },
+      {
+        "createdAt": "2026-10-20T16:08:45.257Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T16:09:17.816Z",
+            "id": 219,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-19",
+            "publisher": null,
+            "source": "TipRanks",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "CRWV fell only 0.44% Monday after Goldman upgraded it to Buy from Hold; semis snapped their 9-day losing streak (longest in 20 years) – the selloff may be exhausted",
+            "url": "https://www.tipranks.com/news/stock-market-today-oct-20-futures-mixed-as-oil-prices-rise-and-ai-stocks-retreat-again"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T16:09:14.615Z",
+            "id": 218,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-19",
+            "publisher": null,
+            "source": "TipRanks",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Monday rebound: Nasdaq +1.11%, NVDA +1.38%, GOOGL +1.05%, TSLA +3.76% – dip-buying appetite intact before earnings",
+            "url": "https://www.tipranks.com/news/stock-market-today-oct-20-futures-mixed-as-oil-prices-rise-and-ai-stocks-retreat-again"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T16:08:56.373Z",
+            "id": 217,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "eOption",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Morning Preview: October 20, 2026 – AI spending fears snap back, Elice -32% on debut",
+            "url": "https://www.eoption.com/morning-preview-october-20-2026/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T16:08:56.142Z",
+            "id": 216,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "TipRanks",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Stock Market Today, Oct. 20 – Futures Mixed as Oil Prices Rise and AI Stocks Retreat Again",
+            "url": "https://www.tipranks.com/news/stock-market-today-oct-20-futures-mixed-as-oil-prices-rise-and-ai-stocks-retreat-again"
+          }
+        ],
+        "horizon": "short",
+        "id": 53,
+        "linkedTickers": [
+          "MU",
+          "NVDA",
+          "CRWV",
+          "SOXX"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 896.0700073242188,
+            "detail": "896.07 now · prediction below 812.02 by 2026-11-10",
+            "direction": "below",
+            "dueDate": "2026-11-10",
+            "id": 122,
+            "progress": 9.51,
+            "snapshotPrice": 904.9000244140624,
+            "status": "confirming",
+            "targetLevel": 812.02,
+            "ticker": "MU"
+          },
+          {
+            "currentPrice": 896.0700073242188,
+            "detail": "896.07 now · prediction above 984.54 by 2026-11-10",
+            "direction": "above",
+            "dueDate": "2026-11-10",
+            "id": 123,
+            "progress": -11.09,
+            "snapshotPrice": 904.9000244140624,
+            "status": "challenged",
+            "targetLevel": 984.54,
+            "ticker": "MU"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "Neoclouds and memory/chips trade on AI-spend durability; bond-funded capex expansion reprices their credit and equity multiples.",
+            "from": "AI capex debt fears",
+            "id": 183,
+            "to": "CRWV/MU/INTC selling"
+          },
+          {
+            "because": "Megacap AI capex sits in the same risk bucket; semis lead, megacap follows on duration rotation.",
+            "from": "CRWV/MU selling",
+            "id": 184,
+            "to": "META/NVDA compression"
+          },
+          {
+            "because": "Energy inflation at $111 Brent lifts terminal-rate expectations (December hike priced), compressing long-duration tech.",
+            "from": "Oil $111 / rate-hike repricing",
+            "id": 185,
+            "to": "Tech multiple compression"
+          }
+        ],
+        "snapshots": {
+          "CRWV": 61.119998931884766,
+          "MU": 904.9000244140624,
+          "NVDA": 217.08999633789065,
+          "SOXX": 501.9299926757813
+        },
+        "statement": "[Muse theory] AI-credit anxiety reprices the AI-capec complex post-open: semis snap back into selloff (MU -2.5%, SNDK -3%, INTC -1.7%, QCOM -1.1% pre-market; KOSPI chipmakers -4.3% overnight; CRWV -3.2% pre-market despite Monday's Goldman upgrade to Buy). Thesis: debt-funded AI buildout fear (CRWV's -25% week) has jumped from single-name to sector risk, pressuring semis and AI-adjacent megacaps. MU (RSI 30.9, below SMA50 $984.54) is the cleanest read: bearish short-horizon toward its 2x-ATR level $812.02. Invalidation: MU closes back above SMA50 $984.54 (mechanical, verified unbreached), or tonight's/Wednesday's earnings (NFLX, UAL, META, TSLA, IBM) deliver beat-and-raise AI-capex guidance that restores the bid.",
+        "status": "challenged",
+        "updatedAt": "2026-10-20T16:08:45.257Z"
+      },
+      {
+        "createdAt": "2026-10-20T12:52:55.375Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T12:53:04.588Z",
+            "id": 211,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Terminal getrotation",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Rotation board: META +14.7% vs SPY (30d, Leading), AAPL +7.4% Leading, EMR +5.3%; NVDA -5.4% Fading, TSLA Improving",
+            "url": "https://finance.yahoo.com/quote/META/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T12:53:04.561Z",
+            "id": 210,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "cryptodaily.co.uk / AP",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "S&P 500 futures flat at 7,735.25 after Monday's AI- and chip-stock rebound lifted the cash index +0.57% — rotation is not yet lifting the index",
+            "url": "https://cryptodaily.co.uk/2026/10/sp-500-futures-oil-netflix-earnings-october-20-2026"
+          }
+        ],
+        "horizon": "short",
+        "id": 52,
+        "linkedTickers": [
+          "META",
+          "AAPL",
+          "NVDA",
+          "QQQ"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 694.25,
+            "detail": "694.25 now · prediction above 740 by 2026-11-03",
+            "direction": "above",
+            "dueDate": "2026-11-03",
+            "id": 120,
+            "progress": -32.38,
+            "snapshotPrice": 705.4400024414062,
+            "status": "challenged",
+            "targetLevel": 740,
+            "ticker": "META"
+          },
+          {
+            "currentPrice": 216.47000122070312,
+            "detail": "216.47 now · prediction below 205 by 2026-11-03",
+            "direction": "below",
+            "dueDate": "2026-11-03",
+            "id": 121,
+            "progress": 5.13,
+            "snapshotPrice": 217.08999633789065,
+            "status": "confirming",
+            "targetLevel": 205,
+            "ticker": "NVDA"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "semis are the heaviest QQQ weight; QQQ runs -2.47% over 15d while NVDA fades",
+            "from": "NVDA fade",
+            "id": 181,
+            "to": "QQQ drag"
+          },
+          {
+            "because": "rotation sustains the index while 15-session breadth holds at 50",
+            "from": "META/AAPL bid",
+            "id": 182,
+            "to": "SPY resilience"
+          }
+        ],
+        "snapshots": {
+          "AAPL": 342.94000244140625,
+          "META": 705.4400024414062,
+          "NVDA": 217.08999633789065,
+          "QQQ": 718.3599853515625
+        },
+        "statement": "Mega-cap leadership is rotating inside the cohort, not collapsing: META leads SPY by +14.7% over 30 days (terminal rotation stack, asOf 2026-10-20) with long alignment (+42), AAPL carries +73 alignment, while NVDA has faded to -5.4% vs SPY over 30d with short alignment (-38) and QQQ runs -2.47% over 15d. 15-session breadth sits at 50 — this is a baton pass from semis to platforms. It refines the Oct 5 machine thesis of narrow AI leadership: the narrowness moved from momentum semis (MU-type) to platform cash-flow (META/AAPL). Invalidation: META ratio-30d vs SPY turns negative AND NVDA ratio-30d turns positive — the baton passes back. Note the Oct 5 META signal (entry $738.88) sits underwater at $705.44; the rotation thesis needs META to reclaim that level to confirm.",
+        "status": "challenged",
+        "updatedAt": "2026-10-20T12:52:55.375Z"
+      },
+      {
+        "createdAt": "2026-10-20T12:52:55.326Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T12:53:07.819Z",
+            "id": 213,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "metapress.net",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Trump said earlier this month US forces will not attack Iran before the Nov 3 midterms — a de-escalation path that would erode the risk premium if flows stay uninterrupted (ING note)",
+            "url": "https://metapress.net/world/2026/10/20/u-s-oil-surges-to-top-107-brent-crude-at-five-month-high-amid-mideast-tensions/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T12:53:04.334Z",
+            "id": 208,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Reuters via live.euronext.com",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Brent hits five-month high ($111.05, highest since May) on Houthi attacks on Saudi sites and vessel attacks in the Gulf; 18 vessels attacked in two weeks (Kpler)",
+            "url": "https://live.euronext.com/en/financial-news/brent-hits-five-month-high-attacks-ships-saudi-sites-fuel-supply-worries"
+          }
+        ],
+        "horizon": "short",
+        "id": 51,
+        "linkedTickers": [
+          "SPY",
+          "QQQ"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 769.3200073242188,
+            "detail": "769.32 now · prediction below 745 by 2026-10-27",
+            "direction": "below",
+            "dueDate": "2026-10-27",
+            "id": 118,
+            "progress": -13.22,
+            "snapshotPrice": 766.47998046875,
+            "status": "challenged",
+            "targetLevel": 745,
+            "ticker": "SPY"
+          },
+          {
+            "currentPrice": 717.6300048828125,
+            "detail": "717.63 now · prediction below 695 by 2026-10-27",
+            "direction": "below",
+            "dueDate": "2026-10-27",
+            "id": 119,
+            "progress": 3.12,
+            "snapshotPrice": 718.3599853515625,
+            "status": "confirming",
+            "targetLevel": 695,
+            "ticker": "QQQ"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "oil-driven inflation fears lift rate expectations; December hike talk reappears in premarket coverage",
+            "from": "Brent $111 risk premium",
+            "id": 179,
+            "to": "equity multiple compression"
+          },
+          {
+            "because": "no index follow-through while WTI front-month gains a ninth straight session",
+            "from": "flat S&P futures",
+            "id": 180,
+            "to": "capped rally follow-through"
+          }
+        ],
+        "snapshots": {
+          "QQQ": 718.3599853515625,
+          "SPY": 766.47998046875
+        },
+        "statement": "Brent $110.80-$111.42 — five-month high, highest since May 19/20 (Reuters, 0810 GMT Oct 20) — sits on a live supply-risk stack: Houthi strikes claimed on Aramco Yanbu, the Shaybah oilfield, and Riyadh/Abha airports (UNCONFIRMED by Saudi authorities), 18 vessels attacked in two weeks (Kpler), two tankers set ablaze in Hormuz after hitting mines (IRGC via Tasnim), and Iran vowing forceful response to any US strike. WTI front-month is up a ninth straight session (~+20% month). S&P futures sat flat at 7,735.25 after Monday's +0.57% cash rebound — the market cannot follow through while crude prices in a war premium. This is the live, confirmed version of the machine's Oct 5 energy/geopolitics thesis (low confidence then; mechanism verified now). Invalidation: Brent breaks and holds below $100 on confirmed uninterrupted flows — the risk premium erodes per ING's own note — or a verifiable US-Iran de-escalation lands.",
+        "status": "challenged",
+        "updatedAt": "2026-10-20T12:52:55.326Z"
+      },
+      {
+        "createdAt": "2026-10-20T12:52:45.455Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T12:53:04.921Z",
+            "id": 212,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "cryptodaily.co.uk / AP",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "AI- and chip-stock rebound helped lift the cash S&P 500 on Monday (+0.57% to 7,702.77) — demand bid for AI names still present despite financing doubts",
+            "url": "https://cryptodaily.co.uk/2026/10/sp-500-futures-oil-netflix-earnings-october-20-2026"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T12:53:04.531Z",
+            "id": 209,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "wdsm710.com",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Nasdaq futures dip as oil climbs, earnings loom: premarket declines in AI-linked names — CoreWeave, Nebius, Apple, Nvidia — on growing AI financing-risk selectivity (single source)",
+            "url": "https://wdsm710.com/2026/10/20/nasdaq-futures-dip-as-oil-prices-climb-earnings-loom/"
+          }
+        ],
+        "horizon": "short",
+        "id": 50,
+        "linkedTickers": [
+          "CRWV",
+          "NVDA"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction below 52 by 2026-11-03",
+            "direction": "below",
+            "dueDate": "2026-11-03",
+            "id": 117,
+            "progress": -11.07,
+            "snapshotPrice": 61.119998931884766,
+            "status": "challenged",
+            "targetLevel": 52,
+            "ticker": "CRWV"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "take-or-pay leverage makes CRWV/Nebius the first casualty of financing risk",
+            "from": "AI funding doubt",
+            "id": 177,
+            "to": "neocloud equity repricing"
+          },
+          {
+            "because": "hyperscaler capex is NVDA's forward book",
+            "from": "neocloud stress",
+            "id": 178,
+            "to": "semi demand doubt"
+          }
+        ],
+        "snapshots": {
+          "CRWV": 61.119998931884766,
+          "NVDA": 217.08999633789065
+        },
+        "statement": "The fragile edge of the AI trade is financing, not demand: premarket saw CoreWeave, Nebius, NVDA, AAPL pressured as investors price AI funding risk into the Q3 tech earnings slate (wdsm710, SINGLE SOURCE). Brent at 5-month highs tightens the same financial conditions the Oct 5 machine rates thesis flagged (10Y retesting 4.30%). Logan's standing AI-credit thread — boringbiz's hyperscaler-bond data ('Debt by a Thousand Cuts'), hkuppy's take-or-pay neocloud case — has its realized poster child in chamath's CRWV short (+182.7%, the board's best trade). A funding scare reprices neocloud equity and the semis feeding it before it touches the megacaps: CRWV at $61.12 is the canary, NVDA's -5.4% 30d fade vs SPY is the transmission. Invalidation: CoreWeave or Nebius raise fresh financing on clean terms, or NVDA's 30d ratio vs SPY turns positive — funding risk priced out, not in.",
+        "status": "challenged",
+        "updatedAt": "2026-10-20T12:52:45.455Z"
+      },
+      {
+        "createdAt": "2026-10-20T11:53:22.081Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T13:51:04.248Z",
+            "id": 215,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Reuters premarket wrap (wncy.com) + TipRanks",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "CRWV sank to a 52-week low in Oct 20 premarket (-3.1%) even after Goldman's Buy upgrade ($106 PT): the credit-fear selloff is overriding analyst cover; Nebius -2.9% premarket alongside",
+            "url": "https://wncy.com/2026/10/20/nasdaq-futures-dip-as-oil-prices-climb-earnings-loom/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T13:51:04.173Z",
+            "id": 214,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Reuters exclusive via Hindu BusinessLine + Invezz",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "ByteDance, Alibaba, Tencent ordered 3M+ RTX PRO 5500 cards (>$35B list) per Reuters: the demand leg is alive in China, but these are export-compliant inference workstation chips, not training clusters; total China orders exceed 6M vs NVDA's 3M global 2027 capacity",
+            "url": "https://www.thehindubusinessline.com/info-tech/bytedance-alibaba-tencent-place-over-35-billion-worth-of-nvidia-chip-orders/article71603973.ece"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T11:53:29.537Z",
+            "id": 207,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "TMT Breakout",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "TMTB Podcast Intel: All-In on CoreWeave's debt scare (Chamath CDS/breach numbers; AI-assisted episode summary — verify before relying)",
+            "url": "https://www.tmtbreakout.com/p/tmtb-podcast-intel-all-in-on-coreweaves"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T11:53:29.518Z",
+            "id": 206,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-20",
+            "publisher": null,
+            "source": "Cardano Capital",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "CoreWeave bonds touched 15% yield; Oracle and Broadcom CDS at records — AI credit stress tape",
+            "url": "https://cardanocapital.substack.com/p/openais-14-trillion-valuation-push"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-20T11:53:29.472Z",
+            "id": 205,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-19",
+            "publisher": null,
+            "source": "TMT Breakout",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "TMTB Morning Wrap: Goldman upgrades CRWV to Buy/$106 — credit fears overstate funding risk",
+            "url": "https://www.tmtbreakout.com/p/tmtb-morning-wrap-62f"
+          }
+        ],
+        "horizon": "short",
+        "id": 49,
+        "linkedTickers": [
+          "CRWV"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction below 42.75 by 2026-11-17",
+            "direction": "below",
+            "dueDate": "2026-11-17",
+            "id": 115,
+            "progress": -5.5,
+            "snapshotPrice": 61.119998931884766,
+            "status": "challenged",
+            "targetLevel": 42.75,
+            "ticker": "CRWV"
+          },
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction above 73.36 by 2026-11-17",
+            "direction": "above",
+            "dueDate": "2026-11-17",
+            "id": 116,
+            "progress": 8.25,
+            "snapshotPrice": 61.119998931884766,
+            "status": "confirming",
+            "targetLevel": 73.36,
+            "ticker": "CRWV"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "TeraWulf CEO explicitly distancing on CNBC ('not a neocloud'), cites investment-grade backstops — market reprices neoclouds by offtaker quality",
+            "from": "CRWV credit stress",
+            "id": 173,
+            "to": "Neocloud sorting"
+          },
+          {
+            "because": "Michael Dell sees DRAM shortage worsening into 2027, new fabs not producing until 2029 — two more years of memory cost pressure on AI infra",
+            "from": "Neocloud sorting",
+            "id": 174,
+            "to": "Memory capex bid"
+          },
+          {
+            "because": "OpenAI raising $30B at $1.4T ahead of Anthropic IPO; SoftBank funding its $64.6B stake with $11.1B junk bonds, CDS above 400bp — valuation and credit entangled",
+            "from": "AI credit stress",
+            "id": 175,
+            "to": "Frontier-lab financing race"
+          },
+          {
+            "because": "Dell enterprise AI factory customer adds accelerated 2.75x; OpenAI+Anthropic absorb 60% of new compute per SemiAnalysis — NVDA gets paid either way",
+            "from": "Frontier-lab financing race",
+            "id": 176,
+            "to": "NVDA demand floor"
+          }
+        ],
+        "snapshots": {
+          "CRWV": 61.119998931884766
+        },
+        "statement": "[Muse theory] CRWV is the AI-credit battleground: Chamath's bear case (CDS ~953bp implying ~55% 5yr default odds, ~$5B from covenant breach, $35B debt plus $35B more at ~8.5%, 75% of revenue from 3 customers) vs Goldman's Buy ($106 PT, credit fears overstated, DDTLs asset-backed). The tape is decisively short-side (factor agreement -95, RSI 29, -56% off highs, theory test 22/100 on the dip-buy) — the long side currently owns only the analyst call.",
+        "status": "challenged",
+        "updatedAt": "2026-10-20T11:53:22.081Z"
+      },
+      {
+        "createdAt": "2026-10-19T15:54:38.275Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T15:54:46.215Z",
+            "id": 204,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-19T11:45:00Z",
+            "publisher": null,
+            "source": "Logan's Synthesize desk (CoinDesk feed item)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Nscale loses Microsoft AI deal as grid connection delay stretches into 2030s — power constraint bite",
+            "url": "https://curatednewslawl.grok.me"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T15:54:43.888Z",
+            "id": 203,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-08T00:00:00Z",
+            "publisher": null,
+            "source": "Michael Burry Substack (via Seeking Alpha/AlphaMaven coverage)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Burry flags risks in private markets, incl. financing behind the AI data center buildout",
+            "url": "https://alpha-maven.com/story/private-equity/some-loud-snapping-and-crackling-michael-burry-flags-risks-in-private-markets-dji-seeking-alpha"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T15:54:41.603Z",
+            "id": 202,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-19T05:39:00Z",
+            "publisher": null,
+            "source": "SemiAnalysis",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Datacenters 2027: The Year of Acceleration, +50GW in a Single Year",
+            "url": "https://newsletter.semianalysis.com/p/datacenters-2027-the-year-of-acceleration"
+          }
+        ],
+        "horizon": "long",
+        "id": 48,
+        "linkedTickers": [
+          "VST",
+          "NVDA"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 150.32000732421875,
+            "detail": "150.32 now · prediction above 174.36 by 2026-12-17",
+            "direction": "above",
+            "dueDate": "2026-12-17",
+            "id": 112,
+            "progress": -2.43,
+            "snapshotPrice": 150.88999938964844,
+            "status": "challenged",
+            "targetLevel": 174.36,
+            "ticker": "VST"
+          },
+          {
+            "currentPrice": 150.32000732421875,
+            "detail": "150.32 now · prediction above 137.13 by 2026-12-17",
+            "direction": "above",
+            "dueDate": "2026-12-17",
+            "id": 113,
+            "progress": 100,
+            "snapshotPrice": 150.88999938964844,
+            "status": "confirming",
+            "targetLevel": 137.13,
+            "ticker": "VST"
+          },
+          {
+            "currentPrice": 216.47000122070312,
+            "detail": "216.47 now · prediction above 226.06 by 2026-12-17",
+            "direction": "above",
+            "dueDate": "2026-12-17",
+            "id": 114,
+            "progress": 19.61,
+            "snapshotPrice": 214.1300048828125,
+            "status": "confirming",
+            "targetLevel": 226.06,
+            "ticker": "NVDA"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "hyperscaler sites need grid capacity; >24GW of advanced construction in the 2027 delivery wave = power equipment and off-take demand",
+            "from": "datacenter 2027 buildout",
+            "id": 170,
+            "to": "VST"
+          },
+          {
+            "because": "accelerating giant-site construction = GPU and networking equipment order flow into 2027",
+            "from": "datacenter 2027 buildout",
+            "id": 171,
+            "to": "NVDA"
+          },
+          {
+            "because": "CHALLENGE: 25GW 'hunch', labor/supply-chain delays and power constraints could cut the 2027 delivery wave — SemiAnalysis claims their model already discounts these",
+            "from": "Gerstner 25GW hunch + constraints",
+            "id": 172,
+            "to": "datacenter 2027 buildout"
+          }
+        ],
+        "snapshots": {
+          "NVDA": 214.1300048828125,
+          "VST": 150.88999938964844
+        },
+        "statement": "[Muse theory] SemiAnalysis 'Datacenters 2027: The Year of Acceleration' — +50GW of new datacenter capacity delivered in a single year (essentially the entire global cumulative market through 2024), with >24GW at just 40 campuses already in advanced construction and mostly >50% done, sustaining 2027 AI-infra capex. CONTESTED read: the near-term NVDA tape is bearish (factor agreement -38, RSI 37.6, price below SMA50), Brad Gerstner's 25GW 'hunch' and power/supply constraints are live counterpoints, and Burry flags private-credit stress on the datacenter financing chain. VST (power/grid supplier) is the clean long-aligned vehicle: mechanical long, target1 174.36, invalidation 137.13.",
+        "status": "challenged",
+        "updatedAt": "2026-10-19T15:54:38.275Z"
+      },
+      {
+        "createdAt": "2026-10-19T15:51:38.636Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T15:51:45.489Z",
+            "id": 201,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Yahoo Finance chart via equity terminal analyzeinstrument",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "IWM: -95 short factor agreement, RSI-14 31.99, invalidation above $278.14, targets $258.89/$251.19; 15d -4.09%, 30d -8.15%",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/IWM?interval=1d&range=1y&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T15:51:45.384Z",
+            "id": 200,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Yahoo Finance chart via equity terminal analyzeinstrument",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "META: +42 long factor agreement with $785.22 target1 and $658.73 invalidation — mega-cap strength challenges the broad-bearish read; valuation reads 'rich', so the long leg is technical, not fundamental",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/META?interval=1d&range=1y&events=div%2Csplits"
+          }
+        ],
+        "horizon": "short",
+        "id": 47,
+        "linkedTickers": [
+          "IWM",
+          "SPY",
+          "AAPL",
+          "META"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 275.7799987792969,
+            "detail": "275.78 now · prediction below 258.89 by 2026-11-17",
+            "direction": "below",
+            "dueDate": "2026-11-17",
+            "id": 109,
+            "progress": -46.23,
+            "snapshotPrice": 270.44000244140625,
+            "status": "challenged",
+            "targetLevel": 258.89,
+            "ticker": "IWM"
+          },
+          {
+            "currentPrice": 275.7799987792969,
+            "detail": "275.78 now · prediction above 278.14 by 2026-11-17",
+            "direction": "above",
+            "dueDate": "2026-11-17",
+            "id": 110,
+            "progress": 69.35,
+            "snapshotPrice": 270.44000244140625,
+            "status": "confirming",
+            "targetLevel": 278.14,
+            "ticker": "IWM"
+          },
+          {
+            "currentPrice": 694.25,
+            "detail": "694.25 now · prediction above 785.22 by 2026-11-17",
+            "direction": "above",
+            "dueDate": "2026-11-17",
+            "id": 111,
+            "progress": -19.87,
+            "snapshotPrice": 709.3300170898438,
+            "status": "challenged",
+            "targetLevel": 785.22,
+            "ticker": "META"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "no-cut Fed expectations keep discount rates elevated, punishing rate-sensitive small caps first",
+            "from": "hot October CPI (3.7% crowd-priced, 81.5% Polymarket odds)",
+            "id": 167,
+            "to": "broad risk de-rating"
+          },
+          {
+            "because": "AAPL (+78) and META (+42) factor strength holds cap-weighted indices above a weak broad tape",
+            "from": "narrow mega-cap earnings strength",
+            "id": 168,
+            "to": "index-level masking"
+          },
+          {
+            "because": "small-cap weakness leadership typically drags SPY/QQQ breadth lower with a lag",
+            "from": "IWM breakdown below $258.89",
+            "id": 169,
+            "to": "breadth deterioration"
+          }
+        ],
+        "snapshots": {
+          "AAPL": 343.4599914550781,
+          "IWM": 270.44000244140625,
+          "META": 709.3300170898438,
+          "SPY": 763.25
+        },
+        "statement": "[Muse theory] Narrow-bid tape: mega-cap factor agreement stays long (AAPL +78, META +42) while the broad tape reads short (IWM -95, SPY -42, QQQ -42, NVDA -38, TSLA -60); 15-session breadth 25% positive. Small caps lead the weakness — IWM 15d -4.09%, 30d -8.15%, Wilder RSI-14 31.99, MACD -4.04, mechanical invalidation above $278.14 — while Polymarket prices October CPI at 3.7% (81.5% odds) with only 14.5% on a +25bp Fed hike: a hot-inflation-no-cut macro consistent with broad de-rating and mega-cap insulation. This is a contested fork (long megacap vs short broad), so no single-direction index call: descriptive read. Invalidation tripwire: 15d breadth crosses 50% positive OR IWM alignment flips above -20; either event breaks the narrow-bid thesis.",
+        "status": "challenged",
+        "updatedAt": "2026-10-19T15:51:38.636Z"
+      },
+      {
+        "createdAt": "2026-10-19T11:58:11.563Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T11:58:24.519Z",
+            "id": 198,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-19",
+            "publisher": null,
+            "source": "SemiAnalysis",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "SINGLE SOURCE (paid preview): Datacenters 2027 +50GW in a single year; constraint shifts from power to memory/logic chips",
+            "url": "https://newsletter.semianalysis.com/p/datacenters-2027-the-year-of-acceleration"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T11:58:24.503Z",
+            "id": 197,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-18",
+            "publisher": null,
+            "source": "The Bear Cave",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Bear Cave #348: CoreWeave CDS at record implying >60% 5yr default, H100 rent $2.85/hr (+53% since Feb 2025), hyperscaler bond binge",
+            "url": "https://thebearcave.substack.com/p/the-bear-cave-348"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T11:58:24.458Z",
+            "id": 196,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-18",
+            "publisher": null,
+            "source": "Accredited Insight",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Non-traded BDCs see first net redemptions since 2022 ($8.1B out vs $3.3B in, Q2); CMBS delinquency 8.02% in Sept, highest since late 2020",
+            "url": "https://www.accreditedinsight.com/p/daily-marks-same-information-a-cv"
+          }
+        ],
+        "horizon": "short",
+        "id": 46,
+        "linkedTickers": [
+          "MU"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 896.0700073242188,
+            "detail": "896.07 now · prediction below 731.32 by 2026-11-17",
+            "direction": "below",
+            "dueDate": "2026-11-17",
+            "id": 107,
+            "progress": -11.68,
+            "snapshotPrice": 878.8400268554688,
+            "status": "challenged",
+            "targetLevel": 731.32,
+            "ticker": "MU"
+          },
+          {
+            "currentPrice": 896.0700073242188,
+            "detail": "896.07 now · prediction above 977.19 by 2026-11-17",
+            "direction": "above",
+            "dueDate": "2026-11-17",
+            "id": 108,
+            "progress": 17.52,
+            "snapshotPrice": 878.8400268554688,
+            "status": "confirming",
+            "targetLevel": 977.19,
+            "ticker": "MU"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "A public short disclosure from a high-profile bear adds positioning overhang on top of an already-running -15% two-week correction (RSI 34, price below 50dma).",
+            "from": "Burry MU short disclosed Oct 19 (one reporting layer)",
+            "id": 164,
+            "to": "MU near-term downside momentum"
+          },
+          {
+            "because": "If memory/logic becomes the binding constraint for 2027-28 datacenter buildout, the drawdown is a fundamental entry and crowded shorts face squeeze risk; MU still 100% above 200dma, revenue +256% YoY.",
+            "from": "SemiAnalysis: +50GW in 2027, memory becomes constraint",
+            "id": 165,
+            "to": "MU short-squeeze / mean-reversion upside risk"
+          },
+          {
+            "because": "Credit stress reprices the whole AI-capex complex indiscriminately; MU at -27.6% off 52w high already reflects the scare, and further neocloud distress drags semis with it.",
+            "from": "CoreWeave CDS >60% 5yr default + record bond issuance",
+            "id": 166,
+            "to": "AI-credit contagion into memory semis"
+          }
+        ],
+        "snapshots": {
+          "MU": 878.8400268554688
+        },
+        "statement": "[Muse theory] MU is a genuine battleground: Burry disclosed a short in MU (Oct 19, via his Substack, one reporting layer) while degentradinglsd is long MU. The tape gives the short side near-term momentum (-15% over two weeks, RSI 34, below 50dma, factor model -38 short) but the long side owns the structure (still 100% above 200dma, +240% YTD, valuation reads cheap). Short thesis: correction extends toward mechanical target 731.32; invalidation is a reclaim above 977.19 (2x ATR). Flag: Burry disclosure is single-source until a second source or filing corroborates.",
+        "status": "challenged",
+        "updatedAt": "2026-10-19T11:58:11.563Z"
+      },
+      {
+        "createdAt": "2026-10-18T15:54:46.724Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-18T15:54:59.659Z",
+            "id": 195,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-12",
+            "publisher": null,
+            "source": "Wintermute",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Market Update: 12 October 2026 — 'crypto lost its flow support while equities kept their earnings support': equities held up on earnings, challenging a blanket AI-credit bearishness across all risk assets",
+            "url": "https://www.wintermute.com/insights/market-color/market-update/market-update-12-october-2026"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-18T15:54:59.612Z",
+            "id": 194,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-18",
+            "publisher": null,
+            "source": "Cardano Capital",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Good Debt vs. Bad Debt: Why the Labels Are Breaking Down — CoreWeave's unsecured bonds yielded 15% on Oct 13 vs 5.9% secured loan; interest ate ~25% of quarterly revenue",
+            "url": "https://cardanocapital.substack.com/p/good-debt-vs-bad-debt-why-the-labels"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-18T15:54:59.381Z",
+            "id": 193,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-18",
+            "publisher": null,
+            "source": "Accredited Insight",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Daily Marks, Same Information | A CV buys a CV | CMBS Delinquencies — first net non-traded BDC outflow since 2022 ($3.3B in vs $8.1B out, Q2); CMBS delinquency 8.02%, highest since late 2020",
+            "url": "https://www.accreditedinsight.com/p/daily-marks-same-information-a-cv"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-18T15:54:59.320Z",
+            "id": 192,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-12",
+            "publisher": null,
+            "source": "Wintermute",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Market Update: 12 October 2026 — FOMC minutes see another hike by year-end; US spot BTC ETF outflows $679M (largest weekly since June); $1.19B 24h liquidations",
+            "url": "https://www.wintermute.com/insights/market-color/market-update/market-update-12-october-2026"
+          }
+        ],
+        "horizon": "short",
+        "id": 45,
+        "linkedTickers": [
+          "CRWV"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction above 73.55 by 2026-11-15",
+            "direction": "above",
+            "dueDate": "2026-11-15",
+            "id": 105,
+            "progress": 6.09,
+            "snapshotPrice": 61.38999938964844,
+            "status": "confirming",
+            "targetLevel": 73.55,
+            "ticker": "CRWV"
+          },
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction below 43.15 by 2026-11-15",
+            "direction": "below",
+            "dueDate": "2026-11-15",
+            "id": 106,
+            "progress": -4.06,
+            "snapshotPrice": 61.38999938964844,
+            "status": "challenged",
+            "targetLevel": 43.15,
+            "ticker": "CRWV"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "Unsecured bonds yielded 15% (Oct 13) vs 5.9% on the secured IG loan, while interest ate ~25% of quarterly revenue (Cardano Capital, from 8-K/tape) — the bond market repricing equity risk.",
+            "from": "CoreWeave unsecured bond yield 15%",
+            "id": 161,
+            "to": "CRWV equity downside"
+          },
+          {
+            "because": "First net BDC outflow since 2022 ($3.3B in vs $8.1B paid out in Q2; OTIC 39% withdrawal requests) — private credit is the marginal funder of GPU/data-center buildout. (Inference: funding dries at the margin.)",
+            "from": "Private BDC net outflows",
+            "id": 162,
+            "to": "AI-infra funding stress"
+          },
+          {
+            "because": "AI earnings land this week (Tesla, Meta); a financing scare already drove Nasdaq -4.5%, worst week since June — either earnings relieve the scare or it tightens further. (Inference: dated catalyst either way.)",
+            "from": "AI earnings week",
+            "id": 163,
+            "to": "credit-scare resolution"
+          }
+        ],
+        "snapshots": {
+          "CRWV": 61.38999938964844
+        },
+        "statement": "[Muse theory] AI-infra credit stress is now priced by the bond market, not just equities: CoreWeave's unsecured bonds yielded 15% on Oct 13 vs 5.9% on its $8.5B secured IG loan, with interest eating ~25% of quarterly revenue (Cardano Capital, Oct 18). Same week, private credit posted its first net BDC outflow since 2022 ($3.3B in vs $8.1B paid out, Q2) and CMBS delinquency hit 8.02%, highest since late 2020 (Accredited Insight, Oct 18). Thesis: the credit leg of the AI-credit-crunch keeps weighing on leveraged AI-infra equities while unsecured yields stay elevated; the bond yield (not the equity) is the forward indicator. Caveat: CRWV equity is -25% in 5d with RSI-14 at 29.5 — oversold-bounce risk is real; the terminal's 30-session walk-forward on this setup is UNQUALIFIED (29.2% hit rate, negative mean directional return) — evidence-led but uncalibrated, watch for continuation not entry timing.",
+        "status": "challenged",
+        "updatedAt": "2026-10-18T15:54:46.724Z"
+      },
+      {
+        "createdAt": "2026-10-17T15:58:15.419Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:58:43.382Z",
+            "id": 183,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Terminal tape (Yahoo Finance via analyzeinstrument)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "MSTR still above its 50-day SMA ($136.83 vs $134.92) — the removal headline has not broken the medium-term trend; mechanical invalidation sits at $156.29",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSTR"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:58:42.602Z",
+            "id": 182,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Lucky Trader (Substack)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Google Clears a Major Quantum Hurdle, Bitcoin Still Safe — MSCI finalized index rules put Strategy at risk of removal; final list Nov 11; MSTR -3% on the news",
+            "url": "https://luckytrader.substack.com/p/google-clears-a-major-quantum-hurdle"
+          }
+        ],
+        "horizon": "short",
+        "id": 43,
+        "linkedTickers": [
+          "MSTR"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 142.72000122070312,
+            "detail": "142.72 now · prediction below 107.64 by 2026-11-14",
+            "direction": "below",
+            "dueDate": "2026-11-14",
+            "id": 100,
+            "progress": -20.18,
+            "snapshotPrice": 136.8300018310547,
+            "status": "challenged",
+            "targetLevel": 107.64,
+            "ticker": "MSTR"
+          },
+          {
+            "currentPrice": 142.72000122070312,
+            "detail": "142.72 now · prediction below 88.18 by 2026-11-14",
+            "direction": "below",
+            "dueDate": "2026-11-14",
+            "id": 101,
+            "progress": -12.11,
+            "snapshotPrice": 136.8300018310547,
+            "status": "challenged",
+            "targetLevel": 88.18,
+            "ticker": "MSTR"
+          },
+          {
+            "currentPrice": 142.72000122070312,
+            "detail": "142.72 now · prediction above 156.29 by 2026-11-14",
+            "direction": "above",
+            "dueDate": "2026-11-14",
+            "id": 102,
+            "progress": 30.27,
+            "snapshotPrice": 136.8300018310547,
+            "status": "confirming",
+            "targetLevel": 156.29,
+            "ticker": "MSTR"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "MSCI-tracked index funds must sell the name if removal is confirmed in the final Nov 11 list",
+            "from": "MSCI final index list (Nov 11)",
+            "id": 156,
+            "to": "MSTR"
+          },
+          {
+            "because": "BTC-treasury premium compression reprices the DAT cohort narrative when the largest treasury name gets de-indexed",
+            "from": "MSTR",
+            "id": 157,
+            "to": "BTC"
+          },
+          {
+            "because": "index-fund pre-positioning ahead of Nov 11 drains marginal bid from an already -54.7% off-high tape",
+            "from": "MSTR",
+            "id": 158,
+            "to": "index-fund flows"
+          }
+        ],
+        "snapshots": {
+          "MSTR": 136.8300018310547
+        },
+        "statement": "[Muse theory] Strategy (MSTR) faces MSCI index-removal risk with the final index list due Nov 11, 2026: index funds pre-positioning out of the name drives forced-selling pressure; the tape already shows -11.3% over 5 sessions and -12.9% over 14 on the headline (theory-test 86/100 HIGH on tape agreement; the score confirms trend, not catalyst certainty). Thesis direction: bearish into the Nov 11 decision. INVALIDATION TRIPWIRE (prediction 3 above): a reclaim above $156.29 (mechanical invalidation, 2x Wilder ATR-14) signals the de-risking is absorbed and kills the thesis. Targets are real mechanical levels: $107.64 (target1) and $88.18 (target2), both verified below current $136.83. FLAG: the removal-risk premise is single-source (Lucky Trader digest citing finalized MSCI index rules) and needs independent corroboration before Nov 11.",
+        "status": "challenged",
+        "updatedAt": "2026-10-17T15:58:15.419Z"
+      },
+      {
+        "createdAt": "2026-10-17T15:54:29.240Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:59.940Z",
+            "id": 181,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "Summa Money (LOW-TIER, single source)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "WTI ~$101.7 / Brent near $110 on reported supply-disruption risks — unconfirmed",
+            "url": "https://summamoney.com/investing/the-daily/october-17-2026-us-stocks-tension-in-the-market-as-high-tech-stocks-plummet-and-crude-oil-breaks-100-ripples-of-ai-credit-anxiety-spread/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:55.839Z",
+            "id": 180,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getsignaltracker",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "CL=F long id 42 closed HIT at target1 on 2026-10-17 (+1.59R / +9.41%); id 8 sits 1.07% below target1 102.49 with 14.1% invalidation room",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?period1=0&period2=1790913536&interval=1d&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:50.367Z",
+            "id": 176,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getsignaltracker",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "GC=F shorts id 7/31 only barely green (4181.1 vs 4198.7/4199 entries) — commodity bid is not uniform; gold safe-haven bid fights the short",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?period1=0&period2=1790911114&interval=1d&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:50.290Z",
+            "id": 174,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "Summa Money (LOW-TIER, single source)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "WTI ~$101.7 / Brent near $110 on reported supply-disruption risks — unconfirmed",
+            "url": "https://summamoney.com/investing/the-daily/october-17-2026-us-stocks-tension-in-the-market-as-high-tech-stocks-plummet-and-crude-oil-breaks-100-ripples-of-ai-credit-anxiety-spread/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:48.909Z",
+            "id": 168,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "Summa Money (LOW-TIER, single source)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Brent/WTI prints are single-source LOW-TIER; a weekend de-escalation headline unwinds the premium fast — the premium is rented, not owned",
+            "url": "https://summamoney.com/investing/the-daily/october-17-2026-us-stocks-tension-in-the-market-as-high-tech-stocks-plummet-and-crude-oil-breaks-100-ripples-of-ai-credit-anxiety-spread/"
+          }
+        ],
+        "horizon": "short",
+        "id": 42,
+        "linkedTickers": [
+          "CL=F"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 98.36000061035156,
+            "detail": "98.36 now · prediction above 102.49 by 2026-10-23",
+            "direction": "above",
+            "dueDate": "2026-10-23",
+            "id": 98,
+            "progress": -282.41,
+            "snapshotPrice": 101.41000366210938,
+            "status": "challenged",
+            "targetLevel": 102.49,
+            "ticker": "CL=F"
+          },
+          {
+            "currentPrice": 98.36000061035156,
+            "detail": "98.36 now · prediction below 87.12 by 2026-11-13",
+            "direction": "below",
+            "dueDate": "2026-11-13",
+            "id": 99,
+            "progress": 21.34,
+            "snapshotPrice": 101.41000366210938,
+            "status": "confirming",
+            "targetLevel": 87.12,
+            "ticker": "CL=F"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "reported Brent $110 / WTI $101.7 are SINGLE-SOURCE; the measured WTI signal momentum is the load-bearing evidence",
+            "from": "US-Iran headline volatility",
+            "id": 154,
+            "to": "crude risk premium"
+          },
+          {
+            "because": "energy longs resolving green while tech longs invalidate is the week's measured rotation signature",
+            "from": "hot-CPI chatter plus rising yields",
+            "id": 155,
+            "to": "energy as inflation-hedge bid"
+          }
+        ],
+        "snapshots": {
+          "CL=F": 101.41000366210938
+        },
+        "statement": "[Muse theory][confidence: low] Measured long-energy momentum: WTI long id 8 (score 50, entry 93.27) closed Friday at 101.41, 1.07% below target1 102.49 with 14.1% room to mechanical invalidation 87.12; sibling WTI long id 42 closed HIT 10-17 at +1.59R. Weekend overlay — Brent ~$110, WTI ~$101.7 on supply-disruption chatter — is SINGLE-SOURCE unconfirmed; the signal momentum is the load-bearing evidence.",
+        "status": "challenged",
+        "updatedAt": "2026-10-17T15:54:29.240Z"
+      },
+      {
+        "createdAt": "2026-10-17T15:54:28.012Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T18:42:00.684Z",
+            "id": 189,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Cardano Capital (Substack, full text)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "AI hedge fund blowup rumors send VIX +34% to 22.31: unconfirmed VARA rumor ($26.4B AUM, -44% July); July precedent — Situational Awareness -67% on ~4x leverage, $16B book sold to Citadel on margin calls; CoreWeave 2032s touched 15% yield",
+            "url": "https://cardanocapital.substack.com/p/ai-hedge-fund-blowup-rumors-send"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T18:42:00.647Z",
+            "id": 188,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "Cardano Capital (Substack, full text)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Nasdaq -4.5% worst week since June: CPI 3.7% vs 3.6% exp, PPI +1.3% m/m; Oct-28 hike odds whipsawed 22%→54%→15-30%; Hock Tan 'casino gamblers' on AI capex; Gartner 80%+ of neoclouds could cease independent operation by 2030",
+            "url": "https://cardanocapital.substack.com/p/nasdaq-falls-45-in-its-worst-week"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T18:41:01.992Z",
+            "id": 187,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "terminal analyzeinstrument",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "NVDA mechanical levels verified: short invalidation above $226.06 (2x Wilder ATR-14), target1 $196.24, target2 $184.31 — refines prediction levels; a daily close above $226.06 kills the bearish read",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?period1=0&period2=1792233971&interval=1d&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:50.862Z",
+            "id": 179,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getmarketread/getsignaltracker",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "AAPL long id 3 closed HIT 2026-10-09 (+1.5R); AAPL still +78 long-aligned in Friday read model — mega-cap stock-picking worked",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?interval=1d&range=2y&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:50.734Z",
+            "id": 178,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-09",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getsignaltracker",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "HD short id 12 (factor score -100) closed MISSED 2026-10-09 — a max-conviction short failed too; not a uniform short-beta week",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/HD?interval=1d&range=2y&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:50.596Z",
+            "id": 177,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "ActionForex",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "10Y ~5.11% with December hike still the market's focus after Warsh refused to revive October bets",
+            "url": "https://www.actionforex.com/action-insight/market-overview/657759-dollar-extends-slide-as-fed-warsh-refuses-to-revive-october-hike-bets/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:50.331Z",
+            "id": 175,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getsignaltracker",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "NVDA long id 5 (factor score 90) closed MISSED at invalidation on 2026-10-15, -1.96R / -5.64%",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA?interval=1d&range=2y&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:50.129Z",
+            "id": 173,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "Binance Square (LOW-TIER, single source)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Nasdaq 100 fell 5.5% for the week; eight-session semiconductor losing streak; stressed CoreWeave debt pricing — unconfirmed",
+            "url": "https://www.binance.com/en/square/post/10-17-2026-nasdaq-100-falls-5-5-for-the-week-as-brent-crude-nears-110-378122438358362"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:49.658Z",
+            "id": 172,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getsignaltracker",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "IWM short id 10 closed HIT at target1 on 2026-10-17, +1.92R / +3.07%",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/IWM?interval=1d&range=2y&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:49.625Z",
+            "id": 171,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-09",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getsignaltracker",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "MU long id 11 (factor score 100) closed MISSED at invalidation on 2026-10-09",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/MU?period1=0&period2=1790911144&interval=1d&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:49.584Z",
+            "id": 170,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getsignaltracker",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "SI=F shorts id 9 and id 32 both closed HIT at target1 on 2026-10-15 (+1.75R / +2.01R)",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/SI%3DF?period1=0&period2=1790911157&interval=1d&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T15:55:49.394Z",
+            "id": 169,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "equity-analyzer-and-signal-tracker · getmarketread",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "META still +42 long-aligned in Friday read model (leader on 30d return/ATR stack) — the last mega-cap long pillar has not broken",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/META?interval=1d&range=1y&events=div%2Csplits"
+          }
+        ],
+        "horizon": "short",
+        "id": 41,
+        "linkedTickers": [
+          "NVDA",
+          "MU",
+          "META",
+          "QQQ"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 216.47000122070312,
+            "detail": "216.47 now · prediction below 200 by 2026-11-13",
+            "direction": "below",
+            "dueDate": "2026-11-13",
+            "id": 94,
+            "progress": -16.56,
+            "snapshotPrice": 214.1300048828125,
+            "status": "challenged",
+            "targetLevel": 200,
+            "ticker": "NVDA"
+          },
+          {
+            "currentPrice": 216.47000122070312,
+            "detail": "216.47 now · prediction above 223.58 by 2026-11-13",
+            "direction": "above",
+            "dueDate": "2026-11-13",
+            "id": 95,
+            "progress": 24.76,
+            "snapshotPrice": 214.1300048828125,
+            "status": "confirming",
+            "targetLevel": 223.58,
+            "ticker": "NVDA"
+          },
+          {
+            "currentPrice": 694.25,
+            "detail": "694.25 now · prediction below 691.88 by 2026-11-06",
+            "direction": "below",
+            "dueDate": "2026-11-06",
+            "id": 96,
+            "progress": 86.42,
+            "snapshotPrice": 709.3300170898438,
+            "status": "confirming",
+            "targetLevel": 691.88,
+            "ticker": "META"
+          },
+          {
+            "currentPrice": 717.6300048828125,
+            "detail": "717.63 now · prediction below 690 by 2026-11-13",
+            "direction": "below",
+            "dueDate": "2026-11-13",
+            "id": 97,
+            "progress": 27.29,
+            "snapshotPrice": 728,
+            "status": "confirming",
+            "targetLevel": 690,
+            "ticker": "QQQ"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "scores 90 and 100 both invalidated within two weeks — either the regime rotated or the factor weights misprice credit-driven selloffs",
+            "from": "NVDA/MU max-conviction long failures",
+            "id": 151,
+            "to": "factor-agreement credibility on AI momentum"
+          },
+          {
+            "because": "reported bank/private-credit stress reframes AI capex as credit risk; SINGLE-SOURCE unconfirmed",
+            "from": "AI financing anxiety (CoreWeave debt stress)",
+            "id": 152,
+            "to": "hyperscaler multiple compression"
+          },
+          {
+            "because": "sector momentum feeds single-name breakdowns; the 8-session streak claim itself is SINGLE-SOURCE unconfirmed",
+            "from": "semiconductor losing streak",
+            "id": 153,
+            "to": "MU/NVDA follow-through selling"
+          }
+        ],
+        "snapshots": {
+          "META": 709.3300170898438,
+          "MU": 878.8400268554688,
+          "NVDA": 214.1300048828125,
+          "QQQ": 728
+        },
+        "statement": "[Muse theory][confidence: low] Measured AI-momentum unwind into Friday's close: the terminal's two highest-conviction tech longs — NVDA (score 90, MISSED 10-15, -1.96R) and MU (score 100, MISSED 10-09) — invalidated while CL=F long closed HIT (10-17, +1.59R), SI=F shorts closed HIT twice (10-15), and the IWM short closed HIT (10-17, +1.92R). Index read model is now net short: SPY -42, QQQ -24, IWM -95, NVDA -38; only AAPL (+78), META (+42), EMR (+51) still long-aligned. Friday closes confirm the damage: NVDA 214.13 (-1.4% day), MU 878.84 (-5.6% day), META 709.33 (-3.7% day, 2.5% above its Oct-5 long invalidation), QQQ 709.80 (-2.5%). Macro overlay — CPI 3.7%, 10Y ~5.09%, Brent ~$110, CoreWeave debt stress — is SINGLE-SOURCE unconfirmed context, not load-bearing evidence.",
+        "status": "challenged",
+        "updatedAt": "2026-10-17T15:54:28.012Z"
+      },
+      {
+        "createdAt": "2026-10-16T16:02:01.585Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T16:02:37.300Z",
+            "id": 164,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "SemiAnalysis",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Caveats: ASML has announced nothing — case rests on patent filings and press reports; Besi remains the only supplier with D2W tools in volume production; ASML must still solve feed-forward metrology and die-to-wafer contact",
+            "url": "https://newsletter.semianalysis.com/p/asml-is-building-a-hybrid-bonding"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T16:02:37.189Z",
+            "id": 163,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "SemiAnalysis",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "ASML Is Building a Hybrid Bonding Tool! — 27 D2W patent families, The Elec architecture report, track-based bonder design; bad news for Besi, HBM D2W slips to 2029+",
+            "url": "https://newsletter.semianalysis.com/p/asml-is-building-a-hybrid-bonding"
+          }
+        ],
+        "horizon": "short",
+        "id": 40,
+        "linkedTickers": [
+          "BESIY",
+          "ASML"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 175.3699951171875,
+            "detail": "175.37 now · prediction below 158.39 by 2026-11-14",
+            "direction": "below",
+            "dueDate": "2026-11-14",
+            "id": 92,
+            "progress": 0.76,
+            "snapshotPrice": 175.5,
+            "status": "confirming",
+            "targetLevel": 158.39,
+            "ticker": "BESIY"
+          },
+          {
+            "currentPrice": 175.3699951171875,
+            "detail": "175.37 now · prediction below 202.72 by 2026-11-14",
+            "direction": "below",
+            "dueDate": "2026-11-14",
+            "id": 93,
+            "progress": 100,
+            "snapshotPrice": 175.5,
+            "status": "confirming",
+            "targetLevel": 202.72,
+            "ticker": "BESIY"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "ASML's track-based D2W bonder targets the logic advanced-packaging socket where Besi is the only volume-qualified supplier today, concentrated at TSMC and Intel",
+            "from": "ASML",
+            "id": 148,
+            "to": "BESIY"
+          },
+          {
+            "because": "bonder hands die-position data to the scanner, so ASML sells bonder+scanner as a pair and tightens the TSMC/Intel co-dependency (inference: expands ASML's packaging TAM)",
+            "from": "ASML",
+            "id": 149,
+            "to": "TSM"
+          },
+          {
+            "because": "D2W HBM adoption slipping to 2029+ removes a priced-in packaging-capex driver for memory equipment; DRAM packaging mix stays conventional (SemiAnalysis view, single-source)",
+            "from": "HBM hybrid-bonding slip",
+            "id": 150,
+            "to": "MU"
+          }
+        ],
+        "snapshots": {
+          "ASML": 1657.43994140625,
+          "BESIY": 175.5
+        },
+        "statement": "[Muse theory] ASML is building a die-to-wafer hybrid-bonding tool (track-based D2W design per patent filings + press reports), breaking Besi's advanced-packaging moat: Besi's logic hybrid-bonding business is concentrated at TSMC and Intel, ASML's two-decade partners, and Besi's HBM growth leg slips as D2W HBM adoption pushes to 2029+. Besi derates while ASML absorbs the displaced packaging TAM. Tool-design specifics are single-source (SemiAnalysis); patents are public record; ASML has announced nothing.",
+        "status": "confirming",
+        "updatedAt": "2026-10-16T16:02:01.594Z"
+      },
+      {
+        "createdAt": "2026-10-16T15:57:43.329Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T15:58:39.967Z",
+            "id": 160,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "CoinEdition",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Warsh's IMF remarks left uncertainty; October hike odds fell to 14.9% from 27.7% — near-term Fed dovishness limits bank downside",
+            "url": "https://coinedition.com/kevin-warshs-imf-remarks-leave-fed-rate-hike-uncertainty-will-bitcoin-and-gold-fall/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T15:58:39.615Z",
+            "id": 159,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "ActionForex",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Dollar slide vs Treasury yields: 10Y ~5.11%, December hike still the market's focus even after Warsh refused to revive October bets",
+            "url": "https://www.actionforex.com/action-insight/market-overview/657759-dollar-extends-slide-as-fed-warsh-refuses-to-revive-october-hike-bets/"
+          }
+        ],
+        "horizon": "short",
+        "id": 39,
+        "linkedTickers": [
+          "WFC",
+          "BAC",
+          "MS",
+          "BNY"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 82.19999694824219,
+            "detail": "82.2 now · prediction below 74.73 by 2026-11-13",
+            "direction": "below",
+            "dueDate": "2026-11-13",
+            "id": 91,
+            "progress": -21.07,
+            "snapshotPrice": 80.9000015258789,
+            "status": "challenged",
+            "targetLevel": 74.73,
+            "ticker": "WFC"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "Sept CPI 3.7% + PPI 6.3% keep hike risk alive into December (one source ~91% Dec odds, SINGLE SOURCE) while 10Y holds ~5.1%",
+            "from": "Persistent rate-shock repricing",
+            "id": 146,
+            "to": "Bank rate/fee outlook pressure (BAC/MS/BNY/WFC -100)"
+          },
+          {
+            "because": "AI infrastructure debt scrutiny reprices private credit/leveraged exposure",
+            "from": "AI-credit-debt fear",
+            "id": 147,
+            "to": "Bank credit-outlook derating even with high NIMs"
+          }
+        ],
+        "snapshots": {
+          "BAC": 51.38999938964844,
+          "BNY": 137.63999938964844,
+          "MS": 181.5099945068359,
+          "WFC": 80.9000015258789
+        },
+        "statement": "[Muse theory] Money-center banks bearish on rate-shock + AI-credit fear: BAC/MS/BNY/WFC all at -100 retained factor agreement, 15d -8% area, while hot CPI (3.7%) and PPI (6.3% YoY) keep hike risk alive into December and 10Y holds ~5.1%. WFC mechanical: short invalidation above 85.01, target1 74.73 verified unbreached. Invalidation: WFC closes above 85.01 or 10Y closes below 4.75%. Challenging evidence: WFC bounced +2.49% on 10-15 on 22.9M volume; October hike odds collapsed to ~14% after Warsh stayed mum at the IMF. Conviction descriptive; scores are uncalibrated agreement, not probabilities.",
+        "status": "challenged",
+        "updatedAt": "2026-10-16T15:57:43.329Z"
+      },
+      {
+        "createdAt": "2026-10-16T15:57:11.053Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T15:58:43.619Z",
+            "id": 162,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "ZeroHedge",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Goldman Asia desk called the chip bounce 'soft'; Thursday's Treasury rally (+12.7bp) unwound Friday as stocks recovered — rotation may be tactical, not structural",
+            "url": "https://www.zerohedge.com/markets/futures-rise-warsh-stays-mum-tesla-flying-car-interrupts-ai-liquidation"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T15:58:41.007Z",
+            "id": 161,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "ZeroHedge",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Futures Rise As Warsh Stays Mum, Tesla 'Flying Car' Interrupts AI Liquidation — week-long AI/momentum unwind, chip semis weak, staples rotation",
+            "url": "https://www.zerohedge.com/markets/futures-rise-warsh-stays-mum-tesla-flying-car-interrupts-ai-liquidation"
+          }
+        ],
+        "horizon": "short",
+        "id": 38,
+        "linkedTickers": [
+          "PG",
+          "COST",
+          "WMT",
+          "QQQ"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 159.32000732421875,
+            "detail": "159.32 now · prediction above 164.04 by 2026-11-13",
+            "direction": "above",
+            "dueDate": "2026-11-13",
+            "id": 89,
+            "progress": 37.15,
+            "snapshotPrice": 156.52999877929688,
+            "status": "confirming",
+            "targetLevel": 164.04,
+            "ticker": "PG"
+          },
+          {
+            "currentPrice": 717.6300048828125,
+            "detail": "717.63 now · prediction below 698.69 by 2026-11-13",
+            "direction": "below",
+            "dueDate": "2026-11-13",
+            "id": 90,
+            "progress": 35.38,
+            "snapshotPrice": 728,
+            "status": "confirming",
+            "targetLevel": 698.69,
+            "ticker": "QQQ"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "Sept PPI +1.3% MoM / 6.3% YoY (biggest since Mar 2022) and CPI 3.7% repriced hike odds; AI-capex debt fears hit AI leaders hardest",
+            "from": "Hot inflation + AI-credit-debt fear",
+            "id": 143,
+            "to": "AI/momentum basket liquidation (QQQ -4.17% 7d)"
+          },
+          {
+            "because": "Capital rotates to staples and broad large-caps while avoiding rate-sensitive growth",
+            "from": "AI unwind",
+            "id": 144,
+            "to": "Defensive bid: Staples +100 agreement, PG +95, DIA +20 long"
+          },
+          {
+            "because": "Flight-to-safety crushed then rebounded; 10Y at ~5.1% keeps discount-rate pressure on long-duration growth",
+            "from": "Rate shock rally then unwind",
+            "id": 145,
+            "to": "Rotation persists while 10Y holds above 5%"
+          }
+        ],
+        "snapshots": {
+          "COST": 978.010009765625,
+          "PG": 156.52999877929688,
+          "QQQ": 728,
+          "WMT": 117.87000274658205
+        },
+        "statement": "[Muse theory] AI unwind rotates into defensives: hot September PPI (6.3% YoY) and AI-capex debt fears (CoreWeave bond pressure) triggered a week-long AI/momentum liquidation; capital moved into Consumer Staples (PG +95 agreement, +6.2% 15d; COST +8.5%; WMT +5.1%) and broad large-caps (DIA +20 long) while QQQ slid -4.17% in 7 sessions. 10Y near 5.1% sustains discount-rate drag on growth. Invalidation: QQQ closes above 747.54 (short mechanical invalidation) or PG closes below 151.52 (long mechanical invalidation). Conviction descriptive; scores are uncalibrated agreement, not probabilities. Caveat: Friday's chip bounce was labeled a soft bounce by Goldman's Asia desk; PG RSI 71.3 is near the 75 extreme.",
+        "status": "confirming",
+        "updatedAt": "2026-10-16T15:57:11.054Z"
+      },
+      {
+        "createdAt": "2026-10-16T14:11:31.025Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T13:52:36.603Z",
+            "id": 166,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Newisty + TokenPost + SEC (Big Updates 2026-10-17)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Oct 16: MSTR closed $136.83 (-9.56%) on 31.8M shares (1.44x normal), lowest close since Sept 17; below-$140-by-Nov-13 prediction ACHIEVED in one session. STRC -$1.81 to $97.72, STRK -3.5% to $71.24, ASST -6.1%. SEC: 848,250 BTC as of Oct 11 at $75,444 avg (~$69.1B, ~$5.1B unrealized). Capital-structure de-rating, not forced selling. Tripwire (close above $160) UNBREACHED.",
+            "url": "https://newisty.com/blog/strategy-stock-falls-96-after-msci-index-rules-threaten-removal"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T13:52:25.653Z",
+            "id": 165,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "equity terminal analyzeinstrument (Yahoo Finance chart)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Terminal analyzeinstrument fresh read 2026-10-17: MSTR factor agreement flipped to -24/100 SHORT (was +42/100 long Oct 15); $136.83 vs SMA20 $156.4, RSI 42.61; short mechanical invalidation 156.29 (2x Wilder ATR-14). Chart now agrees with the event thesis — the Oct 15 chart-vs-event tension resolved. Prior version note: theory created 2026-10-16, tripwire 'daily close above $160 = challenged', predictions below $140 by Nov 13 / below $133 by Dec 4, status confirming.",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSTR?period1=0&period2=1792238398&interval=1d&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:31.704Z",
+            "id": 152,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates 2026-10-16 — UNVERIFIED, publication time unconfirmed; barred from frozen scores",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[UNVERIFIED — needs publication-time confirmation] The Block: MSCI rules could exclude Strategy (MSTR) from indexes (2026-10-15).",
+            "url": "https://www.theblock.co/news/business/2026-10-15-msci-rules-could-exclude-strategy-mstr-from-indexes-418729"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:31.689Z",
+            "id": 151,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates 2026-10-16 — UNVERIFIED, publication time unconfirmed; barred from frozen scores",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[UNVERIFIED — needs publication-time confirmation] Cointelegraph: MSCI adopts index exclusion rules that could oust Strategy.",
+            "url": "https://cointelegraph.com/news/msci-adopts-index-exclusion-rules-that-could-oust-strategy"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:31.673Z",
+            "id": 150,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates 2026-10-16 — UNVERIFIED, publication time unconfirmed; barred from frozen scores",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[UNVERIFIED — needs publication-time confirmation] FXStreet: MSCI adopts index exclusion rules that could oust Strategy.",
+            "url": "https://www.fxstreet.com/cryptocurrencies/news/msci-adopts-index-exclusion-rules-that-could-oust-strategy-202610160506"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:31.654Z",
+            "id": 149,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates 2026-10-16 (Logan/reviewer)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[record] Tripwire: daily close above $160 = theory challenged (SMA20 $157.26, Oct 15 close $151.29, recent high $153.58; currently UNBREACHED, ~$146 premarket 2026-10-16).",
+            "url": "https://curatednewslawl.grok.me"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:31.606Z",
+            "id": 148,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates 2026-10-16 (Logan/reviewer)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[record] Falsification conditions: (1) MSCI Nov 11 final list excludes Strategy (two-annual-period buffer leaves room); (2) MSTR reclaims $160 on volume before the list. Reviewer step 'check the actual MSCI rules' still PENDING verification as of 2026-10-16.",
+            "url": "https://curatednewslawl.grok.me"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:31.588Z",
+            "id": 147,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates 2026-10-16 (Logan/reviewer)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[record] Measured entry R:R 2.1:1 vs 5:1 gate — terminal checkentry verdict BAD on 2026-10-16. Event-window thesis, NOT an entry call. Failed assessment retained per reviewer.",
+            "url": "https://curatednewslawl.grok.me"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:31.556Z",
+            "id": 146,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates 2026-10-16 — UNVERIFIED, publication time unconfirmed; barred from frozen scores",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[UNVERIFIED — needs publication-time confirmation] Blockonomi: MSTR faces index uncertainty as MSCI changes entry rules (notes the two-annual-period buffer).",
+            "url": "https://blockonomi.com/mstr-stock-faces-index-uncertainty-as-msci-changes-entry-rules/"
+          }
+        ],
+        "horizon": "long",
+        "id": 37,
+        "linkedTickers": [
+          "MSTR"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 142.72000122070312,
+            "detail": "142.72 now · prediction below 140 by 2026-11-13",
+            "direction": "below",
+            "dueDate": "2026-11-13",
+            "id": 87,
+            "progress": 43.45,
+            "snapshotPrice": 144.80999755859375,
+            "status": "confirming",
+            "targetLevel": 140,
+            "ticker": "MSTR"
+          },
+          {
+            "currentPrice": 142.72000122070312,
+            "detail": "142.72 now · prediction below 133 by 2026-12-04",
+            "direction": "below",
+            "dueDate": "2026-12-04",
+            "id": 88,
+            "progress": 17.7,
+            "snapshotPrice": 144.80999755859375,
+            "status": "confirming",
+            "targetLevel": 133,
+            "ticker": "MSTR"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "Final removal list Nov 11 forces index funds to sell MSCI-linked holdings (~13M shares per Strategy) by Nov 30",
+            "from": "MSCI",
+            "id": 140,
+            "to": "MSTR"
+          },
+          {
+            "because": "Weaker equity demand threatens the at-the-market equity-raise flywheel funding further BTC purchases (848,250 BTC treasury)",
+            "from": "MSTR",
+            "id": 141,
+            "to": "BTC"
+          },
+          {
+            "because": "The screen sets the template for all treasury companies; watchlist names reprice on the same risk",
+            "from": "MSCI",
+            "id": 142,
+            "to": "Metaplanet/Upexi/SBET"
+          }
+        ],
+        "snapshots": {
+          "MSTR": 144.80999755859375
+        },
+        "statement": "[Muse theory] MSCI finalized 'non-operating company' index rules Oct 15 after US close: firms failing 4+ of 5 ratio screens can be removed from Global Investable Market Indexes; final list Nov 11, effective Nov 30. Strategy was previously named for deletion; JPM est. ~$2.8B passive selling on an EARLIER proposal (not these rules). MSTR closed Oct 15 at $151.29 (+5.62%) BEFORE the announcement; premarket Oct 16 ~$146 (-3.3%). Forced selling hits MSTR regardless of BTC price and weakens the equity-raise flywheel (treasury 848,250 BTC). Terminal mechanical read is long-aligned (+42, invalidation 132.98) -- this theory is the event counterweight. Caveat: terminal checkentry verdict on a short entry here is BAD (5:1 R:R gate failed). Sources: The Block, Cointelegraph, FXStreet, Blockonomi.",
+        "status": "confirming",
+        "updatedAt": "2026-10-16T14:11:31.025Z"
+      },
+      {
+        "createdAt": "2026-10-15T16:01:48.475Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-19T13:50:23.873Z",
+            "id": 199,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-19",
+            "publisher": null,
+            "source": "IC Bank blog / aistockwire / XTB morning wrap (multiple independent weekend briefs)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Median credit spreads across 8 AI borrowers rose 334bp to 413bp Oct 8-15 (CoreWeave median +86bp to 934bp); CRWV short factor agreement still -95 with RSI 29.5; BTC-miner cohort crashed 19-23% on the week with AI-pivot miners now correlating 0.59-0.77 with semis vs 0.29-0.33 with BTC (Binance Research) — the credit scare is spreading from neoclouds to infra-adjacent equities.",
+            "url": "https://www.ic.com/blog/monday-19th-october-2026-stock-futures-rebound-as-investors-reassess-ai-trade-risks/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-18T13:50:07.686Z",
+            "id": 191,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-17",
+            "publisher": null,
+            "source": "TipRanks citing Goldman Sachs",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Goldman: high-yield AI debt spreads widened +25bp Oct 13-14 to 360bp over Treasuries vs +2bp on non-AI debt — the sorting is lender-driven, not just equity-sentiment; contagion spread from chips to software Friday",
+            "url": "https://www.tipranks.com/news/the-week-that-was-the-week-ahead-macro-and-markets-october-18"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-18T13:50:07.616Z",
+            "id": 190,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-18",
+            "publisher": null,
+            "source": "Seeking Alpha + StockMoguls (two independent)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "CoreWeave 5Y CDS briefly exceeded 1,140 bps; 2031 bonds ~15.8% yield vs 9.625% coupon — stock -12% Friday to $61.39, -25% week, tagged 52-week-low zone ($59.90 intraday); unsecured bonds below 80c",
+            "url": "https://seekingalpha.com/article/4955017-coreweave-can-survive-but-shareholders-could-still-lose"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-17T13:52:36.704Z",
+            "id": 167,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "startupfortune (citing Bloomberg) + AP via GainLynx (Big Updates 2026-10-17)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Oct 16: CoreWeave CDS ~881 bps (vs ~547 end-June); 9.625% 2032 notes below 80c yielding >15% (vs ~13.4% start-Oct), corroborated by two independent outlets; ~$52B debt; Q2 interest expense ~$640M exceeded adjusted operating income. Shares -12% Friday after +6% Thursday (Huang 'no rescue needed' pop faded). Nasdaq worst week since June (-4.5%); SOX -3.8% (7-8-session losing streak). Contagion spread chips -> software Friday.",
+            "url": "https://startupfortune.com/goolsbee-says-the-ai-building-boom-is-now-pushing-inflation-into-unrelated-industries/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-16T14:37:38.726Z",
+            "id": 153,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-16",
+            "publisher": null,
+            "source": "Big Updates review 2026-10-16 (Logan/reviewer) — hub designation",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "[record] HUB DESIGNATION 2026-10-16: 'Neocloud credit sorting' is the hub theme for AI-credit stress. Member theories: #34 (MU/META AI-unwind credit repricing), #31 (SOXX financing-risk repricing), #29 (SNDK memory binding constraint), #23 (ORCL capex financing stress), #20 (NVDA credit stress vs elevated multiples). One shared theme; asset-specific differences live on the member theories.",
+            "url": "https://curatednewslawl.grok.me"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T16:02:15.001Z",
+            "id": 145,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "terminal walk-forward diagnostic",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "CRWV short signals: 29.17% hit rate, avg -17.12% directional return over 24 observations -- bearish timing historically poor",
+            "url": "https://curatednewslawl.grok.me"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T16:02:14.961Z",
+            "id": 144,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "terminal analyzeinstrument",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Smart-money proxies constructive (accumulation proxy positive, OBV accumulating) -- contradicts bearish chart call; synthesis verdict contested",
+            "url": "https://curatednewslawl.grok.me"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T16:02:07.475Z",
+            "id": 143,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "Cardano Capital",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Can CoreWeave And Its Neocloud Peers Take Down the AI Trade? Who Is Exposed and Who Is Insulated",
+            "url": "https://cardanocapital.substack.com/p/can-coreweave-and-its-neocloud-peers"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T16:02:07.448Z",
+            "id": 142,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15",
+            "publisher": null,
+            "source": "Noahpinion",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "AI vs. the railroads",
+            "url": "https://www.noahpinion.blog/p/ai-vs-the-railroads"
+          }
+        ],
+        "horizon": "short",
+        "id": 36,
+        "linkedTickers": [
+          "CRWV"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction below 49.43 by 2026-11-13",
+            "direction": "below",
+            "dueDate": "2026-11-13",
+            "id": 85,
+            "progress": 13.34,
+            "snapshotPrice": 64.08499908447266,
+            "status": "confirming",
+            "targetLevel": 49.43,
+            "ticker": "CRWV"
+          },
+          {
+            "currentPrice": 62.130001068115234,
+            "detail": "62.13 now · prediction above 76.68 by 2026-11-13",
+            "direction": "above",
+            "dueDate": "2026-11-13",
+            "id": 86,
+            "progress": -15.52,
+            "snapshotPrice": 64.08499908447266,
+            "status": "challenged",
+            "targetLevel": 76.68,
+            "ticker": "CRWV"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "same debt-funded GPU-fleet model reprices when unsecured neocloud paper prints 15%",
+            "from": "CoreWeave 2032 bonds below 80c at ~15% yield",
+            "id": 137,
+            "to": "Neocloud peers Nebius, IREN, Hut 8, TeraWulf, Cipher"
+          },
+          {
+            "because": "~$0.5T of AI debt priced in 2026; Oracle long bonds touched 8% and both names' CDS hit records Oct 8",
+            "from": "Neocloud funding stress",
+            "id": 138,
+            "to": "Oracle and Broadcom credit"
+          },
+          {
+            "because": "hike odds roughly doubled post-CPI; CoreWeave capex guide $31-35B against $38.6B debt and $640M quarterly net interest",
+            "from": "Hot Sept CPI 3.7% into Oct 28 Fed decision",
+            "id": 139,
+            "to": "Neocloud refinancing cost"
+          }
+        ],
+        "snapshots": {
+          "CRWV": 64.08499908447266
+        },
+        "statement": "[Muse theory] Neocloud credit sorting: CoreWeave's unsecured 2032 bonds repriced from a 9.625% June coupon to ~15% yield (below 80c); Oracle long bonds touched 8%; Oracle/Broadcom CDS at records. The AI capex financing squeeze hits leveraged borrowers first. The call is a slow sorting -- self-funders keep building, levered names get squeezed/consolidated/rescued -- not a single crash. CRWV is the canary.",
+        "status": "challenged",
+        "updatedAt": "2026-10-15T16:01:48.475Z"
+      },
+      {
+        "createdAt": "2026-10-15T15:57:07.410Z",
+        "evidence": [
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T15:58:41.459Z",
+            "id": 141,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15T15:38:36.287Z",
+            "publisher": null,
+            "source": "share-talk.com (SP Angel)",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Stronger US inflation lifted rate-rise bets, yet gold held steady and oil rose on geopolitical incidents — haven bid real, breakout not yet",
+            "url": "https://www.share-talk.com/sp-angel-todays-market-view-thursday-15th-october-2026/"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T15:58:37.069Z",
+            "id": 140,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15T15:38:36.287Z",
+            "publisher": null,
+            "source": "zerohedge.com",
+            "stance": "challenging",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "AI-unwind shifted the hot-CPI move into haven buying of Treasuries and gold — the live threat to the shorts",
+            "url": "https://www.zerohedge.com/markets/futures-slide-ai-unwind-goes-global-kospi-crashes-bear-market-treasuries-soar"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T15:58:32.820Z",
+            "id": 139,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15T15:54:31.020Z",
+            "publisher": null,
+            "source": "Yahoo Finance (via terminal)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "GC=F 4176.20, below SMA20/50/200, -4.87% over 15 sessions — the short's tape is working",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?period1=0&period2=1792061183&interval=1d&events=div%2Csplits"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T15:58:27.804Z",
+            "id": 138,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15T15:45:03.721Z",
+            "publisher": null,
+            "source": "Polymarket (via terminal crowd read)",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "October Fed-hike crowd pricing repricing higher: 'no change' down to 72.5% from 74.5%, 25bp hike up to 27.5%",
+            "url": "https://polymarket.com/market/will-the-fed-increase-interest-rates-by-25-bps-after-the-october-2026-meeting-20260617190324032"
+          },
+          {
+            "asOf": null,
+            "createdAt": "2026-10-15T15:58:22.298Z",
+            "id": 137,
+            "kind": "article",
+            "overallLabel": null,
+            "overallScore": null,
+            "publishedAt": "2026-10-15T15:38:36.287Z",
+            "publisher": null,
+            "source": "graincentral.com",
+            "stance": "confirming",
+            "tickerLabel": null,
+            "tickerScore": null,
+            "title": "Hot US CPI has turned macro risk more hawkish, supporting the US dollar and yields — real-yield cap on gold",
+            "url": "https://www.graincentral.com/markets/daily-market-wire-15-october-2026/"
+          }
+        ],
+        "horizon": "short",
+        "id": 35,
+        "linkedTickers": [
+          "GC=F"
+        ],
+        "predictions": [
+          {
+            "currentPrice": 4133.60009765625,
+            "detail": "4133.6 now · prediction above 4279.59 by 2026-11-12",
+            "direction": "above",
+            "dueDate": "2026-11-12",
+            "id": 79,
+            "progress": -41.2,
+            "snapshotPrice": 4176.2001953125,
+            "status": "challenged",
+            "targetLevel": 4279.59,
+            "ticker": "GC=F"
+          },
+          {
+            "currentPrice": 4133.60009765625,
+            "detail": "4133.6 now · prediction below 3850.37 by 2026-11-12",
+            "direction": "below",
+            "dueDate": "2026-11-12",
+            "id": 80,
+            "progress": 13.07,
+            "snapshotPrice": 4176.2001953125,
+            "status": "confirming",
+            "targetLevel": 3850.37,
+            "ticker": "GC=F"
+          }
+        ],
+        "ripples": [
+          {
+            "because": "Hotter-than-expected US CPI repriced October Fed hike odds higher; real yields punish zero-yield gold.",
+            "from": "Hot CPI 2026-10-15",
+            "id": 128,
+            "to": "real-yield cap on gold"
+          },
+          {
+            "because": "Global AI unwind (KOSPI bear market) rotates fear money into Treasuries and gold per zerohedge.",
+            "from": "AI-unwind risk-off",
+            "id": 129,
+            "to": "haven bid on gold"
+          },
+          {
+            "because": "Gold 'steady' per SP Angel while copper fell a third day: defensive bid is real but not yet a breakout.",
+            "from": "haven bid on gold",
+            "id": 130,
+            "to": "shorts under tension"
+          },
+          {
+            "because": "A close above the mechanical invalidation kills the terminal's own bearish read.",
+            "from": "GC=F above 4279.59",
+            "id": 131,
+            "to": "short thesis dead"
+          }
+        ],
+        "snapshots": {
+          "GC=F": 4176.2001953125
+        },
+        "statement": "[Muse theory] Gold is a genuine contested fork — no directional pick. Our GC=F shorts (id7/31, +0.54%, factor agreement -73, price 4176.20 under all three SMAs, -4.9% over 15 sessions) are caught between two live macro forces. Confirming the short: hot CPI repriced the Fed higher (Polymarket Oct-hike odds rising, 'no change' now 72.5% from 74.5%), real yields up, gold capped by rate math. Challenging the short: the same AI-unwind ripping the tape has shifted flow into haven gold — zerohedge: 'the hot-CPI move into haven buying of Treasuries and gold'; SP Angel: gold 'steady', oil up on geopolitical incidents, copper lower a third day. It stays a short only while price holds below 4279.59; a close above kills it. The haven bid is the live threat — if gold starts rising WITH yields, the cap is gone.",
+        "status": "challenged",
+        "updatedAt": "2026-10-15T15:57:07.410Z"
+      }
+    ]
+  },
+  "ok": true
+}

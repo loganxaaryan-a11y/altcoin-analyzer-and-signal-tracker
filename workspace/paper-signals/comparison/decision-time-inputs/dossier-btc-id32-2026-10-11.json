@@ -1,0 +1,4643 @@
+{
+  "capture_correction_note": "CORRECTION 2026-10-15 (capture correction): this capture's evidence_class was defaulted to FRESH by the 2026-10-14 automatic run, which conflated capture time with decision time. The frozen dossier-cohort-v1 eligibility cutoff is 2026-10-14T18:35:00+00:00 on the DECISION instant; this issuance's decision_at (2026-10-11T09:56:46.741+00:00) predates the cutoff, so it is historical reproduction, not fresh prospective evidence. Label corrected FRESH -> REPLAY/REPRODUCTION (label correction only; the persisted decision-time inputs and arm results were not touched or re-scored). captured_at added, distinct from decision_at.",
+  "captured_at": "2026-10-15T00:58:34.931+00:00",
+  "decision_at": "2026-10-11T09:56:46.741+00:00",
+  "decision_at_ms": 1791712606741,
+  "entry_context": {
+    "atr14": 2125.060764619938,
+    "atr_bar_count": 720,
+    "decision_reference": {
+      "entry": 82951,
+      "stop": 80294.67404422507,
+      "target": 86935.48893366239,
+      "target2": 89591.8148894373
+    },
+    "entry_evidence": {
+      "price": 82951,
+      "priceConvention": "usd-spot-reference",
+      "provider": "CoinGecko markets",
+      "receivedAt": "2026-10-11T09:56:48.038Z",
+      "requestedAfterDecisionAt": "2026-10-11T09:56:46.741Z",
+      "rule": "first-post-decision-provider-quote"
+    },
+    "entry_price": 82951.0,
+    "funding": -5.67592e-05,
+    "levels_recorded": {
+      "entry": 82951.0,
+      "invalidation": 80294.67404422507,
+      "target1": 86935.48893366239,
+      "target2": 89591.8148894373
+    },
+    "oi_change": 0.07569945724583693,
+    "oi_usd": 2490447158.417141,
+    "risk_method": "atr14_1_25x",
+    "risk_multiplier": 1.25,
+    "short_regime_check": null,
+    "signal_day_candle": {
+      "close": 82918,
+      "day": "2026-10-10",
+      "high": 83094,
+      "low": 82483,
+      "open": 82564,
+      "source": "CoinGecko OHLC \u2192 historical_daily_bars grading series"
+    },
+    "validation_status": "partially_testable_prospective"
+  },
+  "evidence_class": "REPLAY/REPRODUCTION",
+  "factors": [
+    {
+      "asOf": "2026-10-11T09:55:57.000Z",
+      "contribution": 2.5,
+      "label": "Trend cluster",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "50D: above \u00b7 200D: above \u00b7 90D: 33.2%",
+      "score": 1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "50D: above \u00b7 200D: above \u00b7 90D: 33.2%",
+      "weight": 2.5
+    },
+    {
+      "asOf": "2026-10-11T09:55:57.000Z",
+      "contribution": 0,
+      "label": "Momentum",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "RSI 51.7",
+      "score": 0,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "RSI 51.7",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T09:55:57.000Z",
+      "contribution": -1.5,
+      "label": "MACD",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "negative cross-state",
+      "score": -1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "negative cross-state",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T09:56:40.367Z",
+      "contribution": 1.75,
+      "label": "Perp funding crowding",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "venue Hyperliquid \u00b7 8h-normalized -0.0057% \u00b7 shorts paying longs",
+      "score": 1,
+      "source": "Hyperliquid",
+      "status": "observed",
+      "value": "venue Hyperliquid \u00b7 8h-normalized -0.0057% \u00b7 shorts paying longs",
+      "weight": 1.75
+    },
+    {
+      "asOf": "2026-10-11T09:56:40.367Z",
+      "contribution": 0,
+      "label": "Open interest",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "OKX $2490447158.42 \u00b7 24H 0.1% \u00b7 Hyperliquid cross-check $3163923704.11",
+      "score": 0,
+      "source": "OKX OI + OKX 24H baseline",
+      "status": "observed",
+      "value": "OKX $2490447158.42 \u00b7 24H 0.1% \u00b7 Hyperliquid cross-check $3163923704.11",
+      "weight": 1
+    },
+    {
+      "asOf": "2026-10-11T09:56:31.070Z",
+      "contribution": -1,
+      "label": "Binance futures positioning",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "taker buy/sell 0.932 \u00b7 global long/short NO_DATA \u00b7 OI NO_DATA \u00b7 liquidations NO_DATA",
+      "score": -1,
+      "source": "Binance Futures",
+      "status": "observed",
+      "value": "taker buy/sell 0.932 \u00b7 global long/short NO_DATA \u00b7 OI NO_DATA \u00b7 liquidations NO_DATA",
+      "weight": 1
+    },
+    {
+      "asOf": null,
+      "contribution": 0,
+      "label": "Cross-venue taker imbalance",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "score": 0,
+      "source": "Binance aggTrades + OKX spot trades",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "weight": 1.25
+    },
+    {
+      "asOf": "2026-10-11T09:56:40.370Z",
+      "contribution": 2,
+      "label": "TVL trend",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "TVL $4429645445.97 \u00b7 7D -2.0% \u00b7 30D 6.5% (chain TVL)",
+      "score": 1,
+      "source": "DeFiLlama",
+      "status": "observed",
+      "value": "TVL $4429645445.97 \u00b7 7D -2.0% \u00b7 30D 6.5% (chain TVL)",
+      "weight": 2
+    },
+    {
+      "asOf": "2026-10-11T09:56:40.370Z",
+      "contribution": 0,
+      "label": "Revenue linkage",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 no verified 30-day fee/revenue series for this asset \u00b7 buybacks: NO_DATA \u2014 no verified buyback feed \u00b7 issuance overhang is scored separately in Supply overhang",
+      "score": 0,
+      "source": "DeFiLlama 30D fees + revenue",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 no verified 30-day fee/revenue series for this asset \u00b7 buybacks: NO_DATA \u2014 no verified buyback feed \u00b7 issuance overhang is scored separately in Supply overhang",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T00:00:00.000Z",
+      "contribution": 1.5,
+      "label": "Developer velocity",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "814 commits / 12w \u00b7 12 of 12 weeks active",
+      "score": 1,
+      "source": "GitHub commit activity",
+      "status": "observed",
+      "value": "814 commits / 12w \u00b7 12 of 12 weeks active",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T09:55:57.000Z",
+      "contribution": 0,
+      "label": "Supply-overhang penalty (negative-only)",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "FDV/mcap 1.00\u00d7 \u2014 limited future supply; no penalty and no positive credit",
+      "score": 0,
+      "source": "CoinGecko",
+      "status": "observed",
+      "value": "FDV/mcap 1.00\u00d7 \u2014 limited future supply; no penalty and no positive credit",
+      "weight": 1.5
+    }
+  ],
+  "freshness_classification": {
+    "cutoff_utc": "2026-10-14T18:35:00+00:00",
+    "note": "decision_at 2026-10-11T09:56:46.741+00:00 before frozen cutoff 2026-10-14T18:35:00+00:00: historical reproduction, not fresh prospective evidence (capture time does not qualify)"
+  },
+  "issuance_key": "bitcoin|spot-reference|crypto-dossier-factor-agreement|2.0.0-measurement-contract|sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220|1791676800000",
+  "issuance_path": "getCryptoAnalysis \u2192 issueGeneratedSignalCandidate",
+  "issued_at": "2026-10-11T09:56:46.741+00:00",
+  "missing_inputs": [
+    {
+      "label": "Cross-venue taker imbalance",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Revenue linkage",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    }
+  ],
+  "model": {
+    "collector": "comparison/dossier_model_collector.py::capture_dossier_evaluation (single automatic write path)",
+    "cost_scenario": "modeled-roundtrip-18bps-funding-unverified-v1",
+    "entry_convention": "first-post-decision-provider-quote",
+    "evaluator_version": "crypto-evaluation-v4-cohort-contract",
+    "parameter_hash": "sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220",
+    "price_convention": "usd-spot-reference",
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+    "strategy_id": "crypto-dossier-factor-agreement",
+    "strategy_version": "2.0.0-measurement-contract",
+    "wiring": "comparison/intended_models.py (score_dossier_factors <- scoreDossierFactors, signal-methodology.ts:47)"
+  },
+  "opportunity_id": "dossier-btc-id32-2026-10-11",
+  "persisted_at": "2026-10-15T00:58:34.931+00:00",
+  "provenance": {
+    "extracted_at": "2026-10-15T00:58:34.920+00:00",
+    "signal_id": 32,
+    "signal_table": "generated_signals",
+    "snapshot_id": 1802813044136039,
+    "snapshot_table": "signal_input_snapshots",
+    "source_db": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/app.db",
+    "source_db_role": "local workspace copy; read-only open (mode=ro); not a dump of the deployed runtime"
+  },
+  "provider_metadata": {
+    "buildId": "starting-build:c3217be9-7f13-4c20-ae29-01600474bbab|source:crypto-phase1-final-signoff-2026-10-09",
+    "providers": [
+      "CoinGeckoOHLC",
+      "historicalDailyBars",
+      "Hyperliquid",
+      "KrakenSpotOHLC",
+      "OKX"
+    ],
+    "sourceAsOf": "2026-10-11T09:55:57.000Z"
+  },
+  "raw_decision_inputs": {
+    "atrBars": [
+      {
+        "availableAt": 1729555200000,
+        "close": 67385.1,
+        "high": 69447.8,
+        "low": 66838.6
+      },
+      {
+        "availableAt": 1729641600000,
+        "close": 67387.6,
+        "high": 67750,
+        "low": 66564.4
+      },
+      {
+        "availableAt": 1729728000000,
+        "close": 66633.4,
+        "high": 67407.5,
+        "low": 65199
+      },
+      {
+        "availableAt": 1729814400000,
+        "close": 68170.1,
+        "high": 68794.2,
+        "low": 66452.2
+      },
+      {
+        "availableAt": 1729900800000,
+        "close": 66606.8,
+        "high": 68699,
+        "low": 65531
+      },
+      {
+        "availableAt": 1729987200000,
+        "close": 67026,
+        "high": 67348.4,
+        "low": 66364
+      },
+      {
+        "availableAt": 1730073600000,
+        "close": 67941.2,
+        "high": 68196,
+        "low": 66850.4
+      },
+      {
+        "availableAt": 1730160000000,
+        "close": 69911.9,
+        "high": 70200,
+        "low": 67535
+      },
+      {
+        "availableAt": 1730246400000,
+        "close": 72661,
+        "high": 73574.9,
+        "low": 69720.1
+      },
+      {
+        "availableAt": 1730332800000,
+        "close": 72331.1,
+        "high": 72887.9,
+        "low": 71400
+      },
+      {
+        "availableAt": 1730419200000,
+        "close": 70250.1,
+        "high": 72662,
+        "low": 69602
+      },
+      {
+        "availableAt": 1730505600000,
+        "close": 69490.1,
+        "high": 71576,
+        "low": 68810
+      },
+      {
+        "availableAt": 1730592000000,
+        "close": 69300,
+        "high": 69858.8,
+        "low": 69060
+      },
+      {
+        "availableAt": 1730678400000,
+        "close": 68748.7,
+        "high": 69363.3,
+        "low": 67483.7
+      },
+      {
+        "availableAt": 1730764800000,
+        "close": 67783.3,
+        "high": 69430.6,
+        "low": 66836
+      },
+      {
+        "availableAt": 1730851200000,
+        "close": 69382.7,
+        "high": 70482,
+        "low": 67481.4
+      },
+      {
+        "availableAt": 1730937600000,
+        "close": 75642,
+        "high": 76457.6,
+        "low": 69341
+      },
+      {
+        "availableAt": 1731024000000,
+        "close": 75949.2,
+        "high": 76937.5,
+        "low": 74500
+      },
+      {
+        "availableAt": 1731110400000,
+        "close": 76550.4,
+        "high": 77242,
+        "low": 75713
+      },
+      {
+        "availableAt": 1731196800000,
+        "close": 76728.3,
+        "high": 76911,
+        "low": 75785.2
+      },
+      {
+        "availableAt": 1731283200000,
+        "close": 80423.3,
+        "high": 81480.7,
+        "low": 76569.9
+      },
+      {
+        "availableAt": 1731369600000,
+        "close": 88737.6,
+        "high": 89600,
+        "low": 80299.9
+      },
+      {
+        "availableAt": 1731456000000,
+        "close": 88087.3,
+        "high": 89920,
+        "low": 85136
+      },
+      {
+        "availableAt": 1731542400000,
+        "close": 90490.9,
+        "high": 93435,
+        "low": 86258
+      },
+      {
+        "availableAt": 1731628800000,
+        "close": 87313.2,
+        "high": 91780,
+        "low": 86621.9
+      },
+      {
+        "availableAt": 1731715200000,
+        "close": 91062,
+        "high": 91850,
+        "low": 87135
+      },
+      {
+        "availableAt": 1731801600000,
+        "close": 90555.1,
+        "high": 91750,
+        "low": 90149
+      },
+      {
+        "availableAt": 1731888000000,
+        "close": 89850,
+        "high": 91399,
+        "low": 88728.6
+      },
+      {
+        "availableAt": 1731974400000,
+        "close": 90507.9,
+        "high": 92607.2,
+        "low": 89400
+      },
+      {
+        "availableAt": 1732060800000,
+        "close": 92376.1,
+        "high": 94000,
+        "low": 90424.6
+      },
+      {
+        "availableAt": 1732147200000,
+        "close": 94364.5,
+        "high": 94925,
+        "low": 91636.1
+      },
+      {
+        "availableAt": 1732233600000,
+        "close": 98496,
+        "high": 98999,
+        "low": 94135
+      },
+      {
+        "availableAt": 1732320000000,
+        "close": 99000,
+        "high": 99650,
+        "low": 97218.3
+      },
+      {
+        "availableAt": 1732406400000,
+        "close": 97759.1,
+        "high": 99000,
+        "low": 97219.2
+      },
+      {
+        "availableAt": 1732492800000,
+        "close": 97994.1,
+        "high": 98607.4,
+        "low": 95751.2
+      },
+      {
+        "availableAt": 1732579200000,
+        "close": 93000,
+        "high": 98880,
+        "low": 92550
+      },
+      {
+        "availableAt": 1732665600000,
+        "close": 91914.5,
+        "high": 94995,
+        "low": 90736
+      },
+      {
+        "availableAt": 1732752000000,
+        "close": 95952.9,
+        "high": 97387.9,
+        "low": 91818.3
+      },
+      {
+        "availableAt": 1732838400000,
+        "close": 95637.8,
+        "high": 96652,
+        "low": 94653.6
+      },
+      {
+        "availableAt": 1732924800000,
+        "close": 97478.7,
+        "high": 98670.1,
+        "low": 95385.7
+      },
+      {
+        "availableAt": 1733011200000,
+        "close": 96456.2,
+        "high": 97491.2,
+        "low": 96185
+      },
+      {
+        "availableAt": 1733097600000,
+        "close": 97244.6,
+        "high": 97850,
+        "low": 95754.4
+      },
+      {
+        "availableAt": 1733184000000,
+        "close": 95853.3,
+        "high": 98135.3,
+        "low": 94450
+      },
+      {
+        "availableAt": 1733270400000,
+        "close": 95917.5,
+        "high": 96267.2,
+        "low": 93565.1
+      },
+      {
+        "availableAt": 1733356800000,
+        "close": 98757.1,
+        "high": 99213.9,
+        "low": 94656.9
+      },
+      {
+        "availableAt": 1733443200000,
+        "close": 97087.3,
+        "high": 104015.5,
+        "low": 91800
+      },
+      {
+        "availableAt": 1733529600000,
+        "close": 99872.9,
+        "high": 101995,
+        "low": 96510.3
+      },
+      {
+        "availableAt": 1733616000000,
+        "close": 99899.9,
+        "high": 100501.4,
+        "low": 99000
+      },
+      {
+        "availableAt": 1733702400000,
+        "close": 101170,
+        "high": 101400,
+        "low": 98699.7
+      },
+      {
+        "availableAt": 1733788800000,
+        "close": 97399.9,
+        "high": 101214.3,
+        "low": 94140.9
+      },
+      {
+        "availableAt": 1733875200000,
+        "close": 96655.1,
+        "high": 98267.9,
+        "low": 94314.1
+      },
+      {
+        "availableAt": 1733961600000,
+        "close": 101177,
+        "high": 101900,
+        "low": 95754
+      },
+      {
+        "availableAt": 1734048000000,
+        "close": 100050.1,
+        "high": 102500,
+        "low": 99296.6
+      },
+      {
+        "availableAt": 1734134400000,
+        "close": 101483.1,
+        "high": 101905.2,
+        "low": 99250
+      },
+      {
+        "availableAt": 1734220800000,
+        "close": 101400.1,
+        "high": 102637.2,
+        "low": 100666
+      },
+      {
+        "availableAt": 1734307200000,
+        "close": 104355.2,
+        "high": 105000,
+        "low": 101222.5
+      },
+      {
+        "availableAt": 1734393600000,
+        "close": 106067.2,
+        "high": 107777,
+        "low": 103319.4
+      },
+      {
+        "availableAt": 1734480000000,
+        "close": 106151.9,
+        "high": 108297.6,
+        "low": 105124
+      },
+      {
+        "availableAt": 1734566400000,
+        "close": 100166.1,
+        "high": 106489.3,
+        "low": 100027.8
+      },
+      {
+        "availableAt": 1734652800000,
+        "close": 97431.4,
+        "high": 102750,
+        "low": 95586.4
+      },
+      {
+        "availableAt": 1734739200000,
+        "close": 97781.8,
+        "high": 98064.7,
+        "low": 92159
+      },
+      {
+        "availableAt": 1734825600000,
+        "close": 97232.6,
+        "high": 99575.4,
+        "low": 96359.8
+      },
+      {
+        "availableAt": 1734912000000,
+        "close": 95101.9,
+        "high": 97321.3,
+        "low": 94201.1
+      },
+      {
+        "availableAt": 1734998400000,
+        "close": 94699.4,
+        "high": 96403,
+        "low": 92417
+      },
+      {
+        "availableAt": 1735084800000,
+        "close": 98647.2,
+        "high": 99400,
+        "low": 93500
+      },
+      {
+        "availableAt": 1735171200000,
+        "close": 99310.8,
+        "high": 99411.6,
+        "low": 97600
+      },
+      {
+        "availableAt": 1735257600000,
+        "close": 95645,
+        "high": 99821.8,
+        "low": 95139.1
+      },
+      {
+        "availableAt": 1735344000000,
+        "close": 94148.9,
+        "high": 97308.6,
+        "low": 93300
+      },
+      {
+        "availableAt": 1735430400000,
+        "close": 95204.1,
+        "high": 95497,
+        "low": 94033.5
+      },
+      {
+        "availableAt": 1735516800000,
+        "close": 93551,
+        "high": 95204.1,
+        "low": 92860.7
+      },
+      {
+        "availableAt": 1735603200000,
+        "close": 92611.3,
+        "high": 94858.7,
+        "low": 91256.6
+      },
+      {
+        "availableAt": 1735689600000,
+        "close": 93370.9,
+        "high": 96040,
+        "low": 91934.1
+      },
+      {
+        "availableAt": 1735776000000,
+        "close": 94380.8,
+        "high": 94888,
+        "low": 92588.1
+      },
+      {
+        "availableAt": 1735862400000,
+        "close": 96805.2,
+        "high": 97719.9,
+        "low": 94167.2
+      },
+      {
+        "availableAt": 1735948800000,
+        "close": 98111.1,
+        "high": 98888,
+        "low": 96034.1
+      },
+      {
+        "availableAt": 1736035200000,
+        "close": 98208.9,
+        "high": 98714.8,
+        "low": 97548.4
+      },
+      {
+        "availableAt": 1736121600000,
+        "close": 98306.2,
+        "high": 98750,
+        "low": 97250
+      },
+      {
+        "availableAt": 1736208000000,
+        "close": 102222,
+        "high": 102479.6,
+        "low": 97974
+      },
+      {
+        "availableAt": 1736294400000,
+        "close": 96932.2,
+        "high": 102759.3,
+        "low": 96100
+      },
+      {
+        "availableAt": 1736380800000,
+        "close": 95060.4,
+        "high": 97232.8,
+        "low": 92501
+      },
+      {
+        "availableAt": 1736467200000,
+        "close": 92531.7,
+        "high": 95251.1,
+        "low": 91168.5
+      },
+      {
+        "availableAt": 1736553600000,
+        "close": 94698.8,
+        "high": 95771.2,
+        "low": 92200
+      },
+      {
+        "availableAt": 1736640000000,
+        "close": 94562.1,
+        "high": 94986.6,
+        "low": 93865
+      },
+      {
+        "availableAt": 1736726400000,
+        "close": 94449.9,
+        "high": 95300,
+        "low": 93652.2
+      },
+      {
+        "availableAt": 1736812800000,
+        "close": 94487.1,
+        "high": 95808.2,
+        "low": 89005.8
+      },
+      {
+        "availableAt": 1736899200000,
+        "close": 96560.1,
+        "high": 97302.9,
+        "low": 94313
+      },
+      {
+        "availableAt": 1736985600000,
+        "close": 100496.4,
+        "high": 100731.7,
+        "low": 96500
+      },
+      {
+        "availableAt": 1737072000000,
+        "close": 99976.7,
+        "high": 100700,
+        "low": 97333
+      },
+      {
+        "availableAt": 1737158400000,
+        "close": 104089.8,
+        "high": 105883,
+        "low": 99952.8
+      },
+      {
+        "availableAt": 1737244800000,
+        "close": 104382,
+        "high": 104907.3,
+        "low": 102222
+      },
+      {
+        "availableAt": 1737331200000,
+        "close": 101191.1,
+        "high": 106246.6,
+        "low": 99538.2
+      },
+      {
+        "availableAt": 1737417600000,
+        "close": 102162.8,
+        "high": 109112,
+        "low": 99500
+      },
+      {
+        "availableAt": 1737504000000,
+        "close": 106162.8,
+        "high": 107200,
+        "low": 100114.2
+      },
+      {
+        "availableAt": 1737590400000,
+        "close": 103648.5,
+        "high": 106293.4,
+        "low": 103271.3
+      },
+      {
+        "availableAt": 1737676800000,
+        "close": 103920.2,
+        "high": 106833.2,
+        "low": 101281.7
+      },
+      {
+        "availableAt": 1737763200000,
+        "close": 104840.4,
+        "high": 107080.6,
+        "low": 102800
+      },
+      {
+        "availableAt": 1737849600000,
+        "close": 104705.2,
+        "high": 105194.1,
+        "low": 104250
+      },
+      {
+        "availableAt": 1737936000000,
+        "close": 102596.5,
+        "high": 105380,
+        "low": 102544.1
+      },
+      {
+        "availableAt": 1738022400000,
+        "close": 102133.3,
+        "high": 103200,
+        "low": 97688.7
+      },
+      {
+        "availableAt": 1738108800000,
+        "close": 101299.8,
+        "high": 103728,
+        "low": 100200
+      },
+      {
+        "availableAt": 1738195200000,
+        "close": 103708,
+        "high": 104749.1,
+        "low": 101277.6
+      },
+      {
+        "availableAt": 1738281600000,
+        "close": 104750.1,
+        "high": 106414.4,
+        "low": 103252.5
+      },
+      {
+        "availableAt": 1738368000000,
+        "close": 102406,
+        "high": 106000,
+        "low": 101500
+      },
+      {
+        "availableAt": 1738454400000,
+        "close": 100624.2,
+        "high": 102748.6,
+        "low": 100147
+      },
+      {
+        "availableAt": 1738540800000,
+        "close": 97696.1,
+        "high": 101415.5,
+        "low": 96100
+      },
+      {
+        "availableAt": 1738627200000,
+        "close": 101425.1,
+        "high": 102500,
+        "low": 91000
+      },
+      {
+        "availableAt": 1738713600000,
+        "close": 97868.5,
+        "high": 101721.9,
+        "low": 96250
+      },
+      {
+        "availableAt": 1738800000000,
+        "close": 96623.8,
+        "high": 99125,
+        "low": 96191
+      },
+      {
+        "availableAt": 1738886400000,
+        "close": 96559.2,
+        "high": 99100,
+        "low": 95700
+      },
+      {
+        "availableAt": 1738972800000,
+        "close": 96547.5,
+        "high": 100181.7,
+        "low": 95634.1
+      },
+      {
+        "availableAt": 1739059200000,
+        "close": 96496.5,
+        "high": 96860.1,
+        "low": 95656.9
+      },
+      {
+        "availableAt": 1739145600000,
+        "close": 96473,
+        "high": 97291.2,
+        "low": 94763.1
+      },
+      {
+        "availableAt": 1739232000000,
+        "close": 97441.2,
+        "high": 98300,
+        "low": 95326.7
+      },
+      {
+        "availableAt": 1739318400000,
+        "close": 95767.1,
+        "high": 98442.3,
+        "low": 94899.2
+      },
+      {
+        "availableAt": 1739404800000,
+        "close": 97874,
+        "high": 98042.8,
+        "low": 94111
+      },
+      {
+        "availableAt": 1739491200000,
+        "close": 96628,
+        "high": 98077.1,
+        "low": 95273.7
+      },
+      {
+        "availableAt": 1739577600000,
+        "close": 97464,
+        "high": 98826,
+        "low": 96340.7
+      },
+      {
+        "availableAt": 1739664000000,
+        "close": 97588.2,
+        "high": 97902,
+        "low": 97279.3
+      },
+      {
+        "availableAt": 1739750400000,
+        "close": 96144.1,
+        "high": 97700,
+        "low": 96112.6
+      },
+      {
+        "availableAt": 1739836800000,
+        "close": 95772.8,
+        "high": 97032.6,
+        "low": 95224.7
+      },
+      {
+        "availableAt": 1739923200000,
+        "close": 95600,
+        "high": 96650.9,
+        "low": 93388.7
+      },
+      {
+        "availableAt": 1740009600000,
+        "close": 96625.7,
+        "high": 96875,
+        "low": 94996.8
+      },
+      {
+        "availableAt": 1740096000000,
+        "close": 98339.1,
+        "high": 98744,
+        "low": 96405.7
+      },
+      {
+        "availableAt": 1740182400000,
+        "close": 96099.5,
+        "high": 99481.1,
+        "low": 94858
+      },
+      {
+        "availableAt": 1740268800000,
+        "close": 96600.1,
+        "high": 96900,
+        "low": 95791.3
+      },
+      {
+        "availableAt": 1740355200000,
+        "close": 96303.4,
+        "high": 96621.6,
+        "low": 95300
+      },
+      {
+        "availableAt": 1740441600000,
+        "close": 91534.4,
+        "high": 96483,
+        "low": 91400
+      },
+      {
+        "availableAt": 1740528000000,
+        "close": 88632.6,
+        "high": 92487.3,
+        "low": 86000
+      },
+      {
+        "availableAt": 1740614400000,
+        "close": 84089.8,
+        "high": 89271,
+        "low": 80525
+      },
+      {
+        "availableAt": 1740700800000,
+        "close": 84691.4,
+        "high": 86951.2,
+        "low": 82611
+      },
+      {
+        "availableAt": 1740787200000,
+        "close": 84309.2,
+        "high": 85061,
+        "low": 78219
+      },
+      {
+        "availableAt": 1740873600000,
+        "close": 86020.8,
+        "high": 86515.9,
+        "low": 83799.3
+      },
+      {
+        "availableAt": 1740960000000,
+        "close": 94285,
+        "high": 95000,
+        "low": 84500.1
+      },
+      {
+        "availableAt": 1741046400000,
+        "close": 86144.7,
+        "high": 94401.6,
+        "low": 85055
+      },
+      {
+        "availableAt": 1741132800000,
+        "close": 87250,
+        "high": 88888,
+        "low": 81434.5
+      },
+      {
+        "availableAt": 1741219200000,
+        "close": 90610.4,
+        "high": 90975.1,
+        "low": 86378.4
+      },
+      {
+        "availableAt": 1741305600000,
+        "close": 89916.8,
+        "high": 92741.5,
+        "low": 87836.3
+      },
+      {
+        "availableAt": 1741392000000,
+        "close": 86762.3,
+        "high": 91227.4,
+        "low": 84665.7
+      },
+      {
+        "availableAt": 1741478400000,
+        "close": 86164.1,
+        "high": 86809.4,
+        "low": 85230
+      },
+      {
+        "availableAt": 1741564800000,
+        "close": 80684,
+        "high": 86435.2,
+        "low": 80006.7
+      },
+      {
+        "availableAt": 1741651200000,
+        "close": 78558.8,
+        "high": 83971.5,
+        "low": 77414.3
+      },
+      {
+        "availableAt": 1741737600000,
+        "close": 82900,
+        "high": 83607.9,
+        "low": 76615.7
+      },
+      {
+        "availableAt": 1741824000000,
+        "close": 83673.4,
+        "high": 84482,
+        "low": 80628.9
+      },
+      {
+        "availableAt": 1741910400000,
+        "close": 81112.3,
+        "high": 84282.4,
+        "low": 79930.7
+      },
+      {
+        "availableAt": 1741996800000,
+        "close": 83997.6,
+        "high": 85278.7,
+        "low": 80847.2
+      },
+      {
+        "availableAt": 1742083200000,
+        "close": 84332.9,
+        "high": 84659.4,
+        "low": 83666.9
+      },
+      {
+        "availableAt": 1742169600000,
+        "close": 82599.9,
+        "high": 85021,
+        "low": 82009.8
+      },
+      {
+        "availableAt": 1742256000000,
+        "close": 84015.2,
+        "high": 84700,
+        "low": 82500
+      },
+      {
+        "availableAt": 1742342400000,
+        "close": 82705.4,
+        "high": 84015.2,
+        "low": 81166
+      },
+      {
+        "availableAt": 1742428800000,
+        "close": 86879.5,
+        "high": 87000,
+        "low": 82553.3
+      },
+      {
+        "availableAt": 1742515200000,
+        "close": 84178.6,
+        "high": 87433.9,
+        "low": 83609.1
+      },
+      {
+        "availableAt": 1742601600000,
+        "close": 84034.3,
+        "high": 84771.3,
+        "low": 83179.3
+      },
+      {
+        "availableAt": 1742688000000,
+        "close": 83800,
+        "high": 84450,
+        "low": 83667.4
+      },
+      {
+        "availableAt": 1742774400000,
+        "close": 86076.5,
+        "high": 86100,
+        "low": 83799.9
+      },
+      {
+        "availableAt": 1742860800000,
+        "close": 87505.3,
+        "high": 88750,
+        "low": 85558.1
+      },
+      {
+        "availableAt": 1742947200000,
+        "close": 87458.1,
+        "high": 88500,
+        "low": 86306.7
+      },
+      {
+        "availableAt": 1743033600000,
+        "close": 86899,
+        "high": 88263,
+        "low": 85853.7
+      },
+      {
+        "availableAt": 1743120000000,
+        "close": 87209.9,
+        "high": 87755.8,
+        "low": 85838.9
+      },
+      {
+        "availableAt": 1743206400000,
+        "close": 84373.9,
+        "high": 87441.7,
+        "low": 83530.1
+      },
+      {
+        "availableAt": 1743292800000,
+        "close": 82613.8,
+        "high": 84559.8,
+        "low": 81655
+      },
+      {
+        "availableAt": 1743379200000,
+        "close": 82325.4,
+        "high": 83500,
+        "low": 81588.7
+      },
+      {
+        "availableAt": 1743465600000,
+        "close": 82523,
+        "high": 83870.8,
+        "low": 81270.3
+      },
+      {
+        "availableAt": 1743552000000,
+        "close": 85201.1,
+        "high": 85500,
+        "low": 82415.9
+      },
+      {
+        "availableAt": 1743638400000,
+        "close": 82508.1,
+        "high": 89042.7,
+        "low": 82141.5
+      },
+      {
+        "availableAt": 1743724800000,
+        "close": 83132.9,
+        "high": 83911,
+        "low": 81177.7
+      },
+      {
+        "availableAt": 1743811200000,
+        "close": 83840.8,
+        "high": 84709.7,
+        "low": 81657.9
+      },
+      {
+        "availableAt": 1743897600000,
+        "close": 83508.9,
+        "high": 84200,
+        "low": 82400
+      },
+      {
+        "availableAt": 1743984000000,
+        "close": 78363.4,
+        "high": 83680,
+        "low": 77057.7
+      },
+      {
+        "availableAt": 1744070400000,
+        "close": 79130.1,
+        "high": 81323.6,
+        "low": 74409.1
+      },
+      {
+        "availableAt": 1744156800000,
+        "close": 76276.5,
+        "high": 80800,
+        "low": 76164.6
+      },
+      {
+        "availableAt": 1744243200000,
+        "close": 82556.3,
+        "high": 83548.9,
+        "low": 74572.5
+      },
+      {
+        "availableAt": 1744329600000,
+        "close": 79552.1,
+        "high": 82676.5,
+        "low": 78451.2
+      },
+      {
+        "availableAt": 1744416000000,
+        "close": 83420.1,
+        "high": 84261.7,
+        "low": 78914.7
+      },
+      {
+        "availableAt": 1744502400000,
+        "close": 85284.1,
+        "high": 85850.9,
+        "low": 82750
+      },
+      {
+        "availableAt": 1744588800000,
+        "close": 83719,
+        "high": 86037.9,
+        "low": 83025.5
+      },
+      {
+        "availableAt": 1744675200000,
+        "close": 84530.7,
+        "high": 85792.1,
+        "low": 83708.2
+      },
+      {
+        "availableAt": 1744761600000,
+        "close": 83633.5,
+        "high": 86401,
+        "low": 83600
+      },
+      {
+        "availableAt": 1744848000000,
+        "close": 84023.8,
+        "high": 85419.7,
+        "low": 83146
+      },
+      {
+        "availableAt": 1744934400000,
+        "close": 84910.1,
+        "high": 85444,
+        "low": 83777.2
+      },
+      {
+        "availableAt": 1745020800000,
+        "close": 84472.5,
+        "high": 85087.9,
+        "low": 84295.4
+      },
+      {
+        "availableAt": 1745107200000,
+        "close": 85121.3,
+        "high": 85611.7,
+        "low": 84384.6
+      },
+      {
+        "availableAt": 1745193600000,
+        "close": 85150.1,
+        "high": 85309.2,
+        "low": 84007.4
+      },
+      {
+        "availableAt": 1745280000000,
+        "close": 87500.6,
+        "high": 88490,
+        "low": 85150
+      },
+      {
+        "availableAt": 1745366400000,
+        "close": 93472,
+        "high": 93888,
+        "low": 87100
+      },
+      {
+        "availableAt": 1745452800000,
+        "close": 93677,
+        "high": 94635.1,
+        "low": 91949.5
+      },
+      {
+        "availableAt": 1745539200000,
+        "close": 93999.9,
+        "high": 94000,
+        "low": 91711
+      },
+      {
+        "availableAt": 1745625600000,
+        "close": 94717.1,
+        "high": 95837.7,
+        "low": 92900
+      },
+      {
+        "availableAt": 1745712000000,
+        "close": 94663.5,
+        "high": 95189.5,
+        "low": 93907.5
+      },
+      {
+        "availableAt": 1745798400000,
+        "close": 93817,
+        "high": 95348.5,
+        "low": 93621.5
+      },
+      {
+        "availableAt": 1745884800000,
+        "close": 94998.1,
+        "high": 95600,
+        "low": 92900
+      },
+      {
+        "availableAt": 1745971200000,
+        "close": 94269.6,
+        "high": 95469.2,
+        "low": 93809.5
+      },
+      {
+        "availableAt": 1746057600000,
+        "close": 94205.4,
+        "high": 95195,
+        "low": 92970.5
+      },
+      {
+        "availableAt": 1746144000000,
+        "close": 96469.9,
+        "high": 97407.8,
+        "low": 94148.3
+      },
+      {
+        "availableAt": 1746230400000,
+        "close": 96920.7,
+        "high": 97885,
+        "low": 96386.7
+      },
+      {
+        "availableAt": 1746316800000,
+        "close": 95869.9,
+        "high": 96922.3,
+        "low": 95785.9
+      },
+      {
+        "availableAt": 1746403200000,
+        "close": 94303.1,
+        "high": 96298,
+        "low": 94153.2
+      },
+      {
+        "availableAt": 1746489600000,
+        "close": 94727,
+        "high": 95173.9,
+        "low": 93570.1
+      },
+      {
+        "availableAt": 1746576000000,
+        "close": 96816.7,
+        "high": 96877.8,
+        "low": 93398.5
+      },
+      {
+        "availableAt": 1746662400000,
+        "close": 97031.4,
+        "high": 97650,
+        "low": 95824
+      },
+      {
+        "availableAt": 1746748800000,
+        "close": 103228,
+        "high": 104082.5,
+        "low": 96874.9
+      },
+      {
+        "availableAt": 1746835200000,
+        "close": 102976.9,
+        "high": 104319.1,
+        "low": 102344.7
+      },
+      {
+        "availableAt": 1746921600000,
+        "close": 104800,
+        "high": 104943.7,
+        "low": 102833.3
+      },
+      {
+        "availableAt": 1747008000000,
+        "close": 104119,
+        "high": 104919.7,
+        "low": 103326.8
+      },
+      {
+        "availableAt": 1747094400000,
+        "close": 102825,
+        "high": 105728.8,
+        "low": 100772.6
+      },
+      {
+        "availableAt": 1747180800000,
+        "close": 104156.7,
+        "high": 104980,
+        "low": 101525.1
+      },
+      {
+        "availableAt": 1747267200000,
+        "close": 103589.7,
+        "high": 104280.1,
+        "low": 102591.5
+      },
+      {
+        "availableAt": 1747353600000,
+        "close": 103761.7,
+        "high": 104123,
+        "low": 101441.6
+      },
+      {
+        "availableAt": 1747440000000,
+        "close": 103500.1,
+        "high": 104500,
+        "low": 103130
+      },
+      {
+        "availableAt": 1747526400000,
+        "close": 103169.1,
+        "high": 103697.1,
+        "low": 102690
+      },
+      {
+        "availableAt": 1747612800000,
+        "close": 106525.6,
+        "high": 106631.8,
+        "low": 103148.2
+      },
+      {
+        "availableAt": 1747699200000,
+        "close": 105637.7,
+        "high": 107042.1,
+        "low": 102100
+      },
+      {
+        "availableAt": 1747785600000,
+        "close": 106855.6,
+        "high": 107262.6,
+        "low": 104269
+      },
+      {
+        "availableAt": 1747872000000,
+        "close": 109675.1,
+        "high": 110698,
+        "low": 106155
+      },
+      {
+        "availableAt": 1747958400000,
+        "close": 111711.1,
+        "high": 111983.2,
+        "low": 109287.2
+      },
+      {
+        "availableAt": 1748044800000,
+        "close": 107333.5,
+        "high": 111785.3,
+        "low": 106824
+      },
+      {
+        "availableAt": 1748131200000,
+        "close": 107824.2,
+        "high": 109503.4,
+        "low": 106905.8
+      },
+      {
+        "availableAt": 1748217600000,
+        "close": 109040.4,
+        "high": 109300.5,
+        "low": 106672.9
+      },
+      {
+        "availableAt": 1748304000000,
+        "close": 109468.6,
+        "high": 110352,
+        "low": 108780
+      },
+      {
+        "availableAt": 1748390400000,
+        "close": 109004.9,
+        "high": 110742.6,
+        "low": 107600
+      },
+      {
+        "availableAt": 1748476800000,
+        "close": 107811.7,
+        "high": 109250,
+        "low": 106805.1
+      },
+      {
+        "availableAt": 1748563200000,
+        "close": 105632.4,
+        "high": 108888,
+        "low": 105348.4
+      },
+      {
+        "availableAt": 1748649600000,
+        "close": 104019.7,
+        "high": 106333.8,
+        "low": 103641.3
+      },
+      {
+        "availableAt": 1748736000000,
+        "close": 104662,
+        "high": 104933.2,
+        "low": 103169
+      },
+      {
+        "availableAt": 1748822400000,
+        "close": 105712.4,
+        "high": 105879.7,
+        "low": 103850
+      },
+      {
+        "availableAt": 1748908800000,
+        "close": 105920.3,
+        "high": 105927.2,
+        "low": 103737.7
+      },
+      {
+        "availableAt": 1748995200000,
+        "close": 105446,
+        "high": 106820,
+        "low": 104984.1
+      },
+      {
+        "availableAt": 1749081600000,
+        "close": 104745.4,
+        "high": 106000,
+        "low": 104279
+      },
+      {
+        "availableAt": 1749168000000,
+        "close": 101579.7,
+        "high": 105948.1,
+        "low": 100400
+      },
+      {
+        "availableAt": 1749254400000,
+        "close": 104376,
+        "high": 105360.1,
+        "low": 101211.5
+      },
+      {
+        "availableAt": 1749340800000,
+        "close": 105654.5,
+        "high": 105929,
+        "low": 104000.1
+      },
+      {
+        "availableAt": 1749427200000,
+        "close": 105754.2,
+        "high": 106477,
+        "low": 105082.3
+      },
+      {
+        "availableAt": 1749513600000,
+        "close": 110280,
+        "high": 110550,
+        "low": 105392.3
+      },
+      {
+        "availableAt": 1749600000000,
+        "close": 110273.6,
+        "high": 110373,
+        "low": 108342.2
+      },
+      {
+        "availableAt": 1749686400000,
+        "close": 108702,
+        "high": 110411,
+        "low": 108139.5
+      },
+      {
+        "availableAt": 1749772800000,
+        "close": 105760.1,
+        "high": 108790.2,
+        "low": 105760
+      },
+      {
+        "availableAt": 1749859200000,
+        "close": 106122.3,
+        "high": 106137.5,
+        "low": 102812.3
+      },
+      {
+        "availableAt": 1749945600000,
+        "close": 105479.4,
+        "high": 106172.3,
+        "low": 104400
+      },
+      {
+        "availableAt": 1750032000000,
+        "close": 105581.4,
+        "high": 106090,
+        "low": 104529
+      },
+      {
+        "availableAt": 1750118400000,
+        "close": 106800.1,
+        "high": 108924.6,
+        "low": 105019.3
+      },
+      {
+        "availableAt": 1750204800000,
+        "close": 104622.4,
+        "high": 107725.1,
+        "low": 103400
+      },
+      {
+        "availableAt": 1750291200000,
+        "close": 104892,
+        "high": 105529.9,
+        "low": 103567.6
+      },
+      {
+        "availableAt": 1750377600000,
+        "close": 104675.2,
+        "high": 105226.5,
+        "low": 103931.6
+      },
+      {
+        "availableAt": 1750464000000,
+        "close": 103292,
+        "high": 106470,
+        "low": 102388.9
+      },
+      {
+        "availableAt": 1750550400000,
+        "close": 102144,
+        "high": 103995.5,
+        "low": 100933.5
+      },
+      {
+        "availableAt": 1750636800000,
+        "close": 100987.9,
+        "high": 103380.5,
+        "low": 98277.2
+      },
+      {
+        "availableAt": 1750723200000,
+        "close": 105382,
+        "high": 106022.4,
+        "low": 99700
+      },
+      {
+        "availableAt": 1750809600000,
+        "close": 106100,
+        "high": 106309.1,
+        "low": 104777
+      },
+      {
+        "availableAt": 1750896000000,
+        "close": 107360,
+        "high": 108165.5,
+        "low": 105888.2
+      },
+      {
+        "availableAt": 1750982400000,
+        "close": 106945,
+        "high": 108289,
+        "low": 106677.4
+      },
+      {
+        "availableAt": 1751068800000,
+        "close": 107115.4,
+        "high": 107712.1,
+        "low": 106477.2
+      },
+      {
+        "availableAt": 1751155200000,
+        "close": 107325.1,
+        "high": 107544.2,
+        "low": 106918.4
+      },
+      {
+        "availableAt": 1751241600000,
+        "close": 108387.2,
+        "high": 108460.7,
+        "low": 107228.2
+      },
+      {
+        "availableAt": 1751328000000,
+        "close": 107120.3,
+        "high": 108792,
+        "low": 106800
+      },
+      {
+        "availableAt": 1751414400000,
+        "close": 105700.1,
+        "high": 107540.2,
+        "low": 105312
+      },
+      {
+        "availableAt": 1751500800000,
+        "close": 108846.9,
+        "high": 109794.7,
+        "low": 105116.4
+      },
+      {
+        "availableAt": 1751587200000,
+        "close": 109631,
+        "high": 110547.2,
+        "low": 108600
+      },
+      {
+        "availableAt": 1751673600000,
+        "close": 108018.9,
+        "high": 109746.6,
+        "low": 107299.9
+      },
+      {
+        "availableAt": 1751760000000,
+        "close": 108249.5,
+        "high": 108379,
+        "low": 107829.7
+      },
+      {
+        "availableAt": 1751846400000,
+        "close": 109223.2,
+        "high": 109650,
+        "low": 107825.2
+      },
+      {
+        "availableAt": 1751932800000,
+        "close": 108282.1,
+        "high": 109700,
+        "low": 107520.3
+      },
+      {
+        "availableAt": 1752019200000,
+        "close": 108931.9,
+        "high": 109199.3,
+        "low": 107500
+      },
+      {
+        "availableAt": 1752105600000,
+        "close": 111323.7,
+        "high": 112000,
+        "low": 108375.3
+      },
+      {
+        "availableAt": 1752192000000,
+        "close": 115990.2,
+        "high": 116800,
+        "low": 110600
+      },
+      {
+        "availableAt": 1752278400000,
+        "close": 117532.6,
+        "high": 118818.4,
+        "low": 115212.5
+      },
+      {
+        "availableAt": 1752364800000,
+        "close": 117461,
+        "high": 118235.6,
+        "low": 116977.1
+      },
+      {
+        "availableAt": 1752451200000,
+        "close": 119102.1,
+        "high": 119499,
+        "low": 117277.3
+      },
+      {
+        "availableAt": 1752537600000,
+        "close": 119855,
+        "high": 123140,
+        "low": 118961.2
+      },
+      {
+        "availableAt": 1752624000000,
+        "close": 117741,
+        "high": 119900,
+        "low": 115712.2
+      },
+      {
+        "availableAt": 1752710400000,
+        "close": 118712.6,
+        "high": 120049.5,
+        "low": 117094
+      },
+      {
+        "availableAt": 1752796800000,
+        "close": 119321,
+        "high": 120999.6,
+        "low": 117527
+      },
+      {
+        "availableAt": 1752883200000,
+        "close": 118011.9,
+        "high": 120833.7,
+        "low": 116929.6
+      },
+      {
+        "availableAt": 1752969600000,
+        "close": 117909.1,
+        "high": 118550,
+        "low": 117382.5
+      },
+      {
+        "availableAt": 1753056000000,
+        "close": 117319.1,
+        "high": 118867,
+        "low": 116600
+      },
+      {
+        "availableAt": 1753142400000,
+        "close": 117461,
+        "high": 119630.4,
+        "low": 116623.7
+      },
+      {
+        "availableAt": 1753228800000,
+        "close": 119977.5,
+        "high": 120237.5,
+        "low": 116260
+      },
+      {
+        "availableAt": 1753315200000,
+        "close": 118735.3,
+        "high": 120100,
+        "low": 117411
+      },
+      {
+        "availableAt": 1753401600000,
+        "close": 118386.9,
+        "high": 119489.8,
+        "low": 117316
+      },
+      {
+        "availableAt": 1753488000000,
+        "close": 117628.1,
+        "high": 118452,
+        "low": 114733.1
+      },
+      {
+        "availableAt": 1753574400000,
+        "close": 117937.5,
+        "high": 118276.6,
+        "low": 117197.6
+      },
+      {
+        "availableAt": 1753660800000,
+        "close": 119455,
+        "high": 119793.4,
+        "low": 117863.8
+      },
+      {
+        "availableAt": 1753747200000,
+        "close": 117979.7,
+        "high": 119779.9,
+        "low": 117425.9
+      },
+      {
+        "availableAt": 1753833600000,
+        "close": 117923,
+        "high": 119200,
+        "low": 117000
+      },
+      {
+        "availableAt": 1753920000000,
+        "close": 117820.7,
+        "high": 118749.4,
+        "low": 115800
+      },
+      {
+        "availableAt": 1754006400000,
+        "close": 115762.3,
+        "high": 118918.9,
+        "low": 115500
+      },
+      {
+        "availableAt": 1754092800000,
+        "close": 113290.2,
+        "high": 116000,
+        "low": 112688.1
+      },
+      {
+        "availableAt": 1754179200000,
+        "close": 112525.2,
+        "high": 114008.2,
+        "low": 112000
+      },
+      {
+        "availableAt": 1754265600000,
+        "close": 114224.1,
+        "high": 114742.9,
+        "low": 111897.1
+      },
+      {
+        "availableAt": 1754352000000,
+        "close": 115092.1,
+        "high": 115700,
+        "low": 114137.1
+      },
+      {
+        "availableAt": 1754438400000,
+        "close": 114115,
+        "high": 115092.1,
+        "low": 112629.7
+      },
+      {
+        "availableAt": 1754524800000,
+        "close": 115010,
+        "high": 115713.6,
+        "low": 113400
+      },
+      {
+        "availableAt": 1754611200000,
+        "close": 117498.1,
+        "high": 117643.3,
+        "low": 114280
+      },
+      {
+        "availableAt": 1754697600000,
+        "close": 116676,
+        "high": 117663,
+        "low": 115946
+      },
+      {
+        "availableAt": 1754784000000,
+        "close": 116467.4,
+        "high": 117869.4,
+        "low": 116282.1
+      },
+      {
+        "availableAt": 1754870400000,
+        "close": 119288.4,
+        "high": 119288.4,
+        "low": 116467.3
+      },
+      {
+        "availableAt": 1754956800000,
+        "close": 118724.5,
+        "high": 122273.5,
+        "low": 118100
+      },
+      {
+        "availableAt": 1755043200000,
+        "close": 120172,
+        "high": 120303.2,
+        "low": 118255
+      },
+      {
+        "availableAt": 1755129600000,
+        "close": 123354.3,
+        "high": 123724.7,
+        "low": 118918.3
+      },
+      {
+        "availableAt": 1755216000000,
+        "close": 118383.1,
+        "high": 124420,
+        "low": 117250
+      },
+      {
+        "availableAt": 1755302400000,
+        "close": 117426.7,
+        "high": 119312.7,
+        "low": 116560.9
+      },
+      {
+        "availableAt": 1755388800000,
+        "close": 117487.5,
+        "high": 117947.4,
+        "low": 117284
+      },
+      {
+        "availableAt": 1755475200000,
+        "close": 117441.3,
+        "high": 118550.2,
+        "low": 117295.3
+      },
+      {
+        "availableAt": 1755561600000,
+        "close": 116260,
+        "high": 117593.3,
+        "low": 114715.9
+      },
+      {
+        "availableAt": 1755648000000,
+        "close": 112830.3,
+        "high": 116766,
+        "low": 112750
+      },
+      {
+        "availableAt": 1755734400000,
+        "close": 114262.7,
+        "high": 114612.1,
+        "low": 112400
+      },
+      {
+        "availableAt": 1755820800000,
+        "close": 112462.5,
+        "high": 114738.6,
+        "low": 112036
+      },
+      {
+        "availableAt": 1755907200000,
+        "close": 116817.9,
+        "high": 117354,
+        "low": 111676
+      },
+      {
+        "availableAt": 1755993600000,
+        "close": 115344.1,
+        "high": 116975,
+        "low": 114551.1
+      },
+      {
+        "availableAt": 1756080000000,
+        "close": 113456.1,
+        "high": 115530.9,
+        "low": 110692.2
+      },
+      {
+        "availableAt": 1756166400000,
+        "close": 110144.9,
+        "high": 113619.8,
+        "low": 109304.8
+      },
+      {
+        "availableAt": 1756252800000,
+        "close": 111829.3,
+        "high": 112395.6,
+        "low": 108734.6
+      },
+      {
+        "availableAt": 1756339200000,
+        "close": 111268.6,
+        "high": 112603.4,
+        "low": 110434.3
+      },
+      {
+        "availableAt": 1756425600000,
+        "close": 112563.7,
+        "high": 113457.9,
+        "low": 110902.6
+      },
+      {
+        "availableAt": 1756512000000,
+        "close": 108400.1,
+        "high": 112570,
+        "low": 107505
+      },
+      {
+        "availableAt": 1756598400000,
+        "close": 108750,
+        "high": 108926.8,
+        "low": 107352.6
+      },
+      {
+        "availableAt": 1756684800000,
+        "close": 108250,
+        "high": 109490.8,
+        "low": 108113.5
+      },
+      {
+        "availableAt": 1756771200000,
+        "close": 109263.5,
+        "high": 109813.2,
+        "low": 107255
+      },
+      {
+        "availableAt": 1756857600000,
+        "close": 111196.9,
+        "high": 111737.8,
+        "low": 108457
+      },
+      {
+        "availableAt": 1756944000000,
+        "close": 111771.1,
+        "high": 112537.6,
+        "low": 110600
+      },
+      {
+        "availableAt": 1757030400000,
+        "close": 110744.3,
+        "high": 112193.7,
+        "low": 109369.8
+      },
+      {
+        "availableAt": 1757116800000,
+        "close": 110647.8,
+        "high": 113372.1,
+        "low": 110231.4
+      },
+      {
+        "availableAt": 1757203200000,
+        "close": 110254.9,
+        "high": 111243,
+        "low": 110036.7
+      },
+      {
+        "availableAt": 1757289600000,
+        "close": 111152.8,
+        "high": 111526.8,
+        "low": 110239
+      },
+      {
+        "availableAt": 1757376000000,
+        "close": 112050.1,
+        "high": 112864.4,
+        "low": 110667.7
+      },
+      {
+        "availableAt": 1757462400000,
+        "close": 111541,
+        "high": 113200,
+        "low": 110815.3
+      },
+      {
+        "availableAt": 1757548800000,
+        "close": 113952.8,
+        "high": 114300,
+        "low": 110934
+      },
+      {
+        "availableAt": 1757635200000,
+        "close": 115500,
+        "high": 115500,
+        "low": 113400
+      },
+      {
+        "availableAt": 1757721600000,
+        "close": 116111.7,
+        "high": 116743.3,
+        "low": 114813.3
+      },
+      {
+        "availableAt": 1757808000000,
+        "close": 115949.1,
+        "high": 116350.8,
+        "low": 115251.1
+      },
+      {
+        "availableAt": 1757894400000,
+        "close": 115390.6,
+        "high": 116149.9,
+        "low": 115238.9
+      },
+      {
+        "availableAt": 1757980800000,
+        "close": 115374.9,
+        "high": 116700,
+        "low": 114158.2
+      },
+      {
+        "availableAt": 1758067200000,
+        "close": 116764.2,
+        "high": 116961.3,
+        "low": 114800
+      },
+      {
+        "availableAt": 1758153600000,
+        "close": 116469,
+        "high": 117291.9,
+        "low": 114799.9
+      },
+      {
+        "availableAt": 1758240000000,
+        "close": 117135.7,
+        "high": 117920,
+        "low": 116201.1
+      },
+      {
+        "availableAt": 1758326400000,
+        "close": 115677.2,
+        "high": 117441.2,
+        "low": 115180.4
+      },
+      {
+        "availableAt": 1758412800000,
+        "close": 115739.1,
+        "high": 116176.8,
+        "low": 115511
+      },
+      {
+        "availableAt": 1758499200000,
+        "close": 115298.9,
+        "high": 115874.6,
+        "low": 115259.4
+      },
+      {
+        "availableAt": 1758585600000,
+        "close": 112747.8,
+        "high": 115410,
+        "low": 111730.3
+      },
+      {
+        "availableAt": 1758672000000,
+        "close": 112001.5,
+        "high": 113318.9,
+        "low": 111557
+      },
+      {
+        "availableAt": 1758758400000,
+        "close": 113300,
+        "high": 113954.3,
+        "low": 111111
+      },
+      {
+        "availableAt": 1758844800000,
+        "close": 109049.8,
+        "high": 113500,
+        "low": 108680.5
+      },
+      {
+        "availableAt": 1758931200000,
+        "close": 109706.3,
+        "high": 110354.8,
+        "low": 108677.5
+      },
+      {
+        "availableAt": 1759017600000,
+        "close": 109720.5,
+        "high": 109760.5,
+        "low": 109177.6
+      },
+      {
+        "availableAt": 1759104000000,
+        "close": 112127.8,
+        "high": 112367.8,
+        "low": 109225.4
+      },
+      {
+        "availableAt": 1759190400000,
+        "close": 114365.2,
+        "high": 114413.4,
+        "low": 111628
+      },
+      {
+        "availableAt": 1759276800000,
+        "close": 113995,
+        "high": 114798,
+        "low": 112764.3
+      },
+      {
+        "availableAt": 1759363200000,
+        "close": 118599.9,
+        "high": 118708.6,
+        "low": 113971.1
+      },
+      {
+        "availableAt": 1759449600000,
+        "close": 120649.9,
+        "high": 121008.9,
+        "low": 118344.4
+      },
+      {
+        "availableAt": 1759536000000,
+        "close": 122259.5,
+        "high": 123930.9,
+        "low": 119350
+      },
+      {
+        "availableAt": 1759622400000,
+        "close": 122426.4,
+        "high": 122843.7,
+        "low": 121620
+      },
+      {
+        "availableAt": 1759708800000,
+        "close": 123542.1,
+        "high": 125670,
+        "low": 122250
+      },
+      {
+        "availableAt": 1759795200000,
+        "close": 124766.5,
+        "high": 126198.1,
+        "low": 123144.1
+      },
+      {
+        "availableAt": 1759881600000,
+        "close": 121419.8,
+        "high": 125207.2,
+        "low": 120694.6
+      },
+      {
+        "availableAt": 1759968000000,
+        "close": 123329.7,
+        "high": 124150,
+        "low": 121104.2
+      },
+      {
+        "availableAt": 1760054400000,
+        "close": 121699,
+        "high": 123750.9,
+        "low": 119750
+      },
+      {
+        "availableAt": 1760140800000,
+        "close": 113000.1,
+        "high": 122498,
+        "low": 100000
+      },
+      {
+        "availableAt": 1760227200000,
+        "close": 110775.1,
+        "high": 113423,
+        "low": 109760
+      },
+      {
+        "availableAt": 1760313600000,
+        "close": 115125.3,
+        "high": 115780,
+        "low": 109694.9
+      },
+      {
+        "availableAt": 1760400000000,
+        "close": 115165.5,
+        "high": 115977.7,
+        "low": 113705.8
+      },
+      {
+        "availableAt": 1760486400000,
+        "close": 113106.2,
+        "high": 115457.2,
+        "low": 110000
+      },
+      {
+        "availableAt": 1760572800000,
+        "close": 110781.9,
+        "high": 113600,
+        "low": 110252
+      },
+      {
+        "availableAt": 1760659200000,
+        "close": 108182.3,
+        "high": 111950,
+        "low": 107483
+      },
+      {
+        "availableAt": 1760745600000,
+        "close": 106451,
+        "high": 109245,
+        "low": 103583.2
+      },
+      {
+        "availableAt": 1760832000000,
+        "close": 107199,
+        "high": 107492.6,
+        "low": 106365.2
+      },
+      {
+        "availableAt": 1760918400000,
+        "close": 108669.8,
+        "high": 109444,
+        "low": 106125.2
+      },
+      {
+        "availableAt": 1761004800000,
+        "close": 110574.4,
+        "high": 111700.1,
+        "low": 107466.8
+      },
+      {
+        "availableAt": 1761091200000,
+        "close": 108406.1,
+        "high": 114000,
+        "low": 107500
+      },
+      {
+        "availableAt": 1761177600000,
+        "close": 107644.1,
+        "high": 109156.4,
+        "low": 106717
+      },
+      {
+        "availableAt": 1761264000000,
+        "close": 110080,
+        "high": 111296,
+        "low": 107556.3
+      },
+      {
+        "availableAt": 1761350400000,
+        "close": 111000,
+        "high": 112400,
+        "low": 109757.8
+      },
+      {
+        "availableAt": 1761436800000,
+        "close": 111645.2,
+        "high": 111925.9,
+        "low": 110700
+      },
+      {
+        "availableAt": 1761523200000,
+        "close": 114509.9,
+        "high": 115400,
+        "low": 111274.3
+      },
+      {
+        "availableAt": 1761609600000,
+        "close": 114153,
+        "high": 116309.8,
+        "low": 113801.4
+      },
+      {
+        "availableAt": 1761696000000,
+        "close": 112918,
+        "high": 116023.4,
+        "low": 112278.2
+      },
+      {
+        "availableAt": 1761782400000,
+        "close": 110104.2,
+        "high": 113601,
+        "low": 109251
+      },
+      {
+        "availableAt": 1761868800000,
+        "close": 108302.7,
+        "high": 111561.5,
+        "low": 106280.5
+      },
+      {
+        "availableAt": 1761955200000,
+        "close": 109552.7,
+        "high": 111000,
+        "low": 108302.6
+      },
+      {
+        "availableAt": 1762041600000,
+        "close": 110018,
+        "high": 110421,
+        "low": 109370
+      },
+      {
+        "availableAt": 1762128000000,
+        "close": 110589.6,
+        "high": 111058.9,
+        "low": 109428.7
+      },
+      {
+        "availableAt": 1762214400000,
+        "close": 106538.3,
+        "high": 110699.6,
+        "low": 105200.2
+      },
+      {
+        "availableAt": 1762300800000,
+        "close": 101537.3,
+        "high": 107258.7,
+        "low": 98900
+      },
+      {
+        "availableAt": 1762387200000,
+        "close": 103900,
+        "high": 104499.9,
+        "low": 98943.9
+      },
+      {
+        "availableAt": 1762473600000,
+        "close": 101290.1,
+        "high": 104115.9,
+        "low": 100266
+      },
+      {
+        "availableAt": 1762560000000,
+        "close": 103279.9,
+        "high": 103995,
+        "low": 99222
+      },
+      {
+        "availableAt": 1762646400000,
+        "close": 102282.1,
+        "high": 103320,
+        "low": 101489.9
+      },
+      {
+        "availableAt": 1762732800000,
+        "close": 104729.8,
+        "high": 105431.9,
+        "low": 101430
+      },
+      {
+        "availableAt": 1762819200000,
+        "close": 105973.3,
+        "high": 106593.5,
+        "low": 104300
+      },
+      {
+        "availableAt": 1762905600000,
+        "close": 103011.5,
+        "high": 107400,
+        "low": 102469.8
+      },
+      {
+        "availableAt": 1762992000000,
+        "close": 101666.6,
+        "high": 105274,
+        "low": 100796
+      },
+      {
+        "availableAt": 1763078400000,
+        "close": 99680.1,
+        "high": 103999,
+        "low": 98000
+      },
+      {
+        "availableAt": 1763164800000,
+        "close": 94517.3,
+        "high": 99806.9,
+        "low": 94000
+      },
+      {
+        "availableAt": 1763251200000,
+        "close": 95537.9,
+        "high": 96700,
+        "low": 94478.5
+      },
+      {
+        "availableAt": 1763337600000,
+        "close": 94190.1,
+        "high": 96498.8,
+        "low": 92890.6
+      },
+      {
+        "availableAt": 1763424000000,
+        "close": 92101.3,
+        "high": 95888,
+        "low": 91150
+      },
+      {
+        "availableAt": 1763510400000,
+        "close": 92966.1,
+        "high": 93747.3,
+        "low": 89251.9
+      },
+      {
+        "availableAt": 1763596800000,
+        "close": 91427.7,
+        "high": 92966.1,
+        "low": 88547
+      },
+      {
+        "availableAt": 1763683200000,
+        "close": 86503,
+        "high": 93003.7,
+        "low": 86000
+      },
+      {
+        "availableAt": 1763769600000,
+        "close": 85069.4,
+        "high": 87331.7,
+        "low": 80595.2
+      },
+      {
+        "availableAt": 1763856000000,
+        "close": 84679.9,
+        "high": 85555,
+        "low": 83432.8
+      },
+      {
+        "availableAt": 1763942400000,
+        "close": 86777.4,
+        "high": 88061.8,
+        "low": 84679.8
+      },
+      {
+        "availableAt": 1764028800000,
+        "close": 88275,
+        "high": 89200,
+        "low": 85250
+      },
+      {
+        "availableAt": 1764115200000,
+        "close": 87326.3,
+        "high": 88432.1,
+        "low": 86100
+      },
+      {
+        "availableAt": 1764201600000,
+        "close": 90535.7,
+        "high": 90600,
+        "low": 86299.5
+      },
+      {
+        "availableAt": 1764288000000,
+        "close": 91281.4,
+        "high": 91878.9,
+        "low": 90088.8
+      },
+      {
+        "availableAt": 1764374400000,
+        "close": 90912.7,
+        "high": 93050,
+        "low": 90250
+      },
+      {
+        "availableAt": 1764460800000,
+        "close": 90833.6,
+        "high": 91179.5,
+        "low": 90247.4
+      },
+      {
+        "availableAt": 1764547200000,
+        "close": 90373.9,
+        "high": 91928.1,
+        "low": 90351
+      },
+      {
+        "availableAt": 1764633600000,
+        "close": 86300,
+        "high": 90378.7,
+        "low": 83870.8
+      },
+      {
+        "availableAt": 1764720000000,
+        "close": 91313.5,
+        "high": 92308.4,
+        "low": 86203.8
+      },
+      {
+        "availableAt": 1764806400000,
+        "close": 93457.9,
+        "high": 94051.6,
+        "low": 91033.4
+      },
+      {
+        "availableAt": 1764892800000,
+        "close": 92142.6,
+        "high": 94000,
+        "low": 90924.8
+      },
+      {
+        "availableAt": 1764979200000,
+        "close": 89332.4,
+        "high": 92679.3,
+        "low": 88095.2
+      },
+      {
+        "availableAt": 1765065600000,
+        "close": 89240.1,
+        "high": 90274.4,
+        "low": 88999.9
+      },
+      {
+        "availableAt": 1765152000000,
+        "close": 90435.1,
+        "high": 91713.7,
+        "low": 87777
+      },
+      {
+        "availableAt": 1765238400000,
+        "close": 90650.1,
+        "high": 92269.6,
+        "low": 89615.8
+      },
+      {
+        "availableAt": 1765324800000,
+        "close": 92702.2,
+        "high": 94583.7,
+        "low": 89545.1
+      },
+      {
+        "availableAt": 1765411200000,
+        "close": 92019.8,
+        "high": 94489,
+        "low": 91599
+      },
+      {
+        "availableAt": 1765497600000,
+        "close": 92541,
+        "high": 93561.8,
+        "low": 89281.4
+      },
+      {
+        "availableAt": 1765584000000,
+        "close": 90277.2,
+        "high": 92751,
+        "low": 89500
+      },
+      {
+        "availableAt": 1765670400000,
+        "close": 90254.1,
+        "high": 90629.9,
+        "low": 89797.1
+      },
+      {
+        "availableAt": 1765756800000,
+        "close": 88163,
+        "high": 90467.7,
+        "low": 87582.5
+      },
+      {
+        "availableAt": 1765843200000,
+        "close": 86434.3,
+        "high": 90038.8,
+        "low": 85151.5
+      },
+      {
+        "availableAt": 1765929600000,
+        "close": 87840.7,
+        "high": 88121.3,
+        "low": 85263.6
+      },
+      {
+        "availableAt": 1766016000000,
+        "close": 86207.8,
+        "high": 90318.3,
+        "low": 85282.2
+      },
+      {
+        "availableAt": 1766102400000,
+        "close": 85462.5,
+        "high": 89437.1,
+        "low": 84421.4
+      },
+      {
+        "availableAt": 1766188800000,
+        "close": 88105.2,
+        "high": 89335,
+        "low": 85077
+      },
+      {
+        "availableAt": 1766275200000,
+        "close": 88338.1,
+        "high": 88513.3,
+        "low": 87800
+      },
+      {
+        "availableAt": 1766361600000,
+        "close": 88622.2,
+        "high": 89013.9,
+        "low": 87601.8
+      },
+      {
+        "availableAt": 1766448000000,
+        "close": 88544.2,
+        "high": 90552.6,
+        "low": 87863.6
+      },
+      {
+        "availableAt": 1766534400000,
+        "close": 87416.4,
+        "high": 88888.8,
+        "low": 86553.3
+      },
+      {
+        "availableAt": 1766620800000,
+        "close": 87613.7,
+        "high": 87973.3,
+        "low": 86271.4
+      },
+      {
+        "availableAt": 1766707200000,
+        "close": 87198,
+        "high": 88547.9,
+        "low": 86944.9
+      },
+      {
+        "availableAt": 1766793600000,
+        "close": 87303.6,
+        "high": 89484.6,
+        "low": 86611.7
+      },
+      {
+        "availableAt": 1766880000000,
+        "close": 87802.6,
+        "high": 87913.3,
+        "low": 87177.5
+      },
+      {
+        "availableAt": 1766966400000,
+        "close": 87853.3,
+        "high": 87998.9,
+        "low": 87364.3
+      },
+      {
+        "availableAt": 1767052800000,
+        "close": 87135.1,
+        "high": 90298.9,
+        "low": 86700
+      },
+      {
+        "availableAt": 1767139200000,
+        "close": 88401.9,
+        "high": 89298,
+        "low": 86736.5
+      },
+      {
+        "availableAt": 1767225600000,
+        "close": 87500.1,
+        "high": 89067.4,
+        "low": 87101.5
+      },
+      {
+        "availableAt": 1767312000000,
+        "close": 88731.8,
+        "high": 88779.3,
+        "low": 87400
+      },
+      {
+        "availableAt": 1767398400000,
+        "close": 89934,
+        "high": 90900,
+        "low": 88273.3
+      },
+      {
+        "availableAt": 1767484800000,
+        "close": 90590.1,
+        "high": 90677.5,
+        "low": 89300
+      },
+      {
+        "availableAt": 1767571200000,
+        "close": 91507,
+        "high": 91768.3,
+        "low": 90590
+      },
+      {
+        "availableAt": 1767657600000,
+        "close": 93866.9,
+        "high": 94783.9,
+        "low": 91489.5
+      },
+      {
+        "availableAt": 1767744000000,
+        "close": 93711.8,
+        "high": 94401.8,
+        "low": 91230.8
+      },
+      {
+        "availableAt": 1767830400000,
+        "close": 91273.3,
+        "high": 93712.5,
+        "low": 90591.9
+      },
+      {
+        "availableAt": 1767916800000,
+        "close": 91029.1,
+        "high": 91584.7,
+        "low": 89225
+      },
+      {
+        "availableAt": 1768003200000,
+        "close": 90513.2,
+        "high": 91955.9,
+        "low": 89603.4
+      },
+      {
+        "availableAt": 1768089600000,
+        "close": 90375.2,
+        "high": 90699.7,
+        "low": 90285.2
+      },
+      {
+        "availableAt": 1768176000000,
+        "close": 90849.8,
+        "high": 91132.3,
+        "low": 90100
+      },
+      {
+        "availableAt": 1768262400000,
+        "close": 91190.9,
+        "high": 92364.1,
+        "low": 89995.2
+      },
+      {
+        "availableAt": 1768348800000,
+        "close": 95358.1,
+        "high": 96476.1,
+        "low": 90938.2
+      },
+      {
+        "availableAt": 1768435200000,
+        "close": 96933.3,
+        "high": 97899.7,
+        "low": 94509
+      },
+      {
+        "availableAt": 1768521600000,
+        "close": 95559.4,
+        "high": 97151.1,
+        "low": 95101
+      },
+      {
+        "availableAt": 1768608000000,
+        "close": 95510.9,
+        "high": 95800,
+        "low": 94260.4
+      },
+      {
+        "availableAt": 1768694400000,
+        "close": 95089.9,
+        "high": 95600,
+        "low": 95002.6
+      },
+      {
+        "availableAt": 1768780800000,
+        "close": 93632.6,
+        "high": 95480.8,
+        "low": 93554.6
+      },
+      {
+        "availableAt": 1768867200000,
+        "close": 92546.5,
+        "high": 93626.8,
+        "low": 91866
+      },
+      {
+        "availableAt": 1768953600000,
+        "close": 88309.9,
+        "high": 92805.9,
+        "low": 87784.4
+      },
+      {
+        "availableAt": 1769040000000,
+        "close": 89372.9,
+        "high": 91111.7,
+        "low": 87200
+      },
+      {
+        "availableAt": 1769126400000,
+        "close": 89454.2,
+        "high": 90261.7,
+        "low": 88422.6
+      },
+      {
+        "availableAt": 1769212800000,
+        "close": 89495,
+        "high": 91099.5,
+        "low": 88470.9
+      },
+      {
+        "availableAt": 1769299200000,
+        "close": 89079.6,
+        "high": 89786.3,
+        "low": 89038.1
+      },
+      {
+        "availableAt": 1769385600000,
+        "close": 86572.3,
+        "high": 89177,
+        "low": 86007
+      },
+      {
+        "availableAt": 1769472000000,
+        "close": 88247.4,
+        "high": 88747.4,
+        "low": 86430.5
+      },
+      {
+        "availableAt": 1769558400000,
+        "close": 89124.1,
+        "high": 89436.2,
+        "low": 87206.2
+      },
+      {
+        "availableAt": 1769644800000,
+        "close": 89159.6,
+        "high": 90438.3,
+        "low": 88719.2
+      },
+      {
+        "availableAt": 1769731200000,
+        "close": 84515.1,
+        "high": 89202.7,
+        "low": 83220.3
+      },
+      {
+        "availableAt": 1769817600000,
+        "close": 84124.7,
+        "high": 84596.4,
+        "low": 81000.1
+      },
+      {
+        "availableAt": 1769904000000,
+        "close": 78648.4,
+        "high": 84124.7,
+        "low": 75600
+      },
+      {
+        "availableAt": 1769990400000,
+        "close": 76882.2,
+        "high": 79315.2,
+        "low": 75665.8
+      },
+      {
+        "availableAt": 1770076800000,
+        "close": 78669.2,
+        "high": 79250,
+        "low": 74543
+      },
+      {
+        "availableAt": 1770163200000,
+        "close": 75662,
+        "high": 79120.2,
+        "low": 72865.2
+      },
+      {
+        "availableAt": 1770249600000,
+        "close": 73013.6,
+        "high": 76866.2,
+        "low": 71722
+      },
+      {
+        "availableAt": 1770336000000,
+        "close": 62858.1,
+        "high": 73156.8,
+        "low": 62308.2
+      },
+      {
+        "availableAt": 1770422400000,
+        "close": 70527.4,
+        "high": 71695.7,
+        "low": 60500
+      },
+      {
+        "availableAt": 1770508800000,
+        "close": 69268.8,
+        "high": 71631.2,
+        "low": 67343.8
+      },
+      {
+        "availableAt": 1770595200000,
+        "close": 70305,
+        "high": 72256.1,
+        "low": 68855.4
+      },
+      {
+        "availableAt": 1770681600000,
+        "close": 70087.2,
+        "high": 71369.9,
+        "low": 68242.5
+      },
+      {
+        "availableAt": 1770768000000,
+        "close": 68785.5,
+        "high": 70468.6,
+        "low": 67875.1
+      },
+      {
+        "availableAt": 1770854400000,
+        "close": 67052.3,
+        "high": 69228.6,
+        "low": 65727.7
+      },
+      {
+        "availableAt": 1770940800000,
+        "close": 66203.8,
+        "high": 68353.3,
+        "low": 65072.2
+      },
+      {
+        "availableAt": 1771027200000,
+        "close": 68837,
+        "high": 69437.4,
+        "low": 65825.8
+      },
+      {
+        "availableAt": 1771113600000,
+        "close": 69758.4,
+        "high": 70540,
+        "low": 68709.7
+      },
+      {
+        "availableAt": 1771200000000,
+        "close": 68780,
+        "high": 70935.2,
+        "low": 68049.8
+      },
+      {
+        "availableAt": 1771286400000,
+        "close": 68860,
+        "high": 70073.2,
+        "low": 67271.1
+      },
+      {
+        "availableAt": 1771372800000,
+        "close": 67475.4,
+        "high": 69191,
+        "low": 66592.4
+      },
+      {
+        "availableAt": 1771459200000,
+        "close": 66425.7,
+        "high": 68418.9,
+        "low": 65838.5
+      },
+      {
+        "availableAt": 1771545600000,
+        "close": 66955.3,
+        "high": 67296.2,
+        "low": 65620.1
+      },
+      {
+        "availableAt": 1771632000000,
+        "close": 67998.2,
+        "high": 68266.3,
+        "low": 66450
+      },
+      {
+        "availableAt": 1771718400000,
+        "close": 67966.6,
+        "high": 68678.8,
+        "low": 67538
+      },
+      {
+        "availableAt": 1771804800000,
+        "close": 67612.1,
+        "high": 68214.5,
+        "low": 67180
+      },
+      {
+        "availableAt": 1771891200000,
+        "close": 64624.1,
+        "high": 67653.3,
+        "low": 63888
+      },
+      {
+        "availableAt": 1771977600000,
+        "close": 64061.9,
+        "high": 64971,
+        "low": 62500
+      },
+      {
+        "availableAt": 1772064000000,
+        "close": 67978.6,
+        "high": 70000,
+        "low": 63921.3
+      },
+      {
+        "availableAt": 1772150400000,
+        "close": 67461.5,
+        "high": 68855.4,
+        "low": 66513
+      },
+      {
+        "availableAt": 1772236800000,
+        "close": 65869.7,
+        "high": 68202.3,
+        "low": 64925
+      },
+      {
+        "availableAt": 1772323200000,
+        "close": 66985.6,
+        "high": 67725.2,
+        "low": 63030
+      },
+      {
+        "availableAt": 1772409600000,
+        "close": 65748.8,
+        "high": 68181.2,
+        "low": 65056.4
+      },
+      {
+        "availableAt": 1772496000000,
+        "close": 68808.4,
+        "high": 70100,
+        "low": 65269.2
+      },
+      {
+        "availableAt": 1772582400000,
+        "close": 68336.7,
+        "high": 69236.5,
+        "low": 66164.3
+      },
+      {
+        "availableAt": 1772668800000,
+        "close": 72684.8,
+        "high": 74062.1,
+        "low": 67419.7
+      },
+      {
+        "availableAt": 1772755200000,
+        "close": 70877.4,
+        "high": 73585.9,
+        "low": 70612.7
+      },
+      {
+        "availableAt": 1772841600000,
+        "close": 68128,
+        "high": 71386.4,
+        "low": 67748
+      },
+      {
+        "availableAt": 1772928000000,
+        "close": 67270.1,
+        "high": 68541.5,
+        "low": 66962.1
+      },
+      {
+        "availableAt": 1773014400000,
+        "close": 65978.7,
+        "high": 68177.4,
+        "low": 65646.2
+      },
+      {
+        "availableAt": 1773100800000,
+        "close": 68446.9,
+        "high": 69513,
+        "low": 65839.6
+      },
+      {
+        "availableAt": 1773187200000,
+        "close": 69955.4,
+        "high": 71781.1,
+        "low": 68399.9
+      },
+      {
+        "availableAt": 1773273600000,
+        "close": 70200.4,
+        "high": 71345.2,
+        "low": 68971.6
+      },
+      {
+        "availableAt": 1773360000000,
+        "close": 70520.8,
+        "high": 70787.1,
+        "low": 69228.2
+      },
+      {
+        "availableAt": 1773446400000,
+        "close": 70953,
+        "high": 73928.5,
+        "low": 70200
+      },
+      {
+        "availableAt": 1773532800000,
+        "close": 71210.6,
+        "high": 71300,
+        "low": 70293.9
+      },
+      {
+        "availableAt": 1773619200000,
+        "close": 72835.7,
+        "high": 73200,
+        "low": 70885.7
+      },
+      {
+        "availableAt": 1773705600000,
+        "close": 74887.7,
+        "high": 74901.3,
+        "low": 72304
+      },
+      {
+        "availableAt": 1773792000000,
+        "close": 73929.9,
+        "high": 75998.1,
+        "low": 73455.9
+      },
+      {
+        "availableAt": 1773878400000,
+        "close": 71270.9,
+        "high": 74682.3,
+        "low": 70500
+      },
+      {
+        "availableAt": 1773964800000,
+        "close": 69911.9,
+        "high": 71623.9,
+        "low": 68782
+      },
+      {
+        "availableAt": 1774051200000,
+        "close": 70515.6,
+        "high": 71340.6,
+        "low": 69400
+      },
+      {
+        "availableAt": 1774137600000,
+        "close": 68907.7,
+        "high": 71071.7,
+        "low": 68538.3
+      },
+      {
+        "availableAt": 1774224000000,
+        "close": 67857.1,
+        "high": 69569.5,
+        "low": 67343.1
+      },
+      {
+        "availableAt": 1774310400000,
+        "close": 70887.2,
+        "high": 71816.6,
+        "low": 67443.2
+      },
+      {
+        "availableAt": 1774396800000,
+        "close": 70515.6,
+        "high": 71369,
+        "low": 68902
+      },
+      {
+        "availableAt": 1774483200000,
+        "close": 71309.6,
+        "high": 71985,
+        "low": 70374
+      },
+      {
+        "availableAt": 1774569600000,
+        "close": 68780.4,
+        "high": 71406.2,
+        "low": 68115.8
+      },
+      {
+        "availableAt": 1774656000000,
+        "close": 66358.3,
+        "high": 69112,
+        "low": 65519.7
+      },
+      {
+        "availableAt": 1774742400000,
+        "close": 66321.7,
+        "high": 67237.8,
+        "low": 65889
+      },
+      {
+        "availableAt": 1774828800000,
+        "close": 65950.3,
+        "high": 67066.2,
+        "low": 64960
+      },
+      {
+        "availableAt": 1774915200000,
+        "close": 66725,
+        "high": 68105.1,
+        "low": 65733.2
+      },
+      {
+        "availableAt": 1775001600000,
+        "close": 68219.7,
+        "high": 68500,
+        "low": 65939
+      },
+      {
+        "availableAt": 1775088000000,
+        "close": 68098.5,
+        "high": 69250,
+        "low": 67546.2
+      },
+      {
+        "availableAt": 1775174400000,
+        "close": 66880.8,
+        "high": 68632.7,
+        "low": 65688.2
+      },
+      {
+        "availableAt": 1775260800000,
+        "close": 66933,
+        "high": 67369,
+        "low": 66288
+      },
+      {
+        "availableAt": 1775347200000,
+        "close": 67283.8,
+        "high": 67534,
+        "low": 66790
+      },
+      {
+        "availableAt": 1775433600000,
+        "close": 68983.7,
+        "high": 69098.9,
+        "low": 66618
+      },
+      {
+        "availableAt": 1775520000000,
+        "close": 68861.4,
+        "high": 70463.7,
+        "low": 68350
+      },
+      {
+        "availableAt": 1775606400000,
+        "close": 71925,
+        "high": 72728,
+        "low": 67734.9
+      },
+      {
+        "availableAt": 1775692800000,
+        "close": 71109,
+        "high": 72850,
+        "low": 70703
+      },
+      {
+        "availableAt": 1775779200000,
+        "close": 71803.5,
+        "high": 73130.5,
+        "low": 70465.1
+      },
+      {
+        "availableAt": 1775865600000,
+        "close": 72973.8,
+        "high": 73455,
+        "low": 71429.8
+      },
+      {
+        "availableAt": 1775952000000,
+        "close": 73060.6,
+        "high": 73800,
+        "low": 72578.8
+      },
+      {
+        "availableAt": 1776038400000,
+        "close": 70754.1,
+        "high": 73150,
+        "low": 70517.7
+      },
+      {
+        "availableAt": 1776124800000,
+        "close": 74441.7,
+        "high": 74966.2,
+        "low": 70595.6
+      },
+      {
+        "availableAt": 1776211200000,
+        "close": 74171.4,
+        "high": 76088.3,
+        "low": 73858.9
+      },
+      {
+        "availableAt": 1776297600000,
+        "close": 74810.1,
+        "high": 75438.8,
+        "low": 73558.1
+      },
+      {
+        "availableAt": 1776384000000,
+        "close": 75162.9,
+        "high": 75500,
+        "low": 73310.6
+      },
+      {
+        "availableAt": 1776470400000,
+        "close": 77117.4,
+        "high": 78343.6,
+        "low": 74569.8
+      },
+      {
+        "availableAt": 1776556800000,
+        "close": 75728.8,
+        "high": 77432.1,
+        "low": 75500
+      },
+      {
+        "availableAt": 1776643200000,
+        "close": 73827.6,
+        "high": 76274.6,
+        "low": 73809.7
+      },
+      {
+        "availableAt": 1776729600000,
+        "close": 75848.3,
+        "high": 76588,
+        "low": 73637.3
+      },
+      {
+        "availableAt": 1776816000000,
+        "close": 76351.9,
+        "high": 77169.6,
+        "low": 74850
+      },
+      {
+        "availableAt": 1776902400000,
+        "close": 78204,
+        "high": 79490.7,
+        "low": 76151.3
+      },
+      {
+        "availableAt": 1776988800000,
+        "close": 78283.6,
+        "high": 78690.1,
+        "low": 76984.3
+      },
+      {
+        "availableAt": 1777075200000,
+        "close": 77455,
+        "high": 78580.7,
+        "low": 77282.6
+      },
+      {
+        "availableAt": 1777161600000,
+        "close": 77648.5,
+        "high": 77876.3,
+        "low": 77145.3
+      },
+      {
+        "availableAt": 1777248000000,
+        "close": 78653.8,
+        "high": 78964.8,
+        "low": 77356.2
+      },
+      {
+        "availableAt": 1777334400000,
+        "close": 77374.7,
+        "high": 79481.2,
+        "low": 76480.4
+      },
+      {
+        "availableAt": 1777420800000,
+        "close": 76331.9,
+        "high": 77799,
+        "low": 75652.1
+      },
+      {
+        "availableAt": 1777507200000,
+        "close": 75750.3,
+        "high": 77888,
+        "low": 74940
+      },
+      {
+        "availableAt": 1777593600000,
+        "close": 76313,
+        "high": 76634.1,
+        "low": 75290.9
+      },
+      {
+        "availableAt": 1777680000000,
+        "close": 78235.3,
+        "high": 78900,
+        "low": 76284.2
+      },
+      {
+        "availableAt": 1777766400000,
+        "close": 78660,
+        "high": 79140,
+        "low": 78045
+      },
+      {
+        "availableAt": 1777852800000,
+        "close": 78547.4,
+        "high": 79400,
+        "low": 78078.7
+      },
+      {
+        "availableAt": 1777939200000,
+        "close": 79843.7,
+        "high": 80770.7,
+        "low": 78209.2
+      },
+      {
+        "availableAt": 1778025600000,
+        "close": 80900.8,
+        "high": 81765.8,
+        "low": 79808
+      },
+      {
+        "availableAt": 1778112000000,
+        "close": 81438,
+        "high": 82790.9,
+        "low": 80728.1
+      },
+      {
+        "availableAt": 1778198400000,
+        "close": 80011.5,
+        "high": 81705,
+        "low": 79368.7
+      },
+      {
+        "availableAt": 1778284800000,
+        "close": 80196.9,
+        "high": 80465.8,
+        "low": 79168.1
+      },
+      {
+        "availableAt": 1778371200000,
+        "close": 80670.1,
+        "high": 81050,
+        "low": 80124
+      },
+      {
+        "availableAt": 1778457600000,
+        "close": 82171.8,
+        "high": 82436.6,
+        "low": 80301
+      },
+      {
+        "availableAt": 1778544000000,
+        "close": 81730.5,
+        "high": 82345.1,
+        "low": 80421.5
+      },
+      {
+        "availableAt": 1778630400000,
+        "close": 80492.3,
+        "high": 81760.4,
+        "low": 79844.4
+      },
+      {
+        "availableAt": 1778716800000,
+        "close": 79292.1,
+        "high": 81277,
+        "low": 78720.9
+      },
+      {
+        "availableAt": 1778803200000,
+        "close": 81070.1,
+        "high": 82017.4,
+        "low": 78901.6
+      },
+      {
+        "availableAt": 1778889600000,
+        "close": 79062.5,
+        "high": 81646.5,
+        "low": 78620
+      },
+      {
+        "availableAt": 1778976000000,
+        "close": 78122.8,
+        "high": 79175,
+        "low": 77624.4
+      },
+      {
+        "availableAt": 1779062400000,
+        "close": 77410,
+        "high": 78579.1,
+        "low": 76642.3
+      },
+      {
+        "availableAt": 1779148800000,
+        "close": 76946.5,
+        "high": 77745.5,
+        "low": 76020.8
+      },
+      {
+        "availableAt": 1779235200000,
+        "close": 76756.3,
+        "high": 77336.2,
+        "low": 76093.6
+      },
+      {
+        "availableAt": 1779321600000,
+        "close": 77479.4,
+        "high": 77750,
+        "low": 76459.6
+      },
+      {
+        "availableAt": 1779408000000,
+        "close": 77549.7,
+        "high": 78100,
+        "low": 76652.5
+      },
+      {
+        "availableAt": 1779494400000,
+        "close": 75456.5,
+        "high": 77809.9,
+        "low": 75288
+      },
+      {
+        "availableAt": 1779580800000,
+        "close": 76670.1,
+        "high": 77308.2,
+        "low": 74209.4
+      },
+      {
+        "availableAt": 1779667200000,
+        "close": 76984.9,
+        "high": 77421.2,
+        "low": 76020.5
+      },
+      {
+        "availableAt": 1779753600000,
+        "close": 77265.9,
+        "high": 77809.9,
+        "low": 76833.8
+      },
+      {
+        "availableAt": 1779840000000,
+        "close": 75824,
+        "high": 77989.3,
+        "low": 75555.3
+      },
+      {
+        "availableAt": 1779926400000,
+        "close": 74337.1,
+        "high": 76041.7,
+        "low": 74121
+      },
+      {
+        "availableAt": 1780012800000,
+        "close": 73515.7,
+        "high": 74467.1,
+        "low": 72470
+      },
+      {
+        "availableAt": 1780099200000,
+        "close": 73370.7,
+        "high": 74200,
+        "low": 72362.8
+      },
+      {
+        "availableAt": 1780185600000,
+        "close": 73753.7,
+        "high": 74004.4,
+        "low": 73131
+      },
+      {
+        "availableAt": 1780272000000,
+        "close": 73570,
+        "high": 74161,
+        "low": 73272.9
+      },
+      {
+        "availableAt": 1780358400000,
+        "close": 71317.5,
+        "high": 73960,
+        "low": 70581.5
+      },
+      {
+        "availableAt": 1780444800000,
+        "close": 66669.7,
+        "high": 71315.5,
+        "low": 66111.8
+      },
+      {
+        "availableAt": 1780531200000,
+        "close": 64035.8,
+        "high": 67420,
+        "low": 64000
+      },
+      {
+        "availableAt": 1780617600000,
+        "close": 63814,
+        "high": 64686.1,
+        "low": 61255.9
+      },
+      {
+        "availableAt": 1780704000000,
+        "close": 61037.9,
+        "high": 63905.3,
+        "low": 59070.6
+      },
+      {
+        "availableAt": 1780790400000,
+        "close": 60855.7,
+        "high": 61496.2,
+        "low": 59493.5
+      },
+      {
+        "availableAt": 1780876800000,
+        "close": 63307.6,
+        "high": 64613,
+        "low": 60714.4
+      },
+      {
+        "availableAt": 1780963200000,
+        "close": 63076.4,
+        "high": 64189,
+        "low": 62388.2
+      },
+      {
+        "availableAt": 1781049600000,
+        "close": 61690.4,
+        "high": 63467.9,
+        "low": 60740.9
+      },
+      {
+        "availableAt": 1781136000000,
+        "close": 61464.4,
+        "high": 62800,
+        "low": 60746.8
+      },
+      {
+        "availableAt": 1781222400000,
+        "close": 63552.3,
+        "high": 63845.9,
+        "low": 61459
+      },
+      {
+        "availableAt": 1781308800000,
+        "close": 63543.2,
+        "high": 64333,
+        "low": 62765.3
+      },
+      {
+        "availableAt": 1781395200000,
+        "close": 64404,
+        "high": 64750,
+        "low": 63418.5
+      },
+      {
+        "availableAt": 1781481600000,
+        "close": 65715.1,
+        "high": 65750,
+        "low": 63643.3
+      },
+      {
+        "availableAt": 1781568000000,
+        "close": 66284.3,
+        "high": 67263.5,
+        "low": 65321.7
+      },
+      {
+        "availableAt": 1781654400000,
+        "close": 65609.5,
+        "high": 66922.4,
+        "low": 65289.8
+      },
+      {
+        "availableAt": 1781740800000,
+        "close": 64454.8,
+        "high": 66370.9,
+        "low": 63866.5
+      },
+      {
+        "availableAt": 1781827200000,
+        "close": 62885.6,
+        "high": 64740.9,
+        "low": 62187
+      },
+      {
+        "availableAt": 1781913600000,
+        "close": 63486.4,
+        "high": 63590.9,
+        "low": 62236.1
+      },
+      {
+        "availableAt": 1782000000000,
+        "close": 64250.1,
+        "high": 64336.4,
+        "low": 63141.3
+      },
+      {
+        "availableAt": 1782086400000,
+        "close": 63234,
+        "high": 64493.6,
+        "low": 63214
+      },
+      {
+        "availableAt": 1782172800000,
+        "close": 63953.6,
+        "high": 65542.1,
+        "low": 63234
+      },
+      {
+        "availableAt": 1782259200000,
+        "close": 62650.3,
+        "high": 64200,
+        "low": 61881.1
+      },
+      {
+        "availableAt": 1782345600000,
+        "close": 60980.8,
+        "high": 63138.7,
+        "low": 59001
+      },
+      {
+        "availableAt": 1782432000000,
+        "close": 59707.1,
+        "high": 61858.8,
+        "low": 58033
+      },
+      {
+        "availableAt": 1782518400000,
+        "close": 60009.2,
+        "high": 60666,
+        "low": 58265
+      },
+      {
+        "availableAt": 1782604800000,
+        "close": 59941.5,
+        "high": 60856.3,
+        "low": 59763.1
+      },
+      {
+        "availableAt": 1782691200000,
+        "close": 59489.5,
+        "high": 60441.1,
+        "low": 58832.8
+      },
+      {
+        "availableAt": 1782777600000,
+        "close": 60157.3,
+        "high": 60687,
+        "low": 58818.6
+      },
+      {
+        "availableAt": 1782864000000,
+        "close": 58531.9,
+        "high": 60172.5,
+        "low": 58100
+      },
+      {
+        "availableAt": 1782950400000,
+        "close": 59959.4,
+        "high": 61270,
+        "low": 57740
+      },
+      {
+        "availableAt": 1783036800000,
+        "close": 61484.4,
+        "high": 62137.2,
+        "low": 59529.6
+      },
+      {
+        "availableAt": 1783123200000,
+        "close": 62546.8,
+        "high": 62881.7,
+        "low": 61173.9
+      },
+      {
+        "availableAt": 1783209600000,
+        "close": 63085.8,
+        "high": 63443.4,
+        "low": 62290.9
+      },
+      {
+        "availableAt": 1783296000000,
+        "close": 63593,
+        "high": 63925.9,
+        "low": 62393.3
+      },
+      {
+        "availableAt": 1783382400000,
+        "close": 64005.1,
+        "high": 64675,
+        "low": 61271.2
+      },
+      {
+        "availableAt": 1783468800000,
+        "close": 63304,
+        "high": 64258,
+        "low": 62613.3
+      },
+      {
+        "availableAt": 1783555200000,
+        "close": 62241.1,
+        "high": 63706.4,
+        "low": 61472.9
+      },
+      {
+        "availableAt": 1783641600000,
+        "close": 63174,
+        "high": 63490.3,
+        "low": 61650
+      },
+      {
+        "availableAt": 1783728000000,
+        "close": 64126.4,
+        "high": 64635,
+        "low": 62895.1
+      },
+      {
+        "availableAt": 1783814400000,
+        "close": 63779.5,
+        "high": 64442.5,
+        "low": 63779.5
+      },
+      {
+        "availableAt": 1783900800000,
+        "close": 63737.4,
+        "high": 64240.9,
+        "low": 63600.8
+      },
+      {
+        "availableAt": 1783987200000,
+        "close": 62253.5,
+        "high": 64364.6,
+        "low": 61765
+      },
+      {
+        "availableAt": 1784073600000,
+        "close": 64977.2,
+        "high": 65056.3,
+        "low": 62203.4
+      },
+      {
+        "availableAt": 1784160000000,
+        "close": 64709.4,
+        "high": 65513.8,
+        "low": 64433.3
+      },
+      {
+        "availableAt": 1784246400000,
+        "close": 63789.5,
+        "high": 64939.3,
+        "low": 63705.1
+      },
+      {
+        "availableAt": 1784332800000,
+        "close": 63907,
+        "high": 64334.3,
+        "low": 62490
+      },
+      {
+        "availableAt": 1784419200000,
+        "close": 64796.7,
+        "high": 64806.8,
+        "low": 63844.7
+      },
+      {
+        "availableAt": 1784505600000,
+        "close": 64678.1,
+        "high": 64928,
+        "low": 64256
+      },
+      {
+        "availableAt": 1784592000000,
+        "close": 65215.7,
+        "high": 65757,
+        "low": 63691.6
+      },
+      {
+        "availableAt": 1784678400000,
+        "close": 66511.7,
+        "high": 66907.3,
+        "low": 65115.2
+      },
+      {
+        "availableAt": 1784764800000,
+        "close": 66072.5,
+        "high": 66698.4,
+        "low": 65504.5
+      },
+      {
+        "availableAt": 1784851200000,
+        "close": 65050.1,
+        "high": 66275.8,
+        "low": 64603.4
+      },
+      {
+        "availableAt": 1784937600000,
+        "close": 64087.8,
+        "high": 65766.9,
+        "low": 63657
+      },
+      {
+        "availableAt": 1785024000000,
+        "close": 64312.9,
+        "high": 64379.7,
+        "low": 63760
+      },
+      {
+        "availableAt": 1785110400000,
+        "close": 65336.6,
+        "high": 65500,
+        "low": 64230.9
+      },
+      {
+        "availableAt": 1785196800000,
+        "close": 63697.1,
+        "high": 65682.6,
+        "low": 63550
+      },
+      {
+        "availableAt": 1785283200000,
+        "close": 63859.6,
+        "high": 64018.6,
+        "low": 62684.4
+      },
+      {
+        "availableAt": 1785369600000,
+        "close": 63901,
+        "high": 64643.8,
+        "low": 63208.4
+      },
+      {
+        "availableAt": 1785456000000,
+        "close": 64723,
+        "high": 65078.5,
+        "low": 63536.5
+      },
+      {
+        "availableAt": 1785542400000,
+        "close": 62822,
+        "high": 65369.8,
+        "low": 62344
+      },
+      {
+        "availableAt": 1785628800000,
+        "close": 62760,
+        "high": 63091,
+        "low": 62200.5
+      },
+      {
+        "availableAt": 1785715200000,
+        "close": 63500,
+        "high": 63712.1,
+        "low": 62740.2
+      },
+      {
+        "availableAt": 1785801600000,
+        "close": 63461.7,
+        "high": 64008.2,
+        "low": 62218.4
+      },
+      {
+        "availableAt": 1785888000000,
+        "close": 64053.7,
+        "high": 64464.9,
+        "low": 63270.3
+      },
+      {
+        "availableAt": 1785974400000,
+        "close": 64599.2,
+        "high": 64954.6,
+        "low": 63823
+      },
+      {
+        "availableAt": 1786060800000,
+        "close": 64259.2,
+        "high": 64936.4,
+        "low": 64100.9
+      },
+      {
+        "availableAt": 1786147200000,
+        "close": 64886.1,
+        "high": 65322.2,
+        "low": 64114.3
+      },
+      {
+        "availableAt": 1786233600000,
+        "close": 64901.1,
+        "high": 65141.9,
+        "low": 64800
+      },
+      {
+        "availableAt": 1786320000000,
+        "close": 64860,
+        "high": 65425.5,
+        "low": 64674.2
+      },
+      {
+        "availableAt": 1786406400000,
+        "close": 63922.1,
+        "high": 65328.8,
+        "low": 63750
+      },
+      {
+        "availableAt": 1786492800000,
+        "close": 63541.1,
+        "high": 64437.6,
+        "low": 63137.2
+      },
+      {
+        "availableAt": 1786579200000,
+        "close": 63412,
+        "high": 64409.2,
+        "low": 63247.4
+      },
+      {
+        "availableAt": 1786665600000,
+        "close": 63423.3,
+        "high": 63929.8,
+        "low": 62800
+      },
+      {
+        "availableAt": 1786752000000,
+        "close": 62979.4,
+        "high": 63557.7,
+        "low": 62490
+      },
+      {
+        "availableAt": 1786838400000,
+        "close": 63024.3,
+        "high": 63111,
+        "low": 62855.8
+      },
+      {
+        "availableAt": 1786924800000,
+        "close": 62819.1,
+        "high": 63310,
+        "low": 62660
+      },
+      {
+        "availableAt": 1787011200000,
+        "close": 64471.7,
+        "high": 64562.3,
+        "low": 62683.4
+      },
+      {
+        "availableAt": 1787097600000,
+        "close": 64677.2,
+        "high": 64995.2,
+        "low": 63985.7
+      },
+      {
+        "availableAt": 1787184000000,
+        "close": 69285,
+        "high": 70001.8,
+        "low": 64115.9
+      },
+      {
+        "availableAt": 1787270400000,
+        "close": 73001.1,
+        "high": 73387,
+        "low": 68850.9
+      },
+      {
+        "availableAt": 1787356800000,
+        "close": 78327.2,
+        "high": 79511.1,
+        "low": 73001.1
+      },
+      {
+        "availableAt": 1787443200000,
+        "close": 77082.6,
+        "high": 78800,
+        "low": 76016.3
+      },
+      {
+        "availableAt": 1787529600000,
+        "close": 77737.5,
+        "high": 78035.3,
+        "low": 75568.1
+      },
+      {
+        "availableAt": 1787616000000,
+        "close": 78966.1,
+        "high": 79978.6,
+        "low": 76686.2
+      },
+      {
+        "availableAt": 1787702400000,
+        "close": 78509.4,
+        "high": 81200,
+        "low": 77850
+      },
+      {
+        "availableAt": 1787788800000,
+        "close": 79008.6,
+        "high": 79221.6,
+        "low": 77628.8
+      },
+      {
+        "availableAt": 1787875200000,
+        "close": 80265.9,
+        "high": 80848.4,
+        "low": 78588.2
+      },
+      {
+        "availableAt": 1787961600000,
+        "close": 77841.8,
+        "high": 81461,
+        "low": 76853
+      },
+      {
+        "availableAt": 1788048000000,
+        "close": 78227.8,
+        "high": 78316,
+        "low": 77379.7
+      },
+      {
+        "availableAt": 1788134400000,
+        "close": 77681.6,
+        "high": 79371.5,
+        "low": 77000
+      },
+      {
+        "availableAt": 1788220800000,
+        "close": 78566.1,
+        "high": 79252.6,
+        "low": 77255.3
+      },
+      {
+        "availableAt": 1788307200000,
+        "close": 77398.1,
+        "high": 79198.3,
+        "low": 76398.4
+      },
+      {
+        "availableAt": 1788393600000,
+        "close": 77305.1,
+        "high": 77736.2,
+        "low": 76236.9
+      },
+      {
+        "availableAt": 1788480000000,
+        "close": 81276.1,
+        "high": 82288.1,
+        "low": 76949.6
+      },
+      {
+        "availableAt": 1788566400000,
+        "close": 79676.4,
+        "high": 81431.1,
+        "low": 78632.3
+      },
+      {
+        "availableAt": 1788652800000,
+        "close": 79828.4,
+        "high": 80206.7,
+        "low": 79462
+      },
+      {
+        "availableAt": 1788739200000,
+        "close": 80334.3,
+        "high": 80541.2,
+        "low": 79237.1
+      },
+      {
+        "availableAt": 1788825600000,
+        "close": 79090.3,
+        "high": 80435,
+        "low": 78673.1
+      },
+      {
+        "availableAt": 1788912000000,
+        "close": 78449.6,
+        "high": 79498,
+        "low": 77609.4
+      },
+      {
+        "availableAt": 1788998400000,
+        "close": 78288.6,
+        "high": 79739.1,
+        "low": 77754.9
+      },
+      {
+        "availableAt": 1789084800000,
+        "close": 76542,
+        "high": 78500,
+        "low": 76466
+      },
+      {
+        "availableAt": 1789171200000,
+        "close": 77210.9,
+        "high": 79832.3,
+        "low": 76000
+      },
+      {
+        "availableAt": 1789257600000,
+        "close": 77264.9,
+        "high": 77490,
+        "low": 77050
+      },
+      {
+        "availableAt": 1789344000000,
+        "close": 76800.2,
+        "high": 77400,
+        "low": 76459.7
+      },
+      {
+        "availableAt": 1789430400000,
+        "close": 78193.1,
+        "high": 79581.2,
+        "low": 76349.8
+      },
+      {
+        "availableAt": 1789516800000,
+        "close": 75585.1,
+        "high": 78242.1,
+        "low": 74891.5
+      },
+      {
+        "availableAt": 1789603200000,
+        "close": 76146.1,
+        "high": 76475,
+        "low": 74957.2
+      },
+      {
+        "availableAt": 1789689600000,
+        "close": 76354.8,
+        "high": 77095.3,
+        "low": 75936.5
+      },
+      {
+        "availableAt": 1789776000000,
+        "close": 80878.1,
+        "high": 81373.8,
+        "low": 76231
+      },
+      {
+        "availableAt": 1789862400000,
+        "close": 81226.5,
+        "high": 81915,
+        "low": 80823.7
+      },
+      {
+        "availableAt": 1789948800000,
+        "close": 81164,
+        "high": 81458.4,
+        "low": 80101
+      },
+      {
+        "availableAt": 1790035200000,
+        "close": 86593.8,
+        "high": 87446.7,
+        "low": 80839.5
+      },
+      {
+        "availableAt": 1790121600000,
+        "close": 86196.7,
+        "high": 86705.3,
+        "low": 85100
+      },
+      {
+        "availableAt": 1790208000000,
+        "close": 84384.6,
+        "high": 87274.4,
+        "low": 83501
+      },
+      {
+        "availableAt": 1790294400000,
+        "close": 84380,
+        "high": 84914.8,
+        "low": 82832.3
+      },
+      {
+        "availableAt": 1790380800000,
+        "close": 84090.5,
+        "high": 85247.4,
+        "low": 83163.6
+      },
+      {
+        "availableAt": 1790467200000,
+        "close": 84426.7,
+        "high": 84451.3,
+        "low": 83777
+      },
+      {
+        "availableAt": 1790553600000,
+        "close": 84444.2,
+        "high": 85142.8,
+        "low": 84122.8
+      },
+      {
+        "availableAt": 1790640000000,
+        "close": 83462.7,
+        "high": 85060.8,
+        "low": 82566.4
+      },
+      {
+        "availableAt": 1790726400000,
+        "close": 83633.4,
+        "high": 84527.1,
+        "low": 82735.1
+      },
+      {
+        "availableAt": 1790812800000,
+        "close": 83564.7,
+        "high": 85604,
+        "low": 82920.1
+      },
+      {
+        "availableAt": 1790899200000,
+        "close": 84849.1,
+        "high": 85238.6,
+        "low": 83124.8
+      },
+      {
+        "availableAt": 1790985600000,
+        "close": 84503.7,
+        "high": 87229,
+        "low": 83860.7
+      },
+      {
+        "availableAt": 1791072000000,
+        "close": 84740,
+        "high": 85025.9,
+        "low": 84431.7
+      },
+      {
+        "availableAt": 1791158400000,
+        "close": 86510.4,
+        "high": 86778.1,
+        "low": 84706.5
+      },
+      {
+        "availableAt": 1791244800000,
+        "close": 85751.5,
+        "high": 86973.6,
+        "low": 84965.7
+      },
+      {
+        "availableAt": 1791331200000,
+        "close": 85542.1,
+        "high": 86683.4,
+        "low": 85110.1
+      },
+      {
+        "availableAt": 1791417600000,
+        "close": 83276.1,
+        "high": 85588.9,
+        "low": 82720.3
+      },
+      {
+        "availableAt": 1791504000000,
+        "close": 81683.8,
+        "high": 83467.7,
+        "low": 80328.6
+      },
+      {
+        "availableAt": 1791590400000,
+        "close": 82559.4,
+        "high": 83462.9,
+        "low": 81542.8
+      },
+      {
+        "availableAt": 1791676800000,
+        "close": 82912.7,
+        "high": 83089.7,
+        "low": 82474.8
+      }
+    ],
+    "decisionAt": 1791712606741,
+    "entryPrice": 82951,
+    "factors": [
+      {
+        "label": "Trend cluster",
+        "score": 1,
+        "weight": 2.5
+      },
+      {
+        "label": "Momentum",
+        "score": 0,
+        "weight": 1.5
+      },
+      {
+        "label": "MACD",
+        "score": -1,
+        "weight": 1.5
+      },
+      {
+        "label": "Perp funding crowding",
+        "score": 1,
+        "weight": 1.75
+      },
+      {
+        "label": "Open interest",
+        "score": 0,
+        "weight": 1
+      },
+      {
+        "label": "Binance futures positioning",
+        "score": -1,
+        "weight": 1
+      },
+      {
+        "label": "Cross-venue taker imbalance",
+        "score": 0,
+        "weight": 1.25
+      },
+      {
+        "label": "TVL trend",
+        "score": 1,
+        "weight": 2
+      },
+      {
+        "label": "Revenue linkage",
+        "score": 0,
+        "weight": 1.5
+      },
+      {
+        "label": "Developer velocity",
+        "score": 1,
+        "weight": 1.5
+      },
+      {
+        "label": "Supply-overhang penalty (negative-only)",
+        "score": 0,
+        "weight": 1.5
+      }
+    ],
+    "riskMultiplier": 1.25
+  },
+  "replay_note": "REPLAY/REPRODUCTION: this is a recorded dossier issuance reproduced through the intended models, NOT a fresh evaluation.",
+  "snapshot": {
+    "available_at": "2026-10-11T09:56:48.038+00:00",
+    "captured_at": "2026-10-11T09:55:57.000+00:00",
+    "replay_at_issuance": {
+      "mismatches": [],
+      "status": "reconstructed"
+    },
+    "snapshot_id": 1802813044136039,
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window"
+  },
+  "source_as_of": "2026-10-11T09:55:57.000+00:00",
+  "store_rule": "missing decision-time inputs are marked UNKNOWN, never backfilled; a later correction is a new file, never an edit of this bundle",
+  "terminal": "crypto"
+}

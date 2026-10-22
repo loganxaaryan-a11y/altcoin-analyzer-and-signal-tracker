@@ -1,0 +1,58 @@
+bun test v1.4.2 (744846f84)
+
+server/src/signal-methodology.test.ts:
+(pass) Phase 1.1 authoritative evaluation > linear short return uses entry notional in gross and modeled-net paths [20.56ms]
+(pass) Phase 1.1 authoritative evaluation > hourly and eight-hour funding normalize identically [16.27ms]
+(pass) Phase 1.1 authoritative evaluation > future candle ending after evaluation cutoff is not consumed [1.37ms]
+(pass) Phase 1.1 authoritative evaluation > expiry-straddling target cannot prove a pre-expiry touch [1.42ms]
+(pass) Phase 1.1 authoritative evaluation > missing middle interval blocks a later target [5.63ms]
+(pass) Phase 1.1 authoritative evaluation > missing tail cannot substitute a stale close for expiry [0.09ms]
+(pass) Phase 1.1 authoritative evaluation > missing initial interval blocks a later target [0.21ms]
+(pass) Phase 1.1 authoritative evaluation > known adverse opening gap resolves before later intrabar target [0.21ms]
+(pass) Phase 1.1 authoritative evaluation > the six timestamp and coverage counterexamples mirror for shorts [0.25ms]
+(pass) Phase 1.1 authoritative evaluation > entry-straddling touch is ambiguous rather than settled [0.08ms]
+(pass) Phase 1.1 authoritative evaluation > pre-entry extremes cannot settle but later same-day touches can [0.17ms]
+(pass) Phase 1.1 authoritative evaluation > double-touch candle stays ambiguous without an adverse opening gap [0.12ms]
+(pass) Phase 1.1 authoritative evaluation > complete coverage receives an exact-horizon time exit [0.12ms]
+(pass) Phase 1.1 authoritative evaluation > missing OHLC cannot be manufactured from close [0.12ms]
+(pass) Phase 1.1 authoritative evaluation > current revision selection updates the read model and keeps older evidence inspectable [1.03ms]
+(pass) Phase 1.1 authoritative evaluation > frozen levels and factor decision remain deterministic [0.61ms]
+(pass) Phase 1.1 authoritative evaluation > poor-expectancy sample sufficiency does not validate edge [0.24ms]
+(pass) Phase 1.2 deterministic dossier replay > untouched raw snapshot reconstructs decision and frozen levels without network access [0.96ms]
+(pass) Phase 1.2 deterministic dossier replay > changing a relevant raw input changes the reconstruction [0.64ms]
+(pass) Phase 1.2 deterministic dossier replay > altering saved derived output is detected field by field [0.59ms]
+(pass) Phase 1.2 deterministic dossier replay > an input unavailable at decision time cannot affect replay [0.82ms]
+(pass) Phase 1.2 prospective cohort isolation > only the exact contract and cost identity enter the cohort [0.25ms]
+(pass) Phase 1 final canonical ATR and replay scope > a 600-bar production window exposes the former last-220 mismatch and full-window replay matches live [2.99ms]
+
+server/src/signal-persistence.integration.test.ts:
+(pass) final signoff production persistence boundary > fault after production write boundary 1 rolls back and retry returns one accepted bundle [8.40ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 2 rolls back and retry returns one accepted bundle [3.70ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 3 rolls back and retry returns one accepted bundle [3.90ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 4 rolls back and retry returns one accepted bundle [3.90ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 5 rolls back and retry returns one accepted bundle [4.37ms]
+(pass) final signoff production persistence boundary > independently interleaved identical requests on separate connections return the same bundle [5.42ms]
+(pass) final signoff production persistence boundary > interleaved competing snapshots return the original accepted linkage and remove loser snapshot [5.53ms]
+
+server/src/signal-action-contract.integration.test.ts:
+(pass) final signoff action and client contract > retry response deterministically returns the database-accepted immutable entry and levels [0.35ms]
+(pass) final signoff action and client contract > client labels issued levels separately from research-reference levels [8.79ms]
+
+server/src/phase2a-research.test.ts:
+(pass) Phase 2A frozen crypto research harness > normal command keeps the final holdout locked [442.77ms]
+(pass) Phase 2A frozen crypto research harness > entry is the first open after inferred feature availability, never the adjacent unavailable open [338.61ms]
+(pass) Phase 2A frozen crypto research harness > breakout references exclude the current bar and zero reference volume cannot pass [338.37ms]
+(pass) Phase 2A frozen crypto research harness > future bars cannot change a previously issued feature decision [639.29ms]
+(pass) Phase 2A frozen crypto research harness > deliberate leakage fixture would look profitable but cannot affect the feature side [552.97ms]
+(pass) Phase 2A frozen crypto research harness > fold-end labels are purged by actual availability, not signal-row count [311.05ms]
+(pass) Phase 2A frozen crypto research harness > common-date panel remains together and block uncertainty uses date blocks [528.32ms]
+(pass) Phase 2A frozen crypto research harness > linear long and short arithmetic, matched baselines, and bps costs remain coherent [349.37ms]
+(pass) Phase 2A frozen crypto research harness > reports separate full-schedule baselines from matched emitted-timestamp baselines [353.03ms]
+(pass) Phase 2A frozen crypto research harness > missing crypto calendar bars remain exclusions and are never synthesized [293.48ms]
+(pass) Phase 2A frozen crypto research harness > reruns are deterministic apart from the report timestamp [656.14ms]
+(pass) Phase 2A frozen crypto research harness > Phase 2A rows carry a separate cohort and cannot impersonate the legacy scoreboard [309.37ms]
+
+ 44 pass
+ 0 fail
+ 139 expect() calls
+Ran 44 tests across 4 files. [6.04s]

@@ -1,0 +1,34 @@
+{
+  "job_id": "signal-explainer",
+  "run_utc": "2026-10-20T02-44Z",
+  "invocation_completed": {
+    "started_utc": "2026-10-20T02:41:36Z",
+    "finished_utc": "2026-10-20T02:44:00Z",
+    "status": "succeeded",
+    "rows_seen": {
+      "crypto_open_signals": 36,
+      "equity_open_signals": "unavailable",
+      "equity_discovery": 0,
+      "crypto_discovery": "unavailable"
+    },
+    "new_keys": [],
+    "explained_keys": [],
+    "skipped": "crypto: all 36 open_signals rows created <=2026-10-15T04:56:13.857Z, before watermark 2026-10-19T22:42:47Z; crypto:44/45 already in ledger. equity: discovery 0 rows; open_signals section_unavailable (transport failure, not evidence of absence). Nothing due under exactly-once contract.",
+    "mirror_as_of": {
+      "crypto_generated_at": "2026-10-20T02:01:37Z",
+      "crypto_open_signals_as_of": "2026-10-19T21:43:02.552Z",
+      "crypto_discovery": "section_unavailable (space worker overloaded)",
+      "crypto_market_read_as_of": "2026-10-20T01:55:51.533Z",
+      "equity_discovery_as_of": "2026-10-20T01:55:28.805Z",
+      "equity_open_signals": "section_unavailable (space worker overloaded)"
+    },
+    "stale_sections": "crypto open_signals as_of 2026-10-19T21:43:02.552Z is ~4h58m old at run start (>2h) \u2014 labeled stale. No exception-path invocation: no known-issued signal missing from mirror; prior run (22:42Z) already checked a fresher tracker read and found nothing new; crypto runner has not issued since 2026-10-15 (frozen-model abstention). Equity open_signals/market_read/theories + crypto discovery/paper_pilot unavailable this mirror build (space worker overloaded) \u2014 recorded as transport failure, not absence.",
+    "exception_path_invocations": [],
+    "action_failures": [],
+    "watermark_advanced": {
+      "from": "2026-10-19T22:42:47Z",
+      "to": "2026-10-20T02:44:00Z"
+    }
+  },
+  "scheduler_provenance": "origin_unverified"
+}

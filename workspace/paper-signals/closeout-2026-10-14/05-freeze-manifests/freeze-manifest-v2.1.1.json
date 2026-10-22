@@ -1,0 +1,57 @@
+{
+  "amended_manifest": "freeze-manifest-v2.1.0.json (sha256 719aed7d19b7bc46e5cf0576359b1771fef235aadfcc8b565e0b7d442435ada4)",
+  "amendment_kind": "date-fields-only amendment to freeze-manifest-v2.1.0.json (expert correction 1, 2026-10-14)",
+  "changed_fields": [
+    {
+      "computation": "latest signal date 2026-12-31 (Thu, XNYS session) -> latest entry session = next XNYS session after the signal date = 2027-01-04 (Mon; 2027-01-01 holiday, 01-02/01-03 weekend) per the frozen entry rule next-xnys-regular-session-open-print (entry window expires at that session's close; NY-date anchor makes intraday position immaterial) -> 30 XNYS sessions strictly after 2027-01-04 = 2027-02-17 (Wed, regular 16:00 ET close). Span from signal date: 48 calendar days. Verified against the frozen calendar in source-export-2026-10-13/equity/server/src/measurement.ts (coverage 2025-2027; closures in span: 2027-01-01, 2027-01-18, 2027-02-15).",
+      "field": "collection_window.equity_outcome_close",
+      "v2_1_0_value": "UNRESOLVED -- see 'equity_horizon.unresolved_conflict'. Under the +47 rule the equity close is 2027-02-16; the plan currently fixes 2027-01-30.",
+      "v2_1_1_value": "2027-02-17 (16:00 ET / 21:00 UTC) -- computed under the frozen equity evaluator's exact rule: close of the 30th XNYS session after the latest possible entry session.",
+      "why": "The +47-day substitution was signal-date-anchored; the frozen evaluator anchors on signal.entryAt and counts the 30 sessions strictly after the entry day (expectedXnysSessions(entryAt, 30)). With the frozen entry rule, a 2026-12-31 signal cannot enter before the 2027-01-04 session, pushing the 30th session one day past the +47 backstop. Calendar calculation, not a decision."
+    },
+    {
+      "field": "collection_window.readout_by",
+      "v2_1_0_value": "2027-02-06 (plan's current date; subject to the unresolved equity-close conflict -- a late equity close moves the readout)",
+      "v2_1_1_value": "2027-02-24 -- computed AFTER the final equity outcome is due (2027-02-17 16:00 ET).",
+      "why": "Readout must follow the final equity outcome (computed floor 2027-02-18). Adopted buffer: +7 calendar days after the final close, mirroring the plan's prior 7-day post-close convention; the buffer itself is the one stated judgment call."
+    },
+    {
+      "field": "operational_rules.corrected_evaluator.equity.horizon_calendar_rule",
+      "v2_1_0_value": "Equity outcome deadline = signal date + 47 calendar days (see 'equity_horizon' section).",
+      "v2_1_1_value": "Equity outcome deadline (per row) = the close of the 30th XNYS session strictly after the NY-calendar date of the entry instant (expectedXnysSessions(entryAt, 30)[29] at session close). For the collection window the latest possible such deadline is 2027-02-17.",
+      "why": "The exact frozen rule is entry-anchored and exclusive; the +47 substitution conflated the signal date with the entry date."
+    },
+    {
+      "field": "equity_horizon.rule",
+      "v2_1_0_value": "Equity outcome deadline = signal date + 47 calendar days.",
+      "v2_1_1_value": "Equity outcome deadline (per row) = close of the 30th XNYS session strictly after the NY-calendar date of the entry instant; collection-window worst case 2027-02-17 (16:00 ET).",
+      "why": "Same as above; v2.1.0's derivation/anchor-backstop text is superseded by the computed rule."
+    },
+    {
+      "field": "equity_horizon.unresolved_conflict",
+      "v2_1_0_value": "(full v2.1.0 text) 2027-01-30 vs 2027-02-16 UNRESOLVED pending Logan's decision; options (i) extend to 2027-02-16 or (ii) restate the horizon (requires a new freeze version).",
+      "v2_1_1_value": "RESOLVED 2026-10-14 by computation (expert correction 1). The conflict was an artifact of the +47 substitution; the frozen evaluator's exact entry-anchored rule computes the equity close (2027-02-17) directly, so no decision and no new freeze version are required for the dates. Executable semantics are untouched.",
+      "why": "Expert order: remove the substitution and the conflict flag."
+    }
+  ],
+  "frozen_at_utc": "2026-10-14T05:10:00Z",
+  "frozen_by": "workstream v2.1.0 consolidation subagent (Decision 3) -- expert correction 1 (equity maturity as calendar calculation)",
+  "immutability_rule": "freeze-manifest-v2.1.0.json is IMMUTABLE and has not been edited (bytes untouched). Its date fields (listed in changed_fields) are SUPERSEDED BY POINTER to this v2.1.1 amendment. Executable semantics are UNCHANGED: models, factor sets, weights, scoring formulas, level construction, entry contract, veto, venue mapping, cost conventions, evaluator versions (equity-eval-3.3.0, crypto-evaluation-v5-corrected), and the primary-comparison rules are all carried forward as-is.",
+  "manifest_version": "2.1.1",
+  "provenance": {
+    "derivation_doc": "comparison/EQUITY-MATURITY-SCHEDULE-2026-10-14.md (sha256 2a8bddd00f2f381294f1eae267c45876bbaa057c2d3de87a028ef477e162cdb6)",
+    "evaluator_source": "goals/research-terminal/hidden_files/source-export-2026-10-13/equity/server/src/measurement.ts (evaluateEquityTradeSetup; expectedXnysSessions; xnysHolidays; XNYS_SUPPORTED_YEARS 2025-2027)",
+    "gaps_update": "comparison/MEASUREMENT-GAPS-2026-10-14.md (sha256 845a1961ab53f83ba8112bb773f599da38a650543614b68ea8b5b829ad87c5a6) -- gap (e) closed with the computed rule",
+    "plan_updates": "comparison/COLLECTION-PLAN-2026-10-14.md (sha256 70dc0af44238e21c975125beebcb9ceb2ea8b949c69bb5480d98e936b529984d) -- \u00a71 dates, \u00a77 open item, \u00a79 conflict section replaced",
+    "readme_pointer": "comparison/README.md conflict-flag paragraph updated to point at this amendment (done 2026-10-14)"
+  },
+  "scope": "This amendment changes ONLY governance/plan dates. Nothing about executable semantics, the freeze versioning rule, or any row data changes. v2.1.0 remains the freeze of record for everything except the five date fields listed above.",
+  "supersedes": {
+    "manifest": "freeze-manifest-v2.1.0.json",
+    "scope": "date fields ONLY: collection_window.equity_outcome_close, collection_window.readout_by, operational_rules.corrected_evaluator.equity.horizon_calendar_rule, equity_horizon.rule, equity_horizon.unresolved_conflict"
+  },
+  "unchanged_fields_restated_for_completeness": {
+    "collection_window.crypto_outcome_close": "2027-01-30 (last issuance 2026-12-31 + 30 elapsed days, the frozen crypto barrier-walk cap) -- UNCHANGED",
+    "collection_window.window": "2026-10-14 -> 2026-12-31 (inclusive, UTC) -- UNCHANGED"
+  }
+}

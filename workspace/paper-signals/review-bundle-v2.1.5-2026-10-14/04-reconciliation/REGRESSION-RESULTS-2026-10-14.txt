@@ -1,0 +1,70 @@
+PAPER SIGNALS v2.1.5 — REGRESSION RESULTS (real runs, packaging day 2026-10-14)
+================================================================================
+All commands were executed live during packaging on the builder VM.
+Counts below are observed outputs, not copied from prior runs.
+
+--------------------------------------------------------------------------------
+1) FULL COMPARISON TEST SUITE
+   command:  cd comparison/tests && python3 run_tests.py
+   modules:  test_harness, test_collector, test_receipt_expiry_parity, test_live_adapter_full
+   result:   Ran 146 tests — OK (exit 0)
+
+   tail of output:
+     ----------------------------------------------------------------------
+     Ran 146 tests in 1.091s
+
+     OK
+     live export: 2 candidates -> /tmp/live-adapter-full-<tmp>/synthetic-export.json
+     excluded pre-freeze: 0
+     deployed runs seen: 1
+
+--------------------------------------------------------------------------------
+2) VERSION-MAPPING REGRESSION TEST (not part of run_tests.py — run separately)
+   command:  cd comparison && python3 -m unittest tests.test_version_mapping -v
+   result:   Ran 10 tests — OK (exit 0)
+
+   tests (all ok):
+     test_entry_contract, test_evaluator_version, test_hashes_recompute,
+     test_level_construction, test_negative_control_tampered_hash,
+     test_negative_control_tampered_rule, test_receipt_expiry,
+     test_venue_mapping, test_version_chain, test_waiting_interval_veto
+
+--------------------------------------------------------------------------------
+3) v2.1.5 RECONCILIATION CHECK
+   command:  cd comparison && python3 check_reconciliation_v2_1_5.py
+   result:   ALL GREEN: 44 checks passed (exit 0)
+
+   sections:
+     [1] frozen manifests untouched (v2.1.5 records sha256 of v2.1.0..v2.1.4; bytes verified untouched)
+     [2] v2.1.5 binds the current executable bytes (harness.py, collect_pilot_rows.py,
+         live_paper_stream.py, tests/*, run_tests.py, check script itself)
+     [3] active-manifest binding (ACTIVE_MANIFEST -> freeze-manifest-v2.1.5.json;
+         harness EXPECTED_ACTIVE_VERSION == '2.1.5')
+     [4]-[8] (hash mapping, cohort bindings, collection bindings — all PASS)
+     [9] receipt-expiry parity check present
+     [10] adapter full-record blocks + collector fold
+
+--------------------------------------------------------------------------------
+TOTAL: 146 (suite) + 10 (version mapping) = 156 tests, all passing;
+       44/44 reconciliation checks green.
+
+Label: BUILDER-REPORTED. These outputs were produced by the builder environment
+during packaging on 2026-10-14 and remain builder-reported until independently
+rerun by the expert (see README.md for the two rerun commands).
+
+--------------------------------------------------------------------------------
+4) BUNDLE SELF-CHECK (verify/ tree inside this package, same packaging day)
+   command:  cd verify && python3 comparison/tests/run_tests.py
+             cd verify/comparison/tests && python3 test_version_mapping.py
+             cd verify/comparison && python3 check_reconciliation_v2_1_5.py
+   result:   Ran 146 tests — OK (self-contained tree)
+             Ran 10 tests — OK
+             ALL GREEN: 44 checks passed
+
+   verify/ required two extra inclusions to reproduce the workspace results
+   byte-for-byte: comparison/live-paper-status-2026-10-14.json (read by
+   test_version_chain) and the compiled orchestrator/dist tree (node probe
+   used by the 6 receipt-expiry parity subtests). Without them the run showed
+   1 ERROR / 6 FAILURES — the same commands now pass in-tree, so the bundle
+   is genuinely rerunnable as shipped. Counts above are identical to the
+   workspace run, not replacements for it.

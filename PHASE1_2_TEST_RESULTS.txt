@@ -1,0 +1,25 @@
+Phase 1.2 crypto terminal checks — 2026-10-09
+
+MODULE TESTS
+Command: bun run test:module
+Runtime: bun 1.4.2
+Result: PASS — 22 passed, 0 failed, 56 expect() calls, 1 file.
+Coverage includes the preserved 17 Phase 1.1 methodology tests, four deterministic replay tests, and one exact mixed-identity cohort test.
+
+PERSISTENCE INTEGRATION TESTS (SEPARATE)
+Command: bun run test:integration
+Runtime: bun 1.4.2
+Result: PASS — 6 passed, 0 failed, 22 expect() calls, 1 file.
+Cases: injected rollback after each of four write boundaries; retry completion; repeated/concurrently scheduled identical issuance; competing snapshots returning the accepted issuance.
+Harness: isolated temporary Bun SQLite databases with the production uniqueness/transaction sequence. No production rows were created.
+
+TYPECHECK
+Command: bun run typecheck
+Result: pending final capture at file-write time; replace before package submission.
+
+PLATFORM UPGRADE v25 APPLICABILITY
+Command: grep -RInE '<(iframe|embed|object)|\\.pdf|PdfViewer' client/src server/src || true
+Result: no matches. This artifact does not render blob-backed PDFs inline; no source change required for v25.
+
+WEB ARTIFACT BUILD / AUDIT
+Result: pending final capture at file-write time; replace before package submission.

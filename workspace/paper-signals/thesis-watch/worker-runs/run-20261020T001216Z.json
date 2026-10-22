@@ -1,0 +1,40 @@
+{
+ "job_id": "thesis-watcher-evening",
+ "run_utc": "2026-10-19T23:56:34Z",
+ "invocation_completed": {
+  "started_utc": "2026-10-19T23:56:34Z",
+  "finished_utc": "2026-10-20T00:12:16Z",
+  "status": "succeeded",
+  "crypto_fetch": "ok: listtheories 12 theories; getmarketread generatedAt 2026-10-19T23:57:41.275Z (BTC 81902.33, ETH 2406.15, SOL 104.97, LINK 12.05, HYPE 79.17 OKX marks asOf 2026-10-20T00:00:00Z; AAVE/NEAR/ZEC/PENDLE from prediction feed)",
+  "equity_fetch": "ok: listtheories 43 theories across 3 pages (cursors 0/20/40, refreshedAt 2026-10-19T23:57:00Z / 23:59:01Z / 2026-10-20T00:01:15Z); getmarketread SPY refreshedAt 2026-10-19T23:57:36.938Z, instruments asOf 2026-10-16T20:00Z (Friday close); prediction-feed prices used as Monday session prints (post-close 00:00Z)",
+  "theories_seen": {
+   "crypto": 12,
+   "equity": 43
+  },
+  "transitions_found": 3,
+  "transitions": [
+   "equity-analyzer-and-signal-tracker/13/tripwire:p1:hit",
+   "equity-analyzer-and-signal-tracker/11/expired:p1",
+   "equity-analyzer-and-signal-tracker/8/tripwire:p1:hit"
+  ],
+  "alerts_precommitted": 3,
+  "learning_entries_appended": 1,
+  "errors": [],
+  "notes": [
+   "NEW altcoin-analyzer-and-signal-tracker/14 baselined silently (status confirming, 4 preds, 3 evidence).",
+   "altcoin-analyzer-and-signal-tracker/11: new evidence id 49 (challenging) inventoried, no transition (status challenged).",
+   "NEW equity-analyzer-and-signal-tracker/48 baselined silently (status challenged, 3 preds, 3 evidence).",
+   "NEW equity-analyzer-and-signal-tracker/47 baselined silently (status challenged, 3 preds, 2 evidence).",
+   "equity-analyzer-and-signal-tracker/36: new evidence id 199 (confirming) inventoried, no transition (status challenged).",
+   "TRIPWIRE equity-analyzer-and-signal-tracker/13/p1: ORCL below 129.93 hit @ 128.22999572753906",
+   "EXPIRED equity-analyzer-and-signal-tracker/11/p1: due 2026-10-19, level unhit",
+   "TRIPWIRE equity-analyzer-and-signal-tracker/8/p1: ORCL below 129.42 hit @ 128.22999572753906",
+   "page3 (equity ids 5,4,3) returned inline; no status flips, no new tripwires, no new evidence; prices refreshed.",
+   "ORCL tripwires (equity/13/p1 below 129.93, equity/8/p1 below 129.42) held back in the morning run as feed drift are now session prints: ORCL 128.23 post-close Monday, consistent across both theories. Alerted.",
+   "equity/11/p1 (IWM above 290.0, due 2026-10-19) expired unresolved; learning entry appended (outcome miss, raw return -3.94%, regime normal, benchmark unavailable).",
+   "Bounce watches still open, classify after 2026-10-20T23:59:33Z: crypto/6/p2 (BTC 81902.33 above 81000), crypto/9/p1 (BTC 81902.33 above 81685.89), equity/3/p1 (NVDA 214.13 below 217.61).",
+   "getmarketread raw responses returned inline (not saved to worker-runs); key figures recorded here."
+  ]
+ },
+ "scheduler_provenance": "origin_unverified"
+}

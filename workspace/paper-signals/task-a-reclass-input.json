@@ -1,0 +1,674 @@
+[
+ {
+  "symbol": "AAPL",
+  "contract": "ct_2e6b7e006aa1436a1271ffc6b38f8564",
+  "signal": "sig_2e6b7e006aa1436a1271ffc6",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:14.530Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:14.530Z",
+  "entryPrice": 341.61126999999993,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "ABBV",
+  "contract": "ct_b0149153b0baf069a824bc80254a8cb0",
+  "signal": "sig_b0149153b0baf069a824bc80",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:14.678Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:14.678Z",
+  "entryPrice": 274.63435999999996,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "ACN",
+  "contract": "ct_cfbe144d2e685bd08c4df8d8ff4b7d8d",
+  "signal": "sig_cfbe144d2e685bd08c4df8d8",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:14.820Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:14.820Z",
+  "entryPrice": 213.77355999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "AMD",
+  "contract": "ct_343ed00dc51874d75e8241c2fe018273",
+  "signal": "sig_343ed00dc51874d75e8241c2",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:14.973Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:14.973Z",
+  "entryPrice": 606.1355299999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "AMGN",
+  "contract": "ct_c8179b4d652b78088ace618177bb808d",
+  "signal": "sig_c8179b4d652b78088ace6181",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:15.139Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:15.139Z",
+  "entryPrice": 413.25283999999994,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "AMT",
+  "contract": "ct_76b3e3efcfb6d19e54d955a5f4617e7a",
+  "signal": "sig_76b3e3efcfb6d19e54d955a5",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:15.265Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:15.265Z",
+  "entryPrice": 179.60942999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "AMZN",
+  "contract": "ct_c470b74ad1d7b38ed6fadf6ed3a9ee62",
+  "signal": "sig_c470b74ad1d7b38ed6fadf6e",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:15.384Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:15.384Z",
+  "entryPrice": 258.83858,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "BRK-B",
+  "contract": "ct_589e8be0067cda275bbdff1759d500e5",
+  "signal": "sig_589e8be0067cda275bbdff17",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:15.956Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:15.956Z",
+  "entryPrice": 521.11059,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "COP",
+  "contract": "ct_571c2fb428eaf1f986867c98ab5662d6",
+  "signal": "sig_571c2fb428eaf1f986867c98",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:16.401Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:16.401Z",
+  "entryPrice": 141.0409,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "COST",
+  "contract": "ct_7eda55c58f6b3ee21587714c58d4bb77",
+  "signal": "sig_7eda55c58f6b3ee21587714c",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:16.606Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:16.606Z",
+  "entryPrice": 955.5846299999998,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "CRM",
+  "contract": "ct_55d173b2fe58ad25723b8d21324eda4b",
+  "signal": "sig_55d173b2fe58ad25723b8d21",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:16.798Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:16.798Z",
+  "entryPrice": 238.24800999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "CSCO",
+  "contract": "ct_870ab9bef80ce127666f7046fe87b157",
+  "signal": "sig_870ab9bef80ce127666f7046",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:16.955Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:16.955Z",
+  "entryPrice": 115.18506999999998,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "CVX",
+  "contract": "ct_cd6570d27cf0c9dfa740c055a906b8d6",
+  "signal": "sig_cd6570d27cf0c9dfa740c055",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:17.096Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:17.096Z",
+  "entryPrice": 217.94772999999998,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "DELL",
+  "contract": "ct_3ab675b689e727029ceb5b1d23377c13",
+  "signal": "sig_3ab675b689e727029ceb5b1d",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:17.211Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:17.211Z",
+  "entryPrice": 573.04247,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "DHR",
+  "contract": "ct_686c941ce9fcc48000384ef39505f9a3",
+  "signal": "sig_686c941ce9fcc48000384ef3",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:17.323Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:17.323Z",
+  "entryPrice": 223.06283999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "DIS",
+  "contract": "ct_980832918e4943f8e43c4b470775e9c6",
+  "signal": "sig_980832918e4943f8e43c4b47",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:17.428Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:17.428Z",
+  "entryPrice": 108.68857999999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "EMR",
+  "contract": "ct_cbbc357f37db0ecd5f50f267cbe132a9",
+  "signal": "sig_cbbc357f37db0ecd5f50f267",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:17.538Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:17.538Z",
+  "entryPrice": 163.66349999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "GEV",
+  "contract": "ct_2296df33d13a8f7d89c125f538cc1803",
+  "signal": "sig_2296df33d13a8f7d89c125f5",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:17.821Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:17.821Z",
+  "entryPrice": 1005.0440399999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "GILD",
+  "contract": "ct_991a46387dad399e3b84fc30ffc6f76a",
+  "signal": "sig_991a46387dad399e3b84fc30",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:17.951Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:17.951Z",
+  "entryPrice": 148.06791999999996,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "GOOG",
+  "contract": "ct_1a2fea2c558a660c0fb3f966f19dc125",
+  "signal": "sig_1a2fea2c558a660c0fb3f966",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:18.083Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:18.083Z",
+  "entryPrice": 349.86951999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "GOOGL",
+  "contract": "ct_339e220e313889dfb25da32e2c04dcc7",
+  "signal": "sig_339e220e313889dfb25da32e",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:18.250Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:18.250Z",
+  "entryPrice": 354.13377999999994,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "ISRG",
+  "contract": "ct_976f15b1ab5505d396a5f1c0fc635d2e",
+  "signal": "sig_976f15b1ab5505d396a5f1c0",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:18.534Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:18.534Z",
+  "entryPrice": 422.48205999999993,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "KO",
+  "contract": "ct_bbe64ba40ccc2196c80da5ba0fb7e2a0",
+  "signal": "sig_bbe64ba40ccc2196c80da5ba",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:18.685Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:18.685Z",
+  "entryPrice": 90.20011,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "LIN",
+  "contract": "ct_e08b48564464e926501c1be8cba350da",
+  "signal": "sig_e08b48564464e926501c1be8",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:18.800Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:18.800Z",
+  "entryPrice": 492.60211,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "MA",
+  "contract": "ct_8606106e50227c9b465ee8f2bddbfce8",
+  "signal": "sig_8606106e50227c9b465ee8f2",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:19.077Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:19.077Z",
+  "entryPrice": 605.4047999999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "MDLZ",
+  "contract": "ct_028a7769ddc01db669d771222f460d8f",
+  "signal": "sig_028a7769ddc01db669d77122",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:19.322Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:19.322Z",
+  "entryPrice": 61.561499999999995,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "MDT",
+  "contract": "ct_ee3e6ca62b007deecaedddb0c16dc28b",
+  "signal": "sig_ee3e6ca62b007deecaedddb0",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:19.500Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:19.500Z",
+  "entryPrice": 93.10301,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "META",
+  "contract": "ct_24b9d83b4fb0aa2864990816f51a3776",
+  "signal": "sig_24b9d83b4fb0aa2864990816",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:19.667Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:19.667Z",
+  "entryPrice": 763.2624999999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "MO",
+  "contract": "ct_349e892626182d7b6c0d9590d42c93a9",
+  "signal": "sig_349e892626182d7b6c0d9590",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:19.932Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:19.932Z",
+  "entryPrice": 71.63156,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "MSFT",
+  "contract": "ct_58cc5c1d81d99a4171cd67e69962c139",
+  "signal": "sig_58cc5c1d81d99a4171cd67e6",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:20.197Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:20.197Z",
+  "entryPrice": 543.9934499999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "NVDA",
+  "contract": "ct_dae9132495e69a01af653f03d78e30e7",
+  "signal": "sig_dae9132495e69a01af653f03",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:20.417Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:20.417Z",
+  "entryPrice": 228.74851999999998,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "PANW",
+  "contract": "ct_03f553456792074379a16e262f07bf3d",
+  "signal": "sig_03f553456792074379a16e26",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:20.581Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:20.581Z",
+  "entryPrice": 397.42702999999995,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "PFE",
+  "contract": "ct_a2cf051c3d1a4f3d0ccf8323f9fc7f62",
+  "signal": "sig_a2cf051c3d1a4f3d0ccf8323",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:20.726Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:20.726Z",
+  "entryPrice": 28.398369999999996,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "PG",
+  "contract": "ct_2d29a69349ed562a9d2e15a137fb0192",
+  "signal": "sig_2d29a69349ed562a9d2e15a1",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:20.834Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:20.834Z",
+  "entryPrice": 153.19303999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "PLTR",
+  "contract": "ct_d8670045fca56e22f01a54faa4d76724",
+  "signal": "sig_d8670045fca56e22f01a54fa",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:20.941Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:20.941Z",
+  "entryPrice": 208.87866999999997,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "PM",
+  "contract": "ct_2be5616fcbbc3d417b13ea70cc4caa70",
+  "signal": "sig_2be5616fcbbc3d417b13ea70",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:21.046Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:21.046Z",
+  "entryPrice": 199.48928999999998,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "SO",
+  "contract": "ct_7eab585daa3b3896109f8ccea98059e0",
+  "signal": "sig_7eab585daa3b3896109f8cce",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:21.303Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:21.303Z",
+  "entryPrice": 88.19810999999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "TMO",
+  "contract": "ct_ce8d76037ce9dfe776ef1ae1094e01b8",
+  "signal": "sig_ce8d76037ce9dfe776ef1ae1",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:21.446Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:21.446Z",
+  "entryPrice": 663.7030399999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "TXN",
+  "contract": "ct_19bfedbe2fb4fba326aa3a7adb04d934",
+  "signal": "sig_19bfedbe2fb4fba326aa3a7a",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:21.653Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:21.653Z",
+  "entryPrice": 288.13785,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "V",
+  "contract": "ct_940f1047d83eecb2cf12e685cc9df767",
+  "signal": "sig_940f1047d83eecb2cf12e685",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:22.098Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:22.098Z",
+  "entryPrice": 396.45606,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "WMT",
+  "contract": "ct_986b452377906f0b271f6159a9c2fa68",
+  "signal": "sig_986b452377906f0b271f6159",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:22.402Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:22.402Z",
+  "entryPrice": 112.39227999999999,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ },
+ {
+  "symbol": "XOM",
+  "contract": "ct_ba1d012f5eee3198491781287f98d91d",
+  "signal": "sig_ba1d012f5eee319849178128",
+  "state_db": "entered",
+  "issuedAt": "2026-10-14T07:30:22.600Z",
+  "entryObservedAt": "2026-10-14T13:30:00.000Z",
+  "entryReceivedAt": "2026-10-14T13:30:22.600Z",
+  "entryPrice": 174.25408,
+  "entryVenue": "primary-listing-consolidated-tape",
+  "entryEvidence": "venue-trade",
+  "window": [
+   "2026-10-14T13:30:00.000Z",
+   "2026-10-14T20:00:00.000Z"
+  ]
+ }
+]

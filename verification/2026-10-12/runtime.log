@@ -1,0 +1,9 @@
+$ bun --version
+1.4.2
+EXIT_CODE=0
+$ node --version
+v24.20.0
+EXIT_CODE=0
+$ uname -srm
+Linux 7.0.0-39-generic x86_64
+EXIT_CODE=0

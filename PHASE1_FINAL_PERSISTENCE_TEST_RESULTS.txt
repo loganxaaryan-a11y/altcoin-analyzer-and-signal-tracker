@@ -1,0 +1,16 @@
+$ bun test server/src/signal-persistence.integration.test.ts
+bun test v1.4.2 (744846f84)
+
+server/src/signal-persistence.integration.test.ts:
+(pass) final signoff production persistence boundary > fault after production write boundary 1 rolls back and retry returns one accepted bundle [7.51ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 2 rolls back and retry returns one accepted bundle [3.17ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 3 rolls back and retry returns one accepted bundle [3.82ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 4 rolls back and retry returns one accepted bundle [7.89ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 5 rolls back and retry returns one accepted bundle [8.00ms]
+(pass) final signoff production persistence boundary > independently interleaved identical requests on separate connections return the same bundle [4.48ms]
+(pass) final signoff production persistence boundary > interleaved competing snapshots return the original accepted linkage and remove loser snapshot [3.97ms]
+
+ 7 pass
+ 0 fail
+ 26 expect() calls
+Ran 7 tests across 1 file. [127.00ms]

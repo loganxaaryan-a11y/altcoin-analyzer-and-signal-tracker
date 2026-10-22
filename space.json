@@ -1,0 +1,19 @@
+{
+  "entry": "client/dist/index.html",
+  "managedCronJobs": [
+    "crypto-theory-discovery",
+    "crypto-theory-synthesis",
+    "crypto-market-discovery",
+    "crypto-history-daily-refresh",
+    "crypto-signal-daily-postmortem",
+    "crypto-universe-daily-snapshot",
+    "crypto-universe-weekly-refresh",
+    "crypto-market-data-refresh",
+    "crypto-signal-status-monitor",
+    "crypto-paper-entry-watch"
+  ],
+  "name": "Altcoin Analyzer and Signal Tracker",
+  "platformVersion": 25,
+  "runtime": "typescript",
+  "slug": "altcoin-analyzer-and-signal-tracker"
+}

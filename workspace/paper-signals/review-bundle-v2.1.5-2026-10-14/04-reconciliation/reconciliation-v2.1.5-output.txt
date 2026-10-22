@@ -1,0 +1,56 @@
+== [1] frozen manifests untouched ==
+  PASS v2.1.5 records a v2.1.4 sha256
+  PASS v2.1.4 bytes untouched
+  PASS v2.1.5 records a v2.1.3 sha256
+  PASS v2.1.3 bytes untouched
+  PASS v2.1.5 records a v2.1.2 sha256
+  PASS v2.1.2 bytes untouched
+  PASS v2.1.5 records a v2.1.1 sha256
+  PASS v2.1.1 bytes untouched
+  PASS v2.1.5 records a v2.1.0 sha256
+  PASS v2.1.0 bytes untouched
+  PASS v2.1.5 supersedes v2.1.4 (chain marked)
+== [2] v2.1.5 binds the current executable bytes ==
+  PASS v2.1.5 records current sha256 for comparison/harness.py
+  PASS v2.1.5 records current sha256 for comparison/collect_pilot_rows.py
+  PASS v2.1.5 records current sha256 for comparison/live_paper_stream.py
+  PASS v2.1.5 records current sha256 for comparison/tests/test_harness.py
+  PASS v2.1.5 records current sha256 for comparison/tests/test_collector.py
+  PASS v2.1.5 records current sha256 for comparison/tests/test_live_adapter_full.py
+  PASS v2.1.5 records current sha256 for comparison/tests/test_receipt_expiry_parity.py
+  PASS v2.1.5 records current sha256 for comparison/tests/run_tests.py
+  PASS v2.1.5 records current sha256 for comparison/check_reconciliation_v2_1_5.py
+== [3] active-manifest binding ==
+  PASS ACTIVE_MANIFEST names freeze-manifest-v2.1.5.json
+  PASS harness EXPECTED_ACTIVE_VERSION == '2.1.5'
+  PASS harness ACTIVE_FREEZE_VERSION == '2.1.5'
+  PASS harness loaded the active manifest (version matches file)
+== [4] no prediction-weight drift ==
+  PASS harness production total weight == 17.0
+  PASS harness C-2 total weight == 15.5
+== [5] superseded born-dead gate statically unreachable ==
+  PASS no born_dead_check definition in harness.py
+  PASS repaired evaluator present
+== [6] collector: vessel, stamp, cutoff, live-export ==
+  PASS collector VESSEL_CSV is the prospective vessel
+  PASS collector stamps the active freeze version
+  PASS collector post-freeze cutoff == v2.1.0 freeze time
+  PASS collector supports --live-export
+== [7] RULE 5/6 present ==
+  PASS c2_may_reuse_production defined
+== [8] v2.1.5 documents this round's changes ==
+  PASS changed_fields documents harness.operational_issuance_eval.receipt_expiry
+  PASS changed_fields documents adapter.full_record
+  PASS changed_fields documents collector.fold_full_record
+== [9] receipt-expiry parity check present ==
+  PASS harness compares received_at against window_end
+  PASS harness returns abstain:entry-expired on late receipt
+== [10] adapter full-record blocks + collector fold ==
+  PASS adapter emits contract block
+  PASS adapter emits entry_observation block
+  PASS adapter emits frozen_levels block
+  PASS adapter emits gate_inputs block
+  PASS adapter emits waiting_interval_evidence block
+  PASS collector defines fold_full_record
+
+ALL GREEN: 44 checks passed.

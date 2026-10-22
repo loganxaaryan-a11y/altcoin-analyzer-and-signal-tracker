@@ -1,0 +1,751 @@
+================================================================================
+paper-signals offline export — fix-4 (package reconciliation) verification log
+Date: 2026-10-14 ~05:24 UTC (01:24 EDT)
+Export: ~/workspace/goals/research-terminal/paper-signals/paper-signals-offline-export.zip
+        sha256 78306ee445d87f9c965349a6402cd6a672c74b603d990a1a3d9cc3cdabb9e320
+        22,684,454 bytes
+Method: fresh extraction to /tmp/pack-verify-fix4 (pristine, nothing reused),
+        run under `unshare -n` (no network namespace), single command:
+            ./build.sh
+        (from the package root /tmp/pack-verify-fix4/paper-signals-offline-export)
+Active freeze manifest resolved by every test: freeze-manifest-v2.1.1.json
+        (via comparison/ACTIVE_MANIFEST; no v2.1.2 minted — checked at build time)
+FINAL: BUILD_EXIT=0 — ALL STEPS PASSED
+Full transcript follows.
+================================================================================
+
+== paper-signals offline build ==
+package root: /tmp/pack-verify-fix4/paper-signals-offline-export
+node: v24.20.0 (need v24.x)
+active freeze manifest: freeze-manifest-v2.1.1.json
+
+== [1/11] tsc availability (vendored, offline) ==
+Version 7.0.2
+
+== [2/11] orchestrator: tsc --strict + postbuild ==
+
+> paper-signal-issuance-orchestrator@0.1.0 build
+> tsc && node scripts/postbuild.mjs
+
+postbuild: renamed to /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/orchestrator/dist/hidden_files/source-export-2026-10-13/equity/server/src/measurement.cjs
+
+== [3/11] orchestrator: drift check ==
+
+> paper-signal-issuance-orchestrator@0.1.0 drift
+> npm run build && node --test dist/paper-signals/orchestrator/tests/drift.js
+
+
+> paper-signal-issuance-orchestrator@0.1.0 build
+> tsc && node scripts/postbuild.mjs
+
+postbuild: renamed to /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/orchestrator/dist/hidden_files/source-export-2026-10-13/equity/server/src/measurement.cjs
+▶ drift check: vendored gate sources unchanged
+  ✔ source unchanged: crypto/server/src/actions.ts (vendored crypto gates: mean, pct, smaAt, horizonReturn, BORN…) (6.016549ms)
+  ✔ source unchanged: equity/server/src/actions.ts (vendored equity gates: average, round, recentLowerHighs, sig…) (6.751412ms)
+  ✔ live-imported measurement.ts still exports the issuer's functions (4.58464ms)
+✔ drift check: vendored gate sources unchanged (18.966172ms)
+ℹ tests 3
+ℹ suites 1
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 175.207295
+
+== [4/11] orchestrator: npm test ==
+
+> paper-signal-issuance-orchestrator@0.1.0 test
+> npm run build && node --test dist/paper-signals/orchestrator/tests/run.js dist/paper-signals/orchestrator/tests/no-legacy-veto.test.js dist/paper-signals/orchestrator/tests/gate-decomposition.test.js dist/paper-signals/orchestrator/tests/db-store.test.js dist/paper-signals/orchestrator/tests/integrated-handler.test.js dist/paper-signals/orchestrator/tests/alert-recovery.test.js dist/paper-signals/orchestrator/tests/clock-skew.test.js
+
+
+> paper-signal-issuance-orchestrator@0.1.0 build
+> tsc && node scripts/postbuild.mjs
+
+postbuild: renamed to /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/orchestrator/dist/hidden_files/source-export-2026-10-13/equity/server/src/measurement.cjs
+▶ recoverable alert delivery
+  ✔ transport failure marks the alert failed; recovery redelivers exactly once with correct final state (34.1443ms)
+  ✔ no deliverAlert hook (sandbox default) records delivery as simulated (3.907264ms)
+  ✔ explicit live ack with ack id is persisted; duplicate acknowledgement is a no-op (5.586023ms)
+  ✔ { acknowledged: false } is a transport failure; recovery delivers once the transport is fixed (7.174126ms)
+  ✔ claim-before-send serializes senders: a 'sending' row is reclaimed by recovery, not double-sent (2.266862ms)
+  ✔ recovery of a 'sending' row never un-delivers a concurrently delivered alert (6.959754ms)
+✔ recoverable alert delivery (63.106364ms)
+▶ venue-clock-skew: future print defers with the named reason, retries later
+  ✔ regression: future-timestamped print -> deferred_clock_skew_future_observation; later tick accepts it unclamped (14.824046ms)
+  ✔ a print timestamped exactly at our now is not skew (boundary: ts > now, strictly) (3.075916ms)
+✔ venue-clock-skew: future print defers with the named reason, retries later (19.65089ms)
+▶ skewGuardedFeed unit
+  ✔ passes present prints through untouched (1.744679ms)
+  ✔ throws VenueClockSkewError on a future print (never clamps) (0.962995ms)
+  ✔ checks async feeds too (0.560071ms)
+  ✔ honours a custom tolerance (1.382004ms)
+✔ skewGuardedFeed unit (5.121446ms)
+▶ DbStore: WriteStore conformance over SQLite
+  ✔ round-trips candidates, signals, contracts, suppressions, alerts (8.218274ms)
+✔ DbStore: WriteStore conformance over SQLite (9.675079ms)
+▶ DbStore: named control 1 — TRANSACTION API (atomic multi-write)
+  ✔ signal + contract + candidate + alert commit atomically in one transaction (3.917659ms)
+  ✔ simulated crash between writes rolls back: no partial state (2.497578ms)
+✔ DbStore: named control 1 — TRANSACTION API (atomic multi-write) (6.742478ms)
+▶ DbStore: named control 2 — ISOLATION (overlapping commits serialize)
+  ✔ overlapping runExclusive commit scopes apply in order with no interleaving (4.766613ms)
+✔ DbStore: named control 2 — ISOLATION (overlapping commits serialize) (5.010399ms)
+▶ DbStore: named control 3 — CLAIM MECHANISM (published vs already_exists)
+  ✔ UNIQUE(identity_hash) + issuance_claim decides published vs already_exists (4.625672ms)
+  ✔ production comparison shape: claim === invocationId => published, else already_exists (2.821915ms)
+✔ DbStore: named control 3 — CLAIM MECHANISM (published vs already_exists) (7.819085ms)
+▶ equity gate decomposition: differential vs vendored signalIssuanceDecision
+  ✔ compose(evaluateEquityBornDead, evaluateEquityShortRegime) ≡ signalIssuanceDecision on 500 random fixtures (47.277028ms)
+  ✔ evaluateEquityBornDead reproduces the exact production reason strings (equity 4-dp rounding) (0.558068ms)
+  ✔ evaluateEquityShortRegime lets longs through and gates shorts on bearish structure (1.52589ms)
+✔ equity gate decomposition: differential vs vendored signalIssuanceDecision (52.749211ms)
+▶ integrated handler: qualifying issuance exactly once (equity)
+  ✔ full path: veto pass -> pending contract -> setup alert -> entered -> atomic persist (23.779336ms)
+✔ integrated handler: qualifying issuance exactly once (equity) (25.159577ms)
+▶ integrated handler: corrected veto on the decision→entry window (crypto)
+  ✔ genuine waiting-interval breach -> fail_closed, invalidated with gate waiting-interval-invalidation (4.609998ms)
+  ✔ pre-decision crossing passes: the OLD veto would have killed this fixture (2.972791ms)
+  ✔ straddling uncertainty in the waiting interval -> uncertain/fail-closed with the straddle rule cited (2.357998ms)
+  ✔ no waiting-interval evidence at all (crypto) -> uncertain/fail-closed (never silent) (2.097488ms)
+✔ integrated handler: corrected veto on the decision→entry window (crypto) (12.523865ms)
+▶ integrated handler: pipeline guards
+  ✔ stale quote -> deferred (never issued on stale evidence), then issues when fresh (11.171185ms)
+  ✔ expired candidate -> rejected with gate expiry, issuer never entered (1.85887ms)
+  ✔ crypto short without bearish structure -> rejected by the RETAINED short-regime gate (2.214364ms)
+✔ integrated handler: pipeline guards (15.678739ms)
+▶ integrated handler: restart / replay and concurrency
+  ✔ restart/replay: store reload + re-ingest -> still exactly one signal (14.260761ms)
+  ✔ overlapping manual + scheduled calls -> exactly one issuance (11.495341ms)
+✔ integrated handler: restart / replay and concurrency (26.023073ms)
+▶ integrated handler: entry outcomes and post-entry point
+  ✔ print beyond the drift cap -> invalidated (void_drift), no signal (3.200543ms)
+  ✔ no qualifying print before the window closes -> entry-expired, reconstruction labeled (3.179161ms)
+  ✔ post-entry stop-out after a valid entry -> signal persisted with the stop-out recorded (5.548026ms)
+  ✔ stopped at birth (entry print itself crossed the stop) -> invalidated, no signal (3.010739ms)
+✔ integrated handler: entry outcomes and post-entry point (15.957177ms)
+▶ item 1: concurrent corruption — loser-overwrites-winner is refused
+  ✔ two DbStore instances on the same file (WAL): A issues, B's drift-invalid outcome attempt changes nothing (14.00006ms)
+✔ item 1: concurrent corruption — loser-overwrites-winner is refused (14.267501ms)
+▶ item 2: late fetch, stale prints, wrong venue
+  ✔ minute-16: fetch starts in-window, clock advances past expiry during the await → expired, never issued (3.527494ms)
+  ✔ stale-but-in-window print (age > maxObservationAgeMs) → skipped → expired (3.777789ms)
+  ✔ wrong-venue print → skipped → expired (2.395665ms)
+✔ item 2: late fetch, stale prints, wrong venue (9.956532ms)
+▶ item 3: durable awaiting-entry recovery
+  ✔ process termination after qualification → new store on the same file → tick resumes → issued; contract NOT recreated; setup alert exactly once (8.256861ms)
+  ✔ poll-budget exhaustion with the window still open → stays awaiting-entry (NOT expired); expires only when the window closes (2.756457ms)
+✔ item 3: durable awaiting-entry recovery (11.205776ms)
+▶ old-veto guard (static): the legacy born-dead veto is not on the integrated path
+  ✔ handler.ts exists and the veto module is the only born-dead emitter in the tree (1.669425ms)
+  ✔ neither old veto function is reachable from the integrated handler (6.613555ms)
+  ✔ the retained regime gates ARE reachable (the guard must not nuke them) (4.568125ms)
+  ✔ handler.ts references no legacy issuance capability and no born-dead literal (1.118799ms)
+✔ old-veto guard (static): the legacy born-dead veto is not on the integrated path (16.003737ms)
+▶ crypto automatic path
+  ✔ qualifying long issues exactly once across repeated ticks (7.510811ms)
+  ✔ crypto issuer double is idempotent at the issuance layer (1.610828ms)
+  ✔ born-dead long abstains cleanly with the gate reason persisted (4.874636ms)
+  ✔ short without bearish structure is rejected by the short-regime gate (2.882926ms)
+  ✔ short with bearish structure issues (2.994344ms)
+  ✔ duplicate instrument+direction within window is suppressed to a single issuance (6.159504ms)
+  ✔ expired candidate is rejected with gate=expiry and never issued (1.274072ms)
+  ✔ detection-to-alert delays are recorded exactly (3.947344ms)
+  ✔ stale inputs defer (never issue on stale evidence), then issue when fresh inputs arrive (2.295565ms)
+  ✔ min-score floor abstains with reason (1.167242ms)
+✔ crypto automatic path (38.316322ms)
+▶ manual path shares the single pipeline
+  ✔ manualIssue on a qualifying candidate issues via the same pipeline (1.156275ms)
+  ✔ manualIssue on a born-dead candidate abstains with reason (0.765379ms)
+  ✔ manual re-issue of the same candidate is idempotent (one signal) (1.335975ms)
+✔ manual path shares the single pipeline (3.514814ms)
+▶ restart and replay idempotency
+  ✔ same input replayed after a store reload issues exactly once (1.663256ms)
+  ✔ equity issuer double: identical retry returns already-existed, one signal (35.758954ms)
+✔ restart and replay idempotency (37.670522ms)
+▶ equity automatic path (real reconstruction import)
+  ✔ qualifying long issues exactly once via the real reconstruction (13.307601ms)
+  ✔ born-dead long (signal-day flush through the stop) is rejected (4.969227ms)
+  ✔ qualifying short issues (bearish structure via real reconstruction) (12.491586ms)
+  ✔ vendored signalIssuanceDecision rejects a short with no bearish structure (1.166511ms)
+  ✔ vendored equity gate agrees with the real imported reconstruction (5.481557ms)
+  ✔ vendored crypto gates match production reason strings (1.443055ms)
+✔ equity automatic path (real reconstruction import) (40.03469ms)
+▶ read-path isolation: dossier views never issue
+  ✔ viewing a qualifying candidate's dossier has zero issuance side effects (1.995234ms)
+  ✔ readpath.ts statically imports no issuance capability (0.364036ms)
+✔ read-path isolation: dossier views never issue (2.648154ms)
+▶ candidate identity
+  ✔ is deterministic and insensitive to live-price/timestamp noise (0.618077ms)
+  ✔ ingest is replay-safe: re-ingesting never overwrites the record (2.121264ms)
+✔ candidate identity (2.941674ms)
+▶ processCandidate direct
+  ✔ already-issued candidates are a no-op (1.365479ms)
+✔ processCandidate direct (1.506661ms)
+ℹ tests 71
+ℹ suites 24
+ℹ pass 71
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1879.994318
+
+== [5/11] entry-v1: tsc + 45 tests ==
+ok - C1(a): evidence 'unavailable' carrying a fill price is rejected at the boundary
+ok - C1(b): receipt-before-observation (causality violation) is rejected
+ok - C1(c): entry observation timestamped before the contract was issued is rejected
+ok - C2: pending contract carries no entry fields — entry explicitly unset
+ok - C2: entry observation before pending-contract creation is rejected
+ok - C2: a contract claiming pending but carrying entry fields is rejected
+ok - C2: a terminal (non-pending) contract is rejected
+ok - C2: full happy path — qualify → pending → observe → entered (distinct event timestamp)
+ok - C2: expiry path — print after the window expires → expired, never a fill
+ok - C2: drift path — print outside the cap → invalidated (void_drift)
+ok - C3: equity late scan — decisionAt is the scan time, not the bar close
+ok - C3: crypto late scan — decisionAt is the scan time, source bar close stays separate
+ok - C3: entry print predating decisionAt is rejected with reason 'entry-before-decision'
+ok - C3: equity decisionAt is bounded — not before the bar close, not at/after the entry open
+
+14 tests passed
+✔ dist/test/corrections-1-3.test.js (106.783511ms)
+ok - contract construction: equity pending contract carries all frozen fields
+ok - equity decisionAt uses session-bounds end (16:00 EDT Friday)
+ok - equity early-close fix: 13:00 ET decision, not hardcoded 16:00
+ok - equity entry: open print at session-open boundary inside drift -> entered
+ok - equity drift beyond cap -> void_drift, never scored as a fill
+ok - equity after-hours print excluded -> void_no_quote
+ok - equity new entryRule does not trip the legacy research-only evaluator regex
+ok - crypto contract: 15-min window, venue clock, cohort marker
+ok - crypto entry: first venue print >= decisionAt (pre-decision prints ignored)
+ok - crypto entry: no venue print in window -> void_expired
+ok - crypto entry: drift beyond 1.5% -> void_drift
+ok - crypto degraded path: null venue time flags observation_degraded, never invents one
+ok - levels: decision-time invalidation immutable under quote refresh
+ok - levels: freeze-at-decision validator passes when published == decision
+ok - levels: validator fails loudly on silent rebuild (the crypto bug)
+ok - levels: explicit rebuild-around-entry policy validates when rule is followed
+ok - levels: validator rejects policy label mismatch
+ok - evidence: unavailable marking records reason, keeps entryPrice null, never fabricates
+ok - evidence: voided contract never carries a fabricated fill price
+ok - state machine: terminal states are final
+ok - contract guards: bad inputs rejected at construction
+ok - legacy: research records untouched, backfill refused, no silent conversion
+ok - calendar: weekends and holidays are not sessions; out-of-range refuses to guess
+ok - ungrounded params are explicit and tunable (not hidden constants)
+
+24 tests passed
+✔ dist/test/entry-v1.test.js (102.906763ms)
+ok - (c2) reconstruct() refuses while the window is still open
+ok - (e) cadence must be strictly finer than the window: 30-min poll on a 15-min window throws
+ok - (c) late fetch of a past print -> labeled reconstruction, rejected as actionable entry
+ok - (d) first in-window print beyond the drift cap -> void_drift
+ok - (f) check() is idempotent on terminal states
+ok - (a) entry observed inside its window, with both alert delays recorded
+ok - (b) window expires with no qualifying print -> void_expired, never filled later
+
+7 watcher tests passed
+✔ dist/test/watcher.test.js (97.717125ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 323.969613
+
+== [6/11] veto: tsc + 40 tests + 11 waiting-interval tests ==
+
+> build
+> ../orchestrator/node_modules/.bin/tsc -p tsconfig.json
+
+
+> test
+> node --test tests/veto.test.ts tests/veto-timing-c6.test.ts tests/holdout-veto-counterexample.test.mjs
+
+
+### crypto LONG: yesterday's low 95 <= stop 98, setup decided TODAY after the candle completed
+  veto fired: true  |  reason: born-dead LONG: signal-day low 95 <= invalidation 98
+  verdict: VETO FIRES on the actual code. Under a correct rule it should NOT fire: the extreme is pre-decision, already observed by the decision factors. This is pre-entry movement (detection delay), not setup invalidation.
+
+### crypto SHORT: yesterday's high 104 >= stop 102, setup decided TODAY after the candle completed
+  veto fired: true  |  reason: born-dead SHORT: signal-day high 104 >= invalidation 102
+  verdict: VETO FIRES on the actual code. Should NOT: same pre-decision double-count.
+
+### CORRECTED rule: post-decision 09:30Z bar low 97.4 <= final stop 98
+  veto fired: true  |  reason: corrected born-dead LONG: post-decision extreme crossed final stop 98
+  verdict: VETO FIRES — correctly: this is genuine setup invalidation, movement strictly after the decision crossed the actual published stop.
+
+### CORRECTED rule: yesterday's low 95 excluded (pre-decision); post-decision bars hold
+  veto fired: false  |  reason: null
+  verdict: VETO DOES NOT FIRE — correctly: the completed signal-day candle (strictly before decisionAt) is excluded from the extreme check.
+
+### equity LONG: signal-day (entry-bar) low 95 <= stop 98, entry = that bar's close
+  veto fired: true  |  reason: born-dead LONG: signal-day low 95 <= invalidation 98
+  verdict: VETO FIRES on the actual code. Should NOT fire as a stop-out: the crossing is pre-entry (intraday, before the close fill) — and the entry contract explicitly disclaims executability ('paper execution is not claimed'). Genuine check would be post-entry sessions only.
+
+5/5 harness expectations held as analyzed.
+✔ tests/holdout-veto-counterexample.test.mjs (95.936592ms)
+✔ (6a1) straddling-entry candle with breach -> UNCERTAIN, not a definite veto (2.377718ms)
+✔ (6a2) straddling-entry candle, whole-bar safe -> definite pass (0.311758ms)
+✔ (6a3) bar fully inside (decision, entry) crossing the stop -> still a definite veto (0.22002ms)
+✔ (6b1) outcome: intraday bar straddling entryAt with a stop touch -> UNCERTAIN, not fail (1.100242ms)
+✔ (6b2) outcome: straddling-entry bar, whole-bar safe -> post-entry portion provably safe (0.359329ms)
+✔ (6b3) outcome: bar fully after entryAt crossing the stop -> still fail (genuine stop-out) (0.188984ms)
+✔ (6c1) valid entry followed by a later extreme beyond the stop -> veto fires (genuine stop-out) (0.698228ms)
+✔ (6c2) extreme timestamped BEFORE entryAt -> does not veto (pre-entry movement) (0.247271ms)
+✔ (6c3) single safe print inside an otherwise unobserved interval -> entry valid, invalidation insufficient-data (0.248093ms)
+✔ (6c4) fully covered post-entry interval, no breach -> pass on both questions (1.018028ms)
+✔ (6c5) entry print itself crosses the stop -> entryValid fail (stopped at birth) (0.569415ms)
+✔ (6c6) straddling-entry bar with a crossing in the new check -> insufficient-data, never a definite stop-out (0.310146ms)
+✔ (6c7) short side: post-entry extreme above the stop -> invalidation_observed (1.337367ms)
+✔ (a1) yesterday-crosses-stop counterexample does NOT veto the new setup (exact fixture) (3.050137ms)
+✔ (a2) genuine post-decision invalidation DOES veto (0.656945ms)
+✔ (a2b) short-side genuine post-decision invalidation DOES veto (0.222133ms)
+✔ (a3) straddling candle whose whole-bar extreme is safe -> definite pass (provisional) (0.225709ms)
+✔ (a4) straddling candle whose extreme crossed the stop -> UNCERTAIN, fail-closed (0.873952ms)
+✔ (a5) no post-decision evidence at all -> UNCERTAIN, fail-closed, never falls back to pre-decision candle (0.233631ms)
+✔ (a6) NO WAITING TRAP: immediate entry validates on the forming candle alone (0.201252ms)
+✔ (a7) equity mode: the signal-day bar crossing the stop is pre-decision -> pass, recorded as feature (0.72638ms)
+✔ (d1) veto uses the FINAL published stop: bar crosses draft stop but not published stop -> NO veto (1.461674ms)
+✔ (d2) veto uses the FINAL published stop: bar misses draft stop but crosses published stop -> VETO (0.644748ms)
+✔ (d3) pipeline guard rejects a run that graded the draft stop instead of the published stop (0.7862ms)
+✔ (b1) entry beyond driftLimit -> entry-rule failure (NOT a veto) (0.211678ms)
+✔ (b2) entry past expiry -> entry-rule failure (0.223856ms)
+✔ (b3) entry inside the permitted zone -> pass (0.129194ms)
+✔ (b4) missing entry -> uncertain, fail-closed (0.102934ms)
+✔ (c1) pre-entry bars are ignored entirely: a pre-entry stop cross does not fail (0.637006ms)
+✔ (c2) post-entry stop touch -> fail (invalidated) (0.202193ms)
+✔ (c3) post-entry target touch -> pass (0.396535ms)
+✔ (c4) same-bar target+stop double touch -> uncertain (pessimistic ordering unresolvable) (0.189274ms)
+✔ (c5) expiry-straddling candle with a touch -> uncertain (0.237186ms)
+✔ (c6) equity: entry inside a session -> uncertain (same granularity as evaluator) (0.299069ms)
+✔ (c7) equity: first post-entry session crossing the stop -> fail (born-dead at evaluation) (0.216715ms)
+✔ (c8) equity veto must examine the evaluator's granularity: intraday evidence for a session evaluator -> uncertain (0.155303ms)
+✔ (o1) full issuance run: the exact counterexample setup passes all three checks (0.237086ms)
+✔ (o2) full issuance run: genuine post-decision breach suppresses (fail-closed) (0.195513ms)
+✔ legacy 5-case counterexample holdout still passes (byte-identical, in place) (90.255517ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 640.721945
+
+> test:waiting-interval
+> npm run build && node --test build/tests/waiting-interval.test.js
+
+
+> build
+> ../orchestrator/node_modules/.bin/tsc -p tsconfig.json
+
+
+--- demo(i): CONFIRMED breach during [decisionAt, entryAt), then recovery before entry ---
+[t=2026-10-13T09:10:00.000Z] verdict=pass
+    reason=waiting interval clear: no post-decision extreme crossed the final published stop 98; pre-decision extremes recorded as setup features, not stop-outs.
+[t=2026-10-13T09:15:00.000Z] verdict=fail
+    reason=setup invalidated in the waiting interval: born-dead LONG: post-decision extreme crossed the final published stop 98 (extreme 97.5 on 09:10-09:15Z (BREACH: low 97.5 <= stop 98)).
+[t=2026-10-13T09:20:00.000Z] verdict=fail
+    reason=setup invalidated in the waiting interval: born-dead LONG: post-decision extreme crossed the final published stop 98 (extreme 97.5 on 09:10-09:15Z (BREACH: low 97.5 <= stop 98)).
+    note: recovery before entry does not un-invalidate — a touch is a touch.
+
+--- demo(ii): PROVISIONAL breach evidence, then exoneration by finer evidence ---
+[t=2026-10-13T09:10:00.000Z] verdict=uncertain
+    reason=waiting-interval invalidation uncertain (fail-closed downstream): issuance-validation unavailable: evidence in the post-decision window is coarser than the finest available granularity (intraday); the path cannot be isolated.
+[t=2026-10-13T09:20:00.000Z] verdict=pass
+    reason=waiting interval clear: no post-decision extreme crossed the final published stop 98; pre-decision extremes recorded as setup features, not stop-outs.
+    note: the coarse provisional suggestion never became a definite breach — finer evidence exonerated the window.
+✔ entryAt < decisionAt throws (integrity — never grade a time-incoherent window) (1.868804ms)
+✔ empty bars + allowEmptyInterval -> pass with reason 'no bars by construction' (1.800132ms)
+✔ empty bars without allowEmptyInterval -> uncertain, fail-closed ('no waiting-interval evidence') (0.26015ms)
+✔ pre-decision extremes crossing the stop are features only — waiting interval still passes (0.843426ms)
+✔ preDecisionAt beyond decisionAt is clamped — post-decision evidence still graded (0.316004ms)
+✔ runQualificationChecks: pre-decision crossing never fails; clean run passes with no decision→entry invalidation (0.63303ms)
+✔ runQualificationChecks: entry-zone drift failure -> fail_closed (entry-rule failure, not a veto) (0.262634ms)
+✔ runQualificationChecks: pipeline stop mismatch -> fail_closed (0.289114ms)
+✔ checkSetupHistory standalone: always pass, even when history crossed the stop (0.377286ms)
+✔ DEMO (i): confirmed breach in the waiting interval — fail at the breach, remains fail after recovery (6.267636ms)
+✔ DEMO (ii): provisional (coarse) breach evidence -> uncertain, then finer evidence exonerates -> pass (3.09188ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 153.666548
+
+== [7/11] pilot: tsc --strict (compile-only; runtime needs network) ==
+
+> paper-pilot@0.1.0 build
+> tsc
+
+
+== [8/11] comparison harness: 86 python tests (incl. active-manifest resolution) ==
+test_ledger_completeness_helper (test_harness.TestAssertedRules.test_ledger_completeness_helper) ... ok
+test_rule1_recorded_suppression_beats_incomplete_ledger (test_harness.TestAssertedRules.test_rule1_recorded_suppression_beats_incomplete_ledger) ... ok
+test_rule1_recorded_suppression_no_score_no_ledger_abstains (test_harness.TestAssertedRules.test_rule1_recorded_suppression_no_score_no_ledger_abstains) ... ok
+test_rule1_recorded_suppression_no_score_with_ledger_abstains (test_harness.TestAssertedRules.test_rule1_recorded_suppression_no_score_with_ledger_abstains) ... ok
+test_rule1_suppression_with_unverifiable_recorded_score_abstains (test_harness.TestAssertedRules.test_rule1_suppression_with_unverifiable_recorded_score_abstains) ... ok
+test_rule2_no_score_no_suppression_never_abstains (test_harness.TestAssertedRules.test_rule2_no_score_no_suppression_never_abstains) ... ok
+test_rule3_challenger_own_ledger_complete_scores_without_prod (test_harness.TestAssertedRules.test_rule3_challenger_own_ledger_complete_scores_without_prod) ... ok
+test_rule3_complete_ledger_no_score_recomputed_both_arms (test_harness.TestAssertedRules.test_rule3_complete_ledger_no_score_recomputed_both_arms) ... ok
+test_rule3_incomplete_ledger_no_score_stays_unscored (test_harness.TestAssertedRules.test_rule3_incomplete_ledger_no_score_stays_unscored) ... ok
+test_rule4_challenger_scored_when_production_has_no_recorded_score (test_harness.TestAssertedRules.test_rule4_challenger_scored_when_production_has_no_recorded_score) ... ok
+test_rule4_nonflipped_shared_evidence_not_inheritance (test_harness.TestAssertedRules.test_rule4_nonflipped_shared_evidence_not_inheritance) ... ok
+test_rule4_production_abstain_challenger_no_evidence_unscored (test_harness.TestAssertedRules.test_rule4_production_abstain_challenger_no_evidence_unscored) ... ok
+test_rule4_production_abstain_challenger_scored_independently (test_harness.TestAssertedRules.test_rule4_production_abstain_challenger_scored_independently) ... ok
+test_cluster_interval_below_minimum_inconclusive (test_harness.TestClusterRobust.test_cluster_interval_below_minimum_inconclusive) ... ok
+test_cluster_interval_empty (test_harness.TestClusterRobust.test_cluster_interval_empty) ... ok
+test_cluster_interval_hand_computed (test_harness.TestClusterRobust.test_cluster_interval_hand_computed) ... ok
+test_compare_no_target_n_logic (test_harness.TestClusterRobust.test_compare_no_target_n_logic) ... ok
+test_direction_disagreement (test_harness.TestClusterRobust.test_direction_disagreement) ... ok
+test_direction_disagreement_no_trigger (test_harness.TestClusterRobust.test_direction_disagreement_no_trigger) ... ok
+test_grouping_rule (test_harness.TestClusterRobust.test_grouping_rule) ... ok
+test_grouping_uses_decision_time_fields_only (test_harness.TestClusterRobust.test_grouping_uses_decision_time_fields_only) ... ok
+test_t975_table (test_harness.TestClusterRobust.test_t975_table) ... ok
+test_challenger_hand_computed (test_harness.TestCryptoScoring.test_challenger_hand_computed) ... ok
+test_flip_b (test_harness.TestCryptoScoring.test_flip_b) ... ok
+test_flip_c (test_harness.TestCryptoScoring.test_flip_c) ... ok
+test_legacy_walkforward_excluded (test_harness.TestCryptoScoring.test_legacy_walkforward_excluded) ... ok
+test_no_data_zero_never_estimated (test_harness.TestCryptoScoring.test_no_data_zero_never_estimated) ... ok
+test_production_hand_computed (test_harness.TestCryptoScoring.test_production_hand_computed) ... ok
+test_roundtrip (test_harness.TestCsvRoundtrip.test_roundtrip) ... ok
+test_mixed (test_harness.TestEquityScoring.test_mixed) ... ok
+test_unanimous_plus_redundancy (test_harness.TestEquityScoring.test_unanimous_plus_redundancy) ... ok
+test_born_dead_long (test_harness.TestLevelsAndGates.test_born_dead_long) ... ok
+test_born_dead_short (test_harness.TestLevelsAndGates.test_born_dead_short) ... ok
+test_born_dead_unverifiable (test_harness.TestLevelsAndGates.test_born_dead_unverifiable) ... ok
+test_mirror_levels_long (test_harness.TestLevelsAndGates.test_mirror_levels_long) ... ok
+test_mirror_levels_missing (test_harness.TestLevelsAndGates.test_mirror_levels_missing) ... ok
+test_mirror_levels_short (test_harness.TestLevelsAndGates.test_mirror_levels_short) ... ok
+test_short_regime_gate (test_harness.TestLevelsAndGates.test_short_regime_gate) ... ok
+test_active_manifest_executable_core_matches_harness (test_harness.TestManifest.test_active_manifest_executable_core_matches_harness) ... ok
+test_active_manifest_resolves_in_package (test_harness.TestManifest.test_active_manifest_resolves_in_package) ... ok
+test_empty_rows_metrics (test_harness.TestMetrics.test_empty_rows_metrics) ... ok
+test_graded_rows_metrics (test_harness.TestMetrics.test_graded_rows_metrics) ... ok
+test_wilson_edges (test_harness.TestMetrics.test_wilson_edges) ... ok
+test_arm_contribution_accounting (test_harness.TestPrimaryAccounting.test_arm_contribution_accounting) ... ok
+test_compare_carries_primary_and_secondary (test_harness.TestPrimaryAccounting.test_compare_carries_primary_and_secondary) ... ok
+test_equity_single_arm_primary (test_harness.TestPrimaryAccounting.test_equity_single_arm_primary) ... ok
+test_primary_all_unknown_reads_n0 (test_harness.TestPrimaryAccounting.test_primary_all_unknown_reads_n0) ... ok
+test_primary_interval_reported_at_g10 (test_harness.TestPrimaryAccounting.test_primary_interval_reported_at_g10) ... ok
+test_primary_paired_difference_abstain_zero_participates (test_harness.TestPrimaryAccounting.test_primary_paired_difference_abstain_zero_participates) ... ok
+test_batch_never_silently_drops (test_harness.TestScorePair.test_batch_never_silently_drops) ... ok
+test_decision_time_strict_raises (test_harness.TestScorePair.test_decision_time_strict_raises) ... ok
+test_equity_challenger_not_applicable (test_harness.TestScorePair.test_equity_challenger_not_applicable) ... ok
+test_flipped_born_dead_fires (test_harness.TestScorePair.test_flipped_born_dead_fires) ... ok
+test_flipped_levels_uncomputable (test_harness.TestScorePair.test_flipped_levels_uncomputable) ... ok
+test_flipped_short_unverifiable_regime_abstains (test_harness.TestScorePair.test_flipped_short_unverifiable_regime_abstains) ... ok
+test_flipped_to_long_issues (test_harness.TestScorePair.test_flipped_to_long_issues) ... ok
+test_issuance_unavailable_classification (test_harness.TestScorePair.test_issuance_unavailable_classification) ... ok
+test_no_ledger_suppressed_candidate_retained (test_harness.TestScorePair.test_no_ledger_suppressed_candidate_retained) ... ok
+test_nonflipped_inherits_issuance (test_harness.TestScorePair.test_nonflipped_inherits_issuance) ... ok
+test_production_unreproduced_kills_challenger (test_harness.TestScorePair.test_production_unreproduced_kills_challenger) ... ok
+test_row_schema_exact (test_harness.TestScorePair.test_row_schema_exact) ... ok
+test_suppressed_recorded_mismatch_still_unreproduced (test_harness.TestScorePair.test_suppressed_recorded_mismatch_still_unreproduced) ... ok
+test_suppressed_with_ledger_no_recorded_score (test_harness.TestScorePair.test_suppressed_with_ledger_no_recorded_score) ... ok
+test_late_asof_flagged_not_dropped (test_collector.TestDecisionTimeValidation.test_late_asof_flagged_not_dropped) ... ok
+test_strict_mode_raises_lookahead (test_collector.TestDecisionTimeValidation.test_strict_mode_raises_lookahead) ... ok
+test_verified_row_passes (test_collector.TestDecisionTimeValidation.test_verified_row_passes) ... ok
+test_dry_run_writes_nothing (test_collector.TestDedupe.test_dry_run_writes_nothing) ... ok
+test_new_candidate_appends_with_extended_header (test_collector.TestDedupe.test_new_candidate_appends_with_extended_header) ... ok
+test_rerun_dedupes_to_zero (test_collector.TestDedupe.test_rerun_dedupes_to_zero) ... ok
+test_same_candidate_new_freeze_version_appends (test_collector.TestDedupe.test_same_candidate_new_freeze_version_appends) ... ok
+test_collect_writes_nothing_on_quarantine_hit (test_collector.TestQuarantine.test_collect_writes_nothing_on_quarantine_hit) ... ok
+test_refuses_v1_file_as_input (test_collector.TestQuarantine.test_refuses_v1_file_as_input) ... ok
+test_refuses_v1_file_as_output (test_collector.TestQuarantine.test_refuses_v1_file_as_output) ... ok
+test_refuses_v1_jsonl_as_output (test_collector.TestQuarantine.test_refuses_v1_jsonl_as_output) ... ok
+test_rejects_missing_candidate_id (test_collector.TestQuarantine.test_rejects_missing_candidate_id) ... ok
+test_rejects_missing_origin (test_collector.TestQuarantine.test_rejects_missing_origin) ... ok
+test_rejects_plumbing_test_origin (test_collector.TestQuarantine.test_rejects_plumbing_test_origin) ... ok
+test_rejects_sandbox_seeded_origin (test_collector.TestQuarantine.test_rejects_sandbox_seeded_origin) ... ok
+test_rejects_unknown_terminal (test_collector.TestQuarantine.test_rejects_unknown_terminal) ... ok
+test_suppressed_flipped_without_levels (test_collector.TestSuppressedCandidates.test_suppressed_flipped_without_levels) ... ok
+test_suppressed_with_ledger_non_flipped (test_collector.TestSuppressedCandidates.test_suppressed_with_ledger_non_flipped) ... ok
+test_suppressed_without_ledger (test_collector.TestSuppressedCandidates.test_suppressed_without_ledger) ... ok
+test_backfill_only_writes_trace_columns (test_collector.TestTraceStamping.test_backfill_only_writes_trace_columns) ... ok
+test_extended_schema_is_frozen_prefix_plus_trace (test_collector.TestTraceStamping.test_extended_schema_is_frozen_prefix_plus_trace) ... ok
+test_issuance_outcome_mapping (test_collector.TestTraceStamping.test_issuance_outcome_mapping) ... ok
+test_stamp_trace_sets_freeze_and_contract (test_collector.TestTraceStamping.test_stamp_trace_sets_freeze_and_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 86 tests in 0.018s
+
+OK
+
+== [9/11] reconciliation checks: v2.1.0 (historical) + v2.1.1 (GATE) ==
+-- v2.1.0: HISTORICAL -- its plan-UNRESOLVED assertions were superseded
+   by the v2.1.1 amendment. Run for the record; failure is the
+   documented outcome and does NOT fail the build.
+== [1] entry contract ==
+  PASS manifest entry contract is actionable-entry-v1
+  PASS plan names actionable-entry-v1
+  PASS manifest records 9 operational source files
+  PASS hash matches disk: contract.ts
+  PASS hash matches disk: entry-rules.ts
+  PASS hash matches disk: feed.ts
+  PASS hash matches disk: levels.ts
+  PASS hash matches disk: pending.ts
+  PASS hash matches disk: watcher.ts
+  PASS hash matches disk: veto.ts
+  PASS hash matches disk: waiting-interval.ts
+  PASS hash matches disk: handler.ts
+  PASS plan states first-post-decision-binance-spot-trade crypto entry rule
+  PASS manifest crypto entry rule matches plan
+== [2] veto identity ==
+  PASS manifest waiting-interval veto names checkWaitingInterval
+  PASS manifest veto window is [decisionAt, entryObservedAt]
+  PASS manifest qualification names runQualificationChecks
+  PASS plan names runQualificationChecks
+  PASS plan names checkWaitingInterval
+  PASS manifest marks legacy born-dead superseded on the issuance path
+  PASS plan does not reinstate born-dead as an issuance gate
+  PASS RULE 1 behavior: recorded suppression -> abstain even with no ledger
+  PASS RULE 2 behavior: no score + no suppression record -> unscored, never abstain
+  PASS manifest names all four asserted rules
+  PASS manifest challenger has no disagreement-as-bug wording
+== [3] abstain/unknown accounting (manifest rule == metrics behavior) ==
+  PASS abstention zero participates: n_primary == 2
+  PASS abstention zero in mean: mean == -1.25
+  PASS never-evaluated counted as UNKNOWN, not zero
+  PASS abstain counted as abstain-zero, not unknown
+  PASS UNKNOWN excluded from the interval (n=2), G<10 -> INCONCLUSIVE
+  PASS manifest primary rule states genuine abstention = 0.000 R real zero
+  PASS manifest states UNKNOWN never scored as 0, never silently dropped
+  PASS plan states the primary accounting rule
+  PASS plan marks both-issued-only as secondary
+== [4] cohort split ==
+  PASS manifest defines Cohort P (crypto paired)
+  PASS manifest defines Cohort E (equity production-only)
+  PASS manifest mandates never pooled without the split
+  PASS plan mandates the cohort split
+  PASS plan forbids pooling
+  PASS metrics.compare('crypto') sees only crypto rows
+  PASS metrics.compare('equity') sees only equity rows
+  PASS equity primary is production-only, never a challenger gap
+== [5] horizon rule ==
+  PASS manifest equity horizon rule = signal date + 47 calendar days
+  PASS plan states the +47 rule
+  PASS manifest records the conflict as UNRESOLVED
+Traceback (most recent call last):
+  File "/tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/comparison/check_reconciliation_v2_1_0.py", line 192, in <module>
+    check("plan records the conflict as UNRESOLVED (section 9)",
+  File "/tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/comparison/check_reconciliation_v2_1_0.py", line 50, in check
+    assert cond, f"RECONCILIATION FAILURE [{name}]: {detail}"
+           ^^^^
+AssertionError: RECONCILIATION FAILURE [plan records the conflict as UNRESOLVED (section 9)]: 
+NOTE: v2.1.0 check failed as documented (superseded assertions); continuing.
+
+-- v2.1.1: GATE -- must pass; any failure aborts the build.
+== [1] v2.1.0 immutability ==
+  PASS v2.1.1 records a v2.1.0 sha256
+  PASS v2.1.0 bytes untouched (hash matches recorded)
+== [2] v2.1.1 is date-fields-only ==
+  PASS amendment_kind names date-fields-only
+  PASS scope disclaims executable-semantics changes
+  PASS changed_fields non-empty with provenance
+  PASS immutability rule restates v2.1.0 untouched
+== [3] plan conflict resolved ==
+  PASS plan section 9 header says RESOLVED
+  PASS section 9 gives the computed resolution
+  PASS plan points at maturity schedule
+== [4] maturity schedule computed dates ==
+  PASS schedule states latest cohort maturity 2027-02-17
+  PASS schedule states equity readout by 2027-02-24
+  PASS schedule cites the 30-XNYS-session rule
+  PASS schedule keeps crypto separate
+== [5] v2.1.1 changed fields carry the new dates ==
+  PASS v2.1.1 names 2027-02-17
+  PASS v2.1.1 names 2027-02-24
+
+ALL GREEN: 15 checks passed.
+
+== [10/11] ten integrated demos ==
+# Integrated Issuance Handler — Ten Demonstrations
+
+Workstream A (integrated issuance handler) + B (DB persistence) + the 2026-10-13 repair
+(concurrency guards, late-fetch/stale-print/venue rules, durable awaiting-entry recovery,
+waiting-interval veto, alert enqueue vs delivery).
+SANDBOX ONLY: no production issuance, no scheduler enablement, no brokerage.
+Every demo runs the COMPLETE handler sequence through the REAL DB path
+(DbStore over node:sqlite: BEGIN IMMEDIATE / COMMIT / ROLLBACK;
+UNIQUE(identity_hash) + issuance_claim = invocationId).
+
+Provenance of the exercised functions:
+  - runQualificationChecks / checkWaitingInterval: veto/src/waiting-interval.ts
+    (the corrected veto after the 2026-10-13 split: qualification-time checks at step 5,
+    the genuine decision→entry veto over the real [decisionAt, entryAt] window at step 9b;
+    runIssuanceChecks stays exported from veto/src/veto.ts for its own unit tests)
+  - checkSetupInvalidation / checkPostEntryInvalidation: veto/src/veto.ts
+    (the ONLY emitter of 'born-dead ...' strings on this path)
+  - buildPendingContract / observeEntry: entry-v1/src/pending.ts (corrections 2+3;
+    the in-memory pending registry is gone — structural validation, durable across restarts)
+  - EntryWatcher cadence rule (poll < window, correction 4): enforced in the handler's observation loop
+  - evaluateEquityShortRegime: orchestrator/src/gates/equity-gate-decomposition.ts (retained regime gate)
+  - evaluateShortRegimeGate: vendored crypto gate (retained regime gate, unchanged semantics)
+  - persistSignalIssuanceBundle shape: crypto/server/src/issuance-persistence.ts:11 (production control)
+  - issuanceClaim === invocationId: crypto/server/src/actions.ts:2013-2021 (production claim mechanism)
+  - db.batch + onConflictDoNothing: equity/server/src/actions.ts:505-513 (production atomic batch)
+
+## Demo 1 — qualifying issuance exactly once (equity)
+Input: equity long, clean post-decision path; next-session open print +0.1% (within the 0.5% drift cap).
+Expected path: tick -> regime gate pass -> runQualificationChecks pass -> pending contract ->
+  setup alert -> open print observed -> entered -> post-entry clean -> atomic persist -> tracker + alerts.
+  [PASS] candidate issued — status=issued
+  [PASS] exactly one signal
+  [PASS] exactly one contract, entered — entryPrice=250.25
+  [PASS] contractId persisted alongside signalId — ct_b25f5669d4194776005fccd02fac8a3f
+  [PASS] setup alert + entry alert
+  [PASS] setupAlertAt < entryObservedAt (spec §2.2) — 2026-10-13T22:30:00.000Z < 2026-10-14T13:30:00.000Z
+  [PASS] tracker shows the signal
+  [PASS] alert feed has both alerts
+  [PASS] second tick issues nothing
+
+## Demo 2 — clean abstention with gate reason (crypto)
+Input: crypto long; the entry print is clean (+0.2%, within the drift cap), but a bar inside
+  the REAL decision→entry waiting interval breaches the final published stop (94).
+Expected path: tick -> runQualificationChecks pass -> pending contract -> setup alert ->
+  entry observed -> checkWaitingInterval fail_closed (breach in the waiting interval) ->
+  invalidated, gate=waiting-interval-invalidation; reason names the breach bar and the final
+  stop; no signal row, no entry alert. (The decision→entry invalidation moved from the
+  speculative step-5 veto to the genuine [decisionAt, entryAt] window at step 9b.)
+  [PASS] invalidated — status=invalidated
+  [PASS] gate is waiting-interval-invalidation — waiting-interval-invalidation
+  [PASS] reason names the breach bar and the final stop
+  [PASS] zero signals
+  [PASS] entry was observed (contract row entered) before the veto fired
+  [PASS] setup alert fired exactly once, no entry alert
+
+## Demo 3 — stale quote rejection (equity)
+Input: candidate with inputs 2h old (freshness 30m); quote provider returns null, then recovers.
+Expected path: tick -> deferred (stale-inputs), nextReassessmentAt set; no issuance, no contract,
+  no alert. Re-tick after recovery -> proceeds to issuance.
+  [PASS] deferred on stale inputs — status=deferred
+  [PASS] gate is stale-inputs
+  [PASS] next reassessment scheduled — 2026-10-13T22:45:00.000Z
+  [PASS] no issuance / contract / alert while stale
+  [PASS] re-tick after recovery issues
+
+## Demo 4 — expired candidate (crypto)
+Input: candidate detected 3h ago, TTL 1h. Expected: rejected gate=expiry; issuer never entered.
+  [PASS] rejected with gate expiry — status=expired gate=expiry
+  [PASS] reason cites the TTL
+  [PASS] issuer never entered
+
+## Demo 5 — restart/replay -> one signal (equity)
+Input: issue once, close the DB, reopen over the same file, re-ingest, tick.
+Expected: still exactly one signal; same signalId and contractId; tick issues nothing new.
+  [PASS] first run issued
+  [PASS] replay returns the issued record
+  [PASS] still exactly one signal
+  [PASS] same signalId and contractId — sig_b25f5669d4194776005fccd0 / ct_b25f5669d4194776005fccd02fac8a3f
+  [PASS] tick over the reloaded store issues nothing
+
+## Demo 6 — pre-decision crossing -> PASS (the behavioral old-veto guard)
+Input: yesterday's (signal-day) bar crossed the proposed stop (low 93 <= stop 94);
+  post-decision 1h bars clean. The LEGACY born-dead veto tests the signal-day candle and
+  would suppress this fixture; the corrected veto records it as a setup feature.
+Expected path: tick -> veto pass (preDecisionFeatures) -> issued.
+  old-veto premise: evaluateBornDead -> publish=false reason="born-dead LONG: signal-day low 93 <= invalidation 94"
+  [PASS] old veto would have killed it
+  [PASS] corrected veto passes -> issued — status=issued: issued via integrated crypto path; entered 2026-10-14T04:00:30.000Z; entry alert appended to sandbox-feed
+  [PASS] exactly one signal
+
+## Demo 7 — genuine setup invalidation -> fail_closed (crypto)
+Input: the entry print is clean, but a bar inside the REAL decision→entry waiting interval
+  breaches the final published stop (94). The breach evidence lives in the waiting interval
+  (moved out of the old speculative step-5 fixture) — test intent preserved: a genuine
+  invalidation fails closed.
+Expected path: tick -> runQualificationChecks pass -> entered -> checkWaitingInterval=fail ->
+  invalidated, gate=waiting-interval-invalidation; reason names the waiting-interval bar and
+  the final stop; validatePipelineOrder passes (checked stop == published stop).
+  [PASS] invalidated
+  [PASS] gate is waiting-interval-invalidation
+  [PASS] reason names the waiting-interval bar and the final stop
+  [PASS] zero signals
+
+## Demo 8 — straddling uncertainty -> uncertain/fail-closed (crypto)
+Input: a forming 1h candle straddles the REAL decision instant (the handler's run time);
+  its extreme crossed the stop. The straddle now lives in the waiting interval.
+Expected path: tick -> entered -> checkWaitingInterval=uncertain -> fail_closed;
+  the pre-event portion is never treated as a definite breach; the straddle rule is cited.
+  [PASS] invalidated
+  [PASS] gate is waiting-interval-invalidation
+  [PASS] verdict is uncertain (fail-closed)
+  [PASS] straddle rule cited
+  [PASS] zero signals
+
+## Demo 9 — overlapping manual + scheduled calls -> exactly one issuance (equity)
+Input: qualifying candidate; integratedManualIssue and integratedTick run concurrently
+  (interleaved, same store, distinct invocation ids).
+Expected: exactly one signal, one contract, one setup alert, one entry alert;
+  the loser returns the existing record (no error, no duplicate).
+  [PASS] racing calls complete without error (loser returns accepted state) — status=awaiting-entry
+  [PASS] exactly one signal — signals=1
+  [PASS] exactly one contract
+  [PASS] exactly one setup alert
+  [PASS] exactly one entry alert
+  [PASS] final state issued with the single accepted signal id — status=issued signalId=sig_b4d1ebcf62a37107dc95d899
+
+## Demo 10 — FINAL ACCEPTANCE: qualify → crash → resume → issue → concurrent loser refused
+The full repair chain on one DB file, every step logged with the DB state asserted:
+  (1) qualification commits the durable pending state, then the process 'dies';
+  (2) a brand-new store on the same file resumes from the DB row → timely valid entry;
+  (3) waiting-interval veto passes; issuance is immutable;
+  (4) the paper alert carries SEPARATE enqueue and delivery timestamps;
+  (5) a conflicting concurrent worker (drift-invalid print after issuance) attempts its
+      outcome on a second connection — and returns the accepted state unchanged.
+  phase 1: qualifying, then simulating process termination after the qualification commit
+  [PASS] phase 1 crashed as simulated (after the qualification commit)
+  [PASS] DB state: candidate awaiting-entry — status=awaiting-entry
+  [PASS] DB state: contract id is deterministic — ct_18102a0eb98eb79c61ecf6ce8b32de0a
+  [PASS] DB state: contract row pending
+  phase 1 durable state: contract ct_18102a0eb98eb79c61ecf6ce8b32de0a, decisionAt 2026-10-14T04:00:00.000Z
+  [PASS] DB state: setup alert enqueued exactly once
+  phase 2: restart — new DbStore on the same file, clock +60s (window still open)
+  [PASS] tick resumed the awaiting-entry candidate and issued — issued=[18102a0eb98eb79c61ecf6ce8b32de0a]
+  [PASS] DB state: candidate issued — status=issued
+  [PASS] contract NOT recreated: same contractId — ct_18102a0eb98eb79c61ecf6ce8b32de0a
+  [PASS] DB state: contract row entered
+  [PASS] resumed contract keeps the original decisionAt (parsed from the DB row, not rebuilt)
+  [PASS] setup alert NOT re-fired on resume
+  [PASS] paper alert: enqueuedAt and deliveredAt are separate timestamps — enqueuedAt=2026-10-14T04:02:00.000Z deliveredAt=2026-10-14T04:02:00.001Z
+  [PASS] paper alert: delivery recorded
+  [PASS] exactly one signal row (immutable issuance)
+  phase 3: worker B (second DB connection, WAL) attempts the drift-invalid outcome after issuance
+  [PASS] B returned the accepted state unchanged (no error, no write)
+  [PASS] final candidate row is exactly A's issued state
+  [PASS] final contract row is exactly A's issued state (still entered, not void_drift)
+  [PASS] final signal row is exactly A's issued state
+
+---
+ALL 10 DEMOS PASSED.
+
+Demo log written to: /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/demo/integrated-demo-log-2026-10-13.md
+
+== [11/11] alert-recovery demo (real crash + recovery) ==
+=== alert-recovery demo: driver ===
+[phase1] issuing a signal; the transport will crash before the entry-alert ack is recorded
+[phase1] transport received entry alert entry_sig_b738d5c377cf44e5c0e6b8cf — CRASHING before the ack is recorded
+driver: phase1 crashed as designed (exit 1, crash marker written)
+
+[phase2] restart: fresh process over the same DB file; running the recovery pass
+[phase2] alerts in DB before recovery: setup=delivered, entry=sending
+[phase2] recovery report: {"at":"2026-10-14T04:02:00.000Z","attempted":["entry_sig_b738d5c377cf44e5c0e6b8cf"],"delivered":["entry_sig_b738d5c377cf44e5c0e6b8cf"],"failed":[],"skipped":[]}
+[phase2] all recovery assertions pass — entry alert redelivered exactly once, final state correct
+
+driver: phase2 (restart + recovery) PASS
+evidence: /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/demo/evidence/alert-recovery
+  transport: {"phase":1,"alertId":"setup_b738d5c377cf44e5c0e6b8cf6cbe8b0f","kind":"setup","event":"transport-accepted"}
+  transport: {"phase":1,"alertId":"entry_sig_b738d5c377cf44e5c0e6b8cf","kind":"entry","event":"transport-received"}
+  transport: {"phase":2,"alertId":"entry_sig_b738d5c377cf44e5c0e6b8cf","kind":"entry","event":"transport-accepted"}
+
+== ALL STEPS PASSED ==
+active manifest: /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/comparison/freeze-manifest-v2.1.1.json
+demo log: /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/demo/integrated-demo-log-2026-10-13.md
+evidence: /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/demo/evidence/integrated/ and /tmp/pack-verify-fix4/paper-signals-offline-export/paper-signals/demo/evidence/alert-recovery/
+BUILD_EXIT=0

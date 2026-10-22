@@ -1,0 +1,4 @@
+candidate 53bb2a86d2e0fee1f36648122134e684 BTCUSD long status=issued gate=- contract=ct_53bb2a86d2e0fee1f36648122134e684(entered) setupAlertAt=2026-10-14T06:44:43.646Z entryObservedAt=2026-10-14T06:54:59.237Z signal=sig_53bb2a86d2e0fee1f3664812
+alert setup_53bb2a86d2e0fee1f36648122134e684 kind=setup enqueued=2026-10-14T06:44:43.646Z delivered=2026-10-14T06:44:43.708Z status=delivered
+alert entry_sig_53bb2a86d2e0fee1f3664812 kind=entry enqueued=2026-10-14T06:55:02.646Z delivered=2026-10-14T06:55:02.727Z status=delivered
+signal sig_53bb2a86d2e0fee1f3664812 issued=2026-10-14T06:55:02.646Z alerted=2026-10-14T06:55:02.646Z

@@ -1,0 +1,107 @@
+{
+  "abstentions": {
+    "chat": "compact daily summary only (see DAILY-SUMMARY-JOB-SPEC-2026-10-14.md)",
+    "rule": "routine abstentions stay in the terminal; no per-abstention chat noise"
+  },
+  "alert_types": [
+    "SETUP_PENDING",
+    "ENTRY_CONFIRMED"
+  ],
+  "collection": "frozen v2.1.0 rules continue; this config governs delivery only",
+  "decided_at": "2026-10-14",
+  "decided_by": "Logan",
+  "dedup_key": [
+    "signal_id",
+    "alert_type"
+  ],
+  "delivery_rule": "mark delivered ONLY after the chat channel acknowledges receipt; sandbox sim-acks stay labeled delivered-simulated",
+  "destination": {
+    "chat": {
+      "chat_id": "7b75e732-f527-4d53-b40d-4aa036201d9b",
+      "name": "Terminal research only side chat",
+      "path": "chat notification path"
+    },
+    "terminal": {
+      "note": "same signal, second view — chat delivery and terminal display are two views of the same signal, not alternatives",
+      "type": "tracker-alert-feed"
+    },
+    "moved_at": "2026-10-17",
+    "moved_by": "Logan (chat split: signals + sweeps -> Terminal research only 7b75e732; pipeline/building/Codex stays in Research terminal building a685c3e7)",
+    "previous_chat": "a685c3e7-c8be-4137-8900-4e899008bca7 (2026-10-14 routing test channel; historical)"
+  },
+  "paper_only": true,
+  "retry_policy": {
+    "backoff": "60s, 5m, 15m, then 1h",
+    "idempotent_on": "(signal_id, alert_type)",
+    "max_attempts": 6
+  },
+  "routing_test": {
+    "payload": "pilot/delivery/routing-test-payload.json",
+    "status": "channel-acked",
+    "channel": "Muse research side chat a685c3e7-c8be-4137-8900-4e899008bca7",
+    "test_message_id": "assistant-msg-630a9f81-e589-1734-6ca4-040ba466fe2b",
+    "sent_at_utc": "2026-10-14T05:12:07.261Z",
+    "ack": {
+      "emoji": "👍",
+      "ack_at_utc": "2026-10-14T05:12:26.05952Z",
+      "record_locator": "runtime.message_reactions row for test_message_id (PK is message_id; the reaction row carries the emoji and updated_at timestamp)",
+      "carrier_message_id": "9d7a0ae5-669f-481a-bab8-fd5d02aa750b",
+      "carrier_message_at_utc": "2026-10-14T05:12:26.142Z",
+      "carrier_message_note": "system event '[User reaction received to a previous message]' quoting the test message"
+    },
+    "evidence_note": "Status derived from live conversation records (muse.db: runtime.messages, runtime.events, runtime.message_reactions), not hand-set. Ack arrived 18.8s after send. Gate passed — live paper alerts are now ungated on the routing test.",
+    "live_paper_alerts_gated": false
+  },
+  "schema": "pilot/delivery/ALERT-SCHEMA-2026-10-14.md",
+  "semantics": "pilot/delivery/DELIVERY-SEMANTICS-2026-10-14.md",
+  "auto_delivery": {
+    "status": "armed — test-proven, auto-unproven",
+    "status_note": "Routing test proved the side-chat path manually (channel-acked, independently re-verified 2026-10-14 from runtime.messages + runtime.message_reactions). No automatic alert has flowed yet: deployed paper tables hold 0 alerts (three completed runpapersignalcycle runs, zero opportunities; nothing manufactured). Worker logic demonstrated end-to-end on real inputs (pilot/delivery/demo/) with nothing sent.",
+    "path": "agent cron -> runtime delivery subsystem -> research side chat (same mechanism as terminal-morning-brief / paste-trade-watch / signal-accuracy-test-week1, verified live in scheduler.delivery_outbox 2026-10-14)",
+    "worker_cron": {
+      "id": "paper-signal-alert-delivery",
+      "schedule": "interval 15m, America/Toronto",
+      "delivery": ["chat_id 7b75e732-f527-4d53-b40d-4aa036201d9b (Terminal research only; moved 2026-10-17 per Logan chat split, was a685c3e7)"],
+      "definition": "pilot/delivery/worker-cron-definition-2026-10-14.md",
+      "registered": true,
+      "registered_note": "Registered 2026-10-14 ~04:33 EDT (first execution 915a6ed2 succeeded, quiet run). Corrected from false per CHAT-ROUTING-RECONCILIATION-2026-10-14.md."
+    },
+    "ledger": "pilot/delivery/alert-delivery-ledger.json (book of record for chat delivery; empty at wiring time)",
+    "ack_source": "scheduler.delivery_outbox: state='delivered' AND delivered_at_utc IS NOT NULL on the run's delivery_key — the runtime's confirmed receipt. Ack query demonstrated on real rows (pilot/delivery/demo/ack-path-demo-2026-10-14.md).",
+    "retry": "per delivery-config retry_policy; re-emission only after observed failure/missing-past-grace and next_attempt_at; max 6 attempts then failed (surfaced in chat + daily summary)",
+    "dedup": "ledger key (signal_id, alert_type); delivered keys never re-sent; awaiting-ack keys never double-sent; unknown keys never auto-retried (Logan rule 2026-10-14: reconcile via outbox or surface for operator review)",
+    "quiet_rule": "no alert due and nothing to surface -> worker stays silent (no 'nothing new' messages)",
+    "abstentions": "never emitted; terminal only; compact daily summary per DAILY-SUMMARY-JOB-SPEC-2026-10-14.md (spec only, not created)",
+    "no_fabrication": "alerts failing alert-schema.json validation are marked unrenderable and surfaced as one-line blockers; no partial or invented payloads, ever",
+    "wiring_doc": "pilot/delivery/AUTO-DELIVERY-WIRING-2026-10-14.md",
+    "demo": "pilot/delivery/demo/worker-logic-demo-2026-10-14.md (decision logic on live 0-alert status -> quiet; render+dedup+ledger on real dry-run fixture, nothing sent)"
+  },
+  "labeling_spec": "pilot/delivery/LABELING-SPEC-2026-10-14.md",
+  "auto_alert_rule": {
+    "rule": "Future alerts fire AUTOMATICALLY within each contract's window, without waiting for expert approval.",
+    "decided_by": "Logan",
+    "decided_at": "2026-10-14",
+    "detail": "When the paper pipeline issues a qualifying signal, the paper-signal-alert-delivery worker emits SETUP_PENDING at qualification and ENTRY_CONFIRMED on entry observation — inside the contract's 15-minute entry window — on its normal 15m sweep, with no expert-approval gate. Expert review remains measurement/oversight; it is never a delivery precondition. Dossier-tracker rows are NOT alerted as actionable under this rule (see labeling_spec: DOSSIER vs PAPER paths).",
+    "worker_reads_here": "this delivery-config.json block + DELIVERY-SEMANTICS-2026-10-14.md section 'Standing rule — automatic alerts, no expert gate'"
+  },
+  "supersedes": "awaiting-user-choice placeholder (2026-10-13). That string survives only inside the frozen acceptance-run-v2.1.0 evidence as a truthful historical record; it is superseded for all live routing and must not be written again.",
+  "trigger_contract": {
+    "doc": "pilot/delivery/TRIGGER-CONTRACT-2026-10-14.md",
+    "mechanism": "deployed issuance path calls cron.run(id='paper-signal-alert-delivery', reason='trigger:<signal_id>/<alert_type>[,...] issued_at=<ISO-8601-UTC>') immediately after durable alert commit",
+    "status": "ISSUER HOOK INSTALLED VIA WRAPPER FALLBACK 2026-10-15 (~00:38Z): contract fallback (b) implemented — `paper-signal-cycle` converted from silent space_action to kind=agent issuance wrapper (owner goal:research-terminal; same 6h phase, next run 2026-10-14 23:09:23 EDT). Wrapper body: pre-snapshot getpaperpilotstatus → invoke runpapersignalcycle (no args) → post-snapshot → diff new alert keys (SETUP_PENDING/ENTRY_CONFIRMED, never test rows) → exactly one cron.run(id='paper-signal-alert-delivery', reason='trigger:<keys> issued_at=<ISO>') per batch; no issuer-side retry; ledgers read-only. Direct-from-artifact invocation (fallback (a)) remains unavailable from the workspace (needs a builder session; open platform question unverified). Worker-side trigger readiness was already DONE 2026-10-14 (~00:05Z): v2.2 body live on paper-signal-alert-delivery handles trigger: reasons. ENTRY_CONFIRMED enqueue point CLOSED 2026-10-15 via the wrapper (see pilot/delivery/ENTRY-CONFIRMED-ENQUEUE-CLOSURE-2026-10-14.md): the step-4 diff keeps ENTRY_CONFIRMED, and on the deployed path ENTRY_CONFIRMED can only be committed inside a runpapersignalcycle invocation the wrapper itself wraps (single-pass entry observation; post-window receipts rejected as entries — historical reconstruction is never an entry), so the pre/post diff fires the single cron.run for every ENTRY_CONFIRMED the deployed path can produce. Manual (unscheduled) invocations are covered by the 15m sweep's missed-trigger recovery. The deployed entry tick (Variant A) remains uninstalled — a future real-time observation improvement, not a delivery gap. Direct artifact hook (fallback (a)) is explicitly OPTIONAL for delivery completeness. PROOF STATUS: hook not yet demonstrated end-to-end — no genuine alert has been enqueued since install; first genuine qualifying signal will exercise wrapper → triggered worker run → outbox ack → ledger automatically. Mechanical verification DONE 2026-10-15 ~00:42Z: manual wrapper run 0729f437 succeeded — agent invoked runpapersignalcycle (deployed paper run id 8: issued 0, deferred 7, abstained 1, clean), pre/post diff found no new keys (known_keys=2 test-ledger keys excluded), no spurious trigger, no outbox row (chat-silent). Run log: pilot/delivery/wrapper-runs/run-2026-10-15T004055Z.json. The wrapper firing cron.run on a genuine alert is UNPROVEN by construction (no genuine alert since install; test rows never persisted) — first genuine qualifying signal exercises it automatically. See pilot/delivery/WRAPPER-FALLBACK-INSTALL-2026-10-14.md.",
+    "ordering": "commit before trigger; issuer never retries a failed cron.run (sweep missed-trigger recovery covers it)",
+    "open_platform_question": "whether artifact server code (space_action) can invoke scheduler.cron.run; fallback is a kind=agent issuance wrapper (parent's call)"
+  },
+  "discovery_mode": "sweep-fallback",
+  "discovery_mode_note": "sweep-fallback: trigger hook not deployed; sweep keeps v2.1 full discovery with documented lateness. Parent flips to 'trigger-only' only after the hook is deployed AND one triggered delivery is proven end-to-end (triggered run -> outbox delivered -> ledger delivered with trigger_source=trigger). In trigger-only mode the sweep is recovery-only: fresh keys inside trigger_grace_s belong to the trigger; older fresh keys are delivered once via missed-trigger recovery.",
+  "trigger_grace_s": 120,
+  "entry_to_delivery_metric": {
+    "doc": "pilot/delivery/ENTRY-TO-DELIVERY-METRIC-2026-10-14.md",
+    "definition": "event_to_delivery_delay_s = ack_at_utc (outbox delivered_at_utc) - event_time_utc (ENTRY_CONFIRMED: entry_observed_at; SETUP_PENDING: issued_at)",
+    "log": "pilot/delivery/entry-to-delivery-log.jsonl (append-only, one JSON object per delivered alert)",
+    "ledger_fields_on_delivered": ["event_time_utc", "event_time_source", "ack_at_utc", "event_to_delivery_delay_s", "enqueue_to_ack_delay_s", "delivered_inside_contract_window", "trigger_source", "trigger_latency_s", "sweep_latency_s", "missed_trigger", "clock_skew"],
+    "note": "reported separately from sweep_latency_s; zero rows as of 2026-10-14 (no alert ever delivered)"
+  },
+  "version": "2026-10-14+trigger-live-worker",
+  "version_note": "2026-10-14+wiring adds the auto_delivery block (worker spec, ledger, ack path, demos). 2026-10-14+hardened (WORKER-SPEC-v2): bounded 12/13-min worker budget, per-step atomic checkpoints, outbox-backed reconciliation of rendered-but-unlogged keys, ledger 'unknown' state per Logan's rule (never blind re-send, never delivered-without-ack), controller_status/delivery_status separation. 2026-10-14+trigger-spec (WORKER-SPEC-v2.2): trigger-driven delivery architecture (TRIGGER-CONTRACT), sweep retained for recovery only, discovery_mode flag (starts sweep-fallback), entry-to-delivery delay metric + timeliness log. 2026-10-14+trigger-live-worker: v2.2 body (+§6b TEST branch, enqueue_to_ack_delay_s) applied to the live cron via cron.update (worker-side trigger readiness done; applied body archived at pilot/delivery/APPLIED-WORKER-BODY-v2.2-2026-10-14.md). Config + docs only; no executables changed, no freeze/version change to the paper program. Issuer-side hook (cron.run from the deployed issuance path) still requires an artifact builder session."
+}

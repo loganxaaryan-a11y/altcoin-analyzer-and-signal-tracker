@@ -1,0 +1,17 @@
+{
+  "description": "Sandbox issuance orchestrator (manual + automatic paths) for the research-terminal paper-signal lane. NEVER touches production issuance.",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "license": "UNLICENSED",
+  "name": "paper-signal-issuance-orchestrator",
+  "private": true,
+  "scripts": {
+    "build": "tsc && node scripts/postbuild.mjs",
+    "drift": "npm run build && node --test dist/paper-signals/orchestrator/tests/drift.js",
+    "test": "npm run build && node --test dist/paper-signals/orchestrator/tests/run.js dist/paper-signals/orchestrator/tests/no-legacy-veto.test.js dist/paper-signals/orchestrator/tests/gate-decomposition.test.js dist/paper-signals/orchestrator/tests/db-store.test.js dist/paper-signals/orchestrator/tests/integrated-handler.test.js dist/paper-signals/orchestrator/tests/alert-recovery.test.js dist/paper-signals/orchestrator/tests/clock-skew.test.js dist/paper-signals/orchestrator/tests/first-print-fidelity.test.js dist/paper-signals/orchestrator/tests/venue-seq-tiebreak.test.js"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

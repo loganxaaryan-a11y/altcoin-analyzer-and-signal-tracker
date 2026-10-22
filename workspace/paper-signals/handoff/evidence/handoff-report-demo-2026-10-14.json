@@ -1,0 +1,87 @@
+{
+  "runId": "demo-2026-10-14",
+  "source": "DEMO-SCRIPTED-DISCOVERY (not a real discovery run)",
+  "completedAt": "2026-10-14T06:48:20.781Z",
+  "freezeVersion": "v2.1.5",
+  "demo": true,
+  "feedMode": "scripted",
+  "feedLabel": "DEMO-SCRIPTED-FEED (labeled demo; not a venue)",
+  "issuancePath": "processIntegratedCandidate(orchestrator/src/issuance/handler.ts) — entry-v1 + waiting-interval veto + venue mapping",
+  "activeFreeze": "v2.1.5",
+  "receivedAt": "2026-10-14T06:48:21.029Z",
+  "staleRun": false,
+  "candidates": [
+    {
+      "candidateKey": "5c57656299f8d9fe7f3f29d2b57c7b87",
+      "symbol": "DEMO1",
+      "direction": "long",
+      "ledgerHash": "00c80d8e89de42a7598c9dfd8625ae50b9811ada1fcabc57572f3a8127ff35aa",
+      "reason": "issued via integrated crypto path; entered 2026-10-14T06:48:50.781Z; entry alert appended to sandbox-feed",
+      "gate": null,
+      "handlerOutcomeKind": "issued",
+      "outcome": "qualified",
+      "reasonCode": "issued"
+    },
+    {
+      "candidateKey": "229d5d29e06f90341031cfa097a0acba",
+      "symbol": "DEMO2",
+      "direction": "short",
+      "ledgerHash": "8291a1fb5376d615bd958b3e17010038ef0874936278851b78b47b5f57b7f782",
+      "reason": "short-regime: bearish daily structure absent (price not below 50D MA; lower highs no; 20D trend not negative)",
+      "gate": "short-regime",
+      "handlerOutcomeKind": "rejected",
+      "outcome": "abstained",
+      "reasonCode": "short-regime"
+    },
+    {
+      "candidateKey": "c8b23344dbc096802f6673391116538b",
+      "symbol": "DEMO3",
+      "direction": "long",
+      "ledgerHash": "ff9c5f084caabff0da413c54882712371c81d4f6537578a35519176497eb47a4",
+      "reason": "qualification suppressed (fail-closed): entry_zone=fail (entry-rule failure (not a veto): entry 105 drifted 500.0 bps from the reference 100, beyond the 150 bps permitted zone.)",
+      "gate": "issuance-veto",
+      "handlerOutcomeKind": "rejected",
+      "outcome": "abstained",
+      "reasonCode": "issuance-veto"
+    },
+    {
+      "candidateKey": "10697d06512533bb939d1eb887e0440f",
+      "symbol": "DEMO4",
+      "direction": "long",
+      "ledgerHash": "62f6eccd865fa3cd9e95aa862174079432a4c64422fae4e8047b3fb04f595e0c",
+      "outcome": "failed",
+      "reasonCode": "no-factor-ledger",
+      "reason": "no factor ledger persisted for candidate 10697d06512533bb939d1eb887e0440f: cannot qualify",
+      "gate": null,
+      "handlerOutcomeKind": null
+    },
+    {
+      "candidateKey": "dad0ee808a1d8c29fe1767ce01155cd1",
+      "symbol": "DEMO5",
+      "direction": "long",
+      "ledgerHash": "8aee314cf8ec7db8aff5ebd7c7426591be7b3170d92e404bab08701064c42dce",
+      "outcome": "failed",
+      "reasonCode": "missing-entry-levels",
+      "reason": "invalidation missing or non-positive: the entry-v1 contract cannot be built",
+      "gate": null,
+      "handlerOutcomeKind": null
+    },
+    {
+      "candidateKey": "e556248682b316febe43a9b1b146dd0a",
+      "symbol": "DEMO6",
+      "direction": "long",
+      "ledgerHash": "462b46dc73b6cb894e51169af26d770aff901c84a8fa6760523734bd00d071d0",
+      "reason": "inputs 121m old, no quote provider configured",
+      "gate": "stale-inputs",
+      "handlerOutcomeKind": "deferred",
+      "outcome": "deferred",
+      "reasonCode": "stale-inputs"
+    }
+  ],
+  "counts": {
+    "qualified": 1,
+    "abstained": 2,
+    "deferred": 1,
+    "failed": 2
+  }
+}

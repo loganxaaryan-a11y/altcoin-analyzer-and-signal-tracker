@@ -1,0 +1,2 @@
+$ bun run typecheck
+$ bun x tsc --noEmit -p client/tsconfig.json && bun x tsc --noEmit -p server/tsconfig.json

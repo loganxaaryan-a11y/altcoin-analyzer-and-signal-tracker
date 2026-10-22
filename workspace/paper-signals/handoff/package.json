@@ -1,0 +1,12 @@
+{
+  "description": "Automatic crypto discovery -> paper qualification handoff (sandbox). Routes discovery radar candidates into the repaired paper issuance path (entry-v1 + waiting-interval veto + venue mapping). NEVER the legacy issuer. Paper only, no brokerage.",
+  "license": "UNLICENSED",
+  "name": "paper-discovery-handoff",
+  "private": true,
+  "scripts": {
+    "handoff": "node src/handoff-run.ts",
+    "test": "node --test tests/run.ts"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

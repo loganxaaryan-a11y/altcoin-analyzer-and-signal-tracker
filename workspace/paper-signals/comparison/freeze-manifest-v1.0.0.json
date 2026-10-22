@@ -1,0 +1,371 @@
+{
+ "comparison_metrics": {
+  "per_model": [
+   "target-before-stop rate",
+   "directional accuracy d5/d14/d30 (where observable)",
+   "net returns after costs (18 bps roundtrip, crypto; equity per equity-eval-3.2.0)",
+   "opportunity coverage (issued/abstain/unscored fraction of the eligible stream)",
+   "alert delay (issued_at - decision_at)"
+  ],
+  "uncertainty": "Wilson 95% CI for rates; mean +/- 1.96*SE for net R. Small-n reported as-is and labeled. Abstentions and missing outcomes are rows with reason codes, never silently dropped."
+ },
+ "exploratory_note": "The 58/118 exploratory result and all other exploratory findings stay exploratory. They are not validation. The comparison dataset is rows collected under THIS freeze.",
+ "frozen_at_utc": "2026-10-14T02:42:57Z",
+ "frozen_by": "workstream C subagent (paper pilot comparison freeze)",
+ "harness": {
+  "decision_time_rule": "Both arms are scored from decision-time inputs only. Any input dated after decisionAt fails the decision-time check: default labels the row decision_time_verified=false (never silently passes); strict mode raises.",
+  "path": "goals/research-terminal/paper-signals/comparison/harness.py",
+  "reads_manifest": "goals/research-terminal/paper-signals/comparison/freeze-manifest-v1.0.0.json",
+  "writes": "comparison row CSV/JSONL under goals/research-terminal/paper-signals/comparison/rows/. Never writes to any production table or holdout."
+ },
+ "immutability_rule": "This manifest is immutable. ANY change to a model's factor list, weights, scoring formula, level construction, gate rules, entry rule, cost model, horizon, or decision-time definition requires a NEW manifest version (1.1.0 or 2.0.0). Never edit this file in place.",
+ "manifest_version": "1.0.0",
+ "models": [
+  {
+   "cost_bps_roundtrip": 18.0,
+   "cost_note": "18 bps round-trip modeled; funding UNVERIFIED (production convention).",
+   "cost_scenario_id": "modeled-roundtrip-18bps-funding-unverified-v1",
+   "decision_clock": "server-utc",
+   "entry_convention": "first-post-decision-provider-quote",
+   "evaluator_version": "crypto-evaluation-v4-cohort-contract",
+   "factors": [
+    {
+     "label": "Trend cluster",
+     "score_rule": "votes: price>=SMA50, price>=SMA200, d90>+8%; score=sign(sum); 0 unless >=200 obs",
+     "source": "CoinGecko daily history",
+     "weight": 2.5
+    },
+    {
+     "label": "Momentum",
+     "score_rule": "RSI-14: >72 -> -1; <30 -> +1; >=52 -> +1; <=45 -> -1; else 0",
+     "source": "CoinGecko daily history",
+     "weight": 1.5
+    },
+    {
+     "label": "MACD",
+     "score_rule": "macd >= signal -> +1 else -1",
+     "source": "CoinGecko daily history",
+     "weight": 1.5
+    },
+    {
+     "label": "Perp funding crowding",
+     "score_rule": "funding8h > +0.00005 -> -1; < -0.00005 -> +1; else 0",
+     "source": "Hyperliquid (hourly x8) or OKX fallback",
+     "weight": 1.75
+    },
+    {
+     "label": "Open interest",
+     "score_rule": "OKX OI 24h change: >+8% -> +1; <-8% -> -1; else 0",
+     "source": "OKX OI + 24h baseline",
+     "weight": 1.0
+    },
+    {
+     "label": "Binance futures positioning",
+     "score_rule": "taker buy/sell >1.05 -> +1; <0.95 -> -1; else 0",
+     "source": "Binance Futures",
+     "weight": 1.0
+    },
+    {
+     "label": "Cross-venue taker imbalance",
+     "score_rule": "continuous: margin<0.04 -> 0 else sign(combined)*min(1,margin/0.35)*sizeScale*(agreement?1:0.5)",
+     "source": "Binance aggTrades + OKX spot trades",
+     "weight": 1.25
+    },
+    {
+     "label": "TVL trend",
+     "score_rule": "tvl30>0 && tvl7>=-2 -> +1; tvl30<-15 -> -1; else 0",
+     "source": "DeFiLlama",
+     "weight": 2.0
+    },
+    {
+     "label": "Revenue linkage",
+     "score_rule": "annualized revenue yield >=1.5% -> +1; else 0 (never negative)",
+     "source": "DeFiLlama 30D fees+revenue",
+     "weight": 1.5
+    },
+    {
+     "label": "Developer velocity",
+     "score_rule": ">=8 active wks && >=50 commits/12w -> +1; <=2 active wks -> -1; else 0",
+     "source": "GitHub commit activity",
+     "weight": 1.5
+    },
+    {
+     "label": "Supply-overhang penalty",
+     "score_rule": "FDV/mcap >=2 -> -1; else 0 (never positive)",
+     "source": "CoinGecko",
+     "weight": 1.5
+    }
+   ],
+   "gates": {
+    "born_dead": "LONG suppressed if signal-day low <= invalidation: 'born-dead LONG: signal-day low {L} <= invalidation {I}'; SHORT suppressed if signal-day high >= invalidation: 'born-dead SHORT: signal-day high {H} >= invalidation {I}'. Signal-day = latest completed UTC day from CoinGecko 4h OHLC.",
+    "eligibility": "no suppression AND sourceAsOf <= 30 min AND price != null AND (meme: $2M<=mcap<=$250M AND socialSnapshot) OR (main: volume24h>=$5M AND mcap>=$25M AND OI>=$1M AND funding != null).",
+    "short_regime": "applies to shorts ONLY: allowed iff priceBelowSma50 && (lowerHighs || trend20Negative); else suppressed."
+   },
+   "horizon": {
+    "checkpoints_days": [
+     5,
+     14,
+     30
+    ],
+    "primary": 30,
+    "unit": "elapsed_days"
+   },
+   "legacy_exclusion": "The legacy 'Walk-forward base rate' factor (weight 1.0) is NOT part of the frozen factor set; reproduction verified 30/30 only with its exclusion.",
+   "levels": {
+    "invalidation": "entry -/+ riskPerUnit by direction",
+    "payoff_convention": "linear-entry-notional",
+    "risk_per_unit": "1.25 x Wilder ATR-14 (canonical, decision-time bars, complete window)",
+    "target1": "entry +/- 1.5 x riskPerUnit",
+    "target2": "entry +/- 2.5 x riskPerUnit"
+   },
+   "model_name": "crypto-dossier-factor-agreement",
+   "parameter_hash": "sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220",
+   "price_convention": "usd-spot-reference",
+   "role": "production",
+   "scoring_formula": "usable = factors with finite contribution, finite weight, weight > 0; weightedNet = SUM(contribution); totalWeight = SUM(weight); longScore = round(clamp(50 + (weightedNet/totalWeight)*42, 5, 95)); shortScore = 100 - longScore; direction = longScore >= shortScore ? long : short. NO_DATA -> score 0, never estimated.",
+   "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+   "source_files": [
+    {
+     "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/signal-methodology.ts",
+     "role": "scoring formula, levels, evaluation, strategy/version constants",
+     "sha256": "617d64ef316e4076496e6f2fa7e90d71a48743ca4c31bb120493f007ae3a8532"
+    },
+    {
+     "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/actions.ts",
+     "role": "factor definitions (actions.ts:3329-3353), issuance decision (actions.ts:1976-2060)",
+     "sha256": "301e270e72a98d1dbcbfcf5d99ce53cc8afb142df77a8c18a514831b2c1a2788"
+    },
+    {
+     "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/schema.ts",
+     "role": "persisted signal/contract schema",
+     "sha256": "26b3202117041b6047b720fc63502d6b3b29316d1b6676acd54b2d3dc652d95f"
+    },
+    {
+     "path": "goals/research-terminal/hidden_files/methodology-export-2026-10-13/methodology-crypto.md",
+     "role": "read-only methodology export (line references) as of 2026-10-13",
+     "sha256": "d3e51672595cfa17e2089f689ec02d114377f94f965a811f228bf00e65ee9782"
+    }
+   ],
+   "strategy_id": "crypto-dossier-factor-agreement",
+   "strategy_version": "2.0.0-measurement-contract",
+   "terminal": "crypto",
+   "total_weight": 17.0
+  },
+  {
+   "cost_bps_roundtrip": 18.0,
+   "cost_note": "18 bps round-trip modeled; funding UNVERIFIED (production convention).",
+   "cost_scenario_id": "modeled-roundtrip-18bps-funding-unverified-v1",
+   "decision_clock": "server-utc",
+   "definition": "Production model with the RSI-14 Momentum factor removed. The ONE deliberate difference from production.",
+   "entry_convention": "first-post-decision-provider-quote",
+   "evaluator_version": "crypto-evaluation-v4-cohort-contract",
+   "factors": [
+    {
+     "label": "Trend cluster",
+     "weight": 2.5
+    },
+    {
+     "label": "MACD",
+     "weight": 1.5
+    },
+    {
+     "label": "Perp funding crowding",
+     "weight": 1.75
+    },
+    {
+     "label": "Open interest",
+     "weight": 1.0
+    },
+    {
+     "label": "Binance futures positioning",
+     "weight": 1.0
+    },
+    {
+     "label": "Cross-venue taker imbalance",
+     "weight": 1.25
+    },
+    {
+     "label": "TVL trend",
+     "weight": 2.0
+    },
+    {
+     "label": "Revenue linkage",
+     "weight": 1.5
+    },
+    {
+     "label": "Developer velocity",
+     "weight": 1.5
+    },
+    {
+     "label": "Supply-overhang penalty",
+     "weight": 1.5
+    }
+   ],
+   "flip_guardrail": "If challenger direction differs from production on >40% of paired rows, pause readout and audit the score pipeline (implementation bug, not a strategy difference).",
+   "gates": {
+    "born_dead_mirror": "Mirrored to challenger direction on the SAME signal-day OHLC: challenger LONG suppressed if signal-day low <= challenger invalidation; challenger SHORT suppressed if signal-day high >= challenger invalidation. Same veto-string templates.",
+    "eligibility": "Byte-identical to production (sourceAsOf <= 30 min, price != null, liquidity/mcap/OI/funding bars), velocity qualifier, tiers, idempotency.",
+    "short_regime_mirror": "Applies ONLY when challenger direction is short: allowed iff priceBelowSma50 && (lowerHighs || trend20Negative) on the same decision-time bars; else suppressed. No long-regime gate."
+   },
+   "horizon": {
+    "checkpoints_days": [
+     5,
+     14,
+     30
+    ],
+    "primary": 30,
+    "unit": "elapsed_days"
+   },
+   "levels": {
+    "invalidation": "entry -/+ riskPerUnit by CHALLENGER direction",
+    "payoff_convention": "linear-entry-notional",
+    "risk_per_unit": "1.25 x Wilder ATR-14 (same ATR-14 value production used; ATR is directionless)",
+    "target1": "entry +/- 1.5 x riskPerUnit",
+    "target2": "entry +/- 2.5 x riskPerUnit"
+   },
+   "model_name": "crypto-dossier-minus-momentum",
+   "parameter_hash": "sha256:derived-from-production-minus-momentum-1.5",
+   "price_convention": "usd-spot-reference",
+   "readout_criteria": {
+    "INCONCLUSIVE": "n < 30 paired definitive rows, or gap < 10pp -> continue collecting; no promotion, no retirement",
+    "REJECT": "n >= 30 paired definitive rows AND (challenger d30-direction accuracy <= production - 10pp OR challenger mean net R < production mean net R - 0.15 R/signal) -> retire C-2",
+    "SUPPORT": "n >= 30 paired definitive rows AND challenger d30-direction accuracy >= production + 10pp AND challenger mean net R >= production mean net R - 0.05 R/signal -> promote to production paper trial"
+   },
+   "role": "challenger",
+   "scoring_formula": "challengerLong = round(clamp(50 + (weightedNet/15.5)*42, 5, 95)); challengerShort = 100 - challengerLong; challengerDirection = challengerLong >= challengerShort ? long : short. The Momentum factor's contribution leaves the net AND its weight 1.5 leaves the denominator; remaining weights are NOT rescaled. Per-factor score rules unchanged from production (NO_DATA -> 0, never estimated).",
+   "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+   "source_files": [
+    {
+     "path": "goals/research-terminal/paper-signals/research/c2-shadow-spec-2026-10-13.md",
+     "role": "frozen C-2 shadow spec (unchanged from CHALLENGER-ASSESSMENT.md S3-S4)",
+     "sha256": "0788a5a78556f38c5e34da0ba2713bb14f218c7fd89b8c1fe13e7c1b52125c40"
+    },
+    {
+     "path": "goals/research-terminal/hidden_files/source-export-2026-10-13/CHALLENGER-ASSESSMENT.md",
+     "role": "challenger assessment (S3-S4 readout criteria, flip guardrail)",
+     "sha256": "7444a65510cc23dd645a6f581de6e34a52490698dae1e3e6b4957b4fd2884809"
+    },
+    {
+     "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/signal-methodology.ts",
+     "role": "per-factor score rules and scoring formula inherited from production",
+     "sha256": "617d64ef316e4076496e6f2fa7e90d71a48743ca4c31bb120493f007ae3a8532"
+    }
+   ],
+   "strategy_id": "crypto-dossier-minus-momentum",
+   "strategy_version": "0.1.0-shadow",
+   "terminal": "crypto",
+   "total_weight": 15.5
+  },
+  {
+   "build_id": "phase1-final-signoff-2026-10-09",
+   "cost_scenario_note": "costs modeled per equity-eval-3.2.0; crypto 18 bps convention does not apply to equity rows.",
+   "decision_clock": "xnys-session-close",
+   "entry_convention": "Reference entry equals the completed adjusted daily close; paper execution is not claimed.",
+   "evaluator_version": "equity-eval-3.2.0",
+   "factors": [
+    {
+     "display": "Price vs SMA 20",
+     "id": "price_vs_sma20",
+     "score_rule": "+1 if close > SMA20, else -1 (0 if SMA unavailable)",
+     "weight": 6
+    },
+    {
+     "display": "Price vs SMA 50",
+     "id": "price_vs_sma50",
+     "score_rule": "+1 if close > SMA50, else -1",
+     "weight": 8
+    },
+    {
+     "display": "Price vs SMA 200",
+     "id": "price_vs_sma200",
+     "score_rule": "+1 if close > SMA200, else -1",
+     "weight": 8
+    },
+    {
+     "display": "Wilder RSI 14",
+     "id": "rsi14_wilder",
+     "score_rule": "+1 if 55 <= RSI <= 75; -1 if 25 <= RSI <= 45; else 0 (0 if RSI null)",
+     "weight": 20
+    },
+    {
+     "display": "MACD 12-26",
+     "id": "macd_12_26",
+     "score_rule": "0 if EMA12/EMA26 null or |diff| < 1e-6; +1 if diff > 0, else -1",
+     "weight": 8
+    },
+    {
+     "display": "High-volume direction",
+     "id": "volume_direction_z",
+     "score_rule": "0 unless volumeZ > 1; then +1 if close > prevClose, -1 if below",
+     "weight": 20
+    },
+    {
+     "display": "ATR-adjusted 30-session trend",
+     "id": "atr_adjusted_trend30",
+     "score_rule": "riskAdjusted = 30d return% / (ATR14/close x 100 x sqrt(30)); 0 if |riskAdjusted| < 0.5; +1/-1 by sign",
+     "weight": 20
+    }
+   ],
+   "gates": {
+    "issuance_validation": "signalIssuanceDecision(direction, invalidation, signalDate, history) on the exact completed bars: LONG breached if signal-day low <= stop; SHORT breached if signal-day high >= stop.",
+    "short_regime": "SHORT additionally requires bearish daily structure: belowSma50 && (lowerHighs || trend20Negative), else suppressed with 'short-regime: bearish daily structure gate not met'."
+   },
+   "horizon": {
+    "checkpoints_sessions": [
+     5,
+     14,
+     30
+    ],
+    "primary": 30,
+    "unit": "trading_sessions"
+   },
+   "levels": {
+    "invalidation_atr_multiple": 2,
+    "invalidation_method": "2.00x Wilder ATR-14 from the reference entry",
+    "target1": "entry +/- 1.5 x riskPerUnit",
+    "target2": "entry +/- 2.5 x riskPerUnit"
+   },
+   "model_name": "equity-factor-agreement",
+   "note": "Frozen for measurement integrity (paper pilot covers both terminals). NO equity challenger is frozen here: none is specified, and inventing one would be a strategy change, which is out of scope.",
+   "parameter_hash": "atr2-target1.5R-weights-6-8-8-20-8-20-20",
+   "quality_gates": "ANOMALY (any daily move > 80% in last 260 sessions), STALE (latest bar > 5 days old), NO_DATA (reading unavailable) -> non-GOOD factors get score = 0; contribution withheld.",
+   "role": "production",
+   "scoring_formula": "rawScore = round(100 x SUM(weight x score) / SUM(weight)), scores in {-1,0,+1}. redundancyAdjustment = -5 if all five trend-cluster factors are +1; +5 if all five are -1 (toward zero); else 0. finalScore = rawScore + redundancyAdjustment. Direction: score >= 20 -> long; <= -20 -> short; else mixed (actions.ts:360 signalDecision).",
+   "snapshot_note": "Persisted Yahoo OHLCV replay; decision-time cutoff enforced (availableAt <= decisionAt).",
+   "source_files": [
+    {
+     "path": "ts-spaces/equity-analyzer-and-signal-tracker/server/src/measurement.ts",
+     "role": "factor scoring mirror (computeEquityDecisionFromRawInputs, DEFAULT_WEIGHTS), issuance gates",
+     "sha256": "9109c826d89919da606e44b80f9b1be7e232a3aef83e53eedde58ca80a4ee0d5"
+    },
+    {
+     "path": "ts-spaces/equity-analyzer-and-signal-tracker/server/src/actions.ts",
+     "role": "dossier factor computation (actions.ts:686-700), factorScoreBreakdown (actions.ts:143-157), signalDecision (actions.ts:360)",
+     "sha256": "17eabf4d8d314fcc130f870df692bf1b66edb67b3a6379972f1b712a3f62cd47"
+    },
+    {
+     "path": "ts-spaces/equity-analyzer-and-signal-tracker/server/src/schema.ts",
+     "role": "persisted signal/ledger schema",
+     "sha256": "342ca33e59d7d99e7e1baa1d4779500907a59e31f0973de4dc997a56c1c5c01a"
+    },
+    {
+     "path": "goals/research-terminal/hidden_files/methodology-export-2026-10-13/methodology-equity.md",
+     "role": "read-only methodology export (line references) as of 2026-10-13",
+     "sha256": "3d5b9f1600f54b8e8c67af92bb2822b6133fd88b73b69f5bb2fc75d252975ae3"
+    }
+   ],
+   "strategy_id": "equity-factor-agreement",
+   "strategy_version": "3.1.0-measurement-closure",
+   "terminal": "equity",
+   "total_weight": 90,
+   "trend_cluster": [
+    "price_vs_sma20",
+    "price_vs_sma50",
+    "price_vs_sma200",
+    "macd_12_26",
+    "atr_adjusted_trend30"
+   ]
+  }
+ ],
+ "scope": "Head-to-head production-vs-challenger comparison for the paper pilot. Sandbox/research only; no production changes; no threshold tuning; no strategy changes."
+}

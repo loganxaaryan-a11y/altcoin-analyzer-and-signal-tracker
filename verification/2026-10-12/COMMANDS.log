@@ -1,0 +1,6 @@
+$ bun install --frozen-lockfile
+$ bun run typecheck
+$ bun test server/src/*.test.ts
+$ bun run test:measurement
+$ bash scripts/package-integrity-closeout.sh crypto-integrity-repair-2026-10-12.zip
+$ sha256sum crypto-integrity-repair-2026-10-12.zip crypto-integrity-repair-2026-10-12.zip.sha256 vendor/space-sdk-0.13.0.tgz

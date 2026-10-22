@@ -1,0 +1,97 @@
+{
+  "manifest_version": "2.1.2",
+  "frozen_at_utc": "2026-10-14T05:32:10Z",
+  "frozen_by": "fix-1-of-5 subagent (2026-10-14) -- executable-path alignment: harness issuance-path gate + manifest binding + collector vessel/stamp/cutoff",
+  "amended_manifest": "freeze-manifest-v2.1.1.json (sha256 96aa584b3bda36aec4cadf78ce9ed527ebddff55821838918281421254c37f52)",
+  "v211_sha256": "96aa584b3bda36aec4cadf78ce9ed527ebddff55821838918281421254c37f52",
+  "v210_executable_core_sha256": "719aed7d19b7bc46e5cf0576359b1771fef235aadfcc8b565e0b7d442435ada4",
+  "amendment_kind": "executable-path amendment to freeze-manifest-v2.1.1.json (fix 1 of 5, 2026-10-14)",
+  "supersedes": {
+    "manifest": "freeze-manifest-v2.1.1.json",
+    "status": "SUPERSEDED as the active manifest",
+    "marker": "goals/research-terminal/paper-signals/comparison/FREEZE-v2.1.1-SUPERSEDED.md",
+    "scope": "active-manifest status; the harness issuance-path gate semantics (historical born-dead mirror -> repaired operational evaluator); the harness manifest binding (hardcoded version -> runtime load); the collector target/stamp/cutoff. v2.1.0 remains the executable-core freeze of record (models, weights, formulas, asserted rules); v2.1.1's date fields are carried forward unchanged."
+  },
+  "immutability_rule": "This manifest is immutable once frozen. ANY change to a model's factor list, weights, scoring formula, level construction, gate rules, entry rule, cost model, horizon, decision-time definition, veto semantics, venue mapping, or evaluator version requires a NEW manifest version (2.2.0 or 3.0.0). Never edit this file in place. freeze-manifest-v2.1.0.json and freeze-manifest-v2.1.1.json are IMMUTABLE and have not been edited (bytes verified above).",
+  "scope": "This amendment changes the HARNESS and COLLECTOR executables to match the active freeze's operational rules. Nothing about prediction weights, factor sets, scoring formulas, level construction, the four asserted harness rules, the decision-time rule, the collection window, or any row data changes. v2.1.0 remains the freeze of record for the executable core; v2.1.1 remains the freeze of record for the amended date fields.",
+  "changed_fields": [
+    {
+      "field": "harness.issuance_path_gate",
+      "v2_1_1_value": "born_dead_check mirror on challenger flipped legs (pre-decision signal-day extremes graded as stop-outs); documented as 'frozen comparison-row semantics'.",
+      "v2_1_2_value": "operational_issuance_eval (harness.py): the repaired operational evaluator -- waiting-interval veto (checkWaitingInterval over the genuine [decisionAt, entryObservedAt], setup-history filter, fail-closed), actionable-entry-v1 contract gates (per-terminal entry rule, 15-min crypto window, drift caps 1.50 crypto / 0.50 equity, 5-min observation-age bound, timestamp ordering, anti-fabrication), venue mapping (ENTRY_VENUE_ACCEPTED_PRINT_LABELS). IDENTICAL for both arms; C-2's only difference remains Momentum removal. The historical born_dead_check function is DELETED (unreachable, statically and behaviorally).",
+      "why": "The active freeze's operational_rules (v2.1.0, carried by v2.1.1) supersede the legacy born-dead veto on the issuance path; the harness's executable path must match the freeze. Pre-decision extremes are setup-history features, never stop-outs."
+    },
+    {
+      "field": "harness.manifest_binding",
+      "v2_1_1_value": "MANIFEST_VERSION = '2.0.0' hardcoded in harness.py; load_manifest() required the v2.0.0 file (which the active freeze had superseded).",
+      "v2_1_2_value": "harness.py loads THE active manifest explicitly at runtime: comparison/ACTIVE_MANIFEST names the file, resolved by path relative to harness.py (resolve_active_manifest_path); load_active_manifest() raises SchemaError unless the loaded manifest_version == EXPECTED_ACTIVE_VERSION ('2.1.2'). Import-time, fail-fast. The hardcoded version constant is gone; ACTIVE_FREEZE_VERSION = ACTIVE_MANIFEST['manifest_version'].",
+      "why": "A hardcoded version string drifts from the active freeze; the harness must fail loudly when its executable path does not match the freeze it claims."
+    },
+    {
+      "field": "harness.suppression_taxonomy",
+      "v2_1_1_value": "_classify_suppression mapped recorded reasons starting with 'born-dead' to abstain:born-dead; repaired-pipeline reasons fell through to abstain:eligibility.",
+      "v2_1_2_value": "Repaired taxonomy: waiting-interval-invalidation, entry-drift, entry-expired, entry-no-quote, entry-venue, issuance-veto (new codes); historical pre-decision-extreme reasons keep abstain:born-dead (RULE 1); the repaired checkSetupInvalidation fail reason ('born-dead ...: post-decision extreme crossed ...') classifies as waiting-interval-invalidation.",
+      "why": "Post-freeze rows are decided by the repaired pipeline; their recorded suppressions must classify under the repaired evaluator's vocabulary, not the historical gate's."
+    },
+    {
+      "field": "harness.born_dead_mirror_columns",
+      "v2_1_1_value": "born_dead_mirror / born_dead_mirror_reason carried the historical mirrored gate's verdict ('passed'/'suppressed').",
+      "v2_1_2_value": "Always None under v2.1.2+: the historical mirrored gate no longer runs. Columns retained (frozen schema: never renamed or removed); reason codes abstain:born-dead(-mirror) retained in the vocabulary for historical rows/reasons.",
+      "why": "The gate is superseded; the columns must not carry a verdict from a gate that no longer runs."
+    },
+    {
+      "field": "collector.target_vessel",
+      "v2_1_1_value": "rows/comparison-rows-pilot-2026-10-14.csv (+ .jsonl twin) hardcoded as PILOT_CSV/PILOT_JSONL.",
+      "v2_1_2_value": "rows/cohort-prospective-v2.csv (VESSEL_CSV) -- the plan's vessel (COLLECTION-PLAN-2026-10-14.md sect. 2). 69-column vessel schema (63 extended + 4 cohort columns), matching the vessel header exactly. The legacy pilot file is not a collection target anymore.",
+      "why": "Target-vessel mismatch (first-post-freeze-opportunity-2026-10-14.json caveat): the plan mandates the prospective vessel; the collector must write there."
+    },
+    {
+      "field": "collector.freeze_stamp",
+      "v2_1_1_value": "freeze_version stamped from harness.MANIFEST_VERSION ('2.0.0'); dedupe key (candidate_id, '2.0.0').",
+      "v2_1_2_value": "freeze_version / applicable_freeze stamped from harness.ACTIVE_FREEZE_VERSION (the loaded active manifest's version); dedupe key (candidate_id, active version). provenance_verdict='PROSPECTIVE', cohort_origin names the collector.",
+      "why": "Stale freeze stamp (first-post-freeze-opportunity caveat): rows collected now must be stamped with the ACTIVE version, never a hardcoded string."
+    },
+    {
+      "field": "collector.post_freeze_cutoff",
+      "v2_1_1_value": "none -- pre-freeze candidates were ingested and reported.",
+      "v2_1_2_value": "Candidates with decision_at before 2026-10-14T04:57:00Z (v2.1.0 freeze time, read from this manifest's prospective_collection.post_freeze_cutoff_utc -- never guessed) are REJECTED before scoring/appending, with a logged reason. Pre-freeze rows belong in cohort-retrospective-v2.csv.",
+      "why": "The prospective vessel accepts ONLY rows decided after the freeze, under its executable rules, with PROSPECTIVE provenance (rows/README-cohort-prospective-v2.md)."
+    }
+  ],
+  "executable_hashes": {
+    "comparison/harness.py": "dfd573e91e8de633f031adac15530a7eb06ff7d73736762291f3e36518705efc",
+    "comparison/collect_pilot_rows.py": "2fc64f398e1671d3d326c47a3e59b1554f205ae50c59517d22efc26cd84321cf",
+    "comparison/tests/test_harness.py": "227e7a7ed59d463f5e61083b2b479da2eaf789525873478ff2ff4b211c131385",
+    "comparison/tests/test_collector.py": "16173ccdf5672bd53bf61c6b50d6bc0b3747dbae6491ec55042fc901e9994877",
+    "comparison/tests/run_tests.py": "b1ca5d22f70d70098e462862d881ee2d29033ddbcaf3237b35163fbb6457c5d6",
+    "comparison/check_reconciliation_v2_1_2.py": "0b0320a2d12b66aadcdb17d79d1cd675adf95167c21ac2a56ab991459b9ad455"
+  },
+  "prospective_collection": {
+    "post_freeze_cutoff_utc": "2026-10-14T04:57:00Z",
+    "post_freeze_cutoff_source": "freeze-manifest-v2.1.0.json frozen_at_utc (verified above)",
+    "vessel": "goals/research-terminal/paper-signals/comparison/rows/cohort-prospective-v2.csv",
+    "vessel_schema_columns": 69,
+    "collector": "goals/research-terminal/paper-signals/comparison/collect_pilot_rows.py"
+  },
+  "prediction_weights_unchanged": {
+    "statement": "No prediction weight, factor set, scoring formula, level construction, asserted rule, or decision-time rule changes in v2.1.2. The harness's frozen scoring constants are byte-identical in behavior to v2.1.0/v2.1.1 (pinned by tests/test_harness.py::TestManifest::test_active_manifest_executable_core_matches_harness).",
+    "crypto_production_total_weight": 17.0,
+    "crypto_c2_total_weight": 15.5,
+    "crypto_c2_difference": "Momentum (weight 1.5) removed; no rescale",
+    "equity_total_weight": 90
+  },
+  "unchanged_fields_restated_for_completeness": {
+    "operational_rules": "entry contract (actionable-entry-v1), waiting-interval veto, venue mapping, level construction, corrected evaluators -- all carried forward from v2.1.0/v2.1.1 unchanged; the harness now EXECUTES them on the issuance path instead of the superseded gate.",
+    "collection_window": "2026-10-14 -> 2026-12-31 (inclusive, UTC) -- UNCHANGED",
+    "collection_window_equity_outcome_close": "2027-02-17 (16:00 ET) -- v2.1.1, UNCHANGED",
+    "collection_window_readout_by": "2027-02-24 -- v2.1.1, UNCHANGED",
+    "asserted_rules": "RULES 1-4 -- UNCHANGED (see harness.py ASSERTED RULES banner)",
+    "decision_time_rule": "UNCHANGED"
+  },
+  "provenance": {
+    "parent_task": "Bounded fix 1 of 5: make the executable path match the active freeze",
+    "constraints": "Do NOT reopen the accepted recovery work (entry-v1, veto, orchestrator sources untouched -- hashes in v2.1.0); do NOT change prediction weights; paper signals only; holdouts locked.",
+    "tests": "comparison/tests/run_tests.py (updated: new assertions a-d; superseded-gate tests replaced)",
+    "reconciliation": "comparison/check_reconciliation_v2_1_2.py"
+  }
+}

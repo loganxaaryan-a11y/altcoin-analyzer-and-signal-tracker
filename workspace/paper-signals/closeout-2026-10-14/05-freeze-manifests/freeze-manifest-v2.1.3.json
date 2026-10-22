@@ -1,0 +1,67 @@
+{
+  "manifest_version": "2.1.3",
+  "frozen_at_utc": "2026-10-14T05:39:00Z",
+  "frozen_by": "coordinator fix-2 follow-through (2026-10-14) -- executable-hash amendment: record fix 2's RULE 5/6 harness bytes",
+  "amended_manifest": "freeze-manifest-v2.1.2.json (sha256 bffc2e93a8add0bba9cabb43d8098f15ad51318df073db66828c990f296174b7)",
+  "v212_sha256": "bffc2e93a8add0bba9cabb43d8098f15ad51318df073db66828c990f296174b7",
+  "v211_sha256": "96aa584b3bda36aec4cadf78ce9ed527ebddff55821838918281421254c37f52",
+  "v210_executable_core_sha256": "719aed7d19b7bc46e5cf0576359b1771fef235aadfcc8b565e0b7d442435ada4",
+  "amendment_kind": "executable-hash amendment to freeze-manifest-v2.1.2.json",
+  "supersedes": {
+    "manifest": "freeze-manifest-v2.1.2.json",
+    "status": "SUPERSEDED as the active manifest",
+    "marker": "goals/research-terminal/paper-signals/comparison/FREEZE-v2.1.2-SUPERSEDED.md",
+    "scope": "active-manifest status; the C-2 reuse gate (RULE 5) and unknown-evidence rule (RULE 6). v2.1.2's executable-path alignment, v2.1.1's date fields, and v2.1.0's executable core all carried forward unchanged."
+  },
+  "immutability_rule": "This manifest is immutable once frozen. ANY change to a model's factor list, weights, scoring formula, level construction, gate rules, entry rule, cost model, horizon, decision-time definition, veto semantics, venue mapping, or evaluator version requires a NEW manifest version. Never edit this file in place.",
+  "scope": "This amendment records the harness bytes after fix 2 (C-2 independent evaluation, RULE 5/6) and bumps the active version. Nothing about prediction weights, factor sets, scoring formulas, level construction, RULES 1-4, the operational evaluator, the decision-time rule, the collection window, or any row data changes.",
+  "changed_fields": [
+    {
+      "field": "harness.c2_reuse_gate",
+      "v2_1_2_value": "non-flipped challenger legs inherited production's issuance via shared-evidence agreement (RULE 4); no exact-match gate.",
+      "v2_1_3_value": "RULE 5: c2_may_reuse_production(evidence) -> (bool, reason). Reuse requires exact input+rule match (ledger, direction, levels via _levels_exact_equal, entry-eligibility inputs, waiting-interval evidence, operational gates, real verdict). Direction-match alone never suffices; mismatch -> C-2 scored independently from its own 10-factor ledger through operational_issuance_eval on C-2's own direction/stop. Verified reuse recorded as levels_mode='reused: exact input+rule match'.",
+      "why": "A matching direction does not prove identical levels, entry eligibility, or waiting-interval evidence."
+    },
+    {
+      "field": "harness.c2_unknown_evidence",
+      "v2_1_2_value": "no explicit unknown bucket for missing C-2 operational evidence.",
+      "v2_1_3_value": "RULE 6: missing C-2 operational evidence -> unscored with unscored:waiting-interval-evidence-missing / unscored:entry-observation-missing / unscored:levels-uncomputable. Never filled from production's values.",
+      "why": "Missing evidence remains unknown; metrics.py excludes unscored from accounting."
+    },
+    {
+      "field": "harness.active_version",
+      "v2_1_2_value": "EXPECTED_ACTIVE_VERSION = '2.1.2'; ACTIVE_MANIFEST names freeze-manifest-v2.1.2.json.",
+      "v2_1_3_value": "EXPECTED_ACTIVE_VERSION = '2.1.3'; ACTIVE_MANIFEST names freeze-manifest-v2.1.3.json.",
+      "why": "Executable change -> version bump + matching hashes, per the freeze discipline."
+    }
+  ],
+  "executable_hashes": {
+    "comparison/harness.py": "98c7b082993e37f7ec67afc9a08a1bf75908d894449aba93b24eeb0d3847aa62",
+    "comparison/collect_pilot_rows.py": "2fc64f398e1671d3d326c47a3e59b1554f205ae50c59517d22efc26cd84321cf",
+    "comparison/live_paper_stream.py": "911cd4161a1a4b077f73a534a41a313b1382888dfd4f42a98f04a1d4d96370f8",
+    "comparison/tests/test_harness.py": "b17cd5983dd00b382150b20174ffc1eebb5beda43dd9fdf263e4b0a2098bd280",
+    "comparison/tests/test_collector.py": "c17a6a0de8b062b2c772a5e9c3cb4ceb00f5528fe4fb2f0845f8a7d7b2b4fd52",
+    "comparison/tests/run_tests.py": "b1ca5d22f70d70098e462862d881ee2d29033ddbcaf3237b35163fbb6457c5d6",
+    "comparison/check_reconciliation_v2_1_3.py": "c18349d5761c36a8dc5a3ba996ff45d9d491d5fb2d7e93b38415c3489f9f8aa4"
+  },
+  "prospective_collection": {
+    "post_freeze_cutoff_utc": "2026-10-14T04:57:00Z",
+    "post_freeze_cutoff_source": "freeze-manifest-v2.1.0.json frozen_at_utc (verified via v2.1.2 chain)",
+    "vessel": "goals/research-terminal/paper-signals/comparison/rows/cohort-prospective-v2.csv",
+    "vessel_schema_columns": 69,
+    "collector": "goals/research-terminal/paper-signals/comparison/collect_pilot_rows.py"
+  },
+  "prediction_weights_unchanged": {
+    "statement": "No prediction weight, factor set, scoring formula, level construction, asserted rule (1-4), or decision-time rule changes in v2.1.3. RULE 5/6 govern result REUSE/unknown-handling only.",
+    "crypto_production_total_weight": 17.0,
+    "crypto_c2_total_weight": 15.5,
+    "crypto_c2_difference": "Momentum (weight 1.5) removed; no rescale",
+    "equity_total_weight": 90
+  },
+  "provenance": {
+    "parent_task": "Bounded fix 2 of 5 follow-through: record fix 2's executable bytes",
+    "constraints": "Do NOT reopen accepted recovery work; do NOT change prediction weights; paper only; holdouts locked.",
+    "tests": "comparison/tests/run_tests.py (128 tests, incl. TestC2IndependentEvaluation)",
+    "reconciliation": "comparison/check_reconciliation_v2_1_3.py"
+  }
+}

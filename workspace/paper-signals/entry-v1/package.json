@@ -1,0 +1,1 @@
+{"description":"Module-format marker: these sources are ESM. (The entry-v1 standalone build pins module:CommonJS explicitly in its own tsconfig and is unaffected.)","name":"actionable-entry-v1","private":true,"type":"module"}

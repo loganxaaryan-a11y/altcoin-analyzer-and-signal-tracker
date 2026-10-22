@@ -1,0 +1,197 @@
+{
+  "correction": "2026-10-15 capture correction: FRESH -> REPLAY/REPRODUCTION for dossier signals 31-42; label correction only, decision-time inputs and arm scores untouched; BTC id43 demo files excluded (untouched, accepted demo)",
+  "verified_after_state": [
+    {
+      "file": "decision-time-inputs/dossier-avax-id37-2026-10-12.json",
+      "sha256": "b265bec30b0ec8a7988aedf8b8d1ff2d54c11f2357fa023c66f0d27e25a25632",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-12T13:04:22.799+00:00",
+      "captured_at": "2026-10-15T00:58:35.140+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-btc-id31-2026-10-10.json",
+      "sha256": "bd180b0c8f4e0b4ff0ac2f9801399dad11f76a32418cee987881f417c502edc7",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-10T01:51:23.436+00:00",
+      "captured_at": "2026-10-15T00:58:34.886+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-btc-id32-2026-10-11.json",
+      "sha256": "1fa254788680514c427408dda07f90736f817b48e948bf9806545dbfeeb6b225",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-11T09:56:46.741+00:00",
+      "captured_at": "2026-10-15T00:58:34.931+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-btc-id35-2026-10-12.json",
+      "sha256": "7098a17d9e83102485c70bc25dc63735c5d7be20482d4df2bd965f40b9d680f7",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-12T09:58:23.978+00:00",
+      "captured_at": "2026-10-15T00:58:35.038+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-btc-id38-2026-10-13.json",
+      "sha256": "52753d3430bee8d921d1f4af59fa954ca0288fb7efef445c2c41654c9714326d",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-13T04:58:03.071+00:00",
+      "captured_at": "2026-10-15T00:58:35.192+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-eth-id36-2026-10-12.json",
+      "sha256": "95f6ffbce94a485a2f5488b3ec8a79801728d722476484c3f3ee6d26ae204b1c",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-12T09:59:06.313+00:00",
+      "captured_at": "2026-10-15T00:58:35.080+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-eth-id42-2026-10-14.json",
+      "sha256": "e8877cfada80902dbf7d84ccc567848a6abda19646fda86359f1218a8de12a63",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-14T13:00:10.056+00:00",
+      "captured_at": "2026-10-15T00:58:44.333+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-hype-id33-2026-10-11.json",
+      "sha256": "c1eb317f8583ca7e6746230d888d15a44fe85f6701285c17b9cebe7d4d265485",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-11T13:06:44.241+00:00",
+      "captured_at": "2026-10-15T00:58:34.961+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-hype-id40-2026-10-14.json",
+      "sha256": "a939ebea869dbe7befc13be79c83e88be38b4777db6e661b89312c6618f64054",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-14T02:23:07.604+00:00",
+      "captured_at": "2026-10-15T00:58:44.218+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-s-id39-2026-10-13.json",
+      "sha256": "7aa865725a639d4e38108c6f81c1f3777fdf81809a82724a3e3a0adfc69cc4ed",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-13T10:07:29.474+00:00",
+      "captured_at": "2026-10-15T00:58:35.228+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-strk-id34-2026-10-12.json",
+      "sha256": "ed55946ffb9d8588e9f39164dce369bdbac25a94e8da43dc6cedb7e4cf362e84",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-12T05:55:57.672+00:00",
+      "captured_at": "2026-10-15T00:58:34.992+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "decision-time-inputs/dossier-sui-id41-2026-10-14.json",
+      "sha256": "f7c96b756a581c10705b79e76eab79c02bf0234dafd6164b4ff929152c144f4d",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": "2026-10-14T13:00:09.354+00:00",
+      "captured_at": "2026-10-15T00:58:44.269+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-avax-id37-2026-10-12.json",
+      "sha256": "b2c9391b3f1c1011571462a7670cdafcfd43fa8ce8dc6f00522232f4990a6f24",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:35.165+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-btc-id31-2026-10-10.json",
+      "sha256": "cc5264cc646b20e90f11d992dda95501b4bcbc1602be6c9ac9c5297dc8fcf28e",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:34.905+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-btc-id32-2026-10-11.json",
+      "sha256": "760b1112b2ec5027956665a0ab923d9f962de086f89190208b49065b17e3ba71",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:34.948+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-btc-id35-2026-10-12.json",
+      "sha256": "d075e4003dfe82df3291994a98bd9536324cc8c40be79bc73362d655bcaec9ca",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:35.054+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-btc-id38-2026-10-13.json",
+      "sha256": "61189aa7ff773bd5543d0e1b3daf888f036406fa230c43e8c332571f8c22ca86",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:35.208+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-eth-id36-2026-10-12.json",
+      "sha256": "0738bf4ac0b1602a6aae8d97c3ee7ed2afca904075643cab9ccdc7b211efb3aa",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:35.101+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-eth-id42-2026-10-14.json",
+      "sha256": "3d1779321c05e9059b839e0c0a595dbbf0ff935c7205fba70b484eb219c68d29",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:44.358+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-hype-id33-2026-10-11.json",
+      "sha256": "66605b5d2359c1b9f116881a0430e10618bb1f74ac6cfcdd8b60ac8a1c11f2a3",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:34.968+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-hype-id40-2026-10-14.json",
+      "sha256": "8001daa39bedf79788227510ec4b267da7d3e28ec8db33c679205733cc3ef954",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:44.236+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-s-id39-2026-10-13.json",
+      "sha256": "63ca669aeedb5aae909e8d125b4f5ee237f3486061896fe2e3d8618885ee67ce",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:35.240+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-strk-id34-2026-10-12.json",
+      "sha256": "f222fe67167f27b78391eb4d752cdd9b8f98bf1c2273b88e771961c65df62b49",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:35.010+00:00",
+      "has_correction_note": true
+    },
+    {
+      "file": "wired-trial-evidence/dossier-sui-id41-2026-10-14.json",
+      "sha256": "db0623589ab9df6350c1aca6dbdb44216e1bd162500fa22f1fac11d167dc354d",
+      "evidence_class": "REPLAY/REPRODUCTION",
+      "decision_at": null,
+      "captured_at": "2026-10-15T00:58:44.292+00:00",
+      "has_correction_note": true
+    }
+  ]
+}

@@ -1,0 +1,475 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1790847188894,
+      "tag": "0001_initial",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790847188894,
+      "tag": "0002_add_trade_journal_rules_snapshots",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790847454117,
+      "tag": "0003_add_signals_alerts_watchlist_analytics",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1790847454117,
+      "tag": "0004_add_journal_outcome_fields",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1790878790860,
+      "tag": "0005_add_theories_predictions_and_evidence",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1790881706562,
+      "tag": "0006_add_theory_watch_engine",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1790885913590,
+      "tag": "0007_add_market_discovery_feed",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1790887367008,
+      "tag": "0008_add_five_dimension_signal_gates",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1790887640543,
+      "tag": "0009_add_signal_invalidation_and_source_freshness",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1790888438951,
+      "tag": "0010_add_discovery_signal_outcome_tracking",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1790889859321,
+      "tag": "0011_purge_unrated_legacy_signals",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1790899532684,
+      "tag": "0012_add_engine_hits_log",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1790902041008,
+      "tag": "0013_add_full_history_cache_and_deep_analyses",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1790907244899,
+      "tag": "0014_add_daily_signal_snapshots_and_briefs",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1790907970707,
+      "tag": "0015_add_cross_market_syntheses",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "6",
+      "when": 1790919861137,
+      "tag": "0016_add_query_path_indexes",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "6",
+      "when": 1790948805870,
+      "tag": "0017_add_signal_risk_methodology",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "6",
+      "when": 1790993069005,
+      "tag": "0018_dedupe_discovery_signals_by_coin",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "6",
+      "when": 1790995767763,
+      "tag": "0019_add_onchain_flow_snapshots",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "6",
+      "when": 1791088272801,
+      "tag": "0020_add_tiered_discovery_metadata",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "6",
+      "when": 1791159268323,
+      "tag": "0021_add_entry_verdict_self_test",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "6",
+      "when": 1791165466631,
+      "tag": "0022_add_measurement_foundation_evidence_dossier_reverse_mode",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "6",
+      "when": 1791167285986,
+      "tag": "0023_finalize_pass_bar_v1",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "6",
+      "when": 1791167363808,
+      "tag": "0024_align_final_pass_bar_definition",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "6",
+      "when": 1791173836331,
+      "tag": "0025_add_theory_discovery_candidate_batches",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "6",
+      "when": 1791178312985,
+      "tag": "0026_add_provider_budgets_and_discovery_lanes",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "6",
+      "when": 1791225001485,
+      "tag": "0027_add_weekly_universe_tiers",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "6",
+      "when": 1791230733570,
+      "tag": "0028_persist_universe_witness_evidence",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "6",
+      "when": 1791235450712,
+      "tag": "0029_add_near_structural_downtrend_flag",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "6",
+      "when": 1791306119471,
+      "tag": "0030_add_suppressed_signal_candidate_log",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "6",
+      "when": 1791509046871,
+      "tag": "0031_phase1_signal_measurement_contract",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "6",
+      "when": 1791511281743,
+      "tag": "0032_phase1_1_evaluation_revisions",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "6",
+      "when": 1791556059974,
+      "tag": "0033_phase1_2_integration_closure",
+      "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "6",
+      "when": 1791568384212,
+      "tag": "0034_add_market_freshness_telemetry",
+      "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "6",
+      "when": 1791577209197,
+      "tag": "0035_phase2a1_freshness_repair",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "6",
+      "when": 1791783727054,
+      "tag": "0036_add_meme_risk_validations",
+      "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "6",
+      "when": 1791827026723,
+      "tag": "0037_add_auditable_measurement_runs",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "6",
+      "when": 1791827665326,
+      "tag": "0038_separate_trade_and_grading_state",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "6",
+      "when": 1791835213723,
+      "tag": "0039_harden_measurement_run_integrity",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "6",
+      "when": 1791953203019,
+      "tag": "0040_add_paper_signal_pilot_records",
+      "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "6",
+      "when": 1792003099388,
+      "tag": "0041_paper_handoff_v219_provenance",
+      "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "6",
+      "when": 1792043213807,
+      "tag": "0042_tag_dossier_evaluations_diagnosis_only",
+      "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "6",
+      "when": 1792043906390,
+      "tag": "0043_add_paper_entry_watch_tick",
+      "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "6",
+      "when": 1792047853715,
+      "tag": "0044_add_engine_hit_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 44,
+      "version": "6",
+      "when": 1792047853715,
+      "tag": "0045_add_scheduler_invocation_receipts",
+      "breakpoints": true
+    },
+    {
+      "idx": 45,
+      "version": "6",
+      "when": 1792104071882,
+      "tag": "0046_discovery_leases_lane_statuses_and_tier_supersession",
+      "breakpoints": true
+    },
+    {
+      "idx": 46,
+      "version": "6",
+      "when": 1792107673268,
+      "tag": "0047_add_issuance_kill_gate_tables",
+      "breakpoints": true
+    },
+    {
+      "idx": 47,
+      "version": "6",
+      "when": 1792111391466,
+      "tag": "0048_upgrade_scheduler_invocation_receipts",
+      "breakpoints": true
+    },
+    {
+      "idx": 48,
+      "version": "6",
+      "when": 1792115099217,
+      "tag": "0049_correct_theory_interpretation_wording",
+      "breakpoints": true
+    },
+    {
+      "idx": 49,
+      "version": "6",
+      "when": 1792120000000,
+      "tag": "0050_discovery_informational_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 50,
+      "version": "6",
+      "when": 1792121694170,
+      "tag": "0051_add_snapshot_correction_audit",
+      "breakpoints": true
+    },
+    {
+      "idx": 51,
+      "version": "6",
+      "when": 1792164162069,
+      "tag": "0052_durable_paper_candidate_intake",
+      "breakpoints": true
+    },
+    {
+      "idx": 52,
+      "version": "6",
+      "when": 1792164483550,
+      "tag": "0053_correct_processed_intake_dispositions",
+      "breakpoints": true
+    },
+    {
+      "idx": 53,
+      "version": "6",
+      "when": 1792168279329,
+      "tag": "0054_paper_poll_leases",
+      "breakpoints": true
+    },
+    {
+      "idx": 54,
+      "version": "6",
+      "when": 1792169965694,
+      "tag": "0055_asset_context_ledger",
+      "breakpoints": true
+    },
+    {
+      "idx": 55,
+      "version": "6",
+      "when": 1792170421880,
+      "tag": "0056_add_linked_asset_research_records",
+      "breakpoints": true
+    },
+    {
+      "idx": 56,
+      "version": "6",
+      "when": 1792335653242,
+      "tag": "0057_theory_withdrawals",
+      "breakpoints": true
+    },
+    {
+      "idx": 57,
+      "version": "6",
+      "when": 1792470252742,
+      "tag": "0058_add_discovery_funnel_counts",
+      "breakpoints": true
+    },
+    {
+      "idx": 58,
+      "version": "6",
+      "when": 1792475388139,
+      "tag": "0059_add_defillama_crosswalk",
+      "breakpoints": true
+    },
+    {
+      "idx": 59,
+      "version": "6",
+      "when": 1792481939887,
+      "tag": "0060_catalog_snapshots_and_discovery_survival",
+      "breakpoints": true
+    },
+    {
+      "idx": 60,
+      "version": "6",
+      "when": 1792520476029,
+      "tag": "0061_theory_watch_created_id_index",
+      "breakpoints": true
+    },
+    {
+      "idx": 61,
+      "version": "6",
+      "when": 1792522241757,
+      "tag": "0062_theory_batch_consumption_linkage",
+      "breakpoints": true
+    },
+    {
+      "idx": 62,
+      "version": "6",
+      "when": 1792522241757,
+      "tag": "0063_research_shortlist_snapshots",
+      "breakpoints": true
+    },
+    {
+      "idx": 63,
+      "version": "6",
+      "when": 1792530547574,
+      "tag": "0064_terminal_notification_read_chat_expiry_fields",
+      "breakpoints": true
+    },
+    {
+      "idx": 64,
+      "version": "6",
+      "when": 1792532355074,
+      "tag": "0065_backfill_paper_alert_expires_at",
+      "breakpoints": true
+    },
+    {
+      "idx": 65,
+      "version": "6",
+      "when": 1792542915059,
+      "tag": "0066_add_paper_issuance_work_checks",
+      "breakpoints": true
+    },
+    {
+      "idx": 66,
+      "version": "6",
+      "when": 1792606270015,
+      "tag": "0067_add_ath_gate_records_and_drift_reference_capture",
+      "breakpoints": true
+    }
+  ]
+}

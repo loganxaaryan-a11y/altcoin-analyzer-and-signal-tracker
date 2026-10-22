@@ -1,0 +1,66 @@
+[
+  {
+    "file": "crypto/server/src/actions.ts",
+    "ranges": [
+      [
+        706,
+        706
+      ],
+      [
+        712,
+        712
+      ],
+      [
+        720,
+        720
+      ],
+      [
+        763,
+        765
+      ],
+      [
+        1194,
+        1194
+      ],
+      [
+        1195,
+        1205
+      ],
+      [
+        1206,
+        1211
+      ],
+      [
+        1219,
+        1224
+      ]
+    ],
+    "sha256": "2e92062fe1143867d8e6c61f272feec6d32ceb41c183457c06dee84918a296a2",
+    "note": "vendored crypto gates: mean, pct, smaAt, horizonReturn, BORN_DEAD_REASON_PREFIX, hasRecentLowerHighs, evaluateShortRegimeGate, evaluateBornDead",
+    "fileSha256": "301e270e72a98d1dbcbfcf5d99ce53cc8afb142df77a8c18a514831b2c1a2788"
+  },
+  {
+    "file": "equity/server/src/actions.ts",
+    "ranges": [
+      [
+        103,
+        103
+      ],
+      [
+        109,
+        109
+      ],
+      [
+        388,
+        401
+      ],
+      [
+        402,
+        416
+      ]
+    ],
+    "sha256": "5f3e49041ff9a27770a35633020348e7d098ffb14483e19a9455acff32bb4487",
+    "note": "vendored equity gates: average, round, recentLowerHighs, signalIssuanceDecision",
+    "fileSha256": "17eabf4d8d314fcc130f870df692bf1b66edb67b3a6379972f1b712a3f62cd47"
+  }
+]

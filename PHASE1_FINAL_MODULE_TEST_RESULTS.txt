@@ -1,0 +1,32 @@
+$ bun test server/src/signal-methodology.test.ts
+bun test v1.4.2 (744846f84)
+
+server/src/signal-methodology.test.ts:
+(pass) Phase 1.1 authoritative evaluation > linear short return uses entry notional in gross and modeled-net paths [3.53ms]
+(pass) Phase 1.1 authoritative evaluation > hourly and eight-hour funding normalize identically [6.32ms]
+(pass) Phase 1.1 authoritative evaluation > future candle ending after evaluation cutoff is not consumed [2.99ms]
+(pass) Phase 1.1 authoritative evaluation > expiry-straddling target cannot prove a pre-expiry touch [1.42ms]
+(pass) Phase 1.1 authoritative evaluation > missing middle interval blocks a later target [2.72ms]
+(pass) Phase 1.1 authoritative evaluation > missing tail cannot substitute a stale close for expiry [0.10ms]
+(pass) Phase 1.1 authoritative evaluation > missing initial interval blocks a later target [0.11ms]
+(pass) Phase 1.1 authoritative evaluation > known adverse opening gap resolves before later intrabar target [0.20ms]
+(pass) Phase 1.1 authoritative evaluation > the six timestamp and coverage counterexamples mirror for shorts [0.24ms]
+(pass) Phase 1.1 authoritative evaluation > entry-straddling touch is ambiguous rather than settled [0.10ms]
+(pass) Phase 1.1 authoritative evaluation > pre-entry extremes cannot settle but later same-day touches can [1.59ms]
+(pass) Phase 1.1 authoritative evaluation > double-touch candle stays ambiguous without an adverse opening gap [0.67ms]
+(pass) Phase 1.1 authoritative evaluation > complete coverage receives an exact-horizon time exit [1.88ms]
+(pass) Phase 1.1 authoritative evaluation > missing OHLC cannot be manufactured from close [0.54ms]
+(pass) Phase 1.1 authoritative evaluation > current revision selection updates the read model and keeps older evidence inspectable [2.06ms]
+(pass) Phase 1.1 authoritative evaluation > frozen levels and factor decision remain deterministic [2.55ms]
+(pass) Phase 1.1 authoritative evaluation > poor-expectancy sample sufficiency does not validate edge [1.96ms]
+(pass) Phase 1.2 deterministic dossier replay > untouched raw snapshot reconstructs decision and frozen levels without network access [2.91ms]
+(pass) Phase 1.2 deterministic dossier replay > changing a relevant raw input changes the reconstruction [0.66ms]
+(pass) Phase 1.2 deterministic dossier replay > altering saved derived output is detected field by field [0.53ms]
+(pass) Phase 1.2 deterministic dossier replay > an input unavailable at decision time cannot affect replay [0.31ms]
+(pass) Phase 1.2 prospective cohort isolation > only the exact contract and cost identity enter the cohort [0.68ms]
+(pass) Phase 1 final canonical ATR and replay scope > a 600-bar production window exposes the former last-220 mismatch and full-window replay matches live [5.33ms]
+
+ 23 pass
+ 0 fail
+ 66 expect() calls
+Ran 23 tests across 1 file. [401.00ms]

@@ -1,0 +1,11 @@
+$ bun test server/src/signal-action-contract.integration.test.ts
+bun test v1.4.2 (744846f84)
+
+server/src/signal-action-contract.integration.test.ts:
+(pass) final signoff action and client contract > retry response deterministically returns the database-accepted immutable entry and levels [3.78ms]
+(pass) final signoff action and client contract > client labels issued levels separately from research-reference levels [6.42ms]
+
+ 2 pass
+ 0 fail
+ 6 expect() calls
+Ran 2 tests across 1 file. [689.00ms]

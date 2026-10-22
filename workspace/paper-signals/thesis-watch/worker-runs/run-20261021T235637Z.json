@@ -1,0 +1,45 @@
+{
+ "invocation_completed": {
+  "run_ts_utc": "2026-10-21T23:56:37Z",
+  "started_utc": "2026-10-21T23:56:37Z",
+  "finished_utc": "2026-10-22T00:11:51Z",
+  "status": "succeeded",
+  "per_terminal_fetch": {
+   "altcoin-analyzer-and-signal-tracker": {
+    "listtheories": "ok (14 theories)",
+    "getmarketread": "ok, asOf 2026-10-22T00:07:24.527Z; ZEC/AAVE/PENDLE/NEAR absent from rows -> prediction-feed prices used"
+   },
+   "equity-analyzer-and-signal-tracker": {
+    "listtheories": "FAILED: 3 attempts, space worker request timed out after 120000ms each",
+    "getmarketread": "FAILED: 1 attempt, space worker request timed out after 120000ms",
+    "note": "terminal-side infrastructure failure; equity state rows untouched this run, no fabrication; retry next run"
+   }
+  },
+  "theories_seen": {
+   "crypto": 14,
+   "equity": 0
+  },
+  "transitions_found": 4,
+  "alerts_pre_committed": [
+   "altcoin-analyzer-and-signal-tracker/16/status:confirming→challenged",
+   "altcoin-analyzer-and-signal-tracker/15/new-challenging-evidence",
+   "altcoin-analyzer-and-signal-tracker/12/tripwire:p1:hit",
+   "altcoin-analyzer-and-signal-tracker/9/tripwire:p2:hit"
+  ],
+  "learning_entries_appended": 0,
+  "bounce_watches_opened": [],
+  "errors": [
+   "equity-analyzer-and-signal-tracker: all action attempts timed out (4x120s); side skipped per body section 2"
+  ],
+  "notes": [
+   "Crypto/16: STATUS confirming -> challenged (alerted)",
+   "Crypto/15: new confirming evidence id 65 baselined silently",
+   "Crypto/15: NEW challenging evidence id 64 (alerted)",
+   "Crypto/12/p1: TRIPWIRE BREAK above 83479.25 (BTC 84219.31962674865) alerted",
+   "Crypto/9/p2: TRIPWIRE BREAK above 83479.25 (BTC 84219.31962674865) alerted"
+  ]
+ },
+ "scheduler_provenance": {
+  "origin_unverified": true
+ }
+}

@@ -1,0 +1,80 @@
+$ bun test
+bun test v1.4.2 (744846f84)
+
+server/src/signal-methodology.test.ts:
+(pass) Phase 1.1 authoritative evaluation > linear short return uses entry notional in gross and modeled-net paths [0.20ms]
+(pass) Phase 1.1 authoritative evaluation > hourly and eight-hour funding normalize identically [29.46ms]
+(pass) Phase 1.1 authoritative evaluation > future candle ending after evaluation cutoff is not consumed [18.54ms]
+(pass) Phase 1.1 authoritative evaluation > expiry-straddling target cannot prove a pre-expiry touch [1.88ms]
+(pass) Phase 1.1 authoritative evaluation > missing middle interval blocks a later target [9.75ms]
+(pass) Phase 1.1 authoritative evaluation > missing tail cannot substitute a stale close for expiry [0.08ms]
+(pass) Phase 1.1 authoritative evaluation > missing initial interval blocks a later target [0.05ms]
+(pass) Phase 1.1 authoritative evaluation > known adverse opening gap resolves before later intrabar target [0.13ms]
+(pass) Phase 1.1 authoritative evaluation > the six timestamp and coverage counterexamples mirror for shorts [0.22ms]
+(pass) Phase 1.1 authoritative evaluation > entry-straddling touch is ambiguous rather than settled [0.04ms]
+(pass) Phase 1.1 authoritative evaluation > pre-entry extremes cannot settle but later same-day touches can [0.12ms]
+(pass) Phase 1.1 authoritative evaluation > double-touch candle stays ambiguous without an adverse opening gap [0.05ms]
+(pass) Phase 1.1 authoritative evaluation > complete coverage receives an exact-horizon time exit [0.06ms]
+(pass) Phase 1.1 authoritative evaluation > missing OHLC cannot be manufactured from close [0.06ms]
+(pass) Phase 1.1 authoritative evaluation > current revision selection updates the read model and keeps older evidence inspectable [2.87ms]
+(pass) Phase 1.1 authoritative evaluation > frozen levels and factor decision remain deterministic [46.93ms]
+(pass) Phase 1.1 authoritative evaluation > poor-expectancy sample sufficiency does not validate edge [0.27ms]
+(pass) Phase 1.2 deterministic dossier replay > untouched raw snapshot reconstructs decision and frozen levels without network access [12.52ms]
+(pass) Phase 1.2 deterministic dossier replay > changing a relevant raw input changes the reconstruction [0.64ms]
+(pass) Phase 1.2 deterministic dossier replay > altering saved derived output is detected field by field [11.40ms]
+(pass) Phase 1.2 deterministic dossier replay > an input unavailable at decision time cannot affect replay [0.28ms]
+(pass) Phase 1.2 prospective cohort isolation > only the exact contract and cost identity enter the cohort [0.31ms]
+(pass) Phase 1 final canonical ATR and replay scope > a 600-bar production window exposes the former last-220 mismatch and full-window replay matches live [38.48ms]
+
+server/src/signal-persistence.integration.test.ts:
+(pass) final signoff production persistence boundary > fault after production write boundary 1 rolls back and retry returns one accepted bundle [85.82ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 2 rolls back and retry returns one accepted bundle [3.09ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 3 rolls back and retry returns one accepted bundle [3.20ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 4 rolls back and retry returns one accepted bundle [3.24ms]
+(pass) final signoff production persistence boundary > fault after production write boundary 5 rolls back and retry returns one accepted bundle [3.10ms]
+(pass) final signoff production persistence boundary > independently interleaved identical requests on separate connections return the same bundle [5.44ms]
+(pass) final signoff production persistence boundary > interleaved competing snapshots return the original accepted linkage and remove loser snapshot [12.39ms]
+
+server/src/signal-action-contract.integration.test.ts:
+(pass) final signoff action and client contract > retry response deterministically returns the database-accepted immutable entry and levels [43.94ms]
+(pass) final signoff action and client contract > client labels issued levels separately from research-reference levels [133.77ms]
+
+server/src/phase2a-research.test.ts:
+(pass) Phase 2A frozen crypto research harness > normal command keeps the final holdout locked [2477.68ms]
+(pass) Phase 2A frozen crypto research harness > entry is the first open after inferred feature availability, never the adjacent unavailable open [2203.28ms]
+(pass) Phase 2A frozen crypto research harness > breakout references exclude the current bar and zero reference volume cannot pass [2190.87ms]
+(pass) Phase 2A frozen crypto research harness > future bars cannot change a previously issued feature decision [5917.52ms]
+(pass) Phase 2A frozen crypto research harness > deliberate leakage fixture would look profitable but cannot affect the feature side [4793.42ms]
+(pass) Phase 2A frozen crypto research harness > fold-end labels are purged by actual availability, not signal-row count [2048.53ms]
+(pass) Phase 2A frozen crypto research harness > common-date panel remains together and block uncertainty uses date blocks [2195.67ms]
+(pass) Phase 2A frozen crypto research harness > linear long and short arithmetic, matched baselines, and bps costs remain coherent [1321.66ms]
+(pass) Phase 2A frozen crypto research harness > reports separate full-schedule baselines from matched emitted-timestamp baselines [873.43ms]
+(pass) Phase 2A frozen crypto research harness > missing crypto calendar bars remain exclusions and are never synthesized [861.43ms]
+(pass) Phase 2A frozen crypto research harness > reruns are deterministic apart from the report timestamp [3531.73ms]
+(pass) Phase 2A frozen crypto research harness > Phase 2A rows carry a separate cohort and cannot impersonate the legacy scoreboard [965.17ms]
+(pass) Phase 2A frozen crypto research harness > direct engine invocation rejects reserved holdout-dated input before any report generation [0.70ms]
+(pass) Phase 2A frozen crypto research harness > missing expected entry or endpoint is excluded and never stretches the elapsed-day clock [1866.39ms]
+(pass) Phase 2A frozen crypto research harness > identical candidate and matched SMA decisions have zero gross, central, and stressed cost differences [1267.68ms]
+(pass) Phase 2A frozen crypto research harness > synthetic positive control qualifies while fixed-seed negative controls do not falsely qualify [707.72ms]
+
+server/src/market-freshness.test.ts:
+(pass) Track A market freshness > expensive analysis can remain throttled while market refresh observations advance [0.21ms]
+(pass) Track A market freshness > a successful response with old event time remains stale [0.06ms]
+(pass) Track A market freshness > the latest Binance daily row is forming until its close time passes [0.44ms]
+(pass) Track A market freshness > forming volume is not relabeled completed volume [0.08ms]
+(pass) Track A market freshness > outage does not alter the last-known observation [0.11ms]
+(pass) Track A market freshness > concurrent refresh work is deduplicated [0.39ms]
+(pass) Track A market freshness > fresh price does not freshen an old funding factor [0.06ms]
+(pass) Track A market freshness > quote monitoring never mutates the issued decision snapshot or levels [0.13ms]
+(pass) Track A market freshness > observed barrier without path evidence remains unsettled [0.08ms]
+(pass) Track A market freshness > repeated status observation has an idempotent key [0.27ms]
+(pass) Track A market freshness > provider correction changes the observation version identity [0.13ms]
+
+ 59 pass
+ 0 fail
+ 174 expect() calls
+Ran 59 tests across 5 files. [36.33s]
+
+$ bun x tsc --noEmit -p server/tsconfig.json
+
+$ bun x tsc --noEmit -p client/tsconfig.json

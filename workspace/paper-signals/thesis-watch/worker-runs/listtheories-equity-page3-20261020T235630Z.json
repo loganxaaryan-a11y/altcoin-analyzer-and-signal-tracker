@@ -1,0 +1,1299 @@
+{
+ "nextCursor": null,
+ "refreshedAt": "2026-10-21T00:03:15.062Z",
+ "theories": [
+  {
+   "createdAt": "2026-10-06T13:05:13.762Z",
+   "evidence": [],
+   "horizon": "short",
+   "id": 13,
+   "linkedTickers": [
+    "ORCL"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 131.13999938964844,
+     "detail": "131.14 now · prediction below 129.93 by 2026-11-04",
+     "direction": "below",
+     "dueDate": "2026-11-04",
+     "id": 26,
+     "progress": 90.36,
+     "snapshotPrice": 142.47999572753906,
+     "status": "confirming",
+     "targetLevel": 129.93,
+     "ticker": "ORCL"
+    },
+    {
+     "currentPrice": 131.13999938964844,
+     "detail": "131.14 now · prediction above 150.84 by 2026-11-04",
+     "direction": "above",
+     "dueDate": "2026-11-04",
+     "id": 27,
+     "progress": -135.65,
+     "snapshotPrice": 142.47999572753906,
+     "status": "challenged",
+     "targetLevel": 150.84,
+     "ticker": "ORCL"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "$18B construction loan quoted below 90c reprices data-center construction credit risk across the SPV stack",
+     "from": "Oracle force majeure on Project Jupiter gas supply",
+     "id": 55,
+     "to": "Blue Owl construction SPVs (four Red Chiles LLCs)"
+    },
+    {
+     "because": "credit stress bleeds into equity as execution risk on the AI capex plan; ORCL already -54% off 52-week high",
+     "from": "Sub-90c construction debt",
+     "id": 56,
+     "to": "ORCL equity repricing lower"
+    },
+    {
+     "because": "54% of net IG issuance from AI issuers (vs 34% last year) concentrates duration risk in one trade",
+     "from": "Hyperscalers issued ~$250B IG debt YTD 2026 (Apollo)",
+     "id": 57,
+     "to": "AI-complex credit and equity markets"
+    }
+   ],
+   "snapshots": {
+    "ORCL": 142.47999572753906
+   },
+   "statement": "[Muse theory] AI buildout credit stress is showing execution strain: Oracle's Project Jupiter (Blue Owl development unit) faces a Sept 24 force-majeure notice on natural-gas supply tangled in permit denials, its $18B construction loan quoted below 90c, and hyperscalers have issued ~$250B of IG debt in 2026 YTD (54% of net IG issuance per Apollo deck). ORCL — already 54% off its 52-week high — reprices lower as data-center credit risk gets priced into equity. Invalidated by a daily close above $150.84.",
+   "status": "challenged",
+   "updatedAt": "2026-10-06T13:05:13.762Z"
+  },
+  {
+   "createdAt": "2026-10-06T13:00:42.836Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-06T13:00:59.047Z",
+     "id": 46,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-06",
+     "publisher": null,
+     "source": "Alternative.me (via terminal crowd pricing, 2026-10-06)",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Fear & Greed at 73 (Greed) + RSI 67-69 — crowded, extended tape; reversal risk on hot CPI/ISM or 10Y through 5.50%",
+     "url": "https://api.alternative.me/fng/?limit=1&format=json"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-06T13:00:56.792Z",
+     "id": 45,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-05",
+     "publisher": null,
+     "source": "Raymond James",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "September in Review — only ~25% of S&P 500 above 50-day average, ~15% multiple compression; index highs depend on concentrated AI mega-caps",
+     "url": "https://www.raymondjames.com/thewiseinvestorgroup/insights/words-from-the-wise/2026/10/05/september-market-update"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-06T13:00:54.845Z",
+     "id": 44,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-09-30",
+     "publisher": null,
+     "source": "Invezz",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "US 10-year Treasury yield hits 24-year high above 5.30%",
+     "url": "https://invezz.com/in/news/2026/09/30/us-10-year-treasury-yield-hits-24-year-high-above-530percent/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-06T13:00:49.174Z",
+     "id": 43,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-05",
+     "publisher": null,
+     "source": "Equity terminal (analyzeinstrument, Yahoo Finance chart data)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "NVDA and QQQ long factor agreement +73; tape test 82/100 with both at 52-week highs",
+     "url": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-06T13:00:46.211Z",
+     "id": 42,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-06",
+     "publisher": null,
+     "source": "Aju Press",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "U.S. Stocks Rise as Treasury Yields Hit 24-Year High; Nasdaq Sets Record",
+     "url": "https://www.ajupress.com/view/20261006064070312"
+    }
+   ],
+   "horizon": "short",
+   "id": 12,
+   "linkedTickers": [
+    "NVDA",
+    "QQQ"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 216.47000122070312,
+     "detail": "216.47 now · prediction above 231.48 by 2026-11-04",
+     "direction": "above",
+     "dueDate": "2026-11-04",
+     "id": 22,
+     "progress": 302.29,
+     "snapshotPrice": 238.8999938964844,
+     "status": "confirming",
+     "targetLevel": 231.48,
+     "ticker": "NVDA"
+    },
+    {
+     "currentPrice": 216.47000122070312,
+     "detail": "216.47 now · prediction above 250.03 by 2026-11-04",
+     "direction": "above",
+     "dueDate": "2026-11-04",
+     "id": 23,
+     "progress": -201.53,
+     "snapshotPrice": 238.8999938964844,
+     "status": "challenged",
+     "targetLevel": 250.03,
+     "ticker": "NVDA"
+    },
+    {
+     "currentPrice": 717.6300048828125,
+     "detail": "717.63 now · prediction above 744.46 by 2026-11-04",
+     "direction": "above",
+     "dueDate": "2026-11-04",
+     "id": 24,
+     "progress": 328.53,
+     "snapshotPrice": 756.2000122070312,
+     "status": "confirming",
+     "targetLevel": 744.46,
+     "ticker": "QQQ"
+    },
+    {
+     "currentPrice": 717.6300048828125,
+     "detail": "717.63 now · prediction above 773.81 by 2026-11-04",
+     "direction": "above",
+     "dueDate": "2026-11-04",
+     "id": 25,
+     "progress": -219.02,
+     "snapshotPrice": 756.2000122070312,
+     "status": "challenged",
+     "targetLevel": 773.81,
+     "ticker": "QQQ"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "10Y at ~5.3% (24-year high) raises discount rates, compressing long-duration equity while AI earnings growth sustains the megacap bid",
+     "from": "Treasury yield shock (10Y ~5.3%)",
+     "id": 52,
+     "to": "Duration-sensitive sectors (Utilities, Staples, REITs) stay pinned"
+    },
+    {
+     "because": "Brent fell 1.9% to ~$100 on Oct 5 as Hormuz headline risk faded, easing the oil-drag hop that powered the Oct 5 bearish machine theories",
+     "from": "Hormuz headline risk fading",
+     "id": 53,
+     "to": "Transport-cost relief for broad industrials and cyclicals"
+    },
+    {
+     "because": "record NVDA/META closes carry cap-weighted indices while rate-sensitive breadth stays weak (~25% of S&P above 50d per Raymond James)",
+     "from": "NVDA/META AI momentum into earnings season",
+     "id": 54,
+     "to": "QQQ keeps outperforming SPY and IWM on the same thesis"
+    }
+   ],
+   "snapshots": {
+    "NVDA": 238.8999938964844,
+    "QQQ": 756.2000122070312
+   },
+   "statement": "[Muse theory] AI megacap leadership is decoupling from the rate shock: with the 10Y at 24-year highs (~5.3%) and Brent back to ~$100 after the Hormuz spike faded, QQQ closed Oct 5 at a record (+2.67% 5d) while SPY/IWM both lagged at +1.20%. NVDA printed consecutive record highs (+13.2% 15d) with +73 factor agreement; META leads the terminal's 30-session return/ATR stack. The tape test scores 82/100 HIGH with both names at 52w highs and 100% above their 50d MAs — but volume z is flat-to-negative, so the move is momentum-rich and confirmation-thin. Tripwire: daily close below mechanical invalidation (NVDA 231.48 / QQQ 744.46), or the 10Y breaking 5.50% / a hot CPI-ISM print breaking the AI-earnings bid. Contest: stretched RSI (67-69) + Greed-73 sentiment + crowd-priced 81.5% no-hike Fed means the decoupling unwinds fast on a hot print; thin breadth (~25% of S&P above 50d) makes this a two-stock story, not a market story.",
+   "status": "challenged",
+   "updatedAt": "2026-10-06T13:00:42.836Z"
+  },
+  {
+   "createdAt": "2026-10-05T12:55:45.609Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T12:56:07.161Z",
+     "id": 41,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-04",
+     "publisher": null,
+     "source": "percysperspective.com",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "WMO Weekly Market Outlook: sharp swings in crude oil and Treasury yields around shifting U.S.-Iran negotiation headlines drove a volatile session",
+     "url": "https://percysperspective.com/2026/10/04/wmo-weekly-market-outlook-2026-week-40oct05-oct09/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T12:56:07.143Z",
+     "id": 40,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-05",
+     "publisher": null,
+     "source": "jqjo.com",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Stocks upbeat, dollar wobbles as Fed hike bets recede",
+     "url": "https://jqjo.com/2026-10-05/us/technology/en/Stocks-upbeat-dollar-wobbles-as-Fed-hike-bets-recede/1343049"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T12:56:07.111Z",
+     "id": 39,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-05",
+     "publisher": null,
+     "source": "fnarena.com",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "The Monday Report: softer-than-expected September US payrolls judged to give the Fed more time before adjusting policy, lifting equities",
+     "url": "https://fnarena.com/2026/10/05/the-monday-report-05-october-2026/"
+    }
+   ],
+   "horizon": "short",
+   "id": 11,
+   "linkedTickers": [
+    "IWM",
+    "SPY",
+    "XLU"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 275.7799987792969,
+     "detail": "275.78 now · prediction above 290 by 2026-10-19",
+     "direction": "above",
+     "dueDate": "2026-10-19",
+     "id": 21,
+     "progress": -67.69,
+     "snapshotPrice": 281.5199890136719,
+     "status": "refuted",
+     "targetLevel": 290,
+     "ticker": "IWM"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "softer labor data gives the Fed room to hold rather than hike",
+     "from": "soft September payrolls",
+     "id": 49,
+     "to": "Fed patience window"
+    },
+    {
+     "because": "rate-sensitive small caps rebound when hike expectations recede",
+     "from": "Fed patience window",
+     "id": 50,
+     "to": "IWM short squeeze"
+    },
+    {
+     "because": "duration drag eases alongside small-cap relief",
+     "from": "IWM rebound",
+     "id": 51,
+     "to": "utilities relief bid"
+    }
+   ],
+   "snapshots": {
+    "IWM": 281.5199890136719,
+    "SPY": 769.6400146484375,
+    "XLU": 39.83000183105469
+   },
+   "statement": "Softer-than-expected September payrolls (BLS unemployment 4.2%, +0.1pp) with receding Fed hike bets opens a Fed-patience window that challenges the crowded IWM short consensus (machine alignment -38; tracked short -0.9% and only 0.69% from invalidation). Rate-sensitive small caps are the first beneficiaries if duration drag eases into this week's ISM Services PMI and FOMC minutes. Countercase live: hot ISM or hawkish minutes reassert the short thesis.",
+   "status": "refuted",
+   "updatedAt": "2026-10-05T12:55:45.609Z"
+  },
+  {
+   "createdAt": "2026-10-05T07:04:38.473Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T07:04:43.088Z",
+     "id": 31,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Reuters",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "G7 agrees diesel/oil stock release after US pressure; pledges no energy export restrictions",
+     "url": "https://bbc.bm/g7-countries-agree-on-release-of-diesel-and-oil-stocks-after-us-pressure"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T07:04:43.066Z",
+     "id": 30,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-03",
+     "publisher": null,
+     "source": "Discovery Alert",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Can the G7 release fix the diesel crisis? Constraint is structural (refined product), volumes come from already-pledged March reserves",
+     "url": "https://discoveryalert.com/analysis/g7-oil-reserve-release-october-2026/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T07:04:43.017Z",
+     "id": 29,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Agence Europe",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "G7 agrees to coordinated 100M-barrel release via IEA, diesel front-loaded in first 20 days",
+     "url": "https://agenceurope.eu/en/bulletin/article/13951/1/g7-countries-agree-to-release-100-million-barrels-of-diesel-and-crude-oil-amid-severe-international-pressures-on-energy"
+    }
+   ],
+   "horizon": "short",
+   "id": 10,
+   "linkedTickers": [
+    "VLO",
+    "PSX",
+    "MPC"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 433.4200134277344,
+     "detail": "433.42 now · prediction below 386.48 by 2026-11-02",
+     "direction": "below",
+     "dueDate": "2026-11-02",
+     "id": 20,
+     "progress": -136.83,
+     "snapshotPrice": 406.2999877929687,
+     "status": "challenged",
+     "targetLevel": 386.48,
+     "ticker": "VLO"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "G7 agreed Oct 2 to a coordinated 100M-barrel release via the IEA over 4 months, with a substantial diesel front-load in the first 20 days (multi-source: Agence Europe, Reuters).",
+     "from": "G7 diesel front-load",
+     "id": 44,
+     "to": "Diesel crack spreads compress"
+    },
+    {
+     "because": "Record $106/bbl NY refining margins (Bloomberg, Sept 1) and 1.6M bpd diesel exports were the exact economics the release is designed to cool.",
+     "from": "Diesel crack spreads compress",
+     "id": 45,
+     "to": "US refiner export margins clipped"
+    },
+    {
+     "because": "The joint statement pledges no energy export restrictions between members, which cools the Washington export-ban threat that was part of theory #9's tail-risk leg (honest cross-current).",
+     "from": "Anti-export-restriction pledge",
+     "id": 46,
+     "to": "US diesel export-ban tail risk reduced"
+    },
+    {
+     "because": "Members will coordinate refinery maintenance to avoid simultaneous shutdowns and raise utilization where possible, adding refined supply into winter.",
+     "from": "Coordinated refinery maintenance",
+     "id": 47,
+     "to": "More diesel supply into winter"
+    },
+    {
+     "because": "VLO +68.9%, MPC +70.7%, PSX +53% over 90d, all near 52w highs; the tape prices the record-margin regime as permanent.",
+     "from": "Refiners at 52w highs",
+     "id": 48,
+     "to": "Multiple derating as margin outlook resets"
+    }
+   ],
+   "snapshots": {
+    "MPC": 422.3299865722656,
+    "PSX": 264.5799865722656,
+    "VLO": 406.2999877929687
+   },
+   "statement": "[Muse theory] G7's Oct 2 coordinated 100M-barrel release (IEA, 4 months, diesel front-loaded in first 20 days) plus an anti-export-restriction pledge and coordinated refinery maintenance directly attacks the record diesel cracks behind the US refiner margin boom. Extends theory #9: the margin-compression leg is now policy-driven and immediate; the export-ban tail-risk leg is REDUCED by the pledge (honest cross-current). VLO/PSX/MPC at 52w highs price $106/bbl NY margins as permanent. Tape is extended (VLO +68.9% 90d) so short-side timing is chase-risk. Invalidation: VLO daily close above $420 (margin regime intact). Multi-source confirmed (Agence Europe, Reuters, IEA statement).",
+   "status": "challenged",
+   "updatedAt": "2026-10-05T07:04:38.473Z"
+  },
+  {
+   "createdAt": "2026-10-04T11:55:35.622Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-06T16:47:56.831Z",
+     "id": 47,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-04",
+     "publisher": null,
+     "source": "Reuters via Nournews, relayed by Islamabad Post",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Iran: Hormuz stays closed until 7 conditions under June Islamabad MoU are met; FM says Tehran plan could reopen in 7 days if US accepts — wide political package (naval blockade, oil sanctions, frozen assets, military pressure, reconstruction), not a technical fix",
+     "url": "https://www.sowetan.co.za/news/world/2026-10-04-iran-says-strait-of-hormuz-will-not-reopen-until-conditions-are-met-nournews-reports/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T11:53:11.241Z",
+     "id": 38,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-09-28",
+     "publisher": null,
+     "source": "Wintermute OTC Desk",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Hormuz still at ~half pre-conflict flow, Brent closed near $103; 'oil from here decides whether the October hike stays priced' — tight physical supply keeps refiner margins supported near-term, working against the bearish-refiner thesis",
+     "url": "https://www.wintermute.com/insights/market-color/market-update/market-update-28-september-2026"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T11:53:11.225Z",
+     "id": 37,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-04",
+     "publisher": null,
+     "source": "Riviera Maritime Media (UKMTO-confirmed)",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Dynacom's 6-week-old tanker Lipsi struck by unknown projectile in Strait of Hormuz (engine-room damage); up to 4 attacks in 72h — shipping risk keeps crude/diesel tight and refiner margins elevated, near-term challenge to the export-ban bear case",
+     "url": "https://www.rivieramm.com/news-content-hub/news-content-hub/dynacom-aframax-tanker-hit-in-strait-of-hormuz-90183"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.338Z",
+     "id": 24,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-09-24",
+     "publisher": null,
+     "source": "Reuters (via LA Post)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "US energy secretary seeks refiners' help amid narrow options to curb diesel price",
+     "url": "https://www.lapost.com/content/us-energy-secretary-seeks-refiners-help-amid-narrow-options-to-curb-diesel-price"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.315Z",
+     "id": 23,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Discovery Alert (Argus/Kpler/Goldman data)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "G7 Oil Reserve Release: 100M bbl coordinated release, anti-export-ban pledge, 20-day diesel frontload",
+     "url": "https://discoveryalert.com/analysis/g7-oil-reserve-release-october-2026/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.270Z",
+     "id": 22,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-09-22",
+     "publisher": null,
+     "source": "American Journal of Transportation (Reuters explainer)",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Ban on US diesel exports would hurt, not help fuel markets, analysts say",
+     "url": "https://www.ajot.com/news/explainer-ban-on-us-diesel-exports-would-hurt-not-help-fuel-markets-analysts-say"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.175Z",
+     "id": 21,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-09-21",
+     "publisher": null,
+     "source": "Transport Topics",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Diesel tops $6.50 a gallon as wars worsen global crunch",
+     "url": "https://www.ttnews.com/articles/diesel-tops-650-gallon-wars"
+    }
+   ],
+   "horizon": "short",
+   "id": 9,
+   "linkedTickers": [
+    "VLO",
+    "PSX",
+    "MPC"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 433.4200134277344,
+     "detail": "433.42 now · prediction below 386.48 by 2026-11-02",
+     "direction": "below",
+     "dueDate": "2026-11-02",
+     "id": 18,
+     "progress": -136.83,
+     "snapshotPrice": 406.2999877929687,
+     "status": "challenged",
+     "targetLevel": 386.48,
+     "ticker": "VLO"
+    },
+    {
+     "currentPrice": 433.4200134277344,
+     "detail": "433.42 now · prediction above 436.02 by 2026-11-02",
+     "direction": "above",
+     "dueDate": "2026-11-02",
+     "id": 19,
+     "progress": 91.25,
+     "snapshotPrice": 406.2999877929687,
+     "status": "confirming",
+     "targetLevel": 436.02,
+     "ticker": "VLO"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "Record $6.51/gal diesel (AAA/EIA) is politically toxic 30 days before the Nov 3 midterms, hitting truckers, farmers, and heating-oil states.",
+     "from": "Record US diesel prices",
+     "id": 39,
+     "to": "White House export-restriction pressure"
+    },
+    {
+     "because": "Trump publicly backed an export ban on Sept 22; the White House denied a 90-day ban and Energy Sec Wright is pursuing the voluntary route first (Reuters, Sept 24).",
+     "from": "Export-restriction pressure",
+     "id": 40,
+     "to": "Voluntary export restraint by refiners"
+    },
+    {
+     "because": "Record $106/bbl NY refining margins (Bloomberg, Sept 1) and record 1.6M bpd diesel exports (Kpler, Aug) are exactly the economics that get clipped when barrels stay home.",
+     "from": "Voluntary export restraint",
+     "id": 41,
+     "to": "Compressed export margins for US refiners"
+    },
+    {
+     "because": "VLO +68.9%, MPC +70.7%, PSX +53% over 90d with all near 52w highs; the tape prices the margin boom with zero discount for the political risk.",
+     "from": "Compressed export margins",
+     "id": 42,
+     "to": "VLO/PSX/MPC multiple derating"
+    },
+    {
+     "because": "EU+UK+Norway took ~430k bpd of US diesel in August (Kpler), ~40% of their imports; the G7 anti-ban pledge binds governments, not US refiner voluntary restraint (inference).",
+     "from": "US export-restriction threat",
+     "id": 43,
+     "to": "Atlantic Basin diesel squeeze"
+    }
+   ],
+   "snapshots": {
+    "MPC": 422.3299865722656,
+    "PSX": 264.5799865722656,
+    "VLO": 406.2999877929687
+   },
+   "statement": "[Muse theory] Diesel export-restriction politics compress US refiner margins: record diesel prices 30 days before midterms force the White House toward voluntary export restraint (ban denied but threatened), clipping record export margins while VLO/PSX/MPC trade at 52w highs pricing zero political risk. Tape direction contradicts (all extended), so this is a tail-risk/positioning thesis, not a price-trend one.",
+   "status": "challenged",
+   "updatedAt": "2026-10-04T11:55:35.622Z"
+  },
+  {
+   "createdAt": "2026-10-04T11:55:35.479Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T11:53:06.573Z",
+     "id": 36,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-04",
+     "publisher": null,
+     "source": "The Bear Cave #346 (citing Reuters)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Broadcom agreed to lend Anthropic up to $42B to finance infrastructure spending — vendor financing of AI buildout, the 2006-style credit structure Burry flagged",
+     "url": "https://thebearcave.substack.com/p/the-bear-cave-346"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T11:53:06.555Z",
+     "id": 35,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-04",
+     "publisher": null,
+     "source": "The Bear Cave #346",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Nidec disclosed ~$7B in writedowns and accounting charges with PwC still withholding signoff on delayed results — AI-adjacent industrial credit/accounting stress datapoint",
+     "url": "https://thebearcave.substack.com/p/the-bear-cave-346"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T11:53:06.489Z",
+     "id": 34,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-04",
+     "publisher": null,
+     "source": "The Bear Cave #346 (citing FT)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Amazon exploring moving $8B of Nvidia chips into an outside financing vehicle and leasing them back; Nvidia talking to insurers about covering lenders' losses if smaller clouds default — SPV/credit-wrap layer on AI capex",
+     "url": "https://thebearcave.substack.com/p/the-bear-cave-346"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T11:53:06.464Z",
+     "id": 33,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-03",
+     "publisher": null,
+     "source": "Morningstar DBRS",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "AI financing partnerships are credit-POSITIVE for Nvidia and data-center operators (NVDA $500B financing partnership) — directly cuts against the 'buildout is crumbling' framing; flags overbuilding/underutilization as the real risk, not imminent credit failure",
+     "url": "https://dbrs.morningstar.com/insights/commentary/490435/ai-financing-partnerships-are-credit-positive-for-nvidia-and-data-center-operators"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-05T11:53:06.435Z",
+     "id": 32,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-05",
+     "publisher": null,
+     "source": "Noahpinion",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "The AI boom is producing real economic activity: construction employment and real wages up since late 2022 (Goldman data) even through deportations — the buildout isn't purely financial engineering; labor-market counterweight to the credit-crack thesis",
+     "url": "https://www.noahpinion.blog/p/what-the-ai-boom-is-doing-for-americans"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.413Z",
+     "id": 28,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-03",
+     "publisher": null,
+     "source": "Cryptonexa",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "NVDA Q2 FY27: $96.2B revenue (+106% YoY), +9% pop; Friday then reversed with $1.5T S&P drawdown",
+     "url": "https://www.cryptonexa.com/bitcoin-options-expiry-volatility-builds-as-nvidias-q2-earnings-fuel-80k-reclaim/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.396Z",
+     "id": 27,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-03",
+     "publisher": null,
+     "source": "TokenPost",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Bessent dismisses AI bubble fears: hyperscalers investing real capital driving real revenue",
+     "url": "https://www.tokenpost.com/news/people/26597"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.380Z",
+     "id": 26,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-01",
+     "publisher": null,
+     "source": "Stocktwits (Burry essay summary)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Burry warns NVDA GPU-backed debt mirrors 1960s computer-leasing bubble",
+     "url": "https://stocktwits.com/news-articles/markets/equity/michael-burry-warns-nvidia-ai-infrastructure-expansion-mirroring-1960s-computer-leasing-bubble/cZD01nERB0L"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T11:55:54.352Z",
+     "id": 25,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Stocktwits (Burry Substack chat quotes)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Burry: infrastructure for AI buildout is crumbling, sees 2006-style setup, wants more leverage",
+     "url": "https://stocktwits.com/news-articles/markets/equity/big-short-michael-burry-says-infrastructure-for-ai-buildout-is-crumbling-sees-2006-style-setup-and-wants-more-leverage/cZDSCCcRB0s"
+    }
+   ],
+   "horizon": "long",
+   "id": 8,
+   "linkedTickers": [
+    "ORCL"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 131.13999938964844,
+     "detail": "131.14 now · prediction below 129.42 by 2026-11-30",
+     "direction": "below",
+     "dueDate": "2026-11-30",
+     "id": 16,
+     "progress": 86.65,
+     "snapshotPrice": 142.3000030517578,
+     "status": "confirming",
+     "targetLevel": 129.42,
+     "ticker": "ORCL"
+    },
+    {
+     "currentPrice": 131.13999938964844,
+     "detail": "131.14 now · prediction above 150.89 by 2026-11-30",
+     "direction": "above",
+     "dueDate": "2026-11-30",
+     "id": 17,
+     "progress": -129.92,
+     "snapshotPrice": 142.3000030517578,
+     "status": "challenged",
+     "targetLevel": 150.89,
+     "ticker": "ORCL"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "Burry's Oct 2 Substack chat: CDS prices moving out, AI loans/bonds falling or not trading, '2006-style setup'; ORCL plans ~$40B debt+equity raise in 2027, the most funding-sensitive hyperscaler.",
+     "from": "Burry credit-side warning",
+     "id": 35,
+     "to": "Credit repricing of debt-funded AI buildout"
+    },
+    {
+     "because": "~$573B of AI financings across 26 deals (Ares alt-credit newsletter via Burry) assume sustained AI spending; Ares itself drew the telecom vendor-financing 2000 parallel.",
+     "from": "Credit repricing",
+     "id": 36,
+     "to": "Higher funding costs for hyperscaler capex"
+    },
+    {
+     "because": "ORCL's $40B raise is debt+equity; equity raised at -54% off 52w highs is deeply dilutive, and debt reprices against the CDS widening Burry flags.",
+     "from": "Higher funding costs",
+     "id": 37,
+     "to": "ORCL capex squeeze and dilution"
+    },
+    {
+     "because": "Burry's Oct 1 essay argues GPU residual values rest on DCF models not secondary prices, mirroring the 1960s computer-leasing bubble; GPU-backed private credit is the collateral layer beneath.",
+     "from": "ORCL derating",
+     "id": 38,
+     "to": "Contagion into GPU-backed private credit"
+    }
+   ],
+   "snapshots": {
+    "ORCL": 142.3000030517578
+   },
+   "statement": "[Muse theory] AI-credit crack: the risk layer of the AI buildout is credit, not chips. Burry's Oct 2 warning (CDS widening, AI loans/bonds falling, '2006-style setup') targets the $700B/yr debt-funded hyperscaler capex stack; ORCL (-54% off 52w high, ~$40B 2027 raise ahead) is the weakest link. Tape confirms the bearish read (ORCL -26% 90d, 0% above 50d); countercase: NVDA's $96.2B +106% YoY quarter shows real demand.",
+   "status": "challenged",
+   "updatedAt": "2026-10-04T11:55:35.479Z"
+  },
+  {
+   "createdAt": "2026-10-03T11:49:36.195Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-07T10:49:18.183Z",
+     "id": 48,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-06",
+     "publisher": null,
+     "source": "Sina/TradingView + HDFC Sky (MRVL guidance); Bloomberg Law (Google-Constellation); equity terminal MRVL read 2026-10-06",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "AI capex persists at the margin: MRVL raised FY2028 revenue outlook to ~$20B (~67% YoY; +5.8% to $287.01, terminal factor +95/100, invalidation $258.17 unbreached 2026-10-06); Google confirmed 20-yr 890MW Constellation nuclear PPA (Bloomberg Law 10-06); DeepSeek nears $12B raise (Reuters/Bloomberg). checkentry timing BAD (1.5:1 vs 5:1 gate, RSI 69.88) — evidence only, not an entry. Falsified if MRVL closes under $258.17 or hyperscalers cut FY27 capex in Q3.",
+     "url": "https://hdfcsky.com/news/sp-500-nasdaq-close-at-record-highs-as-ai-rally-lifts-major-indices-october-7-2026"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-03T11:49:41.476Z",
+     "id": 11,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-01",
+     "publisher": null,
+     "source": "Stocktwits (summary of Burry's paywalled Substack)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Burry cites 1880 story to flag AI's 'power-hungry' chip race; 'parameter trap' / Ballard's Test essay — SINGLE SOURCE (paywalled original)",
+     "url": "https://stocktwits.com/news-articles/markets/equity/soxx-worst-quarter-over-year-michael-burry-1880-ai-power-chip-race/cZDixccRBi9"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-03T11:49:41.424Z",
+     "id": 10,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-01",
+     "publisher": null,
+     "source": "AIStockWire",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Michael Burry swaps Nvidia, Micron, Palantir shorts for puts; 'moving timelines up', AI bubble may burst 'sooner than later'",
+     "url": "https://aistockwire.com/blog/michael-burry-puts-nvidia-nvda-micron-mu-palantir-pltr-ai-bubble-timeline-september-2026"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-03T11:49:41.404Z",
+     "id": 9,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-09-30",
+     "publisher": null,
+     "source": "PYMNTS (Reuters reporting)",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Anthropic's IPO filing: $518B in infra commitments (~80% non-cancelable), $4.6B revenue (12x), $42B net loss ($34B non-cash charge), $2T IPO target",
+     "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-prospectus-shows-what-2-trillion-dollar-ai-company-costs-run/"
+    }
+   ],
+   "horizon": "long",
+   "id": 5,
+   "linkedTickers": [
+    "NVDA",
+    "MU",
+    "SOXX"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 216.47000122070312,
+     "detail": "216.47 now · prediction below 218.12 by 2026-11-30",
+     "direction": "below",
+     "dueDate": "2026-11-30",
+     "id": 7,
+     "progress": 100,
+     "snapshotPrice": 230.86000061035156,
+     "status": "confirming",
+     "targetLevel": 218.12,
+     "ticker": "NVDA"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "Burry cites reasoning-first/compression-first approaches (AlphaGeometry, Meta Coconut, Klarna discussions) as alternatives to zillions of power-hungry chips; proposes 'Ballard's Test'.",
+     "from": "Burry 'parameter trap' essay",
+     "id": 14,
+     "to": "Efficiency-over-scale narrative"
+    },
+    {
+     "because": "If models need less compute per unit of capability, hyperscaler and lab capex intensity falls even as AI revenue grows.",
+     "from": "Efficiency-over-scale narrative",
+     "id": 15,
+     "to": "Reduced incremental GPU demand"
+    },
+    {
+     "because": "SPV/lease structures (e.g. Amazon $8B Grace Blackwell SPV) assume sustained GPU scarcity pricing; demand softness impairs the financing layer first.",
+     "from": "Reduced incremental GPU demand",
+     "id": 16,
+     "to": "Neocloud/SPV lease structures impaired (links theory #3)"
+    },
+    {
+     "because": "Burry's June-2027 $500 MU puts specifically target memory; efficiency-led demand cuts hit DRAM/NAND overbuild hardest after GPUs.",
+     "from": "Reduced incremental GPU demand",
+     "id": 17,
+     "to": "Memory overbuild (MU hurt)"
+    },
+    {
+     "because": "Reuters-reviewed prospectus: $518B infra commitments ~80% non-cancelable ($111.1B Google, $110B Amazon, $31.4B Microsoft, $161.2B Broadcom leases). Buyers are locking in, not pulling back.",
+     "from": "Anthropic $518B locked commitments (CHALLENGING)",
+     "id": 18,
+     "to": "Compute demand still being contracted at scale"
+    },
+    {
+     "because": "BROKEN HOP: no evidence of efficiency gains reducing actual GPU orders today; hyperscaler/lab capex still accelerating and the tape shows zero fear (NVDA -0.5% off 52w high, 84/100 on a bearish thesis = tape contradicts).",
+     "from": "Efficiency gains cutting orders today",
+     "id": 19,
+     "to": "Confirmed demand rollover"
+    }
+   ],
+   "snapshots": {
+    "MU": 1097.3900146484375,
+    "NVDA": 230.86000061035156,
+    "SOXX": 588.9000244140625
+   },
+   "statement": "[Muse theory] Burry's parameter-trap: reasoning-first/compression-first AI efficiency gains will make brute-force scaling redundant, cutting incremental compute demand and leaving chip suppliers + infra investors with weaker returns than priced. Bearish NVDA/MU/SOXX per his Sept-2027 puts. CONTESTED + LOW CONFIDENCE: tape contradicts (NVDA -0.5% off 52w high); essay known only via Stocktwits summary of paywalled Substack (single source); Anthropic's $518B mostly non-cancelable commitments are live counter-evidence.",
+   "status": "confirming",
+   "updatedAt": "2026-10-03T11:49:36.195Z"
+  },
+  {
+   "createdAt": "2026-10-03T11:49:23.117Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-03T11:49:28.030Z",
+     "id": 8,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Techmeme (Bloomberg, Oct 1)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Sources: TSMC exploring Terafab partnership as it mulls Texas presence; weighing multibillion-dollar second US hub near Dallas",
+     "url": "https://www.techmeme.com/261003/p3#a261003p3"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-03T11:49:28.002Z",
+     "id": 7,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Startup Fortune (via Tim Culpan's Culpium)",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "TSMC Is Reportedly in Talks to Help Run Elon Musk's Terafab in Texas",
+     "url": "https://startupfortune.com/tsmc-is-reportedly-in-talks-to-help-run-elon-musks-terafab-in-texas/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-03T11:49:27.954Z",
+     "id": 6,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-09-17",
+     "publisher": null,
+     "source": "BigGo Finance",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Terafab: zero fabs in production; TSMC's Wei notes 3-5 years from groundbreaking to viable output (execution risk)",
+     "url": "https://finance.biggo.com/news/a27e681f-9bbc-4315-8d21-391665f41bb8"
+    }
+   ],
+   "horizon": "short",
+   "id": 4,
+   "linkedTickers": [
+    "TSM",
+    "ASML"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 425.0799865722656,
+     "detail": "425.08 now · prediction above 459.42 by 2026-11-01",
+     "direction": "above",
+     "dueDate": "2026-11-01",
+     "id": 8,
+     "progress": 357.04,
+     "snapshotPrice": 472.7799987792969,
+     "status": "confirming",
+     "targetLevel": 459.42,
+     "ticker": "TSM"
+    },
+    {
+     "currentPrice": 425.0799865722656,
+     "detail": "425.08 now · prediction above 492.81 by 2026-11-01",
+     "direction": "above",
+     "dueDate": "2026-11-01",
+     "id": 9,
+     "progress": -238.14,
+     "snapshotPrice": 472.7799987792969,
+     "status": "challenged",
+     "targetLevel": 492.81,
+     "ticker": "TSM"
+    },
+    {
+     "currentPrice": 1630.8399658203125,
+     "detail": "1630.84 now · prediction above 1803.55 by 2026-11-01",
+     "direction": "above",
+     "dueDate": "2026-11-01",
+     "id": 10,
+     "progress": 370.87,
+     "snapshotPrice": 1867.31005859375,
+     "status": "confirming",
+     "targetLevel": 1803.55,
+     "ticker": "ASML"
+    },
+    {
+     "currentPrice": 1630.8399658203125,
+     "detail": "1630.84 now · prediction above 1962.95 by 2026-11-01",
+     "direction": "above",
+     "dueDate": "2026-11-01",
+     "id": 11,
+     "progress": -247.25,
+     "snapshotPrice": 1867.31005859375,
+     "status": "challenged",
+     "targetLevel": 1962.95,
+     "ticker": "ASML"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "Culpan's Culpium (Oct 2): TSMC exploring operating Terafab in Grimes County TX as anchor for a new Texas campus; nothing signed yet.",
+     "from": "Terafab Texas chip demand (Tesla/SpaceX/xAI, 2nm target)",
+     "id": 20,
+     "to": "TSMC Texas anchor consideration"
+    },
+    {
+     "because": "Anchor-customer demand of Terafab's scale justifies a second build beyond the $265B Arizona commitment (12 fabs + 2 packaging plants).",
+     "from": "TSMC Texas anchor consideration",
+     "id": 21,
+     "to": "Second US hub decision (Dallas area, per Bloomberg Oct 1)"
+    },
+    {
+     "because": "TSMC owns the only proven 2nm process; Terafab has zero fabs in production and Wei's own timeline is 3-5 years to viable output.",
+     "from": "TSMC as Terafab operator",
+     "id": 22,
+     "to": "De-risked US 2nm timeline"
+    },
+    {
+     "because": "Intel is Terafab's named fabrication partner; a TSMC-operated Terafab displaces Intel's biggest potential US foundry showcase.",
+     "from": "TSMC as Terafab operator",
+     "id": 23,
+     "to": "Intel foundry narrative sidelined (INTC hurt)"
+    },
+    {
+     "because": "Fabs plus Terafab's terawatt-compute ambition are among the largest incremental power loads in Texas; grid, gas, and power-equipment chain benefits.",
+     "from": "Dual-hub US expansion (AZ + TX)",
+     "id": 24,
+     "to": "Texas power/infra demand wave"
+    },
+    {
+     "because": "BROKEN HOP: talks-stage only, explicitly nothing signed per Culpan; can collapse or be renegotiated. Do not treat partnership as confirmed.",
+     "from": "Talks-stage report",
+     "id": 25,
+     "to": "Confirmed TSMC-Terafab partnership"
+    }
+   ],
+   "snapshots": {
+    "ASML": 1867.31005859375,
+    "TSM": 472.7799987792969
+   },
+   "statement": "[Muse theory] TSMC exploring operating Musk's Terafab in Texas (Culpan, Oct 2) plus weighing a second US hub near Dallas (Bloomberg, Oct 1) locks in multi-year leading-edge demand from the Musk empire and accelerates US onshoring beyond the $265B Arizona build. Bullish TSM/ASML on demand visibility. TALKS-STAGE: nothing signed; tape extended (TSM RSI 72, 0.7% off 52w high) so entry timing is chase-risk.",
+   "status": "challenged",
+   "updatedAt": "2026-10-03T12:06:25.442Z"
+  },
+  {
+   "createdAt": "2026-10-02T11:49:32.945Z",
+   "evidence": [
+    {
+     "asOf": null,
+     "createdAt": "2026-10-04T04:33:25.199Z",
+     "id": 12,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-03",
+     "publisher": null,
+     "source": "X @michaeljburry",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Burry publishes 9200-word forensic analysis of the Big 5 hyperscalers (MSFT/GOOG/ORCL/META/AMZN); Oct 1 deep dive on GPU depreciation & useful lives; Sep 29: markets should tank to prevent OpenAI/Anthropic IPOs",
+     "url": "https://x.com/michaeljburry/status/2106238731284013426"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-02T12:05:42.956Z",
+     "id": 5,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-01",
+     "publisher": null,
+     "source": "TradingView/Stocktwits",
+     "stance": "challenging",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Michael Burry warns Nvidia AI infrastructure expansion mirroring 1960s computer leasing bubble",
+     "url": "https://www.tradingview.com/news/stocktwits:3c3bd9e3c094b:0-michael-burry-warns-nvidia-ai-infrastructure-expansion-mirroring-1960s-computer-leasing-bubble/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-02T11:49:41.469Z",
+     "id": 4,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Finimize",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Amazon Looks To Move $8 Billion Of Nvidia Chips Off-Balance-Sheet",
+     "url": "https://finimize.com/content/amazon-looks-to-move-8-billion-of-nvidia-chips-off-balance-sheet"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-02T11:49:41.399Z",
+     "id": 3,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Reuters",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Amazon seeks to offload $8 billion of Nvidia chips to investors, FT reports",
+     "url": "https://www.businesstoday.com.my/2026/10/02/amazon-weighs-us8-billion-nvidia-chip-sale-to-investors/"
+    },
+    {
+     "asOf": null,
+     "createdAt": "2026-10-02T11:49:41.383Z",
+     "id": 2,
+     "kind": "article",
+     "overallLabel": null,
+     "overallScore": null,
+     "publishedAt": "2026-10-02",
+     "publisher": null,
+     "source": "Particle News",
+     "stance": "confirming",
+     "tickerLabel": null,
+     "tickerScore": null,
+     "title": "Amazon Reportedly Weighs $8 Billion SPV to Shift Nvidia Chips Off Its Balance Sheet",
+     "url": "https://particle.news/story/amazon-reportedly-weighs-8-billion-spv-to-shift-nvidia-chips-off-its-balance-sheet"
+    }
+   ],
+   "horizon": "long",
+   "id": 3,
+   "linkedTickers": [
+    "AMZN",
+    "NVDA"
+   ],
+   "predictions": [
+    {
+     "currentPrice": 216.47000122070312,
+     "detail": "216.47 now · prediction above 217.61 by 2026-10-31",
+     "direction": "above",
+     "dueDate": "2026-10-31",
+     "id": 3,
+     "progress": 110.58,
+     "snapshotPrice": 228.3800048828125,
+     "status": "confirming",
+     "targetLevel": 217.61,
+     "ticker": "NVDA"
+    },
+    {
+     "currentPrice": 262.6300048828125,
+     "detail": "262.63 now · prediction above 241.22 by 2026-10-31",
+     "direction": "above",
+     "dueDate": "2026-10-31",
+     "id": 4,
+     "progress": 100,
+     "snapshotPrice": 248.22999572753903,
+     "status": "confirming",
+     "targetLevel": 241.22,
+     "ticker": "AMZN"
+    }
+   ],
+   "ripples": [
+    {
+     "because": "Installed chips leave Amazon's books; reported assets grow slower while compute capacity is unchanged, so ROA/ROIC flatter the same AI buildout.",
+     "from": "Amazon $8B SPV talks (FT)",
+     "id": 3,
+     "to": "Flattered hyperscaler capex optics"
+    },
+    {
+     "because": "Vehicle funds mostly via debt backed by Amazon lease payments and chip collateral; investors take Amazon credit risk plus GPU residual-value risk.",
+     "from": "SPV leaseback structure",
+     "id": 4,
+     "to": "New AI-hardware ABS debt class"
+    },
+    {
+     "because": "INFERENCE: no peer deal reported yet, but the structure is replicable, letting industry capex scale without balance-sheet blowout and sustaining NVDA order books.",
+     "from": "Template proven",
+     "id": 5,
+     "to": "MSFT/GOOG/META/Oracle copycats"
+    },
+    {
+     "because": "INFERENCE: if the Blackwell-to-Rubin transition crushes used-GPU values, SPV debt and equity holders absorb it, not Amazon.",
+     "from": "Chip collateral in SPV",
+     "id": 6,
+     "to": "Residual-value risk moves off-books"
+    },
+    {
+     "because": "BROKEN HOP: the chips are bought, installed and operating across 12+ US data centers per FT via Reuters. This is financing engineering, not a demand signal.",
+     "from": "SPV talks",
+     "id": 7,
+     "to": "AI demand weakening"
+    }
+   ],
+   "snapshots": {
+    "AMZN": 248.22999572753903,
+    "NVDA": 228.3800048828125
+   },
+   "statement": "[Muse theory] Hyperscaler AI capex is moving off-balance-sheet: Amazon is in talks (FT, single-origin and exploratory; Amazon and Nvidia declined comment) to move ~$8B of installed Grace Blackwell chips into an investor-funded SPV and lease them back, offering outsiders up to 10% equity with the rest debt. If this becomes a template (MSFT/GOOG/META/Oracle), AI capex can keep scaling without balance-sheet blowout, sustaining NVDA order books, while creating a new AI-hardware asset-backed debt class where outside investors hold GPU residual-value risk.",
+   "status": "confirming",
+   "updatedAt": "2026-10-02T11:49:32.946Z"
+  }
+ ]
+}

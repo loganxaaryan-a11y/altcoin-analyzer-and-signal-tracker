@@ -1,0 +1,255 @@
+{
+  "decision_at": "2026-10-14T13:00:21.555+00:00",
+  "decision_at_ms": 1791982821555,
+  "entry_context": {
+    "atr14": 2183.207762343296,
+    "atr_bar_count": 720,
+    "decision_reference": {
+      "entry": 82805,
+      "stop": 80075.99029707088,
+      "target": 86898.51455439368,
+      "target2": 89627.5242573228
+    },
+    "entry_evidence": {
+      "price": 82805,
+      "priceConvention": "usd-spot-reference",
+      "provider": "CoinGecko markets",
+      "receivedAt": "2026-10-14T13:00:22.620Z",
+      "requestedAfterDecisionAt": "2026-10-14T13:00:21.555Z",
+      "rule": "first-post-decision-provider-quote"
+    },
+    "entry_price": 82805.0,
+    "funding": 0.0001,
+    "levels_recorded": {
+      "entry": 82805.0,
+      "invalidation": 80075.99029707088,
+      "target1": 86898.51455439368,
+      "target2": 89627.5242573228
+    },
+    "oi_change": -0.8376032366488984,
+    "oi_usd": 2455904587.838059,
+    "risk_method": "atr14_1_25x",
+    "risk_multiplier": 1.25,
+    "short_regime_check": null,
+    "signal_day_candle": {
+      "close": 83109,
+      "day": "2026-10-13",
+      "high": 84074,
+      "low": 81018,
+      "open": 81795,
+      "source": "CoinGecko OHLC \u2192 historical_daily_bars grading series"
+    },
+    "validation_status": "partially_testable_prospective"
+  },
+  "factors": [
+    {
+      "asOf": "2026-10-14T12:58:47.000Z",
+      "contribution": 2.5,
+      "label": "Trend cluster",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "50D: above \u00b7 200D: above \u00b7 90D: 29.8%",
+      "score": 1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "50D: above \u00b7 200D: above \u00b7 90D: 29.8%",
+      "weight": 2.5
+    },
+    {
+      "asOf": "2026-10-14T12:58:47.000Z",
+      "contribution": 0,
+      "label": "Momentum",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "RSI 50.6",
+      "score": 0,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "RSI 50.6",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-14T12:58:47.000Z",
+      "contribution": -1.5,
+      "label": "MACD",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "negative cross-state",
+      "score": -1,
+      "source": "CoinGecko daily history",
+      "status": "observed",
+      "value": "negative cross-state",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-14T13:00:15.655Z",
+      "contribution": -1.75,
+      "label": "Perp funding crowding",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "venue Hyperliquid \u00b7 8h-normalized 0.0100% \u00b7 longs paying shorts",
+      "score": -1,
+      "source": "Hyperliquid",
+      "status": "observed",
+      "value": "venue Hyperliquid \u00b7 8h-normalized 0.0100% \u00b7 longs paying shorts",
+      "weight": 1.75
+    },
+    {
+      "asOf": "2026-10-14T13:00:15.655Z",
+      "contribution": 0,
+      "label": "Open interest",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "OKX $2455904587.84 \u00b7 24H -0.8% \u00b7 Hyperliquid cross-check $3183188996.27",
+      "score": 0,
+      "source": "OKX OI + OKX 24H baseline",
+      "status": "observed",
+      "value": "OKX $2455904587.84 \u00b7 24H -0.8% \u00b7 Hyperliquid cross-check $3183188996.27",
+      "weight": 1
+    },
+    {
+      "asOf": "2026-10-14T13:00:05.559Z",
+      "contribution": 0,
+      "label": "Binance futures positioning",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 Binance Futures blocked artifact egress: Service unavailable from a restricted location according to 'b. Eligibility' in https://www.binance.com/en/terms. Please contact customer service if you believe you received this message in error.",
+      "score": 0,
+      "source": "Binance Futures",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 Binance Futures blocked artifact egress: Service unavailable from a restricted location according to 'b. Eligibility' in https://www.binance.com/en/terms. Please contact customer service if you believe you received this message in error.",
+      "weight": 1
+    },
+    {
+      "asOf": null,
+      "contribution": 0,
+      "label": "Cross-venue taker imbalance",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "score": 0,
+      "source": "Binance aggTrades + OKX spot trades",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 both Binance and OKX must clear the trade-count and notional gates.",
+      "weight": 1.25
+    },
+    {
+      "asOf": "2026-10-14T13:00:15.655Z",
+      "contribution": 0,
+      "label": "TVL trend",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "TVL $4464540140.24 \u00b7 7D -2.2% \u00b7 30D 7.4% (chain TVL)",
+      "score": 0,
+      "source": "DeFiLlama",
+      "status": "observed",
+      "value": "TVL $4464540140.24 \u00b7 7D -2.2% \u00b7 30D 7.4% (chain TVL)",
+      "weight": 2
+    },
+    {
+      "asOf": "2026-10-14T13:00:15.655Z",
+      "contribution": 0,
+      "label": "Revenue linkage",
+      "missing_reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "quality": "no_data",
+      "reading": "NO_DATA \u2014 no verified 30-day fee/revenue series for this asset \u00b7 buybacks: NO_DATA \u2014 no verified buyback feed \u00b7 issuance overhang is scored separately in Supply overhang",
+      "score": 0,
+      "source": "DeFiLlama 30D fees + revenue",
+      "status": "UNKNOWN",
+      "value": "NO_DATA \u2014 no verified 30-day fee/revenue series for this asset \u00b7 buybacks: NO_DATA \u2014 no verified buyback feed \u00b7 issuance overhang is scored separately in Supply overhang",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-11T00:00:00.000Z",
+      "contribution": 1.5,
+      "label": "Developer velocity",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "834 commits / 12w \u00b7 12 of 12 weeks active",
+      "score": 1,
+      "source": "GitHub commit activity",
+      "status": "observed",
+      "value": "834 commits / 12w \u00b7 12 of 12 weeks active",
+      "weight": 1.5
+    },
+    {
+      "asOf": "2026-10-14T12:58:47.000Z",
+      "contribution": 0,
+      "label": "Supply-overhang penalty (negative-only)",
+      "missing_reason": null,
+      "quality": "live",
+      "reading": "FDV/mcap 1.00\u00d7 \u2014 limited future supply; no penalty and no positive credit",
+      "score": 0,
+      "source": "CoinGecko",
+      "status": "observed",
+      "value": "FDV/mcap 1.00\u00d7 \u2014 limited future supply; no penalty and no positive credit",
+      "weight": 1.5
+    }
+  ],
+  "issuance_key": "bitcoin|spot-reference|crypto-dossier-factor-agreement|2.0.0-measurement-contract|sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220|1791936000000",
+  "issuance_path": "getCryptoAnalysis \u2192 issueGeneratedSignalCandidate",
+  "issued_at": "2026-10-14T13:00:21.555+00:00",
+  "missing_inputs": [
+    {
+      "label": "Binance futures positioning",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Cross-venue taker imbalance",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    },
+    {
+      "label": "Revenue linkage",
+      "reason": "no asOf recorded at decision time; quality reported as 'no_data' by the issuing pipeline",
+      "status": "UNKNOWN"
+    }
+  ],
+  "model": {
+    "cost_scenario": "modeled-roundtrip-18bps-funding-unverified-v1",
+    "entry_convention": "first-post-decision-provider-quote",
+    "evaluator_version": "crypto-evaluation-v4-cohort-contract",
+    "parameter_hash": "sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220",
+    "price_convention": "usd-spot-reference",
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+    "strategy_id": "crypto-dossier-factor-agreement",
+    "strategy_version": "2.0.0-measurement-contract",
+    "wiring": "comparison/intended_models.py (score_dossier_factors <- scoreDossierFactors, signal-methodology.ts:47)"
+  },
+  "opportunity_id": "dossier-btc-id43-2026-10-14",
+  "persisted_at": "2026-10-15T00:40:38.116+00:00",
+  "provenance": {
+    "extracted_at": "2026-10-15T00:40:38.115+00:00",
+    "signal_id": 43,
+    "signal_table": "generated_signals",
+    "snapshot_id": 3775786275845128,
+    "snapshot_table": "signal_input_snapshots",
+    "source_db": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/app.db",
+    "source_db_role": "local workspace copy; read-only open (mode=ro); not a dump of the deployed runtime"
+  },
+  "provider_metadata": {
+    "buildId": "starting-build:c3217be9-7f13-4c20-ae29-01600474bbab|source:crypto-phase1-final-signoff-2026-10-09",
+    "providers": [
+      "CoinGeckoOHLC",
+      "historicalDailyBars",
+      "Hyperliquid",
+      "KrakenSpotOHLC",
+      "OKX"
+    ],
+    "sourceAsOf": "2026-10-14T12:58:47.000Z"
+  },
+  "snapshot": {
+    "available_at": "2026-10-14T13:00:22.620+00:00",
+    "captured_at": "2026-10-14T12:58:47.000+00:00",
+    "replay_at_issuance": {
+      "mismatches": [],
+      "status": "reconstructed"
+    },
+    "snapshot_id": 3775786275845128,
+    "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window"
+  },
+  "source_as_of": "2026-10-14T12:58:47.000+00:00",
+  "store_rule": "missing decision-time inputs are marked UNKNOWN, never backfilled; a later correction is a new file, never an edit of this bundle",
+  "terminal": "crypto"
+}

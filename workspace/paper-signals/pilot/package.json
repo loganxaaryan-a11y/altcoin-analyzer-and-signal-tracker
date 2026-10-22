@@ -1,0 +1,22 @@
+{
+  "description": "Deployed paper pilot (Workstream D): scheduled tick + bounded entry watcher + read-only Binance venue feed + sandbox alert transport. SANDBOX ONLY — paper reads only, no orders, no brokerage. Every artifact labeled paper.",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "license": "UNLICENSED",
+  "name": "paper-pilot",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "ingest": "node dist/pilot.js ingest",
+    "run": "node dist/pilot.js run",
+    "status": "node dist/pilot.js status",
+    "tick": "node dist/pilot.js tick",
+    "watch": "node dist/pilot.js watch",
+    "outbox": "node dist/entry-outbox-cli.js",
+    "test:outbox": "bash test/outbox/run-tests.sh"
+  },
+  "type": "module",
+  "version": "0.1.0"
+}

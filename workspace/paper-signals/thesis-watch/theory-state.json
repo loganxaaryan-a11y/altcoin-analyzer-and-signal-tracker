@@ -1,0 +1,4924 @@
+{
+ "baseline_note": "SILENT BASELINE. Pre-existing states recorded here never generate alerts; only transitions observed AFTER baseline_recorded_utc alert. Baseline compiled from the 2026-10-15 live terminal inventory (hidden_files/terminal-generated-content-2026-10-15.md, pulled ~06:25 UTC via published read actions). HYPE/AAVE spot prices were not in that inventory pull and are marked pending_first_run; the first scheduled run fills them via getmarketread without alerting.",
+ "baseline_recorded_utc": "2026-10-15T06:40:18Z",
+ "baseline_source": "hidden_files/terminal-generated-content-2026-10-15.md (live pull 2026-10-15 ~06:25 UTC / 02:25 EDT)",
+ "terminals": {
+  "altcoin-analyzer-and-signal-tracker": {
+   "short": "Crypto",
+   "theories": {
+    "3": {
+     "baseline_prices": {
+      "BTC": 80840.0,
+      "SOL": 102.14,
+      "AAVE": 149.3,
+      "HYPE": 79.0523
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 11,
+       "stance": "challenging"
+      },
+      {
+       "id": 17,
+       "stance": "challenging"
+      },
+      {
+       "id": 18,
+       "stance": "confirming"
+      }
+     ],
+     "name": "[Muse theory] Revenue-plus-buyback protocols concentrate flows; AAVE/HYPE outperform",
+     "note": "No theory-level confirming status at baseline, so no evidence inventory required yet.",
+     "predictions": {
+      "p1": {
+       "ticker": "AAVE",
+       "direction": "above",
+       "target_level": 200.07,
+       "due_date": "2026-11-02",
+       "baseline_price": 149.3,
+       "current_price": 154.71,
+       "tripwire_state": "unhit",
+       "progress_pct": 10.655899153043134,
+       "terminal_pred_id": 3,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "AAVE",
+       "direction": "below",
+       "target_level": 167.71,
+       "due_date": "2026-11-02",
+       "baseline_price": 149.3,
+       "current_price": 154.71,
+       "tripwire_state": "hit",
+       "progress_pct": 29.386203150461693,
+       "terminal_pred_id": 4,
+       "note": "hit at first observation (no baseline price existed) — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p3": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 101.36,
+       "due_date": "2026-11-02",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "unhit",
+       "progress_pct": 8.800476585940519,
+       "terminal_pred_id": 5,
+       "baselined_at_first_run": true
+      },
+      "p4": {
+       "ticker": "HYPE",
+       "direction": "below",
+       "target_level": 87.68,
+       "due_date": "2026-11-02",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "hit",
+       "progress_pct": 22.75442951611498,
+       "terminal_pred_id": 6,
+       "note": "hit at first observation (no baseline price existed) — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "challenged",
+     "theory_id": 3,
+     "current_prices": {
+      "AAVE": 154.71,
+      "HYPE": 81.01548391536186
+     },
+     "price_source": {
+      "AAVE": "listtheories prediction feed",
+      "HYPE": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null
+    },
+    "4": {
+     "baseline_prices": {
+      "BTC": 80840.0,
+      "SOL": 102.14,
+      "AAVE": null,
+      "HYPE": 79.0523
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [],
+     "name": "[Muse theory] Hyperliquid USDC-yield buyback stream live (~$193M/yr); HYPE toward $101.22",
+     "note": "No theory-level confirming status at baseline, so no evidence inventory required yet.",
+     "predictions": {
+      "p1": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 101.22,
+       "due_date": "2026-11-04",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "unhit",
+       "progress_pct": 8.856055952407571,
+       "terminal_pred_id": 7,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "HYPE",
+       "direction": "below",
+       "target_level": 87.7,
+       "due_date": "2026-11-04",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "hit",
+       "progress_pct": 22.70180412551144,
+       "terminal_pred_id": 8,
+       "note": "hit at first observation (no baseline price existed) — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "challenged",
+     "theory_id": 4,
+     "current_prices": {
+      "HYPE": 81.01548391536186
+     },
+     "price_source": {
+      "HYPE": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null
+    },
+    "5": {
+     "baseline_prices": {
+      "BTC": 80840.0,
+      "SOL": 102.14,
+      "AAVE": null,
+      "HYPE": 79.0523
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 6,
+       "stance": "confirming"
+      },
+      {
+       "id": 7,
+       "stance": "confirming"
+      },
+      {
+       "id": 8,
+       "stance": "confirming"
+      },
+      {
+       "id": 9,
+       "stance": "challenging"
+      },
+      {
+       "id": 10,
+       "stance": "confirming"
+      }
+     ],
+     "name": "[Muse theory] Tokenized equities dominant Q4 narrative; HYPE buybacks = measurable revenue-to-token accrual",
+     "note": "No theory-level confirming status at baseline, so no evidence inventory required yet.",
+     "predictions": {
+      "p1": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 83.745,
+       "due_date": "2026-11-05",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "unhit",
+       "progress_pct": 41.83484806959431,
+       "terminal_pred_id": 9,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 97.357,
+       "due_date": "2026-11-05",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "unhit",
+       "progress_pct": 10.72502644327333,
+       "terminal_pred_id": 10,
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "challenged",
+     "theory_id": 5,
+     "current_prices": {
+      "HYPE": 81.01548391536186
+     },
+     "price_source": {
+      "HYPE": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null
+    },
+    "6": {
+     "baseline_prices": {
+      "BTC": 80840.0,
+      "SOL": 102.14,
+      "AAVE": null,
+      "HYPE": null
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 2,
+       "stance": "confirming"
+      },
+      {
+       "id": 3,
+       "stance": "confirming"
+      },
+      {
+       "id": 4,
+       "stance": "challenging"
+      },
+      {
+       "id": 5,
+       "stance": "confirming"
+      }
+     ],
+     "name": "[Muse theory] Hormuz attacks → Brent >$101, 10Y >5.3%, $550M liquidations; flush is positioning reset while $81K holds",
+     "note": "No theory-level confirming status at baseline, so no evidence inventory required yet.",
+     "predictions": {
+      "p1": {
+       "ticker": "BTC",
+       "direction": "above",
+       "target_level": 86500.0,
+       "due_date": "2026-11-05",
+       "baseline_price": 80840.0,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "unhit",
+       "progress_pct": 59.70529375881005,
+       "terminal_pred_id": 11
+      },
+      "p2": {
+       "ticker": "BTC",
+       "direction": "below",
+       "target_level": 81000.0,
+       "due_date": "2026-11-05",
+       "baseline_price": 80840.0,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "unhit",
+       "progress_pct": 2112.0747667179057,
+       "terminal_pred_id": 12,
+       "note": "setup state misrecorded unhit; terminal snapshot BTC 83461 on 2026-10-07, baseline inventory 80840 ~06:25Z 2026-10-15: level breached BEFORE baseline_recorded_utc — corrected silently, never alerted",
+       "bounce_watch": {
+        "reclaimed_level": 81000.0,
+        "reclaimed_at_utc": "2026-10-15T23:59:33.517Z",
+        "reclaim_price": 82159.50545381581,
+        "reclaim_context": {
+         "volume_note": "BTC perp OI 24h -3.7% (coverage 36%)",
+         "funding_note": "blended 8h funding 0.0000721 (0.07σ, not extreme); regime 'short covering'",
+         "breadth_note": "crypto 15d breadth 0% positive; fear/greed 51 neutral; altcoin season 59"
+        },
+        "classify_after_utc": "2026-10-20T23:59:33Z",
+        "status": "closed",
+        "note": "hit was a silent baseline correction (never alerted); reclaim observed 2026-10-15 evening run",
+        "morning_run_note_2026-10-17": "BTC 81473.46 above 81000 at 2026-10-17T12:00Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "evening_run_note_2026-10-17": "BTC 81413.14 above 81000 at 2026-10-17T23:59Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-18": "BTC 81953.75 above 81000 at 2026-10-18T12:00Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "evening_run_note_2026-10-18": "BTC 81991.47 above 81000 at 2026-10-18T23:57Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-19": "BTC 82291.37 above 81000 at 2026-10-19T12:01Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "evening_run_note_2026-10-19": "BTC 81902.33274022376 above 81000 at 2026-10-20T00:12:16ZZ; watch open, classify after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-20": "BTC 81416.4903074883 above 81000.0 at 2026-10-20T12:01Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "final": "bounce-held",
+        "classified_at_utc": "2026-10-21T00:05:47.788Z",
+        "classification_price": 82878.12564691149,
+        "classification_note": "BTC never re-breached below 81000 in the 5-day window (held 81413-82982); reclaim held -> bounce-held"
+       }
+      }
+     },
+     "status": "challenged",
+     "theory_id": 6,
+     "current_prices": {
+      "BTC": 84219.31962674865
+     },
+     "price_source": {
+      "BTC": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null
+    },
+    "7": {
+     "baseline_prices": {
+      "BTC": 80840.0,
+      "SOL": 102.14,
+      "AAVE": null,
+      "HYPE": null
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 13,
+       "stance": "challenging"
+      },
+      {
+       "id": 14,
+       "stance": "confirming"
+      },
+      {
+       "id": 15,
+       "stance": "confirming"
+      },
+      {
+       "id": 16,
+       "stance": "confirming"
+      },
+      {
+       "id": 35,
+       "stance": "confirming"
+      }
+     ],
+     "name": "[Muse theory] Onchain-finance convergence: tokenized equities on Solana, RWA perps $6.7B/day; bullish SOL",
+     "note": "No theory-level confirming status at baseline, so no evidence inventory required yet.",
+     "predictions": {
+      "p1": {
+       "ticker": "SOL",
+       "direction": "above",
+       "target_level": 109.18,
+       "due_date": "2026-11-07",
+       "baseline_price": 102.14,
+       "current_price": 107.23160232125046,
+       "tripwire_state": "unhit",
+       "progress_pct": 72.32389660867128,
+       "terminal_pred_id": 13
+      },
+      "p2": {
+       "ticker": "SOL",
+       "direction": "above",
+       "target_level": 118.04,
+       "due_date": "2026-11-07",
+       "baseline_price": 102.14,
+       "current_price": 107.23160232125046,
+       "tripwire_state": "unhit",
+       "progress_pct": 32.022656108493464,
+       "terminal_pred_id": 14
+      }
+     },
+     "status": "challenged",
+     "theory_id": 7,
+     "current_prices": {
+      "SOL": 107.23160232125046
+     },
+     "price_source": {
+      "SOL": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null
+    },
+    "8": {
+     "baseline_prices": {
+      "BTC": 80840.0,
+      "SOL": 102.14,
+      "AAVE": null,
+      "HYPE": 79.0523
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 19,
+       "stance": "confirming"
+      },
+      {
+       "id": 20,
+       "stance": "challenging"
+      },
+      {
+       "id": 21,
+       "stance": "confirming"
+      },
+      {
+       "id": 22,
+       "stance": "confirming"
+      }
+     ],
+     "name": "[Muse theory] RWA perps fastest-growing onchain liquidity channel; HYPE is the venue-token expression",
+     "note": "No theory-level confirming status at baseline, so no evidence inventory required yet.",
+     "predictions": {
+      "p1": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 86.04,
+       "due_date": "2026-12-11",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "unhit",
+       "progress_pct": 28.094851172229085,
+       "terminal_pred_id": 15,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 84.68,
+       "due_date": "2026-12-11",
+       "baseline_price": 79.0523,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "unhit",
+       "progress_pct": 34.88430291880966,
+       "terminal_pred_id": 16,
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "challenged",
+     "theory_id": 8,
+     "current_prices": {
+      "HYPE": 81.01548391536186
+     },
+     "price_source": {
+      "HYPE": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null
+    },
+    "9": {
+     "baseline_prices": {
+      "BTC": 80840.0,
+      "SOL": 102.14,
+      "AAVE": null,
+      "HYPE": null
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 23,
+       "stance": "confirming"
+      },
+      {
+       "id": 24,
+       "stance": "confirming"
+      },
+      {
+       "id": 25,
+       "stance": "challenging"
+      },
+      {
+       "id": 28,
+       "stance": "confirming"
+      },
+      {
+       "id": 29,
+       "stance": "challenging"
+      },
+      {
+       "id": 30,
+       "stance": "confirming"
+      },
+      {
+       "id": 36,
+       "stance": "challenging"
+      }
+     ],
+     "name": "[Muse theory] BTC seller exhaustion near $81-83k (perp-led flush, ETF flows flipped, Strive $280M buy)",
+     "note": "No theory-level confirming status at baseline, so no evidence inventory required yet.",
+     "predictions": {
+      "p1": {
+       "ticker": "BTC",
+       "direction": "below",
+       "target_level": 81685.89,
+       "due_date": "2026-11-12",
+       "baseline_price": 80840.0,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "unhit",
+       "progress_pct": 399.4987086676343,
+       "terminal_pred_id": 17,
+       "note": "setup state misrecorded unhit; terminal snapshot BTC 82669 on 2026-10-14T13:01Z, baseline inventory 80840 ~06:25Z 2026-10-15: level breached BEFORE baseline_recorded_utc — corrected silently, never alerted morning_run_2026-10-20: BTC back below level again (re-breached 10-17, still below at 12:01Z); no transition — breach pre-dates baseline, bounce watch governs classification.",
+       "bounce_watch": {
+        "reclaimed_level": 81685.89,
+        "reclaimed_at_utc": "2026-10-15T23:59:33.517Z",
+        "reclaim_price": 82159.50545381581,
+        "reclaim_context": {
+         "volume_note": "BTC perp OI 24h -3.7% (coverage 36%)",
+         "funding_note": "blended 8h funding 0.0000721 (0.07σ, not extreme); regime 'short covering'",
+         "breadth_note": "crypto 15d breadth 0% positive; fear/greed 51 neutral; altcoin season 59"
+        },
+        "classify_after_utc": "2026-10-20T23:59:33Z",
+        "status": "closed",
+        "note": "hit was a silent baseline correction (never alerted); reclaim observed 2026-10-15 evening run",
+        "morning_run_note_2026-10-17": "BTC 81473.46 below 81685.89 at 2026-10-17T12:00Z (level re-breached before classification; favors fakeout if still below at 2026-10-20T23:59:33Z)",
+        "evening_run_note_2026-10-17": "BTC 81413.14 below 81685.89 at 2026-10-17T23:59Z (level still re-breached; favors fakeout if still below at 2026-10-20T23:59:33Z)",
+        "morning_run_note_2026-10-18": "BTC 81953.75 above 81685.89 at 2026-10-18T12:00Z (level still re-breached; favors fakeout if still below at 2026-10-20T23:59:33Z)",
+        "evening_run_note_2026-10-18": "BTC 81991.47 above 81685.89 at 2026-10-18T23:57Z (level reclaimed since morning); classify bounce-held vs fakeout after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-19": "BTC 82291.37 above 81685.89 at 2026-10-19T12:01Z (level reclaimed since morning 10-18); classify bounce-held vs fakeout after 2026-10-20T23:59:33Z",
+        "evening_run_note_2026-10-19": "BTC 81902.33274022376 above 81685.89 at 2026-10-20T00:12:16ZZ (reclaimed since morning 10-18); classify bounce-held vs fakeout after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-20": "BTC 81416.4903074883 below 81685.89 at 2026-10-20T12:01Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "final": "fakeout",
+        "classified_at_utc": "2026-10-21T00:05:47.788Z",
+        "classification_price": 82878.12564691149,
+        "classification_note": "level re-breached below 81685.89 within window (10-17 ~81473/81413, 10-20 morning 81416); above at classification (82878) but re-breach already occurred -> fakeout"
+       }
+      },
+      "p2": {
+       "ticker": "BTC",
+       "direction": "above",
+       "target_level": 83479.25,
+       "due_date": "2026-11-12",
+       "baseline_price": 80840.0,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "hit",
+       "progress_pct": 128.0409065737861,
+       "terminal_pred_id": 18,
+       "tripwire_hit_observed_utc": "2026-10-22T00:07:24.527Z"
+      }
+     },
+     "status": "challenged",
+     "theory_id": 9,
+     "current_prices": {
+      "BTC": 84219.31962674865
+     },
+     "price_source": {
+      "BTC": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "evidence_note": "ids 30/29/28 first observed 2026-10-17 morning run; theory status challenged so no evidence transition"
+    },
+    "11": {
+     "theory_id": 11,
+     "name": "[Muse theory] BTC boxed $81.5K ETF cost basis / $88K 6-12mo holder cost basis; range over trend",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 31,
+       "stance": "confirming"
+      },
+      {
+       "id": 32,
+       "stance": "challenging"
+      },
+      {
+       "id": 48,
+       "stance": "confirming"
+      },
+      {
+       "id": 49,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "BTC": 81254
+     },
+     "current_prices": {
+      "BTC": 84219.31962674865
+     },
+     "price_source": {
+      "BTC": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "BTC",
+       "direction": "below",
+       "target_level": 81264.7,
+       "due_date": "2026-11-13",
+       "baseline_price": 81254,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "unhit",
+       "progress_pct": 27713.267539714543,
+       "terminal_pred_id": 21,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "BTC",
+       "direction": "above",
+       "target_level": 86489.73,
+       "due_date": "2026-11-13",
+       "baseline_price": 81254,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "unhit",
+       "progress_pct": 56.63622124801415,
+       "terminal_pred_id": 22,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "10": {
+     "theory_id": 10,
+     "name": "[Muse theory] Quantum-timeline compression = durable bid for privacy/quantum-resistant coins (ZEC liquid proxy)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 33,
+       "stance": "confirming"
+      },
+      {
+       "id": 34,
+       "stance": "confirming"
+      },
+      {
+       "id": 37,
+       "stance": "challenging"
+      },
+      {
+       "id": 47,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "ZEC": 1185.7
+     },
+     "current_prices": {
+      "ZEC": 1312
+     },
+     "price_source": {
+      "ZEC": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "ZEC",
+       "direction": "above",
+       "target_level": 1275.57,
+       "due_date": "2026-11-13",
+       "baseline_price": 1185.7,
+       "current_price": 1312,
+       "tripwire_state": "hit",
+       "progress_pct": 140.5363302548126,
+       "terminal_pred_id": 19,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight; ZEC unavailable in getmarketread rows — price from listtheories prediction feed"
+      },
+      "p2": {
+       "ticker": "ZEC",
+       "direction": "below",
+       "target_level": 1062.96,
+       "due_date": "2026-11-13",
+       "baseline_price": 1185.7,
+       "current_price": 1312,
+       "tripwire_state": "unhit",
+       "progress_pct": -102.90043995437506,
+       "terminal_pred_id": 20,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight; ZEC unavailable in getmarketread rows — price from listtheories prediction feed"
+      }
+     }
+    },
+    "12": {
+     "theory_id": 12,
+     "name": "[Muse theory] BTC as Western liquidity barometer into Oct 28 FOMC",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 38,
+       "stance": "confirming"
+      },
+      {
+       "id": 39,
+       "stance": "challenging"
+      },
+      {
+       "id": 40,
+       "stance": "challenging"
+      },
+      {
+       "id": 41,
+       "stance": "confirming"
+      },
+      {
+       "id": 42,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "BTC": 81249
+     },
+     "current_prices": {
+      "BTC": 84219.31962674865
+     },
+     "price_source": {
+      "BTC": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "BTC",
+       "direction": "above",
+       "target_level": 83479.25,
+       "due_date": "2026-11-14",
+       "baseline_price": 81249,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "hit",
+       "progress_pct": 133.18325868170155,
+       "terminal_pred_id": 23,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight",
+       "tripwire_hit_observed_utc": "2026-10-22T00:07:24.527Z"
+      },
+      "p2": {
+       "ticker": "BTC",
+       "direction": "above",
+       "target_level": 78173.35,
+       "due_date": "2026-11-14",
+       "baseline_price": 81249,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "hit",
+       "progress_pct": -96.57534591870515,
+       "terminal_pred_id": 24,
+       "baselined_at_first_run": true,
+       "note": "hit at first observation — baselined silently, never alerted; new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "13": {
+     "theory_id": 13,
+     "name": "[Muse theory] When crypto flows turn there is nothing underneath alts: BTC dominance grinds toward 60% (Wintermute: 59.5%, only 11/66 large alts green) as ETH, SOL and AI-linked alts underperform BTC on flow turns. Spot ETF flows are net-negative (BTC -$679M, ETH -$542M weekly, largest since June), whale money is de-risking at range tops (Hyperliquid 0xc2a3 closed ~$256M BTC longs; dormant ETH whale sold 1,800 ETH), and Glassnode's $88K/$100K overhead supply lines cap break-even rallies. Failed break-even rallies in ETH/SOL/NEAR while flows stay negative; reclaimed resistances break the thesis.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 43,
+       "stance": "confirming"
+      },
+      {
+       "id": 44,
+       "stance": "confirming"
+      },
+      {
+       "id": 45,
+       "stance": "challenging"
+      },
+      {
+       "id": 46,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-18 morning run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "ETH": 2412.89,
+      "SOL": 103.74,
+      "NEAR": 4.9
+     },
+     "current_prices": {
+      "ETH": 2477.153547765903,
+      "SOL": 107.23160232125046,
+      "NEAR": 5.24
+     },
+     "price_source": {
+      "ETH": "getmarketread",
+      "SOL": "getmarketread",
+      "NEAR": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "ETH",
+       "direction": "below",
+       "target_level": 2397.5,
+       "due_date": "2026-11-16",
+       "baseline_price": 2412.89,
+       "current_price": 2477.153547765903,
+       "tripwire_state": "unhit",
+       "progress_pct": -417.56691205915376,
+       "terminal_pred_id": 25,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 morning run; baselined silently, never alerted on first sight",
+       "tripwire_hit_observed_utc": "2026-10-20T12:07:22Z",
+       "bounce_watch": {
+        "reclaimed_level": 2397.5,
+        "reclaimed_at_utc": "2026-10-21T00:05:47.788Z",
+        "reclaim_price": 2444.371561824189,
+        "reclaim_context": {
+         "volume_note": null,
+         "funding_note": null,
+         "breadth_note": null
+        },
+        "classify_after_utc": "2026-10-26T00:06:00Z",
+        "status": "open",
+        "note": "hit alerted (altcoin-analyzer-and-signal-tracker/13/tripwire:p1:hit); level reclaimed 2026-10-20 evening run",
+        "morning_run_note_2026-10-21": "ETH 2466.79 above 2397.5 at 2026-10-21T12:01Z; watch open, classify after 2026-10-26T00:06:00Z"
+       }
+      },
+      "p2": {
+       "ticker": "ETH",
+       "direction": "above",
+       "target_level": 2437.51,
+       "due_date": "2026-11-16",
+       "baseline_price": 2412.89,
+       "current_price": 2477.153547765903,
+       "tripwire_state": "hit",
+       "progress_pct": 261.0217212262483,
+       "terminal_pred_id": 26,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 morning run; baselined silently, never alerted on first sight",
+       "tripwire_hit_observed_utc": "2026-10-21T00:05:47.788Z"
+      },
+      "p3": {
+       "ticker": "SOL",
+       "direction": "below",
+       "target_level": 102.51,
+       "due_date": "2026-11-16",
+       "baseline_price": 103.74,
+       "current_price": 107.23160232125046,
+       "tripwire_state": "unhit",
+       "progress_pct": -283.8701074187396,
+       "terminal_pred_id": 27,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 morning run; baselined silently, never alerted on first sight"
+      },
+      "p4": {
+       "ticker": "SOL",
+       "direction": "above",
+       "target_level": 106.49,
+       "due_date": "2026-11-16",
+       "baseline_price": 103.74,
+       "current_price": 107.23160232125046,
+       "tripwire_state": "hit",
+       "progress_pct": 126.96735713638067,
+       "terminal_pred_id": 28,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 morning run; baselined silently, never alerted on first sight"
+      },
+      "p5": {
+       "ticker": "NEAR",
+       "direction": "below",
+       "target_level": 4.69,
+       "due_date": "2026-11-16",
+       "baseline_price": 4.9,
+       "current_price": 5.24,
+       "tripwire_state": "unhit",
+       "progress_pct": -161.90476190476187,
+       "terminal_pred_id": 29,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 morning run; baselined silently, never alerted on first sight",
+       "tripwire_hit_observed_utc": "2026-10-20T12:07:22Z",
+       "bounce_watch": {
+        "reclaimed_level": 4.69,
+        "reclaimed_at_utc": "2026-10-21T00:05:47.788Z",
+        "reclaim_price": 4.93,
+        "reclaim_context": {
+         "volume_note": null,
+         "funding_note": null,
+         "breadth_note": null
+        },
+        "classify_after_utc": "2026-10-26T00:06:00Z",
+        "status": "open",
+        "note": "hit alerted (altcoin-analyzer-and-signal-tracker/13/tripwire:p5:hit); level reclaimed 2026-10-20 evening run",
+        "morning_run_note_2026-10-21": "NEAR 5.17 above 4.69 at 2026-10-21T12:01Z; watch open, classify after 2026-10-26T00:06:00Z"
+       }
+      },
+      "p6": {
+       "ticker": "NEAR",
+       "direction": "above",
+       "target_level": 5.26,
+       "due_date": "2026-11-16",
+       "baseline_price": 4.9,
+       "current_price": 5.24,
+       "tripwire_state": "unhit",
+       "progress_pct": 94.44444444444456,
+       "terminal_pred_id": 30,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 morning run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "14": {
+     "theory_id": 14,
+     "name": "[Muse theory] Tokenized-stock onchain flywheel is inflecting: Token Terminal reports 6.5% of tokenized-stock market cap now in DeFi venues (from 1.7% at start of year, led by Uniswap/Kamino/Pendle); Pendle launched GOOGLc (Dec 2026) and NVDAc (Jan 2027) fixed-yield markets on Base; GS, Wells Fargo and Morgan Stanley Q3 calls framed tokenization as growth; Circle expanding to ~40 emerging markets; Visa Direct USDC payouts across 180+ countries. CONTESTED: tape cuts against it short-term — LINK RSI 40, daily lower-highs; PENDLE RSI 42.4, -15.6% over 14d — and regulatory friction is live. Structural thesis; near-term price not confirming.",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 52,
+       "stance": "challenging"
+      },
+      {
+       "id": 51,
+       "stance": "confirming"
+      },
+      {
+       "id": 50,
+       "stance": "confirming"
+      },
+      {
+       "id": 62,
+       "stance": "challenging"
+      },
+      {
+       "id": 58,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "LINK": 12.045883466101024,
+      "PENDLE": 2.1
+     },
+     "current_prices": {
+      "LINK": 12.534909172767376,
+      "PENDLE": 2.15
+     },
+     "price_source": {
+      "LINK": "getmarketread",
+      "PENDLE": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "LINK",
+       "direction": "above",
+       "target_level": 12.7,
+       "due_date": "2026-12-17",
+       "baseline_price": 12.045883466101024,
+       "current_price": 12.534909172767376,
+       "tripwire_state": "unhit",
+       "progress_pct": 74.76125144726574,
+       "terminal_pred_id": 31,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "LINK",
+       "direction": "above",
+       "target_level": 11.11,
+       "due_date": "2026-12-17",
+       "baseline_price": 12.045883466101024,
+       "current_price": 12.534909172767376,
+       "tripwire_state": "hit",
+       "progress_pct": -52.25284176711414,
+       "terminal_pred_id": 32,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight; hit at first observation — baselined silently, never alerted"
+      },
+      "p3": {
+       "ticker": "PENDLE",
+       "direction": "above",
+       "target_level": 2.32,
+       "due_date": "2026-12-17",
+       "baseline_price": 2.1,
+       "current_price": 2.15,
+       "tripwire_state": "unhit",
+       "progress_pct": 22.72727272727267,
+       "terminal_pred_id": 33,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight"
+      },
+      "p4": {
+       "ticker": "PENDLE",
+       "direction": "above",
+       "target_level": 1.86,
+       "due_date": "2026-12-17",
+       "baseline_price": 2.1,
+       "current_price": 2.15,
+       "tripwire_state": "hit",
+       "progress_pct": -20.833333333333258,
+       "terminal_pred_id": 34,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight; hit at first observation — baselined silently, never alerted"
+      }
+     }
+    },
+    "15": {
+     "theory_id": 15,
+     "name": "[Muse theory] BTC is basing near $81-82k: Glassnode Week 43 shows the early-October selling has eased (ETF outflows narrowed to -$230M, perp CVD improved, profit-taking cooled) but spot + ETF buyers have not returned; Wintermute's desk sees alt flows being recycled into BTC/ETH and says BTC must move higher before any broad alt rally. Range into FOMC Oct 28, then volatility returns. Theory test 58/100 MEDIUM — structure intact above 200dma, but pinned at the 50dma on thin volume.",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 53,
+       "stance": "challenging"
+      },
+      {
+       "id": 54,
+       "stance": "confirming"
+      },
+      {
+       "id": 55,
+       "stance": "confirming"
+      },
+      {
+       "id": 57,
+       "stance": "confirming"
+      },
+      {
+       "id": 56,
+       "stance": "challenging"
+      },
+      {
+       "id": 63,
+       "stance": "confirming"
+      },
+      {
+       "id": 65,
+       "stance": "confirming"
+      },
+      {
+       "id": 64,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-20 morning run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "BTC": 81398
+     },
+     "current_prices": {
+      "BTC": 84219.31962674865
+     },
+     "price_source": {
+      "BTC": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "BTC",
+       "direction": "above",
+       "target_level": 78173.35,
+       "due_date": "2026-11-17",
+       "baseline_price": 81398,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "hit",
+       "progress_pct": -87.49227440958411,
+       "terminal_pred_id": 35,
+       "baselined_at_first_run": true,
+       "note": "hit at first observation — baselined silently, never alerted; new theory first seen 2026-10-20 morning run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "BTC",
+       "direction": "above",
+       "target_level": 86489.73,
+       "due_date": "2026-11-17",
+       "baseline_price": 81398,
+       "current_price": 84219.31962674865,
+       "tripwire_state": "unhit",
+       "progress_pct": 55.40984354529112,
+       "terminal_pred_id": 36,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 morning run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "16": {
+     "theory_id": 16,
+     "name": "[Muse theory] Prediction-market composite: record volumes vs regulatory offense; onchain rotation bid favors Hyperliquid as listed venue proxy",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 59,
+       "stance": "confirming"
+      },
+      {
+       "id": 60,
+       "stance": "challenging"
+      },
+      {
+       "id": 61,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-21 morning run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "HYPE": 81.31
+     },
+     "current_prices": {
+      "HYPE": 81.01548391536186
+     },
+     "price_source": {
+      "HYPE": "getmarketread"
+     },
+     "data_timestamp_utc": "2026-10-22T00:07:24.527Z",
+     "last_checked_utc": "2026-10-21T23:56:37Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 77.98,
+       "due_date": "2026-11-19",
+       "baseline_price": 81.31,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "hit",
+       "progress_pct": 8.844326866010423,
+       "terminal_pred_id": 37,
+       "baselined_at_first_run": true,
+       "note": "hit at first observation — baselined silently, never alerted; new theory first seen 2026-10-21 morning run"
+      },
+      "p2": {
+       "ticker": "HYPE",
+       "direction": "above",
+       "target_level": 84.68,
+       "due_date": "2026-11-19",
+       "baseline_price": 81.31,
+       "current_price": 81.01548391536186,
+       "tripwire_state": "unhit",
+       "progress_pct": -8.739349692526604,
+       "terminal_pred_id": 38,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-21 morning run; baselined silently, never alerted on first sight"
+      }
+     }
+    }
+   }
+  },
+  "equity-analyzer-and-signal-tracker": {
+   "short": "Equity",
+   "theories": {
+    "30": {
+     "baseline_prices": {
+      "CL=F": 95.38
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [],
+     "name": "CL=F Gulf-escalation energy leg",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "predictions": {
+      "p1": {
+       "ticker": "CL=F",
+       "direction": "above",
+       "target_level": 106.82,
+       "due_date": "2026-11-12",
+       "baseline_price": 95.38,
+       "current_price": 98.36000061035156,
+       "tripwire_state": "unhit",
+       "progress_pct": 26.048956384192024,
+       "terminal_pred_id": 68,
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "confirming",
+     "theory_id": 30,
+     "current_prices": {
+      "CL=F": 98.36000061035156
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "price_source": {
+      "CL=F": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "31": {
+     "baseline_prices": {
+      "SOXX": 543.9
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 117,
+       "stance": "confirming"
+      },
+      {
+       "id": 118,
+       "stance": "confirming"
+      },
+      {
+       "id": 119,
+       "stance": "challenging"
+      },
+      {
+       "id": 128,
+       "stance": "confirming"
+      },
+      {
+       "id": 129,
+       "stance": "confirming"
+      },
+      {
+       "id": 130,
+       "stance": "confirming"
+      },
+      {
+       "id": 131,
+       "stance": "confirming"
+      },
+      {
+       "id": 156,
+       "stance": "confirming"
+      }
+     ],
+     "name": "SOXX AI-financing-risk repricing",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "predictions": {
+      "p1": {
+       "ticker": "SOXX",
+       "direction": "below",
+       "target_level": 495.19,
+       "due_date": "2026-11-12",
+       "baseline_price": 543.9,
+       "current_price": 500.010009765625,
+       "tripwire_state": "unhit",
+       "progress_pct": 90.10468124486758,
+       "terminal_pred_id": 69,
+       "baselined_at_first_run": true,
+       "tripwire_hit_observed_utc": "2026-10-17T12:06:01Z",
+       "note": "tripwire hit 2026-10-17 morning run: SOXX 493.39 below 495.19 — alerted, dedup equity-analyzer-and-signal-tracker/31/tripwire:p1:hit level lost 2026-10-20 morning run (price back across); prior hit recorded, no re-alert"
+      },
+      "p2": {
+       "ticker": "SOXX",
+       "direction": "above",
+       "target_level": 576.37,
+       "due_date": "2026-11-12",
+       "baseline_price": 543.9,
+       "current_price": 500.010009765625,
+       "tripwire_state": "unhit",
+       "progress_pct": -135.17089693370787,
+       "terminal_pred_id": 70,
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "challenged",
+     "theory_id": 31,
+     "current_prices": {
+      "SOXX": 500.010009765625
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "price_source": {
+      "SOXX": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "32": {
+     "baseline_prices": {
+      "QQQ": 743.57
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 120,
+       "stance": "confirming"
+      },
+      {
+       "id": 121,
+       "stance": "confirming"
+      },
+      {
+       "id": 122,
+       "stance": "confirming"
+      },
+      {
+       "id": 123,
+       "stance": "challenging"
+      }
+     ],
+     "name": "QQQ/ASML AI leadership",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "predictions": {
+      "p1": {
+       "ticker": "QQQ",
+       "direction": "above",
+       "target_level": 770.12,
+       "due_date": "2026-11-12",
+       "baseline_price": 743.57,
+       "current_price": 717.6300048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": -97.70242981991561,
+       "terminal_pred_id": 71,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "QQQ",
+       "direction": "above",
+       "target_level": 725.87,
+       "due_date": "2026-11-12",
+       "baseline_price": 743.57,
+       "current_price": 717.6300048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": 146.5536447298728,
+       "terminal_pred_id": 72,
+       "note": "hit at first enumeration — baselined silently, never alerted level lost 2026-10-20 morning run (price back across); prior hit recorded, no re-alert",
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "challenged",
+     "theory_id": 32,
+     "current_prices": {
+      "QQQ": 717.6300048828125
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "price_source": {
+      "QQQ": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "33": {
+     "baseline_prices": {
+      "AAPL": 341.27
+     },
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 124,
+       "stance": "confirming"
+      },
+      {
+       "id": 125,
+       "stance": "confirming"
+      },
+      {
+       "id": 126,
+       "stance": "challenging"
+      },
+      {
+       "id": 127,
+       "stance": "confirming"
+      }
+     ],
+     "name": "AAPL narrow-leadership continuation",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "predictions": {
+      "p1": {
+       "ticker": "AAPL",
+       "direction": "above",
+       "target_level": 361.5,
+       "due_date": "2026-11-12",
+       "baseline_price": 341.27,
+       "current_price": 339.5,
+       "tripwire_state": "unhit",
+       "progress_pct": -8.749382105783392,
+       "terminal_pred_id": 73,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "AAPL",
+       "direction": "above",
+       "target_level": 327.78,
+       "due_date": "2026-11-12",
+       "baseline_price": 341.27,
+       "current_price": 339.5,
+       "tripwire_state": "hit",
+       "progress_pct": 13.120830244625505,
+       "terminal_pred_id": 74,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      }
+     },
+     "status": "challenged",
+     "theory_id": 33,
+     "current_prices": {
+      "AAPL": 339.5
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "price_source": {
+      "AAPL": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "3": {
+     "theory_id": 3,
+     "name": "Hyperscaler AI capex moving off-balance-sheet (AMZN $8B NVDA SPV)",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 2,
+       "stance": "confirming"
+      },
+      {
+       "id": 3,
+       "stance": "confirming"
+      },
+      {
+       "id": 4,
+       "stance": "confirming"
+      },
+      {
+       "id": 5,
+       "stance": "challenging"
+      },
+      {
+       "id": 12,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "NVDA": 228.38,
+      "AMZN": 248.23
+     },
+     "current_prices": {
+      "NVDA": 216.47000122070312,
+      "AMZN": 262.6300048828125
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "NVDA",
+       "direction": "above",
+       "target_level": 217.61,
+       "due_date": "2026-10-31",
+       "baseline_price": 228.38,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 110.58494688297948,
+       "terminal_pred_id": 3,
+       "note": "hit at first enumeration — baselined silently, never alerted level lost 2026-10-20 morning run (price back across); prior hit recorded, no re-alert",
+       "baselined_at_first_run": true,
+       "bounce_watch": {
+        "reclaimed_level": 217.61,
+        "reclaimed_at_utc": "2026-10-15T23:57:07.840Z",
+        "reclaim_price": 217.22999572753906,
+        "reclaim_context": {
+         "volume_note": null,
+         "funding_note": null,
+         "breadth_note": null
+        },
+        "classify_after_utc": "2026-10-20T23:59:33Z",
+        "status": "closed",
+        "note": "hit was a silent baseline correction (never alerted); reclaim observed 2026-10-15 evening run",
+        "morning_run_note_2026-10-17": "NVDA 214.13 below 217.61 at 2026-10-17T12:01Z (feed price below level; favors fakeout if still below at 2026-10-20T23:59:33Z)",
+        "evening_run_note_2026-10-17": "NVDA 214.13 below 217.61 at 2026-10-17T23:57Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-18": "NVDA 214.13 below 217.61 at 2026-10-18T12:00Z (feed price below level; favors fakeout if still below at 2026-10-20T23:59:33Z)",
+        "evening_run_note_2026-10-18": "NVDA 214.13 (Friday close retained, no session) below 217.61; watch open, classify after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-19": "NVDA 214.13 (Friday close retained, no session) below 217.61; watch open, classify after 2026-10-20T23:59:33Z",
+        "evening_run_note_2026-10-19": "NVDA 214.13 (Monday close) below 217.61; watch open, classify after 2026-10-20T23:59:33Z",
+        "morning_run_note_2026-10-20": "NVDA 217.08999633789065 below 217.61 at 2026-10-20T12:01Z; watch open, classify after 2026-10-20T23:59:33Z",
+        "final": "bounce-held",
+        "classified_at_utc": "2026-10-21T00:05:47.788Z",
+        "classification_price": 216.47000122070312,
+        "classification_note": "NVDA never reclaimed above 217.61 in the 5-day window (216.47 at close 10-20); move away from level held -> bounce-held per §7 (re-breached within 5d -> fakeout; else bounce-held)"
+       }
+      },
+      "p2": {
+       "ticker": "AMZN",
+       "direction": "above",
+       "target_level": 241.22,
+       "due_date": "2026-10-31",
+       "baseline_price": 248.23,
+       "current_price": 262.6300048828125,
+       "tripwire_state": "hit",
+       "progress_pct": -205.42089704440127,
+       "terminal_pred_id": 4,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-02T11:49:32.945Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "NVDA": "listtheories prediction feed",
+      "AMZN": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: page3 inline; prices unchanged vs Friday closes; no transitions"
+    },
+    "4": {
+     "theory_id": 4,
+     "name": "TSMC exploring operating Musk's Terafab in Texas",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 6,
+       "stance": "challenging"
+      },
+      {
+       "id": 7,
+       "stance": "confirming"
+      },
+      {
+       "id": 8,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "TSM": 472.78,
+      "ASML": 1867.31
+     },
+     "current_prices": {
+      "TSM": 425.0799865722656,
+      "ASML": 1630.8399658203125
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "TSM",
+       "direction": "above",
+       "target_level": 459.42,
+       "due_date": "2026-11-01",
+       "baseline_price": 472.78,
+       "current_price": 425.0799865722656,
+       "tripwire_state": "unhit",
+       "progress_pct": 357.03602865070735,
+       "terminal_pred_id": 8,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "TSM",
+       "direction": "above",
+       "target_level": 492.81,
+       "due_date": "2026-11-01",
+       "baseline_price": 472.78,
+       "current_price": 425.0799865722656,
+       "tripwire_state": "unhit",
+       "progress_pct": -238.14285285938232,
+       "terminal_pred_id": 9,
+       "baselined_at_first_run": true
+      },
+      "p3": {
+       "ticker": "ASML",
+       "direction": "above",
+       "target_level": 1803.55,
+       "due_date": "2026-11-01",
+       "baseline_price": 1867.31,
+       "current_price": 1630.8399658203125,
+       "tripwire_state": "unhit",
+       "progress_pct": 370.8752104449302,
+       "terminal_pred_id": 10,
+       "baselined_at_first_run": true
+      },
+      "p4": {
+       "ticker": "ASML",
+       "direction": "above",
+       "target_level": 1962.95,
+       "due_date": "2026-11-01",
+       "baseline_price": 1867.31,
+       "current_price": 1630.8399658203125,
+       "tripwire_state": "unhit",
+       "progress_pct": -247.2501402966198,
+       "terminal_pred_id": 11,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-03T11:49:23.117Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "TSM": "listtheories prediction feed",
+      "ASML": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: page3 inline; prices unchanged vs Friday closes; no transitions"
+    },
+    "5": {
+     "theory_id": 5,
+     "name": "Burry's parameter-trap: AI efficiency gains vs capex",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 9,
+       "stance": "challenging"
+      },
+      {
+       "id": 10,
+       "stance": "confirming"
+      },
+      {
+       "id": 11,
+       "stance": "confirming"
+      },
+      {
+       "id": 48,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "NVDA": 230.86
+     },
+     "current_prices": {
+      "NVDA": 216.47000122070312
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "NVDA",
+       "direction": "below",
+       "target_level": 218.12,
+       "due_date": "2026-11-30",
+       "baseline_price": 230.86,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "hit",
+       "progress_pct": 112.95132479824865,
+       "terminal_pred_id": 7,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-03T11:49:36.195Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "NVDA": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: page3 inline; prices unchanged vs Friday closes; no transitions"
+    },
+    "8": {
+     "theory_id": 8,
+     "name": "AI-credit crack: risk layer is credit, not chips",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 25,
+       "stance": "confirming"
+      },
+      {
+       "id": 26,
+       "stance": "confirming"
+      },
+      {
+       "id": 27,
+       "stance": "challenging"
+      },
+      {
+       "id": 28,
+       "stance": "challenging"
+      },
+      {
+       "id": 32,
+       "stance": "challenging"
+      },
+      {
+       "id": 33,
+       "stance": "challenging"
+      },
+      {
+       "id": 34,
+       "stance": "confirming"
+      },
+      {
+       "id": 35,
+       "stance": "confirming"
+      },
+      {
+       "id": 36,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "ORCL": 142.3
+     },
+     "current_prices": {
+      "ORCL": 131.13999938964844
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "ORCL",
+       "direction": "below",
+       "target_level": 129.42,
+       "due_date": "2026-11-30",
+       "baseline_price": 142.3,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "unhit",
+       "progress_pct": 86.64596747167354,
+       "terminal_pred_id": 16,
+       "baselined_at_first_run": true,
+       "repair_note": "2026-10-20: reverted false hit — worker used stale Friday print 128.23 as Monday print; verified Monday close 129.59 > 129.42"
+      },
+      "p2": {
+       "ticker": "ORCL",
+       "direction": "above",
+       "target_level": 150.89,
+       "due_date": "2026-11-30",
+       "baseline_price": 142.3,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "unhit",
+       "progress_pct": -129.9185170006008,
+       "terminal_pred_id": 17,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-04T11:55:35.479Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "ORCL": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "9": {
+     "theory_id": 9,
+     "name": "Diesel export-restriction politics compress refiner margins",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 21,
+       "stance": "confirming"
+      },
+      {
+       "id": 22,
+       "stance": "challenging"
+      },
+      {
+       "id": 23,
+       "stance": "confirming"
+      },
+      {
+       "id": 24,
+       "stance": "confirming"
+      },
+      {
+       "id": 37,
+       "stance": "challenging"
+      },
+      {
+       "id": 38,
+       "stance": "challenging"
+      },
+      {
+       "id": 47,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "VLO": 406.3
+     },
+     "current_prices": {
+      "VLO": 433.4200134277344
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "VLO",
+       "direction": "below",
+       "target_level": 386.48,
+       "due_date": "2026-11-02",
+       "baseline_price": 406.3,
+       "current_price": 433.4200134277344,
+       "tripwire_state": "unhit",
+       "progress_pct": -136.8315510985589,
+       "terminal_pred_id": 18,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "VLO",
+       "direction": "above",
+       "target_level": 436.02,
+       "due_date": "2026-11-02",
+       "baseline_price": 406.3,
+       "current_price": 433.4200134277344,
+       "tripwire_state": "unhit",
+       "progress_pct": 91.25172754957735,
+       "terminal_pred_id": 19,
+       "note": "hit at first enumeration — baselined silently, never alerted level lost 2026-10-20 morning run (price back across); prior hit recorded, no re-alert",
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-04T11:55:35.622Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "VLO": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "10": {
+     "theory_id": 10,
+     "name": "G7 Oct 2 coordinated 100M-barrel release vs diesel cracks",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 29,
+       "stance": "confirming"
+      },
+      {
+       "id": 30,
+       "stance": "challenging"
+      },
+      {
+       "id": 31,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "VLO": 406.3
+     },
+     "current_prices": {
+      "VLO": 433.4200134277344
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "VLO",
+       "direction": "below",
+       "target_level": 386.48,
+       "due_date": "2026-11-02",
+       "baseline_price": 406.3,
+       "current_price": 433.4200134277344,
+       "tripwire_state": "unhit",
+       "progress_pct": -136.8315510985589,
+       "terminal_pred_id": 20,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-05T07:04:38.473Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "VLO": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "11": {
+     "theory_id": 11,
+     "name": "Soft September payrolls open Fed-patience window (IWM)",
+     "status": "refuted",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 39,
+       "stance": "confirming"
+      },
+      {
+       "id": 40,
+       "stance": "confirming"
+      },
+      {
+       "id": 41,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "IWM": 281.52
+     },
+     "current_prices": {
+      "IWM": 275.7799987792969
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "IWM",
+       "direction": "above",
+       "target_level": 290.0,
+       "due_date": "2026-10-19",
+       "baseline_price": 281.52,
+       "current_price": 275.7799987792969,
+       "tripwire_state": "unhit",
+       "progress_pct": -67.68869364036668,
+       "terminal_pred_id": 21,
+       "baselined_at_first_run": true,
+       "resolved": "expired"
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-05T12:55:45.609Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "IWM": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "12": {
+     "theory_id": 12,
+     "name": "AI megacap leadership decoupling from rate shock",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 42,
+       "stance": "confirming"
+      },
+      {
+       "id": 43,
+       "stance": "confirming"
+      },
+      {
+       "id": 44,
+       "stance": "confirming"
+      },
+      {
+       "id": 45,
+       "stance": "challenging"
+      },
+      {
+       "id": 46,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "NVDA": 238.9,
+      "QQQ": 756.2
+     },
+     "current_prices": {
+      "NVDA": 216.47000122070312,
+      "QQQ": 717.6300048828125
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "NVDA",
+       "direction": "above",
+       "target_level": 231.48,
+       "due_date": "2026-11-04",
+       "baseline_price": 238.9,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 302.2910886697686,
+       "terminal_pred_id": 22,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "NVDA",
+       "direction": "above",
+       "target_level": 250.03,
+       "due_date": "2026-11-04",
+       "baseline_price": 238.9,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": -201.52739244651295,
+       "terminal_pred_id": 23,
+       "baselined_at_first_run": true
+      },
+      "p3": {
+       "ticker": "QQQ",
+       "direction": "above",
+       "target_level": 744.46,
+       "due_date": "2026-11-04",
+       "baseline_price": 756.2,
+       "current_price": 717.6300048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": 328.5348817477642,
+       "terminal_pred_id": 24,
+       "baselined_at_first_run": true
+      },
+      "p4": {
+       "ticker": "QQQ",
+       "direction": "above",
+       "target_level": 773.81,
+       "due_date": "2026-11-04",
+       "baseline_price": 756.2,
+       "current_price": 717.6300048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": -219.02325449851085,
+       "terminal_pred_id": 25,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-06T13:00:42.836Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "NVDA": "listtheories prediction feed",
+      "QQQ": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "13": {
+     "theory_id": 13,
+     "name": "Oracle Project Jupiter execution strain (force majeure)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [],
+     "baseline_prices": {
+      "ORCL": 142.48
+     },
+     "current_prices": {
+      "ORCL": 131.13999938964844
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "ORCL",
+       "direction": "below",
+       "target_level": 129.93,
+       "due_date": "2026-11-04",
+       "baseline_price": 142.48,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "unhit",
+       "progress_pct": 90.35857060041089,
+       "terminal_pred_id": 26,
+       "baselined_at_first_run": true,
+       "tripwire_hit_observed_utc": "2026-10-20T00:12:16Z",
+       "repair_note": "2026-10-20: hit confirmed on verified Monday close 129.59 (worker cited stale 128.23); marginal break, 0.26% below level",
+       "bounce_watch": {
+        "reclaimed_level": 129.93,
+        "reclaimed_at_utc": "2026-10-21T00:05:47.788Z",
+        "reclaim_price": 131.13999938964844,
+        "reclaim_context": {
+         "volume_note": null,
+         "funding_note": null,
+         "breadth_note": null
+        },
+        "classify_after_utc": "2026-10-26T00:06:00Z",
+        "status": "open",
+        "note": "hit alerted (equity-analyzer-and-signal-tracker/13/tripwire:p1:hit); level reclaimed 2026-10-20 evening run",
+        "morning_run_note_2026-10-21": "ORCL 131.13999938964844 above 129.93 at 2026-10-21T12:01Z; watch open, classify after 2026-10-26T00:06:00Z"
+       }
+      },
+      "p2": {
+       "ticker": "ORCL",
+       "direction": "above",
+       "target_level": 150.84,
+       "due_date": "2026-11-04",
+       "baseline_price": 142.48,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "unhit",
+       "progress_pct": -135.64594031520974,
+       "terminal_pred_id": 27,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-06T13:05:13.762Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "ORCL": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "14": {
+     "theory_id": 14,
+     "name": "Middle East crude exports recovered; Hormuz premium compressing",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [],
+     "baseline_prices": {
+      "USO": 144.91
+     },
+     "current_prices": {
+      "USO": 160.61000061035156
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "USO",
+       "direction": "below",
+       "target_level": 134.25,
+       "due_date": "2026-11-05",
+       "baseline_price": 144.91,
+       "current_price": 160.61000061035156,
+       "tripwire_state": "unhit",
+       "progress_pct": -147.2795554441986,
+       "terminal_pred_id": 28,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "USO",
+       "direction": "above",
+       "target_level": 160.89,
+       "due_date": "2026-11-05",
+       "baseline_price": 144.91,
+       "current_price": 160.61000061035156,
+       "tripwire_state": "unhit",
+       "progress_pct": 98.24781358167445,
+       "terminal_pred_id": 29,
+       "baselined_at_first_run": true,
+       "tripwire_hit_observed_utc": "2026-10-17T12:06:01Z",
+       "note": "tripwire hit 2026-10-17 morning run: USO 161.76 above 160.89 — alerted, dedup equity-analyzer-and-signal-tracker/14/tripwire:p2:hit level lost 2026-10-20 morning run (price back across); prior hit recorded, no re-alert"
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-07T13:19:09.309Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "USO": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "15": {
+     "theory_id": 15,
+     "name": "AI hardware bottleneck broadened to memory (MU tightest link)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 49,
+       "stance": "confirming"
+      },
+      {
+       "id": 50,
+       "stance": "confirming"
+      },
+      {
+       "id": 51,
+       "stance": "confirming"
+      },
+      {
+       "id": 52,
+       "stance": "challenging"
+      },
+      {
+       "id": 53,
+       "stance": "challenging"
+      },
+      {
+       "id": 54,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "MU": 1088.0
+     },
+     "current_prices": {
+      "MU": 896.0700073242188
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "MU",
+       "direction": "above",
+       "target_level": 1038.27,
+       "due_date": "2026-11-06",
+       "baseline_price": 1088.0,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": 385.9440834019328,
+       "terminal_pred_id": 30,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "MU",
+       "direction": "above",
+       "target_level": 1225.68,
+       "due_date": "2026-11-06",
+       "baseline_price": 1088.0,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": -139.40295807363538,
+       "terminal_pred_id": 31,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-08T13:08:03.358Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "MU": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "16": {
+     "theory_id": 16,
+     "name": "Iran/Hormuz escalation repricing crude (long energy beta)",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 55,
+       "stance": "challenging"
+      },
+      {
+       "id": 57,
+       "stance": "confirming"
+      },
+      {
+       "id": 59,
+       "stance": "confirming"
+      },
+      {
+       "id": 60,
+       "stance": "confirming"
+      },
+      {
+       "id": 61,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "XLE": 63.36,
+      "USO": 143.91
+     },
+     "current_prices": {
+      "XLE": 67.97000122070312,
+      "USO": 160.61000061035156
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "XLE",
+       "direction": "above",
+       "target_level": 60.86,
+       "due_date": "2026-11-06",
+       "baseline_price": 63.36,
+       "current_price": 67.97000122070312,
+       "tripwire_state": "hit",
+       "progress_pct": -184.40004882812502,
+       "terminal_pred_id": 32,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "XLE",
+       "direction": "above",
+       "target_level": 67.11,
+       "due_date": "2026-11-06",
+       "baseline_price": 63.36,
+       "current_price": 67.97000122070312,
+       "tripwire_state": "hit",
+       "progress_pct": 122.93336588541668,
+       "terminal_pred_id": 33,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true,
+       "bounce_watch": {
+        "reclaimed_level": 67.11,
+        "reclaimed_at_utc": "2026-10-16T12:01:05.966Z",
+        "reclaim_price": 66.55999755859375,
+        "reclaim_context": {
+         "volume_note": null,
+         "funding_note": null,
+         "breadth_note": "equity 15d breadth 37.5% positive across 8 measured instruments (getmarketread 2026-10-16T12:01:25Z; SPY +56 long / QQQ -24 short / IWM -51 short; leader META)"
+        },
+        "classify_after_utc": "2026-10-21T12:01:05Z",
+        "status": "closed",
+        "note": "level genuinely hit (XLE 67.63 at 2026-10-15 evening run); price fell back below 67.11 by 2026-10-16 morning run -> reclaim watch opened; classify bounce-held vs fakeout after 5 days",
+        "morning_run_note_2026-10-17": "XLE 66.56 below 67.11 at 2026-10-17T12:01Z; watch open, classify after 2026-10-21T12:01:05Z",
+        "evening_run_note_2026-10-17": "XLE 66.56 below 67.11 at 2026-10-17T23:57Z; watch open, classify after 2026-10-21T12:01:05Z",
+        "morning_run_note_2026-10-18": "XLE unavailable this run (prediction-feed anomaly); watch open, classify after 2026-10-21T12:01:05Z",
+        "evening_run_note_2026-10-18": "XLE 66.56 (Friday close retained, no session) below 67.11; watch open, classify after 2026-10-21T12:01:05Z",
+        "morning_run_note_2026-10-20": "XLE 67.80000305175781 above 67.11 at 2026-10-20T12:01Z; watch open, classify after 2026-10-21T12:01:05Z",
+        "final": "fakeout",
+        "classified_at_utc": "2026-10-21T12:09:40Z",
+        "classification_price": 67.97000122070312,
+        "classification_note": "level re-breached above 67.11 within window (67.80 on 2026-10-20 morning, 67.97 at classification) -> fakeout"
+       }
+      },
+      "p3": {
+       "ticker": "USO",
+       "direction": "above",
+       "target_level": 133.36,
+       "due_date": "2026-11-06",
+       "baseline_price": 143.91,
+       "current_price": 160.61000061035156,
+       "tripwire_state": "hit",
+       "progress_pct": -158.2938446478824,
+       "terminal_pred_id": 34,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p4": {
+       "ticker": "USO",
+       "direction": "above",
+       "target_level": 159.74,
+       "due_date": "2026-11-06",
+       "baseline_price": 143.91,
+       "current_price": 160.61000061035156,
+       "tripwire_state": "hit",
+       "progress_pct": 105.49589772805781,
+       "terminal_pred_id": 35,
+       "baselined_at_first_run": true,
+       "tripwire_hit_observed_utc": "2026-10-17T12:06:01Z",
+       "note": "tripwire hit 2026-10-17 morning run: USO 161.76 above 159.74 — alerted, dedup equity-analyzer-and-signal-tracker/16/tripwire:p4:hit"
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-08T13:13:51.402Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "XLE": "listtheories prediction feed",
+      "USO": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "17": {
+     "theory_id": 17,
+     "name": "AI-datacenter credit fragile node (Oracle/Blue Owl Jupiter)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 56,
+       "stance": "confirming"
+      },
+      {
+       "id": 58,
+       "stance": "challenging"
+      },
+      {
+       "id": 62,
+       "stance": "confirming"
+      },
+      {
+       "id": 63,
+       "stance": "confirming"
+      },
+      {
+       "id": 64,
+       "stance": "confirming"
+      },
+      {
+       "id": 65,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "ORCL": 143.56,
+      "OWL": 9.11
+     },
+     "current_prices": {
+      "ORCL": 131.13999938964844,
+      "OWL": 9.199999809265137
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "ORCL",
+       "direction": "below",
+       "target_level": 156.18,
+       "due_date": "2026-12-31",
+       "baseline_price": 143.56,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "hit",
+       "progress_pct": -98.41521878250047,
+       "terminal_pred_id": 36,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "ORCL",
+       "direction": "below",
+       "target_level": 124.64,
+       "due_date": "2026-12-31",
+       "baseline_price": 143.56,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "unhit",
+       "progress_pct": 65.64482352194273,
+       "terminal_pred_id": 37,
+       "baselined_at_first_run": true
+      },
+      "p3": {
+       "ticker": "OWL",
+       "direction": "below",
+       "target_level": 9.84,
+       "due_date": "2026-12-31",
+       "baseline_price": 9.11,
+       "current_price": 9.199999809265137,
+       "tripwire_state": "hit",
+       "progress_pct": 12.328740995224278,
+       "terminal_pred_id": 38,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p4": {
+       "ticker": "OWL",
+       "direction": "below",
+       "target_level": 8.01,
+       "due_date": "2026-12-31",
+       "baseline_price": 9.11,
+       "current_price": 9.199999809265137,
+       "tripwire_state": "unhit",
+       "progress_pct": -8.181800842285211,
+       "terminal_pred_id": 39,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-08T13:13:51.649Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "ORCL": "listtheories prediction feed",
+      "OWL": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "18": {
+     "theory_id": 18,
+     "name": "META strongest technical long (+73 factor agreement)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 66,
+       "stance": "challenging"
+      },
+      {
+       "id": 67,
+       "stance": "confirming"
+      },
+      {
+       "id": 70,
+       "stance": "challenging"
+      },
+      {
+       "id": 75,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "META": 720.89
+     },
+     "current_prices": {
+      "META": 694.25
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 675.12,
+       "due_date": "2026-11-07",
+       "baseline_price": 720.89,
+       "current_price": 694.25,
+       "tripwire_state": "hit",
+       "progress_pct": 58.204063797247095,
+       "terminal_pred_id": 40,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 789.55,
+       "due_date": "2026-11-07",
+       "baseline_price": 720.89,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": -38.79988348383338,
+       "terminal_pred_id": 41,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-09T13:05:36.485Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "META": "listtheories prediction feed"
+     },
+     "transition_note_2026-10-17": "status flip observed 2026-10-17 morning run — alerted",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "19": {
+     "theory_id": 19,
+     "name": "Rate pressure grinding small caps (IWM short)",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 68,
+       "stance": "confirming"
+      },
+      {
+       "id": 69,
+       "stance": "challenging"
+      },
+      {
+       "id": 84,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "IWM": 277.57
+     },
+     "current_prices": {
+      "IWM": 275.7799987792969
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "IWM",
+       "direction": "below",
+       "target_level": 284.95,
+       "due_date": "2026-11-07",
+       "baseline_price": 277.57,
+       "current_price": 275.7799987792969,
+       "tripwire_state": "hit",
+       "progress_pct": -24.254759088118146,
+       "terminal_pred_id": 42,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "IWM",
+       "direction": "below",
+       "target_level": 266.5,
+       "due_date": "2026-11-07",
+       "baseline_price": 277.57,
+       "current_price": 275.7799987792969,
+       "tripwire_state": "unhit",
+       "progress_pct": 16.169839392078764,
+       "terminal_pred_id": 43,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-09T13:05:45.323Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "IWM": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "20": {
+     "theory_id": 20,
+     "name": "AI-buildout credit stress vs elevated equity multiples (NVDA)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 71,
+       "stance": "confirming"
+      },
+      {
+       "id": 72,
+       "stance": "confirming"
+      },
+      {
+       "id": 73,
+       "stance": "confirming"
+      },
+      {
+       "id": 74,
+       "stance": "challenging"
+      },
+      {
+       "id": 78,
+       "stance": "challenging"
+      },
+      {
+       "id": 79,
+       "stance": "confirming"
+      },
+      {
+       "id": 81,
+       "stance": "confirming"
+      },
+      {
+       "id": 82,
+       "stance": "confirming"
+      },
+      {
+       "id": 83,
+       "stance": "confirming"
+      },
+      {
+       "id": 95,
+       "stance": "confirming"
+      },
+      {
+       "id": 158,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "NVDA": 230.48
+     },
+     "current_prices": {
+      "NVDA": 216.47000122070312
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "NVDA",
+       "direction": "below",
+       "target_level": 218.98,
+       "due_date": "2026-11-07",
+       "baseline_price": 230.48,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "hit",
+       "progress_pct": 121.82607634171188,
+       "terminal_pred_id": 44,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "NVDA",
+       "direction": "above",
+       "target_level": 247.73,
+       "due_date": "2026-11-07",
+       "baseline_price": 230.48,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": -81.21738422780791,
+       "terminal_pred_id": 45,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-09T13:06:11.255Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "NVDA": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "21": {
+     "theory_id": 21,
+     "name": "SpaceX $8B spectrum reprices wireless carrier moat (TMUS)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 76,
+       "stance": "confirming"
+      },
+      {
+       "id": 77,
+       "stance": "challenging"
+      },
+      {
+       "id": 80,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "TMUS": 148.58
+     },
+     "current_prices": {
+      "TMUS": 157.75
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "TMUS",
+       "direction": "below",
+       "target_level": 131.95,
+       "due_date": "2026-11-08",
+       "baseline_price": 148.58,
+       "current_price": 157.75,
+       "tripwire_state": "unhit",
+       "progress_pct": -55.14131088394453,
+       "terminal_pred_id": 46,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "TMUS",
+       "direction": "above",
+       "target_level": 159.66,
+       "due_date": "2026-11-08",
+       "baseline_price": 148.58,
+       "current_price": 157.75,
+       "tripwire_state": "unhit",
+       "progress_pct": 82.76173285198557,
+       "terminal_pred_id": 47,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-10T13:01:07.879Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "TMUS": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "22": {
+     "theory_id": 22,
+     "name": "IWM under rate pressure into CPI",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 85,
+       "stance": "confirming"
+      },
+      {
+       "id": 86,
+       "stance": "confirming"
+      },
+      {
+       "id": 87,
+       "stance": "confirming"
+      },
+      {
+       "id": 88,
+       "stance": "challenging"
+      },
+      {
+       "id": 89,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "IWM": 278.94
+     },
+     "current_prices": {
+      "IWM": 275.7799987792969
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "IWM",
+       "direction": "below",
+       "target_level": 268.15,
+       "due_date": "2026-11-08",
+       "baseline_price": 278.94,
+       "current_price": 275.7799987792969,
+       "tripwire_state": "unhit",
+       "progress_pct": 29.28638758760998,
+       "terminal_pred_id": 48,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "IWM",
+       "direction": "above",
+       "target_level": 286.14,
+       "due_date": "2026-11-08",
+       "baseline_price": 278.94,
+       "current_price": 275.7799987792969,
+       "tripwire_state": "unhit",
+       "progress_pct": -43.888905843098996,
+       "terminal_pred_id": 49,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-11T13:03:29.355Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "IWM": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "23": {
+     "theory_id": 23,
+     "name": "AI-capex financing stress expressing in Oracle's tape",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 90,
+       "stance": "confirming"
+      },
+      {
+       "id": 91,
+       "stance": "confirming"
+      },
+      {
+       "id": 92,
+       "stance": "challenging"
+      },
+      {
+       "id": 93,
+       "stance": "confirming"
+      },
+      {
+       "id": 94,
+       "stance": "challenging"
+      },
+      {
+       "id": 157,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "ORCL": 141.4
+     },
+     "current_prices": {
+      "ORCL": 131.13999938964844
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "ORCL",
+       "direction": "below",
+       "target_level": 121.73,
+       "due_date": "2026-11-08",
+       "baseline_price": 141.4,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "unhit",
+       "progress_pct": 52.16065384011981,
+       "terminal_pred_id": 50,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "ORCL",
+       "direction": "below",
+       "target_level": 154.52,
+       "due_date": "2026-11-08",
+       "baseline_price": 141.4,
+       "current_price": 131.13999938964844,
+       "tripwire_state": "hit",
+       "progress_pct": -78.20122416426497,
+       "terminal_pred_id": 51,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-11T13:07:56.731Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "ORCL": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "24": {
+     "theory_id": 24,
+     "name": "Hormuz physical supply tightening; diplomacy stalled",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 96,
+       "stance": "confirming"
+      },
+      {
+       "id": 97,
+       "stance": "challenging"
+      },
+      {
+       "id": 98,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "CL=F": 92.58
+     },
+     "current_prices": {
+      "CL=F": 98.36000061035156
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "CL=F",
+       "direction": "above",
+       "target_level": 104.61,
+       "due_date": "2026-11-10",
+       "baseline_price": 92.58,
+       "current_price": 98.36000061035156,
+       "tripwire_state": "unhit",
+       "progress_pct": 48.0465553645184,
+       "terminal_pred_id": 52,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "CL=F",
+       "direction": "below",
+       "target_level": 83.34,
+       "due_date": "2026-11-10",
+       "baseline_price": 92.58,
+       "current_price": 98.36000061035156,
+       "tripwire_state": "unhit",
+       "progress_pct": -62.554119159649005,
+       "terminal_pred_id": 53,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-12T10:50:59.351Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "CL=F": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "25": {
+     "theory_id": 25,
+     "name": "Narrow AI-leader outperformance, broad breadth weak",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 99,
+       "stance": "confirming"
+      },
+      {
+       "id": 100,
+       "stance": "confirming"
+      },
+      {
+       "id": 101,
+       "stance": "confirming"
+      },
+      {
+       "id": 102,
+       "stance": "challenging"
+      },
+      {
+       "id": 103,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "META": 718.67
+     },
+     "current_prices": {
+      "META": 694.25
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 674.47,
+       "due_date": "2026-11-09",
+       "baseline_price": 718.67,
+       "current_price": 694.25,
+       "tripwire_state": "hit",
+       "progress_pct": 55.24886877828054,
+       "terminal_pred_id": 54,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 784.97,
+       "due_date": "2026-11-09",
+       "baseline_price": 718.67,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": -36.83257918552027,
+       "terminal_pred_id": 55,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-12T13:04:38.182Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "META": "listtheories prediction feed"
+     },
+     "transition_note_2026-10-17": "status flip observed 2026-10-17 morning run — alerted",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "26": {
+     "theory_id": 26,
+     "name": "SpaceX spectrum flips tower-obsolescence narrative (AMT/CCI)",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 104,
+       "stance": "confirming"
+      },
+      {
+       "id": 105,
+       "stance": "confirming"
+      },
+      {
+       "id": 107,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "AMT": 182.24,
+      "CCI": 79.64
+     },
+     "current_prices": {
+      "AMT": 183.55999755859375,
+      "CCI": 81.13999938964844
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "AMT",
+       "direction": "above",
+       "target_level": 173.07,
+       "due_date": "2026-11-10",
+       "baseline_price": 182.24,
+       "current_price": 183.55999755859375,
+       "tripwire_state": "hit",
+       "progress_pct": -14.394738915962252,
+       "terminal_pred_id": 56,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "AMT",
+       "direction": "above",
+       "target_level": 195.99,
+       "due_date": "2026-11-10",
+       "baseline_price": 182.24,
+       "current_price": 183.55999755859375,
+       "tripwire_state": "unhit",
+       "progress_pct": 9.599982244318115,
+       "terminal_pred_id": 57,
+       "baselined_at_first_run": true
+      },
+      "p3": {
+       "ticker": "CCI",
+       "direction": "above",
+       "target_level": 74.65,
+       "due_date": "2026-11-10",
+       "baseline_price": 79.64,
+       "current_price": 81.13999938964844,
+       "tripwire_state": "hit",
+       "progress_pct": -30.06010800898674,
+       "terminal_pred_id": 58,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p4": {
+       "ticker": "CCI",
+       "direction": "above",
+       "target_level": 87.13,
+       "due_date": "2026-11-10",
+       "baseline_price": 79.64,
+       "current_price": 81.13999938964844,
+       "tripwire_state": "unhit",
+       "progress_pct": 20.026694120806916,
+       "terminal_pred_id": 59,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-12T13:07:04.833Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "AMT": "listtheories prediction feed",
+      "CCI": "listtheories prediction feed"
+     },
+     "transition_note_2026-10-17": "status flip observed 2026-10-17 morning run — alerted",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "27": {
+     "theory_id": 27,
+     "name": "CFTC prediction-market rules impair sportsbooks (DKNG/FLUT)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 106,
+       "stance": "challenging"
+      },
+      {
+       "id": 108,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "DKNG": 19.58,
+      "FLUT": 79.78
+     },
+     "current_prices": {
+      "DKNG": 20.479999542236328,
+      "FLUT": 78.9800033569336
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "DKNG",
+       "direction": "below",
+       "target_level": 21.8,
+       "due_date": "2026-11-10",
+       "baseline_price": 19.58,
+       "current_price": 20.479999542236328,
+       "tripwire_state": "hit",
+       "progress_pct": 40.540519920555354,
+       "terminal_pred_id": 60,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "DKNG",
+       "direction": "below",
+       "target_level": 16.25,
+       "due_date": "2026-11-10",
+       "baseline_price": 19.58,
+       "current_price": 20.479999542236328,
+       "tripwire_state": "unhit",
+       "progress_pct": -27.027013280370277,
+       "terminal_pred_id": 61,
+       "baselined_at_first_run": true
+      },
+      "p3": {
+       "ticker": "FLUT",
+       "direction": "below",
+       "target_level": 88.21,
+       "due_date": "2026-11-10",
+       "baseline_price": 79.78,
+       "current_price": 78.9800033569336,
+       "tripwire_state": "hit",
+       "progress_pct": -9.489877141950274,
+       "terminal_pred_id": 62,
+       "note": "hit at first enumeration — baselined silently, never alerted",
+       "baselined_at_first_run": true
+      },
+      "p4": {
+       "ticker": "FLUT",
+       "direction": "below",
+       "target_level": 67.14,
+       "due_date": "2026-11-10",
+       "baseline_price": 79.78,
+       "current_price": 78.9800033569336,
+       "tripwire_state": "unhit",
+       "progress_pct": 6.329087366031703,
+       "terminal_pred_id": 63,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-12T13:07:34.351Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "DKNG": "listtheories prediction feed",
+      "FLUT": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "28": {
+     "theory_id": 28,
+     "name": "META leads narrowing AI-monetization tape",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 109,
+       "stance": "confirming"
+      },
+      {
+       "id": 110,
+       "stance": "confirming"
+      },
+      {
+       "id": 111,
+       "stance": "challenging"
+      },
+      {
+       "id": 112,
+       "stance": "challenging"
+      }
+     ],
+     "baseline_prices": {
+      "META": 718.67
+     },
+     "current_prices": {
+      "META": 694.25
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "META",
+       "direction": "below",
+       "target_level": 674.47,
+       "due_date": "2026-11-10",
+       "baseline_price": 718.67,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": 55.24886877828054,
+       "terminal_pred_id": 64,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 784.97,
+       "due_date": "2026-11-10",
+       "baseline_price": 718.67,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": -36.83257918552027,
+       "terminal_pred_id": 65,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-13T12:59:26.937Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "META": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "29": {
+     "theory_id": 29,
+     "name": "AI buildout binding constraint rotated to capital (SNDK)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 113,
+       "stance": "confirming"
+      },
+      {
+       "id": 114,
+       "stance": "challenging"
+      },
+      {
+       "id": 115,
+       "stance": "confirming"
+      },
+      {
+       "id": 116,
+       "stance": "challenging"
+      },
+      {
+       "id": 154,
+       "stance": "confirming"
+      }
+     ],
+     "baseline_prices": {
+      "SNDK": 1581.82
+     },
+     "current_prices": {
+      "SNDK": 1365.3800048828125
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "predictions": {
+      "p1": {
+       "ticker": "SNDK",
+       "direction": "below",
+       "target_level": 1296.51,
+       "due_date": "2026-11-10",
+       "baseline_price": 1581.82,
+       "current_price": 1365.3800048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": 75.86134209007307,
+       "terminal_pred_id": 66,
+       "baselined_at_first_run": true
+      },
+      "p2": {
+       "ticker": "SNDK",
+       "direction": "above",
+       "target_level": 1772.03,
+       "due_date": "2026-11-10",
+       "baseline_price": 1581.82,
+       "current_price": 1365.3800048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": -113.7900189880592,
+       "terminal_pred_id": 67,
+       "baselined_at_first_run": true
+      }
+     },
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "created_at": "2026-10-13T13:04:13.835Z",
+     "note": "first full enumeration 2026-10-15 morning run — baselined silently",
+     "missing_since": null,
+     "price_source": {
+      "SNDK": "listtheories prediction feed"
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "34": {
+     "theory_id": 34,
+     "name": "[Muse theory] The AI-unwind is a credit repricing, not an AI demand collapse, and the tape splits it cleanly. Citrini's DRAM bear thesis is being validated by MU: the Oct-2 long invalidated on 10-09 (-5.6%), factor agreement is -38 with 914.13 under SMA20/50, and the breakdown has since run to -16.7% from entry — all against record Q4 FY2026 fundamentals (DRAM $39.8B = 73% of revenue, +343% YoY). ",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 132,
+       "stance": "challenging"
+      },
+      {
+       "id": 133,
+       "stance": "confirming"
+      },
+      {
+       "id": 134,
+       "stance": "confirming"
+      },
+      {
+       "id": 135,
+       "stance": "confirming"
+      },
+      {
+       "id": 136,
+       "stance": "confirming"
+      },
+      {
+       "id": 155,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight",
+     "predictions": {
+      "p1": {
+       "ticker": "MU",
+       "direction": "below",
+       "target_level": 774.01,
+       "due_date": "2026-11-12",
+       "baseline_price": 914.1300048828125,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": 12.888950135063146,
+       "terminal_pred_id": 81,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "MU",
+       "direction": "above",
+       "target_level": 1007.54,
+       "due_date": "2026-11-12",
+       "baseline_price": 914.1300048828125,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": -19.33411679974567,
+       "terminal_pred_id": 82,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      },
+      "p3": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 810.12,
+       "due_date": "2026-11-12",
+       "baseline_price": 737.5399780273438,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": -59.6444818432995,
+       "terminal_pred_id": 83,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      },
+      "p4": {
+       "ticker": "META",
+       "direction": "below",
+       "target_level": 689.16,
+       "due_date": "2026-11-12",
+       "baseline_price": 737.5399780273438,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": 89.47911882654593,
+       "terminal_pred_id": 84,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "baseline_prices": {
+      "MU": 914.1300048828125,
+      "META": 737.5399780273438
+     },
+     "current_prices": {
+      "MU": 896.0700073242188,
+      "META": 694.25
+     },
+     "price_source": {
+      "MU": "listtheories prediction feed",
+      "META": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "evidence_note": "one further evidence item present in source but omitted in the read; inventory covers the 4 visible items",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "35": {
+     "theory_id": 35,
+     "name": "[Muse theory] Gold is a genuine contested fork — no directional pick. Our GC=F shorts (id7/31, +0.54%, factor agreement -73, price 4176.20 under all three SMAs, -4.9% over 15 sessions) are caught between two live macro forces. Confirming the short: hot CPI repriced the Fed higher (Polymarket Oct-hike odds rising, 'no change' now 72.5% from 74.5%), real yields up, gold capped by rate math. Challeng",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 137,
+       "stance": "confirming"
+      },
+      {
+       "id": 138,
+       "stance": "confirming"
+      },
+      {
+       "id": 139,
+       "stance": "confirming"
+      },
+      {
+       "id": 140,
+       "stance": "challenging"
+      },
+      {
+       "id": 141,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight",
+     "predictions": {
+      "p1": {
+       "ticker": "GC=F",
+       "direction": "above",
+       "target_level": 4279.59,
+       "due_date": "2026-11-12",
+       "baseline_price": 4176.2001953125,
+       "current_price": 4133.60009765625,
+       "tripwire_state": "unhit",
+       "progress_pct": -41.20338343322199,
+       "terminal_pred_id": 79,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "GC=F",
+       "direction": "below",
+       "target_level": 3850.37,
+       "due_date": "2026-11-12",
+       "baseline_price": 4176.2001953125,
+       "current_price": 4133.60009765625,
+       "tripwire_state": "unhit",
+       "progress_pct": 13.074324684792558,
+       "terminal_pred_id": 80,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "baseline_prices": {
+      "GC=F": 4176.2001953125
+     },
+     "current_prices": {
+      "GC=F": 4133.60009765625
+     },
+     "price_source": {
+      "GC=F": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "evidence_note": "one further evidence item present in source but omitted in the read; inventory covers the 4 visible items",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "36": {
+     "theory_id": 36,
+     "name": "[Muse theory] Neocloud credit sorting: CoreWeave's unsecured 2032 bonds repriced from a 9.625% June coupon to ~15% yield (below 80c); Oracle long bonds touched 8%; Oracle/Broadcom CDS at records. The AI capex financing squeeze hits leveraged borrowers first. The call is a slow sorting -- self-funders keep building, levered names get squeezed/consolidated/rescued -- not a single crash. CRWV is the ",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 142,
+       "stance": "confirming"
+      },
+      {
+       "id": 143,
+       "stance": "confirming"
+      },
+      {
+       "id": 144,
+       "stance": "challenging"
+      },
+      {
+       "id": 145,
+       "stance": "challenging"
+      },
+      {
+       "id": 153,
+       "stance": "confirming"
+      },
+      {
+       "id": 167,
+       "stance": "confirming"
+      },
+      {
+       "id": 190,
+       "stance": "confirming"
+      },
+      {
+       "id": 191,
+       "stance": "confirming"
+      },
+      {
+       "id": 199,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight",
+     "predictions": {
+      "p1": {
+       "ticker": "CRWV",
+       "direction": "below",
+       "target_level": 49.43,
+       "due_date": "2026-11-13",
+       "baseline_price": 64.08499908447266,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": 13.3401442408058,
+       "terminal_pred_id": 85,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "CRWV",
+       "direction": "above",
+       "target_level": 76.68,
+       "due_date": "2026-11-13",
+       "baseline_price": 64.08499908447266,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": -15.522015674864017,
+       "terminal_pred_id": 86,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-15 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "baseline_prices": {
+      "CRWV": 64.08499908447266
+     },
+     "current_prices": {
+      "CRWV": 62.130001068115234
+     },
+     "price_source": {
+      "CRWV": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "40": {
+     "theory_id": 40,
+     "name": "[Muse theory] ASML is building a die-to-wafer hybrid-bonding tool (track-based D2W design per patent filings + press reports), breaking Besi's advanced-packagin",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 163,
+       "stance": "confirming"
+      },
+      {
+       "id": 164,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "BESIY": 175.5
+     },
+     "current_prices": {
+      "BESIY": 175.3699951171875
+     },
+     "price_source": {
+      "BESIY": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "BESIY",
+       "direction": "below",
+       "target_level": 158.39,
+       "due_date": "2026-11-14",
+       "baseline_price": 175.5,
+       "current_price": 175.3699951171875,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.7598181344973693,
+       "terminal_pred_id": 92,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "BESIY",
+       "direction": "below",
+       "target_level": 202.72,
+       "due_date": "2026-11-14",
+       "baseline_price": 175.5,
+       "current_price": 175.3699951171875,
+       "tripwire_state": "hit",
+       "progress_pct": -0.47760794567413667,
+       "terminal_pred_id": 93,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight; hit at first observation — baselined silently, never alerted"
+      }
+     },
+     "transition_note_2026-10-17": "status flip observed 2026-10-17 morning run — alerted",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "39": {
+     "theory_id": 39,
+     "name": "[Muse theory] Money-center banks bearish on rate-shock + AI-credit fear: BAC/MS/BNY/WFC all at -100 retained factor agreement, 15d -8% area, while hot CPI (3.7%",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 159,
+       "stance": "confirming"
+      },
+      {
+       "id": 160,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "WFC": 80.9000015258789
+     },
+     "current_prices": {
+      "WFC": 82.19999694824219
+     },
+     "price_source": {
+      "WFC": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "WFC",
+       "direction": "below",
+       "target_level": 74.73,
+       "due_date": "2026-11-13",
+       "baseline_price": 80.9000015258789,
+       "current_price": 82.19999694824219,
+       "tripwire_state": "unhit",
+       "progress_pct": -21.069612655859107,
+       "terminal_pred_id": 91,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "38": {
+     "theory_id": 38,
+     "name": "[Muse theory] AI unwind rotates into defensives: hot September PPI (6.3% YoY) and AI-capex debt fears (CoreWeave bond pressure) triggered a week-long AI/momentu",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 161,
+       "stance": "confirming"
+      },
+      {
+       "id": 162,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "PG": 156.52999877929688,
+      "QQQ": 728
+     },
+     "current_prices": {
+      "PG": 159.32000732421875,
+      "QQQ": 717.6300048828125
+     },
+     "price_source": {
+      "PG": "listtheories prediction feed",
+      "QQQ": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "PG",
+       "direction": "above",
+       "target_level": 164.04,
+       "due_date": "2026-11-13",
+       "baseline_price": 156.52999877929688,
+       "current_price": 159.32000732421875,
+       "tripwire_state": "unhit",
+       "progress_pct": 37.15057378726582,
+       "terminal_pred_id": 89,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "QQQ",
+       "direction": "below",
+       "target_level": 698.69,
+       "due_date": "2026-11-13",
+       "baseline_price": 728,
+       "current_price": 717.6300048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": 35.380399580987785,
+       "terminal_pred_id": 90,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "transition_note_2026-10-18": "status flip observed 2026-10-18 morning run (challenged->confirming) — alerted, dedup equity-analyzer-and-signal-tracker/38/status:challenged→confirming",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "37": {
+     "theory_id": 37,
+     "name": "[Muse theory] MSCI finalized 'non-operating company' index rules Oct 15 after US close: firms failing 4+ of 5 ratio screens can be removed from Global Investabl",
+     "status": "confirming",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 146,
+       "stance": "confirming"
+      },
+      {
+       "id": 147,
+       "stance": "challenging"
+      },
+      {
+       "id": 148,
+       "stance": "challenging"
+      },
+      {
+       "id": 149,
+       "stance": "challenging"
+      },
+      {
+       "id": 150,
+       "stance": "confirming"
+      },
+      {
+       "id": 151,
+       "stance": "confirming"
+      },
+      {
+       "id": 152,
+       "stance": "confirming"
+      },
+      {
+       "id": 165,
+       "stance": "confirming"
+      },
+      {
+       "id": 166,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "MSTR": 144.80999755859375
+     },
+     "current_prices": {
+      "MSTR": 142.72000122070312
+     },
+     "price_source": {
+      "MSTR": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "MSTR",
+       "direction": "below",
+       "target_level": 140,
+       "due_date": "2026-11-13",
+       "baseline_price": 144.80999755859375,
+       "current_price": 142.72000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 43.45108937023361,
+       "terminal_pred_id": 87,
+       "baselined_at_first_run": true,
+       "note": "tripwire hit 2026-10-17 morning run: MSTR 136.83 below 140 — alerted, dedup equity-analyzer-and-signal-tracker/37/tripwire:p1:hit",
+       "tripwire_hit_observed_utc": "2026-10-17T12:06:01Z",
+       "bounce_watch": {
+        "reclaimed_level": 140,
+        "reclaimed_at_utc": "2026-10-21T00:05:47.788Z",
+        "reclaim_price": 142.72000122070312,
+        "reclaim_context": {
+         "volume_note": null,
+         "funding_note": null,
+         "breadth_note": null
+        },
+        "classify_after_utc": "2026-10-26T00:06:00Z",
+        "status": "open",
+        "note": "hit alerted (equity-analyzer-and-signal-tracker/37/tripwire:p1:hit); level reclaimed 2026-10-20 evening run",
+        "morning_run_note_2026-10-21": "MSTR 142.72000122070312 above 140 at 2026-10-21T12:01Z; watch open, classify after 2026-10-26T00:06:00Z"
+       }
+      },
+      "p2": {
+       "ticker": "MSTR",
+       "direction": "below",
+       "target_level": 133,
+       "due_date": "2026-12-04",
+       "baseline_price": 144.80999755859375,
+       "current_price": 142.72000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 17.696839711620456,
+       "terminal_pred_id": 88,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-16 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "transition_note_2026-10-17": "status flip observed 2026-10-17 morning run — alerted",
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "41": {
+     "theory_id": 41,
+     "name": "[Muse theory] AI-momentum unwind: NVDA/MU max-conviction longs invalidated",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 169,
+       "stance": "challenging"
+      },
+      {
+       "id": 170,
+       "stance": "confirming"
+      },
+      {
+       "id": 171,
+       "stance": "confirming"
+      },
+      {
+       "id": 172,
+       "stance": "confirming"
+      },
+      {
+       "id": 173,
+       "stance": "confirming"
+      },
+      {
+       "id": 175,
+       "stance": "confirming"
+      },
+      {
+       "id": 177,
+       "stance": "confirming"
+      },
+      {
+       "id": 178,
+       "stance": "challenging"
+      },
+      {
+       "id": 179,
+       "stance": "challenging"
+      },
+      {
+       "id": 187,
+       "stance": "confirming"
+      },
+      {
+       "id": 188,
+       "stance": "confirming"
+      },
+      {
+       "id": 189,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "NVDA": 214.13,
+      "META": 709.33,
+      "QQQ": 728
+     },
+     "current_prices": {
+      "NVDA": 216.47000122070312,
+      "META": 694.25,
+      "QQQ": 717.6300048828125
+     },
+     "price_source": {
+      "NVDA": "listtheories prediction feed",
+      "META": "listtheories prediction feed",
+      "QQQ": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "NVDA",
+       "direction": "below",
+       "target_level": 200,
+       "due_date": "2026-11-13",
+       "baseline_price": 214.13,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": -16.5605181932281,
+       "terminal_pred_id": 94,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "NVDA",
+       "direction": "above",
+       "target_level": 223.58,
+       "due_date": "2026-11-13",
+       "baseline_price": 214.13,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 24.761917679398152,
+       "terminal_pred_id": 95,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      },
+      "p3": {
+       "ticker": "META",
+       "direction": "below",
+       "target_level": 691.88,
+       "due_date": "2026-11-06",
+       "baseline_price": 709.33,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": 86.41833810888254,
+       "terminal_pred_id": 96,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      },
+      "p4": {
+       "ticker": "QQQ",
+       "direction": "below",
+       "target_level": 690,
+       "due_date": "2026-11-13",
+       "baseline_price": 728,
+       "current_price": 717.6300048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": 27.28946083470395,
+       "terminal_pred_id": 97,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "42": {
+     "theory_id": 42,
+     "name": "[Muse theory] Measured long-energy momentum (WTI)",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 168,
+       "stance": "challenging"
+      },
+      {
+       "id": 174,
+       "stance": "confirming"
+      },
+      {
+       "id": 176,
+       "stance": "challenging"
+      },
+      {
+       "id": 180,
+       "stance": "confirming"
+      },
+      {
+       "id": 181,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "CL=F": 101.41
+     },
+     "current_prices": {
+      "CL=F": 98.36000061035156
+     },
+     "price_source": {
+      "CL=F": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "CL=F",
+       "direction": "above",
+       "target_level": 102.49,
+       "due_date": "2026-10-23",
+       "baseline_price": 101.41,
+       "current_price": 98.36000061035156,
+       "tripwire_state": "unhit",
+       "progress_pct": -282.407350893374,
+       "terminal_pred_id": 98,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "CL=F",
+       "direction": "below",
+       "target_level": 87.12,
+       "due_date": "2026-11-13",
+       "baseline_price": 101.41,
+       "current_price": 98.36000061035156,
+       "tripwire_state": "unhit",
+       "progress_pct": 21.343592649744128,
+       "terminal_pred_id": 99,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "43": {
+     "theory_id": 43,
+     "name": "[Muse theory] MSTR MSCI index-removal risk into Nov 11 list",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 182,
+       "stance": "confirming"
+      },
+      {
+       "id": 183,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "MSTR": 136.83
+     },
+     "current_prices": {
+      "MSTR": 142.72000122070312
+     },
+     "price_source": {
+      "MSTR": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "MSTR",
+       "direction": "below",
+       "target_level": 107.64,
+       "due_date": "2026-11-14",
+       "baseline_price": 136.83,
+       "current_price": 142.72000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": -20.178147381648202,
+       "terminal_pred_id": 100,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "MSTR",
+       "direction": "below",
+       "target_level": 88.18,
+       "due_date": "2026-11-14",
+       "baseline_price": 136.83,
+       "current_price": 142.72000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": -12.106888428988924,
+       "terminal_pred_id": 101,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      },
+      "p3": {
+       "ticker": "MSTR",
+       "direction": "above",
+       "target_level": 156.29,
+       "due_date": "2026-11-14",
+       "baseline_price": 136.83,
+       "current_price": 142.72000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 30.267221072472346,
+       "terminal_pred_id": 102,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-17 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "evening_run_note_2026-10-18": "evening_run_2026-10-18: no equity trading session (Sunday); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "45": {
+     "theory_id": 45,
+     "name": "[Muse theory] AI-infra credit stress is now priced by the bond market, not just equities: CoreWeave's unsecured bonds yielded 15% on Oct 13 vs 5.9% on its $8.5B",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 195,
+       "stance": "challenging"
+      },
+      {
+       "id": 194,
+       "stance": "confirming"
+      },
+      {
+       "id": 193,
+       "stance": "confirming"
+      },
+      {
+       "id": 192,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-18 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "CRWV": 61.38999938964844
+     },
+     "current_prices": {
+      "CRWV": 62.130001068115234
+     },
+     "price_source": {
+      "CRWV": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "CRWV",
+       "direction": "above",
+       "target_level": 73.55,
+       "due_date": "2026-11-15",
+       "baseline_price": 61.38999938964844,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": 6.085539813516528,
+       "terminal_pred_id": 105,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "CRWV",
+       "direction": "below",
+       "target_level": 43.15,
+       "due_date": "2026-11-15",
+       "baseline_price": 61.38999938964844,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": -4.057026881737521,
+       "terminal_pred_id": 106,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-18 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "created_at": "2026-10-18T15:54:46.724Z",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "46": {
+     "theory_id": 46,
+     "name": "[Muse theory] MU is a genuine battleground: Burry disclosed a short in MU (Oct 19, via his Substack, one reporting layer) while degentradinglsd is long MU. The tape gives the short side near-term momentum (-15% over two weeks, RSI 34, below 50dma, factor model -38 short) but the long side owns the structure (still 100% above 200dma, +240% YTD, valuation reads cheap). Short thesis: correction extends toward mechanical target 731.32; invalidation is a reclaim above 977.19 (2x ATR). Flag: Burry disclosure is single-source until a second source or filing corroborates.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 196,
+       "stance": "confirming"
+      },
+      {
+       "id": 197,
+       "stance": "confirming"
+      },
+      {
+       "id": 198,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-19 morning run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "MU": 878.8400268554688
+     },
+     "current_prices": {
+      "MU": 896.0700073242188
+     },
+     "price_source": {
+      "MU": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "created_at": "2026-10-19T11:58:11.563Z",
+     "morning_run_note_2026-10-19": "morning_run_2026-10-19: no equity trading session (pre-market Monday 12:01Z); Friday-close prices retained, prediction-feed moves treated as unavailable",
+     "predictions": {
+      "p1": {
+       "ticker": "MU",
+       "direction": "below",
+       "target_level": 731.32,
+       "due_date": "2026-11-17",
+       "baseline_price": 878.8400268554688,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": -11.679756868286708,
+       "terminal_pred_id": 107,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 morning run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "MU",
+       "direction": "above",
+       "target_level": 977.19,
+       "due_date": "2026-11-17",
+       "baseline_price": 878.8400268554688,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": 17.519049490160498,
+       "terminal_pred_id": 108,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 morning run; baselined silently, never alerted on first sight"
+      }
+     },
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "48": {
+     "theory_id": 48,
+     "name": "[Muse theory] SemiAnalysis 'Datacenters 2027: The Year of Acceleration' — +50GW of new datacenter capacity delivered in a single year (essentially the entire global cumulative market through 2024), with >24GW at just 40 campuses already in advanced construction and mostly >50% done, sustaining 2027 AI-infra capex. CONTESTED read: the near-term NVDA tape is bearish (factor agreement -38, RSI 37.6, price below SMA50), Brad Gerstner's 25GW 'hunch' and power/supply constraints are live counterpoints, and Burry flags private-credit stress on the datacenter financing chain. VST (power/grid supplier) is the clean long-aligned vehicle: mechanical long, target1 174.36, invalidation 137.13.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 204,
+       "stance": "challenging"
+      },
+      {
+       "id": 203,
+       "stance": "challenging"
+      },
+      {
+       "id": 202,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "VST": 150.88999938964844,
+      "NVDA": 214.1300048828125
+     },
+     "current_prices": {
+      "VST": 150.32000732421875,
+      "NVDA": 216.47000122070312
+     },
+     "price_source": {
+      "VST": "listtheories prediction feed",
+      "NVDA": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "VST",
+       "direction": "above",
+       "target_level": 174.36,
+       "due_date": "2026-12-17",
+       "baseline_price": 150.88999938964844,
+       "current_price": 150.32000732421875,
+       "tripwire_state": "unhit",
+       "progress_pct": -2.4285984261043834,
+       "terminal_pred_id": 112,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "VST",
+       "direction": "above",
+       "target_level": 137.13,
+       "due_date": "2026-12-17",
+       "baseline_price": 150.88999938964844,
+       "current_price": 150.32000732421875,
+       "tripwire_state": "hit",
+       "progress_pct": 4.1423843801801965,
+       "terminal_pred_id": 113,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight; hit at first observation — baselined silently, never alerted"
+      },
+      "p3": {
+       "ticker": "NVDA",
+       "direction": "above",
+       "target_level": 226.06,
+       "due_date": "2026-12-17",
+       "baseline_price": 214.1300048828125,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 19.614394766343203,
+       "terminal_pred_id": 114,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "47": {
+     "theory_id": 47,
+     "name": "[Muse theory] Narrow-bid tape: mega-cap factor agreement stays long (AAPL +78, META +42) while the broad tape reads short (IWM -95, SPY -42, QQQ -42, NVDA -38, TSLA -60); 15-session breadth 25% positive. Small caps lead the weakness — IWM 15d -4.09%, 30d -8.15%, Wilder RSI-14 31.99, MACD -4.04, mechanical invalidation above $278.14 — while Polymarket prices October CPI at 3.7% (81.5% odds) with only 14.5% on a +25bp Fed hike: a hot-inflation-no-cut macro consistent with broad de-rating and mega-cap insulation. This is a contested fork (long megacap vs short broad), so no single-direction index call: descriptive read. Invalidation tripwire: 15d breadth crosses 50% positive OR IWM alignment flips above -20; either event breaks the narrow-bid thesis.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 201,
+       "stance": "confirming"
+      },
+      {
+       "id": 200,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "IWM": 270.44000244140625,
+      "META": 709.3300170898438
+     },
+     "current_prices": {
+      "IWM": 275.7799987792969,
+      "META": 694.25
+     },
+     "price_source": {
+      "IWM": "listtheories prediction feed",
+      "META": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "IWM",
+       "direction": "below",
+       "target_level": 258.89,
+       "due_date": "2026-11-17",
+       "baseline_price": 270.44000244140625,
+       "current_price": 275.7799987792969,
+       "tripwire_state": "unhit",
+       "progress_pct": -46.23372475443786,
+       "terminal_pred_id": 109,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "IWM",
+       "direction": "above",
+       "target_level": 278.14,
+       "due_date": "2026-11-17",
+       "baseline_price": 270.44000244140625,
+       "current_price": 275.7799987792969,
+       "tripwire_state": "unhit",
+       "progress_pct": 69.35062377949478,
+       "terminal_pred_id": 110,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight"
+      },
+      "p3": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 785.22,
+       "due_date": "2026-11-17",
+       "baseline_price": 709.3300170898438,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": -19.870892720711904,
+       "terminal_pred_id": 111,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-19 evening run; baselined silently, never alerted on first sight"
+      }
+     },
+     "evening_run_note_2026-10-19": "evening_run_2026-10-19: Monday session completed (post-close 00:00Z); prediction-feed prices used as session prints"
+    },
+    "49": {
+     "theory_id": 49,
+     "name": "[Muse theory] CRWV is the AI-credit battleground: Chamath's bear case (CDS ~953bp implying ~55% 5yr default odds, ~$5B from covenant breach, $35B debt plus $35B more at ~8.5%, 75% of revenue from 3 customers) vs Goldman's Buy ($106 PT, credit fears overstated, DDTLs asset-backed). The tape is decisively short-side (factor agreement -95, RSI 29, -56% off highs, theory test 22/100 on the dip-buy) — the long side currently owns only the analyst call.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 205,
+       "stance": "challenging"
+      },
+      {
+       "id": 206,
+       "stance": "confirming"
+      },
+      {
+       "id": 207,
+       "stance": "confirming"
+      },
+      {
+       "id": 215,
+       "stance": "confirming"
+      },
+      {
+       "id": 214,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-20 morning run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "CRWV": 61.119998931884766
+     },
+     "current_prices": {
+      "CRWV": 62.130001068115234
+     },
+     "price_source": {
+      "CRWV": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "created_at": "2026-10-20T11:53:22.081Z",
+     "predictions": {
+      "p1": {
+       "ticker": "CRWV",
+       "direction": "below",
+       "target_level": 42.75,
+       "due_date": "2026-11-17",
+       "baseline_price": 61.119998931884766,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": -5.498106668244876,
+       "terminal_pred_id": 115,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 morning run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "CRWV",
+       "direction": "above",
+       "target_level": 73.36,
+       "due_date": "2026-11-17",
+       "baseline_price": 61.119998931884766,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": 8.25165071971675,
+       "terminal_pred_id": 116,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 morning run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "54": {
+     "theory_id": 54,
+     "name": "[Muse theory] Issuer vetoes are becoming the binding constraint on tokenized-stock venues: nine blue-chip issuers (VZ, AVGO, UNH, Cerebras, APP, APLD, RKLB, CRWV, AOI) formally objected to OKXICE listing their shares — 14% of its planned 63-company roster — and Nasdaq is opting its own shares out over missing best-execution/tape duties. Issuer consent was the unpriced assumption in the tokenized-equity bull case; expect veto contagion to cap roster growth and weigh on tokenized-equity-adjacent plays over the next month.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 222,
+       "stance": "challenging"
+      },
+      {
+       "id": 221,
+       "stance": "confirming"
+      },
+      {
+       "id": 220,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {},
+     "current_prices": {
+      "CRWV": 62.130001068115234,
+      "HOOD": 98.20999908447266
+     },
+     "price_source": {
+      "CRWV": "listtheories prediction feed",
+      "HOOD": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p124": {
+       "ticker": "CRWV",
+       "direction": "below",
+       "target_level": 42.75,
+       "due_date": "2026-11-17",
+       "baseline_price": 62.130001068115234,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 124,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      },
+      "p125": {
+       "ticker": "CRWV",
+       "direction": "above",
+       "target_level": 73.36,
+       "due_date": "2026-11-17",
+       "baseline_price": 62.130001068115234,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 125,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      },
+      "p126": {
+       "ticker": "HOOD",
+       "direction": "below",
+       "target_level": 79.07,
+       "due_date": "2026-11-17",
+       "baseline_price": 98.20999908447266,
+       "current_price": 98.20999908447266,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 126,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      },
+      "p127": {
+       "ticker": "HOOD",
+       "direction": "above",
+       "target_level": 108.15,
+       "due_date": "2026-11-17",
+       "baseline_price": 98.20999908447266,
+       "current_price": 98.20999908447266,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 127,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "53": {
+     "theory_id": 53,
+     "name": "[Muse theory] AI-credit anxiety reprices the AI-capec complex post-open: semis snap back into selloff (MU -2.5%, SNDK -3%, INTC -1.7%, QCOM -1.1% pre-market; KOSPI chipmakers -4.3% overnight; CRWV -3.2% pre-market despite Monday's Goldman upgrade to Buy). Thesis: debt-funded AI buildout fear (CRWV's -25% week) has jumped from single-name to sector risk, pressuring semis and AI-adjacent megacaps. MU (RSI 30.9, below SMA50 $984.54) is the cleanest read: bearish short-horizon toward its 2x-ATR level $812.02. Invalidation: MU closes back above SMA50 $984.54 (mechanical, verified unbreached), or tonight's/Wednesday's earnings (NFLX, UAL, META, TSLA, IBM) deliver beat-and-raise AI-capex guidance that restores the bid.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 219,
+       "stance": "challenging"
+      },
+      {
+       "id": 218,
+       "stance": "challenging"
+      },
+      {
+       "id": 217,
+       "stance": "confirming"
+      },
+      {
+       "id": 216,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {},
+     "current_prices": {
+      "MU": 896.0700073242188
+     },
+     "price_source": {
+      "MU": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p122": {
+       "ticker": "MU",
+       "direction": "below",
+       "target_level": 812.02,
+       "due_date": "2026-11-10",
+       "baseline_price": 896.0700073242188,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 122,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      },
+      "p123": {
+       "ticker": "MU",
+       "direction": "above",
+       "target_level": 984.54,
+       "due_date": "2026-11-10",
+       "baseline_price": 896.0700073242188,
+       "current_price": 896.0700073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 123,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "52": {
+     "theory_id": 52,
+     "name": "Mega-cap leadership is rotating inside the cohort, not collapsing: META leads SPY by +14.7% over 30 days (terminal rotation stack, asOf 2026-10-20) with long alignment (+42), AAPL carries +73 alignment, while NVDA has faded to -5.4% vs SPY over 30d with short alignment (-38) and QQQ runs -2.47% over 15d. 15-session breadth sits at 50 — this is a baton pass from semis to platforms. It refines the Oct 5 machine thesis of narrow AI leadership: the narrowness moved from momentum semis (MU-type) to platform cash-flow (META/AAPL). Invalidation: META ratio-30d vs SPY turns negative AND NVDA ratio-30d turns positive — the baton passes back. Note the Oct 5 META signal (entry $738.88) sits underwater at $705.44; the rotation thesis needs META to reclaim that level to confirm.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 211,
+       "stance": "confirming"
+      },
+      {
+       "id": 210,
+       "stance": "challenging"
+      }
+     ],
+     "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {},
+     "current_prices": {
+      "META": 694.25,
+      "NVDA": 216.47000122070312
+     },
+     "price_source": {
+      "META": "listtheories prediction feed",
+      "NVDA": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p120": {
+       "ticker": "META",
+       "direction": "above",
+       "target_level": 740,
+       "due_date": "2026-11-03",
+       "baseline_price": 694.25,
+       "current_price": 694.25,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 120,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      },
+      "p121": {
+       "ticker": "NVDA",
+       "direction": "below",
+       "target_level": 205,
+       "due_date": "2026-11-03",
+       "baseline_price": 216.47000122070312,
+       "current_price": 216.47000122070312,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 121,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "51": {
+     "theory_id": 51,
+     "name": "Brent $110.80-$111.42 — five-month high, highest since May 19/20 (Reuters, 0810 GMT Oct 20) — sits on a live supply-risk stack: Houthi strikes claimed on Aramco Yanbu, the Shaybah oilfield, and Riyadh/Abha airports (UNCONFIRMED by Saudi authorities), 18 vessels attacked in two weeks (Kpler), two tankers set ablaze in Hormuz after hitting mines (IRGC via Tasnim), and Iran vowing forceful response to any US strike. WTI front-month is up a ninth straight session (~+20% month). S&P futures sat flat at 7,735.25 after Monday's +0.57% cash rebound — the market cannot follow through while crude prices in a war premium. This is the live, confirmed version of the machine's Oct 5 energy/geopolitics thesis (low confidence then; mechanism verified now). Invalidation: Brent breaks and holds below $100 on confirmed uninterrupted flows — the risk premium erodes per ING's own note — or a verifiable US-Iran de-escalation lands.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 213,
+       "stance": "challenging"
+      },
+      {
+       "id": 208,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {},
+     "current_prices": {
+      "SPY": 769.3200073242188,
+      "QQQ": 717.6300048828125
+     },
+     "price_source": {
+      "SPY": "listtheories prediction feed",
+      "QQQ": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p118": {
+       "ticker": "SPY",
+       "direction": "below",
+       "target_level": 745,
+       "due_date": "2026-10-27",
+       "baseline_price": 769.3200073242188,
+       "current_price": 769.3200073242188,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 118,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      },
+      "p119": {
+       "ticker": "QQQ",
+       "direction": "below",
+       "target_level": 695,
+       "due_date": "2026-10-27",
+       "baseline_price": 717.6300048828125,
+       "current_price": 717.6300048828125,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 119,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "50": {
+     "theory_id": 50,
+     "name": "The fragile edge of the AI trade is financing, not demand: premarket saw CoreWeave, Nebius, NVDA, AAPL pressured as investors price AI funding risk into the Q3 tech earnings slate (wdsm710, SINGLE SOURCE). Brent at 5-month highs tightens the same financial conditions the Oct 5 machine rates thesis flagged (10Y retesting 4.30%). Logan's standing AI-credit thread — boringbiz's hyperscaler-bond data ('Debt by a Thousand Cuts'), hkuppy's take-or-pay neocloud case — has its realized poster child in chamath's CRWV short (+182.7%, the board's best trade). A funding scare reprices neocloud equity and the semis feeding it before it touches the megacaps: CRWV at $61.12 is the canary, NVDA's -5.4% 30d fade vs SPY is the transmission. Invalidation: CoreWeave or Nebius raise fresh financing on clean terms, or NVDA's 30d ratio vs SPY turns positive — funding risk priced out, not in.",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [
+      {
+       "id": 212,
+       "stance": "challenging"
+      },
+      {
+       "id": 209,
+       "stance": "confirming"
+      }
+     ],
+     "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight",
+     "baseline_prices": {},
+     "current_prices": {
+      "CRWV": 62.130001068115234
+     },
+     "price_source": {
+      "CRWV": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p117": {
+       "ticker": "CRWV",
+       "direction": "below",
+       "target_level": 52,
+       "due_date": "2026-11-03",
+       "baseline_price": 62.130001068115234,
+       "current_price": 62.130001068115234,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 117,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-20 evening run; baselined silently, never alerted on first sight"
+      }
+     }
+    },
+    "55": {
+     "theory_id": 55,
+     "name": "[Muse theory] NFLX post-earnings fade: Q3 beat spent, ad-revenue guide cut",
+     "status": "challenged",
+     "coverage": "full",
+     "evidence_baselined": true,
+     "evidence_inventory": [],
+     "note": "new theory first seen 2026-10-21 morning run; baselined silently, never alerted on first sight",
+     "baseline_prices": {
+      "NFLX": 68.69000244140625
+     },
+     "current_prices": {
+      "NFLX": 68.69000244140625
+     },
+     "price_source": {
+      "NFLX": "listtheories prediction feed"
+     },
+     "data_timestamp_utc": "2026-10-21T12:05:39.637Z",
+     "last_checked_utc": "2026-10-21T12:09:40Z",
+     "missing_since": null,
+     "predictions": {
+      "p1": {
+       "ticker": "NFLX",
+       "direction": "below",
+       "target_level": 64.0,
+       "due_date": "2026-10-23",
+       "baseline_price": 68.69000244140625,
+       "current_price": 68.69000244140625,
+       "tripwire_state": "unhit",
+       "progress_pct": 0.0,
+       "terminal_pred_id": 128,
+       "baselined_at_first_run": true,
+       "note": "new theory first seen 2026-10-21 morning run; baselined silently, never alerted on first sight"
+      },
+      "p2": {
+       "ticker": "NFLX",
+       "direction": "above",
+       "target_level": 68.69,
+       "due_date": "2026-11-03",
+       "baseline_price": 68.69000244140625,
+       "current_price": 68.69000244140625,
+       "tripwire_state": "hit",
+       "progress_pct": -0.0,
+       "terminal_pred_id": 129,
+       "baselined_at_first_run": true,
+       "note": "hit at first observation (price == level) — baselined silently, never alerted; new theory first seen 2026-10-21 morning run"
+      }
+     }
+    }
+   }
+  }
+ },
+ "version": 1
+}

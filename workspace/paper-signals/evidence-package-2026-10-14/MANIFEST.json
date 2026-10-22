@@ -1,0 +1,95 @@
+{
+  "package": "paper-signals consolidated evidence package",
+  "date_utc": "2026-10-14/15",
+  "file_count": 22,
+  "files": {
+    "APPLIED-WORKER-BODY-v2.2-2026-10-14.md": {
+      "sha256": "fa357ed140b00564c77f306958cae462500528e209e3d36ebff614939b618620",
+      "bytes": 20679
+    },
+    "DEPLOYMENT-GATE-2026-10-14.md": {
+      "sha256": "8ba77714edc2dea8bf8889f5e0194fa8388c9c6749b1508c83e343d463730c2c",
+      "bytes": 8394
+    },
+    "DOSSIER-MODEL-DIAGNOSIS-2026-10-14.md": {
+      "sha256": "cd9de99b4990cb74d06f055d35e4728b82da8330224f7bedbf1ee18133d1e73d",
+      "bytes": 9487
+    },
+    "DOSSIER-VS-PAPER-ENGINE-2026-10-14.md": {
+      "sha256": "f9526861f219ebc8ef4bcfdb5c1717b2e92174ffd63041a129bca7d8a8559efd",
+      "bytes": 18183
+    },
+    "ENTRY-TO-DELIVERY-METRIC-2026-10-14.md": {
+      "sha256": "3a0dd7c5ce6186fb5a499658dd6f1c8be8c21a74d4e16458f73da4ffbc1078f3",
+      "bytes": 6169
+    },
+    "MEASUREMENT-DEFINITIONS-2026-10-14.md": {
+      "sha256": "8f4e607c990202544dbf9969eb4bcc71a227431fba800f4098ae512e155b5283",
+      "bytes": 4863
+    },
+    "MODEL-DIAGNOSIS-COMPARISON-2026-10-14.csv": {
+      "sha256": "d7af285dab358dd6b216b8fecd5778430bbf0e5c9f9f71b312cffea41f433fd5",
+      "bytes": 1553
+    },
+    "PAIRED-INVERSION-RETROSPECTIVE-2026-10-14.csv": {
+      "sha256": "5127c1fa455a0441a0f34b0dc24f9834039eb80529e9f9acfe26ce98a63bcee0",
+      "bytes": 5400
+    },
+    "PAIRED-INVERSION-RETROSPECTIVE-2026-10-14.md": {
+      "sha256": "7f5ad24ac55cc759c6d8e5f3c6cf9535db05e8ea24b93a3f4caa27c25412e056",
+      "bytes": 4520
+    },
+    "REPLAY-FACTOR-LEDGER-EVIDENCE-2026-10-14.json": {
+      "sha256": "a694c0f426752df948753f22f3697f8c259978af1372fb162e5ccc3ce4236c4c",
+      "bytes": 19795
+    },
+    "REPLAY-FACTOR-LEDGER-MAPPING-2026-10-14.md": {
+      "sha256": "8d7b78a0e9df9b547707a0799210322c7301d97c49b9d32fb9ecb9e39c0ea654",
+      "bytes": 10603
+    },
+    "SHADOW-COMPARISON-PROTOCOL-v1.md": {
+      "sha256": "80324df744bd0b1fbf6094f6b831ed953dfb6caaade5339e5396a07b8ae59b05",
+      "bytes": 9931
+    },
+    "SPEC-A-CHART-SETUP-ACTIVE-2026-10-14.md": {
+      "sha256": "3405f05c729b060a395094cd0353f970bec72a50fc00f0a88e857aa4e3a7fce9",
+      "bytes": 57586
+    },
+    "SPEC-A-CHART-SETUP-v4-AMENDMENT-2026-10-14.md": {
+      "sha256": "3ad3ab8451835d48327c895ee415e24541b1ae54ed9c1f00ffde939c725f0ed6",
+      "bytes": 14627
+    },
+    "SUPPORTED-UNIVERSE-v1.0.0.json": {
+      "sha256": "f481259932d418ba607a944de58e10778d9bf2b3e3a73c376a5a366b5b11f5ad",
+      "bytes": 9652
+    },
+    "THREE-DIMENSION-OUTCOMES-2026-10-14.csv": {
+      "sha256": "942e1c3f772e723e96cdad9865e3f7c6f4c3ea57a5df33907a02ca7cbe4cf780",
+      "bytes": 3046
+    },
+    "TRIGGER-CONTRACT-2026-10-14.md": {
+      "sha256": "40a266f0c16208be888415f2d1d5d3931bf201ecac8093da991c2156cfab87b1",
+      "bytes": 5416
+    },
+    "UNIVERSE-POLICY-v1.0.0.md": {
+      "sha256": "02421e5afee33d9a24edb373bafd2bd0c4dbc775dc9abbbee28d15deb0cc2575",
+      "bytes": 4742
+    },
+    "delivery-config.json": {
+      "sha256": "774e05e75f31db41eafb73883303da0fa00dddbd551c6e69d3d1f838da63e16e",
+      "bytes": 9608
+    },
+    "equity-42-expiry-reconciliation-2026-10-14.v2.csv": {
+      "sha256": "e1e4f1488ca959384df90253b532eda37a60e602c605613399b0c243c179f9c8",
+      "bytes": 31470
+    },
+    "test_timestamp_adapter_regression.py": {
+      "sha256": "00f3bec814c53070c81bfe8b35709d13366a0d073a17be4199045f21f13e29ac",
+      "bytes": 6025
+    },
+    "STATUS-2026-10-14.md": {
+      "sha256": "50085c63d1a8b421c0069f66f5f0488746d9ed19c34baa13f95539eb1af0f295",
+      "bytes": 3769
+    }
+  }
+}

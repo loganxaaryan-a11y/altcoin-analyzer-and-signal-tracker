@@ -1,0 +1,32 @@
+{
+  "runId": "86",
+  "source": "crypto-market-discovery",
+  "completedAt": "2026-10-17T02:57:21.815Z",
+  "freezeVersion": "v2.1.5",
+  "demo": false,
+  "feedMode": "binance",
+  "feedLabel": "binance-spot (read-only public market data; paper only)",
+  "issuancePath": "processIntegratedCandidate(orchestrator/src/issuance/handler.ts) — entry-v1 + waiting-interval veto + venue mapping",
+  "activeFreeze": "v2.1.5",
+  "receivedAt": "2026-10-17T03:13:07.677Z",
+  "staleRun": false,
+  "candidates": [
+    {
+      "candidateKey": "19fd693b568ccf334100131f090b93f3",
+      "symbol": "BTC",
+      "direction": "watch",
+      "ledgerHash": "4e8f84565726fb8880b2f877a2aa15d3ec41a093a71e007361a750642c7f76a9",
+      "outcome": "failed",
+      "reasonCode": "invalid-direction",
+      "reason": "direction \"watch\" is not long|short",
+      "gate": null,
+      "handlerOutcomeKind": null
+    }
+  ],
+  "counts": {
+    "qualified": 0,
+    "abstained": 0,
+    "deferred": 0,
+    "failed": 1
+  }
+}

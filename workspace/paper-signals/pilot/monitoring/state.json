@@ -1,0 +1,96 @@
+{
+ "positions": {
+  "paper_00e4b771faf0f29853c5675b": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:50Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_2fdab0335ac447d6baec41d8": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:51Z",
+   "last_outcome": "target1_touched",
+   "total_gaps_seen": 0
+  },
+  "paper_2ab8ea0bd8feaa53ff17028d": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:52Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_4fc35efbcec0d6dd055b4b5f": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:54Z",
+   "last_outcome": "invalidation_touched",
+   "total_gaps_seen": 0
+  },
+  "paper_c27656788f1742b9df78555f": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:55Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_3dfb80cd81972e76d094849c": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:58Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_d3241369357fb372c0573415": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:57Z",
+   "last_outcome": "invalidation_touched",
+   "total_gaps_seen": 0
+  },
+  "paper_9ecb1be0f5e9779a49312ab5": {
+   "last_covered_bar_close_ms": 1792656899999,
+   "last_covered_bar_close_utc": "2026-10-22T08:14:59Z",
+   "last_check_utc": "2026-10-22T08:15:56Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_7d6b448a2e5ec0cdc1aa9aa4": {
+   "last_covered_bar_close_ms": 1792656959999,
+   "last_covered_bar_close_utc": "2026-10-22T08:15:59Z",
+   "last_check_utc": "2026-10-22T08:16:00Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_6c3f666a247a675c951a4eb0": {
+   "last_covered_bar_close_ms": 1792656959999,
+   "last_covered_bar_close_utc": "2026-10-22T08:15:59Z",
+   "last_check_utc": "2026-10-22T08:16:01Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_3d7f6db2183d736bbefdd973": {
+   "last_covered_bar_close_ms": 1792656959999,
+   "last_covered_bar_close_utc": "2026-10-22T08:15:59Z",
+   "last_check_utc": "2026-10-22T08:16:03Z",
+   "last_outcome": "target1_touched",
+   "total_gaps_seen": 0,
+   "last_outcome_note": "interval outcome no_touch_observed did not overwrite established target1_touched (first-touch stands; merge repair 2026-10-22)"
+  },
+  "paper_6aee1bb09ebaef170ab13e82": {
+   "last_covered_bar_close_ms": 1792656959999,
+   "last_covered_bar_close_utc": "2026-10-22T08:15:59Z",
+   "last_check_utc": "2026-10-22T08:16:05Z",
+   "last_outcome": "no_touch_observed",
+   "total_gaps_seen": 0
+  },
+  "paper_ae0ef8cd437b434d3cd5d859": {
+   "last_covered_bar_close_ms": 1792656959999,
+   "last_covered_bar_close_utc": "2026-10-22T08:15:59Z",
+   "last_check_utc": "2026-10-22T08:16:06Z",
+   "last_outcome": "invalidation_touched",
+   "total_gaps_seen": 0
+  }
+ }
+}

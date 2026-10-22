@@ -1,0 +1,607 @@
+{
+  "manifest_version": "2.0.0",
+  "frozen_at_utc": "2026-10-14T04:09:32Z",
+  "frozen_by": "workstream A subagent (freeze v2.0.0 + real candidates into the comparison)",
+  "supersedes": {
+    "manifest": "freeze-manifest-v1.0.0.json",
+    "status": "SUPERSEDED",
+    "marker": "goals/research-terminal/paper-signals/comparison/FREEZE-v1.0.0-SUPERSEDED.md",
+    "why": "Operational rules changed after v1: the repaired pipeline introduced the actionable-entry-v1 contract (decisionAt/sourceObservedAt/receipt-time separation, entry rule, expiry, drift cap, 5-min observation-age limit), the waiting-interval veto (setup-history filter separate from decision->entry invalidation; straddle handling; 'a touch is a touch'), explicit venue mapping, decision-time level immutability with validatePublishedLevels, and the corrected evaluator (barrier semantics, TIMING_UNVERIFIED, 30-day cap, 18 bps). Model factor sets, weights, and scoring formulas are UNCHANGED from v1. v1 rows (rows/comparison-rows-2026-10-13.csv) are quarantined from pilot statistics."
+  },
+  "immutability_rule": "This manifest is immutable. ANY change to a model's factor list, weights, scoring formula, level construction, gate rules, entry rule, cost model, horizon, decision-time definition, veto semantics, venue mapping, or evaluator version requires a NEW manifest version (2.1.0 or 3.0.0). Never edit this file in place.",
+  "operational_rules": {
+    "note": "BOTH arms (production AND C-2 challenger) use IDENTICAL operational rules. C-2's ONLY model difference is the removal of the Momentum factor (10 factors vs 11; weight totals 15.5 vs 17.0).",
+    "entry_contract": {
+      "contract_version": "actionable-entry-v1",
+      "contract_fields": {
+        "decisionAt": "ISO-8601 UTC -- the information-cutoff commit instant (authoritative decision time).",
+        "sourceObservedAt": "venue/provider observation instant of the decision reference price. DISTINCT from decisionAt: decisionAt is when the decision was committed; sourceObservedAt is when the provider observed the price the decision references. Null only under the degraded rule (crypto fallback path only; equity contracts REQUIRE non-null).",
+        "sourceObservationWindow": "optional {start, end} bounding the observation interval.",
+        "entryObservedAt": "venue timestamp of the entry print (the print's own clock).",
+        "entryReceivedAt": "server receipt time of the entry print (staleness audit).",
+        "issuedAt": "server time of contract write; MUST be >= decisionAt."
+      },
+      "timestamps_ordering": "entry print must satisfy decisionAt <= issuedAt <= entryObservedAt <= entryReceivedAt; violations throw ContractError (entry-before-decision, observation-before-issuance, receipt-before-observation).",
+      "entry_rule": {
+        "equity": "next-xnys-regular-session-open-print",
+        "crypto": "first-post-decision-binance-spot-trade",
+        "note": "buildContract enforces the per-terminal rule; a mismatch throws."
+      },
+      "entry_window": {
+        "crypto": "entryWindowOpensAt = decisionAt; entryWindowExpiresAt = decisionAt + 15 min (cryptoEntryWindowMinutes; explicit UngroundedParam, ENTRY-SEMANTICS.md 6.2). Prints outside the window are never entered (void_expired).",
+        "equity": "next regular XNYS session open; after-hours excluded (equityAfterHoursExcluded=true, explicit param)."
+      },
+      "drift_limit": "driftCapPct: 0.50 equity | 1.50 crypto (explicit UngroundedParams, ENTRY-SEMANTICS.md 6.1). |drift| beyond the cap -> void_drift; a drifted print is never entered.",
+      "observation_age_limit": "maxObservationAgeMs = 5 min (cryptoEntryWindowMinutes/3, ENTRY-SEMANTICS.md 6.5). The entry rule demands the FIRST post-decision print observed LIVE; a print older than 5 min at receipt time is historical reconstruction, not an actionable entry -- prints older than this bound are SKIPPED (never entered).",
+      "anti_fabrication": "a contract may only carry entryPrice when evidence is a subsequent observable bid/ask (venue-trade) or an explicitly cost-adjusted quote (cost-adjusted-quote). With evidence 'unavailable', entryPrice MUST stay null -- a fill price is never invented. enterContract REJECTS by THROWING ContractError (never a soft rejection); every rejection carries a machine-readable ENTRY_REJECTION_REASON code.",
+      "terminal_states": "pending -> entered | void_drift | void_expired | void_no_quote. Voided contracts are logged non-entries: excluded from the accuracy cohort, never scored as MISS. States are terminal.",
+      "source_files": [
+        {
+          "path": "goals/research-terminal/paper-signals/entry-v1/src/contract.ts",
+          "sha256": "15853721301ccd13893f99e9c5e6751fb448aeadb7da6141dab7bad7c18cca42",
+          "role": "frozen contract schema, state machine, rejection codes"
+        },
+        {
+          "path": "goals/research-terminal/paper-signals/entry-v1/src/entry-rules.ts",
+          "sha256": "9874a0810b02c90ec457f88f4fcccb427ce47caa377f1c0279314d06f932eb53",
+          "role": "per-terminal entry rules, drift caps, 5-min observation-age bound, venue mapping"
+        },
+        {
+          "path": "goals/research-terminal/paper-signals/entry-v1/src/watcher.ts",
+          "sha256": "b27d715d7054386d85daf349a71468c7e1dfa2d4ca69c340f65a53435a912b07",
+          "role": "live entry watcher (poll cadence strictly finer than entry window)"
+        },
+        {
+          "path": "goals/research-terminal/paper-signals/entry-v1/src/feed.ts",
+          "sha256": "68b5558eb67fcecd2a0ab6d91173e3911b272c94214ba7f6f65bdd415b974784",
+          "role": "TradePrint / VenueFeed types (venue-stamped prints)"
+        },
+        {
+          "path": "goals/research-terminal/paper-signals/entry-v1/src/pending.ts",
+          "sha256": "5624a9b1ffee8e7071ef0340e2f8b4aa1e75f74f8fbd44179a45c47d503da3c1",
+          "role": "pending-contract entry observation path"
+        }
+      ]
+    },
+    "waiting_interval_veto": {
+      "repair": "GAP-4 (expert, 2026-10-13): the old issuance veto graded [detectedAt, handlerStart] -- actually PRE-decision setup history -- while the real waiting interval [contract.decisionAt, entryObservedAt] was never veto-checked. The repair splits the veto across its two real timestamps.",
+      "setup_history_filter": {
+        "function": "checkSetupHistory",
+        "semantics": "Bars entirely before the pre-decision cutoff (endAt <= preDecisionAt, clamped to <= decisionAt) are classified as setup-history FEATURES. A pre-decision extreme that crossed the final published stop is RECORDED (detail.historicalCrosses) -- evidence ABOUT how the setup formed, NEVER a stop-out against it. Yesterday's stop crossing cannot veto a new setup. This check NEVER fails: classificatory, not a veto."
+      },
+      "decision_to_entry_invalidation": {
+        "function": "checkWaitingInterval",
+        "window": "[contract.decisionAt, entryObservedAt] -- the genuine waiting interval. entryAt < decisionAt throws (time-incoherent interval; never guess).",
+        "semantics": "A touch is a touch: any adverse extreme TOUCHING the final published stop in the waiting interval invalidates the setup (fail). Per-bar handling (inherited from checkSetupInvalidation, fail-closed): bar entirely before decisionAt -> feature (never veto); bar straddling decisionAt or entryAt -> definite pass only if the whole-bar extreme provably could not have crossed; otherwise UNCERTAIN/fail-closed (the pre-event portion is never treated as a definite breach and cannot be isolated from OHLC); bar fully post-decision -> normal extreme check; null/incoherent OHLC -> UNCERTAIN; no post-decision bars -> UNCERTAIN ('issuance-validation unavailable'), except the equity overnight gap (session-close -> next-open carries no bars BY CONSTRUCTION: allowEmptyInterval=true passes with the explicit reason 'no bars by construction', never uncertain). Forming candles are admitted (provisional) so an immediate entry needs no completed candle.",
+        "separation": "The result's checks carry the setup-history filter and the decision->entry invalidation as SEPARATE check entries, so a reader can see which question failed."
+      },
+      "qualification_time": "runQualificationChecks (issuance time, entry not yet observed): pipeline-order guard (the veto must grade the FINAL published stop) + setup-history filter + entry-zone rules. Deliberately NO decision->entry invalidation at qualification -- the waiting interval does not exist yet; it is graded by checkWaitingInterval at entry observation. Uncertain fails closed.",
+      "source_files": [
+        {
+          "path": "goals/research-terminal/paper-signals/veto/src/waiting-interval.ts",
+          "sha256": "4035f95c8a02f66d2e69fb942969b2daa11154903fd7ee169333e803cd9f3c40",
+          "role": "timestamp-alignment repair: checkSetupHistory, checkWaitingInterval, runQualificationChecks"
+        },
+        {
+          "path": "goals/research-terminal/paper-signals/veto/src/veto.ts",
+          "sha256": "ae38b6b1ddb933033dfa70e7bf375e403d134e24f75e9b57e60ff6b78a3ae478",
+          "role": "checkSetupInvalidation (straddle/granularity/fail-closed), checkEntryZone, validatePipelineOrder"
+        }
+      ]
+    },
+    "venue_mapping": {
+      "rule": "ENTRY_VENUE_ACCEPTED_PRINT_LABELS (entry-rules.ts:83): contract entryVenue -> accepted print venue labels. A TradePrint's venue label MUST be in the accepted set for the contract's entryVenue, or the print is SKIPPED (never entered). Anti-cross-venue: an entry observed on the wrong venue is not the contract's entry, even if the price is inside the drift cap.",
+      "accepted_labels": {
+        "primary-listing-consolidated-tape": [
+          "consolidated-tape",
+          "primary-listing-consolidated-tape"
+        ],
+        "binance-spot": [
+          "binance-spot"
+        ]
+      },
+      "fallback": "Unknown entryVenue values fall back to exact-label match (fail-closed against unlisted venues).",
+      "consumption": "orchestrator/src/issuance/handler.ts:719 -- acceptedPrintVenues(pending.entryVenue); non-accepted prints skipped.",
+      "source_files": [
+        {
+          "path": "goals/research-terminal/paper-signals/entry-v1/src/entry-rules.ts",
+          "sha256": "9874a0810b02c90ec457f88f4fcccb427ce47caa377f1c0279314d06f932eb53",
+          "role": "ENTRY_VENUE_ACCEPTED_PRINT_LABELS + acceptedPrintVenues()"
+        },
+        {
+          "path": "goals/research-terminal/paper-signals/orchestrator/src/issuance/handler.ts",
+          "sha256": "b43a788047ebb234d3c996595a9612cda60f1acd69adba25eb8bf8d8746b393b",
+          "role": "consumption: venue filter on the live entry path"
+        }
+      ]
+    },
+    "level_construction": {
+      "decision_time_immutability": "The thesis invalidation published at decision time is IMMUTABLE. publishDecisionLevels deep-freezes decision-time levels; withRefreshedQuote returns a NEW package with the refreshed quote but carries the SAME frozen levels reference -- a refreshed quote never silently moves the invalidation.",
+      "rebuild_policy": "Explicit, named, validated choice. 'freeze-at-decision' (v1 rule): published levels === decision-time levels. 'rebuild-around-entry': levels mechanically rebuilt around the actual entry price with the SAME atr14 + riskMultiplier + direction; rebuild inputs and outputs both recorded. The v1 rule for the comparison is freeze-at-decision.",
+      "validator": "validatePublishedLevels(policy, decision, published, entryPrice) replays the declared rule from the recorded inputs and FAILS LOUDLY (LevelMismatchError) on any mismatch -- the check that would have caught the buildAtrLevels silent-rebuild bug (tested stop != published stop).",
+      "veto_stop_alignment": "auditVetoStopAlignment: the stop the issuance veto TESTED must equal the stop the ledger PUBLISHES; fails loudly otherwise.",
+      "risk_math": "crypto: riskPerUnit = 1.25 x Wilder ATR-14 (canonical, decision-time bars, complete window); invalidation = entry -/+ riskPerUnit by direction; target1 = entry +/- 1.5 x riskPerUnit; target2 = entry +/- 2.5 x riskPerUnit. equity: invalidation = 2.00x Wilder ATR-14 from the reference entry; targets 1.5R / 2.5R.",
+      "source_files": [
+        {
+          "path": "goals/research-terminal/paper-signals/entry-v1/src/levels.ts",
+          "sha256": "5bd21b1d71d9fae5443cce6ad10bcb1fe3e0ff868baa94c6523bb872cce528bb",
+          "role": "publishDecisionLevels, withRefreshedQuote, derivePublishedLevels, validatePublishedLevels, auditVetoStopAlignment, buildAtrLevels"
+        }
+      ]
+    },
+    "corrected_evaluator": {
+      "crypto": {
+        "evaluator_version": "crypto-evaluation-v5-corrected",
+        "basis": "First-touch barrier walk on 4h CoinGecko OHLC (candle-close timestamps; block covers [T-4h, T)). Interval-level, timestamp-aware (grade-2026-10-13-corr2.py semantics).",
+        "barrier_semantics": "invalidation-first -> invalidated/MISS; target1-first -> target/HIT; both levels touched in one clean block -> AMBIGUOUS (excluded from hit rate).",
+        "issuance_boundary": "block with close_ts <= issuance -> pre-entry, SKIPPED. Block with open_ts < issuance < close_ts -> STRADDLING: any touch inside it is TIMING-UNVERIFIED (terminal -- the touch cannot be ordered against issuance from OHLC).",
+        "uncertainty_hard_rule": "Uncertainty once established is terminal. A later block NEVER erases uncertainty about an earlier overlapping touch. The walk STOPS at the first touch-or-uncertainty event.",
+        "horizon_cap": "30 elapsed days primary; checkpoints d5/d14/d30. Rows still open past the cap exit at the cap (time_exit).",
+        "costs": "18 bps round-trip modeled; funding UNVERIFIED (production convention). Net R = gross R - 18 bps.",
+        "source_files": [
+          {
+            "path": "goals/research-terminal/hidden_files/signal-accuracy/grade-2026-10-13-corr2.py",
+            "sha256": "d771e0427e5a2b2c062259234e21392f8de7c051971028c7f691adfa2e3ce9f5",
+            "role": "corrected crypto grader: straddle handling, TIMING_UNVERIFIED, uncertainty-terminal hard rule"
+          }
+        ]
+      },
+      "equity": {
+        "evaluator_version": "equity-eval-3.3.0",
+        "basis": "First-touch barrier walk on Yahoo daily bars from the signal date.",
+        "barrier_semantics": "same as crypto (invalidation-first MISS / target1-first HIT / same-bar double-touch AMBIGUOUS).",
+        "timing_unverified": "CE-002: same-day HIT/MISS verdicts where intraday touch order is unknowable from daily bars are TIMING-UNVERIFIED and removed from definitive HIT/MISS totals (replay-equity-2026-10-13-corr.py).",
+        "horizon_cap": "30 trading sessions primary; checkpoints 5/14/30 sessions.",
+        "costs": "costs modeled per equity-eval-3.2.0 convention (unchanged); crypto 18 bps convention does not apply to equity rows.",
+        "source_files": [
+          {
+            "path": "goals/research-terminal/hidden_files/signal-accuracy/replay-equity-2026-10-13-corr.py",
+            "sha256": "cd104cfbc5e2ec165db5de4c1ba8f1953e914922522e0fe5e02b8fc73cae6ecd",
+            "role": "corrected equity replay: CE-002 TIMING_UNVERIFIED ids"
+          }
+        ]
+      },
+      "note": "The deployed engine's own evaluation method (crypto-evaluation-v4-cohort-contract) settled ZERO outcomes independently (expert evidence package 2026-10-13: its 'unverified' label is terminal with no path to resolved). The comparison grades forward under the CORRECTED evaluators above, not the deployed engine's marks."
+    },
+    "source_files": [
+      {
+        "path": "goals/research-terminal/hidden_files/signal-accuracy/grade-2026-10-13-corr2.py",
+        "sha256": "d771e0427e5a2b2c062259234e21392f8de7c051971028c7f691adfa2e3ce9f5",
+        "role": "corrected crypto grader: straddle handling, TIMING_UNVERIFIED, uncertainty-terminal hard rule"
+      },
+      {
+        "path": "goals/research-terminal/hidden_files/signal-accuracy/replay-equity-2026-10-13-corr.py",
+        "sha256": "cd104cfbc5e2ec165db5de4c1ba8f1953e914922522e0fe5e02b8fc73cae6ecd",
+        "role": "corrected equity replay: CE-002 TIMING_UNVERIFIED ids"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/entry-v1/src/contract.ts",
+        "sha256": "15853721301ccd13893f99e9c5e6751fb448aeadb7da6141dab7bad7c18cca42",
+        "role": "frozen contract schema, state machine, rejection codes"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/entry-v1/src/entry-rules.ts",
+        "sha256": "9874a0810b02c90ec457f88f4fcccb427ce47caa377f1c0279314d06f932eb53",
+        "role": "ENTRY_VENUE_ACCEPTED_PRINT_LABELS + acceptedPrintVenues()"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/entry-v1/src/feed.ts",
+        "sha256": "68b5558eb67fcecd2a0ab6d91173e3911b272c94214ba7f6f65bdd415b974784",
+        "role": "TradePrint / VenueFeed types (venue-stamped prints)"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/entry-v1/src/levels.ts",
+        "sha256": "5bd21b1d71d9fae5443cce6ad10bcb1fe3e0ff868baa94c6523bb872cce528bb",
+        "role": "publishDecisionLevels, withRefreshedQuote, derivePublishedLevels, validatePublishedLevels, auditVetoStopAlignment, buildAtrLevels"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/entry-v1/src/pending.ts",
+        "sha256": "5624a9b1ffee8e7071ef0340e2f8b4aa1e75f74f8fbd44179a45c47d503da3c1",
+        "role": "pending-contract entry observation path"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/entry-v1/src/watcher.ts",
+        "sha256": "b27d715d7054386d85daf349a71468c7e1dfa2d4ca69c340f65a53435a912b07",
+        "role": "live entry watcher (poll cadence strictly finer than entry window)"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/orchestrator/src/issuance/handler.ts",
+        "sha256": "b43a788047ebb234d3c996595a9612cda60f1acd69adba25eb8bf8d8746b393b",
+        "role": "consumption: venue filter on the live entry path"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/veto/src/veto.ts",
+        "sha256": "ae38b6b1ddb933033dfa70e7bf375e403d134e24f75e9b57e60ff6b78a3ae478",
+        "role": "checkSetupInvalidation (straddle/granularity/fail-closed), checkEntryZone, validatePipelineOrder"
+      },
+      {
+        "path": "goals/research-terminal/paper-signals/veto/src/waiting-interval.ts",
+        "sha256": "4035f95c8a02f66d2e69fb942969b2daa11154903fd7ee169333e803cd9f3c40",
+        "role": "timestamp-alignment repair: checkSetupHistory, checkWaitingInterval, runQualificationChecks"
+      }
+    ]
+  },
+  "models": [
+    {
+      "model_name": "crypto-dossier-factor-agreement",
+      "role": "production",
+      "terminal": "crypto",
+      "strategy_id": "crypto-dossier-factor-agreement",
+      "strategy_version": "2.0.0-measurement-contract",
+      "parameter_hash": "sha256:4a098b4d389cb85293c78785c82e88a32fe6d96544a8dd84c341dce9fa0b7220",
+      "decision_clock": "server-utc",
+      "price_convention": "usd-spot-reference",
+      "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+      "entry_convention": "first-post-decision-binance-spot-trade (actionable-entry-v1; was 'first-post-decision-provider-quote' in v1)",
+      "evaluator_version": "crypto-evaluation-v5-corrected",
+      "total_weight": 17.0,
+      "n_factors": 11,
+      "scoring_formula": "usable = factors with finite contribution, finite weight, weight > 0 (walk-forward legacy factor excluded); weightedNet = SUM(contribution); totalWeight = SUM(weight); longScore = round(clamp(50 + (weightedNet/totalWeight)*42, 5, 95)); shortScore = 100 - longScore; direction = longScore >= shortScore ? long : short. NO_DATA -> score 0, never estimated.",
+      "levels": {
+        "risk_per_unit": "1.25 x Wilder ATR-14 (canonical, decision-time bars, complete window)",
+        "invalidation": "entry -/+ riskPerUnit by direction (IMMUTABLE from decision time; validatePublishedLevels)",
+        "target1": "entry +/- 1.5 x riskPerUnit",
+        "target2": "entry +/- 2.5 x riskPerUnit",
+        "payoff_convention": "linear-entry-notional"
+      },
+      "gates": {
+        "born_dead": "LONG suppressed if signal-day low <= invalidation; SHORT suppressed if signal-day high >= invalidation. Signal-day = latest completed UTC day from CoinGecko 4h OHLC.",
+        "eligibility": "no suppression AND sourceAsOf <= 30 min AND price != null AND (meme: $2M<=mcap<=$250M AND socialSnapshot) OR (main: volume24h>=$5M AND mcap>=$25M AND OI>=$1M AND funding != null).",
+        "short_regime": "applies to shorts ONLY: allowed iff priceBelowSma50 && (lowerHighs || trend20Negative); else suppressed.",
+        "waiting_interval": "checkWaitingInterval on [contract.decisionAt, entryObservedAt] against the FINAL published stop (see operational_rules.waiting_interval_veto)."
+      },
+      "horizon": {
+        "primary": 30,
+        "checkpoints_days": [
+          5,
+          14,
+          30
+        ],
+        "unit": "elapsed_days"
+      },
+      "cost_bps_roundtrip": 18.0,
+      "cost_note": "18 bps round-trip modeled; funding UNVERIFIED (production convention).",
+      "cost_scenario_id": "modeled-roundtrip-18bps-funding-unverified-v1",
+      "legacy_exclusion": "The legacy 'Walk-forward base rate' factor (weight 1.0) is NOT part of the frozen factor set; reproduction verified 30/30 (v1) and 10/10 (v2 real rows) only with its exclusion.",
+      "factors": [
+        {
+          "label": "Trend cluster",
+          "weight": 2.5,
+          "score_rule": "votes: price>=SMA50, price>=SMA200, d90>+8%; score=sign(sum); 0 unless >=200 obs",
+          "source": "CoinGecko daily history"
+        },
+        {
+          "label": "Momentum",
+          "weight": 1.5,
+          "score_rule": "RSI-14: >72 -> -1; <30 -> +1; >=52 -> +1; <=45 -> -1; else 0",
+          "source": "CoinGecko daily history"
+        },
+        {
+          "label": "MACD",
+          "weight": 1.5,
+          "score_rule": "macd >= signal -> +1 else -1",
+          "source": "CoinGecko daily history"
+        },
+        {
+          "label": "Perp funding crowding",
+          "weight": 1.75,
+          "score_rule": "funding8h > +0.00005 -> -1; < -0.00005 -> +1; else 0",
+          "source": "Hyperliquid (hourly x8) or OKX fallback"
+        },
+        {
+          "label": "Open interest",
+          "weight": 1.0,
+          "score_rule": "OKX OI 24h change: >+8% -> +1; <-8% -> -1; else 0",
+          "source": "OKX OI + 24h baseline"
+        },
+        {
+          "label": "Binance futures positioning",
+          "weight": 1.0,
+          "score_rule": "taker buy/sell >1.05 -> +1; <0.95 -> -1; else 0",
+          "source": "Binance Futures"
+        },
+        {
+          "label": "Cross-venue taker imbalance",
+          "weight": 1.25,
+          "score_rule": "continuous: margin<0.04 -> 0 else sign(combined)*min(1,margin/0.35)*sizeScale*(agreement?1:0.5)",
+          "source": "Binance aggTrades + OKX spot trades"
+        },
+        {
+          "label": "TVL trend",
+          "weight": 2.0,
+          "score_rule": "tvl30>0 && tvl7>=-2 -> +1; tvl30<-15 -> -1; else 0",
+          "source": "DeFiLlama"
+        },
+        {
+          "label": "Revenue linkage",
+          "weight": 1.5,
+          "score_rule": "annualized revenue yield >=1.5% -> +1; else 0 (never negative)",
+          "source": "DeFiLlama 30D fees+revenue"
+        },
+        {
+          "label": "Developer velocity",
+          "weight": 1.5,
+          "score_rule": ">=8 active wks && >=50 commits/12w -> +1; <=2 active wks -> -1; else 0",
+          "source": "GitHub commit activity"
+        },
+        {
+          "label": "Supply-overhang penalty",
+          "weight": 1.5,
+          "score_rule": "FDV/mcap >=2 -> -1; else 0 (never positive)",
+          "source": "CoinGecko"
+        }
+      ],
+      "label_note": "Persisted ledgers may spell the last factor 'Supply-overhang penalty (negative-only)'; identical weight (1.5) and never-positive rule.",
+      "source_files": [
+        {
+          "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/signal-methodology.ts",
+          "role": "scoring formula, levels, evaluation, strategy/version constants",
+          "sha256": "617d64ef316e4076496e6f2fa7e90d71a48743ca4c31bb120493f007ae3a8532"
+        },
+        {
+          "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/actions.ts",
+          "role": "factor definitions, issuance decision",
+          "sha256": "301e270e72a98d1dbcbfcf5d99ce53cc8afb142df77a8c18a514831b2c1a2788"
+        },
+        {
+          "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/schema.ts",
+          "role": "persisted signal/contract schema",
+          "sha256": "26b3202117041b6047b720fc63502d6b3b29316d1b6676acd54b2d3dc652d95f"
+        },
+        {
+          "path": "goals/research-terminal/hidden_files/methodology-export-2026-10-13/methodology-crypto.md",
+          "role": "read-only methodology export (line references) as of 2026-10-13",
+          "sha256": "d3e51672595cfa17e2089f689ec02d114377f94f965a811f228bf00e65ee9782"
+        }
+      ]
+    },
+    {
+      "model_name": "crypto-dossier-minus-momentum",
+      "role": "challenger",
+      "terminal": "crypto",
+      "strategy_id": "crypto-dossier-minus-momentum",
+      "strategy_version": "0.1.0-shadow",
+      "parameter_hash": "sha256:derived-from-production-minus-momentum-1.5",
+      "definition": "Production model with the RSI-14 Momentum factor removed. The ONE deliberate difference from production. ALL operational rules (entry contract, waiting-interval veto, venue mapping, level construction, evaluator) are IDENTICAL to production.",
+      "decision_clock": "server-utc",
+      "price_convention": "usd-spot-reference",
+      "snapshot_version": "crypto-input-snapshot-v3-canonical-atr-window",
+      "entry_convention": "first-post-decision-binance-spot-trade (actionable-entry-v1)",
+      "evaluator_version": "crypto-evaluation-v5-corrected",
+      "total_weight": 15.5,
+      "n_factors": 10,
+      "scoring_formula": "challengerLong = round(clamp(50 + (weightedNet/15.5)*42, 5, 95)); challengerShort = 100 - challengerLong; challengerDirection = challengerLong >= challengerShort ? long : short. The Momentum factor's contribution leaves the net AND its weight 1.5 leaves the denominator; remaining weights are NOT rescaled. Per-factor score rules unchanged from production (NO_DATA -> 0, never estimated).",
+      "levels": {
+        "risk_per_unit": "1.25 x Wilder ATR-14 (same ATR-14 value production used; ATR is directionless)",
+        "invalidation": "entry -/+ riskPerUnit by CHALLENGER direction (IMMUTABLE from decision time)",
+        "target1": "entry +/- 1.5 x riskPerUnit",
+        "target2": "entry +/- 2.5 x riskPerUnit",
+        "payoff_convention": "linear-entry-notional"
+      },
+      "gates": {
+        "born_dead_mirror": "Mirrored to challenger direction on the SAME signal-day OHLC: challenger LONG suppressed if signal-day low <= challenger invalidation; challenger SHORT suppressed if signal-day high >= challenger invalidation.",
+        "eligibility": "Byte-identical to production.",
+        "short_regime_mirror": "Applies ONLY when challenger direction is short: allowed iff priceBelowSma50 && (lowerHighs || trend20Negative) on the same decision-time bars; else suppressed. No long-regime gate.",
+        "waiting_interval": "checkWaitingInterval on [contract.decisionAt, entryObservedAt] against the CHALLENGER's final published stop (same semantics as production)."
+      },
+      "horizon": {
+        "primary": 30,
+        "checkpoints_days": [
+          5,
+          14,
+          30
+        ],
+        "unit": "elapsed_days"
+      },
+      "cost_bps_roundtrip": 18.0,
+      "cost_note": "18 bps round-trip modeled; funding UNVERIFIED (production convention).",
+      "cost_scenario_id": "modeled-roundtrip-18bps-funding-unverified-v1",
+      "factors": [
+        {
+          "label": "Trend cluster",
+          "weight": 2.5
+        },
+        {
+          "label": "MACD",
+          "weight": 1.5
+        },
+        {
+          "label": "Perp funding crowding",
+          "weight": 1.75
+        },
+        {
+          "label": "Open interest",
+          "weight": 1.0
+        },
+        {
+          "label": "Binance futures positioning",
+          "weight": 1.0
+        },
+        {
+          "label": "Cross-venue taker imbalance",
+          "weight": 1.25
+        },
+        {
+          "label": "TVL trend",
+          "weight": 2.0
+        },
+        {
+          "label": "Revenue linkage",
+          "weight": 1.5
+        },
+        {
+          "label": "Developer velocity",
+          "weight": 1.5
+        },
+        {
+          "label": "Supply-overhang penalty",
+          "weight": 1.5
+        }
+      ],
+      "flip_guardrail": "If challenger direction differs from production on >40% of paired rows, pause readout and audit the score pipeline (implementation bug, not a strategy difference).",
+      "readout_criteria": {
+        "SUPPORT": "n >= 30 paired definitive rows AND challenger d30-direction accuracy >= production + 10pp AND challenger mean net R >= production mean net R - 0.05 R/signal -> promote to production paper trial",
+        "REJECT": "n >= 30 paired definitive rows AND (challenger d30-direction accuracy <= production - 10pp OR challenger mean net R < production mean net R - 0.15 R/signal) -> retire C-2",
+        "INCONCLUSIVE": "n < 30 paired definitive rows, or gap < 10pp -> continue collecting; no promotion, no retirement"
+      },
+      "source_files": [
+        {
+          "path": "goals/research-terminal/paper-signals/research/c2-shadow-spec-2026-10-13.md",
+          "role": "frozen C-2 shadow spec",
+          "sha256": "0788a5a78556f38c5e34da0ba2713bb14f218c7fd89b8c1fe13e7c1b52125c40"
+        },
+        {
+          "path": "goals/research-terminal/hidden_files/source-export-2026-10-13/CHALLENGER-ASSESSMENT.md",
+          "role": "challenger assessment (S3-S4 readout criteria, flip guardrail)",
+          "sha256": "7444a65510cc23dd645a6f581de6e34a52490698dae1e3e6b4957b4fd2884809"
+        },
+        {
+          "path": "ts-spaces/altcoin-analyzer-and-signal-tracker/server/src/signal-methodology.ts",
+          "role": "per-factor score rules and scoring formula inherited from production",
+          "sha256": "617d64ef316e4076496e6f2fa7e90d71a48743ca4c31bb120493f007ae3a8532"
+        }
+      ]
+    },
+    {
+      "model_name": "equity-factor-agreement",
+      "role": "production",
+      "terminal": "equity",
+      "strategy_id": "equity-factor-agreement",
+      "strategy_version": "3.1.0-measurement-closure",
+      "build_id": "phase1-final-signoff-2026-10-09",
+      "parameter_hash": "atr2-target1.5R-weights-6-8-8-20-8-20-20",
+      "decision_clock": "xnys-session-close",
+      "entry_convention": "next-xnys-regular-session-open-print (actionable-entry-v1; was 'completed adjusted daily close' reference in v1)",
+      "evaluator_version": "equity-eval-3.3.0",
+      "total_weight": 90,
+      "n_factors": 7,
+      "scoring_formula": "rawScore = round(100 x SUM(weight x score) / SUM(weight)), scores in {-1,0,+1}. redundancyAdjustment = -5 if all five trend-cluster factors are +1; +5 if all five are -1 (toward zero); else 0. finalScore = rawScore + redundancyAdjustment. Direction: score >= 20 -> long; <= -20 -> short; else mixed.",
+      "levels": {
+        "invalidation_method": "2.00x Wilder ATR-14 from the reference entry (IMMUTABLE from decision time; validatePublishedLevels)",
+        "target1": "entry +/- 1.5 x riskPerUnit",
+        "target2": "entry +/- 2.5 x riskPerUnit"
+      },
+      "gates": {
+        "issuance_validation": "signalIssuanceDecision(direction, invalidation, signalDate, history) on the exact completed bars: LONG breached if signal-day low <= stop; SHORT breached if signal-day high >= stop.",
+        "short_regime": "SHORT additionally requires bearish daily structure: belowSma50 && (lowerHighs || trend20Negative), else suppressed.",
+        "waiting_interval": "checkWaitingInterval on [contract.decisionAt, entryObservedAt] (equity overnight gap: no bars BY CONSTRUCTION -> pass with explicit reason, never uncertain)."
+      },
+      "quality_gates": "ANOMALY (any daily move > 80% in last 260 sessions), STALE (latest bar > 5 days old), NO_DATA (reading unavailable) -> non-GOOD factors get score = 0; contribution withheld.",
+      "horizon": {
+        "primary": 30,
+        "checkpoints_sessions": [
+          5,
+          14,
+          30
+        ],
+        "unit": "trading_sessions"
+      },
+      "cost_scenario_note": "costs modeled per equity-eval-3.2.0; crypto 18 bps convention does not apply to equity rows.",
+      "snapshot_note": "Persisted Yahoo OHLCV replay; decision-time cutoff enforced (availableAt <= decisionAt).",
+      "no_equity_challenger": "NO equity challenger is frozen here: none is specified, and inventing one would be a strategy change, which is out of scope. Equity rows score the production arm only; the challenger arm is not-applicable:no-challenger-frozen.",
+      "trend_cluster": [
+        "price_vs_sma20",
+        "price_vs_sma50",
+        "price_vs_sma200",
+        "macd_12_26",
+        "atr_adjusted_trend30"
+      ],
+      "factors": [
+        {
+          "id": "price_vs_sma20",
+          "display": "Price vs SMA 20",
+          "weight": 6,
+          "score_rule": "+1 if close > SMA20, else -1 (0 if SMA unavailable)"
+        },
+        {
+          "id": "price_vs_sma50",
+          "display": "Price vs SMA 50",
+          "weight": 8,
+          "score_rule": "+1 if close > SMA50, else -1"
+        },
+        {
+          "id": "price_vs_sma200",
+          "display": "Price vs SMA 200",
+          "weight": 8,
+          "score_rule": "+1 if close > SMA200, else -1"
+        },
+        {
+          "id": "rsi14_wilder",
+          "display": "Wilder RSI 14",
+          "weight": 20,
+          "score_rule": "+1 if 55 <= RSI <= 75; -1 if 25 <= RSI <= 45; else 0 (0 if RSI null)"
+        },
+        {
+          "id": "macd_12_26",
+          "display": "MACD 12-26",
+          "weight": 8,
+          "score_rule": "0 if EMA12/EMA26 null or |diff| < 1e-6; +1 if diff > 0, else -1"
+        },
+        {
+          "id": "volume_direction_z",
+          "display": "High-volume direction",
+          "weight": 20,
+          "score_rule": "0 unless volumeZ > 1; then +1 if close > prevClose, -1 if below"
+        },
+        {
+          "id": "atr_adjusted_trend30",
+          "display": "ATR-adjusted 30-session trend",
+          "weight": 20,
+          "score_rule": "riskAdjusted = 30d return% / (ATR14/close x 100 x sqrt(30)); 0 if |riskAdjusted| < 0.5; +1/-1 by sign"
+        }
+      ],
+      "source_files": [
+        {
+          "path": "ts-spaces/equity-analyzer-and-signal-tracker/server/src/measurement.ts",
+          "role": "factor scoring mirror (computeEquityDecisionFromRawInputs, DEFAULT_WEIGHTS), issuance gates",
+          "sha256": "9109c826d89919da606e44b80f9b1be7e232a3aef83e53eedde58ca80a4ee0d5"
+        },
+        {
+          "path": "ts-spaces/equity-analyzer-and-signal-tracker/server/src/actions.ts",
+          "role": "dossier factor computation, factorScoreBreakdown, signalDecision",
+          "sha256": "17eabf4d8d314fcc130f870df692bf1b66edb67b3a6379972f1b712a3f62cd47"
+        },
+        {
+          "path": "ts-spaces/equity-analyzer-and-signal-tracker/server/src/schema.ts",
+          "role": "persisted signal/ledger schema",
+          "sha256": "342ca33e59d7d99e7e1baa1d4779500907a59e31f0973de4dc997a56c1c5c01a"
+        },
+        {
+          "path": "goals/research-terminal/hidden_files/methodology-export-2026-10-13/methodology-equity.md",
+          "role": "read-only methodology export (line references) as of 2026-10-13",
+          "sha256": "3d5b9f1600f54b8e8c67af92bb2822b6133fd88b73b69f5bb2fc75d252975ae3"
+        }
+      ]
+    }
+  ],
+  "harness": {
+    "path": "goals/research-terminal/paper-signals/comparison/harness.py",
+    "sha256": "d7e9bb9b627b8ccafcdfd36441f388fe3a10c7f775440f280d0462cadf85575f",
+    "manifest_version": "2.0.0",
+    "reads_manifest": "goals/research-terminal/paper-signals/comparison/freeze-manifest-v2.0.0.json",
+    "writes": "comparison row CSV/JSONL under goals/research-terminal/paper-signals/comparison/rows/. Never writes to any production table or holdout.",
+    "decision_time_rule": "Both arms are scored from decision-time inputs only. Any input dated after decisionAt fails the decision-time check: default labels the row decision_time_verified=false (never silently passes); strict mode raises LookaheadError. Inputs without asOf fields are labeled decision_time_verified=false ('asOf not recorded') -- never assumed. Date-only asOf values are normalized to UTC midnight in the row builder (documented per row); the harness itself is unchanged.",
+    "v2_deltas": [
+      "MANIFEST_VERSION 1.0.0 -> 2.0.0: load_manifest() now requires the v2.0.0 freeze. Quarantined v1 rows are not re-scored.",
+      "New production_decision value 'qualified': scan-qualified radar candidates production never issued -> prod_disposition 'unscored' with new reason code unscored:production-not-issued. All scoring formulas, mirrored levels/gates, and other reason codes are byte-identical to v1.",
+      "The v1 unit-test suite (tests/) still passes; TestManifest now targets freeze-manifest-v2.0.0.json."
+    ]
+  },
+  "comparison_dataset": {
+    "current": "goals/research-terminal/paper-signals/comparison/rows/comparison-rows-pilot-2026-10-14.csv (+ .jsonl twin)",
+    "current_origin": "pilot -- real candidates with persisted decision-time factor ledgers, scored under v2.0.0",
+    "quarantined": "goals/research-terminal/paper-signals/comparison/rows/comparison-rows-2026-10-13.csv (+ .jsonl twin) -- sandbox-seeded rows under the SUPERSEDED v1.0.0 freeze; excluded from pilot statistics, kept for audit only."
+  },
+  "comparison_metrics": {
+    "per_model": [
+      "target-before-stop rate",
+      "directional accuracy d5/d14/d30 (where observable)",
+      "net returns after costs (18 bps roundtrip, crypto; equity per equity-eval-3.2.0 convention)",
+      "opportunity coverage (issued/abstain/unscored fraction of the eligible stream)",
+      "alert delay (issued_at - decision_at)"
+    ],
+    "uncertainty": "Wilson 95% CI for rates; mean +/- 1.96*SE for net R. Small-n reported as-is and labeled. Abstentions and missing outcomes are rows with reason codes, never silently dropped. TIMING_UNVERIFIED rows are excluded from definitive totals."
+  },
+  "exploratory_note": "The 58/118 exploratory result and all other exploratory findings stay exploratory. They are not validation. The comparison dataset is rows collected under THIS freeze.",
+  "scope": "Head-to-head production-vs-challenger comparison for the paper pilot. Sandbox/research only; no production changes; no threshold tuning; no strategy changes. Paper signals only; no brokerage."
+}

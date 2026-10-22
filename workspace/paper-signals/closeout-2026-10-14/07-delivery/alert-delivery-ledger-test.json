@@ -1,0 +1,119 @@
+{
+  "_doc": "Book of record for CHAT delivery of TEST probe alerts (labeled routing probes through the deployed transport). Keyed by dedup key test/<signal_id>/<alert_type> — a test key can never collide with a production key. Written ONLY by the paper-signal-alert-delivery worker on runs whose trigger reason begins with trigger:test/ (pre-commit) and by any later run's §4 ack sweep (reconciliation). NEVER the production ledger (alert-delivery-ledger.json). Paper only, test-labeled, no real orders.",
+  "ack_source": "scheduler.delivery_outbox — state='delivered' AND delivered_at_utc IS NOT NULL on the run's delivery_key (the runtime's confirmed receipt into the side chat). Never a simulated ack, never the worker's own emission.",
+  "chat_id": "a685c3e7-c8be-4137-8900-4e899008bca7",
+  "entries": {
+    "test/sig_TEST_26971b53/ENTRY_CONFIRMED": {
+      "ack_at_utc": "2026-10-14T20:08:25Z",
+      "ack_evidence": {
+        "delivered_at_utc": 1792008505,
+        "delivered_at_utc_iso": "2026-10-14T20:08:25Z",
+        "delivery_key": "cron-delivery:paper-signal-alert-delivery:a1be8a82-18ae-49f9-8429-8150d9d92122:side_chat:a685c3e7-c8be-4137-8900-4e899008bca7",
+        "outbox_state": "delivered",
+        "verification": "independent muse.db SELECT on scheduler.delivery_outbox (row: state='delivered', delivered_at_utc=1792008505), matching the run-context claim exactly",
+        "verified_at_utc": "2026-10-14T20:13:17Z"
+      },
+      "alert_type": "ENTRY_CONFIRMED",
+      "attempts": 1,
+      "clock_skew": false,
+      "decided_note": "integration gate G3 (TEST-branch routing probe, trigger:test/ run a1be8a82 scheduled 2026-10-14T19:49:04Z). Probe text landed in the research side chat; real channel ack confirmed.",
+      "decision_at_unavailable": true,
+      "delivered_inside_contract_window": null,
+      "delivery_status": "delivered",
+      "event_time_source": "issued_at",
+      "event_time_utc": "2026-10-14T19:49:51.472Z",
+      "event_to_delivery_delay_s": 1114,
+      "missed_trigger": false,
+      "payload_ref": "worker-runs/status-2026-10-14T19-50-57Z.json (data.alerts[0]; test_alert_row verbatim)",
+      "run_ts_utc": "2026-10-14T19:49:35Z",
+      "sent_at_utc": "2026-10-14T19:50:57Z",
+      "signal_id": "sig_TEST_26971b53",
+      "sweep_latency_s": null,
+      "test": true,
+      "transport": "test-probe",
+      "trigger_latency_note": "not applicable — the probe was issued inside the triggered run (run start 2026-10-14T19:49:35Z precedes issued_at 2026-10-14T19:49:51.472Z); raw run_start−issued_at would be −16s and is not a meaningful hook latency",
+      "trigger_latency_s": null,
+      "trigger_source": "trigger",
+      "enqueue_to_ack_delay_s": 1048,
+      "enqueue_to_ack_endpoints": {
+        "enqueue_at_utc": "2026-10-14T19:50:57Z",
+        "ack_at_utc": "2026-10-14T20:08:25Z"
+      },
+      "event_to_delivery_endpoints": {
+        "event_time_utc": "2026-10-14T19:49:51.472Z",
+        "ack_at_utc": "2026-10-14T20:08:25Z"
+      },
+      "interval_note": "Two distinct intervals: event_to_delivery_delay_s=1114s (18.6 min, event 2026-10-14T19:49:51.472Z -> ack 2026-10-14T20:08:25Z); enqueue_to_ack_delay_s=1048s (17m28s, enqueue 2026-10-14T19:50:57Z -> ack 2026-10-14T20:08:25Z). Never present 18.6 min as the enqueue->ack interval."
+    },
+    "test/sig_TEST_0c8ffb7f/ENTRY_CONFIRMED": {
+      "signal_id": "sig_TEST_0c8ffb7f",
+      "alert_type": "ENTRY_CONFIRMED",
+      "test": true,
+      "transport": "test-probe",
+      "delivery_status": "delivered",
+      "attempts": 1,
+      "sent_at_utc": "2026-10-15T00:04:26Z",
+      "run_ts_utc": "2026-10-15T00:02:22Z",
+      "run_mode": "triggered",
+      "trigger_source": "trigger",
+      "trigger_reason": "trigger:test/sig_TEST_d853fb5b/ENTRY_CONFIRMED issued_at=2026-10-14T23:59:55Z",
+      "triggered_key_not_visible": true,
+      "triggered_key_not_visible_note": "reason-named test key test/sig_TEST_d853fb5b/ENTRY_CONFIRMED was NOT visible in data.alerts; the emitTestAlert synthesis produced test/sig_TEST_0c8ffb7f/ENTRY_CONFIRMED instead. Per §6b: reason-named key logged and skipped, never rendered from the reason; the visible row delivered under its own dedup key.",
+      "event_time_utc": "2026-10-15T00:02:35.889Z",
+      "event_time_source": "entry_observed_at",
+      "trigger_latency_s": 147,
+      "trigger_latency_note": "this run's start (2026-10-15T00:02:22Z) minus trigger reason issued_at (2026-10-14T23:59:55Z) = 147s. Positive and meaningful (unlike the prior probe where run start preceded issued_at).",
+      "missed_trigger": false,
+      "payload_ref": "worker-runs/status-2026-10-15T00-02-35Z.json (data.alerts[0]; test_alert_row verbatim)",
+      "decided_note": "Second TEST-branch routing probe (trigger:test/ run, emitTestAlert=true). Visible row validated against alert-schema.json (all common + ENTRY_CONFIRMED fields present), dedup key fresh in the test ledger. Rendered with the §6b TEST banner as this run's final output; ack reconciliation rides the next run's §5 against this run's outbox delivery_key.",
+      "ack_at_utc": "2026-10-15T00:06:36Z",
+      "ack_evidence": {
+        "delivery_key": "cron-delivery:paper-signal-alert-delivery:8c64be7a-f4a9-4370-b230-73991b873008:side_chat:a685c3e7-c8be-4137-8900-4e899008bca7",
+        "delivered_at_utc": 1792022796,
+        "delivered_at_utc_iso": "2026-10-15T00:06:36Z",
+        "outbox_state": "delivered",
+        "verified_at_utc": "2026-10-15T00:16:37Z",
+        "verification": "independent muse.db SELECT on scheduler.delivery_outbox (row: state='delivered', delivered_at_utc=1792022796, created_at_utc=1792022734, last_error null), matching the probe run 2026-10-15T00:02:22Z"
+      },
+      "event_to_delivery_delay_s": 241,
+      "enqueue_to_ack_delay_s": 130,
+      "clock_skew": false,
+      "delivered_inside_contract_window": null,
+      "decision_at_unavailable": true,
+      "sweep_latency_s": null,
+      "event_to_delivery_endpoints": {
+        "event_time_utc": "2026-10-15T00:02:35.889Z",
+        "ack_at_utc": "2026-10-15T00:06:36Z"
+      },
+      "enqueue_to_ack_endpoints": {
+        "enqueue_at_utc": "2026-10-15T00:04:26Z",
+        "ack_at_utc": "2026-10-15T00:06:36Z"
+      }
+    }
+  },
+  "initialized_at": "2026-10-14T19:50:57Z",
+  "initialized_note": "Created by the first TEST-branch run of paper-signal-alert-delivery (2026-10-14 15:49 EDT trigger). Pre-committed BEFORE the rendered probe output per §6b/§6 ordering.",
+  "job_id": "paper-signal-alert-delivery",
+  "retry_policy": {
+    "backoff_min_spacing": [
+      "60s",
+      "5m",
+      "15m",
+      "1h",
+      "1h",
+      "1h"
+    ],
+    "max_attempts": 6,
+    "note": "Attempts counted per emission. A re-emission happens only after the prior delivery_key is observed failed/missing past grace, or its next_attempt_at has passed with no ack."
+  },
+  "schema": "paper-alert-delivery-ledger-test/2026-10-14+test-branch",
+  "status_fields_note": "delivery_status set ONLY from scheduler.delivery_outbox ack evidence or the §4 reconciliation rule; controller_status lives in run logs only, never here. unknown keys are never auto-retried; delivered keys never re-sent.",
+  "status_vocabulary": [
+    "awaiting-ack",
+    "retrying",
+    "delivered",
+    "failed",
+    "unrenderable",
+    "unknown"
+  ]
+}

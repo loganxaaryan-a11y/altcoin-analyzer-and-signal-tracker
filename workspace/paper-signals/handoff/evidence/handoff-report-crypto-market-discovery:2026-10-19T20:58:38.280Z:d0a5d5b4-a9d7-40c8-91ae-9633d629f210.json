@@ -1,0 +1,32 @@
+{
+  "runId": "crypto-market-discovery:2026-10-19T20:58:38.280Z:d0a5d5b4-a9d7-40c8-91ae-9633d629f210",
+  "source": "crypto-market-discovery",
+  "completedAt": "2026-10-19T20:59:45.492Z",
+  "freezeVersion": "v2.1.5",
+  "demo": false,
+  "feedMode": "binance",
+  "feedLabel": "binance-spot (read-only public market data; paper only)",
+  "issuancePath": "processIntegratedCandidate(orchestrator/src/issuance/handler.ts) — entry-v1 + waiting-interval veto + venue mapping",
+  "activeFreeze": "v2.1.5",
+  "receivedAt": "2026-10-19T21:10:27.770Z",
+  "staleRun": false,
+  "candidates": [
+    {
+      "candidateKey": "d19f7c8fbc5f91ebe6658517faa2fd1b",
+      "symbol": "ZRO",
+      "direction": "watch",
+      "ledgerHash": "d5df096b64ffff817654e242160513ad107668135bf8aeabb1beb8888458d212",
+      "outcome": "failed",
+      "reasonCode": "invalid-direction",
+      "reason": "direction \"watch\" is not long|short",
+      "gate": null,
+      "handlerOutcomeKind": null
+    }
+  ],
+  "counts": {
+    "qualified": 0,
+    "abstained": 0,
+    "deferred": 0,
+    "failed": 1
+  }
+}

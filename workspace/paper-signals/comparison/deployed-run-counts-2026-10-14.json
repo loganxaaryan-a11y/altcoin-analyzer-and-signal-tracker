@@ -1,0 +1,63 @@
+{
+  "artifact": "altcoin-analyzer-and-signal-tracker",
+  "paper_table": "paper_signals",
+  "legacy_table": "generated_signals",
+  "legacy_tracked_count": 31,
+  "source": {
+    "snapshot_file": "comparison/live-paper-status-2026-10-14.json",
+    "source_field": "deployed-artifact:altcoin-analyzer-and-signal-tracker:getpaperpilotstatus",
+    "exported_at": "2026-10-14T05:41:30Z",
+    "exported_by": "paper-signal-comparison-collection",
+    "note": "Counts copied verbatim from the deployed getpaperpilotstatus snapshot. This subagent seat carries no artifact.invoke_action tool, so a fresh live invocation was not possible here; nothing is fabricated."
+  },
+  "runs": [
+    {
+      "run_id": 3,
+      "run_key": "paper-pilot-v2.1.0:manual:5973183",
+      "trigger": "manual",
+      "status": "complete",
+      "started_at": "2026-10-14T05:18:02.303Z",
+      "completed_at": "2026-10-14T05:18:02.347Z",
+      "candidates_evaluated": 0,
+      "issued_count": 0,
+      "abstained_count": 0,
+      "deferred_count": 0,
+      "suppressed_count": null,
+      "suppressed_note": "deployed run rows expose no suppressedCount field; candidateCount=0 means nothing was evaluated, so nothing could be suppressed or abstained on"
+    },
+    {
+      "run_id": 2,
+      "run_key": "paper-pilot-v2.1.0:manual:5973178",
+      "trigger": "manual",
+      "status": "complete",
+      "started_at": "2026-10-14T04:54:56.233Z",
+      "completed_at": "2026-10-14T04:54:56.285Z",
+      "candidates_evaluated": 0,
+      "issued_count": 0,
+      "abstained_count": 0,
+      "deferred_count": 0,
+      "suppressed_count": null,
+      "suppressed_note": "deployed run rows expose no suppressedCount field; candidateCount=0 means nothing was evaluated, so nothing could be suppressed or abstained on"
+    },
+    {
+      "run_id": 1,
+      "run_key": "paper-pilot-v2.1.0:scheduled:5973178",
+      "trigger": "scheduled",
+      "status": "complete",
+      "started_at": "2026-10-14T04:54:12.656Z",
+      "completed_at": "2026-10-14T04:54:12.675Z",
+      "candidates_evaluated": 0,
+      "issued_count": 0,
+      "abstained_count": 0,
+      "deferred_count": 0,
+      "suppressed_count": null,
+      "suppressed_note": "deployed run rows expose no suppressedCount field; candidateCount=0 means nothing was evaluated, so nothing could be suppressed or abstained on"
+    }
+  ],
+  "totals": {
+    "runs_completed": 3,
+    "candidates_evaluated_total": 0,
+    "issued_total": 0,
+    "verdict": "three completed runs, zero opportunities"
+  }
+}

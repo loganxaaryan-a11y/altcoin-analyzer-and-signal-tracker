@@ -1,0 +1,58 @@
+{
+  "c2": {
+    "arm": "challenger",
+    "arm_disposition": {
+      "disposition": "scored",
+      "missing": [],
+      "reason": null
+    },
+    "direction": "long",
+    "ledger_complete": true,
+    "leg": "non-flipped",
+    "levels_match_production": true,
+    "levels_mode": "verified-shared: C-2 levels recomputed exactly from C-2's own entry inputs (direction matches; buildAtrLevels is direction-dependent); identical to production levels by construction, recorded per RULE 5",
+    "momentum_dropped": 1,
+    "score": 52,
+    "short_score": 48,
+    "strategy": "crypto-dossier-minus-momentum 0.1.0-shadow",
+    "total_weight": 15.5,
+    "weighted_net": 0.75,
+    "wired_function": "intended_models.c2_score_minus_momentum (Momentum contribution AND weight removed; denominator 15.5; not rescaled)"
+  },
+  "evaluated_at": "2026-10-15T00:40:38.118+00:00",
+  "input_bundle": "comparison/decision-time-inputs/dossier-btc-id43-2026-10-14.json",
+  "operational_dispositions": {
+    "c2_paper_issuance": {
+      "disposition": "UNKNOWN",
+      "reason": "no entry-observation evidence under the frozen paper entry convention for C-2's independent evaluation; RULE 6 -- missing C-2 evidence is UNKNOWN, never filled from production"
+    },
+    "prod_paper_issuance": {
+      "disposition": "UNKNOWN",
+      "reason": "no paper-pipeline issuance record for this opportunity; dossier-path issuance (recorded) uses a different entry convention and does not establish the paper operational gates"
+    }
+  },
+  "opportunity_id": "dossier-btc-id43-2026-10-14",
+  "prod": {
+    "arm": "production",
+    "arm_disposition": {
+      "disposition": "scored",
+      "missing": [],
+      "reason": null
+    },
+    "direction": "long",
+    "ledger_complete": true,
+    "recorded_fidelity": {
+      "levels_recomputed_exact": true,
+      "recomputed_matches_recorded_confidence": true,
+      "recomputed_matches_recorded_direction": true,
+      "recorded_confidence": 52,
+      "recorded_direction": "long"
+    },
+    "score": 52,
+    "short_score": 48,
+    "strategy": "crypto-dossier-factor-agreement 2.0.0-measurement-contract",
+    "total_weight": 17.0,
+    "weighted_net": 0.75,
+    "wired_function": "intended_models.score_dossier_factors <- signal-methodology.ts:47 scoreDossierFactors"
+  }
+}

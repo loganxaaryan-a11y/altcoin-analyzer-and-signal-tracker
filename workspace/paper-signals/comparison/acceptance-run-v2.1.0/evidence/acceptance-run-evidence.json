@@ -1,0 +1,65 @@
+{
+  "run": "v2.1.0 final acceptance (Decision 3 consolidation)",
+  "ran_at_utc": "2026-10-14T04:59:59.307Z",
+  "candidate": {
+    "row_id": "crypto:31",
+    "symbol": "BTC",
+    "decision_at": "2026-10-10T01:51:23.436000+00:00",
+    "provenance": "RETROSPECTIVE: decided before any freeze existed (all decisions 2026-10-10 -> 2026-10-14T02:23:07Z, before v1.0.0 2026-10-14T02:42:57Z and v2.0.0 2026-10-14T04:09:32Z); freeze_version=2.0.0 is a collection-time backfill, not prospective provenance; prospective provenance cannot be established (MEASUREMENT-GAPS-2026-10-14.md verdict (a))",
+    "cohort_origin": "pilot-60-backfill",
+    "strategy": "crypto-dossier-factor-agreement 2.0.0-measurement-contract"
+  },
+  "model_run": {
+    "fn": "comparison/harness.py score_crypto_production (frozen production crypto model)",
+    "ledger": "real factors_json of generated_signals id 31 (workspace DB copy)",
+    "result": {
+      "long_score": 56,
+      "short_score": 44,
+      "direction": "long",
+      "weighted_net": 2.5,
+      "total_weight": 17,
+      "factors_used": 11
+    },
+    "reproduced": true
+  },
+  "function_identity": {
+    "module": "paper-signals/orchestrator/src/issuance/handler.ts",
+    "sha256_runtime": "b43a788047ebb234d3c996595a9612cda60f1acd69adba25eb8bf8d8746b393b",
+    "sha256_manifest_v2_1_0": "b43a788047ebb234d3c996595a9612cda60f1acd69adba25eb8bf8d8746b393b",
+    "match": true
+  },
+  "issuance_path": {
+    "entry": "issued",
+    "deciding_gate": null,
+    "reason": "issued via integrated crypto path; entered 2026-10-10T01:52:09.514Z; entry alert appended to sandbox-feed",
+    "gate_is_repaired": true,
+    "legacy_veto_decided_nothing": true,
+    "entry_observed_at": "2026-10-10T01:52:09.514Z",
+    "setup_alert_at": "2026-10-10T01:51:23.436Z"
+  },
+  "delivery": {
+    "alerts_enqueued": 2,
+    "destination": "awaiting-user-choice",
+    "alerts": [
+      {
+        "id": "setup_d19df4ddba2acbf45dc1ab57a7497600",
+        "kind": "setup",
+        "signalId": "sig_d19df4ddba2acbf45dc1ab57",
+        "destination": "awaiting-user-choice",
+        "enqueuedAt": "2026-10-10T01:51:23.436Z"
+      },
+      {
+        "id": "entry_sig_d19df4ddba2acbf45dc1ab57",
+        "kind": "entry",
+        "signalId": "sig_d19df4ddba2acbf45dc1ab57",
+        "destination": "awaiting-user-choice",
+        "enqueuedAt": "2026-10-10T01:52:23.436Z"
+      }
+    ],
+    "armed": true
+  },
+  "data_sources": {
+    "prints": "Binance.US BTCUSDT spot aggTrades (real), venue label binance-spot, availableAt = ts + 200ms (labeled feed latency)",
+    "bars": "Binance.US BTCUSDT 1m klines (real) for vetoBars / waiting-interval / post-entry; daily klines (real) for signal-day + history"
+  }
+}

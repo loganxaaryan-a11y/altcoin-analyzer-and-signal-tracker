@@ -1,0 +1,2 @@
+ledger_row_id,dossier_row_id,cohort_version,checkpoint,graded_outcome,return_net,entry_status,primary_attribution,attribution_subtype,challenger_a_relevance,challenger_a_note,evidence_note,graded_at_utc,graded_by
+EXAMPLE-ONLY-NOT-REAL-DATA,dossier-v1:crypto:EXAMPLE,1,5D,MISS,-1.047,entered,direction_wrong,,unassessed,,EXAMPLE ROW — not a real record. Invalidation 80075.99 touched at 2026-10-15T02:00Z before target1 86898.51; no later target touch within 5D window.,2026-10-20T00:00:00Z,template author

@@ -1,0 +1,88 @@
+{
+  "baseline_arm": {
+    "identity": "frozen production qualification pipeline as deployed at each candidate's decision (paper-pilot lineage / handler 2.1.9)",
+    "treatment_source": "the production dispositions recorded on each candidate (state + reasonCode) \u2014 never recomputed, never altered",
+    "versions_recorded_per_pair": [
+      "candidate.freezeVersion",
+      "candidate.productionHash",
+      "candidate.challengerHash",
+      "handler_version",
+      "status-pull freeze/mapping record"
+    ]
+  },
+  "baseline_freeze_recorded": "paper-pilot-v2.1.5",
+  "challenger_name": "Challenger-R1",
+  "collector_manifest_note": "MANIFEST-NOTE-collector-drift-v2.1.5-2026-10-21.md \u2014 the v2.1.5 manifest is preserved as-is; the collector drift is documented there with its relevance verdict (collector is not a registered input to this challenger; its default path is behavior-identical)",
+  "components": [
+    {
+      "activation_v3": "2026-10-21T19:12:02Z",
+      "eligibility": "candidates whose baseline ran a drift test (venue checkpoint exists) or that the baseline issued; decision >= freeze",
+      "id": "drift_reanchor (R1)"
+    },
+    {
+      "activation_v3": "2026-10-21T19:12:02Z",
+      "eligibility": "every scored candidate carrying frozen levels; provenance labeling only, disposition-neutral",
+      "id": "levels_reason_split (R2)"
+    },
+    {
+      "activation_v3": "2026-10-21T19:12:02Z",
+      "eligibility": "every scored candidate carrying a factor ledger",
+      "id": "attainable_transparency (R3, measurement only)"
+    },
+    {
+      "activation_v3": "2026-10-21T19:12:02Z",
+      "eligibility": "every scored pilot candidate plus the upstream discovery-observed population of each collected run (incl. assets excluded upstream by the old ATH rule before pilot scoring, where a per-asset record exists)",
+      "id": "ath_contextual (R4)"
+    }
+  ],
+  "evaluation_standard": {
+    "classes_never_pooled": [
+      "live_capture drift divergences",
+      "historical_reconstruction (mechanics_proof_only) drift divergences"
+    ],
+    "costs": "frozen 18 bps roundtrip clause, identical for both arms (evaluator crypto-evaluation-v5-corrected: first-touch TOUCH, +/-1.5R / +/-2.5R, 30-day cap)",
+    "dependence": "one cluster per asset (coinId); same-run dependence is NOT merged into clusters under v3 \u2014 it is disclosed via a mandatory per-run pair breakdown in every comparison report (v3 amendment of the v2 transitive coinId-OR-run components, which measured 1 cluster over the whole accrued population; doc 47)",
+    "inference": "mean paired difference; cluster bootstrap over coinId clusters; 10,000 resamples; 90% percentile interval; ambiguous/unknown/non-evaluable/immature counted, never pooled",
+    "insufficient_evidence": "INCONCLUSIVE \u2014 never promotes, never extends the window silently",
+    "kind": "matched_policy_with_uncertainty",
+    "paired_divergences_only": true,
+    "paired_return": "net R per arm; net R = gross R - 0.0018 x entry / |entry - invalidation| (frozen 18 bps clause converted to R units at the position's own risk distance); non-taking arm = 0",
+    "promotion": "separate explicit decision by Logan after a review; nothing in this registration promotes anything",
+    "retuning": "forbidden; any rule-text change voids this registration and requires a new one",
+    "review_checkpoints": "30 matured divergences in a class AND 8 weeks from registration (2026-12-16) \u2014 reporting points with uncertainty, not adoption triggers",
+    "review_deadline": "12 weeks from registration (2027-01-13) \u2014 conclude or retire/redesign explicitly; no silent extension"
+  },
+  "frozen_at_utc": "2026-10-21T19:12:02Z",
+  "immutability": "This registration and its rule text are immutable once frozen. The scorer verifies the rule text hash on every run and refuses to score on mismatch.",
+  "registered_by": "Coordinator Z17, 2026-10-21, under Logan's authorization relaying the expert's reply to the 2026-10-21 send pack: four prospective amendments (clustering estimator repair measured outcome-blind; R1 live-capture join on the discovery run's persisted decision-time capture; R4 velocity bypass made operational via persisted per-asset ATH gate records; R3 state map completed with observed Network/Positioning states) \u2014 evidence in workstream doc 47. V2 and V1 preserved untouched as history.",
+  "registration_id": "challenger-r1-v3",
+  "rule_text_path": "registrations/challenger-r1-v3.rule-text.md",
+  "rule_text_sha256": "4ca0ebf0867ad47b074ece8c294a885472fff69cc7fbf8b632f3299af065618c",
+  "scorer": {
+    "book_output": "rows/challenger-r1-shadow-book-v2.jsonl",
+    "dedupe_key": [
+      "registration_id",
+      "deployed_candidate_id"
+    ],
+    "file": "challenger_r1_v3.py",
+    "input": "the live paper status pull saved by the collection cron (getpaperpilotstatus response JSON) + the discovery observations pull (getdiscoveryobservations response JSON)",
+    "output": "rows/challenger-r1-shadow-v2.jsonl",
+    "path": "challenger_r1_v3.py",
+    "population_output": "rows/challenger-r1-r4-population-v2.jsonl",
+    "prospective_guard": "candidates with decisionAt before frozen_at_utc are refused (counted, never written); no backfilling",
+    "scorer_sha256": "e22763db64ecb9453dc2c045298c2a5144301fe25124b87bc9d3834c4c66ff52",
+    "sha256": "e22763db64ecb9453dc2c045298c2a5144301fe25124b87bc9d3834c4c66ff52"
+  },
+  "shadow_evaluator": {
+    "book": "rows/challenger-r1-shadow-book-v2.jsonl",
+    "costs": "18 bps round-trip, explicit on every shadow record",
+    "evaluator": "crypto-evaluation-v5-corrected",
+    "file": "challenger_shadow_eval_v3.py",
+    "isolation": "shadow book and outcomes live only under comparison/rows/; every record labeled HYPOTHETICAL; never in production positions, production monitoring, or counts of issued work",
+    "outcomes": "rows/challenger-r1-shadow-outcomes-v2.jsonl",
+    "path": "challenger_shadow_eval_v3.py",
+    "sha256": "93495251b39cd5f39f8fb823ff68af6db77d4bcd066e6c57139fd5005496a58e"
+  },
+  "status": "shadow_only",
+  "supersedes": "challenger-r1-v2 (frozen 2026-10-21T07:08:55Z), prospectively only"
+}

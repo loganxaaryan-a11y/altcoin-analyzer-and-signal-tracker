@@ -1,0 +1,83 @@
+{
+  "version": "crypto-phase2a1-repair-review-v2",
+  "generatedAt": "2026-10-09T20:19:33.633593Z",
+  "holdoutOpened": false,
+  "strategyPromoted": false,
+  "nativeTests": {
+    "passed": 66,
+    "failed": 0,
+    "source": "PHASE2A1-TEST-RESULTS-V2.txt"
+  },
+  "files": [
+    {
+      "path": "server/src/market-freshness.ts",
+      "bytes": 11494,
+      "sha256": "07991e5b045f210309534fa100ae150763d6f8d47e6860d160dd0df767274d39"
+    },
+    {
+      "path": "server/src/actions.ts",
+      "bytes": 671375,
+      "sha256": "04ba6f1bdd154c53845b2700ee0d453a334b2ec2c0ba148639d0afebb47ec83d"
+    },
+    {
+      "path": "server/src/schema.ts",
+      "bytes": 42716,
+      "sha256": "2ba317f297808e187ec430844786f5f1e1545d23115a4f5e1fb57dc0e7f27eb2"
+    },
+    {
+      "path": "server/src/phase2a-research.ts",
+      "bytes": 41902,
+      "sha256": "21b8f9b549a3a3b5d7e33bd17b3ae8783a41e334176bafdf6b586605dc4ad9b5"
+    },
+    {
+      "path": "server/src/phase2a-controls.ts",
+      "bytes": 11546,
+      "sha256": "ba50f5a1f2c8a3cb1865349445d61986abb3415257336e1ce53bae850eb5b845"
+    },
+    {
+      "path": "server/src/phase2a-research.test.ts",
+      "bytes": 13515,
+      "sha256": "c868c64f11e94ffb999f39972586e3a1f05056bcd1ede67a8715b7fe99114f50"
+    },
+    {
+      "path": "server/src/market-freshness.test.ts",
+      "bytes": 8525,
+      "sha256": "de0e010972b9fbd72b8927ee895eee1143887d880b443b0a0930f9afafdbe5c2"
+    },
+    {
+      "path": "client/src/App.tsx",
+      "bytes": 216145,
+      "sha256": "73309bb6e8db17920fb1cbe3c66d4303fd28d12e32f0b797073997a2e9056b70"
+    },
+    {
+      "path": "client/src/theme.css",
+      "bytes": 117207,
+      "sha256": "2bcf807da91806a54f1c80aadc242349f5d34b3cabf4510a8417777ea77d0208"
+    },
+    {
+      "path": "drizzle/0035_phase2a1_freshness_repair.sql",
+      "bytes": 1354,
+      "sha256": "2a2ae409b74b942b47d8708dcaa4286fceeac458befbf10ea9096ccea8ad5c9d"
+    },
+    {
+      "path": "research/phase2a1/fixtures/synthetic-validation-bars.jsonl",
+      "bytes": 786912,
+      "sha256": "8c81bf69c062e2c772378cc00f946be104204eb782cfe65089362266e6a4c400"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/validation-report.json",
+      "bytes": 58435,
+      "sha256": "9ebc9db13c749696df4cae492809f50002559a88e63643b36bea0b2c85b3c56e"
+    },
+    {
+      "path": "research/phase2a1/corrected-output-v2/pipeline-positive-control-report.json",
+      "bytes": 681,
+      "sha256": "ec4fe8095e08fac0e14260e2b8c47c4c6e016d21f551ad8253ecc5c6f1c6560d"
+    },
+    {
+      "path": "PHASE2A1-TEST-RESULTS-V2.txt",
+      "bytes": 8707,
+      "sha256": "20234430bb7f2ff5148d7575f0bb3b55db01f9b1289b0859f92d189bdd0b63b8"
+    }
+  ]
+}

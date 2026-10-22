@@ -1,0 +1,1 @@
+{"compilerOptions":{"declaration":false,"module":"NodeNext","moduleResolution":"NodeNext","outDir":"build","rootDir":".","skipLibCheck":true,"sourceMap":false,"strict":true,"target":"ES2022","typeRoots":["../orchestrator/node_modules/@types"],"types":["node"]},"include":["src/**/*","tests/waiting-interval.test.ts"]}

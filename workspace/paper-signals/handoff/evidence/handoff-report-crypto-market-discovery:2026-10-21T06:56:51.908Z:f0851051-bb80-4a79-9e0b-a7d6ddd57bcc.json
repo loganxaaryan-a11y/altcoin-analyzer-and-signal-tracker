@@ -1,0 +1,54 @@
+{
+  "runId": "crypto-market-discovery:2026-10-21T06:56:51.908Z:f0851051-bb80-4a79-9e0b-a7d6ddd57bcc",
+  "source": "crypto-market-discovery",
+  "completedAt": "2026-10-21T06:58:21.071Z",
+  "freezeVersion": "v2.1.5",
+  "demo": false,
+  "feedMode": "binance",
+  "feedLabel": "binance-spot (read-only public market data; paper only)",
+  "issuancePath": "processIntegratedCandidate(orchestrator/src/issuance/handler.ts) — entry-v1 + waiting-interval veto + venue mapping",
+  "activeFreeze": "v2.1.5",
+  "receivedAt": "2026-10-21T09:12:21.416Z",
+  "staleRun": false,
+  "candidates": [
+    {
+      "candidateKey": "31a684bc8eef51d1d096f0c3f71457d8",
+      "symbol": "COMP",
+      "direction": "long",
+      "ledgerHash": "014435d9cdd73e6efdd31cd18e87a3c8849ebee9f909e11a856ce8fbb229a39d",
+      "outcome": "failed",
+      "reasonCode": "missing-entry-levels",
+      "reason": "entryPrice missing or non-positive: the entry-v1 contract cannot be built",
+      "gate": null,
+      "handlerOutcomeKind": null
+    },
+    {
+      "candidateKey": "3ee92d9db4094536ef56e827221f09fb",
+      "symbol": "ZRO",
+      "direction": "long",
+      "ledgerHash": "9a458aa81059250b8d684bb6ffecde4fc10f59c6e4c9caf6f1698571be098c71",
+      "outcome": "failed",
+      "reasonCode": "missing-entry-levels",
+      "reason": "entryPrice missing or non-positive: the entry-v1 contract cannot be built",
+      "gate": null,
+      "handlerOutcomeKind": null
+    },
+    {
+      "candidateKey": "997863f50f1da78fcc77a89b9267c2f2",
+      "symbol": "WLD",
+      "direction": "long",
+      "ledgerHash": "167dd0a94d937fcab976ad60875976d53388b37f00e98e63ec68aed818a44c31",
+      "outcome": "failed",
+      "reasonCode": "missing-entry-levels",
+      "reason": "entryPrice missing or non-positive: the entry-v1 contract cannot be built",
+      "gate": null,
+      "handlerOutcomeKind": null
+    }
+  ],
+  "counts": {
+    "qualified": 0,
+    "abstained": 0,
+    "deferred": 0,
+    "failed": 3
+  }
+}

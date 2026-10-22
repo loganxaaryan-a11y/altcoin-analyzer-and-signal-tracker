@@ -1,0 +1,13 @@
+# Operational file hashes — paper pipeline scheduling layer (2026-10-14)
+# No executables changed (handler/watcher/contract/collector/pilot untouched).
+# Therefore NO new freeze/version minted. These are operational specs, docs,
+# one test, one demo script. Installed cron jobs are platform state.
+# Generated: 2026-10-14T06:55:30Z
+
+0f5a773e0fc520b660f6b8275569209cd861b43cdaabae5c223e1d13fd7346f8  SCHEDULE-OPS-2026-10-14.md
+dbe71eb22c68a6d24a00b476dc83489c0803e2c553f499ec8cf032224977e669  JOB-SPEC-paper-signal-cycle-2026-10-14.md
+0e942288a6af9a2c306228cb8f27f8cf023983d6f9dd46fd105a19425e639454  JOB-SPEC-paper-entry-watcher-2026-10-14.md
+e01922b4ad5767fe370be1d46c2ccda2c7f4219ce4e295a8062ad9bcffebb709  COLLECTOR-SEPARATION-2026-10-14.md
+c0aac100dec21fbdb84937ada731d7f90b29bd81c3da997767ca953c23d0bd59  tests/test_collector_separation.py
+ae6b86bdb465219fb5de7f9c915d48f304536590b81683ebb331acc2b4939139  watcher-demo/watcher-resume-demo.sh
+dfb3fa006d0d301c72d1f179811bd3708dfa1362b90ed7873a7bc7e302504ff1  watcher-demo/DEMO-VERDICT-2026-10-14.md

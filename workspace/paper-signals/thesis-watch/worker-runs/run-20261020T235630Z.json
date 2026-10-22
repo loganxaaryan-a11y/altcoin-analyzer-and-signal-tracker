@@ -1,0 +1,64 @@
+{
+ "invocation_completed": {
+  "run_ts_utc": "2026-10-20T23:56:30Z",
+  "started_utc": "2026-10-20T23:56:30Z",
+  "finished_utc": "2026-10-21T00:12:46Z",
+  "status": "succeeded",
+  "per_terminal_fetch": {
+   "altcoin-analyzer-and-signal-tracker": {
+    "listtheories": "ok",
+    "getmarketread": "ok (2 reads; post-cutoff read used for tripwires/classification)"
+   },
+   "equity-analyzer-and-signal-tracker": {
+    "listtheories": "ok (3 pages, cursor 0/20/40)",
+    "getmarketread": "ok (cached session-close history; prices from prediction feed)"
+   }
+  },
+  "theories_seen": {
+   "crypto": 13,
+   "equity": 49
+  },
+  "transitions_found": 6,
+  "alerts_precommitted": [
+   "altcoin-analyzer-and-signal-tracker/15/new-challenging-evidence",
+   "altcoin-analyzer-and-signal-tracker/14/status:challenged→confirming",
+   "altcoin-analyzer-and-signal-tracker/13/tripwire:p2:hit",
+   "equity-analyzer-and-signal-tracker/33/status:confirming→challenged",
+   "equity-analyzer-and-signal-tracker/17/status:confirming→challenged",
+   "equity-analyzer-and-signal-tracker/40/status:challenged→confirming"
+  ],
+  "bounce_watches_closed": 3,
+  "bounce_watches_opened": [
+   "Crypto/13/p1 ETH",
+   "Crypto/13/p5 NEAR",
+   "Equity/37/p1 MSTR",
+   "Equity/13/p1 ORCL"
+  ],
+  "learning_entries_appended": 0,
+  "errors": [],
+  "notes": [
+   "Crypto/15: new confirming evidence id 57 baselined silently",
+   "Crypto/15: NEW challenging evidence id 56 (alerted)",
+   "Crypto/14: STATUS challenged -> confirming (alerted)",
+   "Crypto/13/p1: level LOST after alerted hit -> bounce watch opened (classify after 2026-10-26T00:06:00Z)",
+   "Crypto/13/p2: TRIPWIRE BREAK above 2437.51 (ETH 2444.371561824189) alerted",
+   "Crypto/13/p5: level LOST after alerted hit -> bounce watch opened (classify after 2026-10-26T00:06:00Z)",
+   "Equity/54: NEW theory baselined silently (status challenged, 4 predictions)",
+   "Equity/53: NEW theory baselined silently (status challenged, 2 predictions)",
+   "Equity/52: NEW theory baselined silently (status challenged, 2 predictions)",
+   "Equity/51: NEW theory baselined silently (status challenged, 2 predictions)",
+   "Equity/50: NEW theory baselined silently (status challenged, 1 predictions)",
+   "Equity/37/p1: level LOST after alerted hit -> bounce watch opened (classify after 2026-10-26T00:06:00Z)",
+   "Equity/33: STATUS confirming -> challenged (alerted)",
+   "Equity/17: STATUS confirming -> challenged (alerted)",
+   "Equity/13/p1: level LOST after alerted hit -> bounce watch opened (classify after 2026-10-26T00:06:00Z)",
+   "altcoin-analyzer-and-signal-tracker/6/p2: bounce watch CLOSED -> bounce-held (price 82878.12564691149 vs level 81000.0)",
+   "altcoin-analyzer-and-signal-tracker/9/p1: bounce watch CLOSED -> fakeout (price 82878.12564691149 vs level 81685.89)",
+   "equity-analyzer-and-signal-tracker/3/p1: bounce watch CLOSED -> bounce-held (price 216.47000122070312 vs level 217.61)",
+   "Equity/40: STATUS challenged -> confirming RE-FLIP after this morning's confirming->challenged; ledger key refreshed attempts=2 (prior 2026-10-17 key awaiting-ack, not delivered) -> alerted again"
+  ]
+ },
+ "scheduler_provenance": {
+  "origin_unverified": true
+ }
+}

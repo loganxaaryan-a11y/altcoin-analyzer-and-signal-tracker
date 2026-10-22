@@ -1,0 +1,42 @@
+{
+  "invocation_completed": {
+    "run_ts_utc": "2026-10-17T18:42:11Z",
+    "started_utc": "2026-10-17T18:41:27Z",
+    "finished_utc": "2026-10-17T18:42:11Z",
+    "status": "succeeded",
+    "rows_seen": {
+      "crypto": 37,
+      "equity": 12
+    },
+    "new_keys": [],
+    "explained_keys": [],
+    "skipped": "No open_signals/discovery rows with created strictly after last_check_utc (2026-10-17T14:43:44Z) on either side. Crypto newest live row id 46 (TEST fixture, 2026-10-16T02:48:49Z) already in ledger; ids 44/45 already explained as catch-up. Row crypto:41 (SUI long, created 2026-10-14T13:00:09Z) predates the strict watermark — pre-ledger rows stay outside scope per the exactly-once contract (decision carried over from the 2026-10-17 02:45Z/06:42Z runs; ledger holds 39/40/44/45/46 only). Equity: 0 issued under equity-eval-3.2.0; 12 legacy rows created 2026-10-01..2026-10-05, all unverified, pre-watermark — established convention, out of scope. Crypto discovery run 91 running with signal_count 0 — no new issuance.",
+    "mirror_as_of": {
+      "crypto": {
+        "generated_at": "2026-10-17T17:45:49Z",
+        "sections": {
+          "open_signals": "2026-10-17T09:46:05.375Z",
+          "theories": "2026-10-17T15:58:23.473Z",
+          "market_read": "2026-10-17T17:42:03.612Z",
+          "discovery": "2026-10-17T16:57:46.639Z"
+        }
+      },
+      "equity": {
+        "generated_at": "2026-10-17T17:45:49Z",
+        "sections": {
+          "open_signals": "2026-10-17T17:41:39.370Z",
+          "theories": "2026-10-17T17:42:38.165Z",
+          "market_read": "2026-10-17T17:43:07.780Z",
+          "discovery": "2026-10-17T17:41:39.009Z"
+        }
+      }
+    },
+    "stale_sections": "none — all sections within 2h bound; no exception-path fetches.",
+    "exception_path_invocations": [],
+    "terminal_fetch": "not invoked — budget/evidence-reuse: mirrors fresh, no known-issued-but-missing signal.",
+    "action_failures": []
+  },
+  "scheduler_provenance": {
+    "origin": "origin_unverified"
+  }
+}
