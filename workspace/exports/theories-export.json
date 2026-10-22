@@ -1,0 +1,1544 @@
+{
+ "export": "theories",
+ "exported_at_utc": "2026-10-22T19:19:38Z",
+ "source_action": "listtheories",
+ "artifact": "altcoin-analyzer-and-signal-tracker",
+ "theory_count": 14,
+ "theories": [
+  {
+   "createdAt": "2026-10-21T11:54:41.496Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-21T11:54:58.674Z",
+     "id": 61,
+     "publishedAt": "2026-10-20",
+     "source": "Linn's Leverage #1134 (Substack link log) \u2014 grade B",
+     "stance": "confirming",
+     "theoryId": 16,
+     "title": "DeFiLlama x Trueo launched revenue/exploit prediction markets \u2014 event contracts extending into DeFi-native data, the onchain leg of the prediction-market composite",
+     "url": "https://linns.substack.com/p/linns-leverage-1134"
+    },
+    {
+     "createdAt": "2026-10-21T11:54:56.338Z",
+     "id": 60,
+     "publishedAt": "2026-10-21",
+     "source": "The Event Horizon (Substack) \u2014 full text, grade B",
+     "stance": "challenging",
+     "theoryId": 16,
+     "title": "Regulatory offensive: Ohio OCCC C&Ds to 10 firms + licensee letter (Oct 30 deadline, license-revocation threats for serving event-contract operators); Utah AG suing Kalshi, named two Susquehanna MMs as defendants (first MM-targeting state action); Cruz bill planned post-midterms; Stifel Sept $82B volume but growth trailing sportsbooks",
+     "url": "https://nexteventhorizon.substack.com/p/ohio-vs-prediction-markets-escalates"
+    },
+    {
+     "createdAt": "2026-10-21T11:54:52.948Z",
+     "id": 59,
+     "publishedAt": "2026-10-21",
+     "source": "The Event Horizon (Substack) \u2014 full text, grade B",
+     "stance": "confirming",
+     "theoryId": 16,
+     "title": "Record volumes: Kalshi $2.50B single day (Oct 19), $21.7B 7d; Polymarket US $3.24B. Hyperliquid Policy Center filed 5 SEC recommendations on Regulation Crypto Assets \u2014 venue legitimacy bid",
+     "url": "https://nexteventhorizon.substack.com/p/ohio-vs-prediction-markets-escalates"
+    }
+   ],
+   "horizon": "short",
+   "id": 16,
+   "linkedCoins": [
+    {
+     "coinId": "hyperliquid",
+     "symbol": "HYPE"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 81.31,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-11-19",
+     "id": 37,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 77.98,
+     "theoryId": 16
+    },
+    {
+     "baseline": 81.31,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-11-19",
+     "id": 38,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 84.68,
+     "theoryId": 16
+    }
+   ],
+   "rippleMap": "Kalshi $2.50B single-day / $21.7B 7d + Polymarket $3.24B (record event-contract volumes) -> DeFiLlama x Trueo revenue/exploit prediction markets (event contracts extend into DeFi-native data) -> Hyperliquid Policy Center's 5 SEC recommendations on Regulation Crypto Assets (venue legitimacy bid) -> HYPE, listed onchain-venue proxy, absorbs the rotation bid. Broken if: Ohio's Oct 30 compliance deadline or Utah's AG suit yields an adverse ruling against a major venue (state win, not noise), or Stifel's Sept $82B-with-trailing-growth saturation flag proves early and volumes roll over. Challenger: Utah named two Susquehanna market makers as defendants \u2014 first time MMs, not venues, are the target.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-21T11:54:41.496Z",
+     "coinId": "hyperliquid",
+     "price": 81.31,
+     "symbol": "HYPE"
+    }
+   ],
+   "statement": "[Muse theory] Prediction-market composite is in a record-volumes vs regulatory-offense phase, and the onchain rotation bid favors Hyperliquid as the listed venue proxy. Kalshi printed $2.50B in a single day (Oct 19) and $21.7B over 7 days; Polymarket US venues $3.24B; DeFiLlama x Trueo launched revenue/exploit prediction markets. The counter-case is live: Ohio issued C&Ds to 10 firms plus a licensee letter (Oct 30 deadline, license-revocation threats for serving event-contract operators); Utah's AG is suing Kalshi and named two Susquehanna MMs; a Cruz bill is planned post-midterms. Polymarket preemptively sued Oct 16 (Commerce Clause + CEA preemption). Read: volumes keep making records regardless of legal noise; state wins accelerate rotation to onchain/offshore venues.",
+   "status": "challenged",
+   "updatedAt": "2026-10-21T11:54:41.496Z"
+  },
+  {
+   "createdAt": "2026-10-20T11:53:36.209Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-22T14:07:04.263Z",
+     "id": 69,
+     "publishedAt": "2026-10-22",
+     "source": "CoinDesk + terminal analyzecoin",
+     "stance": "challenging",
+     "theoryId": 15,
+     "title": "UPDATE 2026-10-22: falsification line REJECTED. BTC surged to ~$84,898 then fell 2.7% to ~$81,600-82,200, below $82,500 support (CoinDesk). Terminal 2026-10-22T14:02Z: regime flipped to 'price and OI falling' (OI -3.68% 24h), daily lower highs/lower lows, RSI 47.4, MACD negative; resistances 81,685/83,479/86,490; supports 81,408/78,173. Revised tripwire: daily close ABOVE $83,479.25 = basing wins - UNBREACHED. Terminal BTC long @81,568 open, invalidation $78,791.",
+     "url": "https://www.coindesk.com/markets/2026/10/22/bitcoin-slides-below-usd82-000-as-ai-doubts-return-with-defi-tokens-leading-declines"
+    },
+    {
+     "createdAt": "2026-10-22T14:07:04.224Z",
+     "id": 68,
+     "publishedAt": "2026-10-22",
+     "source": "Farside via Phemex + SoSoValue",
+     "stance": "confirming",
+     "theoryId": 15,
+     "title": "UPDATE 2026-10-22: flow leg STRENGTHENED. BTC ETFs +$524.8M Oct 21 (Farside) = 3rd straight inflow day; 3-day total ~$1.075B; October flipped -$617M to +$457M (IBIT $235M, FBTC $212.7M = 84.7% of the day). ETH ETFs +$14.9M Oct 21 (first positive day after 5 sessions) but Oct still -$1.08B (worst since Nov 2025). Three fresh wallets took 1,090 BTC ($90.38M) from Wintermute OTC Oct 20-21. Caveat: BTC dominance 60% (highest since May) - flight-to-shelter within crypto, alts still bleeding.",
+     "url": "https://phemex.com/blogs/bitcoin-etf-inflows-top-1-billion-ether-funds-turn-positive"
+    },
+    {
+     "createdAt": "2026-10-21T14:02:50.218Z",
+     "id": 65,
+     "publishedAt": "2026-10-21",
+     "source": "SoSoValue via TokenPost + terminal analyzecoin",
+     "stance": "confirming",
+     "theoryId": 15,
+     "title": "UPDATE 2026-10-21: BTC $83,822, regime flipped to 'price and OI rising' (OI +2.84% 24h, funding 0.01% 8h). Daily structure still lower highs/lower lows; testing resistance $84,448.75 = falsification line. HALF-MET: second inflow day (+$23.16M Tue); need a daily close above $84K. Hashdex: needs >$84K before Oct 27-28 FOMC. Prior (10-20): basing $81-82k, ETF cost-basis ~$81.5K.",
+     "url": "https://www.tokenpost.com/news/investing/36487"
+    },
+    {
+     "createdAt": "2026-10-21T14:02:50.181Z",
+     "id": 64,
+     "publishedAt": "2026-10-21",
+     "source": "Cointelegraph + SoSoValue",
+     "stance": "challenging",
+     "theoryId": 15,
+     "title": "CHALLENGING: Tue +$23.16M was -96% vs Monday, single-buyer again (IBIT +$29.86M); BTC Oct MTD -$67M. ETH ETFs -$26.13M Tue; Oct outflows -$1.08B = worst monthly since Nov 2025, erasing Sept +$832M. Crypto trading as high-beta AI-equity satellite (SMCI +16% moved BTC) \u2014 no digital-gold bid. Weakens the 'buyers returned' read.",
+     "url": "https://cointelegraph.com/markets/ether-etf-outflows-near-1-1-billion-october"
+    },
+    {
+     "createdAt": "2026-10-21T11:55:05.483Z",
+     "id": 63,
+     "publishedAt": "2026-10-21",
+     "source": "Lookonchain via news search \u2014 CORROBORATED (news.bitcoin.com + coinotag)",
+     "stance": "confirming",
+     "theoryId": 15,
+     "title": "Three fresh wallets took 1,090 BTC ($90.38M) from Wintermute OTC Oct 20-21 (test deposits first, cold-storage pattern) \u2014 second near-identical haul in a week (1,162 BTC Oct 14). Spot buyers returning via OTC desks; BTC above $80K for 33 days",
+     "url": "https://news.bitcoin.com/"
+    },
+    {
+     "createdAt": "2026-10-20T13:55:43.720Z",
+     "id": 57,
+     "publishedAt": "2026-10-20",
+     "source": "Cointelegraph + bitcoininsider (ETF flows, Oct 20)",
+     "stance": "confirming",
+     "theoryId": 15,
+     "title": "CORRECTION vs Oct 19 read: US spot BTC ETFs pulled +$526.7M net inflows Monday (biggest since Sept 22) \u2014 entirely BlackRock IBIT (+$665.2M, largest single-day haul in a year) against FBTC -$83.6M and GBTC -$54.9M. Buyers returned but concentrated; October still ~$88-90M negative",
+     "url": "https://cointelegraph.com/markets/bitcoin-etfs-527m-inflows-biggest-since-september"
+    },
+    {
+     "createdAt": "2026-10-20T13:51:42.780Z",
+     "id": 56,
+     "publishedAt": "2026-10-20",
+     "source": "TradingKey US pre-market wrap + crypto terminal tool reads (analyzecoin/gethyperliquidmarket 2026-10-20T13:48Z)",
+     "stance": "challenging",
+     "theoryId": 15,
+     "title": "BTC $81.7k testing support $81,408: daily structure flipped to lower highs/lower lows, regime 'price falling while OI rises' (OI +1.38% 24h = short-building), top HL whales still short -$211M @76.2k and -$202M @78.0k. Basing read weakening; $81.5K ETF cost-basis line under pressure",
+     "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262225780-us-premarket-nvidia-china-orders-35b-micron-strike-memory-stocks-spcx-earnings-tradingkey"
+    },
+    {
+     "createdAt": "2026-10-20T11:53:53.281Z",
+     "id": 55,
+     "publishedAt": "2026-10-19",
+     "source": "Glassnode",
+     "stance": "confirming",
+     "theoryId": 15,
+     "title": "BTC Market Pulse Week 43: selling eased, ETF outflows narrowed to -$230M, spot/ETF buyers not yet returned",
+     "url": "https://research.glassnode.com/btc-market-pulse-week-43-2026/"
+    },
+    {
+     "createdAt": "2026-10-20T11:53:53.267Z",
+     "id": 54,
+     "publishedAt": "2026-10-19",
+     "source": "Wintermute",
+     "stance": "confirming",
+     "theoryId": 15,
+     "title": "Wintermute Market Update Oct 19: $82.5k held 3+ weeks (resistance to support); alt flows recycled into BTC/ETH; BTC must move first",
+     "url": "https://www.wintermute.com/insights"
+    },
+    {
+     "createdAt": "2026-10-20T11:53:53.243Z",
+     "id": 53,
+     "publishedAt": "2026-10-19",
+     "source": "Lucky Trader",
+     "stance": "challenging",
+     "theoryId": 15,
+     "title": "Morning Minute: October ETF bleed -$1.86B combined; ETH ETF cushion only $1.6B before underwater mark-to-market",
+     "url": "https://luckytrader.substack.com/p/crypto-rebounds-as-black-monday-looms"
+    }
+   ],
+   "horizon": "short",
+   "id": 15,
+   "linkedCoins": [
+    {
+     "coinId": "bitcoin",
+     "symbol": "BTC"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 81398,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "above",
+     "dueDate": "2026-11-17",
+     "id": 35,
+     "progress": -4.713689857814035,
+     "status": "confirming",
+     "symbol": "BTC",
+     "targetPrice": 78173.35,
+     "theoryId": 15
+    },
+    {
+     "baseline": 81398,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "above",
+     "dueDate": "2026-11-17",
+     "id": 36,
+     "progress": -2.985232916906437,
+     "status": "challenged",
+     "symbol": "BTC",
+     "targetPrice": 86489.73,
+     "theoryId": 15
+    }
+   ],
+   "rippleMap": "BTC holds $80k (3+ weeks support) -> ETF outflows stabilize (-$230M wk, narrowed from -$675M) -> perp funding normalizes (longs paying, selling eased) -> alts stop bleeding (Wintermute: flows recycled into BTC/ETH, BTC must move first) -> FOMC Oct 28 + midterms Nov 3 catalysts -> IV cheap, volatility returns. Bear branch: loss of $78.2k support -> low $70ks (Wintermute) -> STH capitulation -> ETH ETF cushion breach ($1.6B left) -> forced selling.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-20T11:53:36.209Z",
+     "coinId": "bitcoin",
+     "price": 81398,
+     "symbol": "BTC"
+    }
+   ],
+   "statement": "[Muse theory] BTC is basing near $81-82k: Glassnode Week 43 shows the early-October selling has eased (ETF outflows narrowed to -$230M, perp CVD improved, profit-taking cooled) but spot + ETF buyers have not returned; Wintermute's desk sees alt flows being recycled into BTC/ETH and says BTC must move higher before any broad alt rally. Range into FOMC Oct 28, then volatility returns. Theory test 58/100 MEDIUM \u2014 structure intact above 200dma, but pinned at the 50dma on thin volume.",
+   "status": "challenged",
+   "updatedAt": "2026-10-20T11:53:36.209Z"
+  },
+  {
+   "createdAt": "2026-10-19T15:55:02.320Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-22T11:55:02.256Z",
+     "id": 67,
+     "publishedAt": "2026-10-22T11:50:00Z",
+     "source": "Smart-sources sweep 2026-10-22 (TMTB Morning Wrap cross-ref) - grade B",
+     "stance": "challenging",
+     "theoryId": 14,
+     "title": "UPDATE 2026-10-22: issuer opt-outs ESCALATED 9 to 16 in 4 days - MSFT, GOOGL, GS, QCOM, CAT, MCD, WDC joined the OKX-ICE objection list. Issuer consent, not regulation, is the binding constraint on tokenized-equity supply; the flywheel's venue-side thesis now depends on commercial consent deals, not rails.",
+     "url": "https://luckytrader.substack.com/p/nine-blue-chip-companies-say-no-to"
+    },
+    {
+     "createdAt": "2026-10-21T11:55:02.124Z",
+     "id": 62,
+     "publishedAt": "2026-10-20",
+     "source": "Morning Minute / LuckyTrader (Substack) \u2014 full text, grade B",
+     "stance": "challenging",
+     "theoryId": 14,
+     "title": "Issuer-consent wall: 9 blue chips \u2014 Verizon, Broadcom, UnitedHealth, Cerebras, AppLovin, Applied Digital, Rocket Lab, CoreWeave, Applied Optoelectronics \u2014 objected to shares trading on the OKX-ICE venue (14% of 63 planned listings); Nasdaq opting its own shares out. Binding constraint shifted from regulatory to commercial consent",
+     "url": "https://luckytrader.substack.com/p/nine-blue-chip-companies-say-no-to"
+    },
+    {
+     "createdAt": "2026-10-21T02:56:17.908Z",
+     "id": 58,
+     "publishedAt": "2026-10-20",
+     "source": "Joe Weisenthal @TheStalwart (Bloomberg Odd Lots), quoted in Linn's Leverage #1134",
+     "stance": "confirming",
+     "theoryId": 14,
+     "title": "Weisenthal publicly reverses a decade of blockchain skepticism ('maybe I was wrong about blockchain technology', ~311K views): shared credibly-neutral ledger for institutions, stablecoin programmability for AI-agent payments, tokenized-instrument explosion. NARRATIVE evidence, SMALL WEIGHT (Logan 2026-10-20): mainstream-voice flips are tie-breaker-class confirmation, never sufficient alone to flip a theory.",
+     "url": "https://linns.substack.com/p/linns-leverage-1134"
+    },
+    {
+     "createdAt": "2026-10-19T15:55:14.746Z",
+     "id": 52,
+     "publishedAt": "2026-10-19T11:41:00Z",
+     "source": "Morning Minute / LuckyTrader",
+     "stance": "challenging",
+     "theoryId": 14,
+     "title": "Nine companies incl. Broadcom, Verizon, UnitedHealth objected to the OKX-ICE tokenized-stock venue \u2014 issuer pushback on the SEC Innovation Exemption test",
+     "url": "https://luckytrader.substack.com/p/crypto-rebounds-as-black-monday-looms"
+    },
+    {
+     "createdAt": "2026-10-19T15:55:12.865Z",
+     "id": 51,
+     "publishedAt": "2026-10-19T11:41:00Z",
+     "source": "Morning Minute / LuckyTrader",
+     "stance": "confirming",
+     "theoryId": 14,
+     "title": "Bank earnings calls: GS/Wells/MS frame tokenization as growth; Circle expands to 40 emerging markets; Visa Direct USDC in 180+ countries",
+     "url": "https://luckytrader.substack.com/p/crypto-rebounds-as-black-monday-looms"
+    },
+    {
+     "createdAt": "2026-10-19T15:55:10.940Z",
+     "id": 50,
+     "publishedAt": "2026-10-18T23:39:00Z",
+     "source": "Linn's Leverage #1132",
+     "stance": "confirming",
+     "theoryId": 14,
+     "title": "Token Terminal: 6.5% of tokenized stock mkt cap now in DeFi (from 1.7%); Pendle launches GOOGLc + NVDAc yield markets on Base",
+     "url": "https://linns.substack.com/p/linns-leverage-1132"
+    }
+   ],
+   "horizon": "long",
+   "id": 14,
+   "linkedCoins": [
+    {
+     "coinId": "chainlink",
+     "symbol": "LINK"
+    },
+    {
+     "coinId": "pendle",
+     "symbol": "PENDLE"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 11.95,
+     "coinId": "chainlink",
+     "current": 11.93,
+     "direction": "above",
+     "dueDate": "2026-12-17",
+     "id": 31,
+     "progress": -2.66666666666661,
+     "status": "challenged",
+     "symbol": "LINK",
+     "targetPrice": 12.7,
+     "theoryId": 14
+    },
+    {
+     "baseline": 11.95,
+     "coinId": "chainlink",
+     "current": 11.93,
+     "direction": "above",
+     "dueDate": "2026-12-17",
+     "id": 32,
+     "progress": -2.3809523809523303,
+     "status": "confirming",
+     "symbol": "LINK",
+     "targetPrice": 11.11,
+     "theoryId": 14
+    },
+    {
+     "baseline": 2.07,
+     "coinId": "pendle",
+     "current": 2.05,
+     "direction": "above",
+     "dueDate": "2026-12-17",
+     "id": 33,
+     "progress": -8.000000000000007,
+     "status": "challenged",
+     "symbol": "PENDLE",
+     "targetPrice": 2.32,
+     "theoryId": 14
+    },
+    {
+     "baseline": 2.07,
+     "coinId": "pendle",
+     "current": 2.05,
+     "direction": "above",
+     "dueDate": "2026-12-17",
+     "id": 34,
+     "progress": -9.523809523809543,
+     "status": "confirming",
+     "symbol": "PENDLE",
+     "targetPrice": 1.86,
+     "theoryId": 14
+    }
+   ],
+   "rippleMap": "tokenized-stock DeFi deposits at 6.5% (from 1.7% YTD) -> LINK (oracle demand for tokenized equities in DeFi) -> PENDLE (GOOGLc/NVDAc fixed-yield markets on Base capture the yield layer; $20K USDC LP incentives per pool) // CHALLENGE: nine companies (Broadcom, Verizon, UnitedHealth) objected to the OKX-ICE tokenized-stock venue \u2014 issuer/regulatory pushback can slow the flywheel",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-19T15:55:02.320Z",
+     "coinId": "chainlink",
+     "price": 11.95,
+     "symbol": "LINK"
+    },
+    {
+     "capturedAt": "2026-10-19T15:55:02.320Z",
+     "coinId": "pendle",
+     "price": 2.07,
+     "symbol": "PENDLE"
+    }
+   ],
+   "statement": "[Muse theory] Tokenized-stock onchain flywheel is inflecting: Token Terminal reports 6.5% of tokenized-stock market cap now in DeFi venues (from 1.7% at start of year, led by Uniswap/Kamino/Pendle); Pendle launched GOOGLc (Dec 2026) and NVDAc (Jan 2027) fixed-yield markets on Base; GS, Wells Fargo and Morgan Stanley Q3 calls framed tokenization as growth; Circle expanding to ~40 emerging markets; Visa Direct USDC payouts across 180+ countries. CONTESTED: tape cuts against it short-term \u2014 LINK RSI 40, daily lower-highs; PENDLE RSI 42.4, -15.6% over 14d \u2014 and regulatory friction is live. Structural thesis; near-term price not confirming.",
+   "status": "challenged",
+   "updatedAt": "2026-10-19T15:55:02.320Z"
+  },
+  {
+   "createdAt": "2026-10-18T11:52:49.607Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-18T11:53:03.941Z",
+     "id": 46,
+     "publishedAt": "2026-10-18",
+     "source": "Lookonchain (via aggregation, single-source unconfirmed)",
+     "stance": "confirming",
+     "theoryId": 13,
+     "title": "SINGLE SOURCE: Hyperliquid whale 0xc2a3 closed 2,186 BTC longs (~$256M) for $1.4M profit, trimmed ETH/SOL; dormant ETH whale sold 1,800 ETH after 4 years; whale 0x579f short 232 BTC + 5,810 ETH, long ENA",
+     "url": "https://bitrss.com/whale-wars-bulls-and-bears-battle-for-control-on-hyperliquid-142560"
+    },
+    {
+     "createdAt": "2026-10-18T11:53:03.921Z",
+     "id": 45,
+     "publishedAt": "2026-10-12",
+     "source": "Wintermute",
+     "stance": "challenging",
+     "theoryId": 13,
+     "title": "Countercase: NEAR was the AI-name standout this week; tape shows ETH +26.8%/SOL +33.4%/NEAR +148% over 90d \u2014 the 14d bleed may be mean-reversion of prior leaders, not structural alt fragility",
+     "url": "https://www.wintermute.com/insights/market-color/market-update/market-update-12-october-2026"
+    },
+    {
+     "createdAt": "2026-10-18T11:52:56.588Z",
+     "id": 44,
+     "publishedAt": "2026-10-12",
+     "source": "Wintermute",
+     "stance": "confirming",
+     "theoryId": 13,
+     "title": "Market Update 12 Oct 2026: BTC ETF -$679M / ETH ETF -$542M weekly outflows; 'when flows turned there was nothing underneath it'; BTC dominance toward 59.5%; only 11/66 large alts green, median -3.7%",
+     "url": "https://www.wintermute.com/insights/market-color/market-update/market-update-12-october-2026"
+    },
+    {
+     "createdAt": "2026-10-18T11:52:56.541Z",
+     "id": 43,
+     "publishedAt": "2026-10-14",
+     "source": "Glassnode",
+     "stance": "confirming",
+     "theoryId": 13,
+     "title": "Week 41 'Boxed In': 6-12mo cohort basis ~$88K and 1-2yr cohort ~$100K both turned price back in 2026; ETF cost basis ~$81.5K; Sep 21-Oct 6 took in ~$3B, since Oct 7 ~$760M net outflows",
+     "url": "https://research.glassnode.com/the-week-onchain-week-41-2026/6acf9e1b62e2840001ea0dd4"
+    }
+   ],
+   "horizon": "short",
+   "id": 13,
+   "linkedCoins": [
+    {
+     "coinId": "ethereum",
+     "symbol": "ETH"
+    },
+    {
+     "coinId": "solana",
+     "symbol": "SOL"
+    },
+    {
+     "coinId": "near",
+     "symbol": "NEAR"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 2412.89,
+     "coinId": "ethereum",
+     "current": 2379.29,
+     "direction": "below",
+     "dueDate": "2026-11-16",
+     "id": 25,
+     "progress": 200,
+     "status": "confirming",
+     "symbol": "ETH",
+     "targetPrice": 2397.5,
+     "theoryId": 13
+    },
+    {
+     "baseline": 2412.89,
+     "coinId": "ethereum",
+     "current": 2379.29,
+     "direction": "above",
+     "dueDate": "2026-11-16",
+     "id": 26,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "ETH",
+     "targetPrice": 2437.51,
+     "theoryId": 13
+    },
+    {
+     "baseline": 103.74,
+     "coinId": "solana",
+     "current": 103.32,
+     "direction": "below",
+     "dueDate": "2026-11-16",
+     "id": 27,
+     "progress": 34.146341463415055,
+     "status": "confirming",
+     "symbol": "SOL",
+     "targetPrice": 102.51,
+     "theoryId": 13
+    },
+    {
+     "baseline": 103.74,
+     "coinId": "solana",
+     "current": 103.32,
+     "direction": "above",
+     "dueDate": "2026-11-16",
+     "id": 28,
+     "progress": -15.272727272727336,
+     "status": "challenged",
+     "symbol": "SOL",
+     "targetPrice": 106.49,
+     "theoryId": 13
+    },
+    {
+     "baseline": 4.9,
+     "coinId": "near",
+     "current": 4.89,
+     "direction": "below",
+     "dueDate": "2026-11-16",
+     "id": 29,
+     "progress": 4.761904761905084,
+     "status": "confirming",
+     "symbol": "NEAR",
+     "targetPrice": 4.69,
+     "theoryId": 13
+    },
+    {
+     "baseline": 4.9,
+     "coinId": "near",
+     "current": 4.89,
+     "direction": "above",
+     "dueDate": "2026-11-16",
+     "id": 30,
+     "progress": -2.77777777777797,
+     "status": "challenged",
+     "symbol": "NEAR",
+     "targetPrice": 5.26,
+     "theoryId": 13
+    }
+   ],
+   "rippleMap": "ETF flows turn net-negative (BTC -$679M, ETH -$542M weekly, Wintermute OTC desk 12 Oct) -> bids thin out: 'when flows turned this week, there was nothing underneath it' -> alt liquidation clusters trigger (Glassnode W41: 2-month liq shelf thinned 1/5 in a week; biggest long cluster just under $80K) -> alts underperform BTC: only 11/66 large alts green, median -3.7%, ETH -7% on the week -> whales de-risk at range tops (Hyperliquid 0xc2a3 closed ~$256M BTC longs; dormant ETH wallet sold 1,800 ETH) -> break-even rallies face overhead sellers (coins bought 6-12mo ago: $88K cost basis; 1-2yr: $100K; both turned price back in 2026) -> BTC dominance grinds toward 60%. INFERENCE (not proven): the pattern repeats while ETF flows stay net-negative and perp funding stays neutral-to-long; if ETF flows flip to sustained inflows AND 30y yields ease, the thesis breaks.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-18T11:52:49.607Z",
+     "coinId": "ethereum",
+     "price": 2412.89,
+     "symbol": "ETH"
+    },
+    {
+     "capturedAt": "2026-10-18T11:52:49.607Z",
+     "coinId": "solana",
+     "price": 103.74,
+     "symbol": "SOL"
+    },
+    {
+     "capturedAt": "2026-10-18T11:52:49.607Z",
+     "coinId": "near",
+     "price": 4.9,
+     "symbol": "NEAR"
+    }
+   ],
+   "statement": "[Muse theory] When crypto flows turn there is nothing underneath alts: BTC dominance grinds toward 60% (Wintermute: 59.5%, only 11/66 large alts green) as ETH, SOL and AI-linked alts underperform BTC on flow turns. Spot ETF flows are net-negative (BTC -$679M, ETH -$542M weekly, largest since June), whale money is de-risking at range tops (Hyperliquid 0xc2a3 closed ~$256M BTC longs; dormant ETH whale sold 1,800 ETH), and Glassnode's $88K/$100K overhead supply lines cap break-even rallies. Failed break-even rallies in ETH/SOL/NEAR while flows stay negative; reclaimed resistances break the thesis.",
+   "status": "challenged",
+   "updatedAt": "2026-10-18T11:52:49.607Z"
+  },
+  {
+   "createdAt": "2026-10-17T15:58:23.473Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-17T15:58:44.160Z",
+     "id": 42,
+     "publishedAt": "2026-10-16",
+     "source": "Lucky Trader (Substack), citing Chainalysis",
+     "stance": "confirming",
+     "theoryId": 12,
+     "title": "US became a net importer of BTC for the first time since 2022 \u2014 structural demand supporting the liquidity-barometer read",
+     "url": "https://luckytrader.substack.com/p/google-clears-a-major-quantum-hurdle"
+    },
+    {
+     "createdAt": "2026-10-17T15:58:44.045Z",
+     "id": 41,
+     "publishedAt": "2026-10-12",
+     "source": "Wintermute Insights",
+     "stance": "confirming",
+     "theoryId": 12,
+     "title": "Market Update 12 Oct 2026 \u2014 BTC held the $82.5k range high; constructive only if yields ease and flows return; rotation into AI names (NEAR standout)",
+     "url": "https://www.wintermute.com/insights/market-color/market-update/market-update-12-october-2026"
+    },
+    {
+     "createdAt": "2026-10-17T15:58:43.392Z",
+     "id": 40,
+     "publishedAt": "2026-10-15",
+     "source": "Linn's Leverage #1131 (Substack link log)",
+     "stance": "challenging",
+     "theoryId": 12,
+     "title": "Sept CPI 3.7% vs 3.6% expected \u2014 67th consecutive month above 2% target; Oct 28 FOMC hike odds at 43%, cutting against the 'tightening moderating' read",
+     "url": "https://linns.substack.com/feed"
+    },
+    {
+     "createdAt": "2026-10-17T15:58:43.352Z",
+     "id": 39,
+     "publishedAt": "2026-10-12",
+     "source": "Wintermute Insights",
+     "stance": "challenging",
+     "theoryId": 12,
+     "title": "Market Update 12 Oct 2026 \u2014 US spot BTC ETF outflows $679M (largest weekly since late June), ETH outflows $542M; flows have NOT returned",
+     "url": "https://www.wintermute.com/insights/market-color/market-update/market-update-12-october-2026"
+    },
+    {
+     "createdAt": "2026-10-17T15:58:43.121Z",
+     "id": 38,
+     "publishedAt": "2026-10-16",
+     "source": "Capital Wars / Michael Howell (Substack)",
+     "stance": "confirming",
+     "theoryId": 12,
+     "title": "What Is Bitcoin Telling Us? \u2014 Bitcoin is the most liquidity-sensitive major asset; its stabilization may signal Western tightening is starting to moderate",
+     "url": "https://capitalwars.substack.com/p/what-is-bitcoin-telling-us"
+    }
+   ],
+   "horizon": "short",
+   "id": 12,
+   "linkedCoins": [
+    {
+     "coinId": "bitcoin",
+     "symbol": "BTC"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 81249,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "above",
+     "dueDate": "2026-11-14",
+     "id": 23,
+     "progress": -0.13451406792960433,
+     "status": "challenged",
+     "symbol": "BTC",
+     "targetPrice": 83479.25,
+     "theoryId": 12
+    },
+    {
+     "baseline": 81249,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "above",
+     "dueDate": "2026-11-14",
+     "id": 24,
+     "progress": -0.09754035732284252,
+     "status": "confirming",
+     "symbol": "BTC",
+     "targetPrice": 78173.35,
+     "theoryId": 12
+    }
+   ],
+   "rippleMap": "BTC (liquidity barometer) -> ETH and broad crypto liquidity beta: a Western liquidity turn lifts the whole complex, ETH ETF flows as confirming channel. BTC -> 30y yield / Oct 28 FOMC pricing: the read only holds if yields ease. BTC -> spot BTC ETF flows: $679M weekly outflows must reverse to confirm. BTC -> $82.5k range high: reclaim is the technical confirmation.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-17T15:58:23.473Z",
+     "coinId": "bitcoin",
+     "price": 81249,
+     "symbol": "BTC"
+    }
+   ],
+   "statement": "[Muse theory] Bitcoin is the most liquidity-sensitive major asset and the cleanest barometer of US/Western liquidity (Howell, Capital Wars): stabilization near $81-82k, plus the US becoming a net BTC importer for the first time since 2022 (Chainalysis via Lucky Trader), signals Western tightening may be moderating into the Oct 28 FOMC. CONTESTED: Sept CPI 3.7% vs 3.6% expected, 43% implied odds of an Oct 28 hike, spot BTC ETFs saw $679M weekly outflows \u2014 the liquidity turn is unconfirmed; confidence capped. Tape: MEDIUM 66/100 (100% above 200d, 0% above 50d; RSI 45.5). Mechanical levels: upside confirmation $83,479.25 (first resistance above ~$81,345, unbreached); invalidation hold-above $78,173.35 (support tight below current, unbreached). Daily close below $78,173 breaks the read.",
+   "status": "challenged",
+   "updatedAt": "2026-10-17T15:58:23.473Z"
+  },
+  {
+   "createdAt": "2026-10-16T16:03:11.076Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-19T13:50:23.902Z",
+     "id": 49,
+     "publishedAt": "2026-10-19",
+     "source": "paste.trade API (direct author record; KOL witness, not terminal evidence)",
+     "stance": "challenging",
+     "theoryId": 11,
+     "title": "[KOL witness, FLIP] au_xbt flipped BTC from 40x long @$82,118 (Oct 18, citing 1,000 BTC buy wall at $81,700) to 40x short @$82,636 (Oct 19 08:11 UTC): 'Sellers won at 83,000: 1,000 BTC of shorts filled and spot selling turned heavy.' The box-floor bid the box theory leaned on is the same author's new bear thesis.",
+     "url": "https://paste.trade/api/board?window=today&lens=max"
+    },
+    {
+     "createdAt": "2026-10-18T13:50:29.226Z",
+     "id": 48,
+     "publishedAt": "2026-10-18",
+     "source": "paste.trade API (direct author record; KOL witness, not terminal evidence)",
+     "stance": "confirming",
+     "theoryId": 11,
+     "title": "[KOL witness] au_xbt opened BTC long 40x at $82,118 citing 'a 1,000 BTC buy wall parked at 81,700' \u2014 real spot bid just under price, consistent with the $81.5K ETF-cost-basis box floor holding; witness only, no terminal factor use",
+     "url": "https://paste.trade/api/board?window=today&lens=max"
+    },
+    {
+     "createdAt": "2026-10-16T16:07:02.923Z",
+     "id": 32,
+     "publishedAt": "2026-10-14",
+     "source": "Glassnode",
+     "stance": "challenging",
+     "theoryId": 11,
+     "title": "Boxed In countercase: shallowest bear market ever (never closed below Realized Price), LTH losses down 85% since Aug 12, profit-takers lead 4:1 \u2014 a daily close above $88K with ETF inflows returning flips the box bullish",
+     "url": "https://research.glassnode.com/the-week-onchain-week-41-2026/"
+    },
+    {
+     "createdAt": "2026-10-16T16:06:35.130Z",
+     "id": 31,
+     "publishedAt": "2026-10-14",
+     "source": "Glassnode",
+     "stance": "confirming",
+     "theoryId": 11,
+     "title": "The Week On-Chain Week 41: Boxed In \u2014 $88K 6-12mo cost basis turned price back twice; $81.5K ETF cost basis held daily closes since Sept 21; ETFs -$760M net outflows since Oct 7; symmetric liq clusters $80K/$88K",
+     "url": "https://research.glassnode.com/the-week-onchain-week-41-2026/"
+    }
+   ],
+   "horizon": "short",
+   "id": 11,
+   "linkedCoins": [
+    {
+     "coinId": "bitcoin",
+     "symbol": "BTC"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 81254,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "below",
+     "dueDate": "2026-11-13",
+     "id": 21,
+     "progress": 74.76635514020725,
+     "status": "confirming",
+     "symbol": "BTC",
+     "targetPrice": 81264.7,
+     "theoryId": 11
+    },
+    {
+     "baseline": 81254,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "above",
+     "dueDate": "2026-11-13",
+     "id": 22,
+     "progress": -0.15279626718719275,
+     "status": "challenged",
+     "symbol": "BTC",
+     "targetPrice": 86489.73,
+     "theoryId": 11
+    }
+   ],
+   "rippleMap": "ETF flows flip negative (~$760M outflows since Oct 7 after $3B in Sept 21-Oct 6) -> bids thin below $81.5K ETF cost basis -> daily close below mechanical support $81,264.70 opens True Market Mean $78,173; rallies into $88K meet 6-12mo holder break-even supply -> $88K fails without renewed ETF inflows -> range persists into Oct 28 Fed decision + Nov 3 midterms. Beneficiaries: range sellers, patient $80K bidders. Hurt: breakout chasers into the $88K wall, levered longs if $80K breaks (symmetric liq clusters both sides).",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-16T16:03:11.076Z",
+     "coinId": "bitcoin",
+     "price": 81254,
+     "symbol": "BTC"
+    }
+   ],
+   "statement": "[Muse theory] BTC boxed between the $81.5K US spot ETF cost basis (daily closes held since Sept 21; dips under on Oct 8/13 closed back above) and $88K overhead supply at the 6-12mo holder cost basis, which turned price back twice this year. ETFs flipped to ~$760M net outflows since Oct 7, Binance's largest spot bid block sits at $80K, and liquidation clusters are symmetric (~$80K / ~$88K). Range over trend until ETF inflows return or a daily close exits the box.",
+   "status": "challenged",
+   "updatedAt": "2026-10-16T16:03:11.076Z"
+  },
+  {
+   "createdAt": "2026-10-16T16:03:11.017Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-18T13:50:29.200Z",
+     "id": 47,
+     "publishedAt": "2026-10-17",
+     "source": "crypto.news (corroborates Specter; Specter's own tx trails incomplete)",
+     "stance": "challenging",
+     "theoryId": 10,
+     "title": "ZEC $1,200 rejection held: -4% to ~$1,112 (CMC), -9.7% 7d; crypto.news reports hacker funds from the CryptoBills Ledger incident + the $12M Triple-A exploit rotating into ZEC shielded pools \u2014 corroborates the tainted-demand thesis challenging the clean-privacy narrative; NU7 decision Oct 20",
+     "url": "https://crypto.news/onchain-data-shows-hackers-moving-stolen-funds-to-zcash/"
+    },
+    {
+     "createdAt": "2026-10-17T13:52:36.975Z",
+     "id": 37,
+     "publishedAt": "2026-10-17",
+     "source": "PANews (onchain analyst Specter, SINGLE_SOURCE)",
+     "stance": "challenging",
+     "theoryId": 10,
+     "title": "ZEC rejected at $1,200 (-5% weekend). Onchain analyst Specter (SINGLE_SOURCE): stolen funds from the Ledger/CryptoBilis incident + the $12M 'Triple-A' hack are rotating into ZEC's shielded pool after ZachXBT exposed the Bitget attacker's shielding \u2014 ZEC's recent bid may be partly crime-driven flow: price-positive short-term, but invites the regulatory attention the privacy bid fears. Theory stays challenged.",
+     "url": "https://www.panews.io/articles/01a14993-7c45-70e0-a5dd-3e9aca20455b"
+    },
+    {
+     "createdAt": "2026-10-16T16:07:53.171Z",
+     "id": 34,
+     "publishedAt": "2026-10-15",
+     "source": "Linn's Leverage",
+     "stance": "confirming",
+     "theoryId": 10,
+     "title": "Linn's Leverage #1131 \u2014 radar corroboration: PaikCapital 'still think $zec will be the best performing major'; Boros launches funding-rate spread markets for BTC/ETH; Arthur Hayes bought $888K AERO/PENDLE/ZAMA (OnchainLens)",
+     "url": "https://linns.substack.com/p/linns-leverage-1131"
+    },
+    {
+     "createdAt": "2026-10-16T16:07:32.600Z",
+     "id": 33,
+     "publishedAt": "2026-10-16",
+     "source": "Lucky Trader (Morning Minute)",
+     "stance": "confirming",
+     "theoryId": 10,
+     "title": "Google Clears a Major Quantum Hurdle, Bitcoin Still Safe \u2014 Willow 40x error reduction (Science); RSA-2048 needs 1-in-10^10 errors (~1M times cleaner); Bitcoin ECC <500K physical qubits (March 2026 whitepaper); Drake: AI math breaks ECC in 'months not years'; Coinbase pushes migration now; Sui quantum-safe testnet; ZEC +14% to $1,230",
+     "url": "https://luckytrader.substack.com/p/google-clears-a-major-quantum-hurdle"
+    }
+   ],
+   "horizon": "short",
+   "id": 10,
+   "linkedCoins": [
+    {
+     "coinId": "zcash",
+     "symbol": "ZEC"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 1185.7,
+     "coinId": "zcash",
+     "current": 1211.28,
+     "direction": "above",
+     "dueDate": "2026-11-13",
+     "id": 19,
+     "progress": 28.463335929676152,
+     "status": "confirming",
+     "symbol": "ZEC",
+     "targetPrice": 1275.57,
+     "theoryId": 10
+    },
+    {
+     "baseline": 1185.7,
+     "coinId": "zcash",
+     "current": 1211.28,
+     "direction": "below",
+     "dueDate": "2026-11-13",
+     "id": 20,
+     "progress": -20.840801694639012,
+     "status": "challenged",
+     "symbol": "ZEC",
+     "targetPrice": 1062.96,
+     "theoryId": 10
+    }
+   ],
+   "rippleMap": "Google Willow 40x error reduction (Science) + Drake AI-math warning -> Coinbase pushes migration now, Sui runs quantum-safe txns on testnet -> quantum/privacy narrative bid rotates to ZEC (liquid proxy, +14% Thu) -> reclaim of $1,275.57 mechanical resistance confirms narrative-to-price transmission. Broken if: Willow is ~3 orders of magnitude from the ~500K physical qubits needed (physics far behind narrative). Beneficiaries: ZEC holders, quantum-resistant L1 narratives (SUI, NEAR), security plays (Ledger Atom). Hurt: dormant old-address whales (exposed pubkeys), BTC's digital-gold narrative if quantum fear goes mainstream. Countercase: kairos_res previously falsified 'quantum fears move dormant BTC' (p=0.23).",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-16T16:03:11.017Z",
+     "coinId": "zcash",
+     "price": 1185.7,
+     "symbol": "ZEC"
+    }
+   ],
+   "statement": "[Muse theory] LOW confidence, narrative-driven: quantum-timeline compression is becoming a durable bid for privacy/quantum-resistant coins. Google cut a critical quantum error class ~40x on Willow (Science); its March 2026 whitepaper put Bitcoin ECC at <500K physical qubits vs 105 on Willow; Drake warns AI-driven math breaks ECC in 'months not years'; Coinbase pushes migration now, Sui runs quantum-safe txns on testnet. ZEC (+14% Thu to $1,230) is the liquid proxy. Physics still ~3 orders of magnitude from the threat \u2014 narrative is ahead of physics, and kairos_res previously falsified 'quantum fears move dormant BTC' (p=0.23).",
+   "status": "challenged",
+   "updatedAt": "2026-10-16T16:03:11.017Z"
+  },
+  {
+   "createdAt": "2026-10-14T13:01:15.897Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-17T13:52:25.949Z",
+     "id": 36,
+     "publishedAt": "2026-10-17",
+     "source": "NewsBTC + coingabbar (Farside/Trader T data)",
+     "stance": "challenging",
+     "theoryId": 9,
+     "title": "Oct 16 ETF flows: BTC spot ETFs -$82.39M net (IBIT -$71.8M = 87% of total; FBTC -$10.61M); ETH ETFs -$69.68M (all ETHA, 3rd straight day); SOL -$12.67M; XRP -$2.47M. October cumulative BTC outflow now $614.9M; 11 October outflow days for ETH. BTC faded Saturday to ~$81.5K (-0.6%); rallies still fail at $83.5K \u2014 the ETF bid is gone; Oct 28 Fed meeting is the next swing factor. 24h liquidations $315M (leverage flush fading).",
+     "url": "https://www.newsbtc.com/bitcoin-news/bitcoin-etfs-lose-82-million-as-blackrock-leads-friday-s-withdrawals/"
+    },
+    {
+     "createdAt": "2026-10-16T14:37:31.608Z",
+     "id": 30,
+     "publishedAt": "2026-10-16",
+     "source": "Big Updates review 2026-10-16 (Logan/reviewer) \u2014 record linkage",
+     "stance": "confirming",
+     "theoryId": 9,
+     "title": "Record linkage 2026-10-16: dossier thesis #9 (predictions baseline 82669, due 2026-11-12) vs signal-tracker BTC long id 44 (OPEN, entry 81568, created 2026-10-15; id 43 invalidated) vs paper contract paper-pilot-v2.1.0:paper-pilot-v2.1.0:handoff:79:bitcoin (ENTRY_CONFIRMED, entry 82034.96, ack 13:11:06Z). Dossier = the seller-exhaustion thesis; live paper position = the handoff-79 contract. Separately identified; the paper position does not inherit the dossier's predictions.",
+     "url": "https://curatednewslawl.grok.me"
+    },
+    {
+     "createdAt": "2026-10-16T14:08:48.319Z",
+     "id": 29,
+     "publishedAt": "2026-10-16",
+     "source": "SoSoValue via bloomingbit/TradingView",
+     "stance": "challenging",
+     "theoryId": 9,
+     "title": "Oct 15 US spot-crypto ETF flows: BTC ETFs only +$5.06M net (IBIT sole positive; GBTC -$7.64M), ETH ETFs -$60.22M, all 15 products -$89.4M net -- the bounce was not bought by ETF paper; put skew persists (25d risk reversal -2.35)",
+     "url": "https://www.tradingview.com/news/bloomingbit:d6eb31a05094b:0-us-spot-bitcoin-etfs-return-to-net-inflows-after-one-day-with-5-06-million/"
+    },
+    {
+     "createdAt": "2026-10-16T14:08:48.124Z",
+     "id": 28,
+     "publishedAt": "2026-10-16",
+     "source": "CoinDesk + Hyperliquid market data (terminal)",
+     "stance": "confirming",
+     "theoryId": 9,
+     "title": "Oct 15: BTC wicked under $80K on hot CPI/PPI (wick low $79,692) and reclaimed $82K; HL funding neutral at 0.0100%/8h (crowding z -0.33 sigma); two large HL whale BTC shorts now underwater ($204M short from $77,751 at -$10.5M)",
+     "url": "https://www.coindesk.com/markets/2026/10/16/altcoins-outpace-bitcoin-as-celestia-jumps-16-warsh-silent-on-interest-rate-plans"
+    },
+    {
+     "createdAt": "2026-10-14T13:01:22.510Z",
+     "id": 25,
+     "publishedAt": "2026-10-14",
+     "source": "Lookonchain (via monitoring aggregator)",
+     "stance": "challenging",
+     "theoryId": 9,
+     "title": "Whale rotated ~1,074 BTC into 35,346 ETH over 3 days (avg ~$2,529); ETH OG deposited 6,369 ETH to Kraken \u2014 rotation bid favors ETH over BTC",
+     "url": "https://m.lookonchain.com/token/ethereum"
+    },
+    {
+     "createdAt": "2026-10-14T13:01:22.494Z",
+     "id": 24,
+     "publishedAt": "2026-10-14",
+     "source": "Luckytrader Morning Minute",
+     "stance": "confirming",
+     "theoryId": 9,
+     "title": "Move Over, Saylor, There's a New Top Buyer in Town \u2014 Strive's $280M BTC buy, ETF inflows flip back",
+     "url": "https://luckytrader.substack.com/p/move-over-saylor-theres-a-new-top"
+    },
+    {
+     "createdAt": "2026-10-14T13:01:22.464Z",
+     "id": 23,
+     "publishedAt": "2026-10-12",
+     "source": "Glassnode",
+     "stance": "confirming",
+     "theoryId": 9,
+     "title": "BTC Market Pulse: Week 42 \u2014 perp-led pullback, OI near top of range, new capital still arriving",
+     "url": "https://research.glassnode.com/btc-market-pulse-week-42-2026/"
+    }
+   ],
+   "horizon": "short",
+   "id": 9,
+   "linkedCoins": [
+    {
+     "coinId": "bitcoin",
+     "symbol": "BTC"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 82669,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "below",
+     "dueDate": "2026-11-12",
+     "id": 17,
+     "progress": 144.74473863555443,
+     "status": "confirming",
+     "symbol": "BTC",
+     "targetPrice": 81685.89,
+     "theoryId": 9
+    },
+    {
+     "baseline": 82669,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "above",
+     "dueDate": "2026-11-12",
+     "id": 18,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "BTC",
+     "targetPrice": 83479.25,
+     "theoryId": 9
+    }
+   ],
+   "rippleMap": "Perp-led flush (takers heavy net sellers, long funding below low band, OI stuck near top of range) -> seller exhaustion near $81-83k as ETF outflows -$702M flip back to +$175M inflows and STH panic hands coins to new capital (realized cap + hot capital share above high bands) -> corporate treasury bid rotates from Strategy (mNAV <1.0 first time) to Strive's $280M buy at 13x Saylor's pace -> bounce-or-break: hold above $81.7k support confirms exhaustion, break below targets $78.2k; upside confirmation through $83.5k resistance. Whale BTC->ETH rotation (~1,074 BTC to 35,346 ETH over 3 days) is the counterbid: rotation bid for ETH drains marginal BTC demand.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-14T13:01:15.897Z",
+     "coinId": "bitcoin",
+     "price": 82669,
+     "symbol": "BTC"
+    }
+   ],
+   "statement": "[Muse theory] BTC seller exhaustion near $81-83k: perp takers were heavy net sellers and long funding fell below its low band while futures OI stayed near the top of its range (Glassnode Week 42); ETF weekly outflows of -$702M have flipped back to +$175M (ETH ETFs broke a 10-day outflow streak); new capital keeps arriving (realized cap change + hot capital share above high bands); Strive bought $280M BTC (13x Saylor's buys) as Strategy's mNAV slipped below 1.0. Bounce-or-break at the $81.7k support / $83.5k resistance pair; 71% of supply still in profit caps how far sellers have already capitulated.",
+   "status": "challenged",
+   "updatedAt": "2026-10-14T13:01:15.897Z"
+  },
+  {
+   "createdAt": "2026-10-11T13:08:25.420Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-11T13:09:08.700Z",
+     "id": 22,
+     "publishedAt": "2026-10-08",
+     "source": "Linn's Leverage",
+     "stance": "confirming",
+     "theoryId": 8,
+     "title": "Linn's Leverage #1126 \u2014 RWA perps $6.7B single-day volume (130x since Jan 1), Hyperliquid-Circle $200M deal live",
+     "url": "https://linns.substack.com/p/linns-leverage-1126"
+    },
+    {
+     "createdAt": "2026-10-11T13:09:08.681Z",
+     "id": 21,
+     "publishedAt": "2026-09-25",
+     "source": "CryptoTimes (a16z crypto report)",
+     "stance": "confirming",
+     "theoryId": 8,
+     "title": "RWA Perp Volume Hits $117B as On-chain Share Reaches 86% \u2014 44x YoY per a16z crypto",
+     "url": "https://www.cryptotimes.io/2026/09/25/rwa-perp-volume-hits-117b-as-on-chain-share-reaches-86/"
+    },
+    {
+     "createdAt": "2026-10-11T13:09:08.659Z",
+     "id": 20,
+     "publishedAt": "2026-10-07",
+     "source": "crypto-economy (Pyth Network)",
+     "stance": "challenging",
+     "theoryId": 8,
+     "title": "RWA Perp Volume Falls 15% in September ($637.85B vs $753.7B) \u2014 magnitude also conflicts with the $6.7B single-day stat; methodology variance unresolved",
+     "url": "https://crypto-economy.com/rwa-perp-volume-falls-15-as-open-interest-hits-record/"
+    },
+    {
+     "createdAt": "2026-10-11T13:09:08.619Z",
+     "id": 19,
+     "publishedAt": "2026-09-24",
+     "source": "crypto.news (CryptoRank)",
+     "stance": "confirming",
+     "theoryId": 8,
+     "title": "RWA perp DEXs reach $365B in Q3 2026, up 32% QoQ, 1,000+ listings",
+     "url": "https://crypto.news/rwa-perp-dexs-reach-365b-as-stocks-lead-trading/"
+    }
+   ],
+   "horizon": "long",
+   "id": 8,
+   "linkedCoins": [
+    {
+     "coinId": "hyperliquid",
+     "symbol": "HYPE"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 85.12,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-12-11",
+     "id": 15,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 86.04,
+     "theoryId": 8
+    },
+    {
+     "baseline": 85.12,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-12-11",
+     "id": 16,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 84.68,
+     "theoryId": 8
+    }
+   ],
+   "rippleMap": "RWA-perp volume keeps compounding -> perp-venue fee capture (HYPE) grows, because 1,099 markets across 14 asset categories need a venue and Hyperliquid is the deepest RWA-perp pool with the Circle revenue share live. Funding-rate markets price RWA-perp basis -> LINK/ONDO tokenization rails re-rate, because the same onchain-collateral wave drives both venue volume and rails demand. Kalshi $173-to-$9,600 pre-announcement insider bets -> prediction-market integrity risk repriced, because integrity failures scale with market size and 39-state SCOTUS briefs add regulatory overhang.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-11T13:08:25.420Z",
+     "coinId": "hyperliquid",
+     "price": 85.12,
+     "symbol": "HYPE"
+    }
+   ],
+   "statement": "[Muse theory] RWA perpetuals are the fastest-growing onchain liquidity channel and perp venues capture the flow: $6.7B single-day RWA-perp volume (Oct 8) vs $50.2M on Jan 1 \u2014 130x, single-source via Linn's Leverage citing one X post; direction corroborated by a16z's Sept piece and Wintermute's Sept 2 Opinion, exact figure treat with caution. HYPE is the venue-token expression: Hyperliquid-Circle ~$200M revenue share live, mechanical support 84.68 / resistance 86.04. Invalidation: HYPE daily close below 84.68, or venue-level volume proves wash/incentivized.",
+   "status": "challenged",
+   "updatedAt": "2026-10-11T13:08:25.420Z"
+  },
+  {
+   "createdAt": "2026-10-09T13:05:55.396Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-17T13:52:25.675Z",
+     "id": 35,
+     "publishedAt": "2026-10-16",
+     "source": "CoinMarketCap Academy (Reuters interview, Bangkok IMF/WB meetings)",
+     "stance": "confirming",
+     "theoryId": 7,
+     "title": "Deutsche Bank 'weeks away' from crypto custody launch in Germany (Frankfurt first) \u2014 co-head of corporate bank Gerald Podobnik to Reuters Oct 16; day-one BTC/ETH/USDC/EURC/EURAU for institutional clients, powered by Taurus, conditional on MiCA/BaFin sign-off. Biggest European bank framing crypto custody as corporate-banking growth engine (8% CAGR target). Custody != buy pressure: slow structural bid, not a price event \u2014 keeps the TradFi-into-crypto arc alive through a weak tape.",
+     "url": "https://coinmarketcap.com/academy/article/deutsche-bank-crypto-custody-launch-weeks-away-asia"
+    },
+    {
+     "createdAt": "2026-10-09T13:06:36.503Z",
+     "id": 16,
+     "publishedAt": "2026-10-08",
+     "source": "Citrini Research (paid preview)",
+     "stance": "confirming",
+     "theoryId": 7,
+     "title": "Breaking The Wall - agentic AI needs programmable money; crypto's raison d'etre (SINGLE SOURCE, paid preview)",
+     "url": "https://www.citriniresearch.com/p/breaking-the-wall"
+    },
+    {
+     "createdAt": "2026-10-09T13:06:36.470Z",
+     "id": 15,
+     "publishedAt": "2026-10-09",
+     "source": "Linn's Leverage",
+     "stance": "confirming",
+     "theoryId": 7,
+     "title": "Linn's Leverage #1126 - RWA perps $6.7B single-day volume Oct 8 (130x since Jan 1), Partners Group NGI+ $2.4B infra onchain",
+     "url": "https://linns.substack.com/p/linns-leverage-1126"
+    },
+    {
+     "createdAt": "2026-10-09T13:06:36.331Z",
+     "id": 14,
+     "publishedAt": "2026-10-08",
+     "source": "The Block via Synthesize desk",
+     "stance": "confirming",
+     "theoryId": 7,
+     "title": "Securitize launches 1:1-backed tokenized AAPL/NVDA/MSTR stocks on Solana with dividends, USDC settlement",
+     "url": "https://curatednewslawl.grok.me"
+    },
+    {
+     "createdAt": "2026-10-09T13:06:36.269Z",
+     "id": 13,
+     "publishedAt": "2026-10-09",
+     "source": "Lucky Trader / Morning Minute",
+     "stance": "challenging",
+     "theoryId": 7,
+     "title": "Uptober Turns Sour - $1B longs liquidated/24h, BTC ETF -$484.9M worst day since spring, ETH funding flipped negative",
+     "url": "https://luckytrader.substack.com/p/uptober-turns-sour-as-crypto-majors"
+    }
+   ],
+   "horizon": "short",
+   "id": 7,
+   "linkedCoins": [
+    {
+     "coinId": "solana",
+     "symbol": "SOL"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 110.47,
+     "coinId": "solana",
+     "current": 103.32,
+     "direction": "above",
+     "dueDate": "2026-11-07",
+     "id": 13,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "SOL",
+     "targetPrice": 109.18,
+     "theoryId": 7
+    },
+    {
+     "baseline": 110.47,
+     "coinId": "solana",
+     "current": 103.32,
+     "direction": "above",
+     "dueDate": "2026-11-07",
+     "id": 14,
+     "progress": -94.45178335535005,
+     "status": "challenged",
+     "symbol": "SOL",
+     "targetPrice": 118.04,
+     "theoryId": 7
+    }
+   ],
+   "rippleMap": "Securitize 1:1 tokenized AAPL/NVDA/MSTR on Solana (USDC settlement, dividends) -> tokenized equities need 24/7 settlement rails -> chains capturing RWA flow see fee/volume lift. RWA perps did $6.7B in a single day Oct 8 (+130x since Jan 1, 1,099 markets) -> onchain yield/funding layers (Pendle, Boros) absorb the flow. Citrini: agentic AI will route idle cash to highest bidder -> programmable money infrastructure wins, banks' deposit franchises lose. Partners Group NGI+ $2.4B infra strategy onchain ($500M tokenized, 19.2% ann. since 2024). Hurt downstream: legacy transfer agents, banks' cheap deposit base; tail risk: a security failure or regulatory freeze on tokenized securities.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-09T13:05:55.396Z",
+     "coinId": "solana",
+     "price": 110.47,
+     "symbol": "SOL"
+    }
+   ],
+   "statement": "[Muse theory] The onchain-finance convergence is accelerating from narrative to measurable flow: Securitize launched 1:1-backed tokenized AAPL/NVDA/MSTR on Solana with dividends and USDC settlement; RWA perps printed $6.7B in a single day on Oct 8 (+130x since Jan 1, 1,099 markets across 14 categories); Partners Group is bringing a $2.4B infrastructure strategy onchain ($500M tokenized so far, 19.2% annualized since 2024). Citrini (paid preview, SINGLE SOURCE low-conf) frames the driver: agentic AI will continuously route capital to the highest bidder, and only programmable money infrastructure can serve machine users. Bullish SOL as the chain capturing tokenized-equity flow. Theory test 90/100: 90d +43.8% (+41.3% vs market) but -9.5% over 14d and machine reads deleveraging regime with MACD negative cross - medium-term tape confirms, near-term entry is the tension. Countercase: tokenized-equity volumes are still thin vs spot equities; a custody/regulatory event kills the premium.",
+   "status": "challenged",
+   "updatedAt": "2026-10-09T13:05:55.396Z"
+  },
+  {
+   "createdAt": "2026-10-07T13:08:44.607Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-07T13:09:03.756Z",
+     "id": 5,
+     "publishedAt": "2026-10-07",
+     "source": "Lucky Trader / Morning Minute",
+     "stance": "confirming",
+     "theoryId": 6,
+     "title": "$540M in 24h long liquidations (ETH-led); BTC ETFs +$119M inflow while ETH ETFs -$202M outflows",
+     "url": "https://luckytrader.substack.com/p/okx-raises-at-25b-from-circle-ripple"
+    },
+    {
+     "createdAt": "2026-10-07T13:09:03.590Z",
+     "id": 4,
+     "publishedAt": "2026-10-07",
+     "source": "Crypto Narratives",
+     "stance": "challenging",
+     "theoryId": 6,
+     "title": "September 2026 recap: altcoins collectively up-only and outperformed BTC; scam/maniac squeezes everywhere (clear risk-on) \u2014 challenges the structural risk-off framing",
+     "url": "https://cryptonarratives.substack.com/p/september-2026-recap-narratives-best"
+    },
+    {
+     "createdAt": "2026-10-07T13:09:03.569Z",
+     "id": 3,
+     "publishedAt": "2026-10-07",
+     "source": "Glassnode",
+     "stance": "confirming",
+     "theoryId": 6,
+     "title": "The Week On-chain Week 40: A Rally Running Light \u2014 $85K breakout on thin volume, STH profit-taking at 1-year high, $81K bid support vs $92K squeeze cluster",
+     "url": "https://research.glassnode.com/the-week-onchain-week-40-2026/"
+    },
+    {
+     "createdAt": "2026-10-07T13:09:02.802Z",
+     "id": 2,
+     "publishedAt": "2026-10-07",
+     "source": "CoinDesk",
+     "stance": "confirming",
+     "theoryId": 6,
+     "title": "Bitcoin dips below $84k as oil jumps on Iranian tanker attacks; ~$550M liquidated, Brent above $101, 10Y above 5.3%",
+     "url": "https://www.coindesk.com/markets/2026/10/07/bitcoin-dips-below-usd84-000-as-oil-jumps-on-iranian-tanker-attacks"
+    }
+   ],
+   "horizon": "short",
+   "id": 6,
+   "linkedCoins": [
+    {
+     "coinId": "bitcoin",
+     "symbol": "BTC"
+    },
+    {
+     "coinId": "ethereum",
+     "symbol": "ETH"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 83461,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "above",
+     "dueDate": "2026-11-05",
+     "id": 11,
+     "progress": -72.88581770319183,
+     "status": "challenged",
+     "symbol": "BTC",
+     "targetPrice": 86500,
+     "theoryId": 6
+    },
+    {
+     "baseline": 83461,
+     "coinId": "bitcoin",
+     "current": 81246,
+     "direction": "below",
+     "dueDate": "2026-11-05",
+     "id": 12,
+     "progress": 90.00406338886631,
+     "status": "confirming",
+     "symbol": "BTC",
+     "targetPrice": 81000,
+     "theoryId": 6
+    }
+   ],
+   "rippleMap": "Iranian tanker attacks in Strait of Hormuz -> Brent crude above $101/bbl -> 10Y Treasury yield above 5.3% -> ~$550M crypto long liquidations (ETH-led) -> BTC breaks below $84K -> alt beta lags (memes -7.4% 7D, L1 -3.3%) while idiosyncratic bids (gaming +7.3%, SAND +56.6%) persist",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-07T13:08:44.607Z",
+     "coinId": "bitcoin",
+     "price": 83461,
+     "symbol": "BTC"
+    },
+    {
+     "capturedAt": "2026-10-07T13:08:44.607Z",
+     "coinId": "ethereum",
+     "price": 2565.59,
+     "symbol": "ETH"
+    }
+   ],
+   "statement": "[Muse theory] Renewed Iranian attacks in the Strait of Hormuz pushed Brent above $101/bbl and the 10Y Treasury yield above 5.3%, triggering ~$550M in crypto long liquidations with BTC breaking below $84K. Rate plus geopolitical pressure caps crypto beta until shipping lanes normalize; the flush is a positioning reset, not a trend break, while $81K holds.",
+   "status": "challenged",
+   "updatedAt": "2026-10-07T13:08:44.607Z"
+  },
+  {
+   "createdAt": "2026-10-07T13:08:44.586Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-07T13:54:17.696Z",
+     "id": 10,
+     "publishedAt": "2026-10-05",
+     "source": "Crypto Briefing",
+     "stance": "confirming",
+     "theoryId": 5,
+     "title": "Bloomberg Terminal adds 24/7 Hyperliquid perp quotes (WSL HYPE <GO>) \u2014 100+ contracts incl. equities, S&P 500, Nvidia, Brent, gold",
+     "url": "https://cryptobriefing.com/bloomberg-terminal-hyperliquid-perp-quotes/"
+    },
+    {
+     "createdAt": "2026-10-07T13:09:10.597Z",
+     "id": 9,
+     "publishedAt": "2026-10-07",
+     "source": "Lucky Trader / Morning Minute",
+     "stance": "challenging",
+     "theoryId": 5,
+     "title": "Macquarie skepticism in the same piece: tokenized-stock success depends on 3am Sunday liquidity; SEC framework is temporary so institutions stay reluctant; early demand likely retail-only",
+     "url": "https://luckytrader.substack.com/p/okx-raises-at-25b-from-circle-ripple"
+    },
+    {
+     "createdAt": "2026-10-07T13:09:10.577Z",
+     "id": 8,
+     "publishedAt": "2026-10-06",
+     "source": "Linn's Leverage",
+     "stance": "confirming",
+     "theoryId": 5,
+     "title": "Tokenized stocks now $3.17B+ onchain (+765% YTD, only 2.6% used in DeFi); Coinbase remits USDC reserve yield held on Hyperliquid into $HYPE buybacks",
+     "url": "https://linns.substack.com/p/linns-leverage-1124"
+    },
+    {
+     "createdAt": "2026-10-07T13:09:10.549Z",
+     "id": 7,
+     "publishedAt": "2026-10-07",
+     "source": "Lucky Trader / Morning Minute",
+     "stance": "confirming",
+     "theoryId": 5,
+     "title": "OKX raises at $25B from Circle, Ripple, StanChart; OKXICE filed for 24/7 trading in tokenized shares of 63 US companies",
+     "url": "https://luckytrader.substack.com/p/okx-raises-at-25b-from-circle-ripple"
+    },
+    {
+     "createdAt": "2026-10-07T13:09:10.522Z",
+     "id": 6,
+     "publishedAt": "2026-10-07",
+     "source": "Crypto Narratives",
+     "stance": "confirming",
+     "theoryId": 5,
+     "title": "September 2026 recap: Robinhood-chain/tokenized-stock complex dominated \u2014 PONS 25x in 2 weeks, ARB +140%, UNI 2x on Sep 17 SEC exemptive relief, Ondo x BlackRock +40% in 3 days",
+     "url": "https://cryptonarratives.substack.com/p/september-2026-recap-narratives-best"
+    }
+   ],
+   "horizon": "short",
+   "id": 5,
+   "linkedCoins": [
+    {
+     "coinId": "hyperliquid",
+     "symbol": "HYPE"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 89.12,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-11-05",
+     "id": 9,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 83.745,
+     "theoryId": 5
+    },
+    {
+     "baseline": 89.12,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-11-05",
+     "id": 10,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 97.357,
+     "theoryId": 5
+    }
+   ],
+   "rippleMap": "OKX $25B raise from Circle/Ripple/StanChart -> OKXICE files for 24/7 trading in tokenized shares of 63 US companies -> Robinhood-chain revenue (ARB +140% in September) -> Coinbase remits USDC reserve yield on Hyperliquid into HYPE buybacks -> SEC approves first 3x BTC/ETH ETFs and CFTC proposes CTX/CAM leverage framework -> regulated rails for the tokenized complex",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-07T13:08:44.586Z",
+     "coinId": "hyperliquid",
+     "price": 89.12,
+     "symbol": "HYPE"
+    }
+   ],
+   "statement": "[Muse theory] Tokenized equities are the dominant Q4 crypto narrative: OKX raised at a $25B pre-money valuation and filed for 24/7 trading in tokenized shares of 63 US companies, the Robinhood-chain complex dominated September (PONS 25x in two weeks, ARB +140%, UNI 2x on the Sep 17 SEC exemptive relief), and Coinbase routes USDC reserve yield held on Hyperliquid into HYPE buybacks \u2014 measurable revenue-to-token accrual. HYPE holds above its $83.75 mechanical invalidation with upside toward $97.36.",
+   "status": "challenged",
+   "updatedAt": "2026-10-07T13:08:44.586Z"
+  },
+  {
+   "createdAt": "2026-10-06T13:05:22.336Z",
+   "evidence": [],
+   "horizon": "short",
+   "id": 4,
+   "linkedCoins": [
+    {
+     "coinId": "hyperliquid",
+     "symbol": "HYPE"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 93.07,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-11-04",
+     "id": 7,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 101.22,
+     "theoryId": 4
+    },
+    {
+     "baseline": 93.07,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "below",
+     "dueDate": "2026-11-04",
+     "id": 8,
+     "progress": 200,
+     "status": "confirming",
+     "symbol": "HYPE",
+     "targetPrice": 87.7,
+     "theoryId": 4
+    }
+   ],
+   "rippleMap": "Hyperliquid USDC reserve yield (first $14.58M monthly payment) -> HYPE buyback program -> float reduction at ~$193M/yr run rate -> price support; CFTC CTX+CAM perps licensing path -> Robinhood US perps / Kraken-parent Hyperliquid negotiation -> onshore optionality expands the Hyperliquid TAM; SEC buyback non-security statement (~8 days ago) removes legal overhang on the buyback program",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-06T13:05:22.336Z",
+     "coinId": "hyperliquid",
+     "price": 93.07,
+     "symbol": "HYPE"
+    }
+   ],
+   "statement": "[Muse theory] Hyperliquid's USDC-yield buyback stream is live: the first $14.58M payment from exchange-held USDC converts fee revenue into direct HYPE float reduction at a ~$193M/yr run rate, arriving alongside the CFTC's first formal perps-licensing path (CTX+CAM) and the reported Kraken-parent negotiation. HYPE \u2014 higher highs/lows on daily and weekly, RSI 58.6, $2.02B perp OI in a 'new money in' regime \u2014 trends toward $101.22 while the stream sustains. Invalidated by a daily close below $87.70.",
+   "status": "challenged",
+   "updatedAt": "2026-10-06T13:05:22.336Z"
+  },
+  {
+   "createdAt": "2026-10-05T11:52:52.254Z",
+   "evidence": [
+    {
+     "createdAt": "2026-10-10T13:03:08.881Z",
+     "id": 18,
+     "publishedAt": "2026-10-10",
+     "source": "crypto.news",
+     "stance": "confirming",
+     "theoryId": 3,
+     "title": "Bitcoin retreats, Treasury drops rules, OKX draws investment | Weekly recap \u2014 FinCEN withdrew two crypto reporting proposals (deregulatory tailwind for institutional rails)",
+     "url": "https://crypto.news/bitcoin-retreats-treasury-drops-rules-okx-investment/"
+    },
+    {
+     "createdAt": "2026-10-10T13:03:06.180Z",
+     "id": 17,
+     "publishedAt": "2026-10-09",
+     "source": "Cointelegraph",
+     "stance": "challenging",
+     "theoryId": 3,
+     "title": "Bitcoin and Ether ETFs Shed $986M in October Net Outflows \u2014 week 1 of the theory's two-consecutive-week net-outflow tripwire",
+     "url": "https://cointelegraph.com/markets/bitcoin-ether-etfs-october-outflows-billion"
+    },
+    {
+     "createdAt": "2026-10-08T13:07:59.839Z",
+     "id": 11,
+     "publishedAt": "2026-10-08",
+     "source": "Cointelegraph",
+     "stance": "challenging",
+     "theoryId": 3,
+     "title": "Bitcoin ETF Outflows Hit $485M, Erasing October Inflows",
+     "url": "https://cointelegraph.com/markets/bitcoin-etfs-outflow-largest-june-october?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound"
+    }
+   ],
+   "horizon": "short",
+   "id": 3,
+   "linkedCoins": [
+    {
+     "coinId": "aave",
+     "symbol": "AAVE"
+    },
+    {
+     "coinId": "hyperliquid",
+     "symbol": "HYPE"
+    }
+   ],
+   "predictions": [
+    {
+     "baseline": 180.82,
+     "coinId": "aave",
+     "current": 145.91,
+     "direction": "above",
+     "dueDate": "2026-11-02",
+     "id": 3,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "AAVE",
+     "targetPrice": 200.07,
+     "theoryId": 3
+    },
+    {
+     "baseline": 180.82,
+     "coinId": "aave",
+     "current": 145.91,
+     "direction": "below",
+     "dueDate": "2026-11-02",
+     "id": 4,
+     "progress": 200,
+     "status": "confirming",
+     "symbol": "AAVE",
+     "targetPrice": 167.71,
+     "theoryId": 3
+    },
+    {
+     "baseline": 93.15,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "above",
+     "dueDate": "2026-11-02",
+     "id": 5,
+     "progress": -100,
+     "status": "challenged",
+     "symbol": "HYPE",
+     "targetPrice": 101.36,
+     "theoryId": 3
+    },
+    {
+     "baseline": 93.15,
+     "coinId": "hyperliquid",
+     "current": 77.57,
+     "direction": "below",
+     "dueDate": "2026-11-02",
+     "id": 6,
+     "progress": 200,
+     "status": "confirming",
+     "symbol": "HYPE",
+     "targetPrice": 87.68,
+     "theoryId": 3
+    }
+   ],
+   "rippleMap": "Onchain revenue leadership (PUMP $17.9M/wk, Hyperliquid $14.6M/wk) -> fee-to-buyback conversion (Hyperliquid's first $14.58M USDC fee payment funds HYPE buybacks via AQAV2, ~$193M/yr run-rate; SEC: buybacks don't make a token a security if the network works) -> persistent bid floor under revenue coins -> flows concentrate away from non-revenue alts (revenue names +10-26% on the week: PUMP, AAVE, SKY) -> AAVE/HYPE grind toward mechanical targets (AAVE 200.07, HYPE 101.36 above ATH) while tight invalidations sit just below (167.71 / 87.68). BREAKS IF: fee revenue rolls over (compression or volume drop), a macro risk-off overrides the flywheel, or buyback execution stalls.",
+   "snapshots": [
+    {
+     "capturedAt": "2026-10-05T11:52:52.254Z",
+     "coinId": "aave",
+     "price": 180.82,
+     "symbol": "AAVE"
+    },
+    {
+     "capturedAt": "2026-10-05T11:52:52.254Z",
+     "coinId": "hyperliquid",
+     "price": 93.15,
+     "symbol": "HYPE"
+    }
+   ],
+   "statement": "[Muse theory] Revenue-plus-buyback protocols keep concentrating crypto flows: PUMP led all onchain protocols in weekly revenue ($17.86M), Hyperliquid did $14.64M and just routed its first $14.58M USDC fee payment into HYPE buybacks (~$193M/yr run-rate), the SEC clarified buybacks don't make a token a security, and AAVE runs its own buyback flywheel (+101% 90d). Expect AAVE and HYPE to keep outperforming the alt board over the next month.",
+   "status": "challenged",
+   "updatedAt": "2026-10-05T11:52:52.254Z"
+  }
+ ]
+}

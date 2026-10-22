@@ -36,3 +36,15 @@ pushing.
 Earlier combined export (2026-10-15): `loganxaaryan-a11y/research-terminal-source`.
 The shared paper pipeline lives in this repo; the equity terminal's snapshot
 (`loganxaaryan-a11y/equity-analyzer-and-signal-tracker`) references it.
+
+
+## Export completion — 2026-10-22
+
+Added after verification against the export checklist: `vendor/space-sdk-0.13.0.tgz`
+(the `@hatch/space-sdk` tarball matching the `file:` dependency in package.json —
+a bare clone can now `bun install`), `PORTABILITY.md` (platform dependencies and
+what replaces them elsewhere), and `workspace/exports/theories-export.json`
+(canonical theories export, read from the live terminal 2026-10-22; the earlier
+export carried thesis-watch snapshots only). Migration chain load-verified
+2026-10-22: 67/67 migrations apply cleanly to a scratch SQLite database.
+Exports are point-in-time records; the live system remains the source of truth.
