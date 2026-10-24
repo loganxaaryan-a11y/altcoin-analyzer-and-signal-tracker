@@ -1348,7 +1348,13 @@ export const paperIssuanceWorkChecks = sqliteTable("paper_issuance_work_checks",
   // resultStatus "coalesced" instead of recording nothing. The underlying
   // column is plain text (no SQL CHECK constraint), so this enum widening
   // needs no DDL migration; historical rows are untouched.
-  decision: text("decision", { enum: ["skipped_completed", "processed_new", "recovered_incomplete", "no_handoff", "coalesced"] }).notNull(),
+  // "monitoring_hold" (2026-10-23 issuance inspection): a cycle refused by
+  // the monitoring-health gate records decision "monitoring_hold" with
+  // resultStatus "held" and the gate's full explanation, instead of the
+  // hold branch returning without recording anything — the gap that made
+  // a designed hold (coverage stale past its 45-minute bound) read as a
+  // dispatch failure. Same plain-text column, no DDL migration.
+  decision: text("decision", { enum: ["skipped_completed", "processed_new", "recovered_incomplete", "no_handoff", "coalesced", "monitoring_hold"] }).notNull(),
   resultStatus: text("result_status").notNull(),
   priorRunId: integer("prior_run_id"),
   priorRunStatus: text("prior_run_status"),

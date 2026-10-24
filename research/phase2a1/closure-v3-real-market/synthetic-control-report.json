@@ -1,0 +1,134 @@
+{
+  "version": "phase2a1-synthetic-controls-v1",
+  "cohort": "phase2a1-synthetic-controls-only",
+  "generatedAt": "2026-10-12T07:39:59.831Z",
+  "design": {
+    "positive": "A latent state is sampled and persisted before decision; the later return is generated from that state plus bounded independent noise. The signal reads only the pre-decision state.",
+    "negative": "Signal directions and later outcomes come from independently seeded generators. Fixed seeds are recorded in this report.",
+    "futureInformationUsed": false,
+    "separation": "Synthetic controls use synthetic identifiers, their own cohort, report, rows, and command. They are never accepted by the market-data research engine or merged with market evidence.",
+    "qualificationRule": "At least 100 rows, 3 assets, 30 dates, positive mean central-net return, and a positive 95% complete-date-block lower bound versus the best matched always-long/always-short baseline.",
+    "matchedSmaQualificationLimitation": "The frozen market rule compares each candidate with SMA-200 on the candidate's own timestamps. Because both frozen hypotheses choose the same direction as SMA-200, candidate and SMA returns are identical under equal costs. A strictly positive lower bound versus the best matched comparator is therefore impossible. That equality is retained as a sanity test, not misread as evidence against timing value. Synthetic controls use the appropriate non-identical always-long/always-short comparator so guaranteed directional information can pass."
+  },
+  "positive": {
+    "control": "positive",
+    "seed": 20261009,
+    "rows": 2880,
+    "uniqueAssets": 4,
+    "uniqueDecisionDates": 720,
+    "meanCentralNet": 0.018223348888299892,
+    "bestDirectionalBaseline": "always_short",
+    "bestDirectionalBaselineMean": -0.0016287311910273235,
+    "meanDifference": 0.01985208007932718,
+    "differenceInterval95": [
+      0.019268282321686616,
+      0.020475491469036537
+    ],
+    "completeBlocks": 24,
+    "tailDatesExcluded": 0,
+    "qualified": true
+  },
+  "negative": {
+    "seeds": [
+      7,
+      101,
+      809,
+      20261009,
+      424242
+    ],
+    "reports": [
+      {
+        "control": "negative",
+        "seed": 7,
+        "rows": 2880,
+        "uniqueAssets": 4,
+        "uniqueDecisionDates": 720,
+        "meanCentralNet": -0.001688112579948692,
+        "bestDirectionalBaseline": "always_long",
+        "bestDirectionalBaselineMean": -0.0014386276851307926,
+        "meanDifference": -0.0002494848948179016,
+        "differenceInterval95": [
+          -0.0010312374648909705,
+          0.0004834466063314013
+        ],
+        "completeBlocks": 24,
+        "tailDatesExcluded": 0,
+        "qualified": false
+      },
+      {
+        "control": "negative",
+        "seed": 101,
+        "rows": 2880,
+        "uniqueAssets": 4,
+        "uniqueDecisionDates": 720,
+        "meanCentralNet": -0.0016928240420432598,
+        "bestDirectionalBaseline": "always_short",
+        "bestDirectionalBaselineMean": -0.0017990769027008003,
+        "meanDifference": 0.00010625286065753454,
+        "differenceInterval95": [
+          -0.0007532710459827094,
+          0.0009655958852265029
+        ],
+        "completeBlocks": 24,
+        "tailDatesExcluded": 0,
+        "qualified": false
+      },
+      {
+        "control": "negative",
+        "seed": 809,
+        "rows": 2880,
+        "uniqueAssets": 4,
+        "uniqueDecisionDates": 720,
+        "meanCentralNet": -0.0017077528655887982,
+        "bestDirectionalBaseline": "always_long",
+        "bestDirectionalBaselineMean": -0.001699978297417533,
+        "meanDifference": -0.000007774568171266371,
+        "differenceInterval95": [
+          -0.0010867520587719277,
+          0.001184327536062725
+        ],
+        "completeBlocks": 24,
+        "tailDatesExcluded": 0,
+        "qualified": false
+      },
+      {
+        "control": "negative",
+        "seed": 20261009,
+        "rows": 2880,
+        "uniqueAssets": 4,
+        "uniqueDecisionDates": 720,
+        "meanCentralNet": -0.001695936505943081,
+        "bestDirectionalBaseline": "always_short",
+        "bestDirectionalBaselineMean": -0.0016287311910273235,
+        "meanDifference": -0.00006720531491575648,
+        "differenceInterval95": [
+          -0.0011586237105760833,
+          0.0009896011510126628
+        ],
+        "completeBlocks": 24,
+        "tailDatesExcluded": 0,
+        "qualified": false
+      },
+      {
+        "control": "negative",
+        "seed": 424242,
+        "rows": 2880,
+        "uniqueAssets": 4,
+        "uniqueDecisionDates": 720,
+        "meanCentralNet": -0.0017074950649403036,
+        "bestDirectionalBaseline": "always_long",
+        "bestDirectionalBaselineMean": -0.00157770536848111,
+        "meanDifference": -0.00012978969645919283,
+        "differenceInterval95": [
+          -0.0011584501382584363,
+          0.0008459425969838355
+        ],
+        "completeBlocks": 24,
+        "tailDatesExcluded": 0,
+        "qualified": false
+      }
+    ],
+    "falseQualifications": 0,
+    "falseQualificationRate": 0
+  }
+}

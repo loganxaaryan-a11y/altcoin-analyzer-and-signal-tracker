@@ -1,0 +1,39 @@
+{
+  "registryVersion": "phase2a-trial-registry-v1",
+  "frozenAt": "2026-10-09T16:35:00.000Z",
+  "outcomesViewedBeforeFreeze": false,
+  "scope": "crypto daily Binance Spot USDT direction forecasts",
+  "trials": [
+    {
+      "trialId": "crypto-trend-continuation-v1-h5",
+      "strategy": "trend_continuation",
+      "horizonElapsedDays": 5,
+      "parameterSet": {"smaBars": 200, "returnBars": 20, "equality": "abstain"},
+      "status": "registered"
+    },
+    {
+      "trialId": "crypto-trend-continuation-v1-h30",
+      "strategy": "trend_continuation",
+      "horizonElapsedDays": 30,
+      "parameterSet": {"smaBars": 200, "returnBars": 20, "equality": "abstain"},
+      "status": "registered"
+    },
+    {
+      "trialId": "crypto-breakout-volume-v1-h5",
+      "strategy": "breakout_volume",
+      "horizonElapsedDays": 5,
+      "parameterSet": {"smaBars": 200, "breakoutBars": 20, "volumeMedianBars": 20, "volumeMultiple": 1.5, "currentBarExcluded": true},
+      "status": "registered"
+    },
+    {
+      "trialId": "crypto-breakout-volume-v1-h30",
+      "strategy": "breakout_volume",
+      "horizonElapsedDays": 30,
+      "parameterSet": {"smaBars": 200, "breakoutBars": 20, "volumeMedianBars": 20, "volumeMultiple": 1.5, "currentBarExcluded": true},
+      "status": "registered"
+    }
+  ],
+  "attemptedVariants": [],
+  "hiddenSearch": false,
+  "note": "Registry was frozen before running performance reports. Any later attempted configuration must be appended, never substituted."
+}

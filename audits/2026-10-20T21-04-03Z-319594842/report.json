@@ -1,0 +1,122 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-2b516071-4a65-44f3-b036-48c59c59ae9e/",
+  "duration_ms": 18755.111158,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-04-03Z-319594842",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-04-03Z-319594842/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-04-03Z-319594842/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-04-03Z-319594842/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [],
+    "mobile": []
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [],
+  "blocked_affordances": [],
+  "interactive_nodes": 29,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"Market\"\n    - button \"Coin Dossier\"\n    - button \"Signals\"\n    - button \"Theories\"\n    - button \"Assets\"\n    - button \"Watchlist\"\n    - button \"Journal\"\n    - button \"Alerts\"\n    - button \"Measurement\"\n    - button \"Meme Risk\"\n  - group: More tools\n  - region \"Research shortlist\":\n    - paragraph: Investigation priority · stored evidence only\n    - heading \"Research shortlist\" [level=2]\n    - button \"Reloading…\" [disabled]\n    - paragraph: Loading the research shortlist…\n    - paragraph: Research ranking — never issues, never gates.\n    - text: Loading the research shortlist…\n  - paragraph: Market read\n  - heading \"Coverage is loading\" [level=2]\n  - text: PARTIAL FEED\n  - paragraph: Refreshing CoinGecko prices and OKX instrument coverage…\n  - paragraph: Weekly screener funnel\n  - heading \"500 → T1 + volume or ≥15% / 48H → full scoring\" [level=2]\n  - button \"Recompute weekly universe tiers\": RECOMPUTE\n  - paragraph: Two routes enter full 7-dimension scoring. Non-velocity assets must be T1 and clear the volume path. A ≥15% move over 48 hours qualifies from any tier through the independent velocity path; its volume multiple is not consulted.\n  - paragraph: \"T1 has three independent doors: active verified theory, open signal, or Graduation ≥70. The graduation score does not explain a theory- or signal-led promotion.\"\n  - paragraph: \"Assigned 10/20/2026, 10:58:08 AM · 420 ranked assets → 204 passed $5M spot volume → 111 T3 light-tracking / 31 T2 chart-qualified / 1 T1 full-engine / 62 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -80.2% from ATH (worse than −75%).\"\n  - button \"T1 · 1\"\n  - button \"T2 · 31\"\n  - button \"T3 · 111\"\n  - button \"T4 · 62\"\n  - button \"Open ZRO T1 dossier\":\n    - text: ZRO V#38\n    - strong: LayerZero\n    - paragraph: \"ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-74.4% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-20T00:31:53.000Z, age 10.4h; price moved ≤2%).\"\n    - emphasis: Graduation 30/100 (bar 70)\n    - text: V 0× · 0 · H NO_DATA · W NO_DATA · C 20 · S 10\n  - paragraph: Automatic market discovery\n  - heading \"Verified perp universe → evidence flags\" [level=2]\n  - paragraph: The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.\n  - button \"RUN NOW\"\n  - text: LAST COMPLETED SCAN 10/20/2026, 8:58:37 PM\n  - emphasis: RUNNING\n  - strong: Discovery running — no stage completed.\n  - text: Universe\n  - strong: \"0\"\n  - text: Shortlist\n  - strong: \"0\"\n  - text: News impacts\n  - strong: \"0\"\n  - text: Theories\n  - strong: \"0\"\n  - button \"Auto signals\"\n  - button \"News impact\"\n  - button \"Fundamentals\"\n  - button \"HL perp board\"\n  - button \"Market context\"\n  - note: OPPORTUNITIES — what changed · why it matters · timeframe · evidence and conflicts\n  - note: CHART OPPORTUNITIES — observations only. No entries, no targets, no sizing.\n  - button \"Main Discovery\"\n  - button \"Meme Lane\"\n  - paragraph: Ranked scanner output\n  - heading \"Volume, interest and momentum flags\" [level=2]\n  - text: alignment, not probability\n  - button \"All\"\n  - button \"T1 · full engine only\"\n  - button \"Legacy triggered rows\"\n  - button \"All tiers\"\n  - button \"high\"\n  - button \"medium\"\n  - button \"low\"\n  - text: Sort\n  - button \"alignment\"\n  - button \"7D return\"\n  - button \"24H volume\"\n  - button \"tier\"\n  - text: No signals match these tier filters.\n  - group: Passed log · rejected / monitor-only setups\n  - region \"All observations from the latest completed discovery run\":\n    - paragraph: Research lane · unfiltered\n    - heading \"All observations\" [level=2]\n    - button \"Reload\"\n    - paragraph: Research observations — everything the scanner computed. Tier is a priority label, not a qualification. Issuance decisions are unchanged and shown separately.\n    - paragraph: \"Run #126 · completed 10/20/2026, 4:59:17 PM\"\n    - paragraph: \"Latest completed discovery run #126 · degraded · completed 10/20/2026, 4:59:17 PM · ordered by the run's recorded alignment where the run recorded one; remaining observations follow in the run's scan order.\"\n    - button \"Open USELESS coin dossier\":\n      - text: USELESS Priority · T4\n      - strong: USELESS · Useless Coin · WATCH\n      - text: cross-horizon alignment · alignment 61 / 100 · evidence tier low · 2/5 gates · velocity qualifier — did not pass the T1 doors data through 10/20/2026, 4:56:51 PM\n      - emphasis: Priority · T4\n    - button \"Open VVV coin dossier\":\n      - text: VVV Priority · T3\n      - strong: VVV · Venice Token · WATCH\n      - text: momentum displacement · alignment 58 / 100 · evidence tier low · 3/5 gates · velocity qualifier — did not pass the T1 doors data through 10/20/2026, 4:56:51 PM\n      - emphasis: Priority · T3\n    - button \"Open WLD coin dossier\":\n      - text: WLD Priority · T3\n      - strong: WLD · Worldcoin · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 4/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T3\n    - button \"Open PEPE coin dossier\":\n      - text: PEPE Priority · T3\n      - strong: PEPE · Pepe · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 5/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T3\n    - button \"Open ZRO coin dossier\":\n      - text: ZRO Priority · T1\n      - strong: ZRO · LayerZero · SHORT\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T1\n    - button \"Open BAT coin dossier\":\n      - text: BAT Priority · T3\n      - strong: BAT · Basic Attention · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 4/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T3\n    - button \"Open CARDS coin dossier\":\n      - text: CARDS Priority · T2\n      - strong: CARDS · Collector Crypt · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T2\n    - button \"Open COMP coin dossier\":\n      - text: COMP Priority · T3\n      - strong: COMP · Compound · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 5/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T3\n    - button \"Open BR coin dossier\":\n      - text: BR Priority · T2\n      - strong: BR · Bedrock · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T2\n    - button \"Open BEAM coin dossier\":\n      - text: BEAM Priority · T3\n      - strong: BEAM · Beam · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 5/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T3\n    - button \"Open KNTQ coin dossier\":\n      - text: KNTQ Priority · T4\n      - strong: KNTQ · Kinetiq · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T4\n    - button \"Open STONK coin dossier\":\n      - text: STONK Priority · T4\n      - strong: STONK · STONK · WATCH\n      - text: rejected at strategy eligibility — Chart fetched and normalized, but existing freshness/liquidity/market-cap/perpetual-context strategy eligibility was not satisfied. · stored factor ledger 2/7 dimensions pass data through 10/20/2026, 4:56:51 PM\n      - emphasis: Priority · T4\n    - button \"Open ALT coin dossier\":\n      - text: ALT Priority · T3\n      - strong: ALT · AltLayer · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 4/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T3\n    - button \"Open DIEM coin dossier\":\n      - text: DIEM Priority · no saved tier\n      - strong: DIEM · Diem · WATCH\n      - text: failed at provider or normalization — Binance:provider_rejection:Source returned 400 | CoinGecko:rate_limit:Source returned 429 · stored factor ledger 3/7 dimensions pass data through 10/20/2026, 4:56:51 PM\n      - emphasis: Priority · no saved tier\n    - button \"Open ZCAT coin dossier\":\n      - text: ZCAT Priority · no saved tier\n      - strong: ZCAT · Anonymous Cat · WATCH\n      - text: rejected at strategy eligibility — Chart fetched and normalized, but existing freshness/liquidity/market-cap/perpetual-context strategy eligibility was not satisfied. · stored factor ledger 2/7 dimensions pass data through 10/20/2026, 4:56:51 PM\n      - emphasis: Priority · no saved tier\n    - button \"Open JCT coin dossier\":\n      - text: JCT Priority · no saved tier\n      - strong: JCT · Janction · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · no saved tier\n    - button \"Open ARC coin dossier\":\n      - text: ARC Priority · T4\n      - strong: ARC · AI Rig Complex · SHORT\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T4\n    - button \"Open PHA coin dossier\":\n      - text: PHA Priority · T3\n      - strong: PHA · PHALA · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 5/7 dimensions pass data through 10/20/2026, 4:56:51 PM\"\n      - emphasis: Priority · T3\n    - button \"Open NOCK coin dossier\":\n      - text: NOCK Priority · no saved tier\n      - strong: NOCK · Nockchain · WATCH\n      - text: failed at provider or normalization — Binance:provider_rejection:Source returned 400 | CoinGecko:rate_limit:Source returned 429 · stored factor ledger 2/7 dimensions pass data through 10/20/2026, 4:56:51 PM\n      - emphasis: Priority · no saved tier\n  - paragraph: BTC cycle study\n  - heading \"Regime compass\" [level=2]\n  - button \"Open BTC\"\n  - text: Cycle data loading…\n  - paragraph: /BTC ratio table\n  - heading \"Rotation breadth\" [level=2]\n  - text: CoinGecko\n  - paragraph: Ratio breadth is loading…\n  - text: Ratio data loading…\n  - paragraph: Narrative rotation\n  - heading \"Leaders and laggards\" [level=2]\n  - text: CoinGecko Rotation data loading…",
+  "audit_session_id": "ec872bd4-52b1-44b3-9acd-b81643987967",
+  "readiness": {
+    "desktop": {
+      "settled": false,
+      "settle_ms": 8599,
+      "in_flight": 8,
+      "network_idle": true,
+      "retried": true
+    },
+    "mobile": {
+      "settled": false,
+      "settle_ms": 8618,
+      "in_flight": 8,
+      "network_idle": true,
+      "retried": true
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "mobile_ms": 14315.206125,
+  "cold_launch_ms": 1200.3388330000002,
+  "desktop_ms": 15613.547202,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 2
+  }
+}

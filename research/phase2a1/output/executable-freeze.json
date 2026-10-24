@@ -1,0 +1,11 @@
+{
+  "version": "phase2a1-executable-freeze-v1",
+  "generatedAt": "2026-10-09T18:45:00.000Z",
+  "enginePath": "server/src/phase2a-research.ts",
+  "engineSha256": "1583e6eecd1d8e999a8faaa0012148943ae5753ca4f460738b188c8e6910d184",
+  "specContentSha256": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6",
+  "successCriterionChanged": false,
+  "holdoutOpened": false,
+  "verifiedEngineSha256": "1583e6eecd1d8e999a8faaa0012148943ae5753ca4f460738b188c8e6910d184",
+  "verifiedSpecContentSha256": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6"
+}

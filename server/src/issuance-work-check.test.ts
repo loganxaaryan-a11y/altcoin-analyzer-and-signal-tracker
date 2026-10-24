@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { decideIssuanceWork, summarizeIntakeStatuses, type HandoffProcessingState } from "./issuance-work-check";
+import { decideIssuanceWork, monitoringHoldExplanation, summarizeIntakeStatuses, type HandoffProcessingState } from "./issuance-work-check";
 import { isTerminalIntakeStatus } from "./paper-intake";
 
 const isTerminal = (status: string) => isTerminalIntakeStatus(status as Parameters<typeof isTerminalIntakeStatus>[0]);
@@ -81,6 +81,60 @@ describe("bounded issuance-work check", () => {
     const a = decideIssuanceWork(base);
     const b = decideIssuanceWork({ ...base });
     expect(a).toEqual(b);
+  });
+});
+
+describe("monitoringHoldExplanation", () => {
+  // The 2026-10-23 episode, replayed from its recorded timestamps:
+  // coverage stopped 03:42:59Z, the 45-minute bound was crossed 04:27:59Z,
+  // and the lane was held by design until coverage recovered — while its
+  // status recorded nothing and read as a dispatch failure.
+  const held = monitoringHoldExplanation({
+    coverageStatus: "stale",
+    coverageBasis: "Coverage verified by scheduled recovery",
+    lastSuccessfulCoverageUtc: "2026-10-23T03:42:59.000Z",
+    staleAfterMs: 45 * 60_000,
+    settlementRunUtc: "2026-10-23T03:43:30.000Z",
+    automationLabel: "Scheduled recovery confirmed 2026-10-22T07:35:00Z",
+    failingStage: "venue monitor — coverage stale",
+    reasons: ["Last successful coverage 2026-10-23T03:42:59.000Z is older than the 45-minute staleness bound."],
+    trigger: "manual",
+  });
+
+  test("names the hold as by design, never as a dispatch failure", () => {
+    expect(held.reason).toContain("Held by design by the monitoring-health gate");
+    expect(held.reason).toContain("not a dispatch failure");
+    expect(held.reason).toContain("returned before any candidate processing");
+    expect(held.reason).toContain("No candidate was processed and no entry was admitted");
+  });
+
+  test("computes the freshness-bound crossing from the last coverage, not by hand", () => {
+    expect(held.staleBoundCrossedUtc).toBe("2026-10-23T04:27:59.000Z");
+    expect(held.reason).toContain("the 45-minute freshness bound was crossed at 2026-10-23T04:27:59.000Z");
+  });
+
+  test("a 'manual' trigger label never reads as proof a person fired it", () => {
+    expect(held.reason).toContain('recorded trigger label is "manual"');
+    expect(held.reason).toContain('defaults to "manual"');
+    expect(held.reason).toContain("does not establish that a person fired this invocation");
+  });
+
+  test("no successful coverage timestamp means no invented crossing time", () => {
+    const unknown = monitoringHoldExplanation({
+      coverageStatus: "unavailable",
+      coverageBasis: "Coverage verified by directed recovery",
+      lastSuccessfulCoverageUtc: null,
+      staleAfterMs: 45 * 60_000,
+      settlementRunUtc: null,
+      automationLabel: "Scheduled recovery pending",
+      failingStage: null,
+      reasons: [],
+      trigger: "scheduled",
+    });
+    expect(unknown.staleBoundCrossedUtc).toBeNull();
+    expect(unknown.reason).toContain("last successful coverage unavailable");
+    expect(unknown.reason).not.toContain("freshness bound was crossed at");
+    expect(unknown.reason).toContain('recorded trigger label is "scheduled"');
   });
 });
 

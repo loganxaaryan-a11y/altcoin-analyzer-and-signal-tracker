@@ -1,0 +1,146 @@
+{
+  "version": "crypto-phase2a-ohlcv-research-v1",
+  "cohort": "phase2a-offline-crypto-direction-forecast",
+  "market": "crypto",
+  "universe": [
+    {
+      "instrumentId": "BTCUSDT",
+      "symbol": "BTC",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "ETHUSDT",
+      "symbol": "ETH",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "SOLUSDT",
+      "symbol": "SOL",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "LINKUSDT",
+      "symbol": "LINK",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "DOGEUSDT",
+      "symbol": "DOGE",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "XRPUSDT",
+      "symbol": "XRP",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "AVAXUSDT",
+      "symbol": "AVAX",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "ADAUSDT",
+      "symbol": "ADA",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    },
+    {
+      "instrumentId": "SUIUSDT",
+      "symbol": "SUI",
+      "venue": "Binance Spot",
+      "quoteCurrency": "USDT"
+    }
+  ],
+  "dateRange": {
+    "start": "2019-01-01",
+    "validationEnd": "2024-12-31",
+    "holdoutStart": "2025-01-01",
+    "holdoutEnd": "2026-09-30"
+  },
+  "folds": [
+    {
+      "id": "validation_1",
+      "start": "2023-01-01",
+      "end": "2023-06-30"
+    },
+    {
+      "id": "validation_2",
+      "start": "2023-07-01",
+      "end": "2023-12-31"
+    },
+    {
+      "id": "validation_3",
+      "start": "2024-01-01",
+      "end": "2024-12-31"
+    }
+  ],
+  "horizons": [
+    5,
+    30
+  ],
+  "timing": {
+    "interval": "1d",
+    "calendar": "24/7 UTC",
+    "availabilityLagMs": 300000,
+    "entry": "first Binance daily open whose event time is not earlier than the completed feature bar's inferred availability time",
+    "exit": "terminal Binance close after H complete 24-hour intervals beginning at the eligible entry open"
+  },
+  "hypotheses": [
+    {
+      "id": "trend_continuation",
+      "parameters": {
+        "smaBars": 200,
+        "returnBars": 20,
+        "equality": "abstain"
+      }
+    },
+    {
+      "id": "breakout_volume",
+      "parameters": {
+        "smaBars": 200,
+        "breakoutBars": 20,
+        "volumeMedianBars": 20,
+        "volumeMultiple": 1.5,
+        "currentBarExcludedFromReferences": "true"
+      }
+    }
+  ],
+  "costs": {
+    "centralRoundTripBps": 18,
+    "stressedRoundTripBps": 36,
+    "shortFunding": "unsupported",
+    "executionStatus": "hypothetical"
+  },
+  "baselines": [
+    "always_long",
+    "always_short",
+    "sma200_direction",
+    "cash"
+  ],
+  "selection": {
+    "objective": "pooled out-of-fold mean modeled signed return under central costs",
+    "minimumIssued": 100,
+    "minimumAssets": 3,
+    "minimumDecisionDates": 30,
+    "requiredLowerBoundVsBestDirectionalBaseline": 0,
+    "tieBreak": "trend_continuation"
+  },
+  "uncertainty": {
+    "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel",
+    "blockDays": 30,
+    "resamples": 500,
+    "seed": 20261009
+  },
+  "holdout": {
+    "locked": true,
+    "normalCommandMayEvaluate": false
+  },
+  "sampleQualification": "survivor-sample exploratory"
+}

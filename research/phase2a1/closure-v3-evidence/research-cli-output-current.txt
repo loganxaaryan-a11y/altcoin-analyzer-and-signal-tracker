@@ -1,0 +1,73 @@
+$ bun research/phase2a/cli.ts --input research/phase2a1/real-market-input/normalized-train-validation-bars.jsonl --out research/phase2a1/closure-v3-real-market
+{
+  "ok": true,
+  "engineHash": "09b8146145dbf8af8caa8629038bbdf713f2d96325be18e469cacef57dfb283d",
+  "syntheticControls": {
+    "positiveQualified": true,
+    "negativeFalseQualifications": 0
+  },
+  "outputDir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/research/phase2a1/closure-v3-real-market",
+  "specHash": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6",
+  "datasetManifestHash": "7342ff4d7c9d4330660290c1cdc23debaefb9e1ca6308b9042d70f935446846a",
+  "observationCount": 8162,
+  "selection": [
+    {
+      "horizon": 5,
+      "selected": null,
+      "qualified": false,
+      "reason": "No candidate cleared the predeclared sample, positive net-return, and block-bootstrap baseline-difference checks.",
+      "candidates": [
+        {
+          "strategy": "trend_continuation",
+          "meanCentralNet": 0.005240762335518908,
+          "lowerBoundVsBestDirectional": -0.02774971400445326,
+          "issued": 4045,
+          "uniqueAssets": 9,
+          "uniqueDecisionDates": 711
+        },
+        {
+          "strategy": "breakout_volume",
+          "meanCentralNet": 0.03382867370182805,
+          "lowerBoundVsBestDirectional": -0.022421111370748696,
+          "issued": 319,
+          "uniqueAssets": 9,
+          "uniqueDecisionDates": 167
+        }
+      ]
+    },
+    {
+      "horizon": 30,
+      "selected": null,
+      "qualified": false,
+      "reason": "No candidate cleared the predeclared sample, positive net-return, and block-bootstrap baseline-difference checks.",
+      "candidates": [
+        {
+          "strategy": "trend_continuation",
+          "meanCentralNet": 0.02034116974053381,
+          "lowerBoundVsBestDirectional": -0.20689243233432406,
+          "issued": 3525,
+          "uniqueAssets": 9,
+          "uniqueDecisionDates": 636
+        },
+        {
+          "strategy": "breakout_volume",
+          "meanCentralNet": 0.1869111752521689,
+          "lowerBoundVsBestDirectional": -0.08620156293887196,
+          "issued": 273,
+          "uniqueAssets": 9,
+          "uniqueDecisionDates": 144
+        }
+      ]
+    }
+  ],
+  "holdout": {
+    "locked": true,
+    "start": "2025-01-01",
+    "end": "2026-09-30",
+    "featureEligibleRows": 0,
+    "issuedWithoutLabels": {},
+    "datasetManifestHash": "7342ff4d7c9d4330660290c1cdc23debaefb9e1ca6308b9042d70f935446846a",
+    "performanceOpened": false
+  }
+}
+[exit 0]

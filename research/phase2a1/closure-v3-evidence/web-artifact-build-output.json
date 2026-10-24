@@ -1,0 +1,12 @@
+{
+  "command": "web_artifacts.build({})",
+  "completedAt": "2026-10-12T07:42:13Z",
+  "exitStatus": 0,
+  "ok": true,
+  "outcome": "success",
+  "slug": "altcoin-analyzer-and-signal-tracker",
+  "hasServerActions": true,
+  "serverBundle": "server/dist/actions.js",
+  "privilegedBundle": "server/dist/privileged.js",
+  "note": "The platform-owned builder compiled and staged the current server-backed artifact. A direct client build is intentionally refused by the scaffold; that refusal is preserved in manual-build-attempt-output.txt rather than misreported as a product failure."
+}

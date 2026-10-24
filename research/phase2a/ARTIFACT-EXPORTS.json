@@ -1,0 +1,16 @@
+{
+  "datasetManifestHash": "e40894eb8a40e0622423f145939fe42f0338cbe9c86441357184a70866516bda",
+  "observationCount": 8162,
+  "runtimeExports": {
+    "validationObservationsJsonl": {
+      "blobKey": "phase2a/e40894eb8a40e0622423f145939fe42f0338cbe9c86441357184a70866516bda/validation-observations.jsonl",
+      "contentType": "application/x-ndjson"
+    },
+    "reviewPackageJson": {
+      "blobKey": "phase2a/e40894eb8a40e0622423f145939fe42f0338cbe9c86441357184a70866516bda/review-package.json",
+      "contentType": "application/json"
+    }
+  },
+  "retrieval": "Invoke getphase2aresearchstatus and use the artifact-owned URLs it returns. URLs are deployment-relative and are not reconstructed in this file.",
+  "holdoutPerformanceIncluded": false
+}

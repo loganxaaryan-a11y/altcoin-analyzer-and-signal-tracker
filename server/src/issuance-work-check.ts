@@ -95,6 +95,62 @@ export function decideIssuanceWork(state: HandoffProcessingState): IssuanceWorkD
   };
 }
 
+/**
+ * Monitoring-hold explanation (2026-10-23 issuance inspection).
+ *
+ * The 2026-10-23 "frozen issuance lane" was ONE failure reported as two:
+ * monitoring coverage stopped at 03:42:59Z, its 45-minute freshness bound
+ * was crossed at 04:27:59Z, and from then until coverage recovered the
+ * issuance cycle was HELD BY DESIGN by the monitoring-health gate — it
+ * evaluated health first and returned before any candidate processing.
+ * The defect was not dispatch: the hold branch recorded nothing durable,
+ * so a designed hold was indistinguishable from a dispatch failure in the
+ * lane's own status. This builder produces the durable explanation every
+ * held invocation now records in the work-check ledger.
+ *
+ * Trigger provenance: the recorded trigger is the caller-supplied action
+ * argument, and an unsupplied trigger defaults to "manual" in the action
+ * schema. A "manual" label therefore does NOT establish that a person
+ * fired the invocation, and a resumed check carrying it does not prove
+ * the lane "restarted on its own" — both readings are explicitly refused
+ * here so the stored reason never overclaims the origin.
+ */
+export interface MonitoringHoldExplanationInput {
+  coverageStatus: string;
+  coverageBasis: string;
+  lastSuccessfulCoverageUtc: string | null;
+  staleAfterMs: number;
+  settlementRunUtc: string | null;
+  automationLabel: string;
+  failingStage: string | null;
+  reasons: string[];
+  trigger: string;
+}
+
+export interface MonitoringHoldExplanation {
+  /** Instant the freshness bound was crossed (last coverage + bound), or
+   * null when no successful coverage timestamp is available. */
+  staleBoundCrossedUtc: string | null;
+  reason: string;
+}
+
+export function monitoringHoldExplanation(input: MonitoringHoldExplanationInput): MonitoringHoldExplanation {
+  const lastMs = input.lastSuccessfulCoverageUtc ? Date.parse(input.lastSuccessfulCoverageUtc) : NaN;
+  const staleBoundCrossedUtc = Number.isFinite(lastMs) && input.staleAfterMs > 0
+    ? new Date(lastMs + input.staleAfterMs).toISOString()
+    : null;
+  const staleMinutes = Math.round(input.staleAfterMs / 60_000);
+  const gateReasons = input.reasons.filter((row) => row.trim().length > 0);
+  const reason = [
+    "Held by design by the monitoring-health gate — not a dispatch failure: this cycle was invoked, evaluated monitoring health first, and returned before any candidate processing because entry admission is held.",
+    `Coverage is ${input.coverageStatus.toUpperCase()} (${input.coverageBasis}; last successful coverage ${input.lastSuccessfulCoverageUtc ?? "unavailable"}${staleBoundCrossedUtc ? `; the ${staleMinutes}-minute freshness bound was crossed at ${staleBoundCrossedUtc}` : ""}; latest settlement pass ${input.settlementRunUtc ?? "unavailable"}) and automation is ${input.automationLabel} (failing stage: ${input.failingStage ?? "coverage unverified"}).`,
+    gateReasons.length ? `Gate reasons: ${gateReasons.join(" ")}` : "Gate reasons: none recorded.",
+    "No candidate was processed and no entry was admitted on this invocation. Monitoring, settlement, discovery and research are separate lanes and are not gated by this hold; admission resumes automatically on the first cycle after coverage is fresh and scheduled recovery is confirmed by attestation.",
+    `Trigger provenance: the recorded trigger label is "${input.trigger}", the caller-supplied action argument — an unsupplied trigger defaults to "manual" in the action schema, so a "manual" label alone does not establish that a person fired this invocation.`,
+  ].join(" ");
+  return { staleBoundCrossedUtc, reason };
+}
+
 export function summarizeIntakeStatuses(
   rows: ReadonlyArray<{ status: string; count: number }>,
   isTerminalStatus: (status: string) => boolean,

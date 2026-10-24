@@ -1,0 +1,17 @@
+{
+  "version": "crypto-phase2a-ohlcv-research-v1",
+  "specHash": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6",
+  "source": "Binance market-data-only API",
+  "instruments": [
+    {"instrumentId":"BTCUSDT","symbol":"BTC","rows":3332,"firstEventTime":1502928000000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"af6f44111663025f63988f8554ca1f4bb8819b6f2feb28c726c777bd7570bae6"},
+    {"instrumentId":"ETHUSDT","symbol":"ETH","rows":3332,"firstEventTime":1502928000000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"8516fc6efce8d2bed43ad6e8ca60fbd25684b6f6024635dadc55c82acf5b54a3"},
+    {"instrumentId":"SOLUSDT","symbol":"SOL","rows":2242,"firstEventTime":1597104000000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"f1ceb2cb8859d9df7181213d65f7bbfcd02f570a8e06a1bb877de70c5839321c"},
+    {"instrumentId":"LINKUSDT","symbol":"LINK","rows":2815,"firstEventTime":1547596800000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"c9ca31fb55a95a91c8f3af0b4ceef0608a703243b4eb24fb0702fed189f2ac73"},
+    {"instrumentId":"DOGEUSDT","symbol":"DOGE","rows":2645,"firstEventTime":1562284800000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"1e23d8de68da3856e41ef0188fc9223c76ccd170b6b7f33c5463e0dae32ea7ce"},
+    {"instrumentId":"XRPUSDT","symbol":"XRP","rows":3072,"firstEventTime":1525392000000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"efa24fd8818c2932fcce41cef24b4239e42281be7d10cb7ff4da85805c16a5a3"},
+    {"instrumentId":"AVAXUSDT","symbol":"AVAX","rows":2200,"firstEventTime":1600732800000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"2fa949b4e4e085d66d970d592ff4ec0fee1179f6087bd87635148cafc5fc6893"},
+    {"instrumentId":"ADAUSDT","symbol":"ADA","rows":3089,"firstEventTime":1523923200000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"432dfa1d27ade32f7a79659abde859546eed814a5959ec8a691604e3f754e9bf"},
+    {"instrumentId":"SUIUSDT","symbol":"SUI","rows":1247,"firstEventTime":1683072000000,"lastEventTime":1790726400000,"gaps":0,"duplicates":0,"incoherent":0,"rawHash":"cfc05ac1b52190f0243459bdc982cff7b02274614fdcaeaf260fd68561e19881"}
+  ],
+  "totalRows": 23974
+}

@@ -1,0 +1,101 @@
+[input text: Search any coin]
+[button: Analyze]
+[button: Market] [button: Notifications] [button: Coin Dossier] [button: Signals] [button: Theories] [button: Assets] [button: Watchlist] [button: Journal] [button: Alerts] [button: Measurement] [button: Meme Risk]
+More tools
+[button: News search] [button: Perps & whales]
+Standalone search and deep-dive tools remain available here.
+Investigation priority · stored evidence only
+## Research shortlist
+[button: Reloading…]
+Loading the research shortlist…
+Research ranking — never issues, never gates.
+Loading the research shortlist…
+Market read
+## Coverage is loading
+PARTIAL FEED
+Refreshing CoinGecko prices and OKX instrument coverage…
+Weekly screener funnel
+## 500 → T1 + volume or ≥15% / 48H → full scoring
+[button: RECOMPUTE]
+Two routes enter full 7-dimension scoring. Non-velocity assets must be T1 and clear the volume path. A ≥15% move over 48 hours qualifies from any tier through the independent velocity path; its volume multiple is not consulted.
+T1 has three independent doors: active verified theory, open signal, or Graduation ≥70. The graduation score does not explain a theory- or signal-led promotion.
+Assigned 10/23/2026, 6:36:09 PM · 422 ranked assets → 198 passed $5M spot volume → 111 T3 light-tracking / 32 T2 chart-qualified / 0 T1 full-engine / 56 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -78.5% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-23T14:34:49.000Z, age 4h; price moved ≤2%).
+[button: T1 · 0] [button: T2 · 32] [button: T3 · 111] [button: T4 · 56]
+No saved T1 membership yet. Run the weekly screener.
+Automatic market discovery
+## Verified perp universe → evidence flags
+The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.
+[button: RUN NOW]
+LAST COMPLETED SCAN
+No scan stored yet
+DEGRADED
+Run the first scan to build the discovery feed.
+[button: Auto signals] [button: News impact] [button: Fundamentals] [button: HL perp board] [button: Market context]
+OPPORTUNITIES — what changed · why it matters · timeframe · evidence and conflicts
+CHART OPPORTUNITIES — observations only. No entries, no targets, no sizing.
+[button: Main Discovery] [button: Meme Lane]
+Ranked scanner output
+## Volume, interest and momentum flags
+alignment, not probability
+[button: All] [button: T1 · full engine only] [button: Legacy triggered rows]
+[button: All tiers] [button: high] [button: medium] [button: low]
+Sort
+[button: alignment] [button: 7D return] [button: 24H volume] [button: tier]
+No scheduled scan has completed yet.
+Passed log · rejected / monitor-only setups
+Every retained low-tier shortlist row stays visible with the exact failed or unavailable gates and later 5D/14D/30D outcomes. This scores rejects over time instead of deleting them.
+Research lane · unfiltered
+## All observations
+[button: Reload]
+Research observations — everything the scanner computed. Tier is a priority label, not a qualification. Issuance decisions are unchanged and shown separately.
+Run #161 · completed 10/23/2026, 4:59:18 PM
+Latest completed discovery run #161 · degraded · completed 10/23/2026, 4:59:18 PM · ordered by the run's recorded alignment where the run recorded one; remaining observations follow in the run's scan order.
+[button:
+M
+Priority · no saved tier
+M · MemeCore · SHORT
+eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 2/7 dimensions pass
+data through 10/23/2026, 4:57:50 PM
+Priority · no saved tier
+] [button:
+AKE
+Priority · T2
+AKE · Akedo · LONG
+eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 2/7 dimensions pass
+data through 10/23/2026, 4:57:50 PM
+Priority · T2
+] [button:
+IRYS
+Priority · T2
+IRYS · Irys · LONG
+eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass
+data through 10/23/2026, 4:57:50 PM
+Priority · T2
+] [button:
+MOOLAH
+Priority · no saved tier
+MOOLAH · Moolah · LONG
+eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 4/7 dimensions pass
+data through 10/23/2026, 4:57:50 PM
+Priority · no saved tier
+] [button:
+DOS
+Priority · T3
+DOS · DAPPOS · LONG
+eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 4/7 dimensions pass
+data through 10/23/2026, 4:57:50 PM
+Priority · T3
+]
+BTC cycle study
+## Regime compass
+[button: Open BTC]
+Cycle data loading…
+/BTC ratio table
+## Rotation breadth
+CoinGecko
+Ratio breadth is loading…
+Ratio data loading…
+Narrative rotation
+## Leaders and laggards
+CoinGecko
+Rotation data loading…

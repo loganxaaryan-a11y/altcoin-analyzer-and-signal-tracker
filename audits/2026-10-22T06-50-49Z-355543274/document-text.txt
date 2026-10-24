@@ -1,0 +1,1539 @@
+[input text: Search any coin]
+[button: Analyze]
+[button: Market] [button: Coin Dossier] [button: Signals] [button: Theories] [button: Assets] [button: Watchlist] [button: Journal] [button: Alerts] [button: Measurement] [button: Meme Risk]
+More tools
+[button: News search] [button: Perps & whales]
+Standalone search and deep-dive tools remain available here.
+Terminal inbox · opportunities + lifecycle
+## Notifications · 546 unread · 63 historical
+[button: Reload] [button: Mark all read]
+Blocked opportunities stay visible with their blocker reason — visibility is never gated on paper qualification. Expired setups are kept for the record and are never actionable. Terminal visibility time is recorded separately from chat arrival: an item whose chat copy landed after its window closed reads as a historical notification, not an actionable entry. Read state is set only by your ack here; chat delivery never marks a row read.
+### Actionable now · 431 unread
+JCT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.00419 · invalidation $0.003795
+JCT → T2: top-40 volume among chart-passers; ATH gate -60.9%, price above 50D SMA; mover: 108.2% over 48H with 6.13× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +103.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 146 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/22/2026, 2:57:19 AM → terminal 10/22/2026, 2:57:19 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+MAGMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.332316 · invalidation $0.281514
+MAGMA → T2: top-40 volume among chart-passers; ATH gate -58.5%, price above 50D SMA; mover: 20.0% over 48H with 3.92× baseline volume — velocity qualified independently.
+48H velocity +25.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Magma Finance (MAGMA) LONG qualified in discovery run 146 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 2:57:17 AM → terminal 10/22/2026, 2:57:17 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+ALT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.011973 · invalidation $0.009615
+ALT → T3: hard chart gate rejected it at -98.1% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +42.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AltLayer (ALT) LONG qualified in discovery run 146 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/22/2026, 2:57:16 AM → terminal 10/22/2026, 2:57:16 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+MOOLAH · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.051328 · invalidation $0.044246
+ranked-catalog velocity qualification
+48H velocity +18.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Moolah (MOOLAH) LONG qualified in discovery run 146 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 2:57:16 AM → terminal 10/22/2026, 2:57:16 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.53 · invalidation $2.51
+CVX → T3: hard chart gate rejected it at -95.7% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +23.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 146 but paper issuance is BLOCKED: duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+event 10/22/2026, 2:57:15 AM → terminal 10/22/2026, 2:57:15 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+PROM · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.89 · invalidation $5.02
+PROM → T4: volume-qualified ($11.21M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +20.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Prom (PROM) LONG qualified in discovery run 146 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 2:57:15 AM → terminal 10/22/2026, 2:57:15 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+ORCA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $1.86 · invalidation $1.79
+ORCA → T3: hard chart gate rejected it at -90.1% from ATH (worse than −75%).
+48H velocity +15.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Orca (ORCA) LONG qualified in discovery run 146 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 2:57:14 AM → terminal 10/22/2026, 2:57:14 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+CARDS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.3536 · invalidation $0.34801
+CARDS → T2: top-40 volume among chart-passers; ATH gate -1.2%, price above 50D SMA.
+48H velocity +17.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 146 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/22/2026, 2:57:13 AM → terminal 10/22/2026, 2:57:13 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+HOODINU · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.158692 · invalidation $0.066985
+HOODINU → T2: top-40 volume among chart-passers; ATH gate -1.0%, under 200D history (T1 blocked without sufficient chart data); mover: 139.7% over 48H with 6.53× baseline volume — velocity qualified independently.
+48H velocity +144.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Hood Sword Inu (HOODINU) LONG qualified in discovery run 146 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 2:57:12 AM → terminal 10/22/2026, 2:57:12 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+ZRO · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+SHORT entry $1.91 · invalidation $2.10
+ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-74.0% from ATH, hard gate at -75%).
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. LayerZero (ZRO) SHORT qualified in discovery run 146 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/22/2026, 2:57:12 AM → terminal 10/22/2026, 2:57:12 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.395645 · invalidation $0.354641
+KNTQ → T4: volume-qualified ($5.22M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +19.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 146 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 2:57:12 AM → terminal 10/22/2026, 2:57:12 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+PEARL · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.39 · invalidation $2.14
+PEARL → T2: top-40 volume among chart-passers; ATH gate -2.8%, under 200D history (T1 blocked without sufficient chart data); mover: 3.05× the 30D volume baseline with +11.7% over 48H.
+48H velocity +19.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pearl (PEARL) LONG qualified in discovery run 146 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 2:57:09 AM → terminal 10/22/2026, 2:57:09 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+COMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.02 · invalidation $25.35
+COMP → T3: hard chart gate rejected it at -97.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +20.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 146 but paper issuance is BLOCKED: Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)
+event 10/22/2026, 2:57:09 AM → terminal 10/22/2026, 2:57:09 AM → chat 10/22/2026, 4:16:00 AM · no expiry recorded
+[button: Mark read]
+MOOLAH · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.049919 · invalidation $0.044144
+ranked-catalog velocity qualification
+48H velocity +24.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Moolah (MOOLAH) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:35 AM → terminal 10/22/2026, 1:17:35 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+NOCK · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.02308 · invalidation $0.020511
+ranked-catalog velocity qualification
+48H velocity +15.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Nockchain (NOCK) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:33 AM → terminal 10/22/2026, 1:17:33 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+EDGE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+SHORT entry $0.333031 · invalidation $0.343144
+ranked-catalog velocity qualification
+48H velocity +16.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. edgeX (EDGE) SHORT qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:28 AM → terminal 10/22/2026, 1:17:28 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+PROM · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.83 · invalidation $5.00
+PROM → T4: volume-qualified ($11.21M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +21.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Prom (PROM) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:28 AM → terminal 10/22/2026, 1:17:28 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+MAGMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.331413 · invalidation $0.27952
+MAGMA → T2: top-40 volume among chart-passers; ATH gate -58.5%, price above 50D SMA; mover: 20.0% over 48H with 3.92× baseline volume — velocity qualified independently.
+48H velocity +23.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Magma Finance (MAGMA) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:28 AM → terminal 10/22/2026, 1:17:28 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+ARC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.063208 · invalidation $0.049676
+ARC → T4: volume-qualified ($12.51M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +44.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:25 AM → terminal 10/22/2026, 1:17:25 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+ALT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.012729 · invalidation $0.009615
+ALT → T3: hard chart gate rejected it at -98.1% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +41.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AltLayer (ALT) LONG qualified in discovery run 145 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/22/2026, 1:17:24 AM → terminal 10/22/2026, 1:17:24 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+USELESS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.169773 · invalidation $0.156628
+USELESS → T3: hard chart gate rejected it below the 50D moving average. Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +18.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Useless Coin (USELESS) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:15 AM → terminal 10/22/2026, 1:17:15 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.414474 · invalidation $0.352962
+KNTQ → T4: volume-qualified ($5.22M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +21.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:14 AM → terminal 10/22/2026, 1:17:14 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+HOODINU · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.16109 · invalidation $0.066985
+HOODINU → T2: top-40 volume among chart-passers; ATH gate -1.0%, under 200D history (T1 blocked without sufficient chart data); mover: 139.7% over 48H with 6.53× baseline volume — velocity qualified independently.
+48H velocity +143.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Hood Sword Inu (HOODINU) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:11 AM → terminal 10/22/2026, 1:17:11 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.56 · invalidation $2.42
+CVX → T3: hard chart gate rejected it at -95.7% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +25.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 145 but paper issuance is BLOCKED: duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+event 10/22/2026, 1:17:10 AM → terminal 10/22/2026, 1:17:10 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+VERSE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.242349 · invalidation $0.019712
+ranked-catalog velocity qualification
+48H velocity +345.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Verse World (VERSE) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:09 AM → terminal 10/22/2026, 1:17:09 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+COMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $26.03 · invalidation $25.35
+COMP → T3: hard chart gate rejected it at -97.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +19.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: COMP long already issued as paper_ae0ef8cd437b434d3cd5d859 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 145 but paper issuance is BLOCKED: duplicate suppressed: COMP long already issued as paper_ae0ef8cd437b434d3cd5d859 within 24h (duplicate_24h_suppression)
+event 10/22/2026, 1:17:07 AM → terminal 10/22/2026, 1:17:07 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+PEARL · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.37 · invalidation $2.14
+PEARL → T2: top-40 volume among chart-passers; ATH gate -2.8%, under 200D history (T1 blocked without sufficient chart data); mover: 3.05× the 30D volume baseline with +11.7% over 48H.
+48H velocity +22.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pearl (PEARL) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:17:05 AM → terminal 10/22/2026, 1:17:05 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+ZEC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $1,330.17 · invalidation $1,253.10
+ZEC → T1: active verified theory #74 — ZEC decision-day: NU7 activation call lands today with whales short; volume + chart gates passed. Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+BLOCKED — duplicate suppressed: ZEC long already issued as paper_6aee1bb09ebaef170ab13e82 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Zcash (ZEC) LONG qualified in discovery run 145 but paper issuance is BLOCKED: duplicate suppressed: ZEC long already issued as paper_6aee1bb09ebaef170ab13e82 within 24h (duplicate_24h_suppression)
+event 10/22/2026, 1:17:04 AM → terminal 10/22/2026, 1:17:04 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+NEAR · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.31 · invalidation $4.97
+NEAR → T1: active verified theory #7 — NEAR fade aligns with altcoin unlock supply overhang; volume + chart gates passed. WARNING: near structural-downtrend line (-74.3% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+BLOCKED — duplicate suppressed: NEAR long already issued as paper_6c3f666a247a675c951a4eb0 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. NEAR Protocol (NEAR) LONG qualified in discovery run 145 but paper issuance is BLOCKED: duplicate suppressed: NEAR long already issued as paper_6c3f666a247a675c951a4eb0 within 24h (duplicate_24h_suppression)
+event 10/22/2026, 1:17:04 AM → terminal 10/22/2026, 1:17:04 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+LIT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $3.90 · invalidation $3.37
+LIT → T2: top-40 volume among chart-passers; ATH gate -51.2%, price above 50D SMA. Chart carried from stored snapshot (sourceAsOf 2026-10-21T20:34:54.000Z, age 4h; price moved ≤2%).
+48H velocity +21.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Lighter (LIT) LONG qualified in discovery run 145 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/22/2026, 1:16:51 AM → terminal 10/22/2026, 1:16:51 AM → chat 10/22/2026, 1:51:20 AM · no expiry recorded
+[button: Mark read]
+MOOLAH · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.052237 · invalidation $0.043831
+ranked-catalog velocity qualification
+48H velocity +23.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Moolah (MOOLAH) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:25:05 PM → terminal 10/21/2026, 11:25:05 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+IOST · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.00139 · invalidation $0.000988
+IOST → T3: hard chart gate rejected it at -98.7% from ATH (worse than −75%).
+48H velocity +122.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. IOST (IOST) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:25:05 PM → terminal 10/21/2026, 11:25:05 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+NOCK · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.022605 · invalidation $0.020414
+ranked-catalog velocity qualification
+48H velocity +33.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Nockchain (NOCK) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:25:03 PM → terminal 10/21/2026, 11:25:03 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+MAGMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.317888 · invalidation $0.275447
+MAGMA → T2: top-40 volume among chart-passers; ATH gate -60.1%, price above 50D SMA; mover: 23.2% over 48H with 4.07× baseline volume — velocity qualified independently.
+48H velocity +21.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Magma Finance (MAGMA) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:25:03 PM → terminal 10/21/2026, 11:25:03 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+PROM · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.78 · invalidation $5.00
+PROM → T4: volume-qualified ($10.48M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +18.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Prom (PROM) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:25:02 PM → terminal 10/21/2026, 11:25:02 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+ORE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $126.76 · invalidation $119.28
+ranked-catalog velocity qualification
+48H velocity +25.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. ORE (ORE) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:25:02 PM → terminal 10/21/2026, 11:25:02 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+VERSE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.12924 · invalidation $0.019712
+ranked-catalog velocity qualification
+48H velocity +822.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Verse World (VERSE) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:25:00 PM → terminal 10/21/2026, 11:25:00 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+EDGE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+SHORT entry $0.335631 · invalidation $0.338415
+ranked-catalog velocity qualification
+48H velocity +15.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. edgeX (EDGE) SHORT qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:58 PM → terminal 10/21/2026, 11:24:58 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+ALT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.013195 · invalidation $0.009615
+ALT → T3: hard chart gate rejected it at -98.1% from ATH (worse than −75%).
+48H velocity +46.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AltLayer (ALT) LONG qualified in discovery run 144 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 11:24:57 PM → terminal 10/21/2026, 11:24:57 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.62 · invalidation $2.36
+CVX → T3: hard chart gate rejected it at -95.8% from ATH (worse than −75%).
+48H velocity +24.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 144 but paper issuance is BLOCKED: duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 11:24:57 PM → terminal 10/21/2026, 11:24:57 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.416682 · invalidation $0.35095
+ranked-catalog velocity qualification
+48H velocity +21.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:55 PM → terminal 10/21/2026, 11:24:55 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+CARDS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.378873 · invalidation $0.341098
+CARDS → T2: top-40 volume among chart-passers; ATH gate -3.2%, price above 50D SMA.
+48H velocity +16.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 144 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 11:24:55 PM → terminal 10/21/2026, 11:24:55 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+HOODINU · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.161409 · invalidation $0.066985
+HOODINU → T4: volume-qualified ($11.88M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +146.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Hood Sword Inu (HOODINU) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:52 PM → terminal 10/21/2026, 11:24:52 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+PEARL · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.42 · invalidation $2.10
+PEARL → T2: top-40 volume among chart-passers; ATH gate -6.2%, under 200D history (T1 blocked without sufficient chart data); mover: 15.8% over 48H with 3.01× baseline volume — velocity qualified independently.
+48H velocity +18.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pearl (PEARL) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:50 PM → terminal 10/21/2026, 11:24:50 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+A · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.100352 · invalidation $0.094246
+A → T3: hard chart gate rejected it at -87.1% from ATH (worse than −75%).
+48H velocity +16.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Vaulta (A) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:50 PM → terminal 10/21/2026, 11:24:50 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+GRX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $23.07 · invalidation $15.94
+ranked-catalog velocity qualification
+48H velocity +40.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. GRX Chain (GRX) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:49 PM → terminal 10/21/2026, 11:24:49 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+ZRO · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $1.96 · invalidation $1.99
+ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-73.1% from ATH, hard gate at -75%).
+BLOCKED — Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. LayerZero (ZRO) LONG qualified in discovery run 144 but paper issuance is BLOCKED: Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)
+event 10/21/2026, 11:24:45 PM → terminal 10/21/2026, 11:24:45 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+ZEC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $1,335.28 · invalidation $1,253.10
+ZEC → T1: active verified theory #74 — ZEC decision-day: NU7 activation call lands today with whales short; volume + chart gates passed. Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+BLOCKED — duplicate suppressed: ZEC long already issued as paper_6aee1bb09ebaef170ab13e82 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Zcash (ZEC) LONG qualified in discovery run 144 but paper issuance is BLOCKED: duplicate suppressed: ZEC long already issued as paper_6aee1bb09ebaef170ab13e82 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 11:24:45 PM → terminal 10/21/2026, 11:24:45 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+LIT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $3.84 · invalidation $3.37
+LIT → T2: top-40 volume among chart-passers; ATH gate -50.3%, price above 50D SMA.
+48H velocity +30.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Lighter (LIT) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:44 PM → terminal 10/21/2026, 11:24:44 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+ENA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.213696 · invalidation $0.19582
+ENA → T3: hard chart gate rejected it at -85.7% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+48H velocity +16.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Ethena (ENA) LONG qualified in discovery run 144 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 11:24:43 PM → terminal 10/21/2026, 11:24:43 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+PUMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.005099 · invalidation $0.004726
+PUMP → T2: top-40 volume among chart-passers; ATH gate -41.8%, price above 50D SMA; mover: 15.7% over 48H with 0.57× baseline volume — velocity qualified independently.
+48H velocity +17.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pump.fun (PUMP) LONG qualified in discovery run 144 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 11:24:43 PM → terminal 10/21/2026, 11:24:43 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+NEAR · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.27 · invalidation $4.92
+NEAR → T1: active verified theory #7 — NEAR fade aligns with altcoin unlock supply overhang; volume + chart gates passed. WARNING: near structural-downtrend line (-74.2% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+BLOCKED — duplicate suppressed: NEAR long already issued as paper_6c3f666a247a675c951a4eb0 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. NEAR Protocol (NEAR) LONG qualified in discovery run 144 but paper issuance is BLOCKED: duplicate suppressed: NEAR long already issued as paper_6c3f666a247a675c951a4eb0 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 11:24:43 PM → terminal 10/21/2026, 11:24:43 PM → chat 10/21/2026, 11:51:02 PM · no expiry recorded
+[button: Mark read]
+JCT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.004205 · invalidation $0.004097
+JCT → T2: top-40 volume among chart-passers; ATH gate -61.0%, price above 50D SMA; mover: 108.2% over 48H with 6.13× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+48H velocity +115.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 143 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 9:58:14 PM → terminal 10/21/2026, 9:58:14 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+MAGMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.314215 · invalidation $0.275447
+MAGMA → T2: top-40 volume among chart-passers; ATH gate -60.1%, price above 50D SMA; mover: 23.2% over 48H with 4.07× baseline volume — velocity qualified independently.
+48H velocity +18.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Magma Finance (MAGMA) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:14 PM → terminal 10/21/2026, 9:58:14 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+IOST · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.001657 · invalidation $0.000988
+IOST → T3: hard chart gate rejected it at -98.7% from ATH (worse than −75%).
+48H velocity +139.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. IOST (IOST) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:13 PM → terminal 10/21/2026, 9:58:13 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+MOOLAH · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.052131 · invalidation $0.043449
+ranked-catalog velocity qualification
+48H velocity +23.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Moolah (MOOLAH) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:12 PM → terminal 10/21/2026, 9:58:12 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+ORE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $139.32 · invalidation $119.28
+ranked-catalog velocity qualification
+48H velocity +23.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. ORE (ORE) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:12 PM → terminal 10/21/2026, 9:58:12 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+PROM · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.75 · invalidation $5.00
+PROM → T4: volume-qualified ($10.48M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +19.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Prom (PROM) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:12 PM → terminal 10/21/2026, 9:58:12 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.59 · invalidation $2.31
+CVX → T3: hard chart gate rejected it at -95.8% from ATH (worse than −75%).
+48H velocity +24.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 143 but paper issuance is BLOCKED: duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 9:58:10 PM → terminal 10/21/2026, 9:58:10 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+ALT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.013551 · invalidation $0.009615
+ALT → T3: hard chart gate rejected it at -98.1% from ATH (worse than −75%).
+48H velocity +41.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AltLayer (ALT) LONG qualified in discovery run 143 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 9:58:10 PM → terminal 10/21/2026, 9:58:10 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+CARDS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.376273 · invalidation $0.341098
+CARDS → T2: top-40 volume among chart-passers; ATH gate -3.2%, price above 50D SMA.
+48H velocity +24.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 143 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 9:58:10 PM → terminal 10/21/2026, 9:58:10 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.420271 · invalidation $0.34965
+ranked-catalog velocity qualification
+48H velocity +22.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:10 PM → terminal 10/21/2026, 9:58:10 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+AI · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+SHORT entry $0.082182 · invalidation $0.092187
+AI → T4: volume-qualified ($7.84M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +17.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Artificial Inu (AI) SHORT qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:10 PM → terminal 10/21/2026, 9:58:10 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+ZAMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.081063 · invalidation $0.073612
+ZAMA → T2: top-40 volume among chart-passers; ATH gate -23.9%, price above 50D SMA.
+48H velocity +15.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Zama (ZAMA) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:09 PM → terminal 10/21/2026, 9:58:09 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+VERSE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.180896 · invalidation $0.019712
+ranked-catalog velocity qualification
+48H velocity +584.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Verse World (VERSE) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:09 PM → terminal 10/21/2026, 9:58:09 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+GRX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.33 · invalidation $15.87
+ranked-catalog velocity qualification
+48H velocity +34.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. GRX Chain (GRX) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:07 PM → terminal 10/21/2026, 9:58:07 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+LIT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $3.95 · invalidation $3.34
+LIT → T2: top-40 volume among chart-passers; ATH gate -50.3%, price above 50D SMA.
+48H velocity +30.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Lighter (LIT) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:07 PM → terminal 10/21/2026, 9:58:07 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+GRASS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.702472 · invalidation $0.622096
+GRASS → T3: hard chart gate rejected it at -81.8% from ATH (worse than −75%).
+48H velocity +18.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Grass (GRASS) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:03 PM → terminal 10/21/2026, 9:58:03 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+COMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.68 · invalidation $25.35
+COMP → T3: hard chart gate rejected it at -96.9% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+48H velocity +20.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 143 but paper issuance is BLOCKED: duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 9:58:03 PM → terminal 10/21/2026, 9:58:03 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+ZEC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $1,355.61 · invalidation $1,242.73
+ZEC → T1: active verified theory #74 — ZEC decision-day: NU7 activation call lands today with whales short; volume + chart gates passed. Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+BLOCKED — duplicate suppressed: ZEC long already issued as paper_6aee1bb09ebaef170ab13e82 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Zcash (ZEC) LONG qualified in discovery run 143 but paper issuance is BLOCKED: duplicate suppressed: ZEC long already issued as paper_6aee1bb09ebaef170ab13e82 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 9:58:02 PM → terminal 10/21/2026, 9:58:02 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+ZRO · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $1.99 · invalidation $1.94
+ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-73.1% from ATH, hard gate at -75%).
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. LayerZero (ZRO) LONG qualified in discovery run 143 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 9:58:02 PM → terminal 10/21/2026, 9:58:02 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+PUMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.005143 · invalidation $0.004726
+PUMP → T2: top-40 volume among chart-passers; ATH gate -41.8%, price above 50D SMA; mover: 15.7% over 48H with 0.57× baseline volume — velocity qualified independently.
+48H velocity +16.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pump.fun (PUMP) LONG qualified in discovery run 143 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 9:58:02 PM → terminal 10/21/2026, 9:58:02 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+ENA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.216773 · invalidation $0.19582
+ENA → T3: hard chart gate rejected it at -85.7% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+48H velocity +16.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Ethena (ENA) LONG qualified in discovery run 143 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 9:58:02 PM → terminal 10/21/2026, 9:58:02 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+NEAR · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.34 · invalidation $4.92
+NEAR → T1: active verified theory #7 — NEAR fade aligns with altcoin unlock supply overhang; volume + chart gates passed. WARNING: near structural-downtrend line (-74.2% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T16:34:50.000Z, age 4h; price moved ≤2%).
+BLOCKED — duplicate suppressed: NEAR long already issued as paper_6c3f666a247a675c951a4eb0 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. NEAR Protocol (NEAR) LONG qualified in discovery run 143 but paper issuance is BLOCKED: duplicate suppressed: NEAR long already issued as paper_6c3f666a247a675c951a4eb0 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 9:58:02 PM → terminal 10/21/2026, 9:58:02 PM → chat 10/21/2026, 10:22:00 PM · no expiry recorded
+[button: Mark read]
+MOOLAH · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.051487 · invalidation $0.043144
+ranked-catalog velocity qualification
+48H velocity +21.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Moolah (MOOLAH) LONG qualified in discovery run 141 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 7:00:09 PM → terminal 10/21/2026, 7:00:09 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+AI · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+SHORT entry $0.08797 · invalidation $0.092187
+AI → T4: volume-qualified ($7.9M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +17.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Artificial Inu (AI) SHORT qualified in discovery run 141 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 6:59:59 PM → terminal 10/21/2026, 6:59:59 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+ARC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.061865 · invalidation $0.049676
+ARC → T4: volume-qualified ($12.49M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +38.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) LONG qualified in discovery run 141 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 6:59:58 PM → terminal 10/21/2026, 6:59:58 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.56 · invalidation $2.21
+CVX → T3: hard chart gate rejected it at -95.6% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T12:43:53.000Z, age 3.9h; price moved ≤2%).
+48H velocity +24.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 141 but paper issuance is BLOCKED: duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 6:59:57 PM → terminal 10/21/2026, 6:59:57 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+ALT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.012987 · invalidation $0.009615
+ALT → T3: hard chart gate rejected it at -98.1% from ATH (worse than −75%).
+48H velocity +62.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AltLayer (ALT) LONG qualified in discovery run 141 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 6:59:56 PM → terminal 10/21/2026, 6:59:56 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+W · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.015064 · invalidation $0.013288
+W → T3: hard chart gate rejected it at -99.1% from ATH (worse than −75%).
+48H velocity +16.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Wormhole (W) LONG qualified in discovery run 141 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 6:59:50 PM → terminal 10/21/2026, 6:59:50 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+A · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.099662 · invalidation $0.094246
+A → T4: volume-qualified ($9.79M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +16.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Vaulta (A) LONG qualified in discovery run 141 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 6:59:42 PM → terminal 10/21/2026, 6:59:42 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+COMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.80 · invalidation $25.35
+COMP → T3: hard chart gate rejected it at -97.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T12:43:53.000Z, age 3.9h; price moved ≤2%).
+48H velocity +20.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 141 but paper issuance is BLOCKED: duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 6:59:40 PM → terminal 10/21/2026, 6:59:40 PM → chat 10/21/2026, 7:46:41 PM · no expiry recorded
+[button: Mark read]
+PHA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.058934 · invalidation $0.056423
+PHA → T3: hard chart gate rejected it at -95.7% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T12:43:53.000Z, age 3.9h; price moved ≤2%).
+48H velocity +17.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: PHA long already issued as paper_3d7f6db2183d736bbefdd973 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. PHALA (PHA) LONG qualified in discovery run 140 but paper issuance is BLOCKED: duplicate suppressed: PHA long already issued as paper_3d7f6db2183d736bbefdd973 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 4:59:53 PM → terminal 10/21/2026, 4:59:53 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+MOOLAH · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.050519 · invalidation $0.042446
+ranked-catalog velocity qualification
+48H velocity +20.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Moolah (MOOLAH) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:49 PM → terminal 10/21/2026, 4:59:49 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+ARC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.060077 · invalidation $0.049381
+ARC → T4: volume-qualified ($12.49M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +26.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:48 PM → terminal 10/21/2026, 4:59:48 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.65 · invalidation $2.18
+CVX → T3: hard chart gate rejected it at -95.6% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T12:43:53.000Z, age 3.9h; price moved ≤2%).
+48H velocity +31.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 140 but paper issuance is BLOCKED: duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 4:59:48 PM → terminal 10/21/2026, 4:59:48 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+NOCK · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.023829 · invalidation $0.020414
+ranked-catalog velocity qualification
+48H velocity +21.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Nockchain (NOCK) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:48 PM → terminal 10/21/2026, 4:59:48 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+MAGMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.324503 · invalidation $0.273566
+ranked-catalog velocity qualification
+48H velocity +35.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Magma Finance (MAGMA) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:47 PM → terminal 10/21/2026, 4:59:47 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+IOST · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.001739 · invalidation $0.000911
+IOST → T3: hard chart gate rejected it at -98.9% from ATH (worse than −75%).
+48H velocity +110.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. IOST (IOST) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:44 PM → terminal 10/21/2026, 4:59:44 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+AI · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+SHORT entry $0.091518 · invalidation $0.092187
+AI → T4: volume-qualified ($7.9M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +19.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Artificial Inu (AI) SHORT qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:43 PM → terminal 10/21/2026, 4:59:43 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+W · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.015377 · invalidation $0.013031
+W → T3: hard chart gate rejected it at -99.1% from ATH (worse than −75%).
+48H velocity +17.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Wormhole (W) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:43 PM → terminal 10/21/2026, 4:59:43 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+PROM · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.77 · invalidation $5.00
+PROM → T4: volume-qualified ($8.65M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +16.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Prom (PROM) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:42 PM → terminal 10/21/2026, 4:59:42 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+USELESS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.166239 · invalidation $0.152338
+USELESS → T3: hard chart gate rejected it below the 50D moving average.
+48H velocity +16.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Useless Coin (USELESS) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:40 PM → terminal 10/21/2026, 4:59:40 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.397931 · invalidation $0.339046
+ranked-catalog velocity qualification
+48H velocity +16.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:39 PM → terminal 10/21/2026, 4:59:39 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+GRX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $20.09 · invalidation $15.87
+ranked-catalog velocity qualification
+48H velocity +45.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. GRX Chain (GRX) LONG qualified in discovery run 140 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 4:59:38 PM → terminal 10/21/2026, 4:59:38 PM → chat 10/21/2026, 5:19:30 PM · no expiry recorded
+[button: Mark read]
+JCT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.004314 · invalidation $0.004235
+JCT → T2: top-40 volume among chart-passers; ATH gate -57.2%, price above 50D SMA; mover: 128.3% over 48H with 10.28× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +146.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 139 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 2:56:14 PM → terminal 10/21/2026, 2:56:14 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+NOCK · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.02316 · invalidation $0.020414
+ranked-catalog velocity qualification
+48H velocity +15.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Nockchain (NOCK) LONG qualified in discovery run 139 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 2:56:12 PM → terminal 10/21/2026, 2:56:12 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+IOST · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.001549 · invalidation $0.00087
+IOST → T3: hard chart gate rejected it at -98.9% from ATH (worse than −75%).
+48H velocity +98.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. IOST (IOST) LONG qualified in discovery run 139 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 2:56:12 PM → terminal 10/21/2026, 2:56:12 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+ARC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.0561 · invalidation $0.047793
+ARC → T4: volume-qualified ($10.17M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +19.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) LONG qualified in discovery run 139 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 2:56:12 PM → terminal 10/21/2026, 2:56:12 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+MAGMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.365796 · invalidation $0.273566
+MAGMA → T4: volume-qualified ($7.61M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +28.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Magma Finance (MAGMA) LONG qualified in discovery run 139 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 2:56:09 PM → terminal 10/21/2026, 2:56:09 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.67 · invalidation $2.18
+CVX → T3: hard chart gate rejected it at -95.6% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +29.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 139 but paper issuance is BLOCKED: the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)
+event 10/21/2026, 2:56:09 PM → terminal 10/21/2026, 2:56:09 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.374985 · invalidation $0.339046
+ranked-catalog velocity qualification
+48H velocity +16.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 139 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 2:56:09 PM → terminal 10/21/2026, 2:56:09 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+PEARL · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.41 · invalidation $1.98
+PEARL → T2: top-40 volume among chart-passers; ATH gate -0.1%, under 200D history (T1 blocked without sufficient chart data); mover: 19.0% over 48H with 2.93× baseline volume — velocity qualified independently.
+48H velocity +30.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pearl (PEARL) LONG qualified in discovery run 139 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 2:56:07 PM → terminal 10/21/2026, 2:56:07 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+CARDS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.349927 · invalidation $0.319109
+CARDS → T2: top-40 volume among chart-passers; ATH gate -6.1%, price above 50D SMA.
+48H velocity +31.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 139 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 2:56:07 PM → terminal 10/21/2026, 2:56:07 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+GRX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $23.33 · invalidation $15.87
+ranked-catalog velocity qualification
+48H velocity +59.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. GRX Chain (GRX) LONG qualified in discovery run 139 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 2:56:07 PM → terminal 10/21/2026, 2:56:07 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+NEAR · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $5.24 · invalidation $4.75
+NEAR → T1: active verified theory #7 — NEAR fade aligns with altcoin unlock supply overhang; volume + chart gates passed. WARNING: near structural-downtrend line (-74.4% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+BLOCKED — the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. NEAR Protocol (NEAR) LONG qualified in discovery run 139 but paper issuance is BLOCKED: the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)
+event 10/21/2026, 2:56:04 PM → terminal 10/21/2026, 2:56:04 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+COMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.60 · invalidation $24.09
+COMP → T3: hard chart gate rejected it at -97.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +19.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 139 but paper issuance is BLOCKED: duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 2:56:03 PM → terminal 10/21/2026, 2:56:03 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+WLD · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.577017 · invalidation $0.556494
+WLD → T3: hard chart gate rejected it at -95.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +17.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Worldcoin (WLD) LONG qualified in discovery run 139 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 2:56:02 PM → terminal 10/21/2026, 2:56:02 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+ZRO · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.04 · invalidation $1.92
+ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-72.8% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. LayerZero (ZRO) LONG qualified in discovery run 139 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 2:56:02 PM → terminal 10/21/2026, 2:56:02 PM → chat 10/21/2026, 3:21:58 PM · no expiry recorded
+[button: Mark read]
+JCT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.004638 · invalidation $0.004139
+JCT → T2: top-40 volume among chart-passers; ATH gate -57.2%, price above 50D SMA; mover: 128.3% over 48H with 10.28× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +153.7% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 138 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 12:57:37 PM → terminal 10/21/2026, 12:57:37 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+MAGMA · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.353215 · invalidation $0.271356
+MAGMA → T4: volume-qualified ($7.61M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +15.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Magma Finance (MAGMA) LONG qualified in discovery run 138 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 12:57:36 PM → terminal 10/21/2026, 12:57:36 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+ARC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.05301 · invalidation $0.046142
+ARC → T4: volume-qualified ($10.17M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +22.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) LONG qualified in discovery run 138 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 12:57:36 PM → terminal 10/21/2026, 12:57:36 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+IOST · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.001488 · invalidation $0.000804
+IOST → T3: hard chart gate rejected it at -98.9% from ATH (worse than −75%).
+48H velocity +91.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. IOST (IOST) LONG qualified in discovery run 138 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 12:57:36 PM → terminal 10/21/2026, 12:57:36 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+BR · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.619177 · invalidation $0.571524
+BR → T2: top-40 volume among chart-passers; ATH gate -54.6%, price above 50D SMA. Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +15.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Bedrock (BR) LONG qualified in discovery run 138 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 12:57:34 PM → terminal 10/21/2026, 12:57:34 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+CARDS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.357182 · invalidation $0.314712
+CARDS → T2: top-40 volume among chart-passers; ATH gate -6.1%, price above 50D SMA.
+48H velocity +26.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 138 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 12:57:34 PM → terminal 10/21/2026, 12:57:34 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.63 · invalidation $2.12
+CVX → T3: hard chart gate rejected it at -95.6% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +25.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 138 but paper issuance is BLOCKED: duplicate suppressed: CVX long already issued as paper_7d6b448a2e5ec0cdc1aa9aa4 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 12:57:34 PM → terminal 10/21/2026, 12:57:34 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.373448 · invalidation $0.336458
+ranked-catalog velocity qualification
+48H velocity +22.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 138 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 12:57:33 PM → terminal 10/21/2026, 12:57:33 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+GRX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.44 · invalidation $15.87
+ranked-catalog velocity qualification
+48H velocity +22.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. GRX Chain (GRX) LONG qualified in discovery run 138 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 12:57:32 PM → terminal 10/21/2026, 12:57:32 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+AKE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.026548 · invalidation $0.030076
+AKE → T3: hard chart gate rejected it at -79.7% from ATH (worse than −75%).
+48H velocity +20.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Akedo (AKE) LONG qualified in discovery run 138 but paper issuance is BLOCKED: Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)
+event 10/21/2026, 12:57:31 PM → terminal 10/21/2026, 12:57:31 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+PEARL · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.38 · invalidation $1.95
+PEARL → T2: top-40 volume among chart-passers; ATH gate -0.1%, under 200D history (T1 blocked without sufficient chart data); mover: 19.0% over 48H with 2.93× baseline volume — velocity qualified independently.
+48H velocity +25.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pearl (PEARL) LONG qualified in discovery run 138 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)
+event 10/21/2026, 12:57:29 PM → terminal 10/21/2026, 12:57:29 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+COMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.86 · invalidation $22.58
+COMP → T3: hard chart gate rejected it at -97.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +18.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 138 but paper issuance is BLOCKED: duplicate suppressed: COMP long already issued as paper_9ecb1be0f5e9779a49312ab5 within 24h (duplicate_24h_suppression)
+event 10/21/2026, 12:57:28 PM → terminal 10/21/2026, 12:57:28 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+WLD · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.59594 · invalidation $0.543062
+WLD → T3: hard chart gate rejected it at -95.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+48H velocity +16.6% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Worldcoin (WLD) LONG qualified in discovery run 138 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 12:57:26 PM → terminal 10/21/2026, 12:57:26 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+ZRO · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.03 · invalidation $1.87
+ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-72.8% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T08:34:48.000Z, age 4.2h; price moved ≤2%).
+BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. LayerZero (ZRO) LONG qualified in discovery run 138 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)
+event 10/21/2026, 12:57:25 PM → terminal 10/21/2026, 12:57:25 PM → chat 10/21/2026, 1:23:21 PM · no expiry recorded
+[button: Mark read]
+JCT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.004779 · invalidation $0.003591
+JCT → T2: top-40 volume among chart-passers; ATH gate -57.6%, price above 50D SMA; mover: 128.3% over 48H with 10.28× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-21T06:34:58.000Z, age 2h; price moved ≤2%).
+48H velocity +150.8% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:16 AM → terminal 10/21/2026, 10:58:16 AM → chat 10/21/2026, 11:18:43 AM · no expiry recorded
+[button: Mark read]
+ARC · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+SHORT entry $0.052727 · invalidation $0.053005
+ARC → T4: volume-qualified ($8.71M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +21.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) SHORT qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:16 AM → terminal 10/21/2026, 10:58:16 AM → chat 10/21/2026, 11:18:43 AM · no expiry recorded
+[button: Mark read]
+IOST · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.00145 · invalidation $0.000744
+ranked-catalog velocity qualification
+48H velocity +67.9% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. IOST (IOST) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:15 AM → terminal 10/21/2026, 10:58:15 AM → chat 10/21/2026, 11:18:11 AM · no expiry recorded
+[button: Mark read]
+BR · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.580163 · invalidation $0.581104
+BR → T2: top-40 volume among chart-passers; ATH gate -53.8%, price above 50D SMA.
+48H velocity +25.2% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Bedrock (BR) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:14 AM → terminal 10/21/2026, 10:58:14 AM → chat 10/21/2026, 11:18:11 AM · no expiry recorded
+[button: Mark read]
+ICNT · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.206837 · invalidation $0.165952
+ICNT → T2: top-40 volume among chart-passers; ATH gate -64.8%, price above 50D SMA; mover: 20.0% over 48H with 4.51× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-21T06:34:58.000Z, age 2h; price moved ≤2%).
+48H velocity +23.3% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Impossible Cloud Network Token (ICNT) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:14 AM → terminal 10/21/2026, 10:58:14 AM → chat 10/21/2026, 11:18:43 AM · no expiry recorded
+[button: Mark read]
+CVX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.56 · invalidation $2.12
+CVX → T3: hard chart gate rejected it at -95.7% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T06:34:58.000Z, age 2h; price moved ≤2%).
+48H velocity +27.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:13 AM → terminal 10/21/2026, 10:58:13 AM → chat 10/21/2026, 11:18:11 AM · no expiry recorded
+[button: Mark read]
+KNTQ · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.37391 · invalidation $0.334679
+ranked-catalog velocity qualification
+48H velocity +21.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:11 AM → terminal 10/21/2026, 10:58:11 AM → chat 10/21/2026, 11:18:11 AM · no expiry recorded
+[button: Mark read]
+AKE · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.036429 · invalidation $0.029951
+AKE → T3: hard chart gate rejected it at -76.6% from ATH (worse than −75%).
+48H velocity +25.1% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Akedo (AKE) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:10 AM → terminal 10/21/2026, 10:58:10 AM → chat 10/21/2026, 11:18:43 AM · no expiry recorded
+[button: Mark read]
+GRX · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $21.35 · invalidation $15.87
+ranked-catalog velocity qualification
+48H velocity +27.0% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. GRX Chain (GRX) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:09 AM → terminal 10/21/2026, 10:58:09 AM → chat 10/21/2026, 11:18:11 AM · no expiry recorded
+[button: Mark read]
+CARDS · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $0.356717 · invalidation $0.314712
+CARDS → T2: top-40 volume among chart-passers; ATH gate -8.0%, price above 50D SMA; mover: 37.8% over 48H with 3.02× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-21T06:34:58.000Z, age 2h; price moved ≤2%).
+48H velocity +23.4% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:09 AM → terminal 10/21/2026, 10:58:09 AM → chat 10/21/2026, 11:18:43 AM · no expiry recorded
+[button: Mark read]
+PEARL · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $2.33 · invalidation $1.95
+PEARL → T4: volume-qualified ($10.6M 24h spot volume), below T3 volume-rank cutoff.
+48H velocity +19.5% cleared +15% full-scoring bar independently of volume multiple
+BLOCKED — The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+UNSUPPORTED FOR FORMAL ISSUANCE — research only
+No venue mapping — formal issuance is unsupported until a supported venue mapping exists.
+INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pearl (PEARL) LONG qualified in discovery run 137 but paper issuance is BLOCKED: The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened. (processing-expired)
+event 10/21/2026, 10:58:07 AM → terminal 10/21/2026, 10:58:07 AM → chat 10/21/2026, 11:18:11 AM · no expiry recorded
+[button: Mark read]
+COMP · blocked opportunity
+opportunity · BLOCKED · discovery
+UNREAD
+LONG entry $25.47 · invalidation $21.82
+COMP → T3: hard chart gate rejected it at -97.0% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-21T06:34:58.000Z, age 2h; price moved ≤2%).
+48H velocity +18.4% cleared +15% full-scoring bar independently of volume multiple

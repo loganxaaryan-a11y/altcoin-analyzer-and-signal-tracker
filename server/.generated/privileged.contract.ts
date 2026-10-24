@@ -86,4 +86,10 @@ export const privileged = definePrivilegedContracts({
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
+  writePaperEnrollmentCanonical: {
+    request: z.object({ content: z.string().min(1) }),
+    response: z.object({ ok: z.boolean(), bytes: z.number().nullable(), writtenAtUtc: z.string().nullable(), error: z.string().nullable() }),
+    capabilities: ["subprocess"],
+    timeoutMs: 120_000,
+  },
 });

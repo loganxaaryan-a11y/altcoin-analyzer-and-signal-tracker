@@ -1,0 +1,65 @@
+[
+  {
+    "instrumentId": "BTCUSDT",
+    "symbol": "BTC",
+    "cacheSource": "binance",
+    "rows": 2693,
+    "error": null
+  },
+  {
+    "instrumentId": "ETHUSDT",
+    "symbol": "ETH",
+    "cacheSource": "binance",
+    "rows": 2693,
+    "error": null
+  },
+  {
+    "instrumentId": "SOLUSDT",
+    "symbol": "SOL",
+    "cacheSource": "binance",
+    "rows": 1603,
+    "error": null
+  },
+  {
+    "instrumentId": "LINKUSDT",
+    "symbol": "LINK",
+    "cacheSource": "binance",
+    "rows": 2176,
+    "error": null
+  },
+  {
+    "instrumentId": "SUIUSDT",
+    "symbol": "SUI",
+    "cacheSource": "binance",
+    "rows": 608,
+    "error": null
+  },
+  {
+    "instrumentId": "DOGEUSDT",
+    "symbol": "DOGE",
+    "cacheSource": "binance",
+    "rows": 2006,
+    "error": null
+  },
+  {
+    "instrumentId": "XRPUSDT",
+    "symbol": "XRP",
+    "cacheSource": "binance",
+    "rows": 2433,
+    "error": null
+  },
+  {
+    "instrumentId": "AVAXUSDT",
+    "symbol": "AVAX",
+    "cacheSource": "binance",
+    "rows": 1561,
+    "error": null
+  },
+  {
+    "instrumentId": "ADAUSDT",
+    "symbol": "ADA",
+    "cacheSource": "binance",
+    "rows": 2450,
+    "error": null
+  }
+]

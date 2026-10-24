@@ -1,0 +1,31 @@
+{
+  "version": "crypto-phase2a-ohlcv-research-v1",
+  "cohort": "phase2a-offline-crypto-direction-forecast",
+  "frozenAt": "2026-10-09T16:35:00.000Z",
+  "market": "crypto",
+  "universe": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "LINKUSDT", "DOGEUSDT", "XRPUSDT", "AVAXUSDT", "ADAUSDT", "SUIUSDT"],
+  "venue": "Binance Spot",
+  "quoteCurrency": "USDT",
+  "sampleQualification": "survivor-sample exploratory",
+  "interval": "1d",
+  "calendar": "24/7 UTC",
+  "availabilityLagMs": 300000,
+  "horizonsElapsedDays": [5, 30],
+  "developmentEnd": "2022-12-31",
+  "validationFolds": [
+    {"id": "validation_1", "start": "2023-01-01", "end": "2023-06-30"},
+    {"id": "validation_2", "start": "2023-07-01", "end": "2023-12-31"},
+    {"id": "validation_3", "start": "2024-01-01", "end": "2024-12-31"}
+  ],
+  "holdout": {"start": "2025-01-01", "end": "2026-09-30", "locked": true},
+  "hypotheses": [
+    {"id": "trend_continuation", "smaBars": 200, "returnBars": 20, "equality": "abstain"},
+    {"id": "breakout_volume", "smaBars": 200, "breakoutBars": 20, "volumeMedianBars": 20, "volumeMultiple": 1.5, "currentBarExcluded": true}
+  ],
+  "costs": {"centralRoundTripBps": 18, "stressedRoundTripBps": 36, "shortFunding": "unsupported"},
+  "baselines": ["always_long", "always_short", "sma200_direction", "cash"],
+  "uncertainty": {"method": "UTC decision-date moving-block bootstrap preserving cross-asset panel", "blockDays": 30, "resamples": 500, "seed": 20261009},
+  "selection": {"minimumIssued": 100, "minimumAssets": 3, "minimumDecisionDates": 30, "positiveMeanCentralNet": true, "lower95DifferenceVsBestDirectionalAbove": 0, "tieBreak": "trend_continuation"},
+  "legacyScoreboardMerge": false,
+  "livePromotionAllowed": false
+}

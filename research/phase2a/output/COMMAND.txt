@@ -1,0 +1,1 @@
+bun research/phase2a/cli.ts --input /home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/research/phase2a1/real-market-input/normalized-train-validation-bars.jsonl --out /home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/research/phase2a/output

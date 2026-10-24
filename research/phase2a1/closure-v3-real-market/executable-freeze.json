@@ -1,0 +1,14 @@
+{
+  "version": "phase2a1-executable-freeze-v3-closure",
+  "generatedAt": "2026-10-11T12:00:00.000Z",
+  "enginePath": "server/src/phase2a-research.ts",
+  "engineSha256": "09b8146145dbf8af8caa8629038bbdf713f2d96325be18e469cacef57dfb283d",
+  "specContentSha256": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6",
+  "successCriterionChanged": false,
+  "marketSeedsChanged": false,
+  "holdoutOpened": false,
+  "supersedes": "phase2a1-executable-freeze-v2-availability-repair",
+  "repair": "market reports and synthetic controls now call the shared evaluateDatePanelWithSeeds kernel; original market seed offsets, success rule and aligned population are preserved",
+  "verifiedEngineSha256": "09b8146145dbf8af8caa8629038bbdf713f2d96325be18e469cacef57dfb283d",
+  "verifiedSpecContentSha256": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6"
+}

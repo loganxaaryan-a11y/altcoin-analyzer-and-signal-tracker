@@ -1,0 +1,23 @@
+{
+  "version": "phase2a1-pipeline-positive-v1",
+  "cohort": "phase2a1-synthetic-controls-only",
+  "path": "actual feature/entry/label engine + shared date-panel evaluator",
+  "futureInformationUsed": false,
+  "observations": 1572,
+  "uniqueAssets": 3,
+  "uniqueDecisionDates": 708,
+  "comparator": "always_long",
+  "evaluation": {
+    "candidateMean": 0.009017243026939636,
+    "comparatorMean": -0.0009049091951640663,
+    "differenceMean": 0.009922152222103702,
+    "differenceInterval95": [
+      0.002103174325941743,
+      0.017356837976315913
+    ],
+    "completeBlocks": 24,
+    "tailDatesExcluded": 11,
+    "populationRows": 1572
+  },
+  "detectedConstructedEffect": true
+}

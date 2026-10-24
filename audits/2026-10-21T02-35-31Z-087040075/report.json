@@ -1,0 +1,122 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-a80d079f-230e-48d1-9f22-0709b5d02cb5/",
+  "duration_ms": 12152.646379,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T02-35-31Z-087040075",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T02-35-31Z-087040075/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T02-35-31Z-087040075/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T02-35-31Z-087040075/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [],
+    "mobile": []
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [],
+  "blocked_affordances": [],
+  "interactive_nodes": 18,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"Market\"\n    - button \"Coin Dossier\"\n    - button \"Signals\"\n    - button \"Theories\"\n    - button \"Assets\"\n    - button \"Watchlist\"\n    - button \"Journal\"\n    - button \"Alerts\"\n    - button \"Measurement\"\n    - button \"Meme Risk\"\n  - group: More tools\n  - region \"Notifications\":\n    - paragraph: Terminal inbox · opportunities + lifecycle\n    - heading \"Notifications · 325 unread · 25 historical\" [level=2]\n    - button \"Reload\"\n    - button \"Mark all read\"\n    - paragraph: \"Blocked opportunities stay visible with their blocker reason — visibility is never gated on paper qualification. Expired setups are kept for the record and are never actionable. Terminal visibility time is recorded separately from chat arrival: an item whose chat copy landed after its window closed reads as a historical notification, not an actionable entry. Read state is set only by your ack here; chat delivery never marks a row read.\"\n    - heading \"Actionable now · 273 unread\" [level=3]\n    - article:\n      - strong: PHA · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.057309 · invalidation $0.057757\n      - paragraph: \"PHA → T3: hard chart gate rejected it at -95.7% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +20.4% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. PHALA (PHA) LONG qualified in discovery run 134 but paper issuance is BLOCKED: Frozen invalidation is missing or on the wrong side of the decision reference price. (invalid_frozen_levels)\"\n      - text: event 10/21/2026, 1:47:40 AM → terminal 10/21/2026, 1:47:40 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark PHA · blocked opportunity as read\": Mark read\n    - article:\n      - strong: JCT · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.004582 · invalidation $0.001953\n      - paragraph: \"JCT → T2: top-40 volume among chart-passers; ATH gate -56.1%, price above 50D SMA; mover: 152.7% over 48H with 13.21× baseline volume — velocity qualified independently.\"\n      - paragraph: 48H velocity +154.5% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 134 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/21/2026, 1:47:39 AM → terminal 10/21/2026, 1:47:39 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark JCT · blocked opportunity as read\": Mark read\n    - article:\n      - strong: POD · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.651748 · invalidation $0.589049\n      - paragraph: \"POD → T2: top-40 volume among chart-passers; ATH gate -30.6%, price above 50D SMA; mover: 16.8% over 48H with 1.61× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-20T10:56:52.000Z, age 10.9h; price moved ≤2%).\"\n      - paragraph: 48H velocity +21.1% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Dolphin (POD) LONG qualified in discovery run 134 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/21/2026, 1:47:39 AM → terminal 10/21/2026, 1:47:39 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark POD · blocked opportunity as read\": Mark read\n    - article:\n      - strong: ARC · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: SHORT entry $0.051051 · invalidation $0.053005\n      - paragraph: \"ARC → T4: volume-qualified ($8.07M 24h spot volume), below T3 volume-rank cutoff.\"\n      - paragraph: 48H velocity +25.3% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only No venue mapping — formal issuance is unsupported until a supported venue mapping exists.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) SHORT qualified in discovery run 134 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)\"\n      - text: event 10/21/2026, 1:47:37 AM → terminal 10/21/2026, 1:47:37 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark ARC · blocked opportunity as read\": Mark read\n    - article:\n      - strong: IVVON · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $783.76 · invalidation $771.82\n      - paragraph: ranked-catalog velocity qualification\n      - paragraph: 48H velocity +17.8% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only No venue mapping — formal issuance is unsupported until a supported venue mapping exists.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. iShares Core S&P 500 ETF (Ondo Tokenized ETF) (IVVON) LONG qualified in discovery run 134 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)\"\n      - text: event 10/21/2026, 1:47:37 AM → terminal 10/21/2026, 1:47:37 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark IVVON · blocked opportunity as read\": Mark read\n    - article:\n      - strong: ORE · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $119.92 · invalidation $110.85\n      - paragraph: ranked-catalog velocity qualification\n      - paragraph: 48H velocity +15.3% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only No venue mapping — formal issuance is unsupported until a supported venue mapping exists.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. ORE (ORE) LONG qualified in discovery run 134 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)\"\n      - text: event 10/21/2026, 1:47:34 AM → terminal 10/21/2026, 1:47:34 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark ORE · blocked opportunity as read\": Mark read\n    - article:\n      - strong: KNTQ · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.354611 · invalidation $0.334679\n      - paragraph: \"KNTQ → T4: volume-qualified ($6.72M 24h spot volume), below T3 volume-rank cutoff.\"\n      - paragraph: 48H velocity +19.3% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only No venue mapping — formal issuance is unsupported until a supported venue mapping exists.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 134 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)\"\n      - text: event 10/21/2026, 1:47:33 AM → terminal 10/21/2026, 1:47:33 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark KNTQ · blocked opportunity as read\": Mark read\n    - article:\n      - strong: BR · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.647982 · invalidation $0.597587\n      - paragraph: \"BR → T2: top-40 volume among chart-passers; ATH gate -51.3%, price above 50D SMA; mover: 41.2% over 48H with 1.29× baseline volume — velocity qualified independently.\"\n      - paragraph: 48H velocity +39.7% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Bedrock (BR) LONG qualified in discovery run 134 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/21/2026, 1:47:32 AM → terminal 10/21/2026, 1:47:32 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark BR · blocked opportunity as read\": Mark read\n    - article:\n      - strong: CVX · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $2.48 · invalidation $2.08\n      - paragraph: \"CVX → T3: hard chart gate rejected it at -96.0% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +16.7% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only No venue mapping — formal issuance is unsupported until a supported venue mapping exists.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Convex Finance (CVX) LONG qualified in discovery run 134 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)\"\n      - text: event 10/21/2026, 1:47:31 AM → terminal 10/21/2026, 1:47:31 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark CVX · blocked opportunity as read\": Mark read\n    - article:\n      - strong: CARDS · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.348589 · invalidation $0.312214\n      - paragraph: \"CARDS → T2: top-40 volume among chart-passers; ATH gate -7.5%, price above 50D SMA; mover: 37.8% over 48H with 3.02× baseline volume — velocity qualified independently.\"\n      - paragraph: 48H velocity +32.7% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 134 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/21/2026, 1:47:31 AM → terminal 10/21/2026, 1:47:31 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark CARDS · blocked opportunity as read\": Mark read\n    - article:\n      - strong: PUMP · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.004832 · invalidation $0.00438\n      - paragraph: \"PUMP → T2: top-40 volume among chart-passers; ATH gate -45.9%, price above 50D SMA.\"\n      - paragraph: 48H velocity +16.6% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — no explicit venue instrument mapping exists (venue_mapping_unavailable)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only No venue mapping — formal issuance is unsupported until a supported venue mapping exists.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pump.fun (PUMP) LONG qualified in discovery run 134 but paper issuance is BLOCKED: no explicit venue instrument mapping exists (venue_mapping_unavailable)\"\n      - text: event 10/21/2026, 1:47:29 AM → terminal 10/21/2026, 1:47:29 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark PUMP · blocked opportunity as read\": Mark read\n    - article:\n      - strong: COMP · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $26.06 · invalidation $21.05\n      - paragraph: \"COMP → T3: hard chart gate rejected it at -96.9% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +21.6% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 134 but paper issuance is BLOCKED: the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)\"\n      - text: event 10/21/2026, 1:47:27 AM → terminal 10/21/2026, 1:47:27 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark COMP · blocked opportunity as read\": Mark read\n    - article:\n      - strong: ZRO · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $2.04 · invalidation $1.84\n      - paragraph: \"ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-73.1% from ATH, hard gate at -75%).\"\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. LayerZero (ZRO) LONG qualified in discovery run 134 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/21/2026, 1:47:22 AM → terminal 10/21/2026, 1:47:22 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark ZRO · blocked opportunity as read\": Mark read\n    - article:\n      - strong: WLD · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.590695 · invalidation $0.532853\n      - paragraph: \"WLD → T3: hard chart gate rejected it at -95.0% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +20.2% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Worldcoin (WLD) LONG qualified in discovery run 134 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/21/2026, 1:47:21 AM → terminal 10/21/2026, 1:47:21 AM → chat 10/21/2026, 2:16:29 AM · no expiry recorded\n      - button \"Mark WLD · blocked opportunity as read\": Mark read\n    - article:\n      - strong: PHA · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.058078 · invalidation $0.057757\n      - paragraph: \"PHA → T3: hard chart gate rejected it at -95.7% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +25.8% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. PHALA (PHA) LONG qualified in discovery run 132 but paper issuance is BLOCKED: the first print moved more than 50 bps from the frozen decision reference (entry_outside_drift_zone)\"\n      - text: event 10/20/2026, 10:58:33 PM → terminal 10/20/2026, 10:58:33 PM → chat 10/20/2026, 11:22:00 PM · no expiry recorded\n      - button \"Mark PHA · blocked opportunity as read\": Mark read\n    - article:\n      - strong: JCT · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.004634 · invalidation $0.001953\n      - paragraph: \"JCT → T2: top-40 volume among chart-passers; ATH gate -56.1%, price above 50D SMA; mover: 152.7% over 48H with 13.21× baseline volume — velocity qualified independently.\"\n      - paragraph: 48H velocity +152.0% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 132 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/20/2026, 10:58:31 PM → terminal 10/20/2026, 10:58:31 PM → chat 10/20/2026, 11:22:00 PM · no expiry recorded\n      - button \"Mark JCT · blocked opportunity as read\": Mark read\n    - article:\n      - strong: POD · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.656696 · invalidation $0.534894\n      - paragraph: \"POD → T2: top-40 volume among chart-passers; ATH gate -30.6%, price above 50D SMA; mover: 16.8% over 48H with 1.61× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-20T10:56:52.000Z, age 10.9h; price moved ≤2%).\"\n      - paragraph: 48H velocity +22.9% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: BLOCKED — the frozen production model did not qualify this opportunity (production_model_abstain)\n      - paragraph: UNSUPPORTED FOR FORMAL ISSUANCE — research only MEXC Spot is research-only for now — no MEXC venue evidence path and no MEXC monitoring path exist yet, so formal issuance is unsupported.\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Dolphin (POD) LONG qualified in discovery run 132 but paper issuance is BLOCKED: the frozen production model did not qualify this opportunity (production_model_abstain)\"\n      - text: event 10/20/2026, 10:58:31 PM → terminal 10/20/2026, 10:58:31 PM → chat 10/20/2026, 11:22:00 PM · no expiry recorded\n      - button \"Mark POD · blocked opportunity as read\": Mark read\n    - article:\n      - strong: ORE · blocked opportunity\n  \n… (aria snapshot truncated at 20000 chars)",
+  "audit_session_id": "ccbdf2fa-b90a-4a85-8477-005e45f15493",
+  "readiness": {
+    "desktop": {
+      "settled": false,
+      "settle_ms": 8004,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    },
+    "mobile": {
+      "settled": false,
+      "settle_ms": 8644,
+      "in_flight": 9,
+      "network_idle": true,
+      "retried": true
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "mobile_ms": 10171.148347,
+  "cold_launch_ms": 719.685045,
+  "desktop_ms": 10300.391849,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 2
+  }
+}

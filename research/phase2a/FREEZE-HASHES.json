@@ -1,0 +1,10 @@
+{
+  "frozenAt": "2026-10-09T16:35:00.000Z",
+  "algorithm": "sha256",
+  "files": {
+    "PHASE2A-RESEARCH-SPEC.md": "d8037fc5ee33a0b734aee8374d4ab3598417fdb539e9ee3aa225452fe6787584",
+    "research/phase2a/frozen-config.json": "2333237a2662598534631e81ca4dd9d73e42cf7f156613653e4a94c70324ef1d",
+    "research/phase2a/trial-registry.json": "60491e613dbf75e13676e8953296b9808b96407405cf5ac4579054a8c340d205"
+  },
+  "outcomesViewedBeforeFreeze": false
+}

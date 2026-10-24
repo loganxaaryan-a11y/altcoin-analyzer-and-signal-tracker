@@ -1,0 +1,141 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-7b375b3b-8287-4483-864c-05d21d5bc219/",
+  "duration_ms": 12884.758795,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-19T00-29-41Z-639585690",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-19T00-29-41Z-639585690/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-19T00-29-41Z-639585690/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-19T00-29-41Z-639585690/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [
+    {
+      "selector": "div",
+      "scroll_width": 401,
+      "client_width": 390
+    }
+  ],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [],
+    "mobile": [
+      {
+        "tag": "button",
+        "text": "News impact",
+        "kind": "past_viewport",
+        "overflow_px": 10,
+        "bbox": [
+          207,
+          1098,
+          192,
+          40
+        ]
+      }
+    ]
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [],
+  "blocked_affordances": [],
+  "interactive_nodes": 21,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"Market\"\n    - button \"Coin Dossier\"\n    - button \"Signals\"\n    - button \"Theories\"\n    - button \"Watchlist\"\n    - button \"Journal\"\n    - button \"Alerts\"\n    - button \"Measurement\"\n    - button \"Meme Risk\"\n  - group: More tools\n  - paragraph: Market read\n  - heading \"Coverage is loading\" [level=2]\n  - text: PARTIAL FEED\n  - paragraph: Refreshing CoinGecko prices and OKX instrument coverage…\n  - paragraph: Weekly screener funnel\n  - heading \"500 → T1 + volume or ≥15% / 48H → full scoring\" [level=2]\n  - button \"Recompute weekly universe tiers\": RECOMPUTE\n  - paragraph: Two routes enter full 7-dimension scoring. Non-velocity assets must be T1 and clear the volume path. A ≥15% move over 48 hours qualifies from any tier through the independent velocity path; its volume multiple is not consulted.\n  - paragraph: \"T1 has three independent doors: active verified theory, open signal, or Graduation ≥70. The graduation score does not explain a theory- or signal-led promotion.\"\n  - paragraph: \"Assigned 10/18/2026, 11:50:20 PM · 421 ranked assets → 203 passed $5M spot volume → 111 T3 light-tracking / 30 T2 chart-qualified / 1 T1 full-engine / 62 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -79.8% from ATH (worse than −75%).\"\n  - button \"T1 · 1\"\n  - button \"T2 · 30\"\n  - button \"T3 · 111\"\n  - button \"T4 · 62\"\n  - button \"Open BTC T1 dossier\":\n    - text: BTC V#1\n    - strong: Bitcoin\n    - paragraph: \"BTC → T1: active verified theory #3 — Institutional BTC bid deepens as October unlocks weigh on mid-caps; open long signal id44; volume + chart gates passed.\"\n    - emphasis: Graduation 30/100 (bar 70)\n    - text: V 0.61× · 0 · H NO_DATA · W NO_DATA · C 20 · S 10\n  - paragraph: Automatic market discovery\n  - heading \"Verified perp universe → evidence flags\" [level=2]\n  - paragraph: The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.\n  - button \"RUN NOW\"\n  - text: LAST COMPLETED SCAN 10/18/2026, 11:49:06 PM\n  - emphasis: DEGRADED\n  - strong: \"0 saved T1 assets plus 7 non-T1 ranked assets clearing the current 48H ≥ +15% velocity bar received full scoring from a 500-asset ranked catalog regardless of volume multiple; non-velocity assets still required T1 membership; 0 directional candidates failed issuance controls and entered the suppression log; 0 Main Discovery rows passed the live-perp, freshness, market-cap and $5M consolidated spot-volume bar; 0 separate Meme Lane candidates passed category + micro-cap + Elfa mindshare-first entry (volume excluded; Nansen and holder growth remain on-demand validators); Elfa scheduled budget 20/20 calls today · 166/800 monthly soft allowance (950 hard stop); 0 high, 0 medium, 0 low-confidence flags retained with complete factor evidence; 0 news impacts; 0 evidence-linked theories. Theory verification: 0 surfaced; 0 withheld for evidence floor; 0 contested.\"\n  - text: Universe\n  - strong: \"7\"\n  - text: Shortlist\n  - strong: \"0\"\n  - text: News impacts\n  - strong: \"0\"\n  - text: Theories\n  - strong: \"0\"\n  - text: \"Universe freshness guard live Saved tiers were 4.8h old, within cadence. Provenance: degraded snapshot #34: 420 ranked assets → 195 passed $5M spot volume → 111 T3 light-tracking / 33 T2 chart-qualified / 0 T1 full-engine / 52 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -80.1% from ATH (worse than −75%). Elfa scheduled discovery live 20/20 scheduled calls reserved today; 166/800 monthly soft allowance used (950 hard stop); 20 trending-token and 0 trending-contract symbols returned. altFINS signals feed live 10/15 scheduled calls reserved today; 88/800 monthly soft allowance used (950 hard stop); 0 signal symbols returned in a 25-item page. CoinMarketCap keyless top 100 live 100 ranked symbols returned as cross-source discovery candidates. CoinGecko meme category live 100 category-confirmed meme assets available for the separate micro-cap lane. CoinGecko ranked catalog live 500 unique ranked assets refreshed; saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume multiple. CoinGecko attention live 15 trending assets checked only as lightweight T2/T3 context. Rotation leadership live 7 category leaders refreshed; 0 changes stored as lightweight context only. Silent-hint mentions live 18 ranked-asset mentions retained as context; they cannot promote T2/T3 into signal scoring. Weekly universe tiers live 0/0 saved T1 assets intersected the fresh catalog; 7 independent current non-T1 velocity qualifiers (48H ≥ +15%) selected. A legitimate zero-T1 snapshot remains usable; only a non-empty saved T1 set with zero catalog intersection is classified as identity mismatch. Lane: active(snapshot #34; 0 saved T1 members; 0 catalog intersections). Hyperliquid live 234 perpetual contexts checked for funding and open interest. Fundamentals weekly scores live 41 symbols carry a fresh weekly TVL score (scored 2026-10-16T03:30:10.076Z). Linked news search live 12 unique linked results retained from market, sector and institutional searches. Research synthesis unavailable Web artifact inference timed out.\"\n  - button \"Auto signals\"\n  - button \"News impact\"\n  - button \"Fundamentals\"\n  - button \"Main Discovery\"\n  - button \"Meme Lane\"\n  - paragraph: Ranked scanner output\n  - heading \"Volume, interest and momentum flags\" [level=2]\n  - text: alignment, not probability\n  - button \"All\"\n  - button \"T1 · full engine only\"\n  - button \"Legacy triggered rows\"\n  - button \"All tiers\"\n  - button \"high\"\n  - button \"medium\"\n  - button \"low\"\n  - text: Sort\n  - button \"alignment\"\n  - button \"7D return\"\n  - button \"24H volume\"\n  - button \"tier\"\n  - text: No signals match these tier filters.\n  - group: Passed log · rejected / monitor-only setups\n  - paragraph: BTC cycle study\n  - heading \"Regime compass\" [level=2]\n  - button \"Open BTC\"\n  - text: Cycle data loading…\n  - paragraph: /BTC ratio table\n  - heading \"Rotation breadth\" [level=2]\n  - text: CoinGecko\n  - paragraph: Ratio breadth is loading…\n  - text: Ratio data loading…\n  - paragraph: Narrative rotation\n  - heading \"Leaders and laggards\" [level=2]\n  - text: CoinGecko Rotation data loading…",
+  "audit_session_id": "57ae8760-4534-435b-8c91-249f5bb30723",
+  "readiness": {
+    "desktop": {
+      "settled": false,
+      "settle_ms": 8006,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    },
+    "mobile": {
+      "settled": false,
+      "settle_ms": 8002,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "mobile_ms": 9701.722468,
+  "cold_launch_ms": 1869.982997,
+  "desktop_ms": 9838.743934,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 2
+  }
+}

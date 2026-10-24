@@ -1,0 +1,10 @@
+{
+  "generatedAt": "2026-10-09T16:58:48.405Z",
+  "algorithm": "sha256",
+  "canonicalDatasetManifestContentHash": "e40894eb8a40e0622423f145939fe42f0338cbe9c86441357184a70866516bda",
+  "files": {
+    "research/phase2a/dataset-manifest.json": "3f99afb0615825c3f57c847e35b032c22026077cc4a41ae0885ff711bb0a532c",
+    "PHASE2A-TEST-RESULTS.txt": "8b28110ae1c5e4b4fa86389fd9f7b546c946765a8da5c838c5a6057f5c66f0c3"
+  },
+  "note": "The canonical content hash is computed from stable key-sorted JSON; the file hash covers the pretty-printed on-disk bytes."
+}

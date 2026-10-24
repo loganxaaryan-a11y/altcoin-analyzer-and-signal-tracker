@@ -1,0 +1,11 @@
+{
+  "version": "phase2a1-executable-freeze-v2-availability-repair",
+  "generatedAt": "2026-10-09T20:10:27.000Z",
+  "enginePath": "server/src/phase2a-research.ts",
+  "engineSha256": "21b8f9b549a3a3b5d7e33bd17b3ae8783a41e334176bafdf6b586605dc4ad9b5",
+  "specContentSha256": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6",
+  "successCriterionChanged": false,
+  "holdoutOpened": false,
+  "supersedes": "phase2a1-executable-freeze-v1",
+  "repair": "per-required-input availability plus aligned point-estimate/bootstrap populations"
+}

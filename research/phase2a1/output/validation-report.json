@@ -1,0 +1,1560 @@
+{
+  "version": "crypto-phase2a-ohlcv-research-v1",
+  "cohort": "phase2a-offline-crypto-direction-forecast",
+  "generatedAt": "2026-10-09T18:22:01.569Z",
+  "specHash": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6",
+  "datasetManifestHash": "cb446bbb3363adec4f20bbdcdbab971f6424afe981a381251eb8a907c35146ef",
+  "dataset": {
+    "source": "Binance market-data-only API",
+    "venue": "Binance Spot",
+    "quoteCurrency": "USDT",
+    "sampleQualification": "survivor-sample exploratory",
+    "instruments": [
+      {
+        "instrumentId": "BTCUSDT",
+        "symbol": "BTC",
+        "rows": 970,
+        "firstEventTime": 1651363200000,
+        "lastEventTime": 1735084800000,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "a5dd3a1949fecdb2e962a6f101cc9f351f7668c2aa7b0b73494ff1a8a7e28dae"
+      },
+      {
+        "instrumentId": "ETHUSDT",
+        "symbol": "ETH",
+        "rows": 970,
+        "firstEventTime": 1651363200000,
+        "lastEventTime": 1735084800000,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "03d4c2150ff32b03a37a594ebb70207f30305a90752800c566e97da51ed21ebd"
+      },
+      {
+        "instrumentId": "SOLUSDT",
+        "symbol": "SOL",
+        "rows": 0,
+        "firstEventTime": null,
+        "lastEventTime": null,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "instrumentId": "LINKUSDT",
+        "symbol": "LINK",
+        "rows": 0,
+        "firstEventTime": null,
+        "lastEventTime": null,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "instrumentId": "DOGEUSDT",
+        "symbol": "DOGE",
+        "rows": 0,
+        "firstEventTime": null,
+        "lastEventTime": null,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "instrumentId": "XRPUSDT",
+        "symbol": "XRP",
+        "rows": 0,
+        "firstEventTime": null,
+        "lastEventTime": null,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "instrumentId": "AVAXUSDT",
+        "symbol": "AVAX",
+        "rows": 0,
+        "firstEventTime": null,
+        "lastEventTime": null,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "instrumentId": "ADAUSDT",
+        "symbol": "ADA",
+        "rows": 0,
+        "firstEventTime": null,
+        "lastEventTime": null,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "instrumentId": "SUIUSDT",
+        "symbol": "SUI",
+        "rows": 0,
+        "firstEventTime": null,
+        "lastEventTime": null,
+        "gaps": 0,
+        "duplicates": 0,
+        "incoherent": 0,
+        "rawHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    ],
+    "totalRows": 1940,
+    "retrievedAt": 1791571800000,
+    "exclusions": {
+      "warmup": 0,
+      "incoherent_ohlcv": 0,
+      "gap_in_feature_window": 0,
+      "missing_or_zero_volume": 0,
+      "entry_unavailable": 8,
+      "horizon_unmatured": 152,
+      "gap_in_label_window": 64,
+      "outside_validation": 360,
+      "holdout_locked": 0
+    }
+  },
+  "reports": [
+    {
+      "strategy": "trend_continuation",
+      "horizon": 5,
+      "fold": "validation_1",
+      "eligibleObservations": 362,
+      "issuedDecisions": 342,
+      "abstentions": 8,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 12,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 342,
+      "pendingLabels": 12,
+      "unverifiedLabels": 0,
+      "long": 342,
+      "short": 0,
+      "hits": 332,
+      "flat": 0,
+      "directionalHitRate": 0.9707602339181286,
+      "meanGrossSignedReturn": 0.004427735292666007,
+      "medianGrossSignedReturn": 0.003134800311701518,
+      "meanCentralNetSignedReturn": 0.0026277352926660073,
+      "meanStressedNetSignedReturn": 0.0008277352926660061,
+      "downsideP05": 0.0007557620817843736,
+      "standardDeviation": 0.006378881386512175,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 171,
+      "overlappingExposureCount": 342,
+      "matchedBaselines": {
+        "alwaysLongMean": 0.0026277352926660073,
+        "alwaysShortMean": -0.00622773529266601,
+        "sma200DirectionMean": 0.0026277352926660073,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.004427735292666007,
+          "alwaysShortMean": -0.004427735292666007,
+          "sma200DirectionMean": 0.004427735292666007,
+          "candidateMean": 0.004427735292666007,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": 0.0026277352926660073,
+          "alwaysShortMean": -0.00622773529266601,
+          "sma200DirectionMean": 0.0026277352926660073,
+          "candidateMean": 0.0026277352926660073,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": 0.0008277352926660061,
+          "alwaysShortMean": -0.008027735292666005,
+          "sma200DirectionMean": 0.0008277352926660061,
+          "candidateMean": 0.0008277352926660061,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 350,
+        "alwaysLongMean": 0.0026277802750532962,
+        "alwaysShortMean": -0.006227780275053298,
+        "sma200DirectionMean": 0.0026277802750532962,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": -4.4982387288963754e-8
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.002444310782452508,
+          0.0028204409229354004
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 1 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "trend_continuation",
+      "horizon": 5,
+      "fold": "validation_2",
+      "eligibleObservations": 368,
+      "issuedDecisions": 234,
+      "abstentions": 122,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 12,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 234,
+      "pendingLabels": 12,
+      "unverifiedLabels": 0,
+      "long": 174,
+      "short": 60,
+      "hits": 194,
+      "flat": 0,
+      "directionalHitRate": 0.8290598290598291,
+      "meanGrossSignedReturn": 0.0025587797959912215,
+      "medianGrossSignedReturn": 0.002506552807737989,
+      "meanCentralNetSignedReturn": 0.000758779795991221,
+      "meanStressedNetSignedReturn": -0.0010412202040087789,
+      "downsideP05": -0.005369038590229681,
+      "standardDeviation": 0.005704587768628455,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 117,
+      "overlappingExposureCount": 234,
+      "matchedBaselines": {
+        "alwaysLongMean": -0.0003828351739318257,
+        "alwaysShortMean": -0.003217164826068177,
+        "sma200DirectionMean": 0.000758779795991221,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.0014171648260681742,
+          "alwaysShortMean": -0.0014171648260681742,
+          "sma200DirectionMean": 0.0025587797959912215,
+          "candidateMean": 0.0025587797959912215,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": -0.0003828351739318257,
+          "alwaysShortMean": -0.003217164826068177,
+          "sma200DirectionMean": 0.000758779795991221,
+          "candidateMean": 0.000758779795991221,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.0021828351739318257,
+          "alwaysShortMean": -0.005017164826068173,
+          "sma200DirectionMean": -0.0010412202040087789,
+          "candidateMean": -0.0010412202040087789,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 356,
+        "alwaysLongMean": -0.0015338890457544422,
+        "alwaysShortMean": -0.0020661109542455575,
+        "sma200DirectionMean": -0.0007835016778836766,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0.0015422814738748976
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          -0.0008766314888834055,
+          0.0019987103159399976
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 4 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "trend_continuation",
+      "horizon": 5,
+      "fold": "validation_3",
+      "eligibleObservations": 722,
+      "issuedDecisions": 690,
+      "abstentions": 20,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 4,
+        "horizon_unmatured": 0,
+        "gap_in_label_window": 8,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 690,
+      "pendingLabels": 0,
+      "unverifiedLabels": 8,
+      "long": 0,
+      "short": 690,
+      "hits": 670,
+      "flat": 0,
+      "directionalHitRate": 0.9710144927536232,
+      "meanGrossSignedReturn": 0.002556656074976,
+      "medianGrossSignedReturn": 0.0010881400772233814,
+      "meanCentralNetSignedReturn": 0.000756656074975997,
+      "meanStressedNetSignedReturn": -0.0010433439250240038,
+      "downsideP05": -0.00098008784773068,
+      "standardDeviation": 0.006562187904137063,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 345,
+      "overlappingExposureCount": 690,
+      "matchedBaselines": {
+        "alwaysLongMean": -0.004356656074975998,
+        "alwaysShortMean": 0.000756656074975997,
+        "sma200DirectionMean": 0.000756656074975997,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": -0.002556656074976,
+          "alwaysShortMean": 0.002556656074976,
+          "sma200DirectionMean": 0.002556656074976,
+          "candidateMean": 0.002556656074976,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": -0.004356656074975998,
+          "alwaysShortMean": 0.000756656074975997,
+          "sma200DirectionMean": 0.000756656074975997,
+          "candidateMean": 0.000756656074975997,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.006156656074975992,
+          "alwaysShortMean": -0.0010433439250240038,
+          "sma200DirectionMean": -0.0010433439250240038,
+          "candidateMean": -0.0010433439250240038,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 710,
+        "alwaysLongMean": -0.0043585697379589835,
+        "alwaysShortMean": 0.0007585697379589813,
+        "sma200DirectionMean": 0.0007585697379589813,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": -0.0000019136629829843554
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.0004334193131779769,
+          0.0010706051847727638
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 12 complete 30-date blocks; 6 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 12
+      }
+    },
+    {
+      "strategy": "trend_continuation",
+      "horizon": 5,
+      "fold": "pooled",
+      "eligibleObservations": 1452,
+      "issuedDecisions": 1266,
+      "abstentions": 150,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 4,
+        "horizon_unmatured": 24,
+        "gap_in_label_window": 8,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 1266,
+      "pendingLabels": 24,
+      "unverifiedLabels": 8,
+      "long": 516,
+      "short": 750,
+      "hits": 1196,
+      "flat": 0,
+      "directionalHitRate": 0.9447077409162717,
+      "meanGrossSignedReturn": 0.0030625060300846422,
+      "medianGrossSignedReturn": 0.003001773831296862,
+      "meanCentralNetSignedReturn": 0.0012625060300846416,
+      "meanStressedNetSignedReturn": -0.0005374939699153577,
+      "downsideP05": -0.002554757668877108,
+      "standardDeviation": 0.006411513756273378,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 633,
+      "overlappingExposureCount": 1266,
+      "matchedBaselines": {
+        "alwaysLongMean": -0.0017353796621972439,
+        "alwaysShortMean": -0.0018646203378027539,
+        "sma200DirectionMean": 0.0012625060300846416,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.00006462033780275604,
+          "alwaysShortMean": -0.00006462033780275604,
+          "sma200DirectionMean": 0.0030625060300846422,
+          "candidateMean": 0.0030625060300846422,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": -0.0017353796621972439,
+          "alwaysShortMean": -0.0018646203378027539,
+          "sma200DirectionMean": 0.0012625060300846416,
+          "candidateMean": 0.0012625060300846416,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.0035353796621972393,
+          "alwaysShortMean": -0.003664620337802763,
+          "sma200DirectionMean": -0.0005374939699153577,
+          "candidateMean": -0.0005374939699153577,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 1416,
+        "alwaysLongMean": -0.0019215578516742983,
+        "alwaysShortMean": -0.0016784421483257014,
+        "sma200DirectionMean": 0.0008328961955458625,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0.0004296098345387792
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.0008417334255934458,
+          0.001684041958890332
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 24 complete 30-date blocks; 11 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 24
+      }
+    },
+    {
+      "strategy": "trend_continuation",
+      "horizon": 30,
+      "fold": "validation_1",
+      "eligibleObservations": 362,
+      "issuedDecisions": 292,
+      "abstentions": 8,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 62,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 292,
+      "pendingLabels": 62,
+      "unverifiedLabels": 0,
+      "long": 292,
+      "short": 0,
+      "hits": 292,
+      "flat": 0,
+      "directionalHitRate": 1,
+      "meanGrossSignedReturn": 0.030393123319716886,
+      "medianGrossSignedReturn": 0.030329077078106847,
+      "meanCentralNetSignedReturn": 0.028593123319716838,
+      "meanStressedNetSignedReturn": 0.02679312331971685,
+      "downsideP05": 0.024628571428571416,
+      "standardDeviation": 0.0064820144730454625,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 146,
+      "overlappingExposureCount": 292,
+      "matchedBaselines": {
+        "alwaysLongMean": 0.028593123319716838,
+        "alwaysShortMean": -0.03219312331971685,
+        "sma200DirectionMean": 0.028593123319716838,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.030393123319716886,
+          "alwaysShortMean": -0.030393123319716886,
+          "sma200DirectionMean": 0.030393123319716886,
+          "candidateMean": 0.030393123319716886,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": 0.028593123319716838,
+          "alwaysShortMean": -0.03219312331971685,
+          "sma200DirectionMean": 0.028593123319716838,
+          "candidateMean": 0.028593123319716838,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": 0.02679312331971685,
+          "alwaysShortMean": -0.033993123319716816,
+          "sma200DirectionMean": 0.02679312331971685,
+          "candidateMean": 0.02679312331971685,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 300,
+        "alwaysLongMean": 0.02858050500726423,
+        "alwaysShortMean": -0.03218050500726426,
+        "sma200DirectionMean": 0.02858050500726423,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0.000012618312452607888
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.027476908274714096,
+          0.029798059920062802
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 1 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "trend_continuation",
+      "horizon": 30,
+      "fold": "validation_2",
+      "eligibleObservations": 368,
+      "issuedDecisions": 184,
+      "abstentions": 122,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 62,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 184,
+      "pendingLabels": 62,
+      "unverifiedLabels": 0,
+      "long": 172,
+      "short": 12,
+      "hits": 130,
+      "flat": 0,
+      "directionalHitRate": 0.7065217391304348,
+      "meanGrossSignedReturn": 0.012200694182599267,
+      "medianGrossSignedReturn": 0.020873922518729056,
+      "meanCentralNetSignedReturn": 0.010400694182599273,
+      "meanStressedNetSignedReturn": 0.008600694182599266,
+      "downsideP05": -0.02003757262750154,
+      "standardDeviation": 0.018064572194373258,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 92,
+      "overlappingExposureCount": 184,
+      "matchedBaselines": {
+        "alwaysLongMean": 0.008060168956553286,
+        "alwaysShortMean": -0.011660168956553285,
+        "sma200DirectionMean": 0.010400694182599273,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.009860168956553282,
+          "alwaysShortMean": -0.009860168956553282,
+          "sma200DirectionMean": 0.012200694182599267,
+          "candidateMean": 0.012200694182599267,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": 0.008060168956553286,
+          "alwaysShortMean": -0.011660168956553285,
+          "sma200DirectionMean": 0.010400694182599273,
+          "candidateMean": 0.010400694182599273,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": 0.006260168956553288,
+          "alwaysShortMean": -0.013460168956553277,
+          "sma200DirectionMean": 0.008600694182599266,
+          "candidateMean": 0.008600694182599266,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 306,
+        "alwaysLongMean": -0.0022763867976959614,
+        "alwaysShortMean": -0.0013236132023040342,
+        "sma200DirectionMean": -0.0008690121519689679,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0.01126970633456824
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          -0.01006233631193128,
+          0.02282660333995842
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 4 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "trend_continuation",
+      "horizon": 30,
+      "fold": "validation_3",
+      "eligibleObservations": 722,
+      "issuedDecisions": 642,
+      "abstentions": 20,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 4,
+        "horizon_unmatured": 0,
+        "gap_in_label_window": 56,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 642,
+      "pendingLabels": 0,
+      "unverifiedLabels": 56,
+      "long": 0,
+      "short": 642,
+      "hits": 624,
+      "flat": 0,
+      "directionalHitRate": 0.9719626168224299,
+      "meanGrossSignedReturn": 0.020574744077742586,
+      "medianGrossSignedReturn": 0.020488761890250517,
+      "meanCentralNetSignedReturn": 0.018774744077742572,
+      "meanStressedNetSignedReturn": 0.0169747440777426,
+      "downsideP05": 0.01512532942898967,
+      "standardDeviation": 0.006495650664040861,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 321,
+      "overlappingExposureCount": 642,
+      "matchedBaselines": {
+        "alwaysLongMean": -0.0223747440777426,
+        "alwaysShortMean": 0.018774744077742572,
+        "sma200DirectionMean": 0.018774744077742572,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": -0.020574744077742586,
+          "alwaysShortMean": 0.020574744077742586,
+          "sma200DirectionMean": 0.020574744077742586,
+          "candidateMean": 0.020574744077742586,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": -0.0223747440777426,
+          "alwaysShortMean": 0.018774744077742572,
+          "sma200DirectionMean": 0.018774744077742572,
+          "candidateMean": 0.018774744077742572,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.024174744077742578,
+          "alwaysShortMean": 0.0169747440777426,
+          "sma200DirectionMean": 0.0169747440777426,
+          "candidateMean": 0.0169747440777426,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 660,
+        "alwaysLongMean": -0.02237218763780299,
+        "alwaysShortMean": 0.01877218763780296,
+        "sma200DirectionMean": 0.01877218763780296,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": 0.0000025564399396132975
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.017950847415719447,
+          0.01959672401489869
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 12 complete 30-date blocks; 6 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 12
+      }
+    },
+    {
+      "strategy": "trend_continuation",
+      "horizon": 30,
+      "fold": "pooled",
+      "eligibleObservations": 1452,
+      "issuedDecisions": 1118,
+      "abstentions": 150,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 4,
+        "horizon_unmatured": 124,
+        "gap_in_label_window": 56,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 1118,
+      "pendingLabels": 124,
+      "unverifiedLabels": 56,
+      "long": 464,
+      "short": 654,
+      "hits": 1046,
+      "flat": 0,
+      "directionalHitRate": 0.9355992844364938,
+      "meanGrossSignedReturn": 0.021760917206499402,
+      "medianGrossSignedReturn": 0.021903477071359635,
+      "meanCentralNetSignedReturn": 0.019960917206499413,
+      "meanStressedNetSignedReturn": 0.018160917206499382,
+      "downsideP05": -0.008267400804055315,
+      "standardDeviation": 0.011133995817402683,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 559,
+      "overlappingExposureCount": 1118,
+      "matchedBaselines": {
+        "alwaysLongMean": -0.004053955814443311,
+        "alwaysShortMean": 0.0004539558144433108,
+        "sma200DirectionMean": 0.019960917206499413,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": -0.002253955814443305,
+          "alwaysShortMean": 0.002253955814443305,
+          "sma200DirectionMean": 0.021760917206499402,
+          "candidateMean": 0.021760917206499402,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": -0.004053955814443311,
+          "alwaysShortMean": 0.0004539558144433108,
+          "sma200DirectionMean": 0.019960917206499413,
+          "candidateMean": 0.019960917206499413,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.0058539558144433,
+          "alwaysShortMean": -0.0013460441855566846,
+          "sma200DirectionMean": 0.018160917206499382,
+          "candidateMean": 0.018160917206499382,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 1266,
+        "alwaysLongMean": -0.005440810978566866,
+        "alwaysShortMean": 0.001840810978566866,
+        "sma200DirectionMean": 0.016349034458630937,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": 0.0036118827478684758
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.015531724410205231,
+          0.022973831220023
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 24 complete 30-date blocks; 11 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 24
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 5,
+      "fold": "validation_1",
+      "eligibleObservations": 362,
+      "issuedDecisions": 10,
+      "abstentions": 352,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 0,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 10,
+      "pendingLabels": 0,
+      "unverifiedLabels": 0,
+      "long": 10,
+      "short": 0,
+      "hits": 10,
+      "flat": 0,
+      "directionalHitRate": 1,
+      "meanGrossSignedReturn": 0.004733551507380717,
+      "medianGrossSignedReturn": 0.005576405774418935,
+      "meanCentralNetSignedReturn": 0.002933551507380716,
+      "meanStressedNetSignedReturn": 0.001133551507380716,
+      "downsideP05": 0.0008391554702495067,
+      "standardDeviation": 0.0016951964774052394,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 5,
+      "overlappingExposureCount": 10,
+      "matchedBaselines": {
+        "alwaysLongMean": 0.002933551507380716,
+        "alwaysShortMean": -0.006533551507380715,
+        "sma200DirectionMean": 0.002933551507380716,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.004733551507380717,
+          "alwaysShortMean": -0.004733551507380717,
+          "sma200DirectionMean": 0.004733551507380717,
+          "candidateMean": 0.004733551507380717,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": 0.002933551507380716,
+          "alwaysShortMean": -0.006533551507380715,
+          "sma200DirectionMean": 0.002933551507380716,
+          "candidateMean": 0.002933551507380716,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": 0.001133551507380716,
+          "alwaysShortMean": -0.008333551507380715,
+          "sma200DirectionMean": 0.001133551507380716,
+          "candidateMean": 0.001133551507380716,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 350,
+        "alwaysLongMean": 0.0026277802750532962,
+        "alwaysShortMean": -0.006227780275053298,
+        "sma200DirectionMean": 0.0026277802750532962,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0.0003057712323274197
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.0015573353439753744,
+          0.004320497264000487
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 1 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 5,
+      "fold": "validation_2",
+      "eligibleObservations": 368,
+      "issuedDecisions": 10,
+      "abstentions": 358,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 0,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 10,
+      "pendingLabels": 0,
+      "unverifiedLabels": 0,
+      "long": 10,
+      "short": 0,
+      "hits": 4,
+      "flat": 0,
+      "directionalHitRate": 0.4,
+      "meanGrossSignedReturn": -0.00005751778781061816,
+      "medianGrossSignedReturn": -0.00079158314804853,
+      "meanCentralNetSignedReturn": -0.001857517787810618,
+      "meanStressedNetSignedReturn": -0.0036575177878106187,
+      "downsideP05": -0.005567808783704147,
+      "standardDeviation": 0.0036571369580366136,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 5,
+      "overlappingExposureCount": 10,
+      "matchedBaselines": {
+        "alwaysLongMean": -0.001857517787810618,
+        "alwaysShortMean": -0.0017424822121893818,
+        "sma200DirectionMean": -0.001857517787810618,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": -0.0001150355756212361,
+        "gross": {
+          "alwaysLongMean": -0.00005751778781061816,
+          "alwaysShortMean": 0.00005751778781061816,
+          "sma200DirectionMean": -0.00005751778781061816,
+          "candidateMean": -0.00005751778781061816,
+          "differenceVsBestDirectional": -0.00011503557562123632
+        },
+        "centralNet": {
+          "alwaysLongMean": -0.001857517787810618,
+          "alwaysShortMean": -0.0017424822121893818,
+          "sma200DirectionMean": -0.001857517787810618,
+          "candidateMean": -0.001857517787810618,
+          "differenceVsBestDirectional": -0.0001150355756212361
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.0036575177878106187,
+          "alwaysShortMean": -0.0035424822121893815,
+          "sma200DirectionMean": -0.0036575177878106187,
+          "candidateMean": -0.0036575177878106187,
+          "differenceVsBestDirectional": -0.00011503557562123718
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 356,
+        "alwaysLongMean": -0.0015338890457544422,
+        "alwaysShortMean": -0.0020661109542455575,
+        "sma200DirectionMean": -0.0007835016778836766,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": -0.0010740161099269414
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          -0.0048134551755060866,
+          0.0014770591961919075
+        ],
+        "differenceVsBestDirectional": [
+          -0.006026910351012173,
+          0.006071715761402252
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 4 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 5,
+      "fold": "validation_3",
+      "eligibleObservations": 722,
+      "issuedDecisions": 0,
+      "abstentions": 722,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 0,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 0,
+      "pendingLabels": 0,
+      "unverifiedLabels": 0,
+      "long": 0,
+      "short": 0,
+      "hits": 0,
+      "flat": 0,
+      "directionalHitRate": null,
+      "meanGrossSignedReturn": null,
+      "medianGrossSignedReturn": null,
+      "meanCentralNetSignedReturn": null,
+      "meanStressedNetSignedReturn": null,
+      "downsideP05": null,
+      "standardDeviation": null,
+      "uniqueAssets": 0,
+      "uniqueDecisionDates": 0,
+      "overlappingExposureCount": 0,
+      "matchedBaselines": {
+        "alwaysLongMean": null,
+        "alwaysShortMean": null,
+        "sma200DirectionMean": null,
+        "cashMean": 0,
+        "bestDirectional": null,
+        "differenceVsBestDirectional": null,
+        "gross": {
+          "alwaysLongMean": null,
+          "alwaysShortMean": null,
+          "sma200DirectionMean": null,
+          "candidateMean": null,
+          "differenceVsBestDirectional": null
+        },
+        "centralNet": {
+          "alwaysLongMean": null,
+          "alwaysShortMean": null,
+          "sma200DirectionMean": null,
+          "candidateMean": null,
+          "differenceVsBestDirectional": null
+        },
+        "stressedNet": {
+          "alwaysLongMean": null,
+          "alwaysShortMean": null,
+          "sma200DirectionMean": null,
+          "candidateMean": null,
+          "differenceVsBestDirectional": null
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 710,
+        "alwaysLongMean": -0.0043585697379589835,
+        "alwaysShortMean": 0.0007585697379589813,
+        "sma200DirectionMean": 0.0007585697379589813,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": null
+      },
+      "uncertainty": {
+        "meanCentralNet": null,
+        "differenceVsBestDirectional": null,
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 12 complete 30-date blocks; 6 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 0
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 5,
+      "fold": "pooled",
+      "eligibleObservations": 1452,
+      "issuedDecisions": 20,
+      "abstentions": 1432,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 0,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 20,
+      "pendingLabels": 0,
+      "unverifiedLabels": 0,
+      "long": 20,
+      "short": 0,
+      "hits": 14,
+      "flat": 0,
+      "directionalHitRate": 0.7,
+      "meanGrossSignedReturn": 0.002338016859785049,
+      "medianGrossSignedReturn": 0.0027978650137740904,
+      "meanCentralNetSignedReturn": 0.0005380168597850489,
+      "meanStressedNetSignedReturn": -0.001261983140214951,
+      "downsideP05": -0.005567808783704147,
+      "standardDeviation": 0.0037063728999644423,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 10,
+      "overlappingExposureCount": 20,
+      "matchedBaselines": {
+        "alwaysLongMean": 0.0005380168597850489,
+        "alwaysShortMean": -0.004138016859785048,
+        "sma200DirectionMean": 0.0005380168597850489,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.002338016859785049,
+          "alwaysShortMean": -0.002338016859785049,
+          "sma200DirectionMean": 0.002338016859785049,
+          "candidateMean": 0.002338016859785049,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": 0.0005380168597850489,
+          "alwaysShortMean": -0.004138016859785048,
+          "sma200DirectionMean": 0.0005380168597850489,
+          "candidateMean": 0.0005380168597850489,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.001261983140214951,
+          "alwaysShortMean": -0.005938016859785049,
+          "sma200DirectionMean": -0.001261983140214951,
+          "candidateMean": -0.001261983140214951,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 1416,
+        "alwaysLongMean": -0.0019215578516742983,
+        "alwaysShortMean": -0.0016784421483257014,
+        "sma200DirectionMean": 0.0008328961955458625,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": -0.00029487933576081353
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          -0.0017743112294088558,
+          0.002684706882839934
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 24 complete 30-date blocks; 11 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 24
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 30,
+      "fold": "validation_1",
+      "eligibleObservations": 362,
+      "issuedDecisions": 8,
+      "abstentions": 352,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 2,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 8,
+      "pendingLabels": 2,
+      "unverifiedLabels": 0,
+      "long": 8,
+      "short": 0,
+      "hits": 8,
+      "flat": 0,
+      "directionalHitRate": 1,
+      "meanGrossSignedReturn": 0.030544991015712075,
+      "medianGrossSignedReturn": 0.030420780889767386,
+      "meanCentralNetSignedReturn": 0.02874499101571208,
+      "meanStressedNetSignedReturn": 0.02694499101571208,
+      "downsideP05": 0.024831477927063327,
+      "standardDeviation": 0.0028323617654021278,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 4,
+      "overlappingExposureCount": 8,
+      "matchedBaselines": {
+        "alwaysLongMean": 0.02874499101571208,
+        "alwaysShortMean": -0.032344991015712074,
+        "sma200DirectionMean": 0.02874499101571208,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.030544991015712075,
+          "alwaysShortMean": -0.030544991015712075,
+          "sma200DirectionMean": 0.030544991015712075,
+          "candidateMean": 0.030544991015712075,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": 0.02874499101571208,
+          "alwaysShortMean": -0.032344991015712074,
+          "sma200DirectionMean": 0.02874499101571208,
+          "candidateMean": 0.02874499101571208,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": 0.02694499101571208,
+          "alwaysShortMean": -0.03414499101571208,
+          "sma200DirectionMean": 0.02694499101571208,
+          "candidateMean": 0.02694499101571208,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 300,
+        "alwaysLongMean": 0.02858050500726423,
+        "alwaysShortMean": -0.03218050500726426,
+        "sma200DirectionMean": 0.02858050500726423,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0.00016448600844784847
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          0.02626737755505738,
+          0.0312672695067122
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 1 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 30,
+      "fold": "validation_2",
+      "eligibleObservations": 368,
+      "issuedDecisions": 8,
+      "abstentions": 358,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 2,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 8,
+      "pendingLabels": 2,
+      "unverifiedLabels": 0,
+      "long": 8,
+      "short": 0,
+      "hits": 4,
+      "flat": 0,
+      "directionalHitRate": 0.5,
+      "meanGrossSignedReturn": -0.0000573567418649841,
+      "medianGrossSignedReturn": -0.00338857861367365,
+      "meanCentralNetSignedReturn": -0.0018573567418649836,
+      "meanStressedNetSignedReturn": -0.0036573567418649836,
+      "downsideP05": -0.020844943820224643,
+      "standardDeviation": 0.01963389104018695,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 4,
+      "overlappingExposureCount": 8,
+      "matchedBaselines": {
+        "alwaysLongMean": -0.0018573567418649836,
+        "alwaysShortMean": -0.0017426432581350154,
+        "sma200DirectionMean": -0.0018573567418649836,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": -0.0001147134837299682,
+        "gross": {
+          "alwaysLongMean": -0.0000573567418649841,
+          "alwaysShortMean": 0.0000573567418649841,
+          "sma200DirectionMean": -0.0000573567418649841,
+          "candidateMean": -0.0000573567418649841,
+          "differenceVsBestDirectional": -0.0001147134837299682
+        },
+        "centralNet": {
+          "alwaysLongMean": -0.0018573567418649836,
+          "alwaysShortMean": -0.0017426432581350154,
+          "sma200DirectionMean": -0.0018573567418649836,
+          "candidateMean": -0.0018573567418649836,
+          "differenceVsBestDirectional": -0.0001147134837299682
+        },
+        "stressedNet": {
+          "alwaysLongMean": -0.0036573567418649836,
+          "alwaysShortMean": -0.003542643258135015,
+          "sma200DirectionMean": -0.0036573567418649836,
+          "candidateMean": -0.0036573567418649836,
+          "differenceVsBestDirectional": -0.00011471348372996864
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 306,
+        "alwaysLongMean": -0.0022763867976959614,
+        "alwaysShortMean": -0.0013236132023040342,
+        "sma200DirectionMean": -0.0008690121519689679,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": -0.0009883445898960157
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          -0.019312585957067537,
+          0.01825620663938585
+        ],
+        "differenceVsBestDirectional": [
+          -0.03580653732427302,
+          0.04011241327877171
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 6 complete 30-date blocks; 4 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 6
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 30,
+      "fold": "validation_3",
+      "eligibleObservations": 722,
+      "issuedDecisions": 0,
+      "abstentions": 722,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 0,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 0,
+      "pendingLabels": 0,
+      "unverifiedLabels": 0,
+      "long": 0,
+      "short": 0,
+      "hits": 0,
+      "flat": 0,
+      "directionalHitRate": null,
+      "meanGrossSignedReturn": null,
+      "medianGrossSignedReturn": null,
+      "meanCentralNetSignedReturn": null,
+      "meanStressedNetSignedReturn": null,
+      "downsideP05": null,
+      "standardDeviation": null,
+      "uniqueAssets": 0,
+      "uniqueDecisionDates": 0,
+      "overlappingExposureCount": 0,
+      "matchedBaselines": {
+        "alwaysLongMean": null,
+        "alwaysShortMean": null,
+        "sma200DirectionMean": null,
+        "cashMean": 0,
+        "bestDirectional": null,
+        "differenceVsBestDirectional": null,
+        "gross": {
+          "alwaysLongMean": null,
+          "alwaysShortMean": null,
+          "sma200DirectionMean": null,
+          "candidateMean": null,
+          "differenceVsBestDirectional": null
+        },
+        "centralNet": {
+          "alwaysLongMean": null,
+          "alwaysShortMean": null,
+          "sma200DirectionMean": null,
+          "candidateMean": null,
+          "differenceVsBestDirectional": null
+        },
+        "stressedNet": {
+          "alwaysLongMean": null,
+          "alwaysShortMean": null,
+          "sma200DirectionMean": null,
+          "candidateMean": null,
+          "differenceVsBestDirectional": null
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 660,
+        "alwaysLongMean": -0.02237218763780299,
+        "alwaysShortMean": 0.01877218763780296,
+        "sma200DirectionMean": 0.01877218763780296,
+        "cashMean": 0,
+        "bestDirectional": "always_short",
+        "differenceVsBestDirectional": null
+      },
+      "uncertainty": {
+        "meanCentralNet": null,
+        "differenceVsBestDirectional": null,
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 12 complete 30-date blocks; 6 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 0
+      }
+    },
+    {
+      "strategy": "breakout_volume",
+      "horizon": 30,
+      "fold": "pooled",
+      "eligibleObservations": 1452,
+      "issuedDecisions": 16,
+      "abstentions": 1432,
+      "exclusions": {
+        "warmup": 0,
+        "incoherent_ohlcv": 0,
+        "gap_in_feature_window": 0,
+        "missing_or_zero_volume": 0,
+        "entry_unavailable": 0,
+        "horizon_unmatured": 4,
+        "gap_in_label_window": 0,
+        "outside_validation": 0,
+        "holdout_locked": 0
+      },
+      "maturedLabels": 16,
+      "pendingLabels": 4,
+      "unverifiedLabels": 0,
+      "long": 16,
+      "short": 0,
+      "hits": 12,
+      "flat": 0,
+      "directionalHitRate": 0.75,
+      "meanGrossSignedReturn": 0.015243817136923547,
+      "medianGrossSignedReturn": 0.026255818236089364,
+      "meanCentralNetSignedReturn": 0.013443817136923546,
+      "meanStressedNetSignedReturn": 0.011643817136923546,
+      "downsideP05": -0.020844943820224643,
+      "standardDeviation": 0.020817618190592063,
+      "uniqueAssets": 2,
+      "uniqueDecisionDates": 8,
+      "overlappingExposureCount": 16,
+      "matchedBaselines": {
+        "alwaysLongMean": 0.013443817136923546,
+        "alwaysShortMean": -0.017043817136923545,
+        "sma200DirectionMean": 0.013443817136923546,
+        "cashMean": 0,
+        "bestDirectional": "always_long",
+        "differenceVsBestDirectional": 0,
+        "gross": {
+          "alwaysLongMean": 0.015243817136923547,
+          "alwaysShortMean": -0.015243817136923547,
+          "sma200DirectionMean": 0.015243817136923547,
+          "candidateMean": 0.015243817136923547,
+          "differenceVsBestDirectional": 0
+        },
+        "centralNet": {
+          "alwaysLongMean": 0.013443817136923546,
+          "alwaysShortMean": -0.017043817136923545,
+          "sma200DirectionMean": 0.013443817136923546,
+          "candidateMean": 0.013443817136923546,
+          "differenceVsBestDirectional": 0
+        },
+        "stressedNet": {
+          "alwaysLongMean": 0.011643817136923546,
+          "alwaysShortMean": -0.018843817136923544,
+          "sma200DirectionMean": 0.011643817136923546,
+          "candidateMean": 0.011643817136923546,
+          "differenceVsBestDirectional": 0
+        }
+      },
+      "fullScheduleBaselines": {
+        "eligibleLabeledRows": 1266,
+        "alwaysLongMean": -0.005440810978566866,
+        "alwaysShortMean": 0.001840810978566866,
+        "sma200DirectionMean": 0.016349034458630937,
+        "cashMean": 0,
+        "bestDirectional": "sma200_direction",
+        "differenceVsBestDirectional": -0.0029052173217073915
+      },
+      "uncertainty": {
+        "meanCentralNet": [
+          -0.0016303226068915316,
+          0.026435063081911504
+        ],
+        "differenceVsBestDirectional": [
+          0,
+          0
+        ],
+        "method": "deterministic UTC decision-date moving-block bootstrap preserving the cross-asset panel; COMPLETE scheduled UTC-date grid; 24 complete 30-date blocks; 11 short-tail dates excluded; candidate central-net minus best preselected matched central-net directional baseline",
+        "blocks": 24
+      }
+    }
+  ],
+  "selection": [
+    {
+      "horizon": 5,
+      "selected": null,
+      "qualified": false,
+      "reason": "No candidate cleared the predeclared sample, positive net-return, and block-bootstrap baseline-difference checks.",
+      "candidates": [
+        {
+          "strategy": "trend_continuation",
+          "meanCentralNet": 0.0012625060300846416,
+          "lowerBoundVsBestDirectional": 0,
+          "issued": 1266,
+          "uniqueAssets": 2,
+          "uniqueDecisionDates": 633
+        },
+        {
+          "strategy": "breakout_volume",
+          "meanCentralNet": 0.0005380168597850489,
+          "lowerBoundVsBestDirectional": 0,
+          "issued": 20,
+          "uniqueAssets": 2,
+          "uniqueDecisionDates": 10
+        }
+      ]
+    },
+    {
+      "horizon": 30,
+      "selected": null,
+      "qualified": false,
+      "reason": "No candidate cleared the predeclared sample, positive net-return, and block-bootstrap baseline-difference checks.",
+      "candidates": [
+        {
+          "strategy": "trend_continuation",
+          "meanCentralNet": 0.019960917206499413,
+          "lowerBoundVsBestDirectional": 0,
+          "issued": 1118,
+          "uniqueAssets": 2,
+          "uniqueDecisionDates": 559
+        },
+        {
+          "strategy": "breakout_volume",
+          "meanCentralNet": 0.013443817136923546,
+          "lowerBoundVsBestDirectional": 0,
+          "issued": 16,
+          "uniqueAssets": 2,
+          "uniqueDecisionDates": 8
+        }
+      ]
+    }
+  ],
+  "holdout": {
+    "locked": true,
+    "start": "2025-01-01",
+    "end": "2026-09-30",
+    "featureEligibleRows": 0,
+    "issuedWithoutLabels": {},
+    "datasetManifestHash": "cb446bbb3363adec4f20bbdcdbab971f6424afe981a381251eb8a907c35146ef",
+    "performanceOpened": false
+  },
+  "notes": [
+    "This is a new OHLCV-only strategy experiment, not a historical replay of the live dossier model.",
+    "The fixed universe is a current-survivor sample; delisted assets and historical whole-market membership are unavailable from this source path.",
+    "Short returns are directional hypotheticals. Borrow, funding, locate availability and execution feasibility are unsupported and not included.",
+    "Signals overlap across assets and dates. Event returns are not summed or annualized as a portfolio.",
+    "The engine rejects holdout-dated input before feature, label, or report generation; this result contains no holdout labels or performance."
+  ],
+  "observationCount": 2420
+}

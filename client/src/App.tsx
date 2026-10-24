@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { SafeAreaTopScrim } from "@hatch/space-sdk/client";
@@ -6,18 +6,28 @@ import { api } from "./api";
 import { readTheoryWithDeadline, useTheoryCollection } from "./theory-requests";
 import { CALLER_CALLS, CALLER_CALLS_GENERATED_AT, type CallerCall } from "./caller-calls";
 
-type Tab = "market" | "dossier" | "news" | "smart" | "signals" | "theories" | "assets" | "watchlist" | "journal" | "alerts" | "audit" | "meme-risk";
-const tabs: Array<{ id: Tab; label: string }> = [
-  { id: "market", label: "Market" },
-  { id: "dossier", label: "Coin Dossier" },
-  { id: "signals", label: "Signals" },
+// Four-section terminal (2026-10-23 rebuild): Read / Opportunities / Book /
+// Research. The previous thirteen top-level tabs are preserved as tools
+// inside these sections — no view was deleted, and no scoring, detector or
+// issuance contract changed; only navigation and card presentation moved.
+type Section = "read" | "opportunities" | "book" | "research";
+const sections: Array<{ id: Section; label: string }> = [
+  { id: "read", label: "The Read" },
+  { id: "opportunities", label: "Opportunities" },
+  { id: "book", label: "The Book" },
+  { id: "research", label: "Research" },
+];
+type Tab = "dossier" | "news" | "smart" | "theories" | "assets" | "watchlist" | "alerts" | "audit" | "meme-risk";
+const researchTools: Array<{ id: Tab; label: string }> = [
   { id: "theories", label: "Theories" },
+  { id: "dossier", label: "Coin Dossier" },
   { id: "assets", label: "Assets" },
+  { id: "smart", label: "Wallet & Perps" },
+  { id: "news", label: "News" },
   { id: "watchlist", label: "Watchlist" },
-  { id: "journal", label: "Journal" },
   { id: "alerts", label: "Alerts" },
-  { id: "audit", label: "Measurement" },
   { id: "meme-risk", label: "Meme Risk" },
+  { id: "audit", label: "Diagnostics" },
 ];
 const horizons: Record<string, string> = { d7: "7D", d15: "15D", d30: "30D", d50: "50D", d90: "90D", d180: "6M", d365: "1Y" };
 const canonicalCoinIds: Record<string, string> = { WLD: "worldcoin-wld" };
@@ -309,7 +319,7 @@ function IssuanceWorkPanel() {
   const q = useQuery({ queryKey: ["issuance-work-accounting"], queryFn: () => api.getIssuanceWorkAccounting({ windowHours: 24 }), staleTime: 60_000 });
   const d: any = q.data;
   const latest: any = d?.latestCheck ?? null;
-  const decisionLabel = (value: string | null | undefined) => value === "skipped_completed" ? "SKIPPED — already complete" : value === "processed_new" ? "PROCESSED — new handoff" : value === "recovered_incomplete" ? "RECOVERED — unfinished work" : value === "no_handoff" ? "NO HANDOFF" : value === "coalesced" ? "COALESCED — deferred by lease" : value ?? "—";
+  const decisionLabel = (value: string | null | undefined) => value === "skipped_completed" ? "SKIPPED — already complete" : value === "processed_new" ? "PROCESSED — new handoff" : value === "recovered_incomplete" ? "RECOVERED — unfinished work" : value === "no_handoff" ? "NO HANDOFF" : value === "coalesced" ? "COALESCED — deferred by lease" : value === "monitoring_hold" ? "HELD — monitoring gate (by design)" : value ?? "—";
   return <div className="asset-subblock issuance-work">
     <h3>Issuance work check · bounded</h3>
     <p className="asset-meta">Before any expensive pass, the cycle reads the handoff's committed state — the latest committed run plus every durable intake row. A handoff counts as complete only when that committed state says so; a recent trigger time never suppresses failed, partial or uncertain work, and overlapping invocations coalesce into the active worker instead of racing.</p>
@@ -319,18 +329,47 @@ function IssuanceWorkPanel() {
         <Metric label="Skipped · complete" value={num(d.checks?.skippedCompleted ?? 0)}/>
         <Metric label="Full executions · 24h" value={num(d.executions?.total ?? 0)}/>
         <Metric label="Recoveries · 24h" value={num(d.checks?.recoveredIncomplete ?? 0)}/>
+        <Metric label="Held · monitoring gate · 24h" value={num(d.checks?.monitoringHeld ?? 0)}/>
         <Metric label="Worker generations" value={d.pollLane ? num(d.pollLane.generation) : "—"}/>
         <Metric label="Coalesced invocations" value={d.pollLane ? num(d.pollLane.coalescedCount) : "—"}/>
       </div>
-      {latest ? <p className="asset-meta">Latest check {new Date(latest.checkedAt).toLocaleString()} · <b>{decisionLabel(latest.decision)}</b> · handoff {latest.handoffRunId ?? "—"} · intake {latest.intakeTerminal}/{latest.intakeTotal} terminal{latest.priorRunId ? ` · prior run ${latest.priorRunId} (${latest.priorRunStatus ?? "unknown"})` : ""} · {latest.reason}</p> : <p className="asset-meta">No bounded check has been recorded yet — checks are recorded from the first cycle invocation after this build.</p>}
+      {latest ? <p className="asset-meta">Latest check {new Date(latest.checkedAt).toLocaleString()} · <b>{decisionLabel(latest.decision)}</b> · trigger label {latest.trigger ?? "—"} (caller-supplied; defaults to “manual” when unsupplied — not proof a person fired it) · handoff {latest.handoffRunId ?? "—"} · intake {latest.intakeTerminal}/{latest.intakeTotal} terminal{latest.priorRunId ? ` · prior run ${latest.priorRunId} (${latest.priorRunStatus ?? "unknown"})` : ""} · {latest.reason}</p> : <p className="asset-meta">No bounded check has been recorded yet — checks are recorded from the first cycle invocation after this build.</p>}
+      <p className="asset-meta">A HELD check is the monitoring-health gate working by design: the cycle ran, evaluated coverage first, and was refused before any candidate processing — it is recorded here with the gate's reason, so a hold never again reads as a missing dispatch. Silence in this ledger, not a HELD row, is what a dispatch failure would look like.</p>
       <p className="asset-meta">{d.note}</p>
     </>}
   </div>;
 }
 
-function MonitoringHealthPanel({ health, loading }: { health: any; loading: boolean }) {
+function MonitoringHealthPanel({ health, loading, engineSnapshot }: { health: any; loading: boolean; engineSnapshot?: any }) {
   if (loading && !health) return <div className="asset-subblock monitoring-health"><h3>Venue monitoring · recovery status</h3><Empty>Checking coverage checkpoints…</Empty></div>;
   if (!health) return <div className="asset-subblock monitoring-health degraded"><h3>Venue monitoring · recovery status</h3><p className="unavailable-line"><b>MONITORING UNAVAILABLE</b> — health could not be read; new paper entries are held (fail closed).</p></div>;
+  // Engine snapshot header: book counts, coverage state and enrollment
+  // state come from the engine's published core snapshot verbatim. When
+  // it is missing or unreadable the header says so — these fields are
+  // never recomputed here from the raw store.
+  const snap = engineSnapshot ?? null;
+  const snapStale = snap != null && snap.snapshotAgeMs != null && snap.snapshotAgeMs > 45 * 60_000;
+  const snapEnrollRun = snap?.enrollment?.latestRun ?? null;
+  const snapCanonical = snap?.enrollment?.canonicalFile ?? null;
+  const engineSnapshotBlock = snap == null
+    ? <p className="unavailable-line"><b>Engine snapshot unavailable</b> — the engine has not published a readable core snapshot.</p>
+    : <div className="engine-snapshot">
+        <p className="asset-meta">Engine snapshot as of {snap.generatedAtUtc ?? "unrecorded"}{snapStale ? <> · <b>STALE</b> — older than 45 minutes</> : ""}{snap.source ? ` · source ${snap.source}` : ""}</p>
+        <div className="indicator-grid">
+          <Metric label="Book · total" value={snap.positionsTotal == null ? "—" : num(snap.positionsTotal)}/>
+          <Metric label="Book · settled" value={snap.positionsSettled == null ? "—" : num(snap.positionsSettled)}/>
+          <Metric label="Book · open" value={snap.positionsOpen == null ? "—" : num(snap.positionsOpen)}/>
+          <Metric label="Outcome records" value={snap.outcomeRecords == null ? "—" : num(snap.outcomeRecords)}/>
+          <Metric label="Coverage through" value={snap.coverageThroughUtc ? sourceTimeLabel(new Date(snap.coverageThroughUtc).getTime()) : "unavailable"}/>
+          <Metric label="Coverage complete" value={snap.coverageComplete == null ? "—" : snap.coverageComplete ? "YES" : "NO"}/>
+          <Metric label="Open gaps" value={snap.gapsOpenTotal == null ? "—" : num(snap.gapsOpenTotal)}/>
+          <Metric label="Open positions uncovered" value={num((snap.openPositionsUncovered ?? []).length)}/>
+          <Metric label="Settle verified through" value={snap.settleVerifiedThroughUtc ? sourceTimeLabel(new Date(snap.settleVerifiedThroughUtc).getTime()) : "unavailable"}/>
+        </div>
+        {(snap.openPositionsUncovered ?? []).length ? <p className="asset-meta">Uncovered open positions · {(snap.openPositionsUncovered as string[]).join(", ")}</p> : null}
+        <p className="venue-outcome"><b>Enrollment</b> — last enroll run {snapEnrollRun?.runUtc ? sourceTimeLabel(new Date(snapEnrollRun.runUtc).getTime()) : "unrecorded"} · derived {snapEnrollRun?.derivedEnteredCount == null ? "—" : num(snapEnrollRun.derivedEnteredCount)} entered · missing from book: {(snapEnrollRun?.derivedMissingFromBook ?? []).length ? (snapEnrollRun.derivedMissingFromBook as string[]).join(", ") : "none"} · discrepancies {snapEnrollRun?.discrepanciesCount == null ? "—" : num(snapEnrollRun.discrepanciesCount)}</p>
+        {snapCanonical?.enrollWouldNoop === true && <p className="source-warning"><b>Enrollment would no-op</b> — the canonical file is older than the 20-minute bound, so enrollment would skip without adding anything.</p>}
+      </div>;
   // Coverage and automation are shown as two separate lines — a single
   // badge would merge a directed-recovery coverage claim with an
   // unattended-automation claim that has not been proven yet.
@@ -342,9 +381,10 @@ function MonitoringHealthPanel({ health, loading }: { health: any; loading: bool
   const ageMin = coverage.coverageAgeMs == null ? null : Math.round(coverage.coverageAgeMs / 60_000);
   return <div className={`asset-subblock monitoring-health ${held ? "degraded" : "verified"}`} role={held ? "alert" : undefined}>
     <h3>Venue monitoring · recovery status</h3>
+    {engineSnapshotBlock}
     <p className="venue-outcome"><b>Coverage · {coverageStatus}</b> — {coverage.basis} · last successful coverage {coverage.lastSuccessfulCoverageUtc ? sourceTimeLabel(new Date(coverage.lastSuccessfulCoverageUtc).getTime()) : "unavailable"}{ageMin != null ? ` · ${ageMin} min old (stale after 45 min)` : ""} · gaps {num(coverage.gapsTotal)}</p>
     <p className="venue-outcome"><b>Automation</b> — {automation.label}{automation.status === "confirmed" && automation.coverageThroughUtc ? ` · coverage through ${sourceTimeLabel(new Date(automation.coverageThroughUtc).getTime())}` : ""}{automation.status === "confirmed" && automation.cleanupVerified != null ? ` · timeout cleanup verified: ${automation.cleanupVerified ? "yes — no orphan processes or locks" : "no"}` : ""}</p>
-    {held && <p className="venue-outcome"><b>NEW PAPER ENTRIES HELD</b> — {health.coverageStatus === "verified" && automation.status === "pending" ? "coverage is verified, but scheduled recovery is still pending; a directed pass alone does not prove the automatic loop." : "coverage is not verified, or scheduled recovery is still pending."} Discovery and research keep running; existing positions keep being monitored and settled.</p>}
+    {held && <p className="venue-outcome"><b>NEW PAPER ENTRIES HELD</b> — {health.coverageStatus === "verified" && automation.status === "pending" ? "coverage is verified, but scheduled recovery is still pending; a directed pass alone does not prove the automatic loop." : health.coverageStatus === "stale" ? `coverage is STALE — last successful coverage ${coverage.lastSuccessfulCoverageUtc ? sourceTimeLabel(new Date(coverage.lastSuccessfulCoverageUtc).getTime()) : "unavailable"}${coverage.lastSuccessfulCoverageUtc && coverage.staleAfterMs ? `; its ${Math.round(coverage.staleAfterMs / 60_000)}-minute freshness bound was crossed at ${sourceTimeLabel(new Date(coverage.lastSuccessfulCoverageUtc).getTime() + coverage.staleAfterMs)}` : ""}. The issuance lane is held by this gate by design — each held cycle now records a HELD work check with this reason, so the hold is explained in the issuance status, not silent.` : "coverage is not verified, or scheduled recovery is still pending."} Discovery and research keep running; existing positions keep being monitored and settled.</p>}
     <div className="indicator-grid">
       <Metric label="Entry admission" value={health.entryAdmission === "open" ? "OPEN" : "HELD"}/>
       <Metric label="Coverage" value={coverageStatus}/>
@@ -400,7 +440,7 @@ function PaperPilot() {
     {run.data && <p className="paper-cycle-result">{run.data.summary}</p>}
     {(run.data?.delivery?.missingCapability ?? data?.delivery?.missingCapability) && <p className="source-warning">Delivery architecture: {run.data?.delivery?.missingCapability ?? data?.delivery?.missingCapability}</p>}
     <div className="command-actions"><button className="primary" onClick={() => run.mutate()} disabled={run.isPending}>{run.isPending ? "Running paper cycle…" : "Run explicit paper cycle"}</button><button onClick={() => status.refetch()} disabled={status.isFetching}>{status.isFetching ? "Refreshing…" : "Refresh evidence"}</button></div>
-    <MonitoringHealthPanel health={(monitoringQ.data as any)?.health ?? null} loading={monitoringQ.isPending}/>
+    <MonitoringHealthPanel health={(monitoringQ.data as any)?.health ?? null} engineSnapshot={(monitoringQ.data as any)?.engineSnapshot ?? null} loading={monitoringQ.isPending}/>
     <IssuanceWorkPanel/>
     <details><summary>Freeze, handoff and delivery evidence</summary><div className="venue-list"><div><span>Production hash</span><strong>{data?.freeze?.productionHash ?? "—"}</strong></div><div><span>C-2 hash</span><strong>{data?.freeze?.challengerHash ?? "—"}</strong></div><div><span>Storage</span><strong>{data?.segregation?.paperTable ?? "paper_signals"} · not {data?.segregation?.legacyTable ?? "generated_signals"}</strong></div><div><span>Run-linked handoff</span><strong>{data?.handoff ? `handoff ${data.handoff.id} · discovery ${data.handoff.discoveryRunId}` : "No completed handoff"}</strong></div><div><span>Delivery destination</span><strong>{data?.delivery?.destination ?? "—"}</strong></div><div><span>Acknowledgement path</span><strong>{data?.delivery?.acknowledgementPath ?? "—"}</strong></div><div><span>Fixed readout</span><strong>{data?.freeze?.collectionPlan?.readoutBy ? new Date(data.freeze.collectionPlan.readoutBy).toLocaleDateString() : "Feb 6, 2027"}</strong></div></div></details>
     {data?.handoff?.perCandidateReasons?.length ? <details><summary>Pre-filter candidate reasons · {data.handoff.perCandidateReasons.length}</summary><div className="venue-list">{data.handoff.perCandidateReasons.map((row:any) => <div key={row.candidateKey}><span>{row.symbol} · {row.direction ?? "unqualified"} · {row.stage}</span><strong>{row.outcome} · {row.reasonCode}</strong><small>{row.reason}</small><DeliveryChip alerts={alertRows} contractId={row.candidateKey}/>{plainStateForCandidateKey(row.candidateKey) ? <small>{plainStateForCandidateKey(row.candidateKey)}</small> : null}</div>)}</div></details> : null}
@@ -585,6 +625,15 @@ function TheoryDetailBody({ theory, openSymbol }: { theory: any; openSymbol: (sy
     {theory.withdrawal ? <div className="withdrawn-notice"><strong>WITHDRAWN · {theory.withdrawal.reason}</strong><p>Withdrawn {theory.withdrawal.withdrawnAt ? new Date(theory.withdrawal.withdrawnAt).toLocaleString() : "time unavailable"} by {theory.withdrawal.withdrawnBy ?? "unknown"}. Original reasoning preserved below for inspection; it no longer leads summaries or notifications.</p></div> : null}
     {theory.mode === "contested" && <div className="no-pick">CONTESTED · NO DIRECTIONAL PICK</div>}
     <TheoryScore theory={theory}/>
+    <div className="theory-record" aria-label="Theory record">
+      <div><span>Assets</span><strong>{theory.linkedSymbol || "Cross-market"}{Array.isArray(theory.snapshot?.linkedCoins) && theory.snapshot.linkedCoins.length > 1 ? ` · ${theory.snapshot.linkedCoins.map((coin: any) => coin.symbol).join(" · ")}` : ""}</strong></div>
+      <div><span>Status</span><strong>{theory.status === "live" ? "Active · evidence checks passed" : theory.status}{theory.invalidatedAt ? ` · invalidated ${new Date(theory.invalidatedAt).toLocaleString()}` : ""}</strong></div>
+      <div><span>Recorded</span><strong>{new Date(theory.createdAt).toLocaleString()}</strong></div>
+      <div><span>Last checked</span><strong>{new Date(theory.lastCheckedAt).toLocaleString()} · {ageLabel(Date.now() - new Date(theory.lastCheckedAt).getTime())}</strong></div>
+      <div><span>Evidence balance</span><strong>{theory.layers?.filter((layer: any) => String(layer.status).toUpperCase() === "AGREE").length ?? 0} supporting · {theory.layers?.filter((layer: any) => String(layer.status).toUpperCase() === "DISAGREE").length ?? 0} counter · {theory.layers?.length ?? 0} layers total</strong></div>
+      {theory.snapshot?.integrityAudit ? <div><span>Latest recorded change</span><strong>{String(theory.snapshot.integrityAudit.action ?? "checked")} · prior status {String(theory.snapshot.integrityAudit.priorStatus ?? "unknown")} · {theory.snapshot.integrityAudit.checkedAt ? new Date(theory.snapshot.integrityAudit.checkedAt).toLocaleString() : "time unavailable"}</strong></div> : <div><span>Latest recorded change</span><strong>No status change recorded since this theory was stored; checks since then left the assessment unchanged.</strong></div>}
+      <div><span>Next useful check</span><strong>Automatic re-check on the bounded theory refresh cycle. The observable invalidation below is what ends this theory; the countercase is what to watch first.</strong></div>
+    </div>
     {theory.direction !== "none" && <div className={`direction ${theory.direction === "bullish" ? "up" : "down"}`}>{theory.direction.toUpperCase()}</div>}
     <TheoryIntegrity theory={theory}/>
     <div className="memo-label">WRITTEN THESIS MEMO</div>
@@ -1085,13 +1134,17 @@ function SourceHealthStrip() {
   </section>;
 }
 
-// Terminal-first delivery (design §2.4): Notifications section at the top of
-// the Opportunities view — the union of paper lifecycle events, discovery
-// opportunities (blocked ones render in place with their blocker reason),
-// and engine hits. Read state changes only through the explicit per-row ack
-// or Mark all read below; opening the view never marks anything read. Every
-// row prints event → stored (→ chat, once a digest has carried it) so the
-// notification delay is visible on the row itself.
+// Terminal-first delivery (design §2.4): Notifications live in their own
+// tab — the union of paper lifecycle events, discovery opportunities
+// (blocked ones render in place with their blocker reason), and engine
+// hits. This component mounts only when the Notifications tab is open, so
+// the inbox's full stored history is never fetched or rendered on the
+// Market home view. Read state changes only through the explicit per-row
+// ack or Mark all read below; opening the view never marks anything read.
+// Every row prints event → stored (→ chat, once a digest has carried it)
+// so the notification delay is visible on the row itself. Rows render in
+// pages per group (25 first, then +50 per "Show more") so a history of
+// several hundred stored rows never lands in the DOM all at once.
 function NotificationRow({ row, onAck, acking }: { row: any; onAck: (row: any) => void; acking: boolean }) {
   const stamp = (value: string | null | undefined) => value ? new Date(value).toLocaleString() : null;
   const historical = row.group === "expired" || row.chatLate === true;
@@ -1129,30 +1182,34 @@ function NotificationsSection() {
   const lifecycle = rows.filter((row) => row.group === "lifecycle");
   const expired = rows.filter((row) => row.group === "expired");
   const markAllRead = () => { rows.filter((row) => !row.read).forEach(ack); };
-  const groupBlock = (label: string, groupRows: any[]) => groupRows.length ? <div className="notification-group"><h3>{label}{counts ? ` · ${groupRows.filter((row) => !row.read).length} unread` : ""}</h3><div className="notification-list">{groupRows.map((row) => <NotificationRow key={`${row.store}-${row.id}`} row={row} onAck={ack} acking={acking}/>)}</div></div> : null;
+  const PAGE = 25;
+  const [visible, setVisible] = useState<Record<string, number>>({});
+  const shown = (key: string) => visible[key] ?? PAGE;
+  const showMore = (key: string) => setVisible((old) => ({ ...old, [key]: (old[key] ?? PAGE) + 50 }));
+  const groupBlock = (key: string, label: string, groupRows: any[]) => groupRows.length ? <div className="notification-group"><h3>{label}{counts ? ` · ${groupRows.filter((row) => !row.read).length} unread` : ""} · showing {Math.min(shown(key), groupRows.length)} of {groupRows.length}</h3><div className="notification-list">{groupRows.slice(0, shown(key)).map((row) => <NotificationRow key={`${row.store}-${row.id}`} row={row} onAck={ack} acking={acking}/>)}</div>{groupRows.length > shown(key) && <button type="button" className="text-action" aria-label={`Show more ${label} notifications`} onClick={() => showMore(key)}>Show more · {groupRows.length - shown(key)} remaining</button>}</div> : null;
   return <section className="terminal-section notifications-section" aria-label="Notifications">
-    <div className="panel-head"><div><p className="eyebrow cyan">Terminal inbox · opportunities + lifecycle</p><h2>Notifications{counts ? ` · ${counts.unread} unread` : ""}{counts?.historical ? ` · ${counts.historical} historical` : ""}</h2></div><div className="head-links"><button type="button" onClick={() => q.refetch()} disabled={q.isFetching}>{q.isFetching ? "Reloading…" : "Reload"}</button><button type="button" onClick={markAllRead} disabled={acking || !rows.some((row) => !row.read)}>Mark all read</button></div></div>
-    <p className="muted">Blocked opportunities stay visible with their blocker reason — visibility is never gated on paper qualification. Expired setups are kept for the record and are never actionable. Terminal visibility time is recorded separately from chat arrival: an item whose chat copy landed after its window closed reads as a historical notification, not an actionable entry. Read state is set only by your ack here; chat delivery never marks a row read.</p>
+    <div className="panel-head"><div><p className="eyebrow cyan">Terminal inbox · opportunities + lifecycle</p><h2>Notifications{counts ? ` · ${counts.total} stored · ${counts.unread} unread` : ""}{counts?.historical ? ` · ${counts.historical} historical` : ""}</h2></div><div className="head-links"><button type="button" onClick={() => q.refetch()} disabled={q.isFetching}>{q.isFetching ? "Reloading…" : "Reload"}</button><button type="button" onClick={markAllRead} disabled={acking || !rows.some((row) => !row.read)}>Mark all read</button></div></div>
+    {counts ? <div className="indicator-grid" aria-label="Notification totals by group"><Metric label="Stored total" value={num(counts.total)}/><Metric label="Unread" value={num(counts.unread)}/><Metric label="Actionable" value={num(counts.actionable)}/><Metric label="Lifecycle" value={num(counts.lifecycle)}/><Metric label="Expired" value={num(counts.expired)}/><Metric label="Historical" value={num(counts.historical)}/></div> : null}
+    <p className="muted">The stored total is every notification row committed since this inbox began, across paper lifecycle events, discovery opportunities and engine hits — a running record, not a pile of new alerts. Most rows sit under Lifecycle or Expired; only the Actionable group can still be acted on. Blocked opportunities stay visible with their blocker reason — visibility is never gated on paper qualification. Expired setups are kept for the record and are never actionable. Terminal visibility time is recorded separately from chat arrival: an item whose chat copy landed after its window closed reads as a historical notification, not an actionable entry. Read state is set only by your ack here; chat delivery never marks a row read.</p>
     {q.isPending ? <Empty>Loading notifications…</Empty> : q.data?.error ? <Empty>{q.data.error}</Empty> : !rows.length ? <Empty>No notifications stored yet — opportunities, blocked setups, engine hits and paper lifecycle events land here as they are committed.</Empty> : <>
-      {groupBlock("Actionable now", actionable)}
-      {groupBlock("Lifecycle", lifecycle)}
-      {expired.length ? <details className="notification-expired"><summary>Expired · {expired.length} ({expired.filter((row) => !row.read).length} unread) — record only, never actionable</summary><div className="notification-list">{expired.map((row) => <NotificationRow key={`${row.store}-${row.id}`} row={row} onAck={ack} acking={acking}/>)}</div></details> : null}
+      {groupBlock("actionable", "Actionable now", actionable)}
+      {groupBlock("lifecycle", "Lifecycle", lifecycle)}
+      {expired.length ? <details className="notification-expired"><summary>Expired · {expired.length} ({expired.filter((row) => !row.read).length} unread) — record only, never actionable · showing {Math.min(shown("expired"), expired.length)} of {expired.length}</summary><div className="notification-list">{expired.slice(0, shown("expired")).map((row) => <NotificationRow key={`${row.store}-${row.id}`} row={row} onAck={ack} acking={acking}/>)}</div>{expired.length > shown("expired") && <button type="button" className="text-action" aria-label="Show more Expired notifications" onClick={() => showMore("expired")}>Show more · {expired.length - shown("expired")} remaining</button>}</details> : null}
     </>}
   </section>;
 }
 
 function MarketDiscovery({ market, openCoin }: { market: any; openCoin: (id: string, symbol: string) => void }) {
   const qc = useQueryClient(); const [view, setView] = useState<"signals" | "news" | "fundamentals" | "perpboard" | "context">("signals"); const [lane, setLane] = useState<"main" | "meme">("main"); const [scope, setScope] = useState<"all" | "tier1" | "tier2">("all"); const [tier, setTier] = useState<"all" | "high" | "medium" | "low">("all"); const [sort, setSort] = useState<"alignment" | "return7d" | "volume" | "tier">("alignment");
-  const q = useQuery({ queryKey: ["market-discovery"], queryFn: () => api.getMarketDiscovery({}), staleTime: 300000 });
-  const run = useMutation({ mutationFn: () => api.runMarketDiscovery({ trigger: "manual" }), onSuccess: () => { qc.invalidateQueries({ queryKey: ["market-discovery"] }); qc.invalidateQueries({ queryKey: ["theory-watch"] }); } });
-  const latest = q.data?.run; const currentStatus = run.data?.status ?? latest?.status ?? "degraded"; const allSignals = q.data?.signals ?? []; const tierRank:any = { high:3, medium:2, low:1 }; const signals = allSignals.filter((item: any) => (lane === "meme" ? item.discoveryLane === "meme" : item.discoveryLane !== "meme") && (scope === "all" || item.discoveryTier === scope) && (tier === "all" || item.confidenceTier === tier)).sort((a:any,b:any) => sort === "return7d" ? (b.change7d ?? -999)-(a.change7d ?? -999) : sort === "volume" ? (b.volume24h ?? 0)-(a.volume24h ?? 0) : sort === "tier" ? (tierRank[b.confidenceTier] ?? 0)-(tierRank[a.confidenceTier] ?? 0) : (b.alignment ?? 0)-(a.alignment ?? 0));
+  const q = useQuery({ queryKey: ["market-discovery"], queryFn: () => api.getMarketDiscovery({}), staleTime: 300000, refetchInterval: (query) => ((query.state.data as any)?.activeRun ? 15_000 : false) });
+  const run = useMutation({ mutationFn: () => api.runMarketDiscovery({ trigger: "manual" }), onSuccess: () => { qc.invalidateQueries({ queryKey: ["market-discovery"] }); qc.invalidateQueries({ queryKey: ["theory-watch"] }); }, onSettled: () => { qc.invalidateQueries({ queryKey: ["market-discovery"] }); } });
+  const latest = q.data?.run; const activeRun = q.data?.activeRun ?? null; const currentStatus = activeRun ? "running" : run.data?.status ?? latest?.status ?? "degraded"; const allSignals = q.data?.signals ?? []; const tierRank:any = { high:3, medium:2, low:1 }; const signals = allSignals.filter((item: any) => (lane === "meme" ? item.discoveryLane === "meme" : item.discoveryLane !== "meme") && (scope === "all" || item.discoveryTier === scope) && (tier === "all" || item.confidenceTier === tier)).sort((a:any,b:any) => sort === "return7d" ? (b.change7d ?? -999)-(a.change7d ?? -999) : sort === "volume" ? (b.volume24h ?? 0)-(a.volume24h ?? 0) : sort === "tier" ? (tierRank[b.confidenceTier] ?? 0)-(tierRank[a.confidenceTier] ?? 0) : (b.alignment ?? 0)-(a.alignment ?? 0));
   return <div className="stack discovery-shell">
-    <NotificationsSection/>
     <ResearchShortlistStrip/>
     <MarketRead market={market} compact/>
     <UniverseTiers openCoin={openCoin}/>
     <section className="discovery-command"><div><p className="eyebrow cyan">Automatic market discovery</p><h2>Verified perp universe → evidence flags</h2><p>The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.</p></div><button className="primary" onClick={() => run.mutate()} disabled={run.isPending}>{run.isPending ? "SCANNING TIERS…" : "RUN NOW"}</button></section>
-    <section className={`discovery-run ${currentStatus}`}><div><span>LAST COMPLETED SCAN</span><b>{latest ? new Date(latest.completedAt).toLocaleString() : "No scan stored yet"}</b><em className="run-status">{currentStatus.toUpperCase()}</em></div><strong>{run.data?.message ?? latest?.summary ?? q.data?.error ?? "Run the first scan to build the discovery feed."}</strong>{latest && <div className="scan-stats"><Metric label="Universe" value={num(latest.universeSize)}/><Metric label="Shortlist" value={num(latest.shortlisted)}/><Metric label="News impacts" value={num(latest.newsCount)}/><Metric label="Theories" value={num(latest.theoryCount)}/></div>}{latest?.sourceStatus?.length ? <div className="source-health">{latest.sourceStatus.map((source: any) => <div key={source.source} className={source.status}><b>{source.source}</b><span>{source.status}</span><small>{plainUpstreamError(source.detail)}</small></div>)}</div> : null}</section>
+    <section className={`discovery-run ${currentStatus}`}><div><span>LAST COMPLETED SCAN</span><b>{latest ? new Date(latest.completedAt).toLocaleString() : "No scan stored yet"}</b><em className="run-status">{currentStatus.toUpperCase()}</em></div>{activeRun ? <strong>{`Scan in progress · started ${new Date(activeRun.startedAt).toLocaleString()} · stage ${activeRun.lastCheckpointStage ?? "starting"} — the last completed scan stays below and this panel refreshes itself when the run lands.`}</strong> : <strong>{run.data?.message ?? latest?.summary ?? q.data?.error ?? "Run the first scan to build the discovery feed."}</strong>}{latest && <div className="scan-stats"><Metric label="Universe" value={num(latest.universeSize)}/><Metric label="Shortlist" value={num(latest.shortlisted)}/><Metric label="News impacts" value={num(latest.newsCount)}/><Metric label="Theories" value={num(latest.theoryCount)}/></div>}{latest?.sourceStatus?.length ? <div className="source-health">{latest.sourceStatus.map((source: any) => <div key={`${source.source}-${source.detail?.slice(0, 24) ?? ""}`} className={source.status}><b>{source.source}</b><span>{source.status}</span><small>{plainUpstreamError(source.detail)}</small></div>)}</div> : null}</section>
     {(q.data?.coverageGaps ?? []).length ? <section className="terminal-section coverage-gaps" aria-label="Discovery coverage gaps"><div className="panel-head"><div><p className="eyebrow cyan">Coverage gaps · recorded, not reopened</p><h2>Failed discovery slots · {(q.data?.coverageGaps ?? []).length}</h2></div></div><p className="muted">These scheduled discovery slots failed, timed out or were missed in the last 14 days and produced no scan. They stay on record as coverage gaps: recovery is one bounded attempt per slot by the recovery watch, and an exhausted slot is never reopened from the terminal.</p><div className="venue-list">{(q.data?.coverageGaps ?? []).map((gap: any) => <div key={gap.runId}><span>Run {gap.runId} · {new Date(gap.startedAt).toLocaleString()}</span><strong>{String(gap.status).toUpperCase()} · coverage gap</strong><small>{gap.summary}</small>{gap.failedSources?.length ? <small>{gap.failedSources.join(" · ")}</small> : null}</div>)}</div></section> : null}
     <div className="seg theory-mode"><button className={view === "signals" ? "active" : ""} onClick={() => setView("signals")}>Auto signals</button><button className={view === "news" ? "active" : ""} onClick={() => setView("news")}>News impact</button><button className={view === "fundamentals" ? "active" : ""} onClick={() => setView("fundamentals")}>Fundamentals</button><button className={view === "perpboard" ? "active" : ""} onClick={() => setView("perpboard")}>HL perp board</button><button className={view === "context" ? "active" : ""} onClick={() => setView("context")}>Market context</button></div>
     {view === "signals" && <><ViewLabel view="opportunities"/><ChartOpportunitiesBanner/><section className={`terminal-section ${lane === "meme" ? "meme-lane" : ""}`}><div className="seg lane-switch" aria-label="Discovery lane"><button className={lane === "main" ? "active" : ""} onClick={() => setLane("main")}>Main Discovery</button><button className={lane === "meme" ? "active" : ""} onClick={() => setLane("meme")}>Meme Lane</button></div><div className="panel-head"><div><p className="eyebrow cyan">{lane === "meme" ? "Micro-cap validator stack" : "Ranked scanner output"}</p><h2>{lane === "meme" ? "Mindshare first · measured confirmation second" : "Volume, interest and momentum flags"}</h2></div><span className="alignment-note">{lane === "meme" ? "volume excluded" : "alignment, not probability"}</span></div>{lane === "meme" && <p className="meme-rule">Entry requires a CoinGecko meme-category micro-cap and an Elfa mindshare spike. Open a row to inspect the machine evidence. Nansen netflow and holder-growth witnesses stay outside terminal scoring; missing validators remain visible as NO_DATA.</p>}<div className="seg signal-filters"><button className={scope === "all" ? "active" : ""} onClick={() => setScope("all")}>All</button><button className={scope === "tier1" ? "active" : ""} onClick={() => setScope("tier1")}>T1 · full engine only</button><button className={scope === "tier2" ? "active" : ""} onClick={() => setScope("tier2")}>Legacy triggered rows</button></div><div className="seg signal-filters" aria-label="Evidence tier filter">{(["all", "high", "medium", "low"] as const).map((name) => <button key={name} className={tier === name ? "active" : ""} onClick={() => setTier(name)}>{name === "all" ? "All tiers" : name}</button>)}</div><div className="sticky-sort" aria-label="Sort scanner"><span>Sort</span>{(["alignment","return7d","volume","tier"] as const).map((name)=><button key={name} className={sort===name?"active":""} onClick={()=>setSort(name)}>{name === "return7d" ? "7D return" : name === "volume" ? "24H volume" : name}</button>)}</div>{signals.length ? <div className="discovery-signal-list">{signals.map((item: any) => <button key={item.id} type="button" aria-label={`Open ${item.symbol} coin dossier`} onClick={() => openCoin(item.coinId, item.symbol)}><div className="signal-rank"><b>#{item.rank ?? "—"}</b><span>{item.discoveryTier === "tier2" ? "Tier 2 · triggered" : "Tier 1 · core"}</span></div><div><strong>{item.symbol} · {item.setupType}</strong><small>{item.confidenceTier?.toUpperCase() ?? "LOW"} · {item.passedDimensions ?? 0}/5 gates · {item.researchState === "validated" ? "validated flag" : item.researchState === "research_required" ? "research required" : "monitor only"}</small>{item.triggerReasons?.length ? <small>Scan reason · {item.triggerReasons.join(" · ")}</small> : null}{item.discoveryLane === "meme" && item.socialSnapshot ? <small className="meme-proof">ELFA · mindshare {item.socialSnapshot.changePercent == null ? "spike detected" : `${item.socialSnapshot.changePercent >= 0 ? "+" : ""}${num(item.socialSnapshot.changePercent)}%`} · {item.memeValidation?.state ? `Nansen ${String(item.memeValidation.state).replaceAll("_", " ")}` : "Nansen + holder growth pending external review"}</small> : null}<small className={item.sourceAsOf && Date.now() - new Date(item.sourceAsOf).getTime() > 30 * 60_000 ? "stale" : ""}>{item.sourceAsOf ? `${Date.now() - new Date(item.sourceAsOf).getTime() > 30 * 60_000 ? "STALE · " : ""}as of ${new Date(item.sourceAsOf).toLocaleString()}` : "Source timestamp unavailable"}</small></div><span className={item.direction === "long" ? "up" : item.direction === "short" ? "down" : "muted"}>{item.direction.toUpperCase()}</span><em>{item.dimensions?.length && item.reliability ? `${item.direction.toUpperCase()} · ${item.alignment} / 100` : "RATING WITHHELD"}</em>{item.dimensions?.length ? <ReliabilityLine data={item.reliability}/> : null}{item.glance ? <small className="glance-line">{item.glance.read} Strength — {item.glance.strength} · Risk — {item.glance.risk}</small> : null}<div className="signal-measures"><span>24H {percent(item.change24h)}</span><span>7D {percent(item.change7d)}</span><span>30D {percent(item.change30d)}</span><span>Turnover {item.turnover == null ? "—" : `${(item.turnover * 100).toFixed(1)}%`}</span><span>Invalidation {item.invalidationLevel == null ? "not set · monitor only" : money(item.invalidationLevel)}</span></div><p className="score-formula">{item.discoveryLane === "meme" ? "MEME LANE validator order: Elfa mindshare spike → Nansen Smart Money 24H netflow → holder growth. Nansen is not called by this terminal; volume is displayed as context but never validates or rejects this lane." : "Score = Σ factor contribution. Trend 20 + momentum 15 (24H/7D — 1H noise excluded) + volatility 10 + size-aware spot-volume participation 15 + funding crowding 10 + network fundamentals (TVL trend) 15 + supply overhang 15. PASS earns full weight; MIXED half; FAIL, NEUTRAL (no signal) or unavailable zero. 24H volume is CoinGecko consolidated SPOT volume, never perp volume; the shortlist bar is $5M spot volume. Neutral funding is labeled no-signal, never a penalty."}</p><div className="dimension-strip">{(item.dimensions ?? []).map((dimension:any) => <span key={dimension.name} className={dimension.status} title={dimension.evidence}><b>{dimension.name}</b> · {dimension.reading} · weight {dimension.weight} · contribution {dimension.contribution} · {dimension.status}</span>)}</div><small className="evidence-link">Open dossier for source evidence and disconfirmation →</small></button>)}</div> : <Empty>{latest ? "No signals match these tier filters." : "No scheduled scan has completed yet."}</Empty>}<details className="passed-log"><summary>Passed log · rejected / monitor-only setups</summary><p>Every retained low-tier shortlist row stays visible with the exact failed or unavailable gates and later 5D/14D/30D outcomes. This scores rejects over time instead of deleting them.</p>{allSignals.filter((item:any)=>item.discoveryLane !== "meme" && (item.confidenceTier === "low" || item.researchState === "monitor")).map((item:any)=><div key={item.id}><b>{item.symbol} · passed</b><span>{(item.dimensions ?? []).filter((d:any)=>d.status === "fail" || d.status === "unavailable").map((d:any)=>`${d.name}: ${d.evidence}`).join(" · ") || "Insufficient evidence density"}</span><small>5D {item.outcome5 ?? "pending"} · 14D {item.outcome14 ?? "pending"} · 30D {item.outcome30 ?? "pending"}</small></div>)}</details></section><AllObservations openCoin={openCoin}/></>}
@@ -1183,8 +1240,6 @@ function CompletePicture({ d }: { d: any }) {
 }
 
 function CoinAttention({ asset }: { asset: any }) { const attention = useQuery({ queryKey: ["coin-attention", asset.id], queryFn: () => api.getAttention({ coinId: asset.id, contract: asset.primaryContract, network: asset.primaryNetwork }) }); const a = attention.data?.attention; return <section className="terminal-section"><div className="panel-head"><div><p className="eyebrow cyan">Measured attention</p><h2>{asset.symbol} activity</h2></div><Source>CoinGecko / DexScreener</Source></div>{a ? <div className="indicator-grid"><Metric label="Trending rank" value={a.trendingRank ? `#${a.trendingRank}` : "Not trending"}/><Metric label="DEX boosted" value={a.boosted ? `Yes · ${num(a.boostAmount)}` : "Not seen"}/><Metric label="24H buyers" value={num(a.pool?.buyers24h)}/><Metric label="24H sellers" value={num(a.pool?.sellers24h)}/></div> : <Empty>{attention.isPending ? "Checking public attention signals…" : attention.data?.error ?? "No verified attention data returned."}</Empty>}<p className="muted">Activity is an attention proxy, not proof of accumulation or directional sentiment.</p></section>; }
-
-function MarketWorkspace({ market, openCoin }: { market: any; openCoin: (id: string, symbol: string) => void }) { const rotation = useQuery({ queryKey: ["rotation"], queryFn: () => api.getRotation({}) }); const cycle = useQuery({ queryKey: ["btc-cycle"], queryFn: () => api.getCycleAndRatios({}) }); return <div className="stack"><MarketDiscovery market={market} openCoin={openCoin}/><Rotation cycle={cycle.data} rotation={rotation.data} openCoin={openCoin}/></div>; }
 
 function CrowdPricingPanel({ data }: { data: any }) {
   if (!data || data.state === "no_data") return <section className="terminal-section crowd-pricing-panel no-data"><div className="panel-head"><div><p className="eyebrow cyan">Macro odds</p><h2>Crowd pricing</h2></div><Source>Polymarket</Source></div><p className="crowd-label">{data?.label ?? "Implied crowd prices from Polymarket prediction markets - what bettors will pay, not probabilities."}</p><Empty>{data?.reason ?? "No liquid relevant market passed the required gate."}</Empty></section>;
@@ -1494,7 +1549,7 @@ function SchedulerReceiptsPanel() {
 // returns the in-flight run's proof stamps instead of starting a second run.
 function DiscoveryRunTrigger() {
   const qc = useQueryClient();
-  const run = useMutation({ mutationFn: () => api.runMarketDiscovery({ trigger: "manual" }), onSuccess: () => { qc.invalidateQueries({ queryKey: ["market-discovery"] }); qc.invalidateQueries({ queryKey: ["scheduler-invocations"] }); qc.invalidateQueries({ queryKey: ["source-health"] }); } });
+  const run = useMutation({ mutationFn: () => api.runMarketDiscovery({ trigger: "manual" }), onSuccess: () => { qc.invalidateQueries({ queryKey: ["market-discovery"] }); qc.invalidateQueries({ queryKey: ["scheduler-invocations"] }); qc.invalidateQueries({ queryKey: ["source-health"] }); }, onSettled: () => { qc.invalidateQueries({ queryKey: ["market-discovery"] }); qc.invalidateQueries({ queryKey: ["scheduler-invocations"] }); } });
   const d = run.data;
   return <section className="terminal-section" aria-label="On-demand discovery run">
     <div className="panel-head"><div><p className="eyebrow cyan">Discovery · on demand</p><h2>Run market discovery now</h2></div><button className="primary" onClick={() => run.mutate()} disabled={run.isPending}>{run.isPending ? "RUNNING…" : "RUN DISCOVERY"}</button></div>
@@ -1513,7 +1568,11 @@ function DiscoveryRunTrigger() {
 
 function AuditWorkspace() { const [view, setView] = useState<"foundation" | "evidence" | "reverse" | "twelve" | "attribution">("foundation"); return <div className="stack"><ViewLabel view="diagnostics"/><DiscoveryRunTrigger/><div className="seg workspace-switch audit-switch" role="group" aria-label="Measurement view"><button className={view === "foundation" ? "active" : ""} onClick={() => setView("foundation")}>Foundation</button><button className={view === "evidence" ? "active" : ""} onClick={() => setView("evidence")}>Evidence</button><button className={view === "reverse" ? "active" : ""} onClick={() => setView("reverse")}>Reverse</button><button className={view === "twelve" ? "active" : ""} onClick={() => setView("twelve")}>12-point audit</button><button className={view === "attribution" ? "active" : ""} onClick={() => setView("attribution")}>Attribution</button></div>{view === "foundation" ? <FoundationWorkspace/> : view === "evidence" ? <EvidenceWorkspace/> : view === "reverse" ? <ReverseWorkspace/> : view === "twelve" ? <TwelvePointAuditWorkspace/> : <WinnerLoserAuditWorkspace/>}<SchedulerReceiptsPanel/><SourceJobs/></div>; }
 
-function SignalsWorkspace({ d, openCoin }: { d: any | null; openCoin: (id: string, symbol: string) => void }) { const [view, setView] = useState<"scanner" | "coin">("scanner"); return <div className="stack"><ResearchShortlistStrip/><ViewLabel view="paper"/><PaperPilot/><div className="seg workspace-switch"><button className={view === "scanner" ? "active" : ""} onClick={() => setView("scanner")}>Tracker</button><button className={view === "coin" ? "active" : ""} onClick={() => setView("coin")}>Coin check</button></div>{view === "scanner" ? <><Tracker openCoin={openCoin}/><WatchlistDashboard openCoin={openCoin}/></> : d ? <div className="stack"><SignalTape d={d}/><EntryTiming asset={d.asset}/><Sizing asset={d.asset}/></div> : <CoinRequired onHome={() => setView("scanner")}/>}</div>; }
+// Coin check (formerly the Signals tab's coin view): named setups, entry
+// timing and sizing for the selected coin. Its scanner half moved to The
+// Book (Tracker) and Opportunities (shortlist + scanner) in the four-section
+// rebuild; nothing here was rescored or regated.
+function CoinCheck({ d }: { d: any }) { return <div className="stack"><SignalTape d={d}/><EntryTiming asset={d.asset}/><Sizing asset={d.asset}/></div>; }
 function WatchlistWorkspace({ openCoin }: { openCoin: (id: string, symbol: string) => void }) { return <div className="stack"><WatchlistDashboard openCoin={openCoin}/></div>; }
 
 function JournalTradeRow({ trade }: { trade: any }) {
@@ -2073,9 +2132,110 @@ function AssetView({ focusSymbol, onOpenDossier }: { focusSymbol?: string; onOpe
   </div>;
 }
 
+// ---- Four-section terminal components (2026-10-23) ------------------------
+// The Read: horizon outlook built from the stored market read's own horizon
+// returns (7D short / 30D medium / 90D long) plus its evidence bullets.
+// Nothing here computes a new score; averages describe the covered universe
+// the read already measured, and horizon disagreements are listed by name.
+function HorizonOutlook({ market }: { market: any }) {
+  const m = market?.data; const brief = m?.dayBrief; const rows: any[] = (m?.rows ?? []).filter((row: any) => row.available);
+  if (!m) return <section className="terminal-section outlook"><div className="panel-head"><div><p className="eyebrow cyan">The Read · market outlook</p><h2>Loading the stored market read…</h2></div></div><p className="muted">{market?.error ?? "The outlook appears when the market read lands; opening this section never starts a scan."}</p></section>;
+  const horizon = (key: "d7" | "d30" | "d90", label: string) => {
+    const values = rows.map((row) => row.returns?.[key]).filter((value: any): value is number => typeof value === "number" && Number.isFinite(value));
+    const mean = values.length ? values.reduce((a: number, b: number) => a + b, 0) / values.length : null;
+    const breadth = values.length ? values.filter((value: number) => value > 0).length / values.length * 100 : null;
+    const lean = mean == null ? "Unmeasured" : mean > 1 ? "Risk-on lean" : mean < -1 ? "Risk-off lean" : "Mixed / flat";
+    return { label, mean, breadth, lean };
+  };
+  const horizons = [horizon("d7", "Short · 7 days"), horizon("d30", "Medium · 30 days"), horizon("d90", "Long · 90 days")];
+  const disagreements = rows.filter((row) => typeof row.returns?.d7 === "number" && typeof row.returns?.d90 === "number" && Math.sign(row.returns.d7) !== Math.sign(row.returns.d90) && row.returns.d7 !== 0 && row.returns.d90 !== 0);
+  return <section className="terminal-section outlook" aria-label="Market outlook by horizon">
+    <div className="panel-head"><div><p className="eyebrow cyan">The Read · market outlook</p><h2>{brief ? `${brief.direction} overall` : m.synthesis}</h2></div><span className="feed-badge">{m.partial ? "PARTIAL FEED" : "FULL FEED"}</span></div>
+    <p className="muted">As of {m.asOf ? sourceTimeLabel(new Date(m.asOf).getTime()) : "timestamp unavailable"} · {m.refreshed} of {rows.length + (m.unavailable ?? 0)} covered instruments have complete price + venue coverage{m.unavailable ? ` · ${m.unavailable} partial (${(m.unavailableSymbols ?? []).join(", ")})` : ""}. Descriptive tape averages over the covered universe — not a forecast and not a vote.</p>
+    <div className="outlook-horizons">{horizons.map((h) => <article key={h.label}><span>{h.label}</span><strong className={h.mean == null ? "" : h.mean >= 0 ? "up" : "down"}>{h.mean == null ? "—" : percent(h.mean)}</strong><small>{h.lean} · breadth {h.breadth == null ? "—" : `${h.breadth.toFixed(0)}% positive`}</small></article>)}</div>
+    {brief?.majorScores?.length ? <div className="venue-list">{brief.majorScores.map((row: any) => <div key={row.symbol}><span>{row.symbol} · {row.positiveHorizons}/{row.measuredHorizons} horizons positive</span><strong>alignment {row.alignment == null ? "—" : `${row.alignment > 0 ? "+" : ""}${row.alignment}`}</strong></div>)}</div> : null}
+    {m.regimeContext ? <p className="interpret">Regime context · Fear &amp; Greed {m.regimeContext.fearGreed == null ? "UNVERIFIED" : `${num(m.regimeContext.fearGreed)}${m.regimeContext.fearGreedLabel ? ` (${m.regimeContext.fearGreedLabel})` : ""}`} · Altcoin Season Index {m.regimeContext.altcoinSeasonIndex == null ? "UNVERIFIED" : num(m.regimeContext.altcoinSeasonIndex)} · {m.regimeContext.source} · context only, never a signal vote.</p> : null}
+    {brief?.bullets?.length ? <div className="outlook-bullets"><h3>Main changes, evidence &amp; disagreements</h3>{brief.bullets.map((bullet: any) => <article key={bullet.id}><p>{bullet.claim}</p>{(bullet.evidence ?? []).map((item: any, index: number) => <small key={index}>{item.label} · {item.value} · {item.source}{item.asOf ? ` · ${sourceTimeLabel(new Date(item.asOf).getTime())}` : ""}{item.url ? <> · <a href={item.url} target="_blank" rel="noreferrer">source ↗</a></> : null}</small>)}</article>)}</div> : null}
+    {disagreements.length ? <p className="interpret"><b>Horizon disagreement:</b> {disagreements.map((row) => `${row.symbol} (${percent(row.returns.d7)} 7D vs ${percent(row.returns.d90)} 90D)`).join(" · ")} — short and long tapes point opposite ways on these names; treat single-horizon reads on them as incomplete.</p> : null}
+    <p className="score-disclaimer">Combined direction reliability: {brief?.reliability ?? "UNCALIBRATED"} — track record not yet measured for this combined rule. {brief?.methodology ?? ""}</p>
+  </section>;
+}
+
+// Theory updates surfaced in The Read: the most recently re-checked stored
+// theories, read from the same stored list the Research section uses.
+// Opening The Read performs this one small cached read only.
+function TheoryUpdates({ onOpenTheories }: { onOpenTheories: () => void }) {
+  const q = useQuery({ queryKey: ["read-theory-updates"], queryFn: () => readTheoryWithDeadline(async () => { const result = await api.listTheoryWatch({ limit: 25 }); if (result.error) throw new Error(result.error); return result; }), staleTime: 300000, retry: false });
+  const rows = [...(q.data?.theories ?? [])].sort((a: any, b: any) => new Date(b.lastCheckedAt).getTime() - new Date(a.lastCheckedAt).getTime()).slice(0, 6);
+  return <section className="terminal-section theory-updates" aria-label="Recent theory updates">
+    <div className="panel-head"><div><p className="eyebrow cyan">Theory updates</p><h2>What changed in active theories</h2></div><button className="text-action" onClick={onOpenTheories}>Open theories →</button></div>
+    {q.isPending ? <Empty>Reading stored theory updates…</Empty> : q.error ? <p className="source-warning">Theory updates unavailable: {q.error.message} Stored theories are unaffected; open Research → Theories to retry.</p> : rows.length ? <div className="theory-update-list">{rows.map((theory: any) => { const checkedMs = new Date(theory.lastCheckedAt).getTime(); const fresh = Date.now() - checkedMs < 24 * 3_600_000; return <article key={theory.id} className={fresh ? "changed" : ""}>
+      <div><strong>{theory.headline}</strong><small>{theory.linkedSymbol ? `${theory.linkedSymbol} · ` : ""}{theory.sector} · recorded {dateLabel(new Date(theory.createdAt).getTime())}</small></div>
+      <span className={`status ${theory.status}`}>{theory.status === "live" ? "ACTIVE" : theory.status.toUpperCase()}</span>
+      {theory.direction !== "none" && <span className={theory.direction === "bullish" ? "up" : "down"}>{theory.direction.toUpperCase()}</span>}
+      <small className="theory-update-age">{fresh ? "Updated " : "Checked "}{ageLabel(Date.now() - checkedMs)} ago · {theory.counts?.agreeingLayers ?? 0} supporting / {theory.counts?.disagreeingLayers ?? 0} counter layers</small>
+    </article>; })}</div> : <Empty>No stored theories yet. Run discovery from Research → Theories.</Empty>}
+    <p className="muted">Highlighting follows the stored last-checked time — a theory re-checked in the last 24 hours is lit; quiet theories stay listed in Research with their full history.</p>
+  </section>;
+}
+
+function RotationPanel({ openCoin }: { openCoin: (id: string, symbol: string) => void }) { const rotation = useQuery({ queryKey: ["rotation"], queryFn: () => api.getRotation({}) }); const cycle = useQuery({ queryKey: ["btc-cycle"], queryFn: () => api.getCycleAndRatios({}) }); return <Rotation cycle={cycle.data} rotation={rotation.data} openCoin={openCoin}/>; }
+
+// Opportunities: one card per live idea, merged from stored sources that
+// already exist — paper pilot signals (confirmed entries), discovery scan
+// rows (pending setups and research ideas, partial research included with
+// its missing gates named) and active theories (theory-led ideas). State is
+// labeled on the card face; change highlighting follows stored timestamps.
+// No new score, filter or gate is introduced by this feed.
+type OppState = "entry" | "pending" | "idea" | "theory";
+const OPP_STATE_LABEL: Record<OppState, string> = { entry: "Confirmed paper entry", pending: "Pending setup", idea: "Research idea", theory: "Theory-led idea" };
+const OPP_STATE_RANK: Record<OppState, number> = { entry: 0, pending: 1, idea: 2, theory: 3 };
+function OpportunityFeed({ openCoin, openSymbol, onOpenTheories }: { openCoin: (id: string, symbol: string) => void; openSymbol: (symbol: string) => void; onOpenTheories: () => void }) {
+  const discovery = useQuery({ queryKey: ["market-discovery"], queryFn: () => api.getMarketDiscovery({}), staleTime: 300000 });
+  const paper = useQuery({ queryKey: ["paper-pilot-status"], queryFn: () => api.getPaperPilotStatus({ emitTestAlert: false }), staleTime: 30_000 });
+  const theories = useQuery({ queryKey: ["opportunity-theories"], queryFn: () => api.listTheoryWatch({ limit: 25 }), staleTime: 300000 });
+  const [open, setOpen] = useState<string | null>(null);
+  type Card = { key: string; symbol: string; direction: string; horizon: string; why: string; freshAt: number | null; state: OppState; openAction: () => void; detail: () => ReactNode };
+  const cards: Card[] = [];
+  for (const signal of ((paper.data as any)?.signals ?? [])) {
+    cards.push({ key: `paper-${signal.paperSignalId}`, symbol: signal.symbol, direction: String(signal.direction ?? ""), horizon: signal.horizon ?? "Frozen paper contract", why: `Issued paper ${String(signal.direction ?? "").toUpperCase()} · entry ${money(signal.entryPrice)} · stop ${money(signal.stopPrice)} · target ${money(signal.targetPrice)}`, freshAt: signal.entryAt ? new Date(signal.entryAt).getTime() : signal.decisionAt ? new Date(signal.decisionAt).getTime() : null, state: "entry", openAction: () => openSymbol(signal.symbol), detail: () => <div className="opp-detail"><p>Decision {signal.decisionAt ? sourceTimeLabel(new Date(signal.decisionAt).getTime()) : "time unavailable"} · entry observed {signal.entryAt ? sourceTimeLabel(new Date(signal.entryAt).getTime()) : "not yet"} · {signal.venue} {signal.instrument}. Monitoring and settlement records for this position live in The Book.</p></div> });
+  }
+  for (const item of (discovery.data?.signals ?? [])) {
+    const missing = (item.dimensions ?? []).filter((dimension: any) => dimension.status === "fail" || dimension.status === "unavailable");
+    cards.push({ key: `scan-${item.id}`, symbol: item.symbol, direction: String(item.direction ?? ""), horizon: "5D / 14D / 30D outcome windows", why: item.triggerReasons?.length ? item.triggerReasons.join(" · ") : item.glance?.read ?? item.setupType, freshAt: item.sourceAsOf ? new Date(item.sourceAsOf).getTime() : null, state: item.researchState === "validated" ? "pending" : "idea", openAction: () => openCoin(item.coinId, item.symbol), detail: () => <div className="opp-detail">
+      <div className="levels"><Metric label="Invalidation" value={item.invalidationLevel == null ? "Not set · monitor only" : money(item.invalidationLevel)} tone="down"/><Metric label="24H" value={percent(item.change24h)}/><Metric label="7D" value={percent(item.change7d)}/><Metric label="30D" value={percent(item.change30d)}/></div>
+      {item.dimensions?.length ? <div className="dimension-strip">{item.dimensions.map((dimension: any) => <span key={dimension.name} className={dimension.status} title={dimension.evidence}><b>{dimension.name}</b> · {dimension.reading} · {dimension.status}</span>)}</div> : <p className="muted">Factor ledger unavailable for this row — the rating is withheld rather than estimated.</p>}
+      {missing.length ? <p className="interpret"><b>Limitations:</b> {missing.map((dimension: any) => `${dimension.name} (${dimension.status})`).join(" · ")} — partial research stays visible; these gaps are named, not hidden.</p> : null}
+      {item.dimensions?.length && item.reliability ? <ReliabilityLine data={item.reliability}/> : <p className="muted">Track record not yet measured for this scan row.</p>}
+    </div> });
+  }
+  for (const theory of (theories.data?.theories ?? [])) {
+    if (theory.status === "invalidated" || !theory.linkedSymbol) continue;
+    cards.push({ key: `theory-${theory.id}`, symbol: theory.linkedSymbol, direction: String(theory.direction ?? "none"), horizon: `${theory.sector} · full record in Research`, why: theory.headline, freshAt: theory.lastCheckedAt ? new Date(theory.lastCheckedAt).getTime() : null, state: "theory", openAction: onOpenTheories, detail: () => <div className="opp-detail"><p>{theory.counts?.layers ?? 0} evidence layers · {theory.counts?.agreeingLayers ?? 0} supporting / {theory.counts?.disagreeingLayers ?? 0} counter · {theory.counts?.sources ?? 0} sources · evidence tier {String(theory.evidenceTier ?? theory.confidence).toUpperCase()}. Open Research → Theories for the dated evidence, countercase, invalidation and history.</p></div> });
+  }
+  const seen = new Set<string>(); const merged = cards.filter((card) => { const dedupKey = `${card.symbol}-${card.state}`; if (seen.has(dedupKey)) return false; seen.add(dedupKey); return true; })
+    .sort((a, b) => (OPP_STATE_RANK[a.state] ?? 9) - (OPP_STATE_RANK[b.state] ?? 9) || (b.freshAt ?? 0) - (a.freshAt ?? 0)).slice(0, 15);
+  const loading = discovery.isPending && paper.isPending && theories.isPending;
+  return <section className="terminal-section opportunity-feed" aria-label="Opportunities">
+    <ViewLabel view="opportunities"/>
+    <div className="panel-head"><div><p className="eyebrow cyan">What deserves attention · why now</p><h2>Opportunity cards</h2></div><span className="alignment-note">state labeled on every card</span></div>
+    <p className="muted">Merged from stored paper signals, the latest discovery scan and active theories. An active opportunity stays listed between changes — only the highlight follows freshness. Partial research is shown with its missing evidence named; full entry requirements apply only to issued paper setups in The Book.</p>
+    {loading ? <Empty>Loading stored opportunities…</Empty> : merged.length ? <div className="opp-list">{merged.map((card) => { const changed = card.freshAt != null && Date.now() - card.freshAt < 6 * 3_600_000; const expanded = open === card.key; return <article key={card.key} className={`opp-card state-${card.state}${changed ? " changed" : ""}`}>
+      <button type="button" className="opp-main" aria-expanded={expanded} aria-label={`${card.symbol} opportunity details`} onClick={() => setOpen(expanded ? null : card.key)}>
+        <div className="opp-head"><strong>{card.symbol}</strong><span className={`state-chip ${card.state}`}>{OPP_STATE_LABEL[card.state]}</span>{changed ? <span className="state-chip changed-chip">Updated</span> : null}</div>
+        <p className="opp-why">{card.why}</p>
+        <div className="opp-meta"><span className={card.direction === "long" || card.direction === "bullish" ? "up" : card.direction === "short" || card.direction === "bearish" ? "down" : "muted"}>{card.direction ? card.direction.toUpperCase() : "—"}</span><span>{card.horizon}</span><span className={card.freshAt != null && Date.now() - card.freshAt > 30 * 60_000 ? "stale" : ""}>{card.freshAt != null ? `${ageLabel(Date.now() - card.freshAt)} old` : "freshness unavailable"}</span></div>
+      </button>
+      {expanded && <>{card.detail()}<button type="button" className="text-action" onClick={card.openAction}>{card.state === "theory" ? "Open theory record →" : `Open ${card.symbol} dossier →`}</button></>}
+    </article>; })}</div> : <Empty>No stored opportunities yet — the next discovery scan, paper cycle or theory run will populate this feed. Nothing is hidden behind an existing theory or position.</Empty>}
+  </section>;
+}
+
 export function App() {
   const deepCoin = new URLSearchParams(window.location.search).get("coin")?.trim() || null;
-  const [tab, setTab] = useState<Tab>(deepCoin ? "dossier" : "market");
+  const [section, setSection] = useState<Section>(deepCoin ? "research" : "read");
+  const [tab, setTab] = useState<Tab>(deepCoin ? "dossier" : "theories");
+  const [readView, setReadView] = useState<"outlook" | "notifications">("outlook");
   const [coinId, setCoinId] = useState<string | null>(deepCoin?.toLowerCase() ?? null);
   const [query, setQuery] = useState(deepCoin?.toUpperCase() ?? "");
   const [submitted, setSubmitted] = useState("");
@@ -2089,31 +2249,52 @@ export function App() {
   const marketRead = useQuery({ queryKey: ["market-read"], queryFn: () => api.getMarketRead({}), staleTime: 300000 });
   const analysis = useQuery({ queryKey: ["analysis", coinId], queryFn: () => api.analyzeCoin({ symbol: query || coinId || "BTC", coinId: coinId ?? undefined, refresh: false }), enabled: coinId !== null, staleTime: 300000 });
   const runSearch = (e: FormEvent) => { e.preventDefault(); const next = query.trim(); if (next) { setSubmitted(next); setShowResults(true); } };
-  const selectCoin = (c: any) => { const id = canonicalCoinId(String(c.id ?? ""), String(c.symbol ?? "")); if (!id) return; setCoinId(id); setQuery(String(c.symbol ?? id).toUpperCase()); setShowResults(false); setTab("dossier"); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const selectCoin = (c: any) => { const id = canonicalCoinId(String(c.id ?? ""), String(c.symbol ?? "")); if (!id) return; setCoinId(id); setQuery(String(c.symbol ?? id).toUpperCase()); setShowResults(false); setTab("dossier"); setSection("research"); window.scrollTo({ top: 0, behavior: "smooth" }); };
   const openCoin = (id: string, symbol: string) => selectCoin({ id: canonicalCoinId(id, symbol), symbol });
   const openSymbol = async (symbol: string) => { const result = await api.searchCoins({ query: symbol }); const coin = result.coins.find((item) => item.symbol.toUpperCase() === symbol.toUpperCase()) ?? result.coins[0]; if (coin) selectCoin(coin); };
+  const openTheories = () => { setSection("research"); setTab("theories"); window.scrollTo({ top: 0, behavior: "smooth" }); };
   const d = analysis.data?.data;
-  const needsCoin = tab === "dossier" || tab === "smart";
-  const showAssetHeader = Boolean(d) && (tab === "dossier" || tab === "smart" || tab === "signals" || tab === "news" || tab === "watchlist");
+  const inResearch = section === "research";
+  const needsCoin = inResearch && (tab === "dossier" || tab === "smart");
+  const showAssetHeader = inResearch && Boolean(d) && (tab === "dossier" || tab === "smart");
   return <div className="app"><SafeAreaTopScrim backgroundColor="var(--bg)"/><main>
     <section className="search-zone"><form onSubmit={runSearch}><input aria-label="Search any coin" value={query} onChange={(e) => { setQuery(e.target.value); if (!e.target.value.trim()) setShowResults(false); }} placeholder="Search BTC, LINK, ICP or any coin"/><button aria-label="Run coin search" type="submit">Analyze</button></form>{showResults && <div className="results">{search.isPending || search.isFetching ? <span>Searching…</span> : search.data?.coins.length ? search.data.coins.map((c) => <button key={c.id} onClick={() => selectCoin(c)}><strong>{c.symbol}</strong><span>{c.name}</span><small>{c.rank ? `#${c.rank}` : "unranked"}</small></button>) : <span>{search.data?.message ?? "No matches"}</span>}</div>}</section>
-    <nav aria-label="Terminal sections">{tabs.map((t) => <button key={t.id} className={tab === t.id ? "active" : ""} onClick={() => setTab(t.id)}>{t.label}</button>)}</nav>
-    <details className="parked-tools"><summary>More tools</summary><div><button onClick={() => setTab("news")}>News search</button><button onClick={() => setTab("smart")}>Perps & whales</button></div><small>Standalone search and deep-dive tools remain available here.</small></details>
-    {showAssetHeader && d && <><DirectionalCommand d={d} refreshing={analysis.isFetching || marketRead.isFetching} watching={Boolean(watch.data?.items.some((w) => w.coinId === d.asset.id))} onRefresh={() => { void analysis.refetch(); void marketRead.refetch(); }} onWatch={() => watch.data?.items.some((w) => w.coinId === d.asset.id) ? removeWatch.mutate(d.asset.id) : addWatch.mutate({ coinId: d.asset.id, name: d.asset.name, symbol: d.asset.symbol })}/><FreshnessPanel symbol={d.asset.symbol}/>{tab === "dossier" && <CompletePicture d={d}/>}<AssetContext d={d}/></>}
-    {needsCoin && !coinId && <CoinRequired onHome={() => setTab("market")}/>} 
-    {needsCoin && coinId && analysis.isPending && <div className="loading"><span/>Building the live evidence stack…</div>}
-    {needsCoin && coinId && !analysis.isPending && !d && <Empty>{analysis.data?.error ?? "Analysis unavailable."}</Empty>}
-    {tab === "market" && <MarketWorkspace market={marketRead.data} openCoin={openCoin}/>} 
-    {tab === "theories" && <TheoryWatch asset={d?.asset ?? null} openSymbol={(symbol) => { void openSymbol(symbol); }}/>} 
-    {tab === "news" && <NewsWorkspace asset={d?.asset ?? null}/>} 
-    {tab === "signals" && <SignalsWorkspace d={d ?? null} openCoin={openCoin}/>} 
-    {tab === "watchlist" && <WatchlistWorkspace openCoin={openCoin}/>} 
-    {tab === "journal" && <JournalWorkspace asset={d?.asset ?? null}/>} 
-    {tab === "alerts" && <AlertsWorkspace asset={d?.asset ?? null} openCoin={openCoin}/>}
-    {tab === "assets" && <AssetView focusSymbol={assetFocus} onOpenDossier={(symbol) => { void openSymbol(symbol); }}/>}
-    {tab === "audit" && <AuditWorkspace/>}
-    {tab === "meme-risk" && <MemeRiskWorkspace/>}
-    {tab === "dossier" && d && <DossierWorkspace d={d} onOpenInAssets={(symbol) => { setAssetFocus(symbol.toUpperCase()); setTab("assets"); }}/>} 
-    {tab === "smart" && d && <Smart d={d}/>} 
+    <nav aria-label="Terminal sections">{sections.map((s) => <button key={s.id} className={section === s.id ? "active" : ""} aria-current={section === s.id ? "page" : undefined} onClick={() => setSection(s.id)}>{s.label}</button>)}</nav>
+    {section === "read" && <div className="stack">
+      <div className="seg workspace-switch" role="group" aria-label="Read view"><button className={readView === "outlook" ? "active" : ""} onClick={() => setReadView("outlook")}>Outlook</button><button className={readView === "notifications" ? "active" : ""} onClick={() => setReadView("notifications")}>Notifications</button></div>
+      {readView === "notifications" ? <NotificationsSection/> : <>
+        <HorizonOutlook market={marketRead.data}/>
+        <TheoryUpdates onOpenTheories={openTheories}/>
+        <MarketRead market={marketRead.data} openCoin={openCoin}/>
+        <RotationPanel openCoin={openCoin}/>
+        <details className="status-line"><summary>Status &amp; source diagnostics</summary><SourceHealthStrip/></details>
+      </>}
+    </div>}
+    {section === "opportunities" && <div className="stack">
+      <OpportunityFeed openCoin={openCoin} openSymbol={(symbol) => { void openSymbol(symbol); }} onOpenTheories={openTheories}/>
+      <MarketDiscovery market={marketRead.data} openCoin={openCoin}/>
+    </div>}
+    {section === "book" && <div className="stack">
+      <ViewLabel view="paper"/>
+      <PaperPilot/>
+      <Tracker openCoin={openCoin}/>
+      <JournalWorkspace asset={d?.asset ?? null}/>
+    </div>}
+    {inResearch && <>
+      <div className="seg workspace-switch research-switch" role="group" aria-label="Research tools">{researchTools.map((t) => <button key={t.id} className={tab === t.id ? "active" : ""} onClick={() => setTab(t.id)}>{t.label}</button>)}</div>
+      {showAssetHeader && d && <><DirectionalCommand d={d} refreshing={analysis.isFetching || marketRead.isFetching} watching={Boolean(watch.data?.items.some((w) => w.coinId === d.asset.id))} onRefresh={() => { void analysis.refetch(); void marketRead.refetch(); }} onWatch={() => watch.data?.items.some((w) => w.coinId === d.asset.id) ? removeWatch.mutate(d.asset.id) : addWatch.mutate({ coinId: d.asset.id, name: d.asset.name, symbol: d.asset.symbol })}/><FreshnessPanel symbol={d.asset.symbol}/>{tab === "dossier" && <CompletePicture d={d}/>}<AssetContext d={d}/></>}
+      {needsCoin && !coinId && <CoinRequired onHome={() => setTab("theories")}/>}
+      {needsCoin && coinId && analysis.isPending && <div className="loading"><span/>Building the live evidence stack…</div>}
+      {needsCoin && coinId && !analysis.isPending && !d && <Empty>{analysis.data?.error ?? "Analysis unavailable."}</Empty>}
+      {tab === "theories" && <TheoryWatch asset={d?.asset ?? null} openSymbol={(symbol) => { void openSymbol(symbol); }}/>}
+      {tab === "news" && <NewsWorkspace asset={d?.asset ?? null}/>}
+      {tab === "watchlist" && <WatchlistWorkspace openCoin={openCoin}/>}
+      {tab === "alerts" && <AlertsWorkspace asset={d?.asset ?? null} openCoin={openCoin}/>}
+      {tab === "assets" && <AssetView focusSymbol={assetFocus} onOpenDossier={(symbol) => { void openSymbol(symbol); }}/>}
+      {tab === "audit" && <AuditWorkspace/>}
+      {tab === "meme-risk" && <MemeRiskWorkspace/>}
+      {tab === "dossier" && d && <><DossierWorkspace d={d} onOpenInAssets={(symbol) => { setAssetFocus(symbol.toUpperCase()); setTab("assets"); }}/><CoinCheck d={d}/></>}
+      {tab === "smart" && d && <Smart d={d}/>}
+    </>}
   </main></div>;
 }

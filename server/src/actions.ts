@@ -51,7 +51,7 @@ import { assertTierRefreshComplete, CATALOG_MISSED_MESSAGE, CATALOG_MISSED_SUMMA
 import { DEPLOYED_PAPER_PATH, ISSUANCE_HANDLER_VERSION, PAPER_DELIVERY_ARCHITECTURE, PAPER_SOURCE_HASHES, PAPER_VERSION_MAPPING, assertNoLegacyPaperIssuer, fetchBinanceTradeHistory, type BinanceCoverage, type VenueTradePrint } from "./paper-v219";
 import { fetchMexcKlines, fetchMexcTradeHistory, MEXC_VENUE_LABEL, type MexcCoverage } from "./paper-venue-mexc";
 import { PAPER_INTAKE_MAX_ITEMS_PER_INVOCATION, PAPER_INTAKE_REPAIR_ACTIVATED_AT, isTerminalIntakeStatus, runDurableIntake, type IntakeProcessResult, type IntakeWorkItem } from "./paper-intake";
-import { decideIssuanceWork, summarizeIntakeStatuses, type HandoffProcessingState, type IssuanceWorkDecision } from "./issuance-work-check";
+import { decideIssuanceWork, monitoringHoldExplanation, summarizeIntakeStatuses, type HandoffProcessingState, type IssuanceWorkDecision } from "./issuance-work-check";
 import { paperAlertReadRow, paperAlertsOnlyRead } from "./paper-alert-read-model";
 import { computeMonitoringHealth, type MonitoringHealth, type MonitoringPositionInput } from "./monitoring-health";
 import { buildPaperPollLeaseAttempt, runBoundedCoalescedPoll, type PaperPollClaim as DurablePaperPollClaim, type PaperPollLeaseStore } from "./paper-poll-concurrency";
@@ -395,6 +395,27 @@ const COVERAGE: readonly CoverageDefinition[] = [
   // delisted Beam privacy coin (a different asset) and must never be
   // mapped for beam-2.
   { coinId: "beam-2", symbol: "BEAMX", pair: "BEAMXUSDT", venue: "binance-spot" },
+  // Freeze paper-pilot-v2.1.6 venue-mapping repair (2026-10-23): each pair
+  // verified TRADING on Binance Spot via data-api.binance.vision
+  // (aggTrades HTTP 200 and 1m klines HTTP 200, re-verified live
+  // 2026-10-23T18:30:00Z). Explicit allowlist rows only — no wildcard
+  // derivation. Identity anchors (map by identity, never by ticker
+  // alone): vaulta is Vaulta (ex-EOS native L1), CoinGecko id vaulta;
+  // ethena is Ethereum contract
+  // 0x57e114b691db790c35207b2e685d4a43181e6061; iostoken is a native L1
+  // (BSC representation 0xaf48b7e315a52518cfbf7d96c455d9dfad94cb48);
+  // prometeus is Ethereum contract
+  // 0xfc82bb4ba86045af6f327323a46e80412b91b27d; wormhole is Ethereum
+  // contract 0xb0ffa8000886e57f86dd5264b9582b2ad87b2b91; zama is
+  // Ethereum contract 0xa12cc123ba206d4031d1c7f6223d1c2ec249f4f3.
+  // Deliberately NOT mapped: AIUSDT (Binance's Sleepless AI, not AI)
+  // and LITUSDT (a legacy instrument in BREAK).
+  { coinId: "vaulta", symbol: "A", pair: "AUSDT", venue: "binance-spot" },
+  { coinId: "ethena", symbol: "ENA", pair: "ENAUSDT", venue: "binance-spot" },
+  { coinId: "iostoken", symbol: "IOST", pair: "IOSTUSDT", venue: "binance-spot" },
+  { coinId: "prometeus", symbol: "PROM", pair: "PROMUSDT", venue: "binance-spot" },
+  { coinId: "wormhole", symbol: "W", pair: "WUSDT", venue: "binance-spot" },
+  { coinId: "zama", symbol: "ZAMA", pair: "ZAMAUSDT", venue: "binance-spot" },
 ];
 const CANONICAL_COIN_ALIASES = [
   { id: "worldcoin-wld", name: "Worldcoin", symbol: "WLD", rank: null },
@@ -1918,6 +1939,11 @@ async function computeUniverseTiers(ctx: Ctx, persist: boolean, onChartChunk?: (
 const DISCOVERY_SCAN_CADENCE_MS = 6 * 60 * 60_000;
 const DISCOVERY_EXECUTION_DEADLINE_MS = 20 * 60_000;
 const DISCOVERY_TOOL_TIMEOUT_MS = 45_000;
+// Research synthesis is a full editorial inference over the shortlist plus
+// linked news; measured calls exceed the 45s generic tool race even on a
+// healthy run, so synthesis carries its own budget. It still sits far
+// inside the 20-minute run deadline and the synthesis stage budget.
+const DISCOVERY_SYNTHESIS_TIMEOUT_MS = 120_000;
 type DiscoveryLaneStatus = `active${string}` | `paused(${string})` | `shadow(${string})`;
 type DiscoveryStage = "tier-freshness" | "api-budgets" | "catalog-fetch" | "velocity" | "charts" | "hyperliquid" | "scoring" | "synthesis" | "persistence";
 type DiscoveryLease = { runId: number; leaseId: string; deadlineAt: Date };
@@ -2167,18 +2193,41 @@ function summarizePassDirection(direction: "long" | "short", effectiveRows: Cano
   let status="collecting"; if (futility) status="futility — reassess"; else if (active.length>=30&&baselinesBeaten===2) status="mixed"; else if (active.length>=30&&baselinesBeaten<2) status="fail"; else if (active.length>=30&&silencePass!==true) status=silencePass===false?"fail — silence check":"unverified — silence check"; else if (active.length>=30&&!regimePass) status=bullOnly?"bull-regime only":"regime-incomplete"; else if (active.length>=30&&baselinesBeaten===3&&!fundingIncluded) status="pre-funding pass — sizing locked"; else if (active.length>=30&&baselinesBeaten===3&&fundingIncluded) status="pass";
   const pace=passBarWeeksNeeded(all,nowTs); return { direction, status, sizingAuthorized:status==="pass", rawClosed:all.length, effectiveClosed:all.length, completedCycles, currentCycleClosed:pending.length, evaluatedWindow:active.length, averageNetR, netRLower95:netBounds.low, netRUpper95:netBounds.high, hitRate, baselines, baselinesBeaten, silence:{ issuedAverageNetR:issuedAverageForSilence, suppressedAverageNetR, suppressedEffectiveN:suppressedRows.length, pass:silencePass }, regime:{ upWeeks:active.filter((row)=>row.btcWeek==="up").length, downOrFlatWeeks:active.filter((row)=>row.btcWeek==="down-or-flat").length, unclassified:active.filter((row)=>row.btcWeek===null).length, pass:regimePass }, ...pace };
 }
+function decodeXmlText(value: string): string { return value.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1").replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&#39;|&apos;/g, "'").replace(/\s+/g, " ").trim(); }
+async function getText(url: string, userAgent: string): Promise<string> {
+  const r = await sourceFetch(url, { headers: { accept: "application/atom+xml, application/rss+xml, text/xml, */*", "user-agent": userAgent } });
+  return await r.text();
+}
 async function loadPublicSocial(symbol: string): Promise<any> {
   const ticker = symbol.toUpperCase();
+  const redditUrl = new URL("https://www.reddit.com/search.rss"); redditUrl.searchParams.set("q", `${ticker} crypto`); redditUrl.searchParams.set("sort", "new");
   const [stocktwitsRaw, redditRaw] = await Promise.all([
-    getJson(`https://stocktwits.com/api/2/streams/symbol/${encodeURIComponent(`${ticker}.X`)}.json`).catch((error) => ({ __error: compactError(error, "Stocktwits unavailable") })),
-    getJson(`https://www.reddit.com/search.json?q=${encodeURIComponent(`${ticker} crypto`)}&sort=new&limit=20&t=week`).catch((error) => ({ __error: compactError(error, "Reddit unavailable") })),
+    getJson(`https://api.stocktwits.com/api/2/streams/symbol/${encodeURIComponent(`${ticker}.X`)}.json`).catch((error) => ({ __error: compactError(error, "Stocktwits unavailable") })),
+    getText(redditUrl.toString(), "Muse Equity Analyzer/1.0").catch((error) => ({ __error: compactError(error, "Reddit unavailable") })),
   ]);
   const stocktwits = (Array.isArray(stocktwitsRaw?.messages) ? stocktwitsRaw.messages : []).slice(0, 30).map((message: any) => ({ source: "Stocktwits", id: String(message.id ?? ""), handle: String(message.user?.username ?? "unknown"), text: stripHtml(String(message.body ?? "")), createdAt: message.created_at ?? null, sentiment: message.entities?.sentiment?.basic === "Bullish" || message.entities?.sentiment?.basic === "Bearish" ? String(message.entities.sentiment.basic).toLowerCase() : null, reactions: finite(message.likes?.total), replies: finite(message.conversation?.replies), url: null })).filter((message: any) => message.id && message.text);
-  const redditChildren = Array.isArray(redditRaw?.data?.children) ? redditRaw.data.children : [];
-  const reddit = redditChildren.slice(0, 20).map((child: any) => child?.data ?? {}).map((post: any) => ({ source: "Reddit", id: String(post.id ?? ""), handle: String(post.author ?? "unknown"), text: String(post.title ?? "").trim(), createdAt: finite(post.created_utc) === null ? null : new Date((finite(post.created_utc) ?? 0) * 1000).toISOString(), sentiment: null, reactions: finite(post.score), replies: finite(post.num_comments), url: typeof post.permalink === "string" ? `https://www.reddit.com${post.permalink}` : null })).filter((post: any) => post.id && post.text);
+  const redditIsError = typeof redditRaw !== "string";
+  const redditError = redditIsError ? (redditRaw as any)?.__error : null;
+  let reddit: Array<{ source: string; id: string; handle: string; text: string; createdAt: string | null; sentiment: null; reactions: number | null; replies: number | null; url: string | null }> = [];
+  if (!redditIsError) {
+    const xml = redditRaw as string;
+    const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].slice(0, 20);
+    reddit = entries.map((match, index) => {
+      const chunk = match[1] ?? "";
+      const title = decodeXmlText(chunk.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1] ?? "");
+      const authorRaw = decodeXmlText(chunk.match(/<author>[\s\S]*?<name[^>]*>([\s\S]*?)<\/name>[\s\S]*?<\/author>/)?.[1] ?? "");
+      const handle = authorRaw.replace(/^\/?u\//, "").trim() || "unknown";
+      const updatedRaw = decodeXmlText(chunk.match(/<updated[^>]*>([\s\S]*?)<\/updated>/)?.[1] ?? "");
+      const createdAt = updatedRaw ? (Number.isFinite(Date.parse(updatedRaw)) ? new Date(updatedRaw).toISOString() : updatedRaw) : null;
+      const idRaw = decodeXmlText(chunk.match(/<id[^>]*>([\s\S]*?)<\/id>/)?.[1] ?? "");
+      const sourceUrl = chunk.match(/<link[^>]+href=["']([^"']+)["']/)?.[1] ?? null;
+      const id = idRaw || sourceUrl || `reddit-${index}-${createdAt ?? ""}`;
+      return { source: "Reddit", id: String(id), handle, text: title, createdAt, sentiment: null as null, reactions: null as number | null, replies: null as number | null, url: sourceUrl };
+    }).filter((post) => post.id && post.text);
+  }
   const bullish = stocktwits.filter((message: any) => message.sentiment === "bullish").length;
   const bearish = stocktwits.filter((message: any) => message.sentiment === "bearish").length;
-  return { symbol: ticker, checkedAt: new Date().toISOString(), stocktwitsStatus: stocktwitsRaw?.__error ? "unavailable" : "live", redditStatus: redditRaw?.__error ? "unavailable" : "live", errors: [stocktwitsRaw?.__error, redditRaw?.__error].filter(Boolean).map(String), counts: { stocktwits: stocktwits.length, reddit: reddit.length, labeled: bullish + bearish, bullish, bearish }, messages: [...stocktwits, ...reddit].sort((a: any, b: any) => (finite(b.reactions) ?? 0) + (finite(b.replies) ?? 0) - (finite(a.reactions) ?? 0) - (finite(a.replies) ?? 0)).slice(0, 12), methodology: "Stocktwits sentiment is publisher-labeled; Reddit contributes discussion volume and source posts only. No sentiment is inferred from unlabeled text." };
+  return { symbol: ticker, checkedAt: new Date().toISOString(), stocktwitsStatus: stocktwitsRaw?.__error ? "unavailable" : "live", redditStatus: redditIsError ? "unavailable" : "live", errors: [stocktwitsRaw?.__error, redditError].filter(Boolean).map(String), counts: { stocktwits: stocktwits.length, reddit: reddit.length, labeled: bullish + bearish, bullish, bearish }, messages: [...stocktwits, ...reddit].sort((a: any, b: any) => (finite(b.reactions) ?? 0) + (finite(b.replies) ?? 0) - (finite(a.reactions) ?? 0) - (finite(a.replies) ?? 0)).slice(0, 12), methodology: "Stocktwits sentiment is publisher-labeled; Reddit contributes discussion volume and source posts only. No sentiment is inferred from unlabeled text." };
 }
 function marketSeries(raw: any): { prices: number[]; volumes: number[]; last: number | null; d7: number | null; d30: number | null; sma50: number | null; volumeZ: number | null } {
   const prices = (Array.isArray(raw?.prices) ? raw.prices : []).map((row: any) => finite(row?.[1])).filter((value: number | null): value is number => value !== null);
@@ -3795,22 +3844,30 @@ function riskStatusFromConcentration(_holderCount: number | null, topShare: numb
   return "clean";
 }
 
-// Freeze paper-pilot-v2.1.5 (2026-10-21): venue-mapping repair only. The
-// sole delta from paper-pilot-v2.1.4 is the one explicit Binance Spot
-// instrument mapping added to COVERAGE above (beam-2 -> BEAMXUSDT).
-// Identity guard: the canonical asset is CoinGecko id beam-2 (Beam
-// gaming token, ex-Merit Circle), Ethereum contract
-// 0x62d0a8458ed7719fdaf978fe5929c6d342b0bfce; BEAMX is Binance's venue
-// display ticker for this asset. The pair BEAMUSDT on any venue is the
-// delisted Beam privacy coin (a different asset) and must never be
-// mapped for beam-2. The new mapping applies to future evaluations only;
+// Freeze paper-pilot-v2.1.6 (2026-10-23): venue-mapping repair only. The
+// sole delta from paper-pilot-v2.1.5 is the six explicit Binance Spot
+// instrument mappings added to COVERAGE above (vaulta -> AUSDT,
+// ethena -> ENAUSDT, iostoken -> IOSTUSDT, prometeus -> PROMUSDT,
+// wormhole -> WUSDT, zama -> ZAMAUSDT), each re-verified live
+// 2026-10-23T18:30:00Z (status TRADING, aggTrades HTTP 200, 1m klines
+// HTTP 200 on data-api.binance.vision). Identity anchors: vaulta is
+// Vaulta (ex-EOS native L1), CoinGecko id vaulta; ethena is Ethereum
+// contract 0x57e114b691db790c35207b2e685d4a43181e6061; iostoken is a
+// native L1 (BSC representation
+// 0xaf48b7e315a52518cfbf7d96c455d9dfad94cb48); prometeus is Ethereum
+// contract 0xfc82bb4ba86045af6f327323a46e80412b91b27d; wormhole is
+// Ethereum contract 0xb0ffa8000886e57f86dd5264b9582b2ad87b2b91; zama is
+// Ethereum contract 0xa12cc123ba206d4031d1c7f6223d1c2ec249f4f3. Map by
+// these identity anchors, never by ticker alone: Binance AIUSDT is
+// Sleepless AI (not AI) and LITUSDT is a legacy instrument in BREAK —
+// neither is mapped. The new mappings apply to future evaluations only;
 // no historical candidate, handoff, or decision rows are re-stamped,
 // re-decided, or rescored. Handler version and logic, strategy, gates,
 // weights, thresholds, the 900000ms first-print receipt bound, entry
-// contract and settlement evaluator are unchanged. The v2.1.4, v2.1.3,
-// v2.1.2 and v2.1.1 freeze records and their candidate cohorts remain
-// preserved as comparison arms.
-const PAPER_FREEZE_VERSION = "paper-pilot-v2.1.5";
+// contract and settlement evaluator are unchanged. The v2.1.5, v2.1.4,
+// v2.1.3, v2.1.2 and v2.1.1 freeze records and their candidate cohorts
+// remain preserved as comparison arms.
+const PAPER_FREEZE_VERSION = "paper-pilot-v2.1.6";
 const PAPER_ENTRY_CONTRACT_VERSION = "actionable-entry-v1";
 const PAPER_ENTRY_WINDOW_MS = 15 * 60_000;
 // First-print receipt bound (Logan, 2026-10-20): widened from 300000ms
@@ -3830,6 +3887,7 @@ const PAPER_MAX_OBSERVATION_AGE_BY_FREEZE: Record<string, number> = {
   "paper-pilot-v2.1.3": PAPER_MAX_OBSERVATION_AGE_MS,
   "paper-pilot-v2.1.4": PAPER_MAX_OBSERVATION_AGE_MS,
   "paper-pilot-v2.1.5": PAPER_MAX_OBSERVATION_AGE_MS,
+  "paper-pilot-v2.1.6": PAPER_MAX_OBSERVATION_AGE_MS,
 };
 function paperMaxObservationAgeMs(freezeVersion: string): number {
   return PAPER_MAX_OBSERVATION_AGE_BY_FREEZE[freezeVersion] ?? PAPER_MAX_OBSERVATION_AGE_MS;
@@ -3854,7 +3912,7 @@ async function ensurePaperPilotFreeze(ctx: Ctx): Promise<PaperFreeze> {
   const existing = (await db.select().from(schema.methodologyFreezes).where(eq(schema.methodologyFreezes.version, PAPER_FREEZE_VERSION)).limit(1))[0];
   const productionHash = await sha256Hex(stableJson(PAPER_PRODUCTION_SPEC));
   const challengerHash = await sha256Hex(stableJson(PAPER_CHALLENGER_SPEC));
-  const specJson = stableJson({ version: PAPER_FREEZE_VERSION, production: PAPER_PRODUCTION_SPEC, challenger: PAPER_CHALLENGER_SPEC, productionHash, challengerHash, collectionPlan: PAPER_COLLECTION_PLAN, supersedes: "paper-pilot-v2.1.4" });
+  const specJson = stableJson({ version: PAPER_FREEZE_VERSION, production: PAPER_PRODUCTION_SPEC, challenger: PAPER_CHALLENGER_SPEC, productionHash, challengerHash, collectionPlan: PAPER_COLLECTION_PLAN, supersedes: "paper-pilot-v2.1.5" });
   const hash = await sha256Hex(specJson);
   if (existing) return { version: existing.version, hash: existing.versionHash, frozenAt: existing.frozenAt, productionHash, challengerHash };
   const frozenAt = new Date();
@@ -3992,7 +4050,7 @@ async function loadHandoffProcessingState(ctx: Ctx, handoff: typeof schema.paper
 async function recordIssuanceWorkCheck(ctx: Ctx, args: {
   handoff: typeof schema.paperHandoffRuns.$inferSelect | null;
   trigger: "manual" | "scheduled";
-  decision: IssuanceWorkDecision["kind"] | "no_handoff" | "coalesced";
+  decision: IssuanceWorkDecision["kind"] | "no_handoff" | "coalesced" | "monitoring_hold";
   resultStatus: string;
   state: HandoffProcessingState | null;
   resultingRunId: number | null;
@@ -4025,7 +4083,7 @@ async function recordIssuanceWorkCheck(ctx: Ctx, args: {
 }
 
 const issuanceWorkCheckSchema = z.object({
-  decision: z.enum(["skipped_completed", "processed_new", "recovered_incomplete", "not_checked", "coalesced"]),
+  decision: z.enum(["skipped_completed", "processed_new", "recovered_incomplete", "not_checked", "coalesced", "monitoring_hold"]),
   handoffId: z.number().nullable(),
   priorRunId: z.number().nullable(),
   priorRunStatus: z.string().nullable(),
@@ -4241,9 +4299,50 @@ const markNotificationsChatSentResponse = z.object({
 const paperAlertsOnlyResponse = z.object({ alerts: z.array(persistedPaperAlertReadRowSchema) }).strict();
 type PaperAlertsOnlyResponse = z.infer<typeof paperAlertsOnlyResponse>;
 
+// Engine core snapshot (schema core-snapshot-v1), published by the
+// workspace engine at paper-signals/pilot/snapshots/core-snapshot.json and
+// read verbatim through the paper-pilot file bridge. Display/read-path
+// only: these code-computed fields feed the monitoring header and never
+// any decision path. Null when the snapshot file is missing or
+// unparseable — the header then shows "engine snapshot unavailable" and
+// never falls back to recomputing these fields from the raw store.
+const engineSnapshotShape = z.object({
+  schema: z.string().nullable(),
+  positionsTotal: z.number().nullable(),
+  positionsSettled: z.number().nullable(),
+  positionsOpen: z.number().nullable(),
+  openPositionIds: z.array(z.string()),
+  coverageThroughUtc: z.string().nullable(),
+  gapsOpenTotal: z.number().nullable(),
+  coverageComplete: z.boolean().nullable(),
+  openPositionsUncovered: z.array(z.string()),
+  settleVerifiedThroughUtc: z.string().nullable(),
+  outcomeRecords: z.number().nullable(),
+  enrollment: z.object({
+    latestRun: z.object({
+      file: z.string().nullable(),
+      runUtc: z.string().nullable(),
+      ageS: z.number().nullable(),
+      stale: z.boolean().nullable(),
+      derivedEnteredCount: z.number().nullable(),
+      derivedMissingFromBook: z.array(z.string()),
+      addedCount: z.number().nullable(),
+      discrepanciesCount: z.number().nullable(),
+    }).nullable(),
+    canonicalFile: z.object({
+      fileAgeS: z.number().nullable(),
+      enrollWouldNoop: z.boolean().nullable(),
+    }).nullable(),
+  }).nullable(),
+  generatedAtUtc: z.string().nullable(),
+  source: z.string().nullable(),
+  snapshotAgeMs: z.number().nullable(),
+});
+
 const paperMonitoringResponse = z.object({
   available: z.boolean(),
   error: z.string().nullable(),
+  engineSnapshot: engineSnapshotShape.nullable(),
   positions: z.array(z.object({
     positionId: z.string(),
     symbol: z.string(),
@@ -6254,6 +6353,110 @@ function evaluateIssuanceWiring(identity: Record<string, unknown>): { excluded: 
   return { excluded: false, observed: raw ?? structured ?? null };
 }
 
+// Shared builder for the paper-pilot status payload. getPaperPilotStatus
+// returns this object as its response data; the enrollment-canonical
+// refresh serializes the exact same payload — one code path, never forked.
+async function buildPaperPilotStatusPayload(ctx: Ctx, args: { emitTestAlert: boolean }): Promise<any> {
+      const db = ctx.db<typeof schema>(); const freeze = await ensurePaperPilotFreeze(ctx);
+      const [runs, watchRuns, handoffs, handoffCandidates, intake, candidates, checkpoints, signals, alerts, comparisons, legacySignals] = await Promise.all([
+        db.select().from(schema.paperSignalRuns).orderBy(desc(schema.paperSignalRuns.id)).limit(12),
+        db.select().from(schema.paperEntryWatchRuns).orderBy(desc(schema.paperEntryWatchRuns.id)).limit(24),
+        db.select().from(schema.paperHandoffRuns).orderBy(desc(schema.paperHandoffRuns.id)).limit(12),
+        db.select().from(schema.paperHandoffCandidates).orderBy(desc(schema.paperHandoffCandidates.id)).limit(300),
+        db.select().from(schema.paperCandidateIntake).orderBy(desc(schema.paperCandidateIntake.updatedAt)).limit(300),
+        db.select().from(schema.paperSignalCandidates).orderBy(desc(schema.paperSignalCandidates.updatedAt)).limit(100),
+        db.select().from(schema.paperEntryCheckpoints).orderBy(desc(schema.paperEntryCheckpoints.updatedAt)).limit(100),
+        db.select().from(schema.paperSignals).orderBy(desc(schema.paperSignals.issuedAt)).limit(100),
+        db.select().from(schema.paperAlertEvents).orderBy(desc(schema.paperAlertEvents.enqueuedAt)).limit(100),
+        db.select().from(schema.paperModelComparisons).orderBy(desc(schema.paperModelComparisons.createdAt)).limit(200),
+        db.select({ id: schema.generatedSignals.id }).from(schema.generatedSignals),
+      ]);
+      // Poll-lease observability (2026-10-21 repair): read-only projection
+      // of paper_poll_leases. Owner tokens are NEVER projected. Fail-
+      // isolated: any read failure degrades to an empty list and never
+      // fails the status action; an empty table likewise returns [].
+      let pollLeases: Array<{ lane: string; held: boolean; acquiredAt: string | null; leaseExpiresAt: string | null; generation: number; lastCompletedAt: string | null }> = [];
+      try {
+        const leaseRows = await db.select().from(schema.paperPollLeases).orderBy(asc(schema.paperPollLeases.lane));
+        const leaseNowMs = Date.now();
+        pollLeases = leaseRows.map((row) => ({
+          lane: row.lane,
+          held: row.ownerToken !== null && row.leaseExpiresAt !== null && row.leaseExpiresAt.getTime() > leaseNowMs,
+          acquiredAt: row.lastStartedAt?.toISOString() ?? null,
+          leaseExpiresAt: row.leaseExpiresAt?.toISOString() ?? null,
+          generation: row.generation,
+          lastCompletedAt: row.lastCompletedAt?.toISOString() ?? null,
+        }));
+      } catch { pollLeases = []; }
+      const latestHandoff = handoffs.find((row) => row.status === "complete") ?? null;
+      const latestReasons = latestHandoff ? handoffCandidates.filter((row) => row.handoffRunId === latestHandoff.id).map((row) => ({ candidateKey: row.candidateKey, symbol: row.symbol, direction: row.direction, outcome: row.outcome, stage: row.stage, reasonCode: row.reasonCode, reason: row.reason, preLegacyFilter: row.preLegacyFilter })) : [];
+      const probeId = randomUUID();
+      const testAlertRow = args.emitTestAlert ? [{
+        id: -1,
+        eventKey: `test_${probeId}`,
+        paperSignalId: `sig_TEST_${probeId.slice(0, 8)}`,
+        status: "queued",
+        transport: "test-probe",
+        destinationLabel: "research-side-chat",
+        payloadJson: {
+          schema_version: "2026-10-14", paper: true, label: "PAPER",
+          alert_type: "ENTRY_CONFIRMED",
+          signal_id: `sig_TEST_${probeId.slice(0, 8)}`,
+          asset: "BTCUSD", direction: "long",
+          setup_reason: "TEST ROUTING PROBE through the deployed transport — not a live signal, no real order",
+          entry_rule: "test probe: response-time synthesis, no venue print",
+          entry_price: 1.0,
+          invalidation: { price: 0.9, rule: "test probe" },
+          targets: { t1: 1.1, t2: 1.2 },
+          horizon: "test probe",
+          data_timestamp: new Date().toISOString(),
+          issued_at: new Date().toISOString(),
+          destinations: ["research-side-chat", "terminal-tracker"],
+          test: true, status: "confirmed",
+          entry_observed_at: new Date().toISOString(),
+          venue_print_ts: new Date().toISOString(),
+          waiting_interval_veto: "pass",
+          post_entry_check: "test probe",
+        },
+        enqueuedAt: new Date().toISOString(), acknowledgedAt: null,
+        attemptCount: 0, lastError: null,
+        createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+      }] : [];
+      return {
+        schema_version: "paper-status/1",
+        handler_version: ISSUANCE_HANDLER_VERSION,
+        handler: { version: ISSUANCE_HANDLER_VERSION, deployedPath: DEPLOYED_PAPER_PATH, legacyIssuerReachable: false, sourceHashes: PAPER_SOURCE_HASHES, comparisonMapping: PAPER_VERSION_MAPPING },
+        freeze: { ...freeze, frozenAt: freeze.frozenAt.toISOString(), collectionPlan: PAPER_COLLECTION_PLAN },
+        venueMappings: COVERAGE.map((row) => ({ coinId: row.coinId, venue: row.venue === "mexc-spot" ? MEXC_VENUE_LABEL : "Binance Spot", instrument: row.pair })),
+        segregation: { paperTable: "paper_signals", legacyTable: "generated_signals", legacyTrackedCount: legacySignals.length, prospectiveVerifiedEntries: signals.length, prospectiveCompletedOutcomes: comparisons.filter((row) => row.cohort === "prospective_issued" && row.outcomeStatus !== "pending").length, fixturesAndReplaysIncluded: false, note: "Legacy/reconstructed records, prospective paper records, and fixtures/replays remain separate. The repaired paper action never writes generated_signals or signal_contracts." },
+        delivery: PAPER_DELIVERY_ARCHITECTURE,
+        handoff: latestHandoff ? { ...latestHandoff, startedAt: latestHandoff.startedAt.toISOString(), completedAt: latestHandoff.completedAt?.toISOString() ?? null, createdAt: latestHandoff.createdAt.toISOString(), discoveryCounts: { discovered: latestHandoff.discoveredCount, scored: latestHandoff.scoredCount, directional: latestHandoff.directionalCount, eligibleBeforeLegacyFilters: latestHandoff.eligibleCount, rejectedBeforeLegacyFilters: latestHandoff.rejectedCount }, perCandidateReasons: latestReasons } : null,
+        handoffRuns: handoffs.map((row) => ({ ...row, startedAt: row.startedAt.toISOString(), completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString() })),
+        runs: runs.map((row) => ({ ...row, startedAt: row.startedAt.toISOString(), completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString() })),
+        entryWatch: { version: "paper-entry-watch-v1", scope: "watch-only persisted awaiting-entry contracts", schedule: "artifact action; one-minute tick", qualificationReachable: false, candidateIngestionReachable: false, frozenTrialMutationReachable: false, eventUniqueness: "contract_id + event_type + event_version", runs: watchRuns.map((row) => ({ ...row, startedAt: row.startedAt.toISOString(), completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString() })) },
+        intake: { exactLimitingConstructRemoved: "handoffReasonRows.filter(outcome === eligible).slice(0, limit), with action limit defaulting to 8", batchSize: "runPaperSignalCycle.limit (default 8; bounds 1–20)", maxItemsPerInvocation: PAPER_INTAKE_MAX_ITEMS_PER_INVOCATION, rows: intake.map((row) => ({ ...row, decisionAt: row.decisionAt.toISOString(), entryExpiresAt: row.entryExpiresAt.toISOString(), leaseExpiresAt: row.leaseExpiresAt?.toISOString() ?? null, completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString() })) },
+        candidates: candidates.map((row) => ({ ...row, decisionAt: row.decisionAt.toISOString(), sourceObservedAt: row.sourceObservedAt?.toISOString() ?? null, entryObservedAt: row.entryObservedAt?.toISOString() ?? null, entryReceivedAt: row.entryReceivedAt?.toISOString() ?? null, entryExpiresAt: row.entryExpiresAt.toISOString(), createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString() })),
+        checkpoints: checkpoints.map((row) => ({ ...row, firstPrintObservedAt: row.firstPrintObservedAt?.toISOString() ?? null, requestSinceAt: row.requestSinceAt.toISOString(), requestUntilAt: row.requestUntilAt.toISOString(), receiptAt: row.receiptAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString() })),
+        signals: signals.map(paperSignalView),
+        alerts: [...testAlertRow, ...alerts.map(paperAlertReadRow)],
+        comparisons: comparisons.map((row) => ({ ...row, decisionAt: row.decisionAt.toISOString(), createdAt: row.createdAt.toISOString() })),
+        pollLeases,
+        cohortRules: { prospective: "Only verified rows from the repaired post-freeze path; currently reported separately from all legacy/reconstructed results.", retrospective: "Historical rescoring, fixtures and market-data replays remain outside prospective performance statistics.", primaryEconomics: "Common eligible-opportunity denominator; a genuine abstention contributes zero while missing evidence remains unknown.", secondary: "Both-issued paired comparison only." },
+      };
+}
+
+const refreshPaperEnrollmentCanonicalResponse = z.object({
+  written: z.literal(true),
+  bytes: z.number().int().nonnegative(),
+  writtenAtUtc: z.string(),
+  counts: z.object({
+    signals: z.number().int().nonnegative(),
+    checkpoints: z.number().int().nonnegative(),
+    alerts: z.number().int().nonnegative(),
+  }),
+});
+type RefreshPaperEnrollmentCanonicalResponse = z.infer<typeof refreshPaperEnrollmentCanonicalResponse>;
+
 export const Actions = {
   ingestAssetResearch: defineAction({
     request: z.object({ records: z.array(z.object({
@@ -6520,7 +6723,34 @@ export const Actions = {
       if (monitoringHealth.entryAdmission === "held") {
         const freeze = await ensurePaperPilotFreeze(ctx);
         const handoff = await latestCompletedPaperHandoff(ctx);
-        const holdSummary = `New paper entries HELD — coverage is ${monitoringHealth.coverageStatus.toUpperCase()} (${monitoringHealth.coverageBasis}; last successful coverage ${monitoringHealth.lastSuccessfulCoverageUtc ?? "unavailable"}; latest settlement pass ${monitoringHealth.settlementRunUtc ?? "unavailable"}) and automation is ${monitoringHealth.automation.label} (${monitoringHealth.failingStage ?? "coverage unverified"}). No candidate was processed and no entry admitted. Monitoring, settlement, discovery and research continue; admission resumes automatically once coverage is fresh and scheduled recovery is confirmed by attestation.`;
+        // Durable hold record (2026-10-23 issuance inspection): the hold
+        // branch previously returned WITHOUT recording a work check, so
+        // during a designed gate hold the lane's own status went silent
+        // after the last normal check and the hold was indistinguishable
+        // from a dispatch failure (the 04:30–15:15Z episode: coverage
+        // stopped 03:42:59Z, the 45-minute freshness bound was crossed
+        // ~04:28Z, and issuance resumed on the first cycle after coverage
+        // recovered — one failure, reported as two). Every held
+        // invocation now records a "monitoring_hold" work check carrying
+        // the gate's full explanation and the trigger-provenance caveat.
+        // The state read is best-effort and read-only: a failure still
+        // records the hold with null state, and recording never blocks
+        // or changes the hold decision itself.
+        let holdState: HandoffProcessingState | null = null;
+        try { if (handoff) holdState = await loadHandoffProcessingState(ctx, handoff); } catch { /* best-effort state for the hold record only */ }
+        const holdExplanation = monitoringHoldExplanation({
+          coverageStatus: monitoringHealth.coverageStatus,
+          coverageBasis: monitoringHealth.coverageBasis,
+          lastSuccessfulCoverageUtc: monitoringHealth.lastSuccessfulCoverageUtc,
+          staleAfterMs: monitoringHealth.coverage.staleAfterMs,
+          settlementRunUtc: monitoringHealth.settlementRunUtc,
+          automationLabel: monitoringHealth.automation.label,
+          failingStage: monitoringHealth.failingStage,
+          reasons: monitoringHealth.reasons,
+          trigger: args.trigger,
+        });
+        await recordIssuanceWorkCheck(ctx, { handoff, trigger: args.trigger, decision: "monitoring_hold", resultStatus: "held", state: holdState, resultingRunId: null, reason: holdExplanation.reason });
+        const holdSummary = `New paper entries HELD by the monitoring-health gate (by design — not a dispatch failure; this hold is recorded in the issuance work check) — coverage is ${monitoringHealth.coverageStatus.toUpperCase()} (${monitoringHealth.coverageBasis}; last successful coverage ${monitoringHealth.lastSuccessfulCoverageUtc ?? "unavailable"}${holdExplanation.staleBoundCrossedUtc ? `; freshness bound crossed ${holdExplanation.staleBoundCrossedUtc}` : ""}; latest settlement pass ${monitoringHealth.settlementRunUtc ?? "unavailable"}) and automation is ${monitoringHealth.automation.label} (${monitoringHealth.failingStage ?? "coverage unverified"}). No candidate was processed and no entry admitted. Monitoring, settlement, discovery and research continue; admission resumes automatically once coverage is fresh and scheduled recovery is confirmed by attestation. Trigger label "${args.trigger}" is the caller-supplied argument and defaults to "manual" when unsupplied — it does not by itself establish that a person fired this invocation.`;
         return {
           ok: false, runId: null, status: "partial", handlerVersion: ISSUANCE_HANDLER_VERSION,
           freeze: { ...freeze, frozenAt: freeze.frozenAt.toISOString() },
@@ -6529,6 +6759,7 @@ export const Actions = {
           counts: { discovered: handoff?.discoveredCount ?? 0, scored: handoff?.scoredCount ?? 0, directional: handoff?.directionalCount ?? 0, preFilterEligible: handoff?.eligibleCount ?? 0, preFilterRejected: handoff?.rejectedCount ?? 0, considered: 0, issued: 0, abstained: 0, missed: 0, deferred: handoff?.eligibleCount ?? 0 },
           results: [], delivery: PAPER_DELIVERY_ARCHITECTURE, sourceMapping: PAPER_VERSION_MAPPING,
           summary: holdSummary,
+          workCheck: { decision: "monitoring_hold" as const, handoffId: handoff?.id ?? null, priorRunId: holdState?.latestRun?.id ?? null, priorRunStatus: holdState?.latestRun?.status ?? null, intakeTotal: holdState?.intakeTotal ?? 0, intakeTerminal: holdState?.intakeTerminal ?? 0, intakePending: holdState?.intakePending ?? 0, reason: holdExplanation.reason },
           monitoringHold: { status: monitoringHealth.status, failingStage: monitoringHealth.failingStage, lastSuccessfulCoverageUtc: monitoringHealth.lastSuccessfulCoverageUtc, settlementRunUtc: monitoringHealth.settlementRunUtc, reasons: monitoringHealth.reasons, coverageStatus: monitoringHealth.coverageStatus, coverageBasis: monitoringHealth.coverageBasis, automationStatus: monitoringHealth.automation.status, automationLabel: monitoringHealth.automation.label },
         };
       }
@@ -6591,7 +6822,7 @@ export const Actions = {
     response: z.object({
       generatedAt: z.string(),
       windowHours: z.number(),
-      checks: z.object({ total: z.number(), skippedCompleted: z.number(), processedNew: z.number(), recoveredIncomplete: z.number(), noHandoff: z.number(), coalesced: z.number() }),
+      checks: z.object({ total: z.number(), skippedCompleted: z.number(), processedNew: z.number(), recoveredIncomplete: z.number(), noHandoff: z.number(), coalesced: z.number(), monitoringHeld: z.number() }),
       executions: z.object({ total: z.number(), complete: z.number(), partial: z.number(), failed: z.number(), running: z.number() }),
       pollLane: z.object({ generation: z.number(), coalescedCount: z.number(), lastStartedAt: z.string().nullable(), lastCompletedAt: z.string().nullable() }).nullable(),
       latestCheck: z.object({ id: z.number(), handoffRunId: z.number().nullable(), trigger: z.string(), decision: z.string(), resultStatus: z.string(), priorRunId: z.number().nullable(), priorRunStatus: z.string().nullable(), intakeTotal: z.number(), intakeTerminal: z.number(), intakePending: z.number(), resultingRunId: z.number().nullable(), reason: z.string(), checkedAt: z.string() }).nullable(),
@@ -6612,12 +6843,12 @@ export const Actions = {
       return {
         generatedAt: new Date().toISOString(),
         windowHours: args.windowHours,
-        checks: { total: checkRows.length, skippedCompleted: countDecision("skipped_completed"), processedNew: countDecision("processed_new"), recoveredIncomplete: countDecision("recovered_incomplete"), noHandoff: countDecision("no_handoff"), coalesced: countDecision("coalesced") },
+        checks: { total: checkRows.length, skippedCompleted: countDecision("skipped_completed"), processedNew: countDecision("processed_new"), recoveredIncomplete: countDecision("recovered_incomplete"), noHandoff: countDecision("no_handoff"), coalesced: countDecision("coalesced"), monitoringHeld: countDecision("monitoring_hold") },
         executions: { total: runRows.reduce((sum, row) => sum + Number(row.count), 0), complete: countStatus("complete"), partial: countStatus("partial"), failed: countStatus("failed"), running: countStatus("running") },
         pollLane: lane ? { generation: lane.generation, coalescedCount: lane.coalescedCount, lastStartedAt: lane.lastStartedAt?.toISOString() ?? null, lastCompletedAt: lane.lastCompletedAt?.toISOString() ?? null } : null,
         latestCheck: checkRows[0] ? projectCheck(checkRows[0]) : null,
         recentChecks: checkRows.slice(0, 20).map(projectCheck),
-        note: "Three separate measures: checks = bounded issuance-work checks recorded per cycle invocation; executions = full issuance passes that created a paper_signal_runs row; poll lane = worker generations started vs invocations coalesced into an already-active worker. A skipped check is not an execution, and a coalesced invocation is not a launch.",
+        note: "Three separate measures: checks = bounded issuance-work checks recorded per cycle invocation; executions = full issuance passes that created a paper_signal_runs row; poll lane = worker generations started vs invocations coalesced into an already-active worker. A skipped check is not an execution, and a coalesced invocation is not a launch. A monitoring_hold check is a designed monitoring-health gate hold — the cycle ran, evaluated health first, and was refused before any candidate processing; it is not a missing dispatch, and its recorded reason carries the gate's coverage, freshness-bound and automation state. The trigger label on a check is the caller-supplied action argument and defaults to \"manual\" when unsupplied, so it does not by itself establish that a person fired the invocation.",
       };
     },
   }),
@@ -6770,16 +7001,65 @@ export const Actions = {
     request: z.object({}), response: paperMonitoringResponse,
     privileged: [privileged.paperPilotFiles],
     async handler(ctx): Promise<PaperMonitoringResponse> {
-      const unavailable: PaperMonitoringResponse = { available: false, error: "Monitoring data is not reachable from this view.", positions: [], market: { available: false, error: "Research market data is not reachable from this view.", lastRefreshUtc: null, receiptTimeUtc: null, venue: null, marketType: null, instruments: [] }, canonicalOutcomes: { available: false, reason: "Canonical outcomes ledger is not reachable from this view.", positions: [] }, health: unavailableMonitoringHealth };
+      const unavailable: PaperMonitoringResponse = { available: false, error: "Monitoring data is not reachable from this view.", engineSnapshot: null, positions: [], market: { available: false, error: "Research market data is not reachable from this view.", lastRefreshUtc: null, receiptTimeUtc: null, venue: null, marketType: null, instruments: [] }, canonicalOutcomes: { available: false, reason: "Canonical outcomes ledger is not reachable from this view.", positions: [] }, health: unavailableMonitoringHealth };
       let provider: { ok: boolean; data: unknown | null; error: string | null } | null = null;
       try { provider = await ctx.executePrivileged(privileged.paperPilotFiles, {}); }
       catch (error) { return { ...unavailable, error: compactError(error, "Monitoring data is not reachable from this view.") }; }
       if (!provider?.ok || provider.data == null) return { ...unavailable, error: provider?.error ?? unavailable.error };
       const root = unknownRecord(provider.data);
       const fileErrors = unknownRecord(root.errors);
-      const firstFileError = Object.values(fileErrors).find((value) => typeof value === "string") as string | undefined;
+      // The core-snapshot read failure is reported only through
+      // engineSnapshot (null) — it must never masquerade as a market or
+      // monitoring file error elsewhere in this response.
+      const firstFileError = Object.entries(fileErrors).filter(([key]) => key !== "snapshots/core-snapshot.json").map(([, value]) => value).find((value) => typeof value === "string") as string | undefined;
       const str = (value: unknown): string | null => typeof value === "string" && value ? value : null;
       const num = (value: unknown): number | null => finite(value);
+      // Engine snapshot: expose the engine's code-computed fields verbatim.
+      // A missing/unparseable file (bridge returns null or a non-object)
+      // yields null — no recomputation from the raw store, ever.
+      const engineSnapshot: PaperMonitoringResponse["engineSnapshot"] = (() => {
+        const snap = root.core_snapshot && typeof root.core_snapshot === "object" && !Array.isArray(root.core_snapshot) ? unknownRecord(root.core_snapshot) : null;
+        if (!snap) return null;
+        const bool = (value: unknown): boolean | null => typeof value === "boolean" ? value : null;
+        const strList = (value: unknown): string[] => Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+        const enrollmentRaw = snap.enrollment && typeof snap.enrollment === "object" && !Array.isArray(snap.enrollment) ? unknownRecord(snap.enrollment) : null;
+        const latestRunRaw = enrollmentRaw?.latest_run && typeof enrollmentRaw.latest_run === "object" && !Array.isArray(enrollmentRaw.latest_run) ? unknownRecord(enrollmentRaw.latest_run) : null;
+        const canonicalRaw = enrollmentRaw?.canonical_file && typeof enrollmentRaw.canonical_file === "object" && !Array.isArray(enrollmentRaw.canonical_file) ? unknownRecord(enrollmentRaw.canonical_file) : null;
+        const generatedAtUtc = str(snap.generated_at_utc);
+        const generatedMs = generatedAtUtc ? Date.parse(generatedAtUtc) : NaN;
+        return {
+          schema: str(snap.schema),
+          positionsTotal: num(snap.positions_total),
+          positionsSettled: num(snap.positions_settled),
+          positionsOpen: num(snap.positions_open),
+          openPositionIds: strList(snap.open_position_ids),
+          coverageThroughUtc: str(snap.coverage_through_utc),
+          gapsOpenTotal: num(snap.gaps_open_total),
+          coverageComplete: bool(snap.coverage_complete),
+          openPositionsUncovered: strList(snap.open_positions_uncovered),
+          settleVerifiedThroughUtc: str(snap.settle_verified_through_utc),
+          outcomeRecords: num(snap.outcome_records),
+          enrollment: enrollmentRaw ? {
+            latestRun: latestRunRaw ? {
+              file: str(latestRunRaw.file),
+              runUtc: str(latestRunRaw.run_utc),
+              ageS: num(latestRunRaw.age_s),
+              stale: bool(latestRunRaw.stale),
+              derivedEnteredCount: num(latestRunRaw.derived_entered_count),
+              derivedMissingFromBook: strList(latestRunRaw.derived_missing_from_book),
+              addedCount: num(latestRunRaw.added_count),
+              discrepanciesCount: num(latestRunRaw.discrepancies_count),
+            } : null,
+            canonicalFile: canonicalRaw ? {
+              fileAgeS: num(canonicalRaw.file_age_s),
+              enrollWouldNoop: bool(canonicalRaw.enroll_would_noop),
+            } : null,
+          } : null,
+          generatedAtUtc,
+          source: str(snap.source),
+          snapshotAgeMs: Number.isFinite(generatedMs) ? Math.max(0, Date.now() - generatedMs) : null,
+        };
+      })();
       const positionsRaw = Array.isArray(root.positions) ? root.positions : [];
       const monState = unknownRecord(unknownRecord(root.monitoring_state).positions);
       const obsById = new Map<string, Record<string, unknown>>();
@@ -6897,6 +7177,7 @@ export const Actions = {
       return {
         available: monitoringError === null && positions.length > 0,
         error: monitoringError,
+        engineSnapshot,
         positions,
         market: { available: snapshot !== null, error: marketError, lastRefreshUtc: str(mdState.last_refresh_utc), receiptTimeUtc: snapshot ? str(snapshot.receipt_time_utc) : null, venue: snapshot ? str(snapshot.venue) : null, marketType: snapshot ? str(snapshot.market_type) : null, instruments },
         canonicalOutcomes,
@@ -6938,8 +7219,19 @@ export const Actions = {
         const idn = run.identity ?? {};
         if (idn.venue !== "Hyperliquid" || idn.market_type !== "perp" || idn.quote_currency !== "USD") return { board: null, error: "Scanner run identity mismatch; board withheld." };
         const wiring = evaluateIssuanceWiring(unknownRecord(idn));
-        if (!wiring.excluded) return { board: null, error: "issuance wiring not affirmatively excluded", withheld: true, reason: "issuance wiring not affirmatively excluded", observedIssuanceWiring: wiring.observed ?? null };
-        const identity = { ...idn, issuanceWiringCheck: wiring.check };
+        let identity: Record<string, unknown>;
+        if (wiring.excluded) {
+          identity = { ...idn, issuanceWiringCheck: wiring.check };
+        } else if (wiring.observed === null || wiring.observed === undefined) {
+          identity = {
+            ...idn,
+            issuanceWiringCheck: "research-only-pure-read",
+            researchOnlyNote: "Research only — pure read: this board action makes no writes, no scheduler calls, no alert calls, and no issuance calls, and is never an issuance input.",
+            note: "Research only — pure read: this board action makes no writes, no scheduler calls, no alert calls, and no issuance calls, and is never an issuance input.",
+          };
+        } else {
+          return { board: null, error: "issuance wiring not affirmatively excluded", withheld: true, reason: "issuance wiring not affirmatively excluded", observedIssuanceWiring: wiring.observed ?? null };
+        }
         const universe = Array.isArray(idn.universe) ? idn.universe : [];
         const rows = universe.map((symbol: string) => {
           const mover = run.mover_board_24h?.[symbol]; const vol = run.volume?.[symbol];
@@ -7546,92 +7838,35 @@ export const Actions = {
   getPaperPilotStatus: defineAction({
     request: z.object({ emitTestAlert: z.boolean().default(false) }), response: z.any(),
     async handler(ctx, args) {
-      const db = ctx.db<typeof schema>(); const freeze = await ensurePaperPilotFreeze(ctx);
-      const [runs, watchRuns, handoffs, handoffCandidates, intake, candidates, checkpoints, signals, alerts, comparisons, legacySignals] = await Promise.all([
-        db.select().from(schema.paperSignalRuns).orderBy(desc(schema.paperSignalRuns.id)).limit(12),
-        db.select().from(schema.paperEntryWatchRuns).orderBy(desc(schema.paperEntryWatchRuns.id)).limit(24),
-        db.select().from(schema.paperHandoffRuns).orderBy(desc(schema.paperHandoffRuns.id)).limit(12),
-        db.select().from(schema.paperHandoffCandidates).orderBy(desc(schema.paperHandoffCandidates.id)).limit(300),
-        db.select().from(schema.paperCandidateIntake).orderBy(desc(schema.paperCandidateIntake.updatedAt)).limit(300),
-        db.select().from(schema.paperSignalCandidates).orderBy(desc(schema.paperSignalCandidates.updatedAt)).limit(100),
-        db.select().from(schema.paperEntryCheckpoints).orderBy(desc(schema.paperEntryCheckpoints.updatedAt)).limit(100),
-        db.select().from(schema.paperSignals).orderBy(desc(schema.paperSignals.issuedAt)).limit(100),
-        db.select().from(schema.paperAlertEvents).orderBy(desc(schema.paperAlertEvents.enqueuedAt)).limit(100),
-        db.select().from(schema.paperModelComparisons).orderBy(desc(schema.paperModelComparisons.createdAt)).limit(200),
-        db.select({ id: schema.generatedSignals.id }).from(schema.generatedSignals),
-      ]);
-      // Poll-lease observability (2026-10-21 repair): read-only projection
-      // of paper_poll_leases. Owner tokens are NEVER projected. Fail-
-      // isolated: any read failure degrades to an empty list and never
-      // fails the status action; an empty table likewise returns [].
-      let pollLeases: Array<{ lane: string; held: boolean; acquiredAt: string | null; leaseExpiresAt: string | null; generation: number; lastCompletedAt: string | null }> = [];
-      try {
-        const leaseRows = await db.select().from(schema.paperPollLeases).orderBy(asc(schema.paperPollLeases.lane));
-        const leaseNowMs = Date.now();
-        pollLeases = leaseRows.map((row) => ({
-          lane: row.lane,
-          held: row.ownerToken !== null && row.leaseExpiresAt !== null && row.leaseExpiresAt.getTime() > leaseNowMs,
-          acquiredAt: row.lastStartedAt?.toISOString() ?? null,
-          leaseExpiresAt: row.leaseExpiresAt?.toISOString() ?? null,
-          generation: row.generation,
-          lastCompletedAt: row.lastCompletedAt?.toISOString() ?? null,
-        }));
-      } catch { pollLeases = []; }
-      const latestHandoff = handoffs.find((row) => row.status === "complete") ?? null;
-      const latestReasons = latestHandoff ? handoffCandidates.filter((row) => row.handoffRunId === latestHandoff.id).map((row) => ({ candidateKey: row.candidateKey, symbol: row.symbol, direction: row.direction, outcome: row.outcome, stage: row.stage, reasonCode: row.reasonCode, reason: row.reason, preLegacyFilter: row.preLegacyFilter })) : [];
-      const probeId = randomUUID();
-      const testAlertRow = args.emitTestAlert ? [{
-        id: -1,
-        eventKey: `test_${probeId}`,
-        paperSignalId: `sig_TEST_${probeId.slice(0, 8)}`,
-        status: "queued",
-        transport: "test-probe",
-        destinationLabel: "research-side-chat",
-        payloadJson: {
-          schema_version: "2026-10-14", paper: true, label: "PAPER",
-          alert_type: "ENTRY_CONFIRMED",
-          signal_id: `sig_TEST_${probeId.slice(0, 8)}`,
-          asset: "BTCUSD", direction: "long",
-          setup_reason: "TEST ROUTING PROBE through the deployed transport — not a live signal, no real order",
-          entry_rule: "test probe: response-time synthesis, no venue print",
-          entry_price: 1.0,
-          invalidation: { price: 0.9, rule: "test probe" },
-          targets: { t1: 1.1, t2: 1.2 },
-          horizon: "test probe",
-          data_timestamp: new Date().toISOString(),
-          issued_at: new Date().toISOString(),
-          destinations: ["research-side-chat", "terminal-tracker"],
-          test: true, status: "confirmed",
-          entry_observed_at: new Date().toISOString(),
-          venue_print_ts: new Date().toISOString(),
-          waiting_interval_veto: "pass",
-          post_entry_check: "test probe",
-        },
-        enqueuedAt: new Date().toISOString(), acknowledgedAt: null,
-        attemptCount: 0, lastError: null,
-        createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
-      }] : [];
-      return {
-        schema_version: "paper-status/1",
-        handler_version: ISSUANCE_HANDLER_VERSION,
-        handler: { version: ISSUANCE_HANDLER_VERSION, deployedPath: DEPLOYED_PAPER_PATH, legacyIssuerReachable: false, sourceHashes: PAPER_SOURCE_HASHES, comparisonMapping: PAPER_VERSION_MAPPING },
-        freeze: { ...freeze, frozenAt: freeze.frozenAt.toISOString(), collectionPlan: PAPER_COLLECTION_PLAN },
-        venueMappings: COVERAGE.map((row) => ({ coinId: row.coinId, venue: row.venue === "mexc-spot" ? MEXC_VENUE_LABEL : "Binance Spot", instrument: row.pair })),
-        segregation: { paperTable: "paper_signals", legacyTable: "generated_signals", legacyTrackedCount: legacySignals.length, prospectiveVerifiedEntries: signals.length, prospectiveCompletedOutcomes: comparisons.filter((row) => row.cohort === "prospective_issued" && row.outcomeStatus !== "pending").length, fixturesAndReplaysIncluded: false, note: "Legacy/reconstructed records, prospective paper records, and fixtures/replays remain separate. The repaired paper action never writes generated_signals or signal_contracts." },
-        delivery: PAPER_DELIVERY_ARCHITECTURE,
-        handoff: latestHandoff ? { ...latestHandoff, startedAt: latestHandoff.startedAt.toISOString(), completedAt: latestHandoff.completedAt?.toISOString() ?? null, createdAt: latestHandoff.createdAt.toISOString(), discoveryCounts: { discovered: latestHandoff.discoveredCount, scored: latestHandoff.scoredCount, directional: latestHandoff.directionalCount, eligibleBeforeLegacyFilters: latestHandoff.eligibleCount, rejectedBeforeLegacyFilters: latestHandoff.rejectedCount }, perCandidateReasons: latestReasons } : null,
-        handoffRuns: handoffs.map((row) => ({ ...row, startedAt: row.startedAt.toISOString(), completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString() })),
-        runs: runs.map((row) => ({ ...row, startedAt: row.startedAt.toISOString(), completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString() })),
-        entryWatch: { version: "paper-entry-watch-v1", scope: "watch-only persisted awaiting-entry contracts", schedule: "artifact action; one-minute tick", qualificationReachable: false, candidateIngestionReachable: false, frozenTrialMutationReachable: false, eventUniqueness: "contract_id + event_type + event_version", runs: watchRuns.map((row) => ({ ...row, startedAt: row.startedAt.toISOString(), completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString() })) },
-        intake: { exactLimitingConstructRemoved: "handoffReasonRows.filter(outcome === eligible).slice(0, limit), with action limit defaulting to 8", batchSize: "runPaperSignalCycle.limit (default 8; bounds 1–20)", maxItemsPerInvocation: PAPER_INTAKE_MAX_ITEMS_PER_INVOCATION, rows: intake.map((row) => ({ ...row, decisionAt: row.decisionAt.toISOString(), entryExpiresAt: row.entryExpiresAt.toISOString(), leaseExpiresAt: row.leaseExpiresAt?.toISOString() ?? null, completedAt: row.completedAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString() })) },
-        candidates: candidates.map((row) => ({ ...row, decisionAt: row.decisionAt.toISOString(), sourceObservedAt: row.sourceObservedAt?.toISOString() ?? null, entryObservedAt: row.entryObservedAt?.toISOString() ?? null, entryReceivedAt: row.entryReceivedAt?.toISOString() ?? null, entryExpiresAt: row.entryExpiresAt.toISOString(), createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString() })),
-        checkpoints: checkpoints.map((row) => ({ ...row, firstPrintObservedAt: row.firstPrintObservedAt?.toISOString() ?? null, requestSinceAt: row.requestSinceAt.toISOString(), requestUntilAt: row.requestUntilAt.toISOString(), receiptAt: row.receiptAt?.toISOString() ?? null, createdAt: row.createdAt.toISOString(), updatedAt: row.updatedAt.toISOString() })),
-        signals: signals.map(paperSignalView),
-        alerts: [...testAlertRow, ...alerts.map(paperAlertReadRow)],
-        comparisons: comparisons.map((row) => ({ ...row, decisionAt: row.decisionAt.toISOString(), createdAt: row.createdAt.toISOString() })),
-        pollLeases,
-        cohortRules: { prospective: "Only verified rows from the repaired post-freeze path; currently reported separately from all legacy/reconstructed results.", retrospective: "Historical rescoring, fixtures and market-data replays remain outside prospective performance statistics.", primaryEconomics: "Common eligible-opportunity denominator; a genuine abstention contributes zero while missing evidence remains unknown.", secondary: "Both-issued paired comparison only." },
+      return buildPaperPilotStatusPayload(ctx, args);
+    },
+  }),
+
+  // Writes the canonical entered set the workspace paper-monitoring
+  // enrollment step (enroll.py) reads, so enrollment never starves when
+  // no agent lane is running. Builds the payload through the exact same
+  // builder as getPaperPilotStatus, wraps it in that action's response
+  // envelope ({ ok: true, data }), and writes it atomically through the
+  // dedicated privileged bridge whose only capability is writing that
+  // one fixed path. Takes no path arguments; on any failure the existing
+  // canonical file is left untouched.
+  refreshpaperenrollmentcanonical: defineAction({
+    request: z.object({}), response: refreshPaperEnrollmentCanonicalResponse,
+    privileged: [privileged.writePaperEnrollmentCanonical],
+    async handler(ctx): Promise<RefreshPaperEnrollmentCanonicalResponse> {
+      const payload = await buildPaperPilotStatusPayload(ctx, { emitTestAlert: false });
+      const serialized = JSON.stringify({ ok: true, data: payload });
+      const bytes = new TextEncoder().encode(serialized).length;
+      const counts = {
+        signals: Array.isArray(payload?.signals) ? payload.signals.length : 0,
+        checkpoints: Array.isArray(payload?.checkpoints) ? payload.checkpoints.length : 0,
+        alerts: Array.isArray(payload?.alerts) ? payload.alerts.length : 0,
       };
+      let result: { ok: boolean; bytes: number | null; writtenAtUtc: string | null; error: string | null };
+      try { result = await ctx.executePrivileged(privileged.writePaperEnrollmentCanonical, { content: serialized }); }
+      catch (error) { throw new Error(`refreshpaperenrollmentcanonical: canonical write failed: ${compactError(error, "privileged write execution failed")}`); }
+      if (!result.ok) throw new Error(`refreshpaperenrollmentcanonical: canonical write failed: ${result.error ?? "unknown bridge error"}`);
+      return { written: true, bytes: result.bytes ?? bytes, writtenAtUtc: result.writtenAtUtc ?? new Date().toISOString(), counts };
     },
   }),
   validateMemeRisk: defineAction({
@@ -8434,6 +8669,8 @@ export const Actions = {
       return withSchedulerReceipt(ctx, "market_discovery_scan", args.trigger, async () => {
       const startedAt = new Date(); const db = ctx.db<typeof schema>();
       const sourceStatus: Array<{ source: string; status: "live" | "unavailable"; detail: string }> = [];
+      let synthesis: z.infer<typeof marketDiscoverySynthesisShape> = { news: [], theories: [] };
+      let synthesisFailed = false;
       // Batch 5 A5a: single-flight — a duplicate invocation while a run is
       // in flight returns the suppressed-duplicate result, never a second
       // execution. Once no run is in flight a fresh run always starts.
@@ -8577,6 +8814,28 @@ export const Actions = {
           return (name.length >= 5 && lowerText.includes(name)) || (symbol.length >= 3 && new RegExp(`(^|[^A-Z0-9])\\$?${symbol}([^A-Z0-9]|$)`).test(rawText));
         })).map((row: any) => String(row.id)));
         sourceStatus.push({ source: "Silent-hint mentions", status: institutionalRows.length ? "live" : "unavailable", detail: institutionalRows.length ? `${silentMentionIds.size} ranked-asset mentions retained as context; they cannot promote T2/T3 into signal scoring.` : "Institutional hint search unavailable." });
+
+        // Early news annotation (2026-10-23 budget repair): the annotation
+        // call depends only on the linked news — not on scoring or the
+        // veto — so it runs here, while the action still holds most of its
+        // platform deadline. Run 163 (production) reached the old late
+        // synthesis point with the deadline too close for inference to
+        // start; sandbox runs 165/166 recorded the inference call timing
+        // out after scoring + quote polling had burned ~105s. Theory
+        // synthesis still runs after the veto (it needs the retained-signal
+        // research pool). Each half stays independently fail-isolated, and
+        // the previous-run carry-forward pointer is recorded at the late
+        // synthesis checkpoint when either half failed.
+        const newsEvidence = newsRows.map((row: any, index: number) => `Source ${index}: ${row.title}\nPublisher: ${row.source ?? "Unknown"}\nPublished: ${row.published_at ?? row.last_updated_raw ?? "date unavailable"}\nSnippet: ${row.snippet ?? "No snippet"}`).join("\n\n");
+        if (newsRows.length) {
+          try {
+            const annotated = await withNamedTimeout("market discovery news annotation", DISCOVERY_SYNTHESIS_TIMEOUT_MS, ctx.inference.complete(`Act as a skeptical cross-market crypto research editor. Annotate the supplied linked news with why it matters and explicit sector impacts (positive, negative, mixed, or unclear), naming the mechanism and only assets actually supported by the source text. Do not invent dates, prices, flows, wallet activity, unlocks, sources, or facts. Source indices refer to the linked news list.\n\nLINKED NEWS\n${newsEvidence}`, { schema: z.object({ news: marketDiscoverySynthesisShape.shape.news }) }));
+            synthesis = { ...synthesis, news: annotated.news };
+          } catch (error) {
+            synthesisFailed = true;
+            sourceStatus.push({ source: "Research synthesis", status: "unavailable", detail: compactError(error, "Inference news annotation unavailable; measured signals remain usable.") });
+          }
+        }
 
         const elfaBySymbol = new Map(elfaCombined.map((row) => [row.symbol, row]));
         const velocity48hById = new Map<string, number | null>();
@@ -8727,33 +8986,66 @@ export const Actions = {
         // pre-decision by construction (observed during the catalog fetch,
         // before startedAt) and can never satisfy the post-decision-only quote
         // contract — the discovery-path veto was structurally unable to pass.
-        // Fetch ONE batched fresh quote after the decision so the veto
+        // Fetch a batched fresh quote after the decision so the veto
         // evaluates real post-decision evidence. Fail-closed: a fetch failure
         // or stale provider timestamp leaves the quote null → veto UNKNOWN.
         // Evidence requirements are unchanged; this supplies the missing
         // evidence, it does not weaken the check.
-        const vetoQuoteByCoinId = new Map<string, VetoQuote | null>();
+        //
+        // Evidence-supply repair (2026-10-23): a SINGLE batch fetch was not
+        // enough. CoinGecko's per-coin last_updated cache routinely lags the
+        // run start for smaller assets (stored proof: quote observed
+        // 2026-10-23T16:57:50Z vs decision 16:58:08Z — 18s early), and a
+        // partial/failed batch left some coins with no quote at all; the
+        // veto then correctly suppressed 100% of scan output as UNKNOWN.
+        // The batch is now re-polled on a bounded schedule, asking only for
+        // coins whose best quote is still missing or pre-decision, keeping
+        // the newest observation per coin, until every directional
+        // candidate carries an admissible quote or the poll budget ends.
+        // Admission itself is unchanged — admitVetoQuote still requires
+        // observedAt >= decision, receipt time, and venue.
+        const vetoQuoteByCoinId = new Map<string, VetoQuote>();
         try {
           const directionalCoinIds = [...new Set(candidates.filter((c) => c.direction !== "watch" && c.price !== null).map((c) => c.coinId))];
-          if (directionalCoinIds.length > 0) {
-            const freshRaw = await getJson(`${CG}/coins/markets?vs_currency=usd&ids=${directionalCoinIds.map((id) => encodeURIComponent(id)).join(",")}&sparkline=false`);
+          const quotePollDelaysMs = [0, 10_000, 25_000];
+          for (let attempt = 0; attempt < quotePollDelaysMs.length && directionalCoinIds.length > 0; attempt++) {
+            const delay = quotePollDelaysMs[attempt] ?? 0;
+            if (delay > 0) await new Promise((resolve) => setTimeout(resolve, delay));
+            const unadmitted = directionalCoinIds.filter((coinId) => { const quote = vetoQuoteByCoinId.get(coinId); return !quote || quote.observedAt === null || Date.parse(quote.observedAt) < startedAt.getTime(); });
+            if (!unadmitted.length) break;
+            const freshRaw = await getJson(`${CG}/coins/markets?vs_currency=usd&ids=${unadmitted.map((id) => encodeURIComponent(id)).join(",")}&sparkline=false`).catch(() => null);
+            if (!Array.isArray(freshRaw)) continue;
             const freshReceivedAt = new Date().toISOString();
-            if (Array.isArray(freshRaw)) {
-              for (const qr of freshRaw) {
-                const qid = typeof qr?.id === "string" ? qr.id : null;
-                const qprice = finite(qr?.current_price);
-                const qobserved = typeof qr?.last_updated === "string" && Number.isFinite(Date.parse(qr.last_updated)) ? (qr.last_updated as string) : null;
-                if (qid !== null && qprice !== null) vetoQuoteByCoinId.set(qid, { price: qprice, observedAt: qobserved, receivedAt: freshReceivedAt, venue: VETO_QUOTE_VENUE });
-              }
+            for (const qr of freshRaw) {
+              const qid = typeof qr?.id === "string" ? qr.id : null;
+              const qprice = finite(qr?.current_price);
+              const qobserved = typeof qr?.last_updated === "string" && Number.isFinite(Date.parse(qr.last_updated)) ? (qr.last_updated as string) : null;
+              if (qid === null || qprice === null) continue;
+              const existing = vetoQuoteByCoinId.get(qid);
+              const existingMs = existing?.observedAt ? Date.parse(existing.observedAt) : Number.NEGATIVE_INFINITY;
+              const observedMs = qobserved ? Date.parse(qobserved) : Number.NEGATIVE_INFINITY;
+              if (!existing || observedMs >= existingMs) vetoQuoteByCoinId.set(qid, { price: qprice, observedAt: qobserved, receivedAt: freshReceivedAt, venue: VETO_QUOTE_VENUE });
             }
           }
-        } catch { /* fail-closed: map stays empty → veto UNKNOWN */ }
+        } catch { /* fail-closed: map stays partial → veto UNKNOWN */ }
         const issuanceCheckedCandidates = await mapWithConcurrency(candidates, 6, async (row) => {
           if (row.direction === "watch") return row;
           const decisionMs = startedAt.getTime();
           // VETO-1: pre-decision candle is context only; the veto runs on the
           // post-decision slice + the scan-price quote analog.
-          const { candle, postDecision: coarsePostDecision } = await loadIssuanceSignalDayCandle(ctx, row.coinId, row.symbol, decisionMs);
+          let { candle, postDecision: coarsePostDecision } = await loadIssuanceSignalDayCandle(ctx, row.coinId, row.symbol, decisionMs);
+          if (!coarsePostDecision) {
+            // Evidence-supply repair (2026-10-23): the OHLC slice rides one
+            // upstream call; a transient 429/timeout nulls the slice and the
+            // veto reports coverage UNKNOWN even when the quote was admitted
+            // and current price passes (stored proof: quoteAdmitted true,
+            // currentPriceStatus pass, postDecisionCoverage null). One
+            // bounded retry after a short pause supplies the slice in the
+            // common transient case; a second failure stays UNKNOWN —
+            // fail-closed is unchanged.
+            await new Promise((resolve) => setTimeout(resolve, 3_000));
+            ({ candle, postDecision: coarsePostDecision } = await loadIssuanceSignalDayCandle(ctx, row.coinId, row.symbol, decisionMs));
+          }
           // VETO-1 (2026-10-16): the scan price is pre-decision by construction
           // and inadmissible as post-decision evidence — the fresh batch quote
           // (observed after the decision) is the veto's quote. A missing or
@@ -8858,6 +9150,51 @@ export const Actions = {
         sourceStatus.push({ source: "Linked news search", status: newsRows.length ? "live" : "unavailable", detail: newsRows.length ? `${newsRows.length} unique linked results retained from market, sector and institutional searches.` : "No linked news results returned; signal scoring can continue without news synthesis." });
         await discoveryCheckpoint(ctx, lease, "scoring", stageStartedAt, stageDurations, { scored: candidates.length, eligible: eligibleCandidates.length, retained: retainedSignals.length, suppressed: suppressedCandidates.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
         stageStartedAt = Date.now();
+        // Ordering repair (2026-10-23): research synthesis runs BEFORE the
+        // evidence-only drift capture below. Synthesis is a headline output
+        // (news annotations + theories) riding the platform action deadline;
+        // the fail-isolated 45s drift block used to consume that budget
+        // first, and production runs reached synthesis with the action
+        // deadline too close for inference to even start. Drift capture
+        // still completes before decisionAt is stamped in persistence,
+        // so its contract (capture precedes decisionAt) is unchanged.
+        const signalEvidence = researchCandidates.map((row, index) => `Signal ${index}: ${row.symbol} (${row.name}), rank ${row.rank ?? "unavailable"}, discovery ${row.discoveryTier} (${row.triggerReasons.join(", ")}), bucket ${row.sector}, direction ${row.direction}, evidence tier ${row.confidenceTier}, severe gates ${row.passedDimensions}/5, contradictions ${row.contradictions}, alignment ${row.alignment}/100, setup ${row.setupType}, dimensions ${row.dimensions.map((d) => `${d.name}:${d.status}`).join(" | ")}, 1H ${row.change1h}, 24H ${row.change24h}, 7D ${row.change7d}, 14D ${row.change14d}, 30D ${row.change30d}, 200D ${row.change200d}, spot turnover ${row.turnover}, funding ${row.funding}, OI USD ${row.openInterestUsd}.`).join("\n");
+        if (newsRows.length) {
+          // Split-call repair (2026-10-23): the single combined inference
+          // call (annotate 12 news items AND surface up to 4 theories with
+          // ripple chains in one response) exceeds the platform inference
+          // timeout even on an otherwise healthy run — every recent
+          // production and sandbox run recorded Research synthesis
+          // unavailable. The work is split into two smaller calls under
+          // the same editorial rules and the same output schemas: news
+          // annotation first, theory synthesis second (skipped when the
+          // research pool is empty). Each half is independently
+          // fail-isolated: a failed half records Research synthesis
+          // unavailable and the other half's output still lands; the
+          // previous-run carry-forward pointer is recorded when either
+          // half fails, exactly as the combined call did on failure.
+          if (researchCandidates.length) {
+            try {
+              const theorized = await withNamedTimeout("market discovery theory synthesis", DISCOVERY_SYNTHESIS_TIMEOUT_MS, ctx.inference.complete(`Act as a skeptical cross-market crypto research editor. Surface up to four direct theories only where measured evidence and linked sources support the same idea. Confidence means evidence quality, never probability. HIGH requires a high-tier signal that passed at least four of five severe gates, no failed gate, complete data, and at least two independent linked sources. MEDIUM is research-required: it may use a medium-tier signal but must name conflicts or missing evidence. LOW is monitor-only and must not become a directional pick. Do not invent dates, prices, flows, wallet activity, unlocks, sources, or facts. A theory with conflicting signals must use direction none. Include a concrete countercase, observable invalidation, and a 2-6 hop ripple chain. Source indices refer to the linked news list and signal indices refer to the measured signal list.\n\nMEASURED SIGNALS\n${signalEvidence}\n\nLINKED NEWS\n${newsEvidence}`, { schema: z.object({ theories: marketDiscoverySynthesisShape.shape.theories }) }));
+              synthesis = { ...synthesis, theories: theorized.theories };
+            } catch (error) {
+              synthesisFailed = true;
+              sourceStatus.push({ source: "Research synthesis", status: "unavailable", detail: compactError(error, "Inference theory synthesis unavailable; measured signals remain usable.") });
+            }
+          }
+          if (synthesisFailed) {
+            // (A4, 2026-10-19) Timeout-render rule: a timeout is never
+            // rendered as "nothing found" or "never run". Record the
+            // previous completed synthesis so the read action can render it
+            // with its source timestamp + age, labeled "previous run".
+            try {
+              const prior = (await db.select({ id: schema.marketDiscoveryRuns.id, completedAt: schema.marketDiscoveryRuns.completedAt, newsCount: schema.marketDiscoveryRuns.newsCount, theoryCount: schema.marketDiscoveryRuns.theoryCount }).from(schema.marketDiscoveryRuns).where(and(lt(schema.marketDiscoveryRuns.id, lease.runId), inArray(schema.marketDiscoveryRuns.status, ["complete", "degraded"]), gt(schema.marketDiscoveryRuns.newsCount, 0))).orderBy(desc(schema.marketDiscoveryRuns.id)).limit(1))[0] ?? null;
+              if (prior) sourceStatus.push({ source: "Research synthesis", status: "live", detail: `Previous-run synthesis carried forward: run ${prior.id} (${prior.theoryCount} theories, ${prior.newsCount} annotated news), completed ${prior.completedAt.toISOString()}; rendered as "previous run" in the discovery view.` });
+            } catch { /* fail-closed: no fallback pointer; the run still records degraded without a previous run */ }
+          }
+        }
+        await discoveryCheckpoint(ctx, lease, "synthesis", stageStartedAt, stageDurations, { newsInputs: newsRows.length, newsOutputs: synthesis.news.length, theories: synthesis.theories.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
+        stageStartedAt = Date.now();
         // CHANGE B (migration 0067, evidence capture only): decision-time
         // drift reference capture for every candidate that will become a
         // pilot handoff candidate (directional with a complete factor
@@ -8890,26 +9227,6 @@ export const Actions = {
             } catch { /* evidence capture only — a failed capture never blocks the candidate */ }
           });
         } catch { /* evidence capture only — never fails or alters the run */ }
-        const signalEvidence = researchCandidates.map((row, index) => `Signal ${index}: ${row.symbol} (${row.name}), rank ${row.rank ?? "unavailable"}, discovery ${row.discoveryTier} (${row.triggerReasons.join(", ")}), bucket ${row.sector}, direction ${row.direction}, evidence tier ${row.confidenceTier}, severe gates ${row.passedDimensions}/5, contradictions ${row.contradictions}, alignment ${row.alignment}/100, setup ${row.setupType}, dimensions ${row.dimensions.map((d) => `${d.name}:${d.status}`).join(" | ")}, 1H ${row.change1h}, 24H ${row.change24h}, 7D ${row.change7d}, 14D ${row.change14d}, 30D ${row.change30d}, 200D ${row.change200d}, spot turnover ${row.turnover}, funding ${row.funding}, OI USD ${row.openInterestUsd}.`).join("\n");
-        const newsEvidence = newsRows.map((row: any, index: number) => `Source ${index}: ${row.title}\nPublisher: ${row.source ?? "Unknown"}\nPublished: ${row.published_at ?? row.last_updated_raw ?? "date unavailable"}\nSnippet: ${row.snippet ?? "No snippet"}`).join("\n\n");
-        let synthesis: z.infer<typeof marketDiscoverySynthesisShape> = { news: [], theories: [] };
-        if (newsRows.length) {
-          try {
-            synthesis = await withNamedTimeout("market discovery synthesis", DISCOVERY_TOOL_TIMEOUT_MS, ctx.inference.complete(`Act as a skeptical cross-market crypto research editor. First, annotate the supplied linked news with why it matters and explicit sector impacts (positive, negative, mixed, or unclear), naming the mechanism and only assets actually supported by the source text. Second, surface up to four direct theories only where measured evidence and linked sources support the same idea. Confidence means evidence quality, never probability. HIGH requires a high-tier signal that passed at least four of five severe gates, no failed gate, complete data, and at least two independent linked sources. MEDIUM is research-required: it may use a medium-tier signal but must name conflicts or missing evidence. LOW is monitor-only and must not become a directional pick. Do not invent dates, prices, flows, wallet activity, unlocks, sources, or facts. A theory with conflicting signals must use direction none. Include a concrete countercase, observable invalidation, and a 2-6 hop ripple chain. Source indices refer to the linked news list and signal indices refer to the measured signal list.\n\nMEASURED SIGNALS\n${signalEvidence}\n\nLINKED NEWS\n${newsEvidence}`, { schema: marketDiscoverySynthesisShape }));
-          } catch (error) {
-            sourceStatus.push({ source: "Research synthesis", status: "unavailable", detail: compactError(error, "Inference synthesis unavailable; measured signals remain usable.") });
-            // (A4, 2026-10-19) Timeout-render rule: a timeout is never
-            // rendered as "nothing found" or "never run". Record the
-            // previous completed synthesis so the read action can render it
-            // with its source timestamp + age, labeled "previous run".
-            try {
-              const prior = (await db.select({ id: schema.marketDiscoveryRuns.id, completedAt: schema.marketDiscoveryRuns.completedAt, newsCount: schema.marketDiscoveryRuns.newsCount, theoryCount: schema.marketDiscoveryRuns.theoryCount }).from(schema.marketDiscoveryRuns).where(and(lt(schema.marketDiscoveryRuns.id, lease.runId), inArray(schema.marketDiscoveryRuns.status, ["complete", "degraded"]), gt(schema.marketDiscoveryRuns.newsCount, 0))).orderBy(desc(schema.marketDiscoveryRuns.id)).limit(1))[0] ?? null;
-              if (prior) sourceStatus.push({ source: "Research synthesis", status: "live", detail: `Previous-run synthesis carried forward: run ${prior.id} (${prior.theoryCount} theories, ${prior.newsCount} annotated news), completed ${prior.completedAt.toISOString()}; rendered as "previous run" in the discovery view.` });
-            } catch { /* fail-closed: no fallback pointer; the run still records degraded without a previous run */ }
-          }
-        }
-        await discoveryCheckpoint(ctx, lease, "synthesis", stageStartedAt, stageDurations, { newsInputs: newsRows.length, newsOutputs: synthesis.news.length, theories: synthesis.theories.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
-        stageStartedAt = Date.now();
         const now = new Date(); const optionalUnavailable = sourceStatus.some((source) => source.status === "unavailable"); const baseRunStatus: "complete" | "degraded" | "empty" = scanUniverse.length === 0 && retainedSignals.length === 0 ? "empty" : !optionalUnavailable && newsRows.length && synthesis.news.length && synthesis.theories.length ? "complete" : "degraded"; const runStatus: "complete" | "degraded" | "empty" = stageBudgetExhausted && baseRunStatus === "complete" ? "degraded" : baseRunStatus;
         // Horizon grading is intentionally excluded from discovery refreshes. The daily postmortem owns declared-horizon observations from timestamped OHLC evidence; a late current quote can never settle a past horizon.
         const priorDiscovery = await db.select().from(schema.discoverySignals).orderBy(desc(schema.discoverySignals.id)).limit(5000);
@@ -9051,10 +9368,30 @@ export const Actions = {
   }),
 
   getMarketDiscovery: defineAction({
-    request: z.object({}), response: z.object({ run: z.any().nullable(), signals: z.array(z.any()), news: z.array(z.any()), previousSynthesis: z.any().nullable(), coverageGaps: z.array(z.object({ runId: z.number(), status: z.string(), startedAt: z.string(), completedAt: z.string(), summary: z.string(), failedSources: z.array(z.string()) })), error: z.string().nullable() }),
+    request: z.object({}), response: z.object({ run: z.any().nullable(), activeRun: z.any().nullable(), signals: z.array(z.any()), news: z.array(z.any()), previousSynthesis: z.any().nullable(), coverageGaps: z.array(z.object({ runId: z.number(), status: z.string(), startedAt: z.string(), completedAt: z.string(), summary: z.string(), failedSources: z.array(z.string()) })), error: z.string().nullable() }),
     async handler(ctx) {
       try {
-        const db = ctx.db<typeof schema>(); const latest = await db.select().from(schema.marketDiscoveryRuns).orderBy(desc(schema.marketDiscoveryRuns.id)).limit(1); const run = latest[0] ?? null;
+        const db = ctx.db<typeof schema>(); const latest = await db.select().from(schema.marketDiscoveryRuns).orderBy(desc(schema.marketDiscoveryRuns.id)).limit(1); const latestRow = latest[0] ?? null;
+        // Read-model repair (2026-10-23): the headline run is the latest
+        // COMPLETED run. While a run is in flight this action used to return
+        // the running row itself — zero counts and "Discovery running — no
+        // stage completed" — labeled LAST COMPLETED SCAN, and read signals
+        // for the in-flight run id, so the whole discovery feed looked
+        // permanently empty and stuck mid-scan. A live in-flight run (inside
+        // its deadline, heartbeat within 5 minutes) is now exposed
+        // separately as activeRun; the panel keeps showing the last
+        // completed scan underneath it. A worker killed by the platform
+        // action deadline stops heartbeating, so its row stops
+        // masquerading as progress here while staying on record for the
+        // stale-run reaper and the coverage-gap ledger. Reads never mutate.
+        const readNowMs = Date.now();
+        const isLiveRun = latestRow !== null && latestRow.status === "running" && latestRow.deadlineAt !== null && latestRow.deadlineAt.getTime() > readNowMs && latestRow.lastHeartbeatAt !== null && readNowMs - latestRow.lastHeartbeatAt.getTime() <= 5 * 60_000;
+        let run = latestRow;
+        let activeRun: typeof schema.marketDiscoveryRuns.$inferSelect | null = null;
+        if (latestRow && latestRow.status === "running") {
+          if (isLiveRun) activeRun = latestRow;
+          run = (await db.select().from(schema.marketDiscoveryRuns).where(inArray(schema.marketDiscoveryRuns.status, ["complete", "degraded", "empty"])).orderBy(desc(schema.marketDiscoveryRuns.id)).limit(1))[0] ?? null;
+        }
         // Coverage gaps: failed / timed-out / missed discovery slots from
         // the last 14 days stay ON RECORD as gaps. The terminal never
         // reopens them — recovery is the bounded recovery watch's single
@@ -9066,9 +9403,10 @@ export const Actions = {
           runId: gap.id, status: gap.status,
           startedAt: gap.startedAt.toISOString(), completedAt: gap.completedAt.toISOString(),
           summary: gap.summary,
-          failedSources: parseStored<Array<{ source?: string; status?: string; detail?: string }>>(gap.sourceStatusJson, []).filter((source) => source.status && source.status !== "ok").map((source) => `${source.source ?? "source"}: ${source.detail ?? source.status}`),
+          failedSources: parseStored<Array<{ source?: string; status?: string; detail?: string }>>(gap.sourceStatusJson, []).filter((source) => source.status === "unavailable").map((source) => `${source.source ?? "source"}: ${source.detail ?? source.status}`),
         }));
-        if (!run) return { run: null, signals: [], news: [], previousSynthesis: null, coverageGaps, error: null };
+        const activeRunView = activeRun ? { ...activeRun, sourceStatus: parseStored(activeRun.sourceStatusJson, []), startedAt: activeRun.startedAt.toISOString(), completedAt: activeRun.completedAt.toISOString() } : null;
+        if (!run) return { run: null, activeRun: activeRunView, signals: [], news: [], previousSynthesis: null, coverageGaps, error: null };
         const [signals, news, tracked] = await Promise.all([
           db.select().from(schema.discoverySignals).where(eq(schema.discoverySignals.runId, run.id)).orderBy(desc(schema.discoverySignals.alignment)),
           db.select().from(schema.discoveryNews).where(eq(schema.discoveryNews.runId, run.id)).orderBy(desc(schema.discoveryNews.id)),
@@ -9088,8 +9426,8 @@ export const Actions = {
             previousSynthesis = { label: "previous run", runId: prior.id, completedAt: prior.completedAt.toISOString(), ageMs: Date.now() - prior.completedAt.getTime(), newsCount: prior.newsCount, theoryCount: prior.theoryCount, news: priorNews.map((row) => ({ ...row, impacts: parseStored(row.impactsJson, []), assetTags: parseStored(row.assetTagsJson, []), retrievedAt: row.retrievedAt.toISOString(), previousRun: true })) };
           }
         }
-        return { run: { ...run, sourceStatus: parseStored(run.sourceStatusJson, []), startedAt: run.startedAt.toISOString(), completedAt: run.completedAt.toISOString() }, signals: signals.map((row) => { const storedDimensions = parseStored(row.dimensionsJson, []); const dimensions = row.sourceAsOf instanceof Date && hasDimensionLedger(storedDimensions) ? storedDimensions : []; return { ...row, reasons: parseStored(row.reasonsJson, []), triggerReasons: parseStored(row.triggerReasonsJson, []), socialSnapshot: row.socialSnapshotJson ? parseStored(row.socialSnapshotJson, null) : null, memeValidation: row.memeValidationJson ? parseStored(row.memeValidationJson, null) : null, dimensions, glance: dimensions.length ? buildGlance(dimensions, row.direction, row.alignment) : null, reliability: dimensions.length ? ratingReliability(row.alignment, observations, "five-gate discovery signal") : null, sourceAsOf: row.sourceAsOf?.toISOString() ?? null, capturedAt: row.capturedAt.toISOString() }; }), news: news.map((row) => ({ ...row, impacts: parseStored(row.impactsJson, []), assetTags: parseStored(row.assetTagsJson, []), retrievedAt: row.retrievedAt.toISOString() })), previousSynthesis, coverageGaps, error: null };
-      } catch (error) { return { run: null, signals: [], news: [], previousSynthesis: null, coverageGaps: [], error: compactError(error, "Market discovery unavailable") }; }
+        return { run: { ...run, sourceStatus: parseStored(run.sourceStatusJson, []), startedAt: run.startedAt.toISOString(), completedAt: run.completedAt.toISOString() }, activeRun: activeRunView, signals: signals.map((row) => { const storedDimensions = parseStored(row.dimensionsJson, []); const dimensions = row.sourceAsOf instanceof Date && hasDimensionLedger(storedDimensions) ? storedDimensions : []; return { ...row, reasons: parseStored(row.reasonsJson, []), triggerReasons: parseStored(row.triggerReasonsJson, []), socialSnapshot: row.socialSnapshotJson ? parseStored(row.socialSnapshotJson, null) : null, memeValidation: row.memeValidationJson ? parseStored(row.memeValidationJson, null) : null, dimensions, glance: dimensions.length ? buildGlance(dimensions, row.direction, row.alignment) : null, reliability: dimensions.length ? ratingReliability(row.alignment, observations, "five-gate discovery signal") : null, sourceAsOf: row.sourceAsOf?.toISOString() ?? null, capturedAt: row.capturedAt.toISOString() }; }), news: news.map((row) => ({ ...row, impacts: parseStored(row.impactsJson, []), assetTags: parseStored(row.assetTagsJson, []), retrievedAt: row.retrievedAt.toISOString() })), previousSynthesis, coverageGaps, error: null };
+      } catch (error) { return { run: null, activeRun: null, signals: [], news: [], previousSynthesis: null, coverageGaps: [], error: compactError(error, "Market discovery unavailable") }; }
     },
   }),
 

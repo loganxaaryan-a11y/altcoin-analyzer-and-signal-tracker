@@ -1,0 +1,12 @@
+$ bun run build:server
+$ cd server && bun build ./src/actions.ts --target=bun --outfile=./dist/actions.js
+Bundled 200 modules in 341ms
+
+  actions.js  12.90 MB  (entry point)
+
+[exit 0]
+$ bun run build:client
+$ bun ./client/build.mjs
+This web artifact cannot be built by hand. To make this change, call the `artifact.edit` tool (or `artifact.create_web_static` / `artifact.create_web_fullstack` for a new one); it rebuilds and re-publishes the web artifact automatically. Speak to the user as you would about any edit you are making for them: conversational, focused on what is changing and that it will be ready shortly.
+error: script "build:client" exited with code 1
+[exit 1]

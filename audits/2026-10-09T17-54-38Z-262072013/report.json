@@ -1,0 +1,305 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-b8a84941-40bf-46a1-8fcd-fe876d9baafb/",
+  "duration_ms": 20768.272280999998,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-09T17-54-38Z-262072013",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-09T17-54-38Z-262072013/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-09T17-54-38Z-262072013/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-09T17-54-38Z-262072013/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [
+    {
+      "selector": "div",
+      "scroll_width": 401,
+      "client_width": 390
+    }
+  ],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 29,
+        "bbox": [
+          165,
+          2240,
+          52,
+          97
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "65 — watch, constructive — a majority of factors agree. Stre",
+        "kind": "text_truncated",
+        "overflow_px": 13,
+        "bbox": [
+          165,
+          2497,
+          52,
+          255
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 29,
+        "bbox": [
+          165,
+          2870,
+          52,
+          97
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 29,
+        "bbox": [
+          165,
+          3476,
+          52,
+          97
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 29,
+        "bbox": [
+          165,
+          4083,
+          52,
+          97
+        ]
+      }
+    ],
+    "mobile": [
+      {
+        "tag": "button",
+        "text": "News impact",
+        "kind": "past_viewport",
+        "overflow_px": 10,
+        "bbox": [
+          207,
+          2121,
+          192,
+          40
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "80 — watch, strong — most measured factors agree. Strength —",
+        "kind": "text_truncated",
+        "overflow_px": 5,
+        "bbox": [
+          33,
+          2799,
+          44,
+          243
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 37,
+        "bbox": [
+          33,
+          3347,
+          44,
+          97
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "65 — watch, constructive — a majority of factors agree. Stre",
+        "kind": "text_truncated",
+        "overflow_px": 21,
+        "bbox": [
+          33,
+          3685,
+          44,
+          267
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 37,
+        "bbox": [
+          33,
+          4257,
+          44,
+          97
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "58 — watch, mixed — factors are split. Strength — Trend (+20",
+        "kind": "text_truncated",
+        "overflow_px": 5,
+        "bbox": [
+          33,
+          4606,
+          44,
+          255
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 37,
+        "bbox": [
+          33,
+          5166,
+          44,
+          97
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "56 — long, mixed — factors are split. Strength — Trend (+20)",
+        "kind": "text_truncated",
+        "overflow_px": 5,
+        "bbox": [
+          33,
+          5526,
+          44,
+          255
+        ]
+      },
+      {
+        "tag": "small",
+        "text": "Open dossier for source evidence and disconfirmation →",
+        "kind": "text_truncated",
+        "overflow_px": 37,
+        "bbox": [
+          33,
+          6086,
+          44,
+          97
+        ]
+      }
+    ]
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "artifact-capture.invalid",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 4036,
+      "bytes_down": 2490
+    },
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [],
+  "blocked_affordances": [],
+  "interactive_nodes": 23,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"Market\"\n    - button \"Coin Dossier\"\n    - button \"Signals\"\n    - button \"Theories\"\n    - button \"Watchlist\"\n    - button \"Journal\"\n    - button \"Alerts\"\n    - button \"Measurement\"\n  - group: More tools\n  - paragraph: Market read\n  - heading \"Coverage is loading\" [level=2]\n  - text: PARTIAL FEED\n  - paragraph: Refreshing CoinGecko prices and OKX instrument coverage…\n  - paragraph: Weekly screener funnel\n  - heading \"500 → T1 + volume or ≥15% / 48H → full scoring\" [level=2]\n  - button \"Recompute weekly universe tiers\": RECOMPUTE\n  - paragraph: Two routes enter full 7-dimension scoring. Non-velocity assets must be T1 and clear the volume path. A ≥15% move over 48 hours qualifies from any tier through the independent velocity path; its volume multiple is not consulted.\n  - paragraph: \"T1 has three independent doors: active verified theory, open signal, or Graduation ≥70. The graduation score does not explain a theory- or signal-led promotion.\"\n  - paragraph: \"Assigned 10/9/2026, 8:25:15 AM · 426 ranked assets → 239 passed $5M spot volume → 111 T3 light-tracking / 40 T2 chart-qualified / 3 T1 full-engine / 85 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -80.6% from ATH (worse than −75%).\"\n  - button \"T1 · 3\"\n  - button \"T2 · 40\"\n  - button \"T3 · 111\"\n  - button \"T4 · 85\"\n  - button \"Open BTC T1 dossier\":\n    - text: BTC V#1\n    - strong: Bitcoin\n    - paragraph: \"BTC → T1: active verified theory #3 — Institutional BTC bid deepens as October unlocks weigh on mid-caps; open long signal id29; volume + chart gates passed.\"\n    - emphasis: Graduation 30/100 (bar 70)\n    - text: V 0.25× · 0 · H NO_DATA · W NO_DATA · C 20 · S 10\n  - button \"Open SOL T1 dossier\":\n    - text: SOL V#3\n    - strong: Solana\n    - paragraph: \"SOL → T1: active verified theory #1 — Solana consolidates retail flow as AVAX and experimental L2s lose bid; open long signal id24; volume + chart gates passed.\"\n    - emphasis: Graduation 30/100 (bar 70)\n    - text: V 0.28× · 0 · H NO_DATA · W NO_DATA · C 20 · S 10\n  - button \"Open ZRO T1 dossier\":\n    - text: ZRO V#45\n    - strong: LayerZero\n    - paragraph: \"ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-71.1% from ATH, hard gate at -75%).\"\n    - emphasis: Graduation 30/100 (bar 70)\n    - text: V 0.4× · 0 · H NO_DATA · W NO_DATA · C 20 · S 10\n  - paragraph: Automatic market discovery\n  - heading \"Verified perp universe → evidence flags\" [level=2]\n  - paragraph: The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.\n  - button \"RUN NOW\"\n  - text: LAST COMPLETED SCAN 10/9/2026, 2:26:13 PM\n  - emphasis: DEGRADED\n  - strong: \"3 saved T1 assets plus 19 non-T1 ranked assets clearing the current 48H ≥ +15% velocity bar received full scoring from a 500-asset ranked catalog regardless of volume multiple; non-velocity assets still required T1 membership; 14 directional candidates failed issuance controls and entered the suppression log; 4 Main Discovery rows passed the live-perp, freshness, market-cap and $5M consolidated spot-volume bar; 0 separate Meme Lane candidates passed category + micro-cap + Elfa mindshare-first entry (volume excluded; Nansen and holder growth remain on-demand validators); Elfa scheduled budget 8/10 calls today; 0 high, 1 medium, 3 low-confidence flags retained with complete factor evidence; 0 news impacts; 0 evidence-linked theories. Theory verification: 0 surfaced; 0 withheld for evidence floor; 0 contested.\"\n  - text: Universe\n  - strong: \"22\"\n  - text: Shortlist\n  - strong: \"4\"\n  - text: News impacts\n  - strong: \"0\"\n  - text: Theories\n  - strong: \"0\"\n  - text: Universe freshness guard live usage unavailable Elfa scheduled discovery live 8/10 calls altFINS signals feed live 4/10 calls CoinMarketCap keyless top 100 live usage unavailable CoinGecko meme category live usage unavailable CoinGecko ranked catalog live usage unavailable CoinGecko attention live usage unavailable Rotation leadership live usage unavailable Silent-hint mentions live usage unavailable Weekly universe tiers live usage unavailable Hyperliquid live usage unavailable Fundamentals weekly scores live usage unavailable Linked news search live usage unavailable Research synthesis unavailable usage unavailable\n  - button \"Auto signals\"\n  - button \"News impact\"\n  - button \"Fundamentals\"\n  - button \"Main Discovery\"\n  - button \"Meme Lane\"\n  - paragraph: Ranked scanner output\n  - heading \"Volume, interest and momentum flags\" [level=2]\n  - text: alignment, not probability\n  - button \"All\"\n  - button \"T1 · full engine only\"\n  - button \"Legacy triggered rows\"\n  - button \"All tiers\"\n  - button \"high\"\n  - button \"medium\"\n  - button \"low\"\n  - text: Sort\n  - button \"alignment\"\n  - button \"7D return\"\n  - button \"24H volume\"\n  - button \"tier\"\n  - button \"Open SOL coin dossier\":\n    - text: \"#7 Tier 1 · core\"\n    - strong: SOL · cross-horizon alignment\n    - text: \"LOW · 3/5 gates · monitor only Scan reason · SOL → T1: active verified theory #1 — Solana consolidates retail flow as AVAX and experimental L2s lose bid; open long signal id24; volume + chart gates passed. STALE · as of 10/9/2026, 2:23:47 PM WATCH\"\n    - emphasis: WATCH · 80 / 100\n    - text: \"SIZE DOWN / KILL · -0.29R expectancy · 35.71% win rate · 80–100 band · n=14 · 14 closed five-gate discovery signal horizon observations in this score band (5D). Discovery outcomes use +1R/-1R because the scanner stores direction outcomes, not execution prices. 80 — watch, strong — most measured factors agree. Strength — Momentum (+15): 24H -2.1% · 7D -10.5% · Risk — No opposing factor measured. 24H -2.1% 7D -10.5% 30D +4.7% Turnover 6.9% Invalidation not set · monitor only\"\n    - paragraph: Score = Σ factor contribution. Trend 20 + momentum 15 (24H/7D — 1H noise excluded) + volatility 10 + size-aware spot-volume participation 15 + funding crowding 10 + network fundamentals (TVL trend) 15 + supply overhang 15. PASS earns full weight; MIXED half; FAIL, NEUTRAL (no signal) or unavailable zero. 24H volume is CoinGecko consolidated SPOT volume, never perp volume; the shortlist bar is $5M spot volume. Neutral funding is labeled no-signal, never a penalty.\n    - text: Trend · 7D -10.5% · 14D -9.2% · 30D 4.7% · 200D 21.3% · weight 20 · contribution 10 · mixed Momentum · 24H -2.1% · 7D -10.5% · weight 15 · contribution 15 · pass Volatility · 47.4% annualized 7D realized · weight 10 · contribution 10 · pass Volume · 6.9% spot turnover · weight 15 · contribution 15 · pass Positioning / funding · 0.0013% funding · weight 10 · contribution 0 · neutral Network fundamentals · TVL 7D 2.2% · 30D 15.4% (chain) · weight 15 · contribution 15 · pass Supply overhang · FDV/mcap 1.08× · 92.6% circulating · weight 15 · contribution 15 · pass Open dossier for source evidence and disconfirmation →\n  - button \"Open ATOM coin dossier\":\n    - text: \"#79 Tier 2 · triggered\"\n    - strong: ATOM · cross-horizon alignment\n    - text: \"LOW · 4/5 gates · monitor only Scan reason · ATOM → T3: hard chart gate rejected it at -95.6% from ATH (worse than −75%). · 48H velocity +15.9% cleared +15% full-scoring bar independently of volume multiple STALE · as of 10/9/2026, 2:23:47 PM WATCH\"\n    - emphasis: WATCH · 65 / 100\n    - text: \"CALIBRATED · 0R expectancy · 50% win rate · 65–79 band · n=36 · 36 closed five-gate discovery signal horizon observations in this score band (5D). Discovery outcomes use +1R/-1R because the scanner stores direction outcomes, not execution prices. 65 — watch, constructive — a majority of factors agree. Strength — Trend (+20): 7D 10.9% · 14D 6.5% · 30D 0.7% · 200D -10.4% · Risk — No opposing factor measured. 24H +7.9% 7D +10.9% 30D +0.7% Turnover 14.9% Invalidation not set · monitor only\"\n    - paragraph: Score = Σ factor contribution. Trend 20 + momentum 15 (24H/7D — 1H noise excluded) + volatility 10 + size-aware spot-volume participation 15 + funding crowding 10 + network fundamentals (TVL trend) 15 + supply overhang 15. PASS earns full weight; MIXED half; FAIL, NEUTRAL (no signal) or unavailable zero. 24H volume is CoinGecko consolidated SPOT volume, never perp volume; the shortlist bar is $5M spot volume. Neutral funding is labeled no-signal, never a penalty.\n    - text: Trend · 7D 10.9% · 14D 6.5% · 30D 0.7% · 200D -10.4% · weight 20 · contribution 20 · pass Momentum · 24H 7.9% · 7D 10.9% · weight 15 · contribution 15 · pass Volatility · 101.6% annualized 7D realized · weight 10 · contribution 10 · pass Volume · 14.9% spot turnover · weight 15 · contribution 15 · pass Positioning / funding · 0.0013% funding · weight 10 · contribution 0 · neutral Network fundamentals · unavailable · weight 15 · contribution 0 · unavailable Supply overhang · FDV/mcap 1.00× · 100.0% circulating · weight 15 · contribution 15 · pass Open dossier for source evidence and disconfirmation →\n  - button \"Open W coin dossier\":\n    - text: \"#266 Tier 2 · triggered\"\n    - strong: W · momentum displacement\n    - text: \"LOW · 4/5 gates · monitor only Scan reason · W → T3: hard chart gate rejected it at -99.0% from ATH (worse than −75%). · 48H velocity +27.8% cleared +15% full-scoring bar independently of volume multiple STALE · as of 10/9/2026, 2:23:47 PM WATCH\"\n    - emphasis: WATCH · 58 / 100\n    - text: \"SIZE DOWN / KILL · -0.2R expectancy · 40.23% win rate · 50–64 band · n=174 · 174 closed five-gate discovery signal horizon observations in this score band (5D). Discovery outcomes use +1R/-1R because the scanner stores direction outcomes, not execution prices. 58 — watch, mixed — factors are split. Strength — Trend (+20): 7D 27.8% · 14D 45.1% · 30D 71.3% · 200D -22.8% · Risk — No opposing factor measured. 24H +2.9% 7D +27.8% 30D +71.3% Turnover 56.9% Invalidation not set · monitor only\"\n    - paragraph: Score = Σ factor contribution. Trend 20 + momentum 15 (24H/7D — 1H noise excluded) + volatility 10 + size-aware spot-volume participation 15 + funding crowding 10 + network fundamentals (TVL trend) 15 + supply overhang 15. PASS earns full weight; MIXED half; FAIL, NEUTRAL (no signal) or unavailable zero. 24H volume is CoinGecko consolidated SPOT volume, never perp volume; the shortlist bar is $5M spot volume. Neutral funding is labeled no-signal, never a penalty.\n    - text: Trend · 7D 27.8% · 14D 45.1% · 30D 71.3% · 200D -22.8% · weight 20 · contribution 20 · pass Momentum · 24H 2.9% · 7D 27.8% · weight 15 · contribution 15 · pass Volatility · 159.1% annualized 7D realized · weight 10 · contribution 10 · pass Volume · 56.9% spot turnover · weight 15 · contribution 15 · pass Positioning / funding · 0.0013% funding · weight 10 · contribution 0 · neutral Network fundamentals · unavailable · weight 15 · contribution 0 · unavailable Supply overhang · FDV/mcap 1.52× · 65.9% circulating · weight 15 · contribution 8 · mixed Open dossier for source evidence and disconfirmation →\n  - button \"Open MET coin dossier\":\n    - text: \"#166 Tier 2 · triggered\"\n    - strong: MET · momentum displacement\n    - text: \"MEDIUM · 2/5 gates · research required Scan reason · MET → T2: top-40 volume among chart-passers; ATH gate -40.1%, price above 50D SMA. · 48H velocity +28.2% cleared +15% full-scoring bar independently of volume multiple STALE · as of 10/9/2026, 2:23:47 PM LONG\"\n    - emphasis: LONG · 56 / 100\n    - text: \"SIZE DOWN / KILL · -0.2R expectancy · 40.23% win rate · 50–64 band · n=174 · 174 closed five-gate discovery signal horizon observations in this score band (5D). Discovery outcomes use +1R/-1R because the scanner stores direction outcomes, not execution prices. 56 — long, mixed — factors are split. Strength — Trend (+20): 7D 34.3% · 14D 24.4% · 30D 109.0% · 200D 200.1% · Risk — No opposing factor measured. 24H -5.3% 7D +34.3% 30D +109.0% Turnover 116.9% Invalidation $0.41769\"\n    - paragraph: Score = Σ factor contribution. Trend 20 + momentum 15 (24H/7D — 1H noise excluded) + volatility 10 + size-aware spot-volume participation 15 + funding crowding 10 + network fundamentals (TVL trend) 15 + supply overhang 15. PASS earns full weight; MIXED half; FAIL, NEUTRAL (no signal) or unavailable zero. 24H volume is CoinGecko consolidated SPOT volume, never perp volume; the shortlist bar is $5M spot volume. Neutral funding is labeled no-signal, never a penalty.\n    - text: Trend · 7D 34.3% · 14D 24.4% · 30D 109.0% · 200D 200.1% · weight 20 · contribution 20 · pass Momentum · 24H -5.3% · 7D 34.3% · weight 15 · contribution 8 · mixed Volatility · 221.7% annualized 7D realized · weight 10 · contribution 5 · mixed Volume · 116.9% spot turnover · weight 15 · contribution 15 · pass Positioning / funding · 0.0013% funding · weight 10 · contribution 0 · neutral Network fundamentals · unavailable · weight 15 · contribution 0 · unavailable Supply overhang · FDV/mcap 1.79× · 55.9% circulating · weight 15 · contribution 8 · mixed Open dossier for source evidence and disconfirmation →\n  - group: Passed log · rejected / monitor-only setups\n  - paragraph: BTC cycle study\n  - heading \"Regime compass\" [level=2]\n  - button \"Open BTC\"\n  - text: Cycle data loading…\n  - paragraph: /BTC ratio table\n  - heading \"Rotation breadth\" [level=2]\n  - text: CoinGecko\n  - paragraph: Ratio breadth is loading…\n  - text: Ratio data loading…\n  - paragraph: Narrative rotation\n  - heading \"Leaders and laggards\" [level=2]\n  - text: CoinGecko Rotation data loading…",
+  "audit_session_id": "0c1e7569-4d85-4dae-806c-1cba5f46d3ac",
+  "readiness": {
+    "desktop": {
+      "settled": false,
+      "settle_ms": 8012,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    },
+    "mobile": {
+      "settled": false,
+      "settle_ms": 9082,
+      "in_flight": 5,
+      "network_idle": true,
+      "retried": true
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "cold_launch_ms": 2364.073563,
+  "desktop_ms": 15767.465879,
+  "mobile_ms": 15963.849738,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 2
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "specHash": "90ba804cd8816517244a805086599c3f6c7a6a1a82372e234ba62804e1edfdd6",
+  "datasetManifestHash": "7342ff4d7c9d4330660290c1cdc23debaefb9e1ca6308b9042d70f935446846a",
+  "source": "Binance market-data-only API",
+  "venue": "Binance Spot",
+  "quoteCurrency": "USDT",
+  "sampleQualification": "survivor-sample exploratory",
+  "instruments": [
+    {
+      "instrumentId": "BTCUSDT",
+      "symbol": "BTC",
+      "rows": 2693,
+      "firstEventTime": 1502928000000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "54048cd35e65480173896b4f4ff3d47e2a068c623c0bf67691e23238882abda7"
+    },
+    {
+      "instrumentId": "ETHUSDT",
+      "symbol": "ETH",
+      "rows": 2693,
+      "firstEventTime": 1502928000000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "8bb39c0094a9304f95eaf6c4212d3164c751a2f208cc09d0971a8db09de339c7"
+    },
+    {
+      "instrumentId": "SOLUSDT",
+      "symbol": "SOL",
+      "rows": 1603,
+      "firstEventTime": 1597104000000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "35287c8a900f139aeb1cd512f0b041a289f52159e2fc9e1672526a71af35c928"
+    },
+    {
+      "instrumentId": "LINKUSDT",
+      "symbol": "LINK",
+      "rows": 2176,
+      "firstEventTime": 1547596800000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "76c556ac45e173514c2424ea7797e85c078cd7ac496eb7191d922feff3bb369d"
+    },
+    {
+      "instrumentId": "DOGEUSDT",
+      "symbol": "DOGE",
+      "rows": 2006,
+      "firstEventTime": 1562284800000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "c44c8440a808664f627cb4f5694b81be8c66d629ff3a608790998d414b49a187"
+    },
+    {
+      "instrumentId": "XRPUSDT",
+      "symbol": "XRP",
+      "rows": 2433,
+      "firstEventTime": 1525392000000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "5528f7c2f493453dfb7af98141e9be0b3780050a4eb5044aa230565ad1eedbf7"
+    },
+    {
+      "instrumentId": "AVAXUSDT",
+      "symbol": "AVAX",
+      "rows": 1561,
+      "firstEventTime": 1600732800000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "29aa32ed47687e274a67a51384a095c502d59ddf9040eebe7b495313414aaf66"
+    },
+    {
+      "instrumentId": "ADAUSDT",
+      "symbol": "ADA",
+      "rows": 2450,
+      "firstEventTime": 1523923200000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "17a381d96ad200c7e3d83b9ebaa93e32a1bfb4ce4284a1ec3d273b85613889d0"
+    },
+    {
+      "instrumentId": "SUIUSDT",
+      "symbol": "SUI",
+      "rows": 608,
+      "firstEventTime": 1683072000000,
+      "lastEventTime": 1735516800000,
+      "gaps": 0,
+      "duplicates": 0,
+      "incoherent": 0,
+      "rawHash": "4604072692d467f3a0c7ba5d5fcb6f4f7feeef2588fc56d092517eb3d5a73803"
+    }
+  ],
+  "totalRows": 18223,
+  "retrievedAt": 1790930773900,
+  "exclusions": {
+    "warmup": 796,
+    "incoherent_ohlcv": 0,
+    "gap_in_feature_window": 0,
+    "feature_unavailable_at_decision": 0,
+    "missing_or_zero_volume": 0,
+    "entry_unavailable": 4,
+    "horizon_unmatured": 517,
+    "gap_in_label_window": 187,
+    "outside_validation": 40700,
+    "holdout_locked": 0
+  }
+}

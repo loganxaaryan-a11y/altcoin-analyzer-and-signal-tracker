@@ -1,0 +1,206 @@
+{
+  "protocol": {
+    "version": "phase2a1-timing-protocol-v3-review-only",
+    "executedPerformance": false,
+    "volatility": {
+      "input": "30 trailing decision-available daily close-to-close log returns",
+      "annualization": "sqrt(365)",
+      "buckets": [
+        {
+          "id": "low",
+          "min": 0,
+          "maxExclusive": 0.5
+        },
+        {
+          "id": "medium",
+          "min": 0.5,
+          "maxExclusive": 0.9
+        },
+        {
+          "id": "high",
+          "min": 0.9,
+          "maxExclusive": null
+        }
+      ]
+    },
+    "pool": {
+      "match": [
+        "instrument",
+        "validation fold",
+        "frozen prior SMA-200 side",
+        "horizon",
+        "volatility bucket"
+      ],
+      "windowDays": 90,
+      "candidateDateExcluded": true,
+      "otherCandidateDatesEligible": true,
+      "forwardReturnsUsed": false,
+      "minimumPoolSize": 20
+    },
+    "matching": {
+      "seeds": [
+        20261009,
+        20261010,
+        20261011,
+        20261012,
+        20261013
+      ],
+      "order": "ascending instrument/fold/strategy/horizon/candidate decision time; seeded comparator hash within each pool",
+      "reuse": "without replacement within instrument/fold/side/horizon/bucket until exhausted; then lowest reuse count, seeded hash tie-break",
+      "exhaustion": "pool below 20 is unmatched and never widened"
+    },
+    "dependence": {
+      "links": [
+        "shared candidate date",
+        "shared comparator date",
+        "overlapping candidate or comparator forward windows"
+      ],
+      "minimumUsableComponents": 20,
+      "gate": "below 20 components remains descriptive only; the gate is never relaxed"
+    }
+  },
+  "generatedAt": "2026-10-11T04:55:51.283Z",
+  "cohort": "structural-preflight-only-no-outcome-statistics",
+  "bars": 18223,
+  "candidates": 8162,
+  "eligibleComparatorDates": 5901,
+  "results": [
+    {
+      "seed": 20261009,
+      "candidates": 8162,
+      "matched": 7097,
+      "unmatched": 1065,
+      "poolSizes": {
+        "min": 0,
+        "p25": 31,
+        "median": 50,
+        "p75": 72,
+        "max": 154
+      },
+      "comparatorReuse": {
+        "reusedMatches": 96,
+        "uniqueComparatorDates": 3747
+      },
+      "dependence": {
+        "componentCount": 3,
+        "usableComponentCount": 3,
+        "qualificationGateMet": false,
+        "componentSizes": [
+          3835,
+          1756,
+          1506
+        ]
+      }
+    },
+    {
+      "seed": 20261010,
+      "candidates": 8162,
+      "matched": 7097,
+      "unmatched": 1065,
+      "poolSizes": {
+        "min": 0,
+        "p25": 31,
+        "median": 50,
+        "p75": 72,
+        "max": 154
+      },
+      "comparatorReuse": {
+        "reusedMatches": 98,
+        "uniqueComparatorDates": 3749
+      },
+      "dependence": {
+        "componentCount": 3,
+        "usableComponentCount": 3,
+        "qualificationGateMet": false,
+        "componentSizes": [
+          3835,
+          1756,
+          1506
+        ]
+      }
+    },
+    {
+      "seed": 20261011,
+      "candidates": 8162,
+      "matched": 7097,
+      "unmatched": 1065,
+      "poolSizes": {
+        "min": 0,
+        "p25": 31,
+        "median": 50,
+        "p75": 72,
+        "max": 154
+      },
+      "comparatorReuse": {
+        "reusedMatches": 92,
+        "uniqueComparatorDates": 3750
+      },
+      "dependence": {
+        "componentCount": 3,
+        "usableComponentCount": 3,
+        "qualificationGateMet": false,
+        "componentSizes": [
+          3835,
+          1756,
+          1506
+        ]
+      }
+    },
+    {
+      "seed": 20261012,
+      "candidates": 8162,
+      "matched": 7097,
+      "unmatched": 1065,
+      "poolSizes": {
+        "min": 0,
+        "p25": 31,
+        "median": 50,
+        "p75": 72,
+        "max": 154
+      },
+      "comparatorReuse": {
+        "reusedMatches": 80,
+        "uniqueComparatorDates": 3754
+      },
+      "dependence": {
+        "componentCount": 3,
+        "usableComponentCount": 3,
+        "qualificationGateMet": false,
+        "componentSizes": [
+          3835,
+          1756,
+          1506
+        ]
+      }
+    },
+    {
+      "seed": 20261013,
+      "candidates": 8162,
+      "matched": 7097,
+      "unmatched": 1065,
+      "poolSizes": {
+        "min": 0,
+        "p25": 31,
+        "median": 50,
+        "p75": 72,
+        "max": 154
+      },
+      "comparatorReuse": {
+        "reusedMatches": 80,
+        "uniqueComparatorDates": 3756
+      },
+      "dependence": {
+        "componentCount": 3,
+        "usableComponentCount": 3,
+        "qualificationGateMet": false,
+        "componentSizes": [
+          3835,
+          1756,
+          1506
+        ]
+      }
+    }
+  ],
+  "performanceExecuted": false,
+  "warning": "This report contains pool and dependency structure only. No candidate/comparator returns, intervals, or qualification outcome were calculated."
+}

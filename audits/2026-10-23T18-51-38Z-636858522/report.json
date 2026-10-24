@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-0093995a-a2f5-42a3-80f9-cc633ee8ebb9/",
+  "duration_ms": 14008.621420000001,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-23T18-51-38Z-636858522",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-23T18-51-38Z-636858522/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-23T18-51-38Z-636858522/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-23T18-51-38Z-636858522/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [],
+    "mobile": []
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [],
+  "blocked_affordances": [],
+  "interactive_nodes": 27,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"Market\"\n    - button \"Notifications\"\n    - button \"Coin Dossier\"\n    - button \"Signals\"\n    - button \"Theories\"\n    - button \"Assets\"\n    - button \"Watchlist\"\n    - button \"Journal\"\n    - button \"Alerts\"\n    - button \"Measurement\"\n    - button \"Meme Risk\"\n  - group: More tools\n  - region \"Research shortlist\":\n    - paragraph: Investigation priority · stored evidence only\n    - heading \"Research shortlist\" [level=2]\n    - button \"Reloading…\" [disabled]\n    - paragraph: Loading the research shortlist…\n    - paragraph: Research ranking — never issues, never gates.\n    - text: Loading the research shortlist…\n  - paragraph: Market read\n  - heading \"Coverage is loading\" [level=2]\n  - text: PARTIAL FEED\n  - paragraph: Refreshing CoinGecko prices and OKX instrument coverage…\n  - paragraph: Weekly screener funnel\n  - heading \"500 → T1 + volume or ≥15% / 48H → full scoring\" [level=2]\n  - button \"Recompute weekly universe tiers\": RECOMPUTE\n  - paragraph: Two routes enter full 7-dimension scoring. Non-velocity assets must be T1 and clear the volume path. A ≥15% move over 48 hours qualifies from any tier through the independent velocity path; its volume multiple is not consulted.\n  - paragraph: \"T1 has three independent doors: active verified theory, open signal, or Graduation ≥70. The graduation score does not explain a theory- or signal-led promotion.\"\n  - paragraph: \"Assigned 10/23/2026, 6:36:09 PM · 422 ranked assets → 198 passed $5M spot volume → 111 T3 light-tracking / 32 T2 chart-qualified / 0 T1 full-engine / 56 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -78.5% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-23T14:34:49.000Z, age 4h; price moved ≤2%).\"\n  - button \"T1 · 0\"\n  - button \"T2 · 32\"\n  - button \"T3 · 111\"\n  - button \"T4 · 56\"\n  - text: No saved T1 membership yet. Run the weekly screener.\n  - paragraph: Automatic market discovery\n  - heading \"Verified perp universe → evidence flags\" [level=2]\n  - paragraph: The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.\n  - button \"RUN NOW\"\n  - text: LAST COMPLETED SCAN No scan stored yet\n  - emphasis: DEGRADED\n  - strong: Run the first scan to build the discovery feed.\n  - button \"Auto signals\"\n  - button \"News impact\"\n  - button \"Fundamentals\"\n  - button \"HL perp board\"\n  - button \"Market context\"\n  - note: OPPORTUNITIES — what changed · why it matters · timeframe · evidence and conflicts\n  - note: CHART OPPORTUNITIES — observations only. No entries, no targets, no sizing.\n  - button \"Main Discovery\"\n  - button \"Meme Lane\"\n  - paragraph: Ranked scanner output\n  - heading \"Volume, interest and momentum flags\" [level=2]\n  - text: alignment, not probability\n  - button \"All\"\n  - button \"T1 · full engine only\"\n  - button \"Legacy triggered rows\"\n  - button \"All tiers\"\n  - button \"high\"\n  - button \"medium\"\n  - button \"low\"\n  - text: Sort\n  - button \"alignment\"\n  - button \"7D return\"\n  - button \"24H volume\"\n  - button \"tier\"\n  - text: No scheduled scan has completed yet.\n  - group: Passed log · rejected / monitor-only setups\n  - region \"All observations from the latest completed discovery run\":\n    - paragraph: Research lane · unfiltered\n    - heading \"All observations\" [level=2]\n    - button \"Reload\"\n    - paragraph: Research observations — everything the scanner computed. Tier is a priority label, not a qualification. Issuance decisions are unchanged and shown separately.\n    - paragraph: \"Run #161 · completed 10/23/2026, 4:59:18 PM\"\n    - paragraph: \"Latest completed discovery run #161 · degraded · completed 10/23/2026, 4:59:18 PM · ordered by the run's recorded alignment where the run recorded one; remaining observations follow in the run's scan order.\"\n    - button \"Open M coin dossier\":\n      - text: M Priority · no saved tier\n      - strong: M · MemeCore · SHORT\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 2/7 dimensions pass data through 10/23/2026, 4:57:50 PM\"\n      - emphasis: Priority · no saved tier\n    - button \"Open AKE coin dossier\":\n      - text: AKE Priority · T2\n      - strong: AKE · Akedo · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 2/7 dimensions pass data through 10/23/2026, 4:57:50 PM\"\n      - emphasis: Priority · T2\n    - button \"Open IRYS coin dossier\":\n      - text: IRYS Priority · T2\n      - strong: IRYS · Irys · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 3/7 dimensions pass data through 10/23/2026, 4:57:50 PM\"\n      - emphasis: Priority · T2\n    - button \"Open MOOLAH coin dossier\":\n      - text: MOOLAH Priority · no saved tier\n      - strong: MOOLAH · Moolah · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 4/7 dimensions pass data through 10/23/2026, 4:57:50 PM\"\n      - emphasis: Priority · no saved tier\n    - button \"Open DOS coin dossier\":\n      - text: DOS Priority · T3\n      - strong: DOS · DAPPOS · LONG\n      - text: \"eligible at issuance controls — Eligible before legacy issuance filters. Legacy path would have suppressed: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue · stored factor ledger 4/7 dimensions pass data through 10/23/2026, 4:57:50 PM\"\n      - emphasis: Priority · T3\n  - paragraph: BTC cycle study\n  - heading \"Regime compass\" [level=2]\n  - button \"Open BTC\"\n  - text: Cycle data loading…\n  - paragraph: /BTC ratio table\n  - heading \"Rotation breadth\" [level=2]\n  - text: CoinGecko\n  - paragraph: Ratio breadth is loading…\n  - text: Ratio data loading…\n  - paragraph: Narrative rotation\n  - heading \"Leaders and laggards\" [level=2]\n  - text: CoinGecko Rotation data loading…",
+  "document_text": {
+    "path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-23T18-51-38Z-636858522/document-text.txt",
+    "chars": 5801,
+    "truncated": false
+  },
+  "audit_session_id": "375de17b-7e35-4382-8c1b-e6544e07be86",
+  "readiness": {
+    "desktop": {
+      "settled": false,
+      "settle_ms": 8005,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    },
+    "mobile": {
+      "settled": false,
+      "settle_ms": 8494,
+      "in_flight": 8,
+      "network_idle": true,
+      "retried": true
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "cold_launch_ms": 735.045985,
+  "desktop_ms": 10921.675204000001,
+  "mobile_ms": 11634.464818,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 2
+  }
+}

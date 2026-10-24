@@ -1,0 +1,162 @@
+[input text: Search any coin]
+[button: Analyze]
+[button: Market] [button: Notifications] [button: Coin Dossier] [button: Signals] [button: Theories] [button: Assets] [button: Watchlist] [button: Journal] [button: Alerts] [button: Measurement] [button: Meme Risk]
+More tools
+[button: News search] [button: Perps & whales]
+Standalone search and deep-dive tools remain available here.
+Investigation priority · stored evidence only
+## Research shortlist
+[button: Reloading…]
+Loading the research shortlist…
+Research ranking — never issues, never gates.
+Loading the research shortlist…
+Market read
+## Coverage is loading
+PARTIAL FEED
+Refreshing CoinGecko prices and OKX instrument coverage…
+Weekly screener funnel
+## 500 → T1 + volume or ≥15% / 48H → full scoring
+[button: RECOMPUTE]
+Two routes enter full 7-dimension scoring. Non-velocity assets must be T1 and clear the volume path. A ≥15% move over 48 hours qualifies from any tier through the independent velocity path; its volume multiple is not consulted.
+T1 has three independent doors: active verified theory, open signal, or Graduation ≥70. The graduation score does not explain a theory- or signal-led promotion.
+[button: T1 · 0] [button: T2 · 0] [button: T3 · 0] [button: T4 · 0]
+Loading saved weekly tiers…
+Automatic market discovery
+## Verified perp universe → evidence flags
+The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.
+[button: RUN NOW]
+LAST COMPLETED SCAN
+10/23/2026, 4:59:18 PM
+DEGRADED
+Discovery run 161 (degraded): 500-asset catalog → 0 saved-T1 + 5 velocity qualifiers → 5 scored (5 fetched, 0 chart-failed) → 0 passed the discovery bar (0 main, 0 meme) → 5 veto suppressions → 0 retained (0 high / 0 medium / 0 low). Degraded: research synthesis unavailable (inference timed out); 14/15 sources live. Catalog provenance: fresh 2026-10-23T16:58:18.350Z (2 pages). Theory verification: 0 surfaced; 0 withheld for evidence floor; 0 contested.
+Universe
+5
+Shortlist
+0
+News impacts
+0
+Theories
+0
+Universe freshness guard
+live
+Saved tiers were 2.4h old, within cadence. Provenance: degraded snapshot #59: 423 ranked assets → 200 passed $5M spot volume → 111 T3 light-tracking / 31 T2 chart-qualified / 0 T1 full-engine / 59 T4 volume-qualified below cutoff. MEGA T3: …
+Elfa scheduled discovery
+live
+14/20 scheduled calls reserved today; 260/800 monthly soft allowance used (950 hard stop); 20 trending-token and 0 trending-contract symbols returned.
+altFINS signals feed
+live
+7/15 scheduled calls reserved today; 137/800 monthly soft allowance used (950 hard stop); 0 signal symbols returned in a 25-item page.
+CoinMarketCap keyless top 100
+live
+100 ranked symbols returned as cross-source discovery candidates.
+CoinGecko meme category
+live
+100 category-confirmed meme assets available for the separate micro-cap lane.
+CoinGecko ranked catalog
+live
+500 unique ranked assets refreshed; provenance: fresh 2026-10-23T16:58:18.350Z (2 pages); saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume mult…
+CoinGecko attention
+live
+15 trending assets checked only as lightweight T2/T3 context.
+Rotation leadership
+live
+7 category leaders refreshed; 0 changes stored as lightweight context only.
+Silent-hint mentions
+live
+26 ranked-asset mentions retained as context; they cannot promote T2/T3 into signal scoring.
+Weekly universe tiers
+live
+0/0 saved T1 assets intersected the fresh catalog; 5 independent current non-T1 velocity qualifiers (48H ≥ +15%) selected. A legitimate zero-T1 snapshot remains usable; only a non-empty saved T1 set with zero catalog intersection is classif…
+Hyperliquid
+live
+234 perpetual contexts checked for funding and open interest.
+Fundamentals weekly scores
+live
+38 symbols carry a fresh weekly TVL score (scored 2026-10-21T02:06:53.941Z).
+Linked news search
+live
+12 unique linked results retained from market, sector and institutional searches.
+Research synthesis
+unavailable
+timeout: market discovery synthesis exceeded 45s
+Research synthesis
+live
+Previous-run synthesis carried forward: run 61 (0 theories, 12 annotated news), completed 2026-10-15T01:54:38.414Z; rendered as "previous run" in the discovery view.
+Coverage gaps · recorded, not reopened
+## Failed discovery slots · 12
+These scheduled discovery slots failed, timed out or were missed in the last 14 days and produced no scan. They stay on record as coverage gaps: recovery is one bounded attempt per slot by the recovery watch, and an exhausted slot is never reopened from the terminal.
+Run 142 · 10/21/2026, 8:59:09 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: hyperliquid. Lease 391524a0-0361-4a68-b751-4d0a23d5a858 fenced.
+Universe freshness guard: Saved tiers were 0.4h old, within cadence. Provenance: degraded snapshot #47: 423 ranked assets → 232 passed $5M spot volume → 111 T3 light-tracking / 36 T2 chart-qualified / 3 T1 full-engine / 83 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -78.9% from ATH (worse than −75%). · Elfa scheduled discovery: 20/20 scheduled calls reserved today; 226/800 monthly soft allowance used (950 hard stop); 20 trending-token and 0 trending-contract symbols returned. · altFINS signals feed: 10/15 scheduled calls reserved today; 118/800 monthly soft allowance used (950 hard stop); 0 signal symbols returned in a 25-item page. · CoinMarketCap keyless top 100: 100 ranked symbols returned as cross-source discovery candidates. · CoinGecko meme category: 100 category-confirmed meme assets available for the separate micro-cap lane. · CoinGecko ranked catalog: 500 unique ranked assets refreshed; provenance: fresh 2026-10-21T20:59:19.803Z (2 pages); saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume multiple. · CoinGecko attention: 15 trending assets checked only as lightweight T2/T3 context. · Rotation leadership: 7 category leaders refreshed; 0 changes stored as lightweight context only. · Silent-hint mentions: 20 ranked-asset mentions retained as context; they cannot promote T2/T3 into signal scoring. · Weekly universe tiers: 3/3 saved T1 assets intersected the fresh catalog; 26 independent current non-T1 velocity qualifiers (48H ≥ +15%) selected. A legitimate zero-T1 snapshot remains usable; only a non-empty saved T1 set with zero catalog intersection is classified as identity mismatch. Lane: active(snapshot #47; 3 saved T1 members; 3 catalog intersections). · Hyperliquid: 234 perpetual contexts checked for funding and open interest.
+Run 133 · 10/21/2026, 12:56:40 AM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: hyperliquid. Lease f337f401-ea09-41eb-adc1-3a813addbbba fenced.
+Universe freshness guard: Saved tiers were 3.1h old, within cadence. Provenance: degraded snapshot #41: 422 ranked assets → 214 passed $5M spot volume → 111 T3 light-tracking / 37 T2 chart-qualified / 1 T1 full-engine / 66 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -80.1% from ATH (worse than −75%). · Elfa scheduled discovery: 2/20 scheduled calls reserved today; 208/800 monthly soft allowance used (950 hard stop); 20 trending-token and 0 trending-contract symbols returned. · altFINS signals feed: 1/15 scheduled calls reserved today; 109/800 monthly soft allowance used (950 hard stop); 0 signal symbols returned in a 25-item page. · CoinMarketCap keyless top 100: 100 ranked symbols returned as cross-source discovery candidates. · CoinGecko meme category: 100 category-confirmed meme assets available for the separate micro-cap lane. · CoinGecko ranked catalog: 500 unique ranked assets refreshed; provenance: fresh 2026-10-21T00:56:52.982Z (2 pages); saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume multiple. · CoinGecko attention: 15 trending assets checked only as lightweight T2/T3 context. · Rotation leadership: 7 category leaders refreshed; 0 changes stored as lightweight context only. · Silent-hint mentions: 14 ranked-asset mentions retained as context; they cannot promote T2/T3 into signal scoring. · Weekly universe tiers: 1/1 saved T1 assets intersected the fresh catalog; 13 independent current non-T1 velocity qualifiers (48H ≥ +15%) selected. A legitimate zero-T1 snapshot remains usable; only a non-empty saved T1 set with zero catalog intersection is classified as identity mismatch. Lane: active(snapshot #41; 1 saved T1 members; 1 catalog intersections). · Hyperliquid: 234 perpetual contexts checked for funding and open interest.
+Run 131 · 10/20/2026, 10:26:02 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: tier-freshness. Lease f1b5eaa5-46a8-43f2-a2cc-2dbc355a4adb fenced.
+Universe freshness guard: Saved tiers were 0.6h old, within cadence. Provenance: degraded snapshot #41: 422 ranked assets → 214 passed $5M spot volume → 111 T3 light-tracking / 37 T2 chart-qualified / 1 T1 full-engine / 66 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -80.1% from ATH (worse than −75%).
+Run 130 · 10/20/2026, 9:50:12 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: velocity. Lease 41206b01-3c72-4415-a175-e1f469ea2c8b fenced.
+Universe freshness guard: Saved tiers were 10.9h old; refresh completed 2026-10-20T21:51:47.899Z. Provenance: degraded snapshot #41: 422 ranked assets → 214 passed $5M spot volume → 111 T3 light-tracking / 37 T2 chart-qualified / 1 T1 full-engine / 66 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -80.1% from ATH (worse than −75%). · Elfa scheduled discovery: 18/20 scheduled calls reserved today; 204/800 monthly soft allowance used (950 hard stop); 20 trending-token and 0 trending-contract symbols returned. · altFINS signals feed: 8/15 scheduled calls reserved today; 106/800 monthly soft allowance used (950 hard stop); 0 signal symbols returned in a 25-item page. · CoinMarketCap keyless top 100: 100 ranked symbols returned as cross-source discovery candidates. · CoinGecko meme category: 100 category-confirmed meme assets available for the separate micro-cap lane. · CoinGecko ranked catalog: 500 unique ranked assets refreshed; provenance: fresh 2026-10-20T21:52:07.786Z (2 pages); saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume multiple. · CoinGecko attention: 15 trending assets checked only as lightweight T2/T3 context. · Rotation leadership: 7 category leaders refreshed; 0 changes stored as lightweight context only. · Silent-hint mentions: 15 ranked-asset mentions retained as context; they cannot promote T2/T3 into signal scoring. · Weekly universe tiers: 1/1 saved T1 assets intersected the fresh catalog; 23 independent current non-T1 velocity qualifiers (48H ≥ +15%) selected. A legitimate zero-T1 snapshot remains usable; only a non-empty saved T1 set with zero catalog intersection is classified as identity mismatch. Lane: active(snapshot #41; 1 saved T1 members; 1 catalog intersections).
+Run 129 · 10/20/2026, 8:58:37 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: tier-freshness. Lease eb8af164-fc92-4ef9-a1b3-9391238fb016 fenced.
+Run 128 · 10/20/2026, 6:57:54 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: tier-freshness. Lease 58589100-25b1-435f-97df-f8f3dbb0a139 fenced.
+Run 127 · 10/20/2026, 5:33:39 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: tier-freshness. Lease 0ac2e562-355a-43c8-aa88-83adffd0fbdc fenced.
+Run 122 · 10/20/2026, 6:56:20 AM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: none. Lease 68df0d4d-36e8-4059-8343-65ccb97dc7d3 fenced.
+Run 121 · 10/20/2026, 2:56:03 AM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: tier-freshness. Lease 3ab9d9fa-75ca-43f4-a86d-070348866582 fenced.
+Universe freshness guard: Saved tiers were 2.3h old, within cadence. Provenance: degraded snapshot #39: 422 ranked assets → 205 passed $5M spot volume → 111 T3 light-tracking / 32 T2 chart-qualified / 1 T1 full-engine / 62 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -79.6% from ATH (worse than −75%).
+Run 113 · 10/19/2026, 4:57:39 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: api-budgets. Lease 7ee494a2-4159-4baa-a8b8-3925f87d1a82 fenced.
+Universe freshness guard: Saved tiers were 9.2h old; refresh completed 2026-10-19T16:58:53.901Z. Provenance: degraded snapshot #38: 422 ranked assets → 208 passed $5M spot volume → 111 T3 light-tracking / 32 T2 chart-qualified / 2 T1 full-engine / 64 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -80.4% from ATH (worse than −75%). · Elfa scheduled discovery: 12/20 scheduled calls reserved today; 178/800 monthly soft allowance used (950 hard stop); 0 trending-token and 0 trending-contract symbols returned. trending tokens failed: connect ENOENT /run/hatch/sandbox/space-privileged.sock; trending contracts failed: connect ENOENT /run/hatch/sandbox/space-privileged.sock. · altFINS signals feed: Signals call failed: connect ENOENT /run/hatch/sandbox/space-privileged.sock. 6/15 scheduled calls reserved today; 94/800 monthly soft allowance used (950 hard stop); 0 signal symbols returned.
+Run 112 · 10/19/2026, 2:55:06 PM
+TIMEOUT · coverage gap
+Named timeout: execution deadline exceeded without completion. Last checkpoint: none. Lease a692fad5-2e49-4906-879c-1b37b90e94f3 fenced.
+Run 109 · 10/19/2026, 6:56:19 AM
+FAILED · coverage gap
+Market discovery failed — Ranked market catalog degraded (0/500 rows); global required input failed before chart scoring, synthesis, or persistence.
+Universe freshness guard: Saved tiers were 7.1h old; refresh completed 2026-10-19T06:57:35.438Z. Provenance: degraded snapshot #36: 422 ranked assets → 206 passed $5M spot volume → 111 T3 light-tracking / 34 T2 chart-qualified / 2 T1 full-engine / 60 T4 volume-qualified below cutoff. MEGA T3: MEGA → T3: hard chart gate rejected it at -79.8% from ATH (worse than −75%). · Elfa scheduled discovery: 6/20 scheduled calls reserved today; 172/800 monthly soft allowance used (950 hard stop); 20 trending-token and 0 trending-contract symbols returned. · altFINS signals feed: 3/15 scheduled calls reserved today; 91/800 monthly soft allowance used (950 hard stop); 0 signal symbols returned in a 25-item page. · CoinMarketCap keyless top 100: 100 ranked symbols returned as cross-source discovery candidates. · CoinGecko meme category: 100 category-confirmed meme assets available for the separate micro-cap lane. · CoinGecko ranked catalog: 0 unique ranked assets refreshed; saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume multiple. Fetch detail: Source returned 429 | Source returned 429
+[button: Auto signals] [button: News impact] [button: Fundamentals] [button: HL perp board] [button: Market context]
+OPPORTUNITIES — what changed · why it matters · timeframe · evidence and conflicts
+CHART OPPORTUNITIES — observations only. No entries, no targets, no sizing.
+[button: Main Discovery] [button: Meme Lane]
+Ranked scanner output
+## Volume, interest and momentum flags
+alignment, not probability
+[button: All] [button: T1 · full engine only] [button: Legacy triggered rows]
+[button: All tiers] [button: high] [button: medium] [button: low]
+Sort
+[button: alignment] [button: 7D return] [button: 24H volume] [button: tier]
+No signals match these tier filters.
+Passed log · rejected / monitor-only setups
+Every retained low-tier shortlist row stays visible with the exact failed or unavailable gates and later 5D/14D/30D outcomes. This scores rejects over time instead of deleting them.
+Research lane · unfiltered
+## All observations
+[button: Reloading…]
+Research observations — everything the scanner computed. Tier is a priority label, not a qualification. Issuance decisions are unchanged and shown separately.
+Loading every observation from the latest completed run…
+BTC cycle study
+## Regime compass
+[button: Open BTC]
+Cycle data loading…
+/BTC ratio table
+## Rotation breadth
+CoinGecko
+Ratio breadth is loading…
+Ratio data loading…
+Narrative rotation
+## Leaders and laggards
+CoinGecko
+Rotation data loading…

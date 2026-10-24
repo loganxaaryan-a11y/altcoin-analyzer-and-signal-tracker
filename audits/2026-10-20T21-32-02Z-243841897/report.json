@@ -1,0 +1,122 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-f9c5bc89-6867-4b4f-b248-0a5e866ca51a/",
+  "duration_ms": 16458.450168,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-32-02Z-243841897",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-32-02Z-243841897/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-32-02Z-243841897/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-20T21-32-02Z-243841897/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [],
+    "mobile": []
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [],
+  "blocked_affordances": [],
+  "interactive_nodes": 19,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"Market\"\n    - button \"Coin Dossier\"\n    - button \"Signals\"\n    - button \"Theories\"\n    - button \"Assets\"\n    - button \"Watchlist\"\n    - button \"Journal\"\n    - button \"Alerts\"\n    - button \"Measurement\"\n    - button \"Meme Risk\"\n  - group: More tools\n  - region \"Notifications\":\n    - paragraph: Terminal inbox · opportunities + lifecycle\n    - heading \"Notifications · 227 unread\" [level=2]\n    - button \"Reload\"\n    - button \"Mark all read\"\n    - paragraph: Blocked opportunities stay visible with their blocker reason — visibility is never gated on paper qualification. Expired setups are kept for the record and are never actionable. Read state is set only by your ack here; chat delivery never marks a row read.\n    - heading \"Actionable now · 98 unread\" [level=3]\n    - article:\n      - strong: BAT · SETUP PENDING\n      - text: lifecycle · SETUP_PENDING · paper alert UNREAD\n      - paragraph: LONG entry $0.207621 · invalidation $0.180431 · T1 $0.248407 · T2 $0.275597\n      - paragraph: \"Frozen production model qualified BAT long: score 60; complete 7-dimension decision ledger; persisted candidate paper-pilot-v2.1.0:paper-pilot-v2.1.0:handoff:126:basic-attention-token.\"\n      - paragraph: First Binance Spot venue print at or after 2026-10-20T16:59:16.894Z inside the 15-minute entry window, received within 5 minutes and drift ≤ 50 bps from the frozen decision reference.\n      - text: event 10/20/2026, 5:04:27 PM → stored 10/20/2026, 5:04:27 PM · no expiry recorded\n      - button \"Mark BAT · SETUP PENDING as read\": Mark read\n    - article:\n      - strong: JCT · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.004607 · invalidation $0.001943\n      - paragraph: ranked-catalog velocity qualification\n      - paragraph: 48H velocity +137.5% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:31 PM → stored 10/20/2026, 4:58:31 PM · no expiry recorded\n      - button \"Mark JCT · blocked opportunity as read\": Mark read\n    - article:\n      - strong: ARC · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: SHORT entry $0.052222 · invalidation $0.048003\n      - paragraph: \"ARC → T4: volume-qualified ($5.66M 24h spot volume), below T3 volume-rank cutoff.\"\n      - paragraph: 48H velocity +17.7% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. AI Rig Complex (ARC) SHORT qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:30 PM → stored 10/20/2026, 4:58:30 PM · no expiry recorded\n      - button \"Mark ARC · blocked opportunity as read\": Mark read\n    - article:\n      - strong: PHA · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.057403 · invalidation $0.050894\n      - paragraph: \"PHA → T3: hard chart gate rejected it at -95.6% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +21.3% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. PHALA (PHA) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:30 PM → stored 10/20/2026, 4:58:30 PM · no expiry recorded\n      - button \"Mark PHA · blocked opportunity as read\": Mark read\n    - article:\n      - strong: KNTQ · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.339848 · invalidation $0.329689\n      - paragraph: \"KNTQ → T4: volume-qualified ($8.62M 24h spot volume), below T3 volume-rank cutoff.\"\n      - paragraph: 48H velocity +18.6% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Kinetiq (KNTQ) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:30 PM → stored 10/20/2026, 4:58:30 PM · no expiry recorded\n      - button \"Mark KNTQ · blocked opportunity as read\": Mark read\n    - article:\n      - strong: ALT · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.01022 · invalidation $0.00852\n      - paragraph: \"ALT → T3: hard chart gate rejected it at -98.4% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +24.1% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. AltLayer (ALT) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:29 PM → stored 10/20/2026, 4:58:29 PM · no expiry recorded\n      - button \"Mark ALT · blocked opportunity as read\": Mark read\n    - article:\n      - strong: BAT · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.207621 · invalidation $0.180431\n      - paragraph: \"BAT → T3: hard chart gate rejected it at -89.4% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +22.9% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Basic Attention (BAT) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:28 PM → stored 10/20/2026, 4:58:28 PM · no expiry recorded\n      - button \"Mark BAT · blocked opportunity as read\": Mark read\n    - article:\n      - strong: BR · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.688876 · invalidation $0.597587\n      - paragraph: \"BR → T2: top-40 volume among chart-passers; ATH gate -48.9%, price above 50D SMA; mover: 48.8% over 48H with 3.79× baseline volume — velocity qualified independently.\"\n      - paragraph: 48H velocity +65.5% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Bedrock (BR) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:28 PM → stored 10/20/2026, 4:58:28 PM · no expiry recorded\n      - button \"Mark BR · blocked opportunity as read\": Mark read\n    - article:\n      - strong: PEPE · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.000005 · invalidation $0.000004\n      - paragraph: \"PEPE → T3: hard chart gate rejected it at -85.1% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-20T00:31:53.000Z, age 10.4h; price moved ≤2%).\"\n      - paragraph: 48H velocity +18.2% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Pepe (PEPE) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:28 PM → stored 10/20/2026, 4:58:28 PM · no expiry recorded\n      - button \"Mark PEPE · blocked opportunity as read\": Mark read\n    - article:\n      - strong: CARDS · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.33206 · invalidation $0.27961\n      - paragraph: \"CARDS → T2: top-40 volume among chart-passers; ATH gate -15.1%, price above 50D SMA; mover: 28.3% over 48H with 1.88× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-20T00:31:53.000Z, age 10.4h; price moved ≤2%).\"\n      - paragraph: 48H velocity +35.5% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:27 PM → stored 10/20/2026, 4:58:27 PM · no expiry recorded\n      - button \"Mark CARDS · blocked opportunity as read\": Mark read\n    - article:\n      - strong: BEAM · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.003065 · invalidation $0.002948\n      - paragraph: \"BEAM → T3: hard chart gate rejected it at -92.9% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +16.3% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Beam (BEAM) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:27 PM → stored 10/20/2026, 4:58:27 PM · no expiry recorded\n      - button \"Mark BEAM · blocked opportunity as read\": Mark read\n    - article:\n      - strong: COMP · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $27.19 · invalidation $21.05\n      - paragraph: \"COMP → T3: hard chart gate rejected it at -97.3% from ATH (worse than −75%).\"\n      - paragraph: 48H velocity +15.8% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Compound (COMP) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:24 PM → stored 10/20/2026, 4:58:24 PM · no expiry recorded\n      - button \"Mark COMP · blocked opportunity as read\": Mark read\n    - article:\n      - strong: ZRO · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: SHORT entry $1.94 · invalidation $2.00\n      - paragraph: \"ZRO → T1: active verified theory #4 — LayerZero bid tracks institutional stablecoin settlement buildout; open long signal id12; volume + chart gates passed. WARNING: near structural-downtrend line (-74.4% from ATH, hard gate at -75%). Chart carried from stored snapshot (sourceAsOf 2026-10-20T00:31:53.000Z, age 10.4h; price moved ≤2%).\"\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. LayerZero (ZRO) SHORT qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:23 PM → stored 10/20/2026, 4:58:23 PM · no expiry recorded\n      - button \"Mark ZRO · blocked opportunity as read\": Mark read\n    - article:\n      - strong: WLD · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.567854 · invalidation $0.50623\n      - paragraph: \"WLD → T3: hard chart gate rejected it at -95.4% from ATH (worse than −75%). Chart carried from stored snapshot (sourceAsOf 2026-10-20T00:31:53.000Z, age 10.4h; price moved ≤2%).\"\n      - paragraph: 48H velocity +20.7% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Worldcoin (WLD) LONG qualified in discovery run 126 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 4:58:23 PM → stored 10/20/2026, 4:58:23 PM · no expiry recorded\n      - button \"Mark WLD · blocked opportunity as read\": Mark read\n    - article:\n      - strong: CARDS · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.33679 · invalidation $0.272164\n      - paragraph: \"CARDS → T2: top-40 volume among chart-passers; ATH gate -15.1%, price above 50D SMA; mover: 28.3% over 48H with 1.88× baseline volume — velocity qualified independently. Chart carried from stored snapshot (sourceAsOf 2026-10-20T00:31:53.000Z, age 10.4h; price moved ≤2%).\"\n      - paragraph: 48H velocity +18.9% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Collector Crypt (CARDS) LONG qualified in discovery run 125 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 2:55:32 PM → stored 10/20/2026, 2:55:32 PM · no expiry recorded\n      - button \"Mark CARDS · blocked opportunity as read\": Mark read\n    - article:\n      - strong: Q · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.128284 · invalidation $0.113177\n      - paragraph: \"Q → T2: top-40 volume among chart-passers; ATH gate -42.4%, price above 50D SMA.\"\n      - paragraph: 48H velocity +15.4% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Quack AI (Q) LONG qualified in discovery run 125 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 2:55:32 PM → stored 10/20/2026, 2:55:32 PM · no expiry recorded\n      - button \"Mark Q · blocked opportunity as read\": Mark read\n    - article:\n      - strong: BR · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.671749 · invalidation $0.490919\n      - paragraph: \"BR → T2: top-40 volume among chart-passers; ATH gate -48.9%, price above 50D SMA; mover: 48.8% over 48H with 3.79× baseline volume — velocity qualified independently.\"\n      - paragraph: 48H velocity +66.6% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Bedrock (BR) LONG qualified in discovery run 125 but paper issuance is BLOCKED: issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - text: event 10/20/2026, 2:55:30 PM → stored 10/20/2026, 2:55:30 PM · no expiry recorded\n      - button \"Mark BR · blocked opportunity as read\": Mark read\n    - article:\n      - strong: JCT · blocked opportunity\n      - text: opportunity · BLOCKED · discovery UNREAD\n      - paragraph: LONG entry $0.004192 · invalidation $0.001873\n      - paragraph: ranked-catalog velocity qualification\n      - paragraph: 48H velocity +118.5% cleared +15% full-scoring bar independently of volume multiple\n      - paragraph: \"BLOCKED — issuance-validation UNKNOWN: no admissible post-decision price evidence (0 admissible interval(s)); contract requires observation time + receipt time + venue\"\n      - paragraph: \"INFORMATIONAL ONLY — not a trade signal, not a paper entry. Janction (JCT\n… (aria snapshot truncated at 20000 chars)",
+  "audit_session_id": "fe3e053e-fc2f-406d-be6b-ee1991a0e747",
+  "readiness": {
+    "desktop": {
+      "settled": false,
+      "settle_ms": 8039,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    },
+    "mobile": {
+      "settled": false,
+      "settle_ms": 8017,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "mobile_ms": 12220.141834000002,
+  "cold_launch_ms": 231.95240699999977,
+  "desktop_ms": 13454.164977999999,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 2
+  }
+}

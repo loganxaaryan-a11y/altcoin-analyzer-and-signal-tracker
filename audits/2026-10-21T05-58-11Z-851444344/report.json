@@ -1,0 +1,147 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/",
+  "duration_ms": 9803.213629,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T05-58-11Z-851444344",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T05-58-11Z-851444344/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T05-58-11Z-851444344/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-21T05-58-11Z-851444344/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [],
+    "mobile": []
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)",
+    "console.error: Failed to load resource: the server responded with a status of 503 (Service Unavailable) (https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions)"
+  ],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [
+    {
+      "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-5cde421c-1f7a-410a-a47b-dea3c7d88989/actions",
+      "status": 503,
+      "resource_type": "fetch"
+    }
+  ],
+  "blocked_affordances": [],
+  "interactive_nodes": 19,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"Market\"\n    - button \"Coin Dossier\"\n    - button \"Signals\"\n    - button \"Theories\"\n    - button \"Assets\"\n    - button \"Watchlist\"\n    - button \"Journal\"\n    - button \"Alerts\"\n    - button \"Measurement\"\n    - button \"Meme Risk\"\n  - group: More tools\n  - region \"Notifications\":\n    - paragraph: Terminal inbox · opportunities + lifecycle\n    - heading \"Notifications\" [level=2]\n    - button \"Reload\"\n    - button \"Mark all read\" [disabled]\n    - paragraph: \"Blocked opportunities stay visible with their blocker reason — visibility is never gated on paper qualification. Expired setups are kept for the record and are never actionable. Terminal visibility time is recorded separately from chat arrival: an item whose chat copy landed after its window closed reads as a historical notification, not an actionable entry. Read state is set only by your ack here; chat delivery never marks a row read.\"\n    - text: No notifications stored yet — opportunities, blocked setups, engine hits and paper lifecycle events land here as they are committed.\n  - region \"Research shortlist\":\n    - paragraph: Investigation priority · stored evidence only\n    - heading \"Research shortlist\" [level=2]\n    - button \"Reload\"\n    - paragraph: Research shortlist unavailable.\n    - paragraph: Research ranking — never issues, never gates.\n    - text: Research shortlist unavailable.\n  - paragraph: Market read\n  - heading \"Coverage is loading\" [level=2]\n  - text: PARTIAL FEED\n  - paragraph: Refreshing CoinGecko prices and OKX instrument coverage…\n  - paragraph: Weekly screener funnel\n  - heading \"500 → T1 + volume or ≥15% / 48H → full scoring\" [level=2]\n  - button \"Recompute weekly universe tiers\": RECOMPUTE\n  - paragraph: Two routes enter full 7-dimension scoring. Non-velocity assets must be T1 and clear the volume path. A ≥15% move over 48 hours qualifies from any tier through the independent velocity path; its volume multiple is not consulted.\n  - paragraph: \"T1 has three independent doors: active verified theory, open signal, or Graduation ≥70. The graduation score does not explain a theory- or signal-led promotion.\"\n  - button \"T1 · 0\"\n  - button \"T2 · 0\"\n  - button \"T3 · 0\"\n  - button \"T4 · 0\"\n  - text: No saved T1 membership yet. Run the weekly screener.\n  - paragraph: Automatic market discovery\n  - heading \"Verified perp universe → evidence flags\" [level=2]\n  - paragraph: The weekly funnel pulls CoinGecko’s top 500. Non-velocity assets reach full 7-dimension scoring through the saved T1 and volume path. Any tier can also enter through the independent ≥15% / 48H velocity path, where the volume multiple is not consulted.\n  - button \"RUN NOW\"\n  - text: LAST COMPLETED SCAN No scan stored yet\n  - emphasis: DEGRADED\n  - strong: Run the first scan to build the discovery feed.\n  - button \"Auto signals\"\n  - button \"News impact\"\n  - button \"Fundamentals\"\n  - button \"HL perp board\"\n  - button \"Market context\"\n  - note: OPPORTUNITIES — what changed · why it matters · timeframe · evidence and conflicts\n  - note: CHART OPPORTUNITIES — observations only. No entries, no targets, no sizing.\n  - button \"Main Discovery\"\n  - button \"Meme Lane\"\n  - paragraph: Ranked scanner output\n  - heading \"Volume, interest and momentum flags\" [level=2]\n  - text: alignment, not probability\n  - button \"All\"\n  - button \"T1 · full engine only\"\n  - button \"Legacy triggered rows\"\n  - button \"All tiers\"\n  - button \"high\"\n  - button \"medium\"\n  - button \"low\"\n  - text: Sort\n  - button \"alignment\"\n  - button \"7D return\"\n  - button \"24H volume\"\n  - button \"tier\"\n  - text: No scheduled scan has completed yet.\n  - group: Passed log · rejected / monitor-only setups\n  - region \"All observations from the latest completed discovery run\":\n    - paragraph: Research lane · unfiltered\n    - heading \"All observations\" [level=2]\n    - button \"Reload\"\n    - paragraph: Research observations — everything the scanner computed. Tier is a priority label, not a qualification. Issuance decisions are unchanged and shown separately.\n    - text: No completed discovery run has stored observations yet.\n  - paragraph: BTC cycle study\n  - heading \"Regime compass\" [level=2]\n  - button \"Open BTC\"\n  - text: Cycle data loading…\n  - paragraph: /BTC ratio table\n  - heading \"Rotation breadth\" [level=2]\n  - text: CoinGecko\n  - paragraph: Ratio breadth is loading…\n  - text: Ratio data loading…\n  - paragraph: Narrative rotation\n  - heading \"Leaders and laggards\" [level=2]\n  - text: CoinGecko Rotation data loading…",
+  "audit_session_id": "be4153c1-e2b0-4552-aa5b-140e7c71774b",
+  "readiness": {
+    "desktop": {
+      "settled": true,
+      "settle_ms": 1340,
+      "in_flight": 0,
+      "network_idle": true,
+      "retried": false
+    },
+    "mobile": {
+      "settled": true,
+      "settle_ms": 1167,
+      "in_flight": 0,
+      "network_idle": true,
+      "retried": false
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "mobile_ms": 4376.298460999999,
+  "cold_launch_ms": 3906.1837289999994,
+  "desktop_ms": 4934.258885,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 0
+  }
+}

@@ -1,0 +1,14 @@
+bun test v1.4.2 (744846f84)
+
+server/src/measurement-recovery.test.ts:
+(pass) measurement restart recovery > resumes the same run cursor and repeats an interrupted batch without skips [3.66ms]
+(pass) measurement restart recovery > retries failed IDs after the forward cursor without changing trade state [0.42ms]
+(pass) measurement restart recovery > all 28 IDs reconcile with explicit reasons and no silent exclusions [0.23ms]
+(pass) measurement restart recovery > volatile worker timestamps do not rewrite identical evaluation history [2.05ms]
+
+ 4 pass
+ 0 fail
+ 17 expect() calls
+Ran 4 tests across 1 file. [57.00ms]
+
+EXIT_CODE=0
