@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "url": "https://artifact-capture.invalid/spaces/v2/hatch-audit-525322e1-8caa-47cb-940e-b3299b493447/",
+  "duration_ms": 14564.408760999999,
+  "output_dir": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-25T00-14-58Z-558935603",
+  "nav_status": 200,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-25T00-14-58Z-558935603/screenshot.png",
+      "fullpage_screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-25T00-14-58Z-558935603/screenshot-full.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "screenshot_path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-25T00-14-58Z-558935603/screenshot-mobile.png"
+    }
+  },
+  "mobile_layout": {
+    "viewport_width": 390,
+    "scroll_width": 390,
+    "overflow_px": 0,
+    "widest_selector": null,
+    "verdict": "pass"
+  },
+  "horizontal_scrollers": [],
+  "unreachable_controls": {
+    "desktop": [],
+    "mobile": []
+  },
+  "clipped": {
+    "desktop": [],
+    "mobile": []
+  },
+  "images": {
+    "total": 0,
+    "broken": [],
+    "duplicate": [],
+    "unstable": [],
+    "failed_requests": [],
+    "external_blocked": {
+      "count": 0,
+      "sample": []
+    },
+    "sample_urls": [],
+    "verdict": "pass"
+  },
+  "text_issues": [],
+  "console_errors": [],
+  "console_warnings": [],
+  "external_fetch_failures": 2,
+  "external_fetch_failure_samples": [
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)",
+    "console.error: Failed to load resource: net::ERR_SOCKS_CONNECTION_FAILED (https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap)"
+  ],
+  "blocked_requests": [],
+  "external_requests": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "resource_type": "stylesheet"
+    }
+  ],
+  "external_requests_dropped": 0,
+  "external_requests_dropped_data_bearing": 0,
+  "transport_ledger_active": true,
+  "egress_lockdown": true,
+  "transport_connections": [
+    {
+      "host": "fonts.googleapis.com",
+      "port": 443,
+      "connects": 2,
+      "bytes_up": 0,
+      "bytes_down": 0,
+      "policy_denied": true
+    }
+  ],
+  "transport_udp_attempts": 0,
+  "transport_overflow": 0,
+  "unexplained_transport_hosts": [],
+  "broken_assets": [],
+  "blocked_affordances": [],
+  "interactive_nodes": 10,
+  "aria_snapshot": "- main:\n  - textbox \"Search any coin\"\n  - button \"Run coin search\": Analyze\n  - navigation \"Terminal sections\":\n    - button \"The Read\"\n    - button \"Opportunities\"\n    - button \"The Book\"\n    - button \"Research\"\n  - group \"Read view\":\n    - button \"Outlook\"\n    - button \"Notifications\"\n  - paragraph: The Read · market outlook\n  - heading \"Loading the stored market read…\" [level=2]\n  - paragraph: The outlook appears when the market read lands; opening this section never starts a scan.\n  - region \"Recent theory updates\":\n    - paragraph: Theory updates\n    - heading \"What changed in active theories\" [level=2]\n    - button \"Open theories →\"\n    - text: Reading stored theory updates…\n    - paragraph: Highlighting follows the stored last-checked time — a theory re-checked in the last 24 hours is lit; quiet theories stay listed in Research with their full history.\n  - paragraph: Market read\n  - heading \"Coverage is loading\" [level=2]\n  - text: PARTIAL FEED\n  - paragraph: Refreshing CoinGecko prices and OKX instrument coverage…\n  - paragraph: BTC cycle study\n  - heading \"Regime compass\" [level=2]\n  - button \"Open BTC\"\n  - text: Cycle data loading…\n  - paragraph: /BTC ratio table\n  - heading \"Rotation breadth\" [level=2]\n  - text: CoinGecko\n  - paragraph: Ratio breadth is loading…\n  - text: Ratio data loading…\n  - paragraph: Narrative rotation\n  - heading \"Leaders and laggards\" [level=2]\n  - text: CoinGecko Rotation data loading…\n  - group: Status & source diagnostics",
+  "document_text": {
+    "path": "/home/hatch/workspace/ts-spaces/altcoin-analyzer-and-signal-tracker/audits/2026-10-25T00-14-58Z-558935603/document-text.txt",
+    "chars": 4377,
+    "truncated": false
+  },
+  "audit_session_id": "c45bbb00-0a52-4860-82fb-b30cf13a0747",
+  "readiness": {
+    "desktop": {
+      "settled": false,
+      "settle_ms": 8010,
+      "in_flight": null,
+      "network_idle": false,
+      "retried": true
+    },
+    "mobile": {
+      "settled": false,
+      "settle_ms": 8417,
+      "in_flight": 6,
+      "network_idle": true,
+      "retried": true
+    }
+  },
+  "color_scheme": {
+    "declared": "light",
+    "media_dependent": null,
+    "dark_frame": false
+  },
+  "cold_launch_ms": 3763.944758,
+  "desktop_ms": 9514.15567,
+  "mobile_ms": 9842.762256999998,
+  "browser_launches": 1,
+  "audit_path": "shared-concurrent",
+  "diagnostics": {
+    "audit_path": "shared-concurrent",
+    "concurrent_ran": true,
+    "concurrent_desktop_retry": false,
+    "concurrent_mobile_retry": false,
+    "shared_launch_failed": false,
+    "nav_retries": 0,
+    "settle_retries": 2
+  }
+}

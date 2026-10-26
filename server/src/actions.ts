@@ -47,14 +47,51 @@ import { PACKAGE_SOURCE_FILES } from "./phase2a-package-sources";
 import { MARKET_FRESHNESS_VERSION, QUOTE_STALE_AFTER_MS, MarketFetchError, RefreshDeduplicator, currentObservationsFromPointers, fetchMarketJson, freshnessState, normalizeBinanceKline, normalizeBinanceMiniTicker, observationFingerprint, observationFreshness, quoteEligibleForContract, statusEventKey, statusFromQuote, streamIdentity, type MarketObservation } from "./market-freshness";
 import { detectFundingBundles, normalizeRugCheck, panelVerdict, type HolderFunding, type RiskStatus } from "./meme-risk";
 import { reconcileMeasurement, selectMeasurementBatch, stableEvaluationFingerprint, type GradingState, type TradeState } from "./measurement-recovery";
-import { assertTierRefreshComplete, CATALOG_MISSED_MESSAGE, CATALOG_MISSED_SUMMARY, CATALOG_PAGE_RETRY_DELAYS_MS, chunkArray, classifyDiscoveryLanes, DISCOVERY_STAGE_BUDGET_MS, isLiveDiscoveryLease, namedTimeoutSummary, resolveCatalog, retryOnce, shouldCarryStoredChart, skippedVenueAttempt, StageBudgetTimeoutError, stageBudgetExhaustedDetail, suppressedDuplicateMessage, withStageBudget } from "./discovery-repair";
+import { assertTierRefreshComplete, canTransitionDiscoveryRun, CATALOG_MISSED_MESSAGE, CATALOG_MISSED_SUMMARY, CATALOG_PAGE_RETRY_DELAYS_MS, certifyDiscoverySlot, chunkArray, classifyDiscoveryLanes, DISCOVERY_STAGE_BUDGET_MS, isLiveDiscoveryLease, isReapableStaleDiscoveryRun, namedTimeoutSummary, requiredFeedDeferralReason, resolveCatalog, retryOnce, runBudgetedChecks, scoringBudgetDeferralReason, shouldCarryStoredChart, skippedVenueAttempt, StageBudgetTimeoutError, stageBudgetExhaustedDetail, suppressedDuplicateMessage, withStageBudget } from "./discovery-repair";
 import { DEPLOYED_PAPER_PATH, ISSUANCE_HANDLER_VERSION, PAPER_DELIVERY_ARCHITECTURE, PAPER_SOURCE_HASHES, PAPER_VERSION_MAPPING, assertNoLegacyPaperIssuer, fetchBinanceTradeHistory, type BinanceCoverage, type VenueTradePrint } from "./paper-v219";
 import { fetchMexcKlines, fetchMexcTradeHistory, MEXC_VENUE_LABEL, type MexcCoverage } from "./paper-venue-mexc";
 import { PAPER_INTAKE_MAX_ITEMS_PER_INVOCATION, PAPER_INTAKE_REPAIR_ACTIVATED_AT, isTerminalIntakeStatus, runDurableIntake, type IntakeProcessResult, type IntakeWorkItem } from "./paper-intake";
-import { decideIssuanceWork, monitoringHoldExplanation, summarizeIntakeStatuses, type HandoffProcessingState, type IssuanceWorkDecision } from "./issuance-work-check";
+import { decideIssuanceWork, monitoringHoldExplanation, planHandoffAccounting, selectHandoffToAccount, summarizeHandoffCoverage, summarizeIntakeStatuses, type HandoffProcessingState, type IssuanceWorkDecision } from "./issuance-work-check";
+import { evaluateHistoryCacheFreshness, stateAfterMetadataWriteFailure } from "./history-cache-freshness";
 import { paperAlertReadRow, paperAlertsOnlyRead } from "./paper-alert-read-model";
 import { computeMonitoringHealth, type MonitoringHealth, type MonitoringPositionInput } from "./monitoring-health";
 import { buildPaperPollLeaseAttempt, runBoundedCoalescedPoll, type PaperPollClaim as DurablePaperPollClaim, type PaperPollLeaseStore } from "./paper-poll-concurrency";
+import { fullErrorText, getFallbackWriteFailures, MAX_CAPTURE_ROWS, pruneCountFor, recordWriteFailure as recordWriteFailureRow, type WriteFailureInput } from "./write-failure-capture";
+import { buildInputFreshnessRecord, buildLevelConstructionRecord, candidateFreshnessDisposition, catalogFreshnessRecord, DECISION_INPUT_MAX_AGE_MS, paperPathFreshnessGate, WEEKLY_FUNDAMENTALS_MAX_AGE_MS, type InputFreshnessRecord } from "./input-freshness";
+import { PROVISIONAL_BINANCE_SPOT_29, WritesDisabledGuard, proveZeroProductionWrites, runExpandedScoringHarness, runLiveScoringRehearsal, type ProductionRowCounts } from "./expanded-scoring-harness";
+import { guardedWrite, settleFeedWithAbort, TimingRecorder } from "./fetch-timing";
+import { runFailureRecordingSequence } from "./discovery-failure-isolation";
+import { persistResearchShortlistSnapshot } from "./research-shortlist-snapshot";
+import { admissionLaneFor, buildPilotRunRecord, isPilotOnlyAdmission, PILOT_V217_ACTIVATED_AT, PILOT_V217_BINANCE_UNIVERSE, PILOT_V217_COIN_IDS, PILOT_V217_EXCLUSIONS, PILOT_V217_REVIEW_PLAN, PILOT_V217_SUPERSEDES, PILOT_V217_VERSION, summarizePilotReview, type PilotRunRecord } from "./pilot-v217";
+
+// Write-failure capture (Q4; Q6 hardening 2026-10-25): single insert into
+// write_failure_captures in its own try/catch via recordWriteFailureRow —
+// never throws, never runs in a transaction, never guards on lease/row
+// status. If the capture insert itself fails it returns { captured: false }
+// (the module pushes the redacted capture to the independent fallback sink:
+// structured log line + in-memory buffer read by getWriteFailureCaptures)
+// and the caller rethrows the ORIGINAL error. Bypasses compactError
+// entirely; stored text is bounded (8,000 chars) and secrets-redacted at
+// the capture layer, and each capture records operation + schema version.
+// After a successful capture the table is pruned to the newest
+// MAX_CAPTURE_ROWS rows (best-effort, its own try/catch) so capture
+// storage cannot grow unbounded.
+async function recordWriteFailure(ctx: Ctx, input: WriteFailureInput): Promise<{ captured: boolean }> {
+  const db = ctx.db<typeof schema>();
+  const result = await recordWriteFailureRow(async (values) => { await db.insert(schema.writeFailureCaptures).values(values); }, input);
+  if (result.captured) {
+    try {
+      const totalRows = await db.select({ count: sql<number>`count(*)` }).from(schema.writeFailureCaptures);
+      const excess = pruneCountFor(Number(totalRows[0]?.count ?? 0), MAX_CAPTURE_ROWS);
+      if (excess > 0) {
+        const oldest = await db.select({ id: schema.writeFailureCaptures.id }).from(schema.writeFailureCaptures).orderBy(asc(schema.writeFailureCaptures.id)).limit(excess);
+        const ids = oldest.map((row) => row.id);
+        if (ids.length) await db.delete(schema.writeFailureCaptures).where(inArray(schema.writeFailureCaptures.id, ids));
+      }
+    } catch { /* pruning is best-effort maintenance; it never masks the capture or the original error */ }
+  }
+  return result;
+}
 
 type PaperPollLane = "entry_watch" | "issuance_cycle" | "delivery_worker";
 type PaperPollAcquireResult = { acquired: true; ownerToken: string; generation: number } | { acquired: false; activeOwnerToken: string | null; generation: number };
@@ -187,18 +224,38 @@ async function withSchedulerReceipt<T>(ctx: Ctx, jobKey: SchedulerJobKey, claime
   // transient write failure cannot cascade into a lost run + a lost
   // failure-record. A second failure throws the original error as before;
   // the underlying receipt-fault diagnosis is a separate queued item.
-  await retryOnce(async () => { await db.insert(schema.schedulerInvocationReceipts).values({ jobKey, jobName: job.jobName, runId, status: "running", invokedAt, completedAt: null, deployedVersion: PHASE1_BUILD_ID, triggerProvenance: claimedTrigger, progressJson: null, error: null }); });
-  ctx.invalidateQueries();
+  // Write-failure capture (Q4): each receipt write is captured AFTER
+  // retryOnce exhausts — one capture row per occurrence, full verbatim text.
   try {
-    const result = await work();
-    await retryOnce(async () => { await db.update(schema.schedulerInvocationReceipts).set({ status: "succeeded", completedAt: new Date(), progressJson: schedulerProgressJson(result), error: null }).where(eq(schema.schedulerInvocationReceipts.runId, runId)); });
-    ctx.invalidateQueries();
-    return result;
+    await retryOnce(async () => { await db.insert(schema.schedulerInvocationReceipts).values({ jobKey, jobName: job.jobName, runId, status: "running", invokedAt, completedAt: null, deployedVersion: PHASE1_BUILD_ID, triggerProvenance: claimedTrigger, progressJson: null, error: null }); });
+  } catch (insertError) {
+    await recordWriteFailure(ctx, { lane: "scheduler_receipt", tableName: "scheduler_invocation_receipts", statementKind: "insert", runId, attemptedKey: runId, error: insertError, context: { jobKey } });
+    throw insertError;
+  }
+  ctx.invalidateQueries();
+  let result: T;
+  try {
+    result = await work();
   } catch (error) {
-    await retryOnce(async () => { await db.update(schema.schedulerInvocationReceipts).set({ status: "failed", completedAt: new Date(), error: compactError(error, "Scheduler invocation failed") }).where(eq(schema.schedulerInvocationReceipts.runId, runId)); });
+    try {
+      await retryOnce(async () => { await db.update(schema.schedulerInvocationReceipts).set({ status: "failed", completedAt: new Date(), error: compactError(error, "Scheduler invocation failed") }).where(eq(schema.schedulerInvocationReceipts.runId, runId)); });
+    } catch (updateError) {
+      // Capture the update failure (with the original work error preserved
+      // in context), then rethrow the ORIGINAL work error — never the
+      // update error.
+      await recordWriteFailure(ctx, { lane: "scheduler_receipt", tableName: "scheduler_invocation_receipts", statementKind: "update", runId, attemptedKey: runId, error: updateError, context: { jobKey, receiptStatus: "failed", originalError: fullErrorText(error) } });
+    }
     ctx.invalidateQueries();
     throw error;
   }
+  try {
+    await retryOnce(async () => { await db.update(schema.schedulerInvocationReceipts).set({ status: "succeeded", completedAt: new Date(), progressJson: schedulerProgressJson(result), error: null }).where(eq(schema.schedulerInvocationReceipts.runId, runId)); });
+  } catch (updateError) {
+    await recordWriteFailure(ctx, { lane: "scheduler_receipt", tableName: "scheduler_invocation_receipts", statementKind: "update", runId, attemptedKey: runId, error: updateError, context: { jobKey, receiptStatus: "succeeded" } });
+    throw updateError;
+  }
+  ctx.invalidateQueries();
+  return result;
 }
 
 function schedulerReceiptVersions(storedVersion: string | null): { configuredStartupVersion: string | null; executingVersion: string | null } {
@@ -376,6 +433,31 @@ const COVERAGE: readonly CoverageDefinition[] = [
   { coinId: "dgrid-ai", symbol: "DGAI", pair: "DGAIUSDT", venue: "mexc-spot" },
   { coinId: "janction", symbol: "JCT", pair: "JCTUSDT", venue: "mexc-spot" },
   { coinId: "verified-emeralds", symbol: "VEREM", pair: "VEREMUSDT", venue: "mexc-spot" },
+  // Prospective venue-mapping repair (2026-10-26, expert direction):
+  // quant-network verified separately against ALL five mapping checks
+  // before this row was added. (1) Asset identity: CoinGecko id
+  // quant-network, Ethereum contract
+  // 0x4a220e6096b25eadb88358cb44068a3248254675. (2) Supported spot
+  // instrument: MEXC Spot QNTUSDT, isSpotTradingAllowed true. (3)
+  // Trading status: MEXC exchangeInfo status "1" (enabled), verified
+  // live 2026-10-26. (4) Windowed trade-history availability: MEXC
+  // aggTrades for QNTUSDT returns prints (the production
+  // fetchMexcTradeHistory path). (5) Completed-bar monitoring
+  // availability: MEXC 1m klines return completed bars. The MEXC
+  // contractAddress equals the CoinGecko canonical Ethereum contract
+  // exactly. Binance Spot has NO QNTUSDT (exchangeInfo: invalid
+  // symbol), so the mapping is MEXC, like janction. Prospective only:
+  // run 151's quant-network deferral (production 65,
+  // venue_mapping_unavailable) is a historical record and is NOT
+  // re-decided; a future candidate under this mapping is what confirms
+  // enrollment. Deliberately NOT mapped the same day: grass — MEXC
+  // GRASSUSDT exists and trades, but its contractAddress
+  // (CEzN7TtD…) does NOT equal the CoinGecko canonical Solana mint for
+  // grass (Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs), so asset
+  // identity is unproven and the mapping fails check (1); Binance Spot
+  // GRASSUSDT is an invalid symbol. Grass stays unmapped until identity
+  // is proven.
+  { coinId: "quant-network", symbol: "QNT", pair: "QNTUSDT", venue: "mexc-spot" },
   // Freeze paper-pilot-v2.1.4 venue-mapping repair (2026-10-21): each pair
   // verified TRADING on Binance Spot via data-api.binance.vision
   // exchangeInfo (three agreeing passes, 2026-10-21). Explicit allowlist
@@ -590,11 +672,18 @@ const VALUATION_PEERS: Readonly<Record<string, readonly ValuationPeer[]>> = {
 const ETHERSCAN_WATCHLIST = [{ coin: "ETH", label: "vitalik.eth", address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045", kind: "confirmed individual" }] as const;
 
 const UPSTREAM_TIMEOUT_MS = 20_000;
-async function sourceFetch(url: string, init: RequestInit): Promise<Response> {
+async function sourceFetch(url: string, init: RequestInit, externalSignal?: AbortSignal): Promise<Response> {
   let lastError: unknown = null;
   for (let attempt = 0; attempt < 2; attempt++) {
+    // Q3: an external AbortSignal (e.g. the veto-poll deadline) is linked
+    // into this transport's own controller, so cancelling the caller
+    // actually cancels the underlying fetch — verified in fetch-timing
+    // tests — instead of only bounding the await.
+    if (externalSignal?.aborted) { const abortError = new Error("The operation was aborted"); abortError.name = "AbortError"; throw abortError; }
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
+    const onExternalAbort = () => controller.abort();
+    externalSignal?.addEventListener("abort", onExternalAbort, { once: true });
     try {
       const response = await fetch(url, { ...init, signal: controller.signal });
       if (!response.ok) {
@@ -605,15 +694,16 @@ async function sourceFetch(url: string, init: RequestInit): Promise<Response> {
       }
       return response;
     } catch (error) {
+      if (externalSignal?.aborted) { const abortError = new Error("The operation was aborted"); abortError.name = "AbortError"; throw abortError; }
       lastError = controller.signal.aborted ? new Error(`timeout: upstream request exceeded ${UPSTREAM_TIMEOUT_MS / 1000}s`) : error;
       if (attempt === 1) throw lastError;
       await new Promise((resolve) => setTimeout(resolve, 500 * (attempt + 1)));
-    } finally { clearTimeout(timer); }
+    } finally { clearTimeout(timer); externalSignal?.removeEventListener("abort", onExternalAbort); }
   }
   throw lastError instanceof Error ? lastError : new Error("Upstream request failed");
 }
-async function getJson(url: string): Promise<any> {
-  const r = await sourceFetch(url, { headers: { accept: "application/json", "user-agent": "MuseAltcoinTerminal/1.0" } });
+async function getJson(url: string, externalSignal?: AbortSignal): Promise<any> {
+  const r = await sourceFetch(url, { headers: { accept: "application/json", "user-agent": "MuseAltcoinTerminal/1.0" } }, externalSignal);
   return await r.json();
 }
 type DeveloperVelocity = { state: "available" | "no_data"; repo: string | null; repoSource?: "curated" | "coingecko"; commits12w: number | null; activeWeeks: number | null; sampleWeeks: number; source: "GitHub commit activity"; asOf: string | null; reason: string | null };
@@ -658,7 +748,11 @@ async function getDeveloperVelocity(coinId: string, resolver?: DeveloperVelocity
   if (!owner || !name) return { state: "no_data", repo, repoSource, commits12w: null, activeWeeks: null, sampleWeeks: 0, source: "GitHub commit activity", asOf: null, reason: "NO_DATA — repository mapping is malformed." };
   let raw: any = null;
   for (let attempt = 0; attempt < 3; attempt++) {
-    const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(name)}/stats/commit_activity`, { headers: { accept: "application/vnd.github+json", "user-agent": "MuseAltcoinTerminal/1.0" } }).catch(() => null);
+    // Bounded deadline (run-186 repair): no raw fetch without an abort
+    // signal — a stalled GitHub response degrades to NO_DATA via the
+    // existing null path instead of hanging the caller.
+    const ghController = new AbortController(); const ghTimer = setTimeout(() => ghController.abort(), UPSTREAM_TIMEOUT_MS);
+    const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(name)}/stats/commit_activity`, { headers: { accept: "application/vnd.github+json", "user-agent": "MuseAltcoinTerminal/1.0" }, signal: ghController.signal }).catch(() => null).finally(() => clearTimeout(ghTimer));
     if (!response) break;
     if (response.status === 202) { await new Promise((resolve) => setTimeout(resolve, 800 * (attempt + 1))); continue; }
     if (!response.ok) return { state: "no_data", repo, repoSource, commits12w: null, activeWeeks: null, sampleWeeks: 0, source: "GitHub commit activity", asOf: null, reason: `NO_DATA — GitHub returned ${response.status} for the resolved repository.` };
@@ -908,8 +1002,14 @@ function valuationRow(label: string, value: string, source: string, asOf: string
 
 type BinanceFuturesContext = { state: "available" | "no_data"; symbol: string; source: "Binance Futures"; asOf: string; funding: any | null; openInterest: any | null; positioning: any | null; liquidations: any | null; reason: string | null; endpointStatus: Array<{ endpoint: string; ok: boolean; status: number; reason: string | null }> };
 async function fetchJsonWithStatus(url: string): Promise<{ ok: boolean; status: number; data: any; reason: string | null }> {
-  try { const response = await fetch(url, { headers: { accept: "application/json", "user-agent": "MuseAltcoinTerminal/1.0" } }); const text = await response.text(); let data: any = null; try { data = text ? JSON.parse(text) : null; } catch { data = null; } const detail = typeof data?.msg === "string" ? data.msg : text.slice(0, 240); return { ok: response.ok, status: response.status, data, reason: response.ok ? null : detail || `HTTP ${response.status}` }; }
-  catch (error) { return { ok: false, status: 0, data: null, reason: compactError(error, "network error") }; }
+  // Bounded deadline (run-186 repair): this raw fetch previously carried no
+  // abort signal at all, so a stalled Binance Futures response could hang
+  // its caller (including discovery's persistence-stage theory
+  // verification) past every stage budget and the run deadline.
+  const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
+  try { const response = await fetch(url, { headers: { accept: "application/json", "user-agent": "MuseAltcoinTerminal/1.0" }, signal: controller.signal }); const text = await response.text(); let data: any = null; try { data = text ? JSON.parse(text) : null; } catch { data = null; } const detail = typeof data?.msg === "string" ? data.msg : text.slice(0, 240); return { ok: response.ok, status: response.status, data, reason: response.ok ? null : detail || `HTTP ${response.status}` }; }
+  catch (error) { return { ok: false, status: 0, data: null, reason: controller.signal.aborted ? `timeout: upstream request exceeded ${UPSTREAM_TIMEOUT_MS / 1000}s` : compactError(error, "network error") }; }
+  finally { clearTimeout(timer); }
 }
 async function getBinanceFuturesContext(symbolInput: string): Promise<BinanceFuturesContext> {
   const symbol = `${symbolInput.toUpperCase()}USDT`; const asOf = new Date().toISOString();
@@ -1730,7 +1830,7 @@ async function fetchCatalogPageWithRetries(page: number, errors: string[]): Prom
   }
   return [];
 }
-type UniverseCatalogLoad = { rows: any[]; provenance: string; fromCache: boolean };
+type UniverseCatalogLoad = { rows: any[]; provenance: string; fromCache: boolean; catalogKind: "fresh" | "cached"; snapshotFetchedAtMs: number | null };
 async function loadUniverseCatalog(ctx: Ctx, attemptFresh = true): Promise<UniverseCatalogLoad> {
   const db = ctx.db<typeof schema>();
   let freshRows: any[] = [];
@@ -1753,9 +1853,12 @@ async function loadUniverseCatalog(ctx: Ctx, attemptFresh = true): Promise<Unive
     try {
       await db.insert(schema.catalogSnapshots).values({ fetchedAt, rowCount: decision.rows.length, catalogVersion, rowsJson: JSON.stringify(decision.rows), sourceStatus: "fresh (2 pages)" });
     } catch { /* snapshot persistence is best-effort; the fresh rows already stand */ }
-    return { rows: decision.rows, provenance: decision.provenance, fromCache: false };
+    return { rows: decision.rows, provenance: decision.provenance, fromCache: false, catalogKind: "fresh", snapshotFetchedAtMs: null };
   }
-  return { rows: decision.rows, provenance: decision.provenance, fromCache: true };
+  // Q1: a cached catalog keeps its ORIGINAL provenance timestamp
+  // (snapshotRow.fetchedAt) — it is labeled cached with its age by the
+  // caller and never re-stamped as fresh by this fetching run.
+  return { rows: decision.rows, provenance: decision.provenance, fromCache: true, catalogKind: "cached", snapshotFetchedAtMs: snapshotRow ? snapshotRow.fetchedAt.getTime() : null };
 }
 
 async function computeUniverseTiers(ctx: Ctx, persist: boolean, onChartChunk?: (done: number, total: number) => Promise<void>): Promise<{ rows: UniverseCandidate[]; runId: number | null; summary: string; sourceStatus: Array<{ source: string; status: "live" | "unavailable"; detail: string }>; universeCount: number; volumePassCount: number }> {
@@ -1785,7 +1888,7 @@ async function computeUniverseTiers(ctx: Ctx, persist: boolean, onChartChunk?: (
     if (error instanceof CatalogMissedError && previousSnapshotFresh) {
       storedTierFallback = true;
       const storedRows = previous.map((row) => ({ id: row.coinId, name: row.name, symbol: row.symbol.toLowerCase(), market_cap_rank: row.marketCapRank, current_price: row.price, total_volume: row.volume24h, ath_change_percentage: row.athChangePct, last_updated: row.sourceAsOf.toISOString() }));
-      catalog = { rows: storedRows, provenance: `stored tier snapshot (age ${((previousSnapshotAgeMs ?? 0) / 3_600_000).toFixed(1)}h); catalog MISSED`, fromCache: true };
+      catalog = { rows: storedRows, provenance: `stored tier snapshot (age ${((previousSnapshotAgeMs ?? 0) / 3_600_000).toFixed(1)}h); catalog MISSED`, fromCache: true, catalogKind: "cached", snapshotFetchedAtMs: previousTierRun ? previousTierRun.completedAt.getTime() : null };
       sourceStatus.push({ source: "CoinGecko top 500", status: "unavailable", detail: `${CATALOG_MISSED_MESSAGE}; tier refresh continued from the stored tier snapshot.` });
     } else throw error;
   }
@@ -1944,6 +2047,16 @@ const DISCOVERY_TOOL_TIMEOUT_MS = 45_000;
 // healthy run, so synthesis carries its own budget. It still sits far
 // inside the 20-minute run deadline and the synthesis stage budget.
 const DISCOVERY_SYNTHESIS_TIMEOUT_MS = 120_000;
+// Run-186 repair: one candidate's post-decision evidence load (history-cache
+// backfill + OHLC slice, including the bounded retry) gets one aggregate
+// deadline. The chained per-call transport timeouts (20s each) never bounded
+// the chain; this does. A candidate whose evidence misses the deadline is
+// deferred with the reason — the veto's fail-closed contract is unchanged.
+const DISCOVERY_CANDIDATE_EVIDENCE_TIMEOUT_MS = 60_000;
+// Run-186 repair: the veto quote poll as a whole is bounded too. Collected
+// quotes stay in the map; a coin still missing an admissible quote at the
+// deadline defers through the veto's existing UNKNOWN path.
+const DISCOVERY_VETO_POLL_DEADLINE_MS = 45_000;
 type DiscoveryLaneStatus = `active${string}` | `paused(${string})` | `shadow(${string})`;
 type DiscoveryStage = "tier-freshness" | "api-budgets" | "catalog-fetch" | "velocity" | "charts" | "hyperliquid" | "scoring" | "synthesis" | "persistence";
 type DiscoveryLease = { runId: number; leaseId: string; deadlineAt: Date };
@@ -1957,8 +2070,14 @@ async function startDiscoveryLease(ctx: Ctx, startedAt: Date): Promise<Discovery
   const now = new Date();
   const stale = await db.select().from(schema.marketDiscoveryRuns).where(sql`${schema.marketDiscoveryRuns.status} = 'running' AND ((${schema.marketDiscoveryRuns.deadlineAt} IS NOT NULL AND ${schema.marketDiscoveryRuns.deadlineAt} < ${now}) OR (${schema.marketDiscoveryRuns.deadlineAt} IS NULL AND ${schema.marketDiscoveryRuns.startedAt} < ${new Date(now.getTime() - DISCOVERY_EXECUTION_DEADLINE_MS)}))`);
   for (const row of stale) {
+    // Terminal rows are never reapable and never reopened (run-186 repair):
+    // a run already closed as a named timeout is a coverage gap forever —
+    // this guard is defense-in-depth behind the status='running' filter,
+    // enforcing the same transition table the tests pin.
+    if (!isReapableStaleDiscoveryRun({ status: row.status, deadlineAtMs: row.deadlineAt?.getTime() ?? null, startedAtMs: row.startedAt.getTime() }, now.getTime(), DISCOVERY_EXECUTION_DEADLINE_MS)) continue;
+    if (!canTransitionDiscoveryRun(row.status, "timeout")) continue;
     const checkpoint = row.lastCheckpointStage ?? "none"; const fencedLease = row.leaseId ?? "legacy-no-lease";
-    await db.update(schema.marketDiscoveryRuns).set({ status: "timeout", summary: namedTimeoutSummary(checkpoint, fencedLease), completedAt: now, lastHeartbeatAt: now }).where(eq(schema.marketDiscoveryRuns.id, row.id));
+    await db.update(schema.marketDiscoveryRuns).set({ status: "timeout", summary: namedTimeoutSummary(checkpoint, fencedLease), completedAt: now, lastHeartbeatAt: now }).where(and(eq(schema.marketDiscoveryRuns.id, row.id), eq(schema.marketDiscoveryRuns.status, "running")));
   }
   // Single-flight gate (after stale reaping, before inserting): a live run —
   // running, inside its deadline, heartbeating within 3 minutes — suppresses
@@ -2541,12 +2660,17 @@ async function fetchHyperliquidFunding(coinId: string, symbol: string, fetchedAt
   return rows;
 }
 
-async function ensureHistoryCache(ctx: Ctx, coinId: string, symbol: string, force = false): Promise<{ state: any; bars: HistoryBar[]; funding: Array<{ ts: number; value: number }> }> {
+async function ensureHistoryCache(ctx: Ctx, coinId: string, symbol: string, force = false): Promise<{ state: any; bars: HistoryBar[]; funding: Array<{ ts: number; value: number }>; cacheDegraded: boolean; cacheFreshness: ReturnType<typeof evaluateHistoryCacheFreshness> }> {
   const db = ctx.db<typeof schema>(); const upper = symbol.toUpperCase(); const def = COVERAGE.find((row) => row.coinId === coinId || row.symbol === upper); const pair = def?.pair ?? null;
   const existing = (await db.select().from(schema.historyCacheState).where(eq(schema.historyCacheState.coinId, coinId)).limit(1))[0] ?? null;
   const today = utcDay(Date.now()); const refreshedToday = existing?.lastRefreshAt instanceof Date && utcDay(existing.lastRefreshAt.getTime()) === today;
   let lastError: string | null = existing?.lastError ?? null;
   let resolvedSource: HistorySource = pair ? (def?.venue === "mexc-spot" ? "mexc" : "binance") : "coingecko";
+  // Set when THIS call's isolated metadata upsert fails: the refresh's
+  // metadata did not commit, so the returned state is degraded via
+  // stateAfterMetadataWriteFailure (prior row, unadvanced timestamp,
+  // failure visible in lastError) — never the attempted values.
+  let stateWriteFailure: { error: unknown; refreshError: string | null } | null = null;
   if (force || !refreshedToday || !existing?.barCount || Boolean(existing?.lastError)) {
     const refreshErrors: string[] = [];
     // Shared history is an independently idempotent, monotonic cache rather than
@@ -2600,16 +2724,57 @@ async function ensureHistoryCache(ctx: Ctx, coinId: string, symbol: string, forc
     const funding = await db.select().from(schema.historicalMetrics).where(eq(schema.historicalMetrics.coinId, coinId));
     if (allBars.length) resolvedSource = (allBars.at(-1)?.source ?? resolvedSource) as HistorySource;
     const stateValues = { coinId, symbol: upper, source: resolvedSource, firstBarTs: allBars[0]?.ts ?? null, lastBarTs: allBars.at(-1)?.ts ?? null, barCount: allBars.length, fundingCount: funding.length, lastRefreshAt: refreshStartedAt, lastError };
-    await db.insert(schema.historyCacheState).values(stateValues).onConflictDoUpdate({
-      target: schema.historyCacheState.coinId,
-      set: stateValues,
-      setWhere: sql`${schema.historyCacheState.lastRefreshAt} IS NULL OR ${schema.historyCacheState.lastRefreshAt} <= ${refreshStartedAt.getTime()}`,
-    });
+    // Null-id failure — ROOT CAUSE OPEN (2026-10-25, per Logan's
+    // direction): discovery runs 179 and 182 FAILED on this write; all
+    // that survives is the driver's query echo ("insert into
+    // \"history_cache_state\" (\"id\", ...) values (null, ?, ...)").
+    // A query echo containing null for an autoincrement field does NOT
+    // establish the cause: stateValues carries no id by design, the
+    // deployed table is `id integer PRIMARY KEY AUTOINCREMENT NOT NULL`
+    // (migration 0013), and no fix for the underlying error has been
+    // chosen. What was missing was CAPTURE: this upsert had no
+    // diagnostic-capture wiring, so the full underlying error was never
+    // recorded (write_failure_captures held zero rows for 179/182). The
+    // upsert is now captured VERBATIM on failure — message, stack and
+    // cause chain via recordWriteFailure — and isolated, so the next
+    // recurrence lands the actual database error in
+    // write_failure_captures (readable via getWriteFailureCaptures) and
+    // the cause can be demonstrated before any fix is picked. No
+    // arbitrary id is generated anywhere.
+    //
+    // Isolation optionality — VERIFIED, with its boundary: the DATA
+    // (bars/metrics) commits independently and immutably, so a metadata
+    // failure cannot falsify it. The METADATA is the freshness record
+    // and is NOT optional for freshness/eligibility: on failure the
+    // returned state is the prior committed row degraded by
+    // stateAfterMetadataWriteFailure — lastRefreshAt NOT advanced,
+    // lastError carrying the failure, metadataWriteFailed set — and
+    // evaluateHistoryCacheFreshness (the single freshness evaluator)
+    // never reads such a state as fresh. So a failed write cannot make
+    // stale inputs appear fresh, cannot clear a recorded error, and
+    // cannot mark this refresh complete: refreshedToday stays false on
+    // the prior row, so the next call retries the refresh AND the write.
+    // Callers that need freshness (history-dependent eligibility) must
+    // consult cacheFreshness/cacheDegraded on this return value.
+    try {
+      await db.insert(schema.historyCacheState).values(stateValues).onConflictDoUpdate({
+        target: schema.historyCacheState.coinId,
+        set: stateValues,
+        setWhere: sql`${schema.historyCacheState.lastRefreshAt} IS NULL OR ${schema.historyCacheState.lastRefreshAt} <= ${refreshStartedAt.getTime()}`,
+      });
+    } catch (stateWriteError) {
+      stateWriteFailure = { error: stateWriteError, refreshError: lastError };
+      await recordWriteFailure(ctx, { lane: "history_cache", tableName: "history_cache_state", statementKind: "upsert", attemptedKey: coinId, error: stateWriteError, context: { stage: "cache_state_upsert", symbol: upper, source: resolvedSource, barCount: allBars.length } });
+    }
   }
   const bars = await db.select().from(schema.historicalDailyBars).where(eq(schema.historicalDailyBars.coinId, coinId)).orderBy(asc(schema.historicalDailyBars.ts));
   const funding = await db.select().from(schema.historicalMetrics).where(eq(schema.historicalMetrics.coinId, coinId)).orderBy(asc(schema.historicalMetrics.ts));
-  const state = (await db.select().from(schema.historyCacheState).where(eq(schema.historyCacheState.coinId, coinId)).limit(1))[0] ?? null;
-  return { state, bars: bars.map((row) => ({ ...row, source: row.source as HistorySource, fetchedAt: row.fetchedAt })), funding: funding.map((row) => ({ ts: row.ts, value: row.value })) };
+  const committedState = (await db.select().from(schema.historyCacheState).where(eq(schema.historyCacheState.coinId, coinId)).limit(1))[0] ?? null;
+  const state: any = stateWriteFailure
+    ? stateAfterMetadataWriteFailure(committedState, stateWriteFailure.refreshError, stateWriteFailure.error instanceof Error ? stateWriteFailure.error.name : typeof stateWriteFailure.error)
+    : committedState;
+  const cacheFreshness = evaluateHistoryCacheFreshness(state, Date.now());
+  return { state, bars: bars.map((row) => ({ ...row, source: row.source as HistorySource, fetchedAt: row.fetchedAt })), funding: funding.map((row) => ({ ts: row.ts, value: row.value })), cacheDegraded: !cacheFreshness.fresh, cacheFreshness };
 }
 // VETO-1 (2026-10-15, revised per Logan item 6): returns the pre-decision
 // signal-day candle (CONTEXT ONLY — never a veto) plus the post-decision
@@ -3808,7 +3973,7 @@ async function collectPhase2AValidationBars(ctx: Ctx, refresh: boolean): Promise
   const bars: ResearchBar[] = []; const sourceRuns: Array<{ instrumentId: string; symbol: string; cacheSource: string | null; rows: number; error: string | null }> = [];
   for (const coverage of COVERAGE) {
     const member = memberBySymbol.get(coverage.symbol); if (!member) continue;
-    const cached = await ensureHistoryCache(ctx, coverage.coinId, coverage.symbol, refresh).catch((error) => ({ state: null, bars: [] as HistoryBar[], funding: [], error: compactError(error, "History cache unavailable") }));
+    const cached = await ensureHistoryCache(ctx, coverage.coinId, coverage.symbol, refresh).catch((error) => ({ state: null, bars: [] as HistoryBar[], funding: [], cacheDegraded: true, cacheFreshness: { fresh: false as const, state: "unavailable" as const, reason: "History cache read failed; freshness unproven." }, error: compactError(error, "History cache unavailable") }));
     const accepted = cached.bars.flatMap((row): ResearchBar[] => {
       const open = finite(row.open); const high = finite(row.high); const low = finite(row.low); const close = finite(row.close); const volume = finite(row.volume); const retrievedAt = row.fetchedAt instanceof Date ? row.fetchedAt.getTime() : Number(row.fetchedAt);
       if (row.source !== "binance" || open === null || high === null || low === null || close === null || volume === null || !Number.isFinite(retrievedAt) || row.ts + PHASE2A_DAY_MS + BAR_AVAILABILITY_LAG_MS >= Date.parse(`${FROZEN_CRYPTO_SPEC.dateRange.holdoutStart}T00:00:00.000Z`)) return [];
@@ -3867,7 +4032,44 @@ function riskStatusFromConcentration(_holderCount: number | null, topShare: numb
 // contract and settlement evaluator are unchanged. The v2.1.5, v2.1.4,
 // v2.1.3, v2.1.2 and v2.1.1 freeze records and their candidate cohorts
 // remain preserved as comparison arms.
-const PAPER_FREEZE_VERSION = "paper-pilot-v2.1.6";
+// Freeze paper-pilot-v2.1.7 (2026-10-26): ACTIVATION of the bounded
+// Binance Spot admission pilot approved by Logan on 2026-10-25, now
+// that the repair build's preflight has passed (discovery certification
+// "complete"→"completed" normalization at the consumer boundary;
+// notification 621 resolved as coverage-gap/expired-unissued linked to
+// run 191; the live workload rehearsal with production writes disabled
+// at 22 evaluated / 6 deferred in 28,903 ms total with 4 ms pure
+// scoring against the 120,000 ms budget, 57 external calls counted
+// separately from 28 stored reads; the paper-path freshness gate
+// unit-tested in isolation for missing/future/stale/boundary timestamps
+// with cache preservation; the "Stored evidence reads" label shipped).
+// The SOLE delta from v2.1.6 is the admission rule: discovery full
+// scoring gains a third lane alongside saved-T1 and the 48H velocity
+// lane — an asset in the frozen pilot universe (PILOT_V217_BINANCE_
+// UNIVERSE in ./pilot-v217: the 28 verified Binance Spot instruments
+// present in the catalog at verification; BEAMX absent, so NOT in the
+// set — the verified count is 28, never the provisional target of 29)
+// that is present in the run's catalog enters full scoring. Venue
+// mappings (COVERAGE) are UNCHANGED by this freeze: the quant-network
+// MEXC Spot mapping added 2026-10-26 is a separate versioned mapping
+// change and is NOT part of the Binance pilot admission set, and grass
+// was not mapped. Source-age rules, the production score threshold
+// (≥ 60, ≤ 1 severe fail among the first five dimensions), severe-fail
+// treatment, first-print selection, the 900,000 ms receipt deadline,
+// the 50 bps drift bound, frozen-level validation, the entry contract
+// and the settlement evaluator are all UNCHANGED — nothing here was
+// altered to produce signals. Prospective only: no historical
+// candidate, handoff, or decision rows are re-stamped, re-decided, or
+// rescored, and no expired window is reopened. Every run under this
+// freeze records the admission version and the actual pilot universe
+// (market_discovery_runs.admission_version / pilot_universe_json,
+// migration 0072); the universe does not change mid-review. The first
+// three natural runs after activation are reviewed under
+// PILOT_V217_REVIEW_PLAN; first-entry enrollment and settlement are
+// post-activation checks, not activation prerequisites. Rollback point:
+// paper-pilot-v2.1.6, whose freeze record and candidate cohorts remain
+// preserved as the comparison arm.
+const PAPER_FREEZE_VERSION = "paper-pilot-v2.1.7";
 const PAPER_ENTRY_CONTRACT_VERSION = "actionable-entry-v1";
 const PAPER_ENTRY_WINDOW_MS = 15 * 60_000;
 // First-print receipt bound (Logan, 2026-10-20): widened from 300000ms
@@ -3888,6 +4090,7 @@ const PAPER_MAX_OBSERVATION_AGE_BY_FREEZE: Record<string, number> = {
   "paper-pilot-v2.1.4": PAPER_MAX_OBSERVATION_AGE_MS,
   "paper-pilot-v2.1.5": PAPER_MAX_OBSERVATION_AGE_MS,
   "paper-pilot-v2.1.6": PAPER_MAX_OBSERVATION_AGE_MS,
+  "paper-pilot-v2.1.7": PAPER_MAX_OBSERVATION_AGE_MS,
 };
 function paperMaxObservationAgeMs(freezeVersion: string): number {
   return PAPER_MAX_OBSERVATION_AGE_BY_FREEZE[freezeVersion] ?? PAPER_MAX_OBSERVATION_AGE_MS;
@@ -3900,6 +4103,7 @@ const PAPER_PRODUCTION_SPEC = {
   dimensions: ["Trend", "Momentum", "Volatility", "Volume", "Positioning / funding", "Network fundamentals", "Supply overhang"],
   direction: "model-selected discovery direction from decision-time inputs; never supplied by the paper action caller",
   qualification: "directional, non-low evidence tier, complete dimension ledger, post-freeze decision evidence",
+  admission: { version: PILOT_V217_VERSION, activatedAt: PILOT_V217_ACTIVATED_AT, lanes: ["saved-T1 (unchanged)", "48H velocity ≥ +15% non-stablecoin (unchanged)", "binance-spot-pilot (new in v2.1.7)"], pilotUniverse: PILOT_V217_BINANCE_UNIVERSE.map((entry) => ({ coinId: entry.coinId, symbol: entry.symbol, instrument: entry.instrument })), pilotUniverseCount: PILOT_V217_BINANCE_UNIVERSE.length, pilotExclusions: PILOT_V217_EXCLUSIONS.map((row) => `${row.symbol}: ${row.reason}`), rule: "A frozen-universe asset present in the run's catalog enters full scoring alongside T1 and velocity; thresholds, gates, source-age rules, severe-fail treatment, first-print selection, receipt deadline, drift bound and frozen-level validation are unchanged from v2.1.6. Every admitted candidate is evaluated or explicitly deferred; the universe is recorded on every run and never changes mid-review." },
   entry: { contract: PAPER_ENTRY_CONTRACT_VERSION, venue: "Binance Spot", quote: "USDT", windowMs: PAPER_ENTRY_WINDOW_MS, maxObservationAgeMs: PAPER_MAX_OBSERVATION_AGE_MS, futureSkewMs: PAPER_FUTURE_SKEW_MS, driftBps: PAPER_DRIFT_BPS },
   evaluation: { primary: "target-before-stop", horizon: "30 elapsed days", costsBps: 18, ambiguity: "same-bar double touch or boundary-straddling evidence remains unknown" },
 } as const;
@@ -3912,7 +4116,7 @@ async function ensurePaperPilotFreeze(ctx: Ctx): Promise<PaperFreeze> {
   const existing = (await db.select().from(schema.methodologyFreezes).where(eq(schema.methodologyFreezes.version, PAPER_FREEZE_VERSION)).limit(1))[0];
   const productionHash = await sha256Hex(stableJson(PAPER_PRODUCTION_SPEC));
   const challengerHash = await sha256Hex(stableJson(PAPER_CHALLENGER_SPEC));
-  const specJson = stableJson({ version: PAPER_FREEZE_VERSION, production: PAPER_PRODUCTION_SPEC, challenger: PAPER_CHALLENGER_SPEC, productionHash, challengerHash, collectionPlan: PAPER_COLLECTION_PLAN, supersedes: "paper-pilot-v2.1.5" });
+  const specJson = stableJson({ version: PAPER_FREEZE_VERSION, production: PAPER_PRODUCTION_SPEC, challenger: PAPER_CHALLENGER_SPEC, productionHash, challengerHash, collectionPlan: PAPER_COLLECTION_PLAN, supersedes: PILOT_V217_SUPERSEDES });
   const hash = await sha256Hex(specJson);
   if (existing) return { version: existing.version, hash: existing.versionHash, frozenAt: existing.frozenAt, productionHash, challengerHash };
   const frozenAt = new Date();
@@ -3935,6 +4139,8 @@ type PaperHandoffCandidateInput = {
   coinId: string; name: string; symbol: string; direction: "long" | "short" | "watch";
   price: number | null; invalidationLevel: number | null; sourceAsOf: Date | null; capturedAt: Date;
   dimensions: FlagDimension[]; suppressionReason: string | null; discoverySignalId: number | null;
+  // paper-pilot-v2.1.7: admission lane(s) recorded as handoff evidence.
+  admissionLane?: string;
   stage: string; reason: string;
   // Additive evidence capture (migration 0067): discovery-time drift
   // reference capture JSON, or null when no capture was attempted.
@@ -3997,7 +4203,7 @@ async function persistPaperHandoffSnapshot(ctx: Ctx, args: { discoveryRunId: num
       if (eligible) eligibleCount++; else rejectedCount++;
       reasons[reasonCode] = (reasons[reasonCode] ?? 0) + 1;
       const candidateKey = `${PAPER_FREEZE_VERSION}:handoff:${args.discoveryRunId}:${item.coinId}`;
-      const evidence = candidate ? { coinId: candidate.coinId, name: candidate.name, symbol: candidate.symbol, direction: candidate.direction, price: candidate.price, invalidationLevel: candidate.invalidationLevel, sourceAsOf: candidate.sourceAsOf?.toISOString() ?? null, capturedAt: candidate.capturedAt.toISOString(), suppressionReasonFromLegacyPath: candidate.suppressionReason, handoffCompletedAt: args.completedAt.toISOString(), originalScan: item } : { coinId: item.coinId, symbol: item.symbol, handoffCompletedAt: args.completedAt.toISOString(), originalScan: item };
+      const evidence = candidate ? { coinId: candidate.coinId, name: candidate.name, symbol: candidate.symbol, direction: candidate.direction, price: candidate.price, invalidationLevel: candidate.invalidationLevel, sourceAsOf: candidate.sourceAsOf?.toISOString() ?? null, capturedAt: candidate.capturedAt.toISOString(), suppressionReasonFromLegacyPath: candidate.suppressionReason, admissionLane: candidate.admissionLane ?? null, admissionVersion: PAPER_FREEZE_VERSION, handoffCompletedAt: args.completedAt.toISOString(), originalScan: item } : { coinId: item.coinId, symbol: item.symbol, admissionVersion: PAPER_FREEZE_VERSION, handoffCompletedAt: args.completedAt.toISOString(), originalScan: item };
       await db.insert(schema.paperHandoffCandidates).values({ handoffRunId: created.id, discoveryRunId: args.discoveryRunId, discoverySignalId: candidate?.discoverySignalId ?? null, candidateKey, coinId: item.coinId, symbol: item.symbol, direction: candidate?.direction ?? "unknown", stage: item.stage, outcome: eligible ? "eligible" : item.status === "failed" ? "failed" : "rejected", reasonCode, reason, preLegacyFilter: true, factorLedgerJson: stableJson(candidate?.dimensions ?? []), decisionEvidenceJson: stableJson(evidence), driftReferenceCaptureJson: candidate?.driftReferenceCaptureJson ?? null, createdAt: now }).onConflictDoNothing();
     }
     await db.update(schema.paperHandoffRuns).set({ status: "complete", discoveredCount: args.scanItems.length, scoredCount: args.candidates.length, directionalCount, eligibleCount, rejectedCount, reasonCountsJson: stableJson(reasons), completedAt: new Date() }).where(eq(schema.paperHandoffRuns.id, created.id));
@@ -4010,15 +4216,90 @@ async function persistPaperHandoffSnapshot(ctx: Ctx, args: { discoveryRunId: num
   }
 }
 
-async function latestCompletedPaperHandoff(ctx: Ctx): Promise<typeof schema.paperHandoffRuns.$inferSelect | null> {
+/**
+ * Every completed handoff, oldest first (2026-10-25 missed-handoff
+ * repair). The previous selection returned ONLY the handoff linked to
+ * the latest discovery run with status complete/degraded. Discovery run
+ * 184 persisted handoff 94 complete at 12:58:27Z and then timed out in a
+ * later stage (fenced "timeout" at 14:55:19Z), so selection kept
+ * returning handoff 93 for checks 885–908 while 94 sat eligible and
+ * unprocessed — and when run 185 completed, selection jumped straight
+ * to handoff 95, leapfrogging 94 permanently. A completed handoff row is
+ * the durable unit discovery committed: its candidate evidence is frozen
+ * at persist time and the intake sync already treats every completed
+ * handoff as processable, so the discovery run's later status must not
+ * uncommit it. Selection and coverage accounting now operate over this
+ * full list; the cycle accounts for UNEXPIRED handoffs first, ordered
+ * by earliest entry expiry, and dispositions expired handoffs
+ * separately in a bounded batch (see issuance-work-check's
+ * planHandoffAccounting) so historical cleanup can never starve current
+ * issuance.
+ */
+async function completedPaperHandoffs(ctx: Ctx): Promise<Array<typeof schema.paperHandoffRuns.$inferSelect>> {
   const db = ctx.db<typeof schema>();
-  // Ordering guard: the paper cycle may consume only the handoff linked to the
-  // latest discovery run that finished successfully. Falling back to an older
-  // completed handoff would let the paper cycle race ahead of a newer discovery
-  // run whose handoff is still building or failed.
-  const latestDiscovery = (await db.select({ id: schema.marketDiscoveryRuns.id }).from(schema.marketDiscoveryRuns).where(inArray(schema.marketDiscoveryRuns.status, ["complete", "degraded"])).orderBy(desc(schema.marketDiscoveryRuns.id)).limit(1))[0];
-  if (!latestDiscovery) return null;
-  return (await db.select().from(schema.paperHandoffRuns).where(and(eq(schema.paperHandoffRuns.discoveryRunId, latestDiscovery.id), eq(schema.paperHandoffRuns.status, "complete"))).limit(1))[0] ?? null;
+  return db.select().from(schema.paperHandoffRuns).where(eq(schema.paperHandoffRuns.status, "complete")).orderBy(asc(schema.paperHandoffRuns.id));
+}
+
+async function latestCompletedPaperHandoff(ctx: Ctx): Promise<typeof schema.paperHandoffRuns.$inferSelect | null> {
+  const handoffs = await completedPaperHandoffs(ctx);
+  return handoffs[handoffs.length - 1] ?? null;
+}
+
+/** Committed processing state for EVERY completed handoff, in the same
+ * oldest-first order. Two aggregate reads (latest run per discovery run,
+ * intake counts grouped by handoff+status) — never one query pair per
+ * handoff — so coverage accounting stays bounded as handoffs accumulate. */
+async function loadAllHandoffProcessingStates(ctx: Ctx, handoffs: Array<typeof schema.paperHandoffRuns.$inferSelect>): Promise<HandoffProcessingState[]> {
+  if (!handoffs.length) return [];
+  const db = ctx.db<typeof schema>();
+  const discoveryRunIds = [...new Set(handoffs.map((row) => row.discoveryRunId))];
+  const runRows = await db.select().from(schema.paperSignalRuns).where(inArray(schema.paperSignalRuns.discoveryRunId, discoveryRunIds)).orderBy(desc(schema.paperSignalRuns.id));
+  const latestRunByDiscovery = new Map<number, typeof schema.paperSignalRuns.$inferSelect>();
+  for (const run of runRows) {
+    if (run.discoveryRunId !== null && !latestRunByDiscovery.has(run.discoveryRunId)) latestRunByDiscovery.set(run.discoveryRunId, run);
+  }
+  const statusRows = await db.select({ handoffRunId: schema.paperCandidateIntake.handoffRunId, status: schema.paperCandidateIntake.status, count: sql<number>`count(*)` }).from(schema.paperCandidateIntake).where(inArray(schema.paperCandidateIntake.handoffRunId, handoffs.map((row) => row.id))).groupBy(schema.paperCandidateIntake.handoffRunId, schema.paperCandidateIntake.status);
+  const intakeByHandoff = new Map<number, { total: number; terminal: number; pending: number }>();
+  for (const row of statusRows) {
+    const summary = summarizeIntakeStatuses([{ status: row.status, count: Number(row.count) }], (status) => isTerminalIntakeStatus(status as Parameters<typeof isTerminalIntakeStatus>[0]));
+    const existing = intakeByHandoff.get(row.handoffRunId) ?? { total: 0, terminal: 0, pending: 0 };
+    existing.total += summary.total; existing.terminal += summary.terminal; existing.pending += summary.pending;
+    intakeByHandoff.set(row.handoffRunId, existing);
+  }
+  // Pending-window expiry per handoff (starvation prevention): earliest /
+  // latest entryExpiresAt over NON-terminal intake rows — the urgency key
+  // and the fully-expired test for planHandoffAccounting.
+  const expiryRows = await db.select({ handoffRunId: schema.paperCandidateIntake.handoffRunId, earliest: sql<number | null>`min(${schema.paperCandidateIntake.entryExpiresAt})`, latest: sql<number | null>`max(${schema.paperCandidateIntake.entryExpiresAt})` }).from(schema.paperCandidateIntake).where(and(inArray(schema.paperCandidateIntake.handoffRunId, handoffs.map((row) => row.id)), inArray(schema.paperCandidateIntake.status, ["queued", "processing", "retryable_failure", "overflow_deferred"]))).groupBy(schema.paperCandidateIntake.handoffRunId);
+  const expiryByHandoff = new Map<number, { earliest: string | null; latest: string | null }>();
+  for (const row of expiryRows) {
+    expiryByHandoff.set(row.handoffRunId, {
+      earliest: row.earliest !== null && row.earliest !== undefined ? new Date(Number(row.earliest)).toISOString() : null,
+      latest: row.latest !== null && row.latest !== undefined ? new Date(Number(row.latest)).toISOString() : null,
+    });
+  }
+  return handoffs.map((handoff) => {
+    const latestRun = latestRunByDiscovery.get(handoff.discoveryRunId) ?? null;
+    const intake = intakeByHandoff.get(handoff.id) ?? { total: 0, terminal: 0, pending: 0 };
+    let expiry = expiryByHandoff.get(handoff.id) ?? { earliest: null, latest: null };
+    // No intake rows yet but eligible candidates exist: the window is the
+    // handoff's own completion plus the frozen 15-minute entry window —
+    // derived from committed handoff evidence, never invented.
+    if (!expiry.earliest && intake.total === 0 && handoff.eligibleCount > 0 && handoff.completedAt) {
+      const derived = new Date(handoff.completedAt.getTime() + PAPER_ENTRY_WINDOW_MS).toISOString();
+      expiry = { earliest: derived, latest: derived };
+    }
+    return {
+      handoffId: handoff.id,
+      discoveryRunId: handoff.discoveryRunId,
+      eligibleCount: handoff.eligibleCount,
+      latestRun: latestRun ? { id: latestRun.id, status: latestRun.status, completedAt: latestRun.completedAt?.toISOString() ?? null } : null,
+      intakeTotal: intake.total,
+      intakeTerminal: intake.terminal,
+      intakePending: intake.pending,
+      earliestEntryExpiresAt: expiry.earliest,
+      latestEntryExpiresAt: expiry.latest,
+    };
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -4036,6 +4317,15 @@ async function loadHandoffProcessingState(ctx: Ctx, handoff: typeof schema.paper
   const latestRun = (await db.select().from(schema.paperSignalRuns).where(eq(schema.paperSignalRuns.discoveryRunId, handoff.discoveryRunId)).orderBy(desc(schema.paperSignalRuns.id)).limit(1))[0] ?? null;
   const statusRows = await db.select({ status: schema.paperCandidateIntake.status, count: sql<number>`count(*)` }).from(schema.paperCandidateIntake).where(eq(schema.paperCandidateIntake.handoffRunId, handoff.id)).groupBy(schema.paperCandidateIntake.status);
   const intake = summarizeIntakeStatuses(statusRows.map((row) => ({ status: row.status, count: Number(row.count) })), (status) => isTerminalIntakeStatus(status as Parameters<typeof isTerminalIntakeStatus>[0]));
+  const expiryRows = await db.select({ earliest: sql<number | null>`min(${schema.paperCandidateIntake.entryExpiresAt})`, latest: sql<number | null>`max(${schema.paperCandidateIntake.entryExpiresAt})` }).from(schema.paperCandidateIntake).where(and(eq(schema.paperCandidateIntake.handoffRunId, handoff.id), inArray(schema.paperCandidateIntake.status, ["queued", "processing", "retryable_failure", "overflow_deferred"])));
+  const expiryRow = expiryRows[0] ?? null;
+  let earliestEntryExpiresAt = expiryRow?.earliest !== null && expiryRow?.earliest !== undefined ? new Date(Number(expiryRow.earliest)).toISOString() : null;
+  let latestEntryExpiresAt = expiryRow?.latest !== null && expiryRow?.latest !== undefined ? new Date(Number(expiryRow.latest)).toISOString() : null;
+  if (!earliestEntryExpiresAt && intake.total === 0 && handoff.eligibleCount > 0 && handoff.completedAt) {
+    const derived = new Date(handoff.completedAt.getTime() + PAPER_ENTRY_WINDOW_MS).toISOString();
+    earliestEntryExpiresAt = derived;
+    latestEntryExpiresAt = derived;
+  }
   return {
     handoffId: handoff.id,
     discoveryRunId: handoff.discoveryRunId,
@@ -4044,13 +4334,15 @@ async function loadHandoffProcessingState(ctx: Ctx, handoff: typeof schema.paper
     intakeTotal: intake.total,
     intakeTerminal: intake.terminal,
     intakePending: intake.pending,
+    earliestEntryExpiresAt,
+    latestEntryExpiresAt,
   };
 }
 
 async function recordIssuanceWorkCheck(ctx: Ctx, args: {
   handoff: typeof schema.paperHandoffRuns.$inferSelect | null;
   trigger: "manual" | "scheduled";
-  decision: IssuanceWorkDecision["kind"] | "no_handoff" | "coalesced" | "monitoring_hold";
+  decision: IssuanceWorkDecision["kind"] | "no_handoff" | "coalesced" | "monitoring_hold" | "coverage_gap_closed";
   resultStatus: string;
   state: HandoffProcessingState | null;
   resultingRunId: number | null;
@@ -4145,6 +4437,98 @@ async function skippedPaperCycleResponse(ctx: Ctx, handoff: typeof schema.paperH
     results, delivery: PAPER_DELIVERY_ARCHITECTURE, sourceMapping: PAPER_VERSION_MAPPING, summary,
     workCheck: { decision: decision.kind, handoffId: handoff.id, priorRunId: priorRun.id, priorRunStatus: priorRun.status, intakeTotal: state.intakeTotal, intakeTerminal: state.intakeTerminal, intakePending: state.intakePending, reason: decision.reason },
   };
+}
+
+/**
+ * Read-only projection for a handoff that is fully accounted for WITHOUT
+ * a paper-cycle run (coverage-gap closure: every intake row dispositioned
+ * terminal outside a cycle). No run row is created, no intake is synced,
+ * no candidate is reprocessed — the results are the committed intake
+ * dispositions themselves. This is the response the bounded check returns
+ * instead of forcing a redundant full pass over expired candidates.
+ */
+async function dispositionedPaperCycleResponse(ctx: Ctx, handoff: typeof schema.paperHandoffRuns.$inferSelect, state: HandoffProcessingState, decision: IssuanceWorkDecision): Promise<PaperCycleResponse> {
+  const db = ctx.db<typeof schema>();
+  const freeze = await ensurePaperPilotFreeze(ctx);
+  const handoffReasonRows = await db.select().from(schema.paperHandoffCandidates).where(eq(schema.paperHandoffCandidates.handoffRunId, handoff.id)).orderBy(asc(schema.paperHandoffCandidates.id)).limit(1000);
+  const preFilterReasons = handoffReasonRows.map((row) => ({ candidateKey: row.candidateKey, symbol: row.symbol, direction: row.direction, outcome: row.outcome, stage: row.stage, reasonCode: row.reasonCode, reason: row.reason, preLegacyFilter: row.preLegacyFilter }));
+  const handoffCandidateById = new Map(handoffReasonRows.filter((row) => row.outcome === "eligible").map((row) => [row.id, row]));
+  const finalIntake = await db.select().from(schema.paperCandidateIntake).where(eq(schema.paperCandidateIntake.handoffRunId, handoff.id)).orderBy(asc(schema.paperCandidateIntake.batchOrdinal));
+  const results: PaperCycleResultRow[] = finalIntake.map((row) => ({
+    candidateKey: row.candidateKey,
+    symbol: handoffCandidateById.get(row.handoffCandidateId)?.symbol ?? "UNKNOWN",
+    state: row.status === "processing_expired" ? "expired" : row.status === "missed_processing" ? "missed_processing" : row.outcome ?? row.status,
+    reasonCode: row.reasonCode,
+    reason: row.reason,
+    paperSignalId: null,
+  }));
+  const missed = results.filter((row) => row.state === "missed_processing").length;
+  const abstained = results.filter((row) => ["abstained", "expired", "invalidated", "processing-expired"].includes(row.state)).length;
+  const summary = `Issuance work check — SKIPPED: ${decision.reason} This check created no run row, synced no intake, wrote no gate audit and fetched no venue data; the results below are the committed intake dispositions (${missed} missed-processing, ${abstained} abstained/expired/invalidated). No retroactive position was created.`;
+  return {
+    ok: true, runId: null, status: "complete", handlerVersion: ISSUANCE_HANDLER_VERSION,
+    freeze: { ...freeze, frozenAt: freeze.frozenAt.toISOString() },
+    handoff, preFilterReasons,
+    counts: { ...cycleCountsFromHandoff(handoff), considered: results.length, issued: 0, abstained, missed, deferred: 0 },
+    results, delivery: PAPER_DELIVERY_ARCHITECTURE, sourceMapping: PAPER_VERSION_MAPPING, summary,
+    workCheck: { decision: decision.kind, handoffId: handoff.id, priorRunId: null, priorRunStatus: null, intakeTotal: state.intakeTotal, intakeTerminal: state.intakeTerminal, intakePending: state.intakePending, reason: decision.reason },
+  };
+}
+
+/**
+ * Expired-handoff disposition WITHOUT entries (shared by the manual
+ * closeMissedHandoffCoverageGap action and the issuance cycle's
+ * starvation-prevention lane). Guards: the handoff must be complete,
+ * never processed by a cycle (no paper-cycle run, no paper candidates),
+ * not already coverage-gap closed, and EVERY eligible candidate's
+ * original entry window must have expired. On success every
+ * non-terminal intake row becomes missed_processing
+ * (coverage_gap_missed_handoff), ONE append-only coverage_gap_closed
+ * work check records it, and NO paper candidate, paper signal, run row
+ * or retroactive position is created. Original intake events are
+ * preserved; discovery notification rows are never rewritten (their
+ * displayed state is read-derived from intake). Idempotent.
+ */
+type ExpiredHandoffDispositionResult =
+  | { ok: true; alreadyClosed: boolean; dispositioned: Array<{ intakeId: number; candidateKey: string; symbol: string; status: string; reasonCode: string | null }>; notifications: Array<{ id: number; coinId: string; symbol: string }>; workCheckRecorded: boolean; reason: string }
+  | { ok: false; error: string };
+
+async function dispositionExpiredHandoff(ctx: Ctx, handoff: PaperHandoffRunRow, trigger: "manual" | "scheduled", viaCycle: boolean): Promise<ExpiredHandoffDispositionResult> {
+  const db = ctx.db<typeof schema>();
+  if (handoff.status !== "complete") return { ok: false, error: `Handoff ${handoff.id} is "${handoff.status}", not complete; only a completed handoff can be dispositioned.` };
+  const notifications = await db.select({ id: schema.discoveryInformationalNotifications.id, coinId: schema.discoveryInformationalNotifications.coinId, symbol: schema.discoveryInformationalNotifications.symbol }).from(schema.discoveryInformationalNotifications).where(eq(schema.discoveryInformationalNotifications.discoveryRunId, handoff.discoveryRunId)).orderBy(asc(schema.discoveryInformationalNotifications.id));
+  const priorClosure = (await db.select().from(schema.paperIssuanceWorkChecks).where(and(eq(schema.paperIssuanceWorkChecks.handoffRunId, handoff.id), eq(schema.paperIssuanceWorkChecks.decision, "coverage_gap_closed"))).limit(1))[0] ?? null;
+  if (priorClosure) return { ok: true, alreadyClosed: true, dispositioned: [], notifications, workCheckRecorded: true, reason: `Handoff ${handoff.id} was already coverage-gap closed by work check ${priorClosure.id}; no further writes were made.` };
+  const existingRun = (await db.select().from(schema.paperSignalRuns).where(eq(schema.paperSignalRuns.discoveryRunId, handoff.discoveryRunId)).limit(1))[0] ?? null;
+  if (existingRun) return { ok: false, error: `Handoff ${handoff.id} has paper-cycle run ${existingRun.id}; it was processed by a cycle and is not a missed handoff.` };
+  const paperCandidates = await db.select({ id: schema.paperSignalCandidates.id }).from(schema.paperSignalCandidates).where(eq(schema.paperSignalCandidates.discoveryRunId, handoff.discoveryRunId));
+  if (paperCandidates.length) return { ok: false, error: `Handoff ${handoff.id} has ${paperCandidates.length} persisted paper candidates; it was processed and is not a missed handoff.` };
+  const now = new Date();
+  const eligibleRows = await db.select().from(schema.paperHandoffCandidates).where(and(eq(schema.paperHandoffCandidates.handoffRunId, handoff.id), eq(schema.paperHandoffCandidates.outcome, "eligible"))).orderBy(asc(schema.paperHandoffCandidates.id));
+  for (const row of eligibleRows) {
+    const window = paperCandidateWindow(row, handoff, now);
+    if (window.entryExpiresAt.getTime() > now.getTime()) return { ok: false, error: `Candidate ${row.symbol} on handoff ${handoff.id} is still inside its original entry window (expires ${window.entryExpiresAt.toISOString()}); the cycle must process it normally — expired disposition only applies once every window has expired.` };
+  }
+  const discoveryRun = (await db.select({ status: schema.marketDiscoveryRuns.status }).from(schema.marketDiscoveryRuns).where(eq(schema.marketDiscoveryRuns.id, handoff.discoveryRunId)).limit(1))[0] ?? null;
+  const symbolByCandidateId = new Map(eligibleRows.map((row) => [row.id, row.symbol]));
+  const expiryByCandidateId = new Map(eligibleRows.map((row) => [row.id, paperCandidateWindow(row, handoff, now).entryExpiresAt]));
+  const intakeRows = await db.select().from(schema.paperCandidateIntake).where(eq(schema.paperCandidateIntake.handoffRunId, handoff.id)).orderBy(asc(schema.paperCandidateIntake.id));
+  const dispositioned: Array<{ intakeId: number; candidateKey: string; symbol: string; status: string; reasonCode: string | null }> = [];
+  for (const row of intakeRows) {
+    if (isTerminalIntakeStatus(row.status)) continue;
+    const entryExpiresAt = expiryByCandidateId.get(row.handoffCandidateId) ?? null;
+    const laneNote = viaCycle
+      ? `Expired-handoff disposition (starvation-prevention lane): handoff ${handoff.id} (discovery run ${handoff.discoveryRunId}) completed ${handoff.completedAt?.toISOString() ?? "at an unrecorded time"} with this candidate eligible, but no issuance cycle ever selected it; the cycle now accounts for it from REMAINING capacity after unexpired handoffs, in a bounded batch, so historical cleanup never starves current issuance.`
+      : `Coverage-gap closure (missed-handoff repair): handoff ${handoff.id} (discovery run ${handoff.discoveryRunId}) completed ${handoff.completedAt?.toISOString() ?? "at an unrecorded time"} with this candidate eligible, but no issuance cycle ever selected it — selection only returned the handoff of the latest complete/degraded discovery run, discovery run ${handoff.discoveryRunId} ended "${discoveryRun?.status ?? "unknown"}" after its handoff persisted, and a newer completed handoff then leapfrogged it.`;
+    const reason = `${laneNote} Its original entry window expired ${entryExpiresAt ? entryExpiresAt.toISOString() : "before this disposition"}; it stays expired — no retroactive position, no paper candidate and no cycle run were created. Dispositioned missed_processing so the handoff is accounted for in coverage.`;
+    await db.update(schema.paperCandidateIntake).set({ status: "missed_processing", outcome: "missed-processing", reasonCode: "coverage_gap_missed_handoff", reason, claimedBy: null, leaseExpiresAt: null, completedAt: now, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.id, row.id), eq(schema.paperCandidateIntake.status, row.status)));
+    dispositioned.push({ intakeId: row.id, candidateKey: row.candidateKey, symbol: symbolByCandidateId.get(row.handoffCandidateId) ?? "UNKNOWN", status: "missed_processing", reasonCode: "coverage_gap_missed_handoff" });
+  }
+  const state = await loadHandoffProcessingState(ctx, handoff);
+  const reason = `Coverage-gap disposition appended for missed handoff ${handoff.id} (discovery run ${handoff.discoveryRunId}, discovery status "${discoveryRun?.status ?? "unknown"}"): ${dispositioned.length} non-terminal intake row(s) dispositioned missed_processing (reason code coverage_gap_missed_handoff); ${state.intakeTerminal}/${state.intakeTotal} intake rows now terminal. The handoff stays expired — no paper candidate, no paper signal, no run row, no retroactive position. Discovery notifications for this run (${notifications.map((row) => row.id).join(", ") || "none"}) keep their original stored rows; their read-derived state now resolves from the terminal intake disposition instead of AWAITING_ISSUANCE.`;
+  await recordIssuanceWorkCheck(ctx, { handoff, trigger, decision: "coverage_gap_closed", resultStatus: "closed_expired", state, resultingRunId: null, reason });
+  const recorded = (await db.select().from(schema.paperIssuanceWorkChecks).where(and(eq(schema.paperIssuanceWorkChecks.handoffRunId, handoff.id), eq(schema.paperIssuanceWorkChecks.decision, "coverage_gap_closed"))).limit(1))[0] ?? null;
+  return { ok: true, alreadyClosed: false, dispositioned, notifications, workCheckRecorded: recorded !== null, reason };
 }
 
 function cycleCountsFromHandoff(handoff: typeof schema.paperHandoffRuns.$inferSelect | null) {
@@ -5023,7 +5407,7 @@ async function syncPaperCandidateIntake(ctx: Ctx, freezeVersion: string, now: Da
     const status = persisted ? "processed" as const : historicalUnprocessed ? "missed_processing" as const : "queued" as const;
     const reasonCode = persisted?.reasonCode ?? (historicalUnprocessed ? "missed-processing" : null);
     const reason = persisted?.reason ?? (historicalUnprocessed ? "The candidate was eligible before the durable intake repair but received no paper-processing row. It remains missed-processing; its expired historical opportunity is not reopened and its hypothetical outcome is unknown." : null);
-    await db.insert(schema.paperCandidateIntake).values({
+    try { await db.insert(schema.paperCandidateIntake).values({
       handoffCandidateId: row.id,
       handoffRunId: row.handoffRunId,
       discoveryRunId: row.discoveryRunId,
@@ -5041,14 +5425,17 @@ async function syncPaperCandidateIntake(ctx: Ctx, freezeVersion: string, now: Da
       completedAt: status === "queued" ? null : now,
       createdAt: now,
       updatedAt: now,
-    }).onConflictDoNothing();
+    }).onConflictDoNothing(); } catch (insertError) { await recordWriteFailure(ctx, { lane: "paper_intake", tableName: "paper_candidate_intake", statementKind: "insert", runId: row.handoffRunId, attemptedKey: canonicalKey, error: insertError, context: { handoffCandidateId: row.id } }); throw insertError; }
   }
 }
 
-async function runExplicitPaperCycle(ctx: Ctx, trigger: "manual" | "scheduled", limit: number): Promise<PaperCycleResponse> {
+async function runExplicitPaperCycle(ctx: Ctx, trigger: "manual" | "scheduled", limit: number, targetHandoff?: typeof schema.paperHandoffRuns.$inferSelect): Promise<PaperCycleResponse> {
   assertNoLegacyPaperIssuer();
   const db = ctx.db<typeof schema>(); const gateStore = createDrizzleIssuanceGateStore(db); const freeze = await ensurePaperPilotFreeze(ctx); const startedAt = new Date();
-  const handoff = await latestCompletedPaperHandoff(ctx);
+  // The bounded work check passes the OLDEST unaccounted handoff as the
+  // explicit target (missed-handoff repair): the full pass must process
+  // the handoff the check selected, never silently re-derive the newest.
+  const handoff = targetHandoff ?? await latestCompletedPaperHandoff(ctx);
   if (!handoff) return { ok: false, runId: null, status: "failed", handlerVersion: ISSUANCE_HANDLER_VERSION, freeze: { ...freeze, frozenAt: freeze.frozenAt.toISOString() }, handoff: null, preFilterReasons: [], counts: { ...cycleCountsFromHandoff(null), considered: 0, issued: 0, abstained: 0, missed: 0, deferred: 0 }, results: [], delivery: PAPER_DELIVERY_ARCHITECTURE, sourceMapping: PAPER_VERSION_MAPPING, summary: "No completed discovery handoff exists. The paper cycle refused to race the latest discovery run." };
   const handoffReasonRows = await db.select().from(schema.paperHandoffCandidates).where(eq(schema.paperHandoffCandidates.handoffRunId, handoff.id)).orderBy(asc(schema.paperHandoffCandidates.id)).limit(1000);
   const preFilterReasons = handoffReasonRows.map((row) => ({ candidateKey: row.candidateKey, symbol: row.symbol, direction: row.direction, outcome: row.outcome, stage: row.stage, reasonCode: row.reasonCode, reason: row.reason, preLegacyFilter: row.preLegacyFilter }));
@@ -5089,10 +5476,12 @@ async function runExplicitPaperCycle(ctx: Ctx, trigger: "manual" | "scheduled", 
     const entryExpiresAt = new Date(decisionAt.getTime() + PAPER_ENTRY_WINDOW_MS);
     let initialState: "awaiting_entry" | "deferred" | "abstained" | "expired" = "awaiting_entry"; let initialCode: string | null = null; let initialReason: string | null = null;
     let gateRevisionForCommit: number | null = null; let gateBandForCommit: string | null = null; let operationalWarning: { bandKey: string; basis: string } | null = null;
-    if (decisionAt.getTime() < freeze.frozenAt.getTime()) { initialState = "deferred"; initialCode = "pre_freeze_candidate"; initialReason = "Discovery decision predates the executable freeze and is excluded from prospective pilot statistics."; }
-    else if (!ledgerOk || !sourceObservedAt) { initialState = "deferred"; initialCode = "decision_input_unverified"; initialReason = "Complete, timestamped decision-time factor evidence is unavailable."; }
-    else if (sourceObservedAt.getTime() > decisionAt.getTime() + PAPER_FUTURE_SKEW_MS) { initialState = "deferred"; initialCode = "future_source_timestamp"; initialReason = "The discovery source timestamp is in the future relative to the decision."; }
-    else if (decisionAt.getTime() - sourceObservedAt.getTime() > 30 * 60_000) { initialState = "deferred"; initialCode = "stale_decision_inputs"; initialReason = "Decision inputs were more than 30 minutes old at the paper decision."; }
+    // The paper-path freshness gate, extracted to input-freshness.ts
+    // (paperPathFreshnessGate) so the exact production comparisons —
+    // missing, future (strict > skew), stale (strict > 30 minutes) —
+    // are unit-tested in isolation. Same order, same codes, same reasons.
+    const freshnessGate = paperPathFreshnessGate({ decisionAtMs: decisionAt.getTime(), sourceObservedAtMs: sourceObservedAt?.getTime() ?? null, ledgerOk, frozenAtMs: freeze.frozenAt.getTime(), maxAgeMs: DECISION_INPUT_MAX_AGE_MS, futureSkewMs: PAPER_FUTURE_SKEW_MS });
+    if (freshnessGate.outcome === "deferred") { initialState = "deferred"; initialCode = freshnessGate.code; initialReason = freshnessGate.reason; }
     else if (!pair) { initialState = "deferred"; initialCode = "venue_mapping_unavailable"; initialReason = "No explicit venue instrument mapping exists (Binance Spot / MEXC Spot)."; }
     else if (!(price && price > 0) || !(stopPrice > 0) || (direction === "long" ? stopPrice >= price : stopPrice <= price)) { initialState = "abstained"; initialCode = "invalid_frozen_levels"; initialReason = "Frozen invalidation is missing or on the wrong side of the decision reference price."; }
     else if (!scores || Math.abs(scores.production) < PAPER_MIN_SCORE) { initialState = "abstained"; initialCode = "min_score_strength_floor"; initialReason = `After direction qualification, |score| ${Math.abs(scores?.production ?? 0)} is below the preserved floor ${PAPER_MIN_SCORE}.`; }
@@ -5177,28 +5566,30 @@ async function runExplicitPaperCycle(ctx: Ctx, trigger: "manual" | "scheduled", 
       return row;
     },
     claim: async (item, now, leaseExpiresAt) => {
+      try {
       const claimed = await db.update(schema.paperCandidateIntake).set({ status: "processing", attemptCount: sql`${schema.paperCandidateIntake.attemptCount} + 1`, claimedBy: ctx.invocationId, leaseExpiresAt, reasonCode: null, reason: null, updatedAt: now }).where(and(
         eq(schema.paperCandidateIntake.candidateKey, item.key),
         sql`(${schema.paperCandidateIntake.status} IN ('queued','retryable_failure','overflow_deferred') OR (${schema.paperCandidateIntake.status} = 'processing' AND ${schema.paperCandidateIntake.leaseExpiresAt} <= ${now}))`,
       )).returning({ id: schema.paperCandidateIntake.id });
       return claimed.length === 1;
+      } catch (claimError) { await recordWriteFailure(ctx, { lane: "paper_intake", tableName: "paper_candidate_intake", statementKind: "update", attemptedKey: item.key, error: claimError, context: { stage: "claim" } }); throw claimError; }
     },
     handleItem: async (item): Promise<IntakeProcessResult> => {
       const row = await processOne(item.value);
       return { outcome: row.state, reasonCode: row.reasonCode, reason: row.reason };
     },
     complete: async (item, processed, now) => {
-      await db.update(schema.paperCandidateIntake).set({ status: "processed", outcome: processed.outcome, reasonCode: processed.reasonCode, reason: processed.reason, claimedBy: null, leaseExpiresAt: null, completedAt: now, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), eq(schema.paperCandidateIntake.claimedBy, ctx.invocationId)));
+      try { await db.update(schema.paperCandidateIntake).set({ status: "processed", outcome: processed.outcome, reasonCode: processed.reasonCode, reason: processed.reason, claimedBy: null, leaseExpiresAt: null, completedAt: now, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), eq(schema.paperCandidateIntake.claimedBy, ctx.invocationId))); } catch (updateError) { await recordWriteFailure(ctx, { lane: "paper_intake", tableName: "paper_candidate_intake", statementKind: "update", attemptedKey: item.key, error: updateError, context: { stage: "complete" } }); throw updateError; }
     },
     expire: async (item, now) => {
-      await db.update(schema.paperCandidateIntake).set({ status: "processing_expired", outcome: "processing-expired", reasonCode: "processing-expired", reason: "The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened.", claimedBy: null, leaseExpiresAt: null, completedAt: now, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), sql`${schema.paperCandidateIntake.status} NOT IN ('processed','missed_processing')`));
+      try { await db.update(schema.paperCandidateIntake).set({ status: "processing_expired", outcome: "processing-expired", reasonCode: "processing-expired", reason: "The candidate's original entry window elapsed before its bounded intake batch reached it. The historical opportunity was not reopened.", claimedBy: null, leaseExpiresAt: null, completedAt: now, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), sql`${schema.paperCandidateIntake.status} NOT IN ('processed','missed_processing')`)); } catch (updateError) { await recordWriteFailure(ctx, { lane: "paper_intake", tableName: "paper_candidate_intake", statementKind: "update", attemptedKey: item.key, error: updateError, context: { stage: "expire" } }); throw updateError; }
     },
     fail: async (item, error, now) => {
       const expired = now.getTime() > item.expiresAt.getTime();
-      await db.update(schema.paperCandidateIntake).set({ status: expired ? "processing_expired" : "retryable_failure", outcome: expired ? "processing-expired" : "processing-failed", reasonCode: expired ? "processing-expired" : "candidate_processing_failed", reason: expired ? "Candidate processing failed and its original entry window elapsed before a safe retry. The opportunity was not reopened." : compactError(error, "Candidate processing failed; durable intake will resume without reissuing completed candidates."), claimedBy: null, leaseExpiresAt: null, completedAt: expired ? now : null, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), eq(schema.paperCandidateIntake.claimedBy, ctx.invocationId)));
+      try { await db.update(schema.paperCandidateIntake).set({ status: expired ? "processing_expired" : "retryable_failure", outcome: expired ? "processing-expired" : "processing-failed", reasonCode: expired ? "processing-expired" : "candidate_processing_failed", reason: expired ? "Candidate processing failed and its original entry window elapsed before a safe retry. The opportunity was not reopened." : compactError(error, "Candidate processing failed; durable intake will resume without reissuing completed candidates."), claimedBy: null, leaseExpiresAt: null, completedAt: expired ? now : null, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), eq(schema.paperCandidateIntake.claimedBy, ctx.invocationId))); } catch (updateError) { await recordWriteFailure(ctx, { lane: "paper_intake", tableName: "paper_candidate_intake", statementKind: "update", attemptedKey: item.key, error: updateError, context: { stage: "fail", originalError: fullErrorText(error) } }); throw updateError; }
     },
     overflow: async (item, now) => {
-      await db.update(schema.paperCandidateIntake).set({ status: "overflow_deferred", outcome: "processing-overflow", reasonCode: "processing_overflow", reason: `The invocation reached its explicit ${PAPER_INTAKE_MAX_ITEMS_PER_INVOCATION}-candidate safety bound. This candidate remains durable and resumable within its original window.`, claimedBy: null, leaseExpiresAt: null, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), sql`${schema.paperCandidateIntake.status} NOT IN ('processed','processing_expired','missed_processing')`));
+      try { await db.update(schema.paperCandidateIntake).set({ status: "overflow_deferred", outcome: "processing-overflow", reasonCode: "processing_overflow", reason: `The invocation reached its explicit ${PAPER_INTAKE_MAX_ITEMS_PER_INVOCATION}-candidate safety bound. This candidate remains durable and resumable within its original window.`, claimedBy: null, leaseExpiresAt: null, updatedAt: now }).where(and(eq(schema.paperCandidateIntake.candidateKey, item.key), sql`${schema.paperCandidateIntake.status} NOT IN ('processed','processing_expired','missed_processing')`)); } catch (updateError) { await recordWriteFailure(ctx, { lane: "paper_intake", tableName: "paper_candidate_intake", statementKind: "update", attemptedKey: item.key, error: updateError, context: { stage: "overflow" } }); throw updateError; }
     },
   });
   const finalIntake = await db.select().from(schema.paperCandidateIntake).where(eq(schema.paperCandidateIntake.handoffRunId, handoff.id)).orderBy(asc(schema.paperCandidateIntake.batchOrdinal));
@@ -6427,6 +6818,7 @@ async function buildPaperPilotStatusPayload(ctx: Ctx, args: { emitTestAlert: boo
         handler_version: ISSUANCE_HANDLER_VERSION,
         handler: { version: ISSUANCE_HANDLER_VERSION, deployedPath: DEPLOYED_PAPER_PATH, legacyIssuerReachable: false, sourceHashes: PAPER_SOURCE_HASHES, comparisonMapping: PAPER_VERSION_MAPPING },
         freeze: { ...freeze, frozenAt: freeze.frozenAt.toISOString(), collectionPlan: PAPER_COLLECTION_PLAN },
+        activation: { version: PILOT_V217_VERSION, activatedAt: PILOT_V217_ACTIVATED_AT, supersedes: PILOT_V217_SUPERSEDES, admissionLanes: ["saved-T1", "48H velocity", "binance-spot-pilot"], pilotUniverse: PILOT_V217_BINANCE_UNIVERSE.map((entry) => ({ ...entry })), pilotUniverseCount: PILOT_V217_BINANCE_UNIVERSE.length, pilotExclusions: PILOT_V217_EXCLUSIONS.map((row) => ({ ...row })), note: "paper-pilot-v2.1.7 is ACTIVE prospectively: the frozen 28-instrument Binance pilot universe present in a run's catalog enters full scoring alongside T1 and velocity. Mappings, thresholds, source-age rules, severe-fail treatment, first-print selection, receipt deadline, drift bound and frozen-level validation are unchanged from v2.1.6. Per-run admission version + universe and the first-three-runs review are served by getV217ActivationStatus." },
         venueMappings: COVERAGE.map((row) => ({ coinId: row.coinId, venue: row.venue === "mexc-spot" ? MEXC_VENUE_LABEL : "Binance Spot", instrument: row.pair })),
         segregation: { paperTable: "paper_signals", legacyTable: "generated_signals", legacyTrackedCount: legacySignals.length, prospectiveVerifiedEntries: signals.length, prospectiveCompletedOutcomes: comparisons.filter((row) => row.cohort === "prospective_issued" && row.outcomeStatus !== "pending").length, fixturesAndReplaysIncluded: false, note: "Legacy/reconstructed records, prospective paper records, and fixtures/replays remain separate. The repaired paper action never writes generated_signals or signal_contracts." },
         delivery: PAPER_DELIVERY_ARCHITECTURE,
@@ -6722,7 +7114,21 @@ export const Actions = {
       })();
       if (monitoringHealth.entryAdmission === "held") {
         const freeze = await ensurePaperPilotFreeze(ctx);
-        const handoff = await latestCompletedPaperHandoff(ctx);
+        // The hold record names the handoff the cycle WOULD have
+        // accounted for — the oldest unaccounted one when any exist —
+        // so a hold during an owed-work window is visible as such.
+        let handoff: typeof schema.paperHandoffRuns.$inferSelect | null = null;
+        let holdState: HandoffProcessingState | null = null;
+        try {
+          const allHandoffs = await completedPaperHandoffs(ctx);
+          if (allHandoffs.length) {
+            const allStates = await loadAllHandoffProcessingStates(ctx, allHandoffs);
+            const picked = selectHandoffToAccount(allStates, Date.now());
+            const idx = picked?.targetIndex ?? allHandoffs.length - 1;
+            handoff = allHandoffs[idx] ?? null;
+            holdState = allStates[idx] ?? null;
+          }
+        } catch { handoff = await latestCompletedPaperHandoff(ctx).catch(() => null); }
         // Durable hold record (2026-10-23 issuance inspection): the hold
         // branch previously returned WITHOUT recording a work check, so
         // during a designed gate hold the lane's own status went silent
@@ -6736,8 +7142,7 @@ export const Actions = {
         // The state read is best-effort and read-only: a failure still
         // records the hold with null state, and recording never blocks
         // or changes the hold decision itself.
-        let holdState: HandoffProcessingState | null = null;
-        try { if (handoff) holdState = await loadHandoffProcessingState(ctx, handoff); } catch { /* best-effort state for the hold record only */ }
+        if (!holdState && handoff) { try { holdState = await loadHandoffProcessingState(ctx, handoff); } catch { /* best-effort state for the hold record only */ } }
         const holdExplanation = monitoringHoldExplanation({
           coverageStatus: monitoringHealth.coverageStatus,
           coverageBasis: monitoringHealth.coverageBasis,
@@ -6772,21 +7177,73 @@ export const Actions = {
       // through the full pass, and a handoff is marked complete only from
       // the run + intake rows that pass committed.
       const work = async (): Promise<PaperCycleResponse> => {
-        const handoff = await latestCompletedPaperHandoff(ctx);
-        if (!handoff) {
+        // Missed-handoff repair + starvation prevention: the check covers
+        // EVERY completed handoff, not only the newest. The plan is
+        // two-lane (planHandoffAccounting): UNEXPIRED unaccounted
+        // handoffs are processed first, ordered by earliest entry
+        // expiry, so a fresh eligible handoff is handled inside its
+        // window; EXPIRED never-run handoffs are dispositioned without
+        // entries in a bounded batch from REMAINING capacity, so the
+        // historical backlog can never starve current issuance. When
+        // all are accounted, the target is the newest and the cycle
+        // reports its skip exactly as before.
+        const handoffs = await completedPaperHandoffs(ctx);
+        if (!handoffs.length) {
           const result = await runExplicitPaperCycle(ctx, args.trigger, args.limit);
           await recordIssuanceWorkCheck(ctx, { handoff: null, trigger: args.trigger, decision: "no_handoff", resultStatus: result.status, state: null, resultingRunId: result.runId, reason: "No completed discovery handoff exists; the cycle recorded its refusal and no issuance work was owed or skipped." });
           return { ...result, workCheck: { decision: "not_checked", handoffId: null, priorRunId: null, priorRunStatus: null, intakeTotal: 0, intakeTerminal: 0, intakePending: 0, reason: "No completed handoff exists to check." } };
         }
-        const state = await loadHandoffProcessingState(ctx, handoff);
-        const decision = decideIssuanceWork(state);
-        if (decision.kind === "skipped_completed") {
-          const result = await skippedPaperCycleResponse(ctx, handoff, state, decision);
+        const states = await loadAllHandoffProcessingStates(ctx, handoffs);
+        const nowMs = Date.now();
+        const plan = planHandoffAccounting(states, nowMs);
+        // Expired dispositions run AFTER the primary target is chosen
+        // and never displace it; each is best-effort (a guard refusal —
+        // e.g. a window still open on re-check — leaves the handoff in
+        // coverage for the next cycle, never silently dropped).
+        const runExpiredDispositions = async (excludeIndex: number | null): Promise<void> => {
+          for (const index of plan.expiredDispositionIndices) {
+            if (index === excludeIndex) continue;
+            const expiredHandoff = handoffs[index];
+            if (!expiredHandoff) continue;
+            try { await dispositionExpiredHandoff(ctx, expiredHandoff, args.trigger, true); }
+            catch { /* best-effort cleanup lane — the handoff stays unaccounted in coverage reporting */ }
+          }
+        };
+        if (plan.primaryIndex === null && plan.expiredUnaccountedIndices.length === 0) {
+          // All accounted: report the newest handoff's skip as before.
+          const targetIndex = handoffs.length - 1;
+          const handoff = handoffs[targetIndex];
+          const state = states[targetIndex];
+          if (!handoff || !state) throw new Error("issuance work check could not resolve its target handoff");
+          const decision = decideIssuanceWork(state);
+          const result = state.latestRun
+            ? await skippedPaperCycleResponse(ctx, handoff, state, decision)
+            : await dispositionedPaperCycleResponse(ctx, handoff, state, decision);
           await recordIssuanceWorkCheck(ctx, { handoff, trigger: args.trigger, decision: decision.kind, resultStatus: "skipped", state, resultingRunId: result.runId, reason: decision.reason });
           return result;
         }
-        const result = await runExplicitPaperCycle(ctx, args.trigger, args.limit);
+        if (plan.primaryIndex === null) {
+          // Only expired work remains: disposition the bounded batch and
+          // report the first expired handoff's committed dispositions.
+          await runExpiredDispositions(null);
+          const targetIndex = plan.expiredUnaccountedIndices[0] ?? handoffs.length - 1;
+          const handoff = handoffs[targetIndex];
+          if (!handoff) throw new Error("issuance work check could not resolve its expired target handoff");
+          const state = await loadHandoffProcessingState(ctx, handoff);
+          const decision = decideIssuanceWork(state);
+          const result = await dispositionedPaperCycleResponse(ctx, handoff, state, decision);
+          return { ...result, workCheck: { decision: decision.kind, handoffId: handoff.id, priorRunId: null, priorRunStatus: null, intakeTotal: state.intakeTotal, intakeTerminal: state.intakeTerminal, intakePending: state.intakePending, reason: `${decision.reason} Expired handoffs were dispositioned without entries in a bounded batch (starvation-prevention lane); coverage reporting continues to span both groups.` } };
+        }
+        const targetIndex = plan.primaryIndex;
+        const handoff = handoffs[targetIndex];
+        const state = states[targetIndex];
+        if (!handoff || !state) throw new Error("issuance work check could not resolve its target handoff");
+        const decision = decideIssuanceWork(state);
+        const result = await runExplicitPaperCycle(ctx, args.trigger, args.limit, handoff);
         await recordIssuanceWorkCheck(ctx, { handoff, trigger: args.trigger, decision: decision.kind, resultStatus: result.status, state, resultingRunId: result.runId, reason: decision.reason });
+        // Remaining capacity only: the fresh handoff's full pass above
+        // always lands first; expired cleanup follows, bounded.
+        await runExpiredDispositions(targetIndex);
         return { ...result, workCheck: { decision: decision.kind, handoffId: handoff.id, priorRunId: state.latestRun?.id ?? null, priorRunStatus: state.latestRun?.status ?? null, intakeTotal: state.intakeTotal, intakeTerminal: state.intakeTerminal, intakePending: state.intakePending, reason: decision.reason } };
       };
       const poll = await runBoundedCoalescedPoll(paperPollLeaseStore(ctx, "issuance_cycle"), work, PAPER_POLL_MAX_PASSES);
@@ -6802,8 +7259,14 @@ export const Actions = {
       let coalescedHandoff: typeof schema.paperHandoffRuns.$inferSelect | null = null;
       let coalescedState: HandoffProcessingState | null = null;
       try {
-        coalescedHandoff = await latestCompletedPaperHandoff(ctx);
-        if (coalescedHandoff) coalescedState = await loadHandoffProcessingState(ctx, coalescedHandoff);
+        const allHandoffs = await completedPaperHandoffs(ctx);
+        if (allHandoffs.length) {
+          const allStates = await loadAllHandoffProcessingStates(ctx, allHandoffs);
+          const picked = selectHandoffToAccount(allStates, Date.now());
+          const idx = picked?.targetIndex ?? allHandoffs.length - 1;
+          coalescedHandoff = allHandoffs[idx] ?? null;
+          coalescedState = allStates[idx] ?? null;
+        }
       } catch { /* best-effort state for the marker row only */ }
       const coalescedReason = `Issuance poll coalesced / deferred-by-lease: the issuance_cycle lease is held by generation ${poll.activeGeneration}; this tick recorded its attempted issuance-work check and started no second processor. The holding generation owns candidate progress.`;
       await recordIssuanceWorkCheck(ctx, { handoff: coalescedHandoff, trigger: args.trigger, decision: "coalesced", resultStatus: "coalesced", state: coalescedState, resultingRunId: null, reason: coalescedReason });
@@ -6822,8 +7285,13 @@ export const Actions = {
     response: z.object({
       generatedAt: z.string(),
       windowHours: z.number(),
-      checks: z.object({ total: z.number(), skippedCompleted: z.number(), processedNew: z.number(), recoveredIncomplete: z.number(), noHandoff: z.number(), coalesced: z.number(), monitoringHeld: z.number() }),
+      checks: z.object({ total: z.number(), skippedCompleted: z.number(), processedNew: z.number(), recoveredIncomplete: z.number(), noHandoff: z.number(), coalesced: z.number(), monitoringHeld: z.number(), coverageGapClosed: z.number() }),
       executions: z.object({ total: z.number(), complete: z.number(), partial: z.number(), failed: z.number(), running: z.number() }),
+      coverage: z.object({
+        totalHandoffs: z.number(), accountedHandoffs: z.number(), allAccounted: z.boolean(),
+        unaccounted: z.array(z.object({ handoffId: z.number(), discoveryRunId: z.number(), decision: z.string(), intakeTotal: z.number(), intakeTerminal: z.number(), intakePending: z.number(), reason: z.string(), expiryGroup: z.string().nullable(), earliestEntryExpiresAt: z.string().nullable(), latestEntryExpiresAt: z.string().nullable() })),
+        groups: z.object({ unexpiredUnaccounted: z.number(), expiredUnaccounted: z.number() }).nullable(),
+      }),
       pollLane: z.object({ generation: z.number(), coalescedCount: z.number(), lastStartedAt: z.string().nullable(), lastCompletedAt: z.string().nullable() }).nullable(),
       latestCheck: z.object({ id: z.number(), handoffRunId: z.number().nullable(), trigger: z.string(), decision: z.string(), resultStatus: z.string(), priorRunId: z.number().nullable(), priorRunStatus: z.string().nullable(), intakeTotal: z.number(), intakeTerminal: z.number(), intakePending: z.number(), resultingRunId: z.number().nullable(), reason: z.string(), checkedAt: z.string() }).nullable(),
       recentChecks: z.array(z.object({ id: z.number(), handoffRunId: z.number().nullable(), trigger: z.string(), decision: z.string(), resultStatus: z.string(), priorRunId: z.number().nullable(), priorRunStatus: z.string().nullable(), intakeTotal: z.number(), intakeTerminal: z.number(), intakePending: z.number(), resultingRunId: z.number().nullable(), reason: z.string(), checkedAt: z.string() })),
@@ -6843,15 +7311,149 @@ export const Actions = {
       return {
         generatedAt: new Date().toISOString(),
         windowHours: args.windowHours,
-        checks: { total: checkRows.length, skippedCompleted: countDecision("skipped_completed"), processedNew: countDecision("processed_new"), recoveredIncomplete: countDecision("recovered_incomplete"), noHandoff: countDecision("no_handoff"), coalesced: countDecision("coalesced"), monitoringHeld: countDecision("monitoring_hold") },
+        checks: { total: checkRows.length, skippedCompleted: countDecision("skipped_completed"), processedNew: countDecision("processed_new"), recoveredIncomplete: countDecision("recovered_incomplete"), noHandoff: countDecision("no_handoff"), coalesced: countDecision("coalesced"), monitoringHeld: countDecision("monitoring_hold"), coverageGapClosed: countDecision("coverage_gap_closed") },
         executions: { total: runRows.reduce((sum, row) => sum + Number(row.count), 0), complete: countStatus("complete"), partial: countStatus("partial"), failed: countStatus("failed"), running: countStatus("running") },
+        coverage: await (async () => {
+          const allHandoffs = await completedPaperHandoffs(ctx);
+          const allStates = await loadAllHandoffProcessingStates(ctx, allHandoffs);
+          const summary = summarizeHandoffCoverage(allStates, Date.now());
+          return { totalHandoffs: summary.totalHandoffs, accountedHandoffs: summary.accountedHandoffs, allAccounted: summary.allAccounted, unaccounted: summary.unaccounted.map((row) => ({ handoffId: row.handoffId, discoveryRunId: row.discoveryRunId, decision: row.decision, intakeTotal: row.intakeTotal, intakeTerminal: row.intakeTerminal, intakePending: row.intakePending, reason: row.reason, expiryGroup: row.expiryGroup, earliestEntryExpiresAt: row.earliestEntryExpiresAt, latestEntryExpiresAt: row.latestEntryExpiresAt })), groups: summary.groups };
+        })(),
         pollLane: lane ? { generation: lane.generation, coalescedCount: lane.coalescedCount, lastStartedAt: lane.lastStartedAt?.toISOString() ?? null, lastCompletedAt: lane.lastCompletedAt?.toISOString() ?? null } : null,
         latestCheck: checkRows[0] ? projectCheck(checkRows[0]) : null,
         recentChecks: checkRows.slice(0, 20).map(projectCheck),
-        note: "Three separate measures: checks = bounded issuance-work checks recorded per cycle invocation; executions = full issuance passes that created a paper_signal_runs row; poll lane = worker generations started vs invocations coalesced into an already-active worker. A skipped check is not an execution, and a coalesced invocation is not a launch. A monitoring_hold check is a designed monitoring-health gate hold — the cycle ran, evaluated health first, and was refused before any candidate processing; it is not a missing dispatch, and its recorded reason carries the gate's coverage, freshness-bound and automation state. The trigger label on a check is the caller-supplied action argument and defaults to \"manual\" when unsupplied, so it does not by itself establish that a person fired the invocation.",
+        note: "Four separate measures that must not be merged: checks = bounded issuance-work checks recorded per cycle invocation (\"the scheduled check ran\"); coverage = whether EVERY completed handoff is accounted for in committed state (\"all eligible handoffs were accounted for\") — a cycle can run on schedule while coverage is incomplete, and coverage.unaccounted names each handoff still owed work, split by coverage.groups into UNEXPIRED handoffs (owed a live processing pass; the cycle takes these first, earliest expiry first) and EXPIRED handoffs (owed a disposition without entries; dispositioned in a bounded batch from remaining cycle capacity) — an expired handoff stays in coverage until its disposition lands, nothing disappears merely because it expired; executions = full issuance passes that created a paper_signal_runs row; poll lane = worker generations started vs invocations coalesced into an already-active worker. A skipped check is not an execution, and a coalesced invocation is not a launch. A monitoring_hold check is a designed monitoring-health gate hold — the cycle ran, evaluated health first, and was refused before any candidate processing; it is not a missing dispatch, and its recorded reason carries the gate's coverage, freshness-bound and automation state. The trigger label on a check is the caller-supplied action argument and defaults to \"manual\" when unsupplied, so it does not by itself establish that a person fired the invocation.",
       };
     },
   }),
+  // Coverage-gap closure for a missed handoff (2026-10-25 repair). A
+  // completed handoff that no cycle ever selected — handoff 94 is the
+  // proven case: its discovery run (184) ended "timeout" after the
+  // handoff persisted, single-handoff selection kept returning handoff
+  // 93, and run 185's completion leapfrogged it — is dispositioned
+  // honestly instead of being silently skipped forever: every
+  // non-terminal intake row becomes missed_processing with the
+  // coverage-gap reason, and ONE append-only coverage_gap_closed work
+  // check records the disposition. The handoff stays expired: no paper
+  // candidate, no paper signal, no run row, no retroactive position.
+  // Original intake rows' events are preserved — only their status /
+  // outcome / reason fields advance to the terminal disposition, and
+  // rows already terminal are untouched. Discovery notification rows are
+  // NEVER rewritten: their displayed state is read-derived from intake,
+  // so notifications 612–613 (VEREM/JCT, run 184) stop reading
+  // AWAITING_ISSUANCE and read BLOCKED with this reason, with their
+  // original stored events intact. Idempotent: a second call reports
+  // alreadyClosed and writes nothing. Guards refuse any handoff that a
+  // cycle has actually processed (a run or paper candidates exist) or
+  // whose entry windows have not all expired.
+  closeMissedHandoffCoverageGap: defineAction({
+    request: z.object({ handoffId: z.number().int().positive() }),
+    response: z.object({
+      ok: z.boolean(), handoffId: z.number(), discoveryRunId: z.number().nullable(), alreadyClosed: z.boolean(),
+      dispositioned: z.array(z.object({ intakeId: z.number(), candidateKey: z.string(), symbol: z.string(), status: z.string(), reasonCode: z.string().nullable() })),
+      notifications: z.array(z.object({ id: z.number(), coinId: z.string(), symbol: z.string() })),
+      workCheckRecorded: z.boolean(), paperCandidatesForRun: z.number(),
+      reason: z.string(), error: z.string().nullable(),
+    }),
+    async handler(ctx, args) {
+      const db = ctx.db<typeof schema>();
+      const fail = (error: string, discoveryRunId: number | null = null) => ({ ok: false, handoffId: args.handoffId, discoveryRunId, alreadyClosed: false, dispositioned: [], notifications: [], workCheckRecorded: false, paperCandidatesForRun: 0, reason: error, error });
+      const handoff = (await db.select().from(schema.paperHandoffRuns).where(eq(schema.paperHandoffRuns.id, args.handoffId)).limit(1))[0] ?? null;
+      if (!handoff) return fail(`Handoff ${args.handoffId} does not exist.`);
+      // Shared implementation with the cycle's expired-disposition lane
+      // (dispositionExpiredHandoff): identical guards, dispositions and
+      // guarantees — no paper candidate, no run row, no retroactive
+      // position, idempotent.
+      const result = await dispositionExpiredHandoff(ctx, handoff, "manual", false);
+      if (!result.ok) return fail(result.error, handoff.discoveryRunId);
+      ctx.invalidateQueries();
+      return { ok: true, handoffId: handoff.id, discoveryRunId: handoff.discoveryRunId, alreadyClosed: result.alreadyClosed, dispositioned: result.dispositioned, notifications: result.notifications, workCheckRecorded: result.workCheckRecorded, paperCandidatesForRun: 0, reason: result.reason, error: null };
+    },
+  }),
+
+  // Coverage-gap disposition for a discovery notification whose run
+  // NEVER produced a handoff (migration 0071) — the notification-621
+  // case: discovery run 191 stalled inside scoring after the partial
+  // notification write (janction, stored 02:59:09Z), produced no
+  // handoff, and was closed terminal UNCERTAIN. With no handoff there
+  // are no intake rows for closeMissedHandoffCoverageGap to disposition,
+  // so the notification read AWAITING_ISSUANCE forever — a dead slot
+  // looking as though issuance was still coming. This action appends
+  // ONE disposition row (coverage_gap_expired_unissued) linked to the
+  // notification's own discovery run; the original notification row is
+  // preserved byte-for-byte and the read model resolves its state from
+  // the disposition. No failure cause is fabricated (the disposition
+  // records only that the slot closed without a handoff and the window
+  // expired unissued), no entry is created, and no expired window is
+  // reopened. Guards refuse while issuance could still legitimately
+  // arrive: a handoff exists for the run, paper candidates exist for
+  // the run, or the notification's window has not expired while its run
+  // could still be live. Idempotent: a second call reports
+  // alreadyResolved and writes nothing.
+  appendDiscoveryNotificationDisposition: defineAction({
+    request: z.object({ notificationId: z.number().int().positive() }),
+    response: z.object({ ok: z.boolean(), alreadyResolved: z.boolean(), dispositionId: z.number().nullable(), discoveryRunId: z.number().nullable(), reason: z.string() }),
+    async handler(ctx, args): Promise<{ ok: boolean; alreadyResolved: boolean; dispositionId: number | null; discoveryRunId: number | null; reason: string }> {
+      const db = ctx.db<typeof schema>();
+      const notification = (await db.select().from(schema.discoveryInformationalNotifications).where(eq(schema.discoveryInformationalNotifications.id, args.notificationId)).limit(1))[0] ?? null;
+      if (!notification) return { ok: false, alreadyResolved: false, dispositionId: null, discoveryRunId: null, reason: `Discovery notification ${args.notificationId} does not exist; nothing was written.` };
+      const runId = notification.discoveryRunId;
+      const existing = (await db.select().from(schema.discoveryNotificationDispositions).where(eq(schema.discoveryNotificationDispositions.notificationId, notification.id)).limit(1))[0] ?? null;
+      if (existing) return { ok: true, alreadyResolved: true, dispositionId: existing.id, discoveryRunId: runId, reason: `Notification ${notification.id} already carries disposition ${existing.id} (${existing.disposition}, recorded ${existing.createdAt.toISOString()}); no further writes were made.` };
+      if (runId !== null) {
+        const handoffs = await db.select({ id: schema.paperHandoffRuns.id }).from(schema.paperHandoffRuns).where(eq(schema.paperHandoffRuns.discoveryRunId, runId)).limit(1);
+        if (handoffs.length > 0) return { ok: false, alreadyResolved: false, dispositionId: null, discoveryRunId: runId, reason: `Discovery run ${runId} has handoff ${handoffs[0]!.id}; its notifications resolve through the handoff/intake path (closeMissedHandoffCoverageGap), not this disposition. Nothing was written.` };
+        const candidates = await db.select({ id: schema.paperSignalCandidates.id }).from(schema.paperSignalCandidates).where(eq(schema.paperSignalCandidates.discoveryRunId, runId)).limit(1);
+        if (candidates.length > 0) return { ok: false, alreadyResolved: false, dispositionId: null, discoveryRunId: runId, reason: `Discovery run ${runId} already produced paper candidates; its notifications resolve from the issuance record, not this disposition. Nothing was written.` };
+      }
+      const now = new Date();
+      const windowExpired = notification.expiresAt !== null && notification.expiresAt.getTime() <= now.getTime();
+      let runClosed = runId === null;
+      if (runId !== null) {
+        const run = (await db.select({ status: schema.marketDiscoveryRuns.status }).from(schema.marketDiscoveryRuns).where(eq(schema.marketDiscoveryRuns.id, runId)).limit(1))[0] ?? null;
+        runClosed = run === null || run.status !== "running";
+      }
+      const slotAged = now.getTime() - notification.createdAt.getTime() > 4 * 60 * 60_000;
+      if (!windowExpired && !(runClosed && slotAged)) {
+        return { ok: false, alreadyResolved: false, dispositionId: null, discoveryRunId: runId, reason: `Notification ${notification.id} is not yet closable: its entry window has not expired (expiresAt ${notification.expiresAt?.toISOString() ?? "unrecorded"}) and its discovery slot is not proven closed and aged. Issuance could still legitimately arrive; nothing was written.` };
+      }
+      const reason = `Coverage gap: discovery run ${runId ?? "unrecorded"} closed without producing an issuance handoff, so no intake rows, paper candidates, or paper signal exist for this notification; the entry window expired unissued. The original notification event is preserved unchanged. No failure cause is asserted by this disposition — the run's terminal record (or its absence from the completed-run read) is the evidence, and no entry was or will be issued for this slot.`;
+      const inserted = (await db.insert(schema.discoveryNotificationDispositions).values({ notificationId: notification.id, discoveryRunId: runId, disposition: "coverage_gap_expired_unissued", reason, createdAt: now }).onConflictDoNothing().returning())[0]
+        ?? (await db.select().from(schema.discoveryNotificationDispositions).where(eq(schema.discoveryNotificationDispositions.notificationId, notification.id)).limit(1))[0]
+        ?? null;
+      if (!inserted) return { ok: false, alreadyResolved: false, dispositionId: null, discoveryRunId: runId, reason: `Disposition insert for notification ${notification.id} did not persist; nothing was written.` };
+      ctx.invalidateQueries();
+      return { ok: true, alreadyResolved: false, dispositionId: inserted.id, discoveryRunId: runId, reason: `Appended coverage_gap_expired_unissued disposition ${inserted.id} for notification ${notification.id} (${notification.symbol}, discovery run ${runId ?? "unrecorded"}). ${reason}` };
+    },
+  }),
+
+  // Read surface for the write-failure diagnostic capture (migration
+  // 0068): the full verbatim error text for failed writes, uncapped.
+  // Until this action existed the capture could be written but not read
+  // back through the artifact — which is why the history_cache_state
+  // null-id failure (discovery runs 179/182) could only be seen as a
+  // 220-char compactError slice in the run summary.
+  getWriteFailureCaptures: defineAction({
+    request: z.object({ limit: z.number().int().min(1).max(200).default(50) }),
+    response: z.object({
+      total: z.number(),
+      captures: z.array(z.object({ id: z.number(), occurredAt: z.string(), lane: z.string(), tableName: z.string(), statementKind: z.string(), operation: z.string(), schemaVersion: z.string(), runId: z.string().nullable(), attemptedKey: z.string().nullable(), errorKind: z.string(), errorText: z.string(), contextJson: z.string().nullable() })),
+      // Q6 independent fallback: captures whose DB insert itself failed,
+      // held in the bounded in-memory sink (id 0 = never persisted).
+      fallback: z.array(z.object({ occurredAt: z.string(), lane: z.string(), tableName: z.string(), statementKind: z.string(), operation: z.string(), schemaVersion: z.string(), errorKind: z.string(), errorText: z.string(), captureErrorKind: z.string() })),
+    }),
+    async handler(ctx, args) {
+      const db = ctx.db<typeof schema>();
+      const rows = await db.select().from(schema.writeFailureCaptures).orderBy(desc(schema.writeFailureCaptures.id)).limit(args.limit);
+      const totalRows = await db.select({ count: sql<number>`count(*)` }).from(schema.writeFailureCaptures);
+      return {
+        total: Number(totalRows[0]?.count ?? 0),
+        captures: rows.map((row) => ({ id: row.id, occurredAt: row.occurredAt.toISOString(), lane: row.lane, tableName: row.tableName, statementKind: row.statementKind, operation: row.operation, schemaVersion: row.schemaVersion, runId: row.runId, attemptedKey: row.attemptedKey, errorKind: row.errorKind, errorText: row.errorText, contextJson: row.contextJson })),
+        fallback: getFallbackWriteFailures().slice(0, args.limit).map((entry) => ({ occurredAt: entry.occurredAt.toISOString(), lane: entry.lane, tableName: entry.tableName, statementKind: entry.statementKind, operation: entry.operation, schemaVersion: entry.schemaVersion, errorKind: entry.errorKind, errorText: entry.errorText, captureErrorKind: entry.captureErrorKind })),
+      };
+    },
+  }),
+
   // Exact, persisted issuance accounting for a discovery run. This is a read
   // model only: it never replays an expired candidate or relaxes any issuance
   // check. The workspace delivery/diagnostic path can use it to explain every
@@ -7406,8 +8008,19 @@ export const Actions = {
         const idn = unknownRecord(run.identity);
         if (idn.venue !== "Hyperliquid" || idn.market_type !== "perp" || idn.quote_currency !== "USD") throw new Error("Scanner run identity mismatch; board withheld.");
         const wiring = evaluateIssuanceWiring(idn);
-        if (!wiring.excluded) throw new Error("Hyperliquid board withheld: issuance wiring not affirmatively excluded.");
-        boardRun = run;
+        if (wiring.excluded) {
+          boardRun = run;
+        } else if (wiring.observed === null || wiring.observed === undefined) {
+          // Board-aligned research-only branch (Q5): identical predicate
+          // to the board handler. This action is a pure read — no writes,
+          // no scheduler calls, no alert calls, no issuance calls — and
+          // HL-derived outputs here are ranking/conflict lanes only, never
+          // an issuance input.
+          boardRun = run;
+          notes.push("Hyperliquid feed: research-only-pure-read — issuance wiring not observed (null/undefined); proceeding as ranking only. Research only — pure read: this shortlist makes no writes, no scheduler calls, no alert calls, and no issuance calls, and is never an issuance input.");
+        } else {
+          throw new Error("Hyperliquid board withheld: issuance wiring not affirmatively excluded.");
+        }
         boardIdentity = idn;
         boardAsOf = typeof idn.snapshot_receipt_utc === "string" ? idn.snapshot_receipt_utc : null;
         boardStale = boardAsOf !== null && Number.isFinite(Date.parse(boardAsOf)) ? computedAt.getTime() - Date.parse(boardAsOf) > SHORTLIST_BOARD_STALE_MS : false;
@@ -7703,16 +8316,26 @@ export const Actions = {
         rows,
         notes,
       };
-      try {
-        const db = ctx.db<typeof schema>();
-        const inserted = await db.insert(schema.researchShortlistSnapshots).values({ version: payload.version, computedAt, payloadJson: JSON.stringify(payload) }).returning({ id: schema.researchShortlistSnapshots.id });
-        const snapshotId = inserted[0]?.id ?? null;
-        payload.snapshotId = snapshotId;
-        if (snapshotId !== null) {
-          await db.update(schema.researchShortlistSnapshots).set({ payloadJson: JSON.stringify(payload) }).where(eq(schema.researchShortlistSnapshots.id, snapshotId));
+      // Snapshot persistence with write-failure capture (Q4 follow-up):
+      // a failed insert/update is captured verbatim into
+      // write_failure_captures via recordWriteFailure; the capture never
+      // throws, and the ranking is still returned unsaved with the note
+      // below — identical behavior to before, now with a capture row.
+      const persisted = await persistResearchShortlistSnapshot({
+        insertSnapshot: async () => {
+          const db = ctx.db<typeof schema>();
+          const inserted = await db.insert(schema.researchShortlistSnapshots).values({ version: payload.version, computedAt, payloadJson: JSON.stringify(payload) }).returning({ id: schema.researchShortlistSnapshots.id });
+          return inserted[0]?.id ?? null;
+        },
+        updatePayload: async (snapshotId) => {
+          const db = ctx.db<typeof schema>();
+          await db.update(schema.researchShortlistSnapshots).set({ payloadJson: JSON.stringify({ ...payload, snapshotId }) }).where(eq(schema.researchShortlistSnapshots.id, snapshotId));
           ctx.invalidateQueries();
-        }
-      } catch (error) { notes.push(`Shortlist snapshot could not be stored: ${compactError(error, "snapshot insert failed")} — the computed ranking is returned unsaved.`); }
+        },
+        capture: async (error, statementKind, snapshotId) => recordWriteFailure(ctx, { lane: "research_shortlist", tableName: "research_shortlist_snapshots", statementKind, attemptedKey: snapshotId === null ? payload.computedAt : String(snapshotId), error, context: { version: payload.version } }),
+      });
+      payload.snapshotId = persisted.snapshotId;
+      if (!persisted.stored) notes.push(`Shortlist snapshot could not be stored: ${compactError(persisted.error, "snapshot insert failed")} — the computed ranking is returned unsaved.`);
       return payload;
     },
   }),
@@ -8006,7 +8629,7 @@ export const Actions = {
       const rows: Array<{ coinId: string; symbol: string; source: string; bars: number; funding: number; error: string | null }> = [];
       for (const coin of COVERAGE) {
         const fallbackSource: HistorySource = coin.pair ? (coin.venue === "mexc-spot" ? "mexc" : "binance") : "coingecko";
-        const cached = await ensureHistoryCache(ctx, coin.coinId, coin.symbol, false).catch((error) => ({ state: { source: fallbackSource, lastError: compactError(error, "History refresh failed") }, bars: [], funding: [] }));
+        const cached = await ensureHistoryCache(ctx, coin.coinId, coin.symbol, false).catch((error) => ({ state: { source: fallbackSource, lastError: compactError(error, "History refresh failed") }, bars: [], funding: [], cacheDegraded: true, cacheFreshness: { fresh: false as const, state: "unavailable" as const, reason: "History cache read failed; freshness unproven." } }));
         rows.push({ coinId: coin.coinId, symbol: coin.symbol, source: String(cached.state?.source ?? fallbackSource), bars: cached.bars.length, funding: cached.funding.length, error: cached.state?.lastError ?? null });
       }
       const refreshed = rows.filter((row) => row.bars > 0).length; return { ok: refreshed > 0, refreshed, unavailable: rows.length - refreshed, rows };
@@ -8669,6 +9292,12 @@ export const Actions = {
       return withSchedulerReceipt(ctx, "market_discovery_scan", args.trigger, async () => {
       const startedAt = new Date(); const db = ctx.db<typeof schema>();
       const sourceStatus: Array<{ source: string; status: "live" | "unavailable"; detail: string }> = [];
+      // Q1/Q3 (2026-10-25): per-input freshness records and per-fetch /
+      // per-checkpoint timing records for this run, surfaced in the run's
+      // source status before the scoring checkpoint persists it.
+      const inputFreshness: InputFreshnessRecord[] = [];
+      const perCandidateFreshness = new Map<string, InputFreshnessRecord[]>();
+      const runTiming = new TimingRecorder();
       let synthesis: z.infer<typeof marketDiscoverySynthesisShape> = { news: [], theories: [] };
       let synthesisFailed = false;
       // Batch 5 A5a: single-flight — a duplicate invocation while a run is
@@ -8687,6 +9316,14 @@ export const Actions = {
       // Batch 5 A1b: any per-stage budget exhaustion degrades the run.
       let stageBudgetExhausted = false;
       let tierLaneStatus: DiscoveryLaneStatus = "paused(not validated)"; let velocityLaneStatus: DiscoveryLaneStatus = "paused(not validated)";
+      // paper-pilot-v2.1.7 (migration 0072): the active mapping/admission
+      // version and the actual pilot universe are recorded on EVERY run
+      // under this freeze — including missed and failed runs — and the
+      // frozen universe never changes mid-review.
+      const admissionVersion: string = PAPER_FREEZE_VERSION;
+      let pilotLaneStatus: string = "not yet evaluated (catalog not loaded)";
+      let pilotUniverseJson: string | null = null;
+      let pilotRecord: PilotRunRecord | null = null;
       let tierFreshness: UniverseTierFreshness | null = null; let stageStartedAt = Date.now();
       try {
         try {
@@ -8720,7 +9357,7 @@ export const Actions = {
         const elfaCombined = [...new Map([...elfaTokens, ...elfaContracts].map((row) => [row.symbol, row])).values()];
         const elfaCallFailures = [elfaTokenResult && !elfaTokenResult.ok ? `trending tokens failed: ${elfaTokenResult.error ?? "unknown error"}` : null, elfaContractResult && !elfaContractResult.ok ? `trending contracts failed: ${elfaContractResult.error ?? "unknown error"}` : null].filter((row): row is string => row !== null);
         sourceStatus.push({ source: "Elfa scheduled discovery", status: elfaBudget.granted && (elfaTokenResult?.ok || elfaContractResult?.ok) ? "live" : "unavailable", detail: !elfaBudget.granted ? `${elfaBudget.guard === "hard_stop" ? "Monthly hard stop" : elfaBudget.guard === "graceful_degrade" ? "Monthly graceful-degradation guard" : "Daily hard cap"} reached: ${elfaBudget.used}/20 calls reserved on ${elfaBudget.day}; ${elfaBudget.monthlyUsed}/800 soft monthly allowance used (950 hard stop). No Elfa request was sent.` : `${elfaBudget.used}/20 scheduled calls reserved today; ${elfaBudget.monthlyUsed}/800 monthly soft allowance used (950 hard stop); ${elfaTokens.length} trending-token and ${elfaContracts.length} trending-contract symbols returned.${elfaCallFailures.length ? ` ${elfaCallFailures.join("; ")}.` : ""}` });
-        if (elfaCombined.length || elfaBudget.granted) await db.insert(schema.discoveryState).values({ key: "elfa_discovery_snapshot", valueJson: JSON.stringify({ asOf: startedAt.toISOString(), tokens: elfaCombined, budget: elfaBudget, tokenCall: { ok: elfaTokenResult?.ok ?? false, error: elfaTokenResult?.error ?? null }, contractCall: { ok: elfaContractResult?.ok ?? false, error: elfaContractResult?.error ?? null } }), updatedAt: startedAt }).onConflictDoUpdate({ target: schema.discoveryState.key, set: { valueJson: JSON.stringify({ asOf: startedAt.toISOString(), tokens: elfaCombined, budget: elfaBudget, tokenCall: { ok: elfaTokenResult?.ok ?? false, error: elfaTokenResult?.error ?? null }, contractCall: { ok: elfaContractResult?.ok ?? false, error: elfaContractResult?.error ?? null } }), updatedAt: startedAt } });
+        if (elfaCombined.length || elfaBudget.granted) try { await db.insert(schema.discoveryState).values({ key: "elfa_discovery_snapshot", valueJson: JSON.stringify({ asOf: startedAt.toISOString(), tokens: elfaCombined, budget: elfaBudget, tokenCall: { ok: elfaTokenResult?.ok ?? false, error: elfaTokenResult?.error ?? null }, contractCall: { ok: elfaContractResult?.ok ?? false, error: elfaContractResult?.error ?? null } }), updatedAt: startedAt }).onConflictDoUpdate({ target: schema.discoveryState.key, set: { valueJson: JSON.stringify({ asOf: startedAt.toISOString(), tokens: elfaCombined, budget: elfaBudget, tokenCall: { ok: elfaTokenResult?.ok ?? false, error: elfaTokenResult?.error ?? null }, contractCall: { ok: elfaContractResult?.ok ?? false, error: elfaContractResult?.error ?? null } }), updatedAt: startedAt } }); } catch (elfaWriteError) { await recordWriteFailure(ctx, { lane: "discovery", tableName: "discovery_state", statementKind: "upsert", runId: lease.runId, attemptedKey: "elfa_discovery_snapshot", error: elfaWriteError, context: { stage: "api-budgets" } }); throw elfaWriteError; }
         const altfinsBudget = await reserveApiCredits(ctx, "altfins", "scheduled_discovery_calls", 1, 15);
         const altfinsResult = altfinsBudget.granted ? await withNamedTimeout("altFINS signals", DISCOVERY_TOOL_TIMEOUT_MS, ctx.executePrivileged(privileged.altfinsRequest, { endpoint: "signals", direction: "BULLISH", symbols: [], limit: 25 })).catch((error) => ({ ok: false as const, data: null, error: compactError(error, "altFINS unavailable") })) : null;
         const altfinsSignalRows = altfinsResult?.ok ? providerRows(altfinsResult.data) : [];
@@ -8775,7 +9412,11 @@ export const Actions = {
         sourceStatus.push({ source: "CoinMarketCap keyless top 100", status: cmcTopSymbols.size >= 50 ? "live" : "unavailable", detail: cmcTopSymbols.size ? `${cmcTopSymbols.size} ranked symbols returned as cross-source discovery candidates.` : "Keyless listings were unavailable; no CMC expansion candidates were added." });
         const memeIds = new Set<string>((Array.isArray(memeCategoryPage) ? memeCategoryPage : []).map((row: any) => String(row?.id ?? "")).filter(Boolean));
         sourceStatus.push({ source: "CoinGecko meme category", status: memeIds.size ? "live" : "unavailable", detail: memeIds.size ? `${memeIds.size} category-confirmed meme assets available for the separate micro-cap lane.` : "Meme category feed unavailable; no asset can enter Meme Lane this run." });
-        sourceStatus.push({ source: "CoinGecko ranked catalog", status: universe.length >= 100 ? "live" : "unavailable", detail: `${universe.length} unique ranked assets refreshed; provenance: ${discoveryCatalog?.provenance ?? (catalogMissed ? CATALOG_MISSED_MESSAGE : "unavailable")}; saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume multiple.${catalogFetchErrors.length ? ` Fetch detail: ${catalogFetchErrors.join(" | ")}` : ""}` });
+        sourceStatus.push({ source: "CoinGecko ranked catalog", status: universe.length >= 100 ? "live" : "unavailable", detail: `${universe.length} unique ranked assets refreshed; provenance: ${discoveryCatalog?.provenance ?? (catalogMissed ? CATALOG_MISSED_MESSAGE : "unavailable")}; saved T1 members and every non-stablecoin asset with a current 48H move of at least +15% continue into full signal scoring, independent of volume multiple; under paper-pilot-v2.1.7 the frozen Binance pilot universe present in the catalog also continues into full scoring.${catalogFetchErrors.length ? ` Fetch detail: ${catalogFetchErrors.join(" | ")}` : ""}` });
+        // Q1: the catalog's per-input freshness record — a cached catalog
+        // keeps its original provenance timestamp and is labeled cached
+        // with its age, never re-stamped as fresh by this run.
+        if (discoveryCatalog) inputFreshness.push(catalogFreshnessRecord({ kind: discoveryCatalog.catalogKind, snapshotFetchedAtMs: discoveryCatalog.snapshotFetchedAtMs, fetchTimeMs: startedAt.getTime() }));
         velocityLaneStatus = universe.length >= 100 ? "active(independent ranked-catalog 48H velocity path verified: selection uses catalog sparkline only; tier lookup is label/fallback context and is not an eligibility dependency)" : `paused(ranked catalog degraded: ${universe.length}/500)`;
         const dependencyValidation = { catalog: { usable: universe.length >= 100, count: universe.length, errors: catalogFetchErrors, provenance: discoveryCatalog?.provenance ?? null, missed: catalogMissed }, tierSnapshot: { usable: tierFreshness !== null, runId: tierFreshness?.runId ?? null, status: tierFreshness?.runStatus ?? null }, velocityIndependence: { verified: true, dependencies: ["CoinGecko ranked catalog sparkline_in_7d.price", "stablecoin exclusion"], tierDependency: false } };
         await discoveryCheckpoint(ctx, lease, "catalog-fetch", stageStartedAt, stageDurations, { catalogRows: universe.length, provenance: discoveryCatalog?.provenance ?? null, missed: catalogMissed, errors: catalogFetchErrors.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus), dependencyValidationJson: stableJson(dependencyValidation) });
@@ -8785,7 +9426,9 @@ export const Actions = {
           // recompute, no fabrication, no retry in-run.
           const missedAt = new Date();
           await assertDiscoveryLease(ctx, lease);
-          await db.update(schema.marketDiscoveryRuns).set({ status: "missed", summary: CATALOG_MISSED_SUMMARY, universeSize: 0, shortlisted: 0, signalCount: 0, newsCount: 0, theoryCount: 0, sourceStatusJson: JSON.stringify(sourceStatus), tierLaneStatus, velocityLaneStatus, stageDurationsJson: stableJson(stageDurations), completedAt: missedAt, lastHeartbeatAt: missedAt }).where(and(eq(schema.marketDiscoveryRuns.id, lease.runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running")));
+          pilotLaneStatus = "catalog missed — no pilot candidate was evaluated; the run is recorded as missed, never as a model abstention";
+          pilotUniverseJson = stableJson({ version: PILOT_V217_VERSION, activatedAt: PILOT_V217_ACTIVATED_AT, universe: PILOT_V217_BINANCE_UNIVERSE, universeCount: PILOT_V217_BINANCE_UNIVERSE.length, presentSymbols: [], missingDeferredSymbols: [], dispositions: [], note: pilotLaneStatus });
+          await db.update(schema.marketDiscoveryRuns).set({ status: "missed", summary: CATALOG_MISSED_SUMMARY, universeSize: 0, shortlisted: 0, signalCount: 0, newsCount: 0, theoryCount: 0, sourceStatusJson: JSON.stringify(sourceStatus), tierLaneStatus, velocityLaneStatus, admissionVersion, pilotUniverseJson, pilotLaneStatus, stageDurationsJson: stableJson(stageDurations), completedAt: missedAt, lastHeartbeatAt: missedAt }).where(and(eq(schema.marketDiscoveryRuns.id, lease.runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running")));
           ctx.invalidateQueries();
           return { ok: true, status: "missed" as const, runId: lease.runId, universeSize: 0, signalCount: 0, newsCount: 0, theoryCount: 0, message: CATALOG_MISSED_SUMMARY, computedAt: missedAt.toISOString(), dataThrough: null };
         }
@@ -8847,9 +9490,24 @@ export const Actions = {
           const coinId = String(row.id); const move48h = velocity48hById.get(coinId) ?? null;
           return isVelocityQualifier(move48h, isStablecoinMarketRow(row, new Set<string>()));
         }).map((row: any) => String(row.id)));
-        const scanUniverse = universe.filter((row: any) => tier1Ids.has(String(row.id)) || velocityQualifierIds.has(String(row.id)));
+        // paper-pilot-v2.1.7 admission lane (the freeze's sole delta):
+        // a frozen-universe Binance Spot asset present in this run's
+        // catalog enters full scoring ALONGSIDE saved-T1 and velocity —
+        // never instead of them. T1 and velocity selection are byte-for-
+        // byte the v2.1.6 rules. A frozen-universe asset absent from the
+        // catalog is not in the universe array at all; it is accounted
+        // as explicitly deferred in the pilot record below, never
+        // silently dropped.
+        const catalogCoinIds = new Set<string>(universe.map((row: any) => String(row.id)));
+        const pilotPresentIds = new Set<string>(PILOT_V217_BINANCE_UNIVERSE.filter((entry) => catalogCoinIds.has(entry.coinId)).map((entry) => entry.coinId));
+        const scanUniverse = universe.filter((row: any) => tier1Ids.has(String(row.id)) || velocityQualifierIds.has(String(row.id)) || PILOT_V217_COIN_IDS.has(String(row.id)));
         const scannedTier1Count = scanUniverse.filter((row: any) => tier1Ids.has(String(row.id))).length;
         const velocityQualifierCount = scanUniverse.filter((row: any) => !tier1Ids.has(String(row.id)) && velocityQualifierIds.has(String(row.id))).length;
+        const pilotAdmittedCount = scanUniverse.filter((row: any) => PILOT_V217_COIN_IDS.has(String(row.id))).length;
+        const pilotOnlyAdmittedCount = scanUniverse.filter((row: any) => isPilotOnlyAdmission({ coinId: String(row.id), tier1Ids, velocityIds: velocityQualifierIds })).length;
+        const pilotMissingDeferred = PILOT_V217_BINANCE_UNIVERSE.filter((entry) => !catalogCoinIds.has(entry.coinId));
+        pilotLaneStatus = `active(${PILOT_V217_VERSION} frozen Binance universe: ${PILOT_V217_BINANCE_UNIVERSE.length} instruments recorded; ${pilotPresentIds.size} present in catalog, ${pilotAdmittedCount} admitted to full scoring (${pilotOnlyAdmittedCount} pilot-only), ${pilotMissingDeferred.length} explicitly deferred — not present in catalog${pilotMissingDeferred.length ? `: ${pilotMissingDeferred.map((entry) => entry.symbol).join(", ")}` : ""})`;
+        sourceStatus.push({ source: "Binance admission pilot (paper-pilot-v2.1.7)", status: "live", detail: `${pilotLaneStatus}. Admission version and the actual universe are recorded on this run; the universe does not change mid-review. QNT's MEXC Spot mapping is a separate versioned mapping change and is not part of this pilot set; grass was not mapped. Thresholds, source-age rules, severe-fail treatment, first-print selection, receipt deadline, drift bound and frozen-level validation are unchanged from v2.1.6.` });
         const laneClassification = classifyDiscoveryLanes({ tierSnapshotUsable: tierFreshness !== null, tierRunId: tierFreshness?.runId ?? null, savedT1Count: tier1Ids.size, catalogT1Intersection: scannedTier1Count, catalogCount: universe.length, velocityIndependent: true });
         tierLaneStatus = laneClassification.tierLaneStatus;
         velocityLaneStatus = laneClassification.velocityLaneStatus;
@@ -8888,7 +9546,12 @@ export const Actions = {
           });
           await writeAthGateRecords(ctx, lease.runId, athGateRecords, athGateEvaluatedAt);
         } catch { /* evidence capture only — never fails or alters the run */ }
-        await discoveryCheckpoint(ctx, lease, "velocity", stageStartedAt, stageDurations, { savedT1: tier1Ids.size, catalogT1Intersection: scannedTier1Count, velocityQualified: velocityQualifierCount, scanUniverse: scanUniverse.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus), dependencyValidationJson: stableJson({ ...dependencyValidation, lanes: { tierLaneStatus, velocityLaneStatus }, zeroT1Legitimate: tierFreshness !== null && tier1Ids.size === 0, identityMismatch: tier1Ids.size > 0 && scannedTier1Count === 0 }) });
+        // Provisional pilot record at this checkpoint (present/missing
+        // known; per-asset dispositions land at run completion and
+        // overwrite this JSON — a mid-run read never mistakes "not yet
+        // scored" for an omission).
+        pilotUniverseJson = stableJson({ version: PILOT_V217_VERSION, activatedAt: PILOT_V217_ACTIVATED_AT, universe: PILOT_V217_BINANCE_UNIVERSE, universeCount: PILOT_V217_BINANCE_UNIVERSE.length, presentSymbols: PILOT_V217_BINANCE_UNIVERSE.filter((entry) => catalogCoinIds.has(entry.coinId)).map((entry) => entry.symbol), missingDeferredSymbols: pilotMissingDeferred.map((entry) => entry.symbol), pilotOnlyAdmittedSymbols: scanUniverse.filter((row: any) => isPilotOnlyAdmission({ coinId: String(row.id), tier1Ids, velocityIds: velocityQualifierIds })).map((row: any) => String(row.symbol ?? "").toUpperCase()), dispositions: [], note: "provisional — per-asset dispositions are recorded at run completion" });
+        await discoveryCheckpoint(ctx, lease, "velocity", stageStartedAt, stageDurations, { savedT1: tier1Ids.size, catalogT1Intersection: scannedTier1Count, velocityQualified: velocityQualifierCount, pilotPresent: pilotPresentIds.size, pilotAdmitted: pilotAdmittedCount, pilotOnlyAdmitted: pilotOnlyAdmittedCount, pilotMissingDeferred: pilotMissingDeferred.length, scanUniverse: scanUniverse.length }, { tierLaneStatus, velocityLaneStatus, admissionVersion, pilotUniverseJson, pilotLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus), dependencyValidationJson: stableJson({ ...dependencyValidation, lanes: { tierLaneStatus, velocityLaneStatus, pilotLaneStatus }, admission: { version: admissionVersion, pilotUniverse: PILOT_V217_BINANCE_UNIVERSE.map((entry) => entry.symbol), pilotPresent: [...pilotPresentIds], pilotMissingDeferred: pilotMissingDeferred.map((entry) => entry.symbol) }, zeroT1Legitimate: tierFreshness !== null && tier1Ids.size === 0, identityMismatch: tier1Ids.size > 0 && scannedTier1Count === 0 }) });
         stageStartedAt = Date.now();
         await assertDiscoveryLease(ctx, lease);
         // Batch 5 A1a/A1b/A4: one venue probe for the stage, charts fetched
@@ -8940,6 +9603,10 @@ export const Actions = {
         const fundBySymbol = new Map<string, DiscoveryFundamentals>();
         if (fundCacheFresh && Array.isArray(fundCache.rows)) for (const r of fundCache.rows) { if (r?.symbol && r?.tvl) fundBySymbol.set(String(r.symbol).toUpperCase(), { tvlChange7d: finite(r.tvl.change7d), tvlChange30d: finite(r.tvl.change30d), scope: typeof r.tvl.scope === "string" ? r.tvl.scope : null, asOf: typeof r.tvl.asOf === "string" ? r.tvl.asOf : null }); }
         sourceStatus.push({ source: "Fundamentals weekly scores", status: fundCacheFresh ? "live" : "unavailable", detail: fundCacheFresh ? `${fundBySymbol.size} symbols carry a fresh weekly TVL score (scored ${fundCache.scoredAt}).` : "No fresh weekly fundamentals score is stored; the Network-fundamentals dimension is NO_DATA this run. Run refreshFundamentalsScores." });
+        // Q1: weekly fundamentals is an OPTIONAL input — stale/missing
+        // contributes 0 with NO_DATA (the gate's existing treatment),
+        // never an estimate and never a deferral.
+        inputFreshness.push(buildInputFreshnessRecord({ input: "weekly fundamentals", requirement: "optional", sourceTimeMs: fundCache?.scoredAt && Number.isFinite(Date.parse(String(fundCache.scoredAt))) ? Date.parse(String(fundCache.scoredAt)) : null, fetchTimeMs: startedAt.getTime(), maxAgeMs: WEEKLY_FUNDAMENTALS_MAX_AGE_MS }));
         const candidates = scanUniverse.map((row: any) => {
           const coinId = String(row.id); const symbol = String(row.symbol).toUpperCase(); const price = finite(row.current_price); const marketCap = finite(row.market_cap); const volume24h = finite(row.total_volume); const turnover = marketCap && volume24h !== null ? volume24h / marketCap : null;
           const dailyChart = discoveryChartById.get(coinId) ?? { closes: [], highs: [], lows: [], volumes: [], timestamps: [], source: "unavailable" as const, attempts: [] };
@@ -8975,13 +9642,35 @@ export const Actions = {
           const setupType = discoveryLane === "meme" ? "Elfa mindshare spike · validators pending" : attention && (turnover ?? 0) >= 0.12 ? "attention + turnover" : Math.abs(changes.d7 ?? 0) >= 12 ? "momentum displacement" : funding !== null && Math.abs(funding) >= 0.0001 ? "funding extreme" : "cross-horizon alignment";
           const discoveryTier: "tier1" | "tier2" = tier1Ids.has(coinId) ? "tier1" : "tier2";
           const move48h = velocity48hById.get(coinId) ?? null;
-          const triggerReasons = discoveryTier === "tier1" ? [universeTierById.get(coinId)?.reason ?? "saved T1 universe assignment"] : [universeTierById.get(coinId)?.reason ?? "ranked-catalog velocity qualification", `48H velocity ${move48h === null ? "unavailable" : `${move48h >= 0 ? "+" : ""}${move48h.toFixed(1)}%`} cleared +15% full-scoring bar independently of volume multiple`];
+          const admissionLane = admissionLaneFor({ coinId, tier1Ids, velocityIds: velocityQualifierIds });
+          const triggerReasons = discoveryTier === "tier1" ? [universeTierById.get(coinId)?.reason ?? "saved T1 universe assignment", ...(admissionLane.includes("binance_pilot") ? ["also a frozen paper-pilot-v2.1.7 Binance pilot universe member"] : [])] : velocityQualifierIds.has(coinId) ? [universeTierById.get(coinId)?.reason ?? "ranked-catalog velocity qualification", `48H velocity ${move48h === null ? "unavailable" : `${move48h >= 0 ? "+" : ""}${move48h.toFixed(1)}%`} cleared +15% full-scoring bar independently of volume multiple`] : ["paper-pilot-v2.1.7 Binance Spot admission pilot — verified frozen-universe instrument present in this run's catalog", "Frozen pilot universe (28 instruments, recorded at the 2026-10-26 activation) admitted this asset to full scoring alongside T1 and velocity; admission changes no threshold, gate, source-age rule, or level rule"];
           const socialSnapshot = elfaSocial ? { ...elfaSocial, asOf: startedAt.toISOString(), source: "Elfa AI" } : null;
           const laneReasons = discoveryLane === "meme" ? ["MEME LANE: category-confirmed micro-cap", `Elfa mindshare first validator ${elfaSocial?.changePercent === null || elfaSocial?.changePercent === undefined ? "triggered" : `${elfaSocial.changePercent >= 0 ? "+" : ""}${elfaSocial.changePercent.toFixed(1)}%`}`, "Nansen netflow pending on-demand deep research", "Holder-growth confirmation pending or unavailable", "Volume excluded from validation"] : [];
           const publishedDirection = discoveryLane === "meme" ? "watch" as const : direction;
           const shortRegimeGate = evaluateShortRegimeGate(price, dailyChart.closes, dailyChart.highs);
-          return { coinId, name: String(row.name), symbol, rank: rank === null ? null : Math.round(rank), sector: marketBucket, direction: publishedDirection, alignment: gate.alignment, confidenceTier: discoveryLane === "meme" ? "low" as const : confidenceTier, passedDimensions: gate.passed, researchState: discoveryLane === "meme" ? "monitor" as const : researchState, dimensions: gate.dimensions, contradictions: gate.contradictions, glance, discoveryTier, discoveryLane, socialSnapshot, triggerReasons, invalidationLevel, sourceAsOf, setupType, price, priceObservedAt: typeof row.last_updated === "string" && Number.isFinite(Date.parse(row.last_updated)) ? row.last_updated as string : null, change1h: changes.h1, change24h: changes.h24, change7d: changes.d7, change14d: changes.d14, change30d: changes.d30, change200d: changes.d200, change48h: move48h, turnover, volume24h, marketCap, funding, openInterestUsd, signalDayCandle: null as SignalDayCandle | null, shortRegimeGate, suppressionReason: null as string | null, reasons: [...laneReasons, `${discoveryTier === "tier1" ? "Tier 1" : "Velocity qualifier"}: ${triggerReasons.join(", ")}.`, ...reasons, `${gate.passed}/5 severe gates passed; ${gate.contradictions} contradictory gates.`], activityScore };
+          return { coinId, name: String(row.name), symbol, rank: rank === null ? null : Math.round(rank), sector: marketBucket, direction: publishedDirection, alignment: gate.alignment, confidenceTier: discoveryLane === "meme" ? "low" as const : confidenceTier, passedDimensions: gate.passed, researchState: discoveryLane === "meme" ? "monitor" as const : researchState, dimensions: gate.dimensions, contradictions: gate.contradictions, glance, discoveryTier, admissionLane, discoveryLane, socialSnapshot, triggerReasons, invalidationLevel, sourceAsOf, setupType, price, priceObservedAt: typeof row.last_updated === "string" && Number.isFinite(Date.parse(row.last_updated)) ? row.last_updated as string : null, change1h: changes.h1, change24h: changes.h24, change7d: changes.d7, change14d: changes.d14, change30d: changes.d30, change200d: changes.d200, change48h: move48h, turnover, volume24h, marketCap, funding, openInterestUsd, signalDayCandle: null as SignalDayCandle | null, shortRegimeGate, suppressionReason: null as string | null, reasons: [...laneReasons, `${discoveryTier === "tier1" ? "Tier 1" : admissionLane.includes("binance_pilot") && !admissionLane.includes("velocity") ? "Binance pilot (paper-pilot-v2.1.7)" : "Velocity qualifier"}: ${triggerReasons.join(", ")}.`, ...reasons, `${gate.passed}/5 severe gates passed; ${gate.contradictions} contradictory gates.`], activityScore };
         });
+        // Q1: per-candidate per-input freshness records. Required inputs:
+        // catalog price and sparkline (both from the catalog row, timed by
+        // its last_updated source time against the existing 30-minute
+        // decision-input rule). Optional input: Hyperliquid funding/OI.
+        // A stale/missing REQUIRED input defers the candidate in the
+        // scoring worker with the missing-input reason — it is never
+        // scored around into an abstain.
+        for (const row of scanUniverse) {
+          const coinId = String((row as any).id);
+          const candidate = candidates.find((c) => c.coinId === coinId);
+          if (!candidate || candidate.direction === "watch") continue;
+          const sourceMs = typeof (row as any).last_updated === "string" && Number.isFinite(Date.parse((row as any).last_updated)) ? Date.parse((row as any).last_updated) : null;
+          const sparklinePrices = Array.isArray((row as any).sparkline_in_7d?.price) ? (row as any).sparkline_in_7d.price : [];
+          const records: InputFreshnessRecord[] = [
+            buildInputFreshnessRecord({ input: "catalog price", requirement: "required", sourceTimeMs: candidate.price !== null ? sourceMs : null, fetchTimeMs: startedAt.getTime(), maxAgeMs: DECISION_INPUT_MAX_AGE_MS, detail: candidate.price !== null ? undefined : "catalog price: no usable price on the catalog row — input unavailable." }),
+            buildInputFreshnessRecord({ input: "sparkline", requirement: "required", sourceTimeMs: sparklinePrices.length ? sourceMs : null, fetchTimeMs: startedAt.getTime(), maxAgeMs: DECISION_INPUT_MAX_AGE_MS, detail: sparklinePrices.length ? undefined : "sparkline: catalog row carries no sparkline — input unavailable." }),
+            buildInputFreshnessRecord({ input: "Hyperliquid funding/OI", requirement: "optional", sourceTimeMs: candidate.funding !== null || candidate.openInterestUsd !== null ? startedAt.getTime() : null, fetchTimeMs: startedAt.getTime(), maxAgeMs: DECISION_INPUT_MAX_AGE_MS }),
+          ];
+          perCandidateFreshness.set(coinId, records);
+          inputFreshness.push(...records.map((record) => ({ ...record, input: `${candidate.symbol} ${record.input}` })));
+        }
         // VETO-1 observation wiring fix (2026-10-16): the scan price is
         // pre-decision by construction (observed during the catalog fetch,
         // before startedAt) and can never satisfy the post-decision-only quote
@@ -9008,12 +9697,27 @@ export const Actions = {
         try {
           const directionalCoinIds = [...new Set(candidates.filter((c) => c.direction !== "watch" && c.price !== null).map((c) => c.coinId))];
           const quotePollDelaysMs = [0, 10_000, 25_000];
+          const quotePollStartedAtMs = Date.now();
           for (let attempt = 0; attempt < quotePollDelaysMs.length && directionalCoinIds.length > 0; attempt++) {
+            // Bounded poll (run-186 repair): no new round starts past the
+            // poll deadline, so the poll can never consume the scoring
+            // section. Quotes already collected stand; the rest defer
+            // per candidate through the veto's fail-closed UNKNOWN path.
+            if (attempt > 0 && Date.now() - quotePollStartedAtMs >= DISCOVERY_VETO_POLL_DEADLINE_MS) break;
             const delay = quotePollDelaysMs[attempt] ?? 0;
-            if (delay > 0) await new Promise((resolve) => setTimeout(resolve, delay));
+            if (delay > 0) await new Promise((resolve) => setTimeout(resolve, Math.min(delay, Math.max(0, DISCOVERY_VETO_POLL_DEADLINE_MS - (Date.now() - quotePollStartedAtMs)))));
             const unadmitted = directionalCoinIds.filter((coinId) => { const quote = vetoQuoteByCoinId.get(coinId); return !quote || quote.observedAt === null || Date.parse(quote.observedAt) < startedAt.getTime(); });
             if (!unadmitted.length) break;
-            const freshRaw = await getJson(`${CG}/coins/markets?vs_currency=usd&ids=${unadmitted.map((id) => encodeURIComponent(id)).join(",")}&sparkline=false`).catch(() => null);
+            const pollRemainingMs = Math.max(1_000, DISCOVERY_VETO_POLL_DEADLINE_MS - (Date.now() - quotePollStartedAtMs));
+            // Q3: the poll runs through settleFeedWithAbort — the deadline
+            // passes an AbortSignal into the transport (getJson →
+            // sourceFetch links it into the fetch), so a timeout actually
+            // cancels the underlying request, and the timing record
+            // (operation, startedAt, durationMs, timeoutMs, outcome,
+            // cancelled) lands in the run's timing records. The 45s poll
+            // deadline itself is unchanged.
+            const pollSettlement = await settleFeedWithAbort("veto quote poll", pollRemainingMs, (signal) => getJson(`${CG}/coins/markets?vs_currency=usd&ids=${unadmitted.map((id) => encodeURIComponent(id)).join(",")}&sparkline=false`, signal).catch(() => null), runTiming);
+            const freshRaw = pollSettlement.status === "available" ? pollSettlement.value : null;
             if (!Array.isArray(freshRaw)) continue;
             const freshReceivedAt = new Date().toISOString();
             for (const qr of freshRaw) {
@@ -9028,23 +9732,69 @@ export const Actions = {
             }
           }
         } catch { /* fail-closed: map stays partial → veto UNKNOWN */ }
-        const issuanceCheckedCandidates = await mapWithConcurrency(candidates, 6, async (row) => {
+        // Run-186 repair: this section previously ran with NO stage budget,
+        // NO intermediate heartbeat, and NO lease assertion until every
+        // candidate finished — while each candidate's evidence load chains
+        // many transport-bounded calls (a cold history-cache backfill alone
+        // runs up to 12 sequential pages, and one leg, fetchMexcKlines,
+        // carried no timeout at all). A stall anywhere in it froze the
+        // run's heartbeat at the preceding "hyperliquid" checkpoint until
+        // the worker died: run 186's exact signature. The section now runs
+        // under the scoring stage budget (runBudgetedChecks); each
+        // candidate's evidence load carries its own aggregate deadline and
+        // a miss defers that candidate with the reason (a required feed —
+        // never scored around, fail-closed veto unchanged); candidates the
+        // budget never reaches are deferred with the budget reason; and
+        // chunk progress heartbeats land on the scoring checkpoint so the
+        // lease keeps asserting — and fencing — throughout.
+        const scoringDeferralReason = scoringBudgetDeferralReason("post-decision evidence (history cache + OHLC)", DISCOVERY_STAGE_BUDGET_MS.scoring);
+        const budgetedChecks = await runBudgetedChecks({
+          items: candidates,
+          keyOf: (row) => row.coinId,
+          budgetMs: DISCOVERY_STAGE_BUDGET_MS.scoring,
+          concurrency: 6,
+          onProgress: (completed) => {
+            if (completed % 6 !== 0) return;
+            void discoveryCheckpoint(ctx, lease, "scoring", stageStartedAt, stageDurations, { scored: candidates.length, checksCompleted: completed, checksTotal: candidates.length, partial: completed < candidates.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) }).catch(() => { /* intermediate checkpoint is best-effort; the stage-end checkpoint is authoritative */ });
+          },
+          worker: async (row, control) => {
           if (row.direction === "watch") return row;
+          const dir: "long" | "short" = row.direction;
           const decisionMs = startedAt.getTime();
+          // Q1: a stale/missing REQUIRED input (catalog price, sparkline,
+          // or decision inputs older than the existing 30-minute rule)
+          // defers this candidate with the missing-input reason — the
+          // evidence load is skipped and the candidate is never scored
+          // around the gap into an abstain.
+          const freshnessRecords = perCandidateFreshness.get(row.coinId) ?? [];
+          const freshnessDisposition = candidateFreshnessDisposition(freshnessRecords);
+          const freshnessDeferral = freshnessDisposition.disposition === "defer" ? freshnessDisposition.deferReason : null;
           // VETO-1: pre-decision candle is context only; the veto runs on the
           // post-decision slice + the scan-price quote analog.
-          let { candle, postDecision: coarsePostDecision } = await loadIssuanceSignalDayCandle(ctx, row.coinId, row.symbol, decisionMs);
-          if (!coarsePostDecision) {
-            // Evidence-supply repair (2026-10-23): the OHLC slice rides one
-            // upstream call; a transient 429/timeout nulls the slice and the
-            // veto reports coverage UNKNOWN even when the quote was admitted
-            // and current price passes (stored proof: quoteAdmitted true,
-            // currentPriceStatus pass, postDecisionCoverage null). One
-            // bounded retry after a short pause supplies the slice in the
-            // common transient case; a second failure stays UNKNOWN —
-            // fail-closed is unchanged.
-            await new Promise((resolve) => setTimeout(resolve, 3_000));
-            ({ candle, postDecision: coarsePostDecision } = await loadIssuanceSignalDayCandle(ctx, row.coinId, row.symbol, decisionMs));
+          let candle: SignalDayCandle | null = null;
+          let coarsePostDecision: PostDecisionSlice | null = null;
+          let evidenceDeferral: string | null = null;
+          if (!freshnessDeferral) try {
+            const evidence = await withNamedTimeout(`issuance evidence ${row.symbol}`, DISCOVERY_CANDIDATE_EVIDENCE_TIMEOUT_MS, (async () => {
+              let loaded = await loadIssuanceSignalDayCandle(ctx, row.coinId, row.symbol, decisionMs);
+              if (!loaded.postDecision) {
+                // Evidence-supply repair (2026-10-23): the OHLC slice rides one
+                // upstream call; a transient 429/timeout nulls the slice and the
+                // veto reports coverage UNKNOWN even when the quote was admitted
+                // and current price passes (stored proof: quoteAdmitted true,
+                // currentPriceStatus pass, postDecisionCoverage null). One
+                // bounded retry after a short pause supplies the slice in the
+                // common transient case; a second failure stays UNKNOWN —
+                // fail-closed is unchanged.
+                await new Promise((resolve) => setTimeout(resolve, 3_000));
+                loaded = await loadIssuanceSignalDayCandle(ctx, row.coinId, row.symbol, decisionMs);
+              }
+              return loaded;
+            })());
+            candle = evidence.candle; coarsePostDecision = evidence.postDecision;
+          } catch (error) {
+            if (!(error instanceof NamedTimeoutError)) throw error;
+            evidenceDeferral = requiredFeedDeferralReason("post-decision evidence (history cache + OHLC)", error.message);
           }
           // VETO-1 (2026-10-16): the scan price is pre-decision by construction
           // and inadmissible as post-decision evidence — the fresh batch quote
@@ -9053,14 +9803,26 @@ export const Actions = {
           // entry price, when issued, remains the decision-time scan price.
           const scanQuote: VetoQuote | null = vetoQuoteByCoinId.get(row.coinId) ?? null;
           const quoteMs = scanQuote === null ? null : Date.parse(scanQuote.receivedAt);
-          const postDecision = quoteMs !== null && Number.isFinite(quoteMs)
+          const postDecision = freshnessDeferral ? null : quoteMs !== null && Number.isFinite(quoteMs)
             ? await augmentPostDecisionWithVenueKlines(row.coinId, decisionMs, quoteMs, coarsePostDecision)
             : coarsePostDecision;
+          // Q1: level-construction record for this candidate — candle
+          // interval, completed/forming state, last included observation,
+          // and the decision reference timestamp; observations after the
+          // decision are excluded and recorded as excluded.
+          const levelRecord = coarsePostDecision && coarsePostDecision.intervals.length
+            ? buildLevelConstructionRecord({ candles: coarsePostDecision.intervals.map((iv) => ({ startMs: Date.parse(iv.start), endMs: Date.parse(iv.end) })), decisionTimeMs: decisionMs })
+            : null;
           const veto = row.invalidationLevel === null
             ? { publish: false as const, status: "unknown" as const, currentPriceStatus: "unknown" as const, intervalCoverageStatus: "unknown" as const, reason: "issuance-validation unavailable: invalidation missing", quoteAdmission: { admitted: false, price: null, reason: "invalidation missing" }, admittedHighs: [] as Array<{ value: number; intervalStart: string; intervalEnd: string; venue: string }>, admittedLows: [] as Array<{ value: number; intervalStart: string; intervalEnd: string; venue: string }>, foldedHigh: null, foldedLow: null, admissibleIntervalCount: 0, straddlingDecision: [], straddlingEntry: [] }
             : evaluateBornDead(row.direction, row.invalidationLevel, { postDecision, quote: scanQuote, contextCandle: candle }, decisionMs);
-          const suppressionReason = !veto.publish ? veto.reason : row.direction === "short" && !row.shortRegimeGate.allowed ? row.shortRegimeGate.reason : null;
-          if (suppressionReason) await logSuppressedSignal(ctx, { coinId: row.coinId, name: row.name, symbol: row.symbol, direction: row.direction, source: "market_discovery", reason: suppressionReason, signalDay: candle?.day ?? utcDay(startedAt.getTime()), entry: row.price, invalidation: row.invalidationLevel, candle, metadata: { discoveryTier: row.discoveryTier, triggerReasons: row.triggerReasons, change48h: row.change48h, alignment: row.alignment, shortRegimeGate: row.shortRegimeGate, issuancePath: "runMarketDiscovery → issuanceCheckedCandidates", ...buildVetoMetadataFragment({ direction: row.direction, invalidation: row.invalidationLevel ?? Number.NaN, decisionMs, contextCandle: candle, postDecision, quote: scanQuote, result: veto }) } });
+          const suppressionReason = freshnessDeferral ?? evidenceDeferral ?? (!veto.publish ? veto.reason : row.direction === "short" && !row.shortRegimeGate.allowed ? row.shortRegimeGate.reason : null);
+          // Run-scoped writes are skipped once the scoring budget has fired:
+          // the run has already moved on with this candidate deferred, and a
+          // late background worker must not write into a fenced run. Q3:
+          // guardedWrite performs that budget/lease check before writing
+          // and records the skip in the run's timing records.
+          if (suppressionReason) await guardedWrite(runTiming, { operation: "suppressed-signal write", timeoutMs: DISCOVERY_STAGE_BUDGET_MS.scoring, state: { budgetFired: control.aborted(), leaseFenced: false } }, async () => { await logSuppressedSignal(ctx, { coinId: row.coinId, name: row.name, symbol: row.symbol, direction: dir, source: "market_discovery", reason: suppressionReason, signalDay: candle?.day ?? utcDay(startedAt.getTime()), entry: row.price, invalidation: row.invalidationLevel, candle, metadata: { discoveryTier: row.discoveryTier, admissionLane: row.admissionLane, triggerReasons: row.triggerReasons, change48h: row.change48h, alignment: row.alignment, shortRegimeGate: row.shortRegimeGate, issuancePath: "runMarketDiscovery → issuanceCheckedCandidates", inputFreshness: freshnessRecords, levelConstruction: levelRecord, ...buildVetoMetadataFragment({ direction: dir, invalidation: row.invalidationLevel ?? Number.NaN, decisionMs, contextCandle: candle, postDecision, quote: scanQuote, result: veto }) } }); });
           // Discovery informational notification lane (2026-10-16): a
           // discovery-qualified directional candidate blocked from paper
           // issuance is eligible for an INFORMATIONAL chat notification. The
@@ -9068,14 +9830,14 @@ export const Actions = {
           // never issues, grades, or revives a candidate; it only notifies.
           // Discovery qualification rules are unchanged (this row reached the
           // issuance veto, i.e. it passed scoring).
-          if (suppressionReason) {
-            const disclosure = `INFORMATIONAL ONLY — not a trade signal, not a paper entry. ${row.name} (${row.symbol}) ${row.direction.toUpperCase()} qualified in discovery run ${lease.runId} but paper issuance is BLOCKED: ${suppressionReason}`;
+          if (suppressionReason) await guardedWrite(runTiming, { operation: "discovery informational notification write", timeoutMs: DISCOVERY_STAGE_BUDGET_MS.scoring, state: { budgetFired: control.aborted(), leaseFenced: false } }, async () => {
+            const disclosure = `INFORMATIONAL ONLY — not a trade signal, not a paper entry. ${row.name} (${row.symbol}) ${dir.toUpperCase()} qualified in discovery run ${lease.runId} but paper issuance is BLOCKED: ${suppressionReason}`;
             await ctx.db<typeof schema>().insert(schema.discoveryInformationalNotifications).values({
               kind: "INFORMATIONAL",
               coinId: row.coinId,
               symbol: row.symbol,
               name: row.name,
-              direction: row.direction,
+              direction: dir,
               entry: row.price,
               invalidation: row.invalidationLevel,
               target1: null,
@@ -9094,9 +9856,52 @@ export const Actions = {
               expiresAt: null,
               chatSentAt: null,
             });
-          }
+          });
           return { ...row, signalDayCandle: candle, suppressionReason };
+          },
         });
+        if (budgetedChecks.budgetExhausted) {
+          sourceStatus.push({ source: "scoring", status: "unavailable", detail: `${stageBudgetExhaustedDetail("scoring", DISCOVERY_STAGE_BUDGET_MS.scoring)}; ${budgetedChecks.deferredKeys.length} candidate(s) deferred with the reason, not evaluated this run.` });
+          stageBudgetExhausted = true;
+        }
+        const issuanceCheckedCandidates = candidates.map((row) => {
+          const checked = budgetedChecks.results.get(row.coinId);
+          if (checked) return checked;
+          // Never reached before the scoring budget fired: deferred with
+          // the reason — recorded in the handoff and the funnel accounting
+          // exactly like a veto block, never silently dropped.
+          if (row.direction === "watch") return row;
+          return { ...row, signalDayCandle: null as SignalDayCandle | null, suppressionReason: scoringDeferralReason };
+        });
+        // Deferred candidates receive the same suppressed-signal accounting
+        // and informational disclosure as veto-blocked ones (their worker
+        // never ran, so the writes happen here).
+        for (const row of issuanceCheckedCandidates) {
+          if (row.direction === "watch" || row.suppressionReason !== scoringDeferralReason) continue;
+          await logSuppressedSignal(ctx, { coinId: row.coinId, name: row.name, symbol: row.symbol, direction: row.direction, source: "market_discovery", reason: scoringDeferralReason, signalDay: utcDay(startedAt.getTime()), entry: row.price, invalidation: row.invalidationLevel, candle: null, metadata: { discoveryTier: row.discoveryTier, admissionLane: row.admissionLane, triggerReasons: row.triggerReasons, change48h: row.change48h, alignment: row.alignment, shortRegimeGate: row.shortRegimeGate, issuancePath: "runMarketDiscovery → issuanceCheckedCandidates (deferred: scoring stage budget)", deferred: true } });
+          const disclosure = `INFORMATIONAL ONLY — not a trade signal, not a paper entry. ${row.name} (${row.symbol}) ${row.direction.toUpperCase()} qualified in discovery run ${lease.runId} but paper issuance is BLOCKED: ${scoringDeferralReason}`;
+          await db.insert(schema.discoveryInformationalNotifications).values({
+            kind: "INFORMATIONAL",
+            coinId: row.coinId,
+            symbol: row.symbol,
+            name: row.name,
+            direction: row.direction,
+            entry: row.price,
+            invalidation: row.invalidationLevel,
+            target1: null,
+            target2: null,
+            triggerReasonsJson: JSON.stringify(row.triggerReasons),
+            blockerReason: scoringDeferralReason,
+            disclosure,
+            discoveryRunId: lease.runId,
+            signalDay: utcDay(startedAt.getTime()),
+            status: "pending",
+            createdAt: new Date(),
+            sentAt: null,
+            expiresAt: null,
+            chatSentAt: null,
+          });
+        }
         const tierRank = { high: 3, medium: 2, low: 1 } as const;
         const suppressedCandidates = issuanceCheckedCandidates.filter((row) => row.direction !== "watch" && row.suppressionReason !== null);
         const eligibleCandidates = issuanceCheckedCandidates.filter((row) => row.suppressionReason === null && row.sourceAsOf instanceof Date && Date.now() - row.sourceAsOf.getTime() <= 30 * 60_000 && row.price !== null && (row.discoveryLane === "meme" ? row.marketCap !== null && row.marketCap >= 2_000_000 && row.marketCap <= 250_000_000 && row.socialSnapshot !== null : row.volume24h !== null && row.volume24h >= 5_000_000 && row.marketCap !== null && row.marketCap >= 25_000_000 && row.openInterestUsd !== null && row.openInterestUsd >= 1_000_000 && row.funding !== null));
@@ -9148,6 +9953,17 @@ export const Actions = {
         const omittedCandidates = discoveryResearchPool.filter((row) => !researchCandidates.includes(row));
         if (omittedCandidates.length) sourceStatus.push({ source: "Research synthesis", status: "live", detail: `Evidence budget: showing ${researchCandidates.length} of ${discoveryResearchPool.length} candidates; omitted: ${omittedCandidates.map((row) => `${row.symbol}(${row.direction})`).join(", ")} — beyond the 18-candidate prompt budget; shortlist order (tier, alignment, activity) unchanged.` });
         sourceStatus.push({ source: "Linked news search", status: newsRows.length ? "live" : "unavailable", detail: newsRows.length ? `${newsRows.length} unique linked results retained from market, sector and institutional searches.` : "No linked news results returned; signal scoring can continue without news synthesis." });
+        // Q1/Q3 inspection surface: the run's per-input freshness records
+        // and per-fetch/per-checkpoint timing records ride in the run's
+        // source status (persisted on this checkpoint and the final run
+        // row). Checkpoint timings are recorded from the stage durations
+        // this run already measured; fetch timings (veto quote poll,
+        // guarded-write skips) were recorded as they happened.
+        for (const [stage, durationMs] of Object.entries(stageDurations)) {
+          runTiming.record({ operation: `checkpoint:${stage}`, startedAtMs: Date.now() - durationMs, endedAtMs: Date.now(), timeoutMs: DISCOVERY_STAGE_BUDGET_MS[stage as DiscoveryStage] ?? 0, outcome: "completed", cancelled: false, cancellation: "not_needed", cancellationNote: null });
+        }
+        sourceStatus.push({ source: "Per-input freshness (Q1)", status: "live", detail: JSON.stringify(inputFreshness.slice(0, 120)) });
+        sourceStatus.push({ source: "Fetch & checkpoint timing (Q3)", status: "live", detail: JSON.stringify(runTiming.records.slice(0, 120)) });
         await discoveryCheckpoint(ctx, lease, "scoring", stageStartedAt, stageDurations, { scored: candidates.length, eligible: eligibleCandidates.length, retained: retainedSignals.length, suppressed: suppressedCandidates.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
         stageStartedAt = Date.now();
         // Ordering repair (2026-10-23): research synthesis runs BEFORE the
@@ -9241,15 +10057,15 @@ export const Actions = {
               const reason = /timeout/i.test(row.detail) ? (row.source === "Research synthesis" ? "inference timed out" : "timed out") : /hard stop|hard cap|graceful-degradation/i.test(row.detail) ? "budget cap reached" : row.source === "Research synthesis" ? (row.detail.length > 64 ? `${row.detail.slice(0, 61).trimEnd()}...` : row.detail.replace(/\.$/, "")) : "";
               return `${row.source.charAt(0).toLowerCase()}${row.source.slice(1)} unavailable${reason ? ` (${reason})` : ""}`;
             }).join("; ")}; ${sourceStatus.length - summaryUnavailableSources.length}/${sourceStatus.length} sources live.`;
-        const populatedSummary = `Discovery run ${lease.runId} (${runStatus}): ${universe.length}-asset catalog → ${scannedTier1Count} saved-T1 + ${velocityQualifierCount} velocity qualifiers → ${candidates.length} scored (${summaryChartFetched} fetched, ${summaryChartFailed} chart-failed) → ${eligibleCandidates.length} passed the discovery bar (${mainCount} main, ${memeCount} meme) → ${suppressedCandidates.length} veto suppressions → ${retainedSignals.length} retained (${retainedSignals.filter((row) => row.confidenceTier === "high").length} high / ${retainedSignals.filter((row) => row.confidenceTier === "medium").length} medium / ${retainedSignals.filter((row) => row.confidenceTier === "low").length} low). ${degradationReason} Catalog provenance: ${discoveryCatalog?.provenance ?? "unavailable"}.`;
+        const populatedSummary = `Discovery run ${lease.runId} (${runStatus}): ${universe.length}-asset catalog → ${scannedTier1Count} saved-T1 + ${velocityQualifierCount} velocity qualifiers + ${pilotAdmittedCount} Binance pilot admissions under ${admissionVersion} (${pilotOnlyAdmittedCount} pilot-only; ${pilotMissingDeferred.length} frozen-universe assets explicitly deferred — not present in catalog) → ${candidates.length} scored (${summaryChartFetched} fetched, ${summaryChartFailed} chart-failed) → ${eligibleCandidates.length} passed the discovery bar (${mainCount} main, ${memeCount} meme) → ${suppressedCandidates.length} veto suppressions → ${retainedSignals.length} retained (${retainedSignals.filter((row) => row.confidenceTier === "high").length} high / ${retainedSignals.filter((row) => row.confidenceTier === "medium").length} medium / ${retainedSignals.filter((row) => row.confidenceTier === "low").length} low). ${degradationReason} Catalog provenance: ${discoveryCatalog?.provenance ?? "unavailable"}.`;
         const runSummary = runStatus === "empty" ? `Healthy empty discovery run: ${tierLaneStatus}; ${velocityLaneStatus}; valid ${universe.length}-asset catalog produced 0 T1 intersections and 0 velocity qualifiers. No thresholds changed and no expired candidate was revived.` : populatedSummary;
         const runId = lease.runId;
         await assertDiscoveryLease(ctx, lease);
-        await db.update(schema.marketDiscoveryRuns).set({ universeSize: scanUniverse.length, shortlisted: retainedSignals.length, signalCount: retainedSignals.length, newsCount: synthesis.news.length, theoryCount: synthesis.theories.length, summary: runSummary, sourceStatusJson: JSON.stringify(sourceStatus), tierLaneStatus, velocityLaneStatus, stageDurationsJson: stableJson(stageDurations), completedAt: now }).where(and(eq(schema.marketDiscoveryRuns.id, runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running")));
+        await db.update(schema.marketDiscoveryRuns).set({ universeSize: scanUniverse.length, shortlisted: retainedSignals.length, signalCount: retainedSignals.length, newsCount: synthesis.news.length, theoryCount: synthesis.theories.length, summary: runSummary, sourceStatusJson: JSON.stringify(sourceStatus), tierLaneStatus, velocityLaneStatus, admissionVersion, pilotUniverseJson, pilotLaneStatus, stageDurationsJson: stableJson(stageDurations), completedAt: now }).where(and(eq(schema.marketDiscoveryRuns.id, runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running")));
         await db.insert(schema.discoveryState).values({ key: "rotation_leaders", valueJson: JSON.stringify([...currentLeaderIds].sort()), updatedAt: now }).onConflictDoUpdate({ target: schema.discoveryState.key, set: { valueJson: JSON.stringify([...currentLeaderIds].sort()), updatedAt: now } });
         for (const row of retainedSignals) {
           const existing = priorDiscovery.find((signal) => signal.coinId === row.coinId);
-          const currentValues = { runId, latestRunId: runId, name: row.name, symbol: row.symbol, rank: row.rank, sector: row.sector, direction: row.direction, alignment: row.alignment, confidenceTier: row.confidenceTier, passedDimensions: row.passedDimensions, researchState: row.researchState, dimensionsJson: JSON.stringify(row.dimensions), discoveryTier: row.discoveryTier, discoveryLane: row.discoveryLane, triggerReasonsJson: JSON.stringify(row.triggerReasons), socialSnapshotJson: row.socialSnapshot ? JSON.stringify(row.socialSnapshot) : null, invalidationLevel: row.invalidationLevel, sourceAsOf: row.sourceAsOf, setupType: row.setupType, price: row.price, change1h: row.change1h, change24h: row.change24h, change7d: row.change7d, change30d: row.change30d, turnover: row.turnover, volume24h: row.volume24h, marketCap: row.marketCap, funding: row.funding, openInterestUsd: row.openInterestUsd, reasonsJson: JSON.stringify(row.reasons), capturedAt: now };
+          const currentValues = { runId, latestRunId: runId, name: row.name, symbol: row.symbol, rank: row.rank, sector: row.sector, direction: row.direction, alignment: row.alignment, confidenceTier: row.confidenceTier, passedDimensions: row.passedDimensions, researchState: row.researchState, dimensionsJson: JSON.stringify(row.dimensions), discoveryTier: row.discoveryTier, admissionLane: row.admissionLane, discoveryLane: row.discoveryLane, triggerReasonsJson: JSON.stringify(row.triggerReasons), socialSnapshotJson: row.socialSnapshot ? JSON.stringify(row.socialSnapshot) : null, invalidationLevel: row.invalidationLevel, sourceAsOf: row.sourceAsOf, setupType: row.setupType, price: row.price, change1h: row.change1h, change24h: row.change24h, change7d: row.change7d, change30d: row.change30d, turnover: row.turnover, volume24h: row.volume24h, marketCap: row.marketCap, funding: row.funding, openInterestUsd: row.openInterestUsd, reasonsJson: JSON.stringify(row.reasons), capturedAt: now };
           if (existing) await db.update(schema.discoverySignals).set(currentValues).where(eq(schema.discoverySignals.id, existing.id));
           else await db.insert(schema.discoverySignals).values({ ...currentValues, firstSeenRunId: runId, coinId: row.coinId, firstSeenPrice: row.price, firstSeenDirection: row.direction, firstSeenSourceAsOf: row.sourceAsOf });
         }
@@ -9282,11 +10098,23 @@ export const Actions = {
           if (eligibleIds.has(coinId)) return { coinId, symbol, status: "excluded", stage: "evidence_ledger", reason: "Eligible candidate did not carry a complete factor-evidence ledger.", attempts: chart.attempts };
           return { coinId, symbol, status: "excluded", stage: "strategy_eligibility", reason: "Chart fetched and normalized, but existing freshness/liquidity/market-cap/perpetual-context strategy eligibility was not satisfied.", attempts: chart.attempts };
         });
+        // paper-pilot-v2.1.7: a frozen-universe asset absent from this
+        // run's catalog gets an explicit deferred scan item — it flows
+        // into the funnel accounting and the paper handoff snapshot as
+        // a recorded deferral, never a silent drop and never a model
+        // abstention. Present pilot members already carry their scan
+        // disposition above.
+        for (const entry of pilotMissingDeferred) {
+          scanItems.push({ coinId: entry.coinId, symbol: entry.symbol, status: "excluded", stage: "pilot_admission", reason: "Frozen paper-pilot-v2.1.7 universe asset not present in this run's catalog — explicitly deferred (not evaluated this run); never silently dropped and never read as a model abstention.", attempts: [] });
+        }
+        pilotRecord = buildPilotRunRecord({ catalogCoinIds, tier1Ids, velocityIds: velocityQualifierIds, scanDispositionByCoinId: new Map(scanItems.map((item) => [item.coinId, { status: item.status, stage: item.stage, reason: item.reason }])) });
+        pilotUniverseJson = stableJson(pilotRecord);
+        pilotLaneStatus = `active(${PILOT_V217_VERSION} frozen Binance universe: ${pilotRecord.universeCount} recorded; ${pilotRecord.presentSymbols.length} present, ${pilotRecord.evaluatedCount} evaluated with a scan disposition, ${pilotRecord.deferredCount} explicitly deferred — not in catalog, ${pilotRecord.pilotOnlyAdmittedSymbols.length} pilot-only admissions, ${pilotRecord.unexplainedOmissions} unexplained omissions)`;
         const accounting = { requested: scanItems.length, fetched: fetchedCount, dataValid: fetchedCount, eligible: eligibleCandidates.length, scored: candidates.length, emitted: scanItems.filter((row) => row.status === "emitted").length, suppressed: scanItems.filter((row) => row.status === "suppressed").length, excluded: scanItems.filter((row) => row.status === "excluded").length, failed: scanItems.filter((row) => row.status === "failed").length };
         const reasonCounts = scanItems.reduce<Record<string, number>>((counts, row) => { const key = `${row.status}:${row.stage}`; counts[key] = (counts[key] ?? 0) + 1; return counts; }, {});
         await assertDiscoveryLease(ctx, lease);
         const operationStatus: "complete" | "degraded" = runStatus === "empty" ? "complete" : runStatus;
-        await db.insert(schema.scanOperations).values({ scanKey: `market-discovery:${startedAt.toISOString()}`, strategyId: "crypto-market-discovery", strategyVersion: PHASE1_SOURCE_VERSION, status: operationStatus, requestedCount: scanUniverse.length, fetchedCount, eligibleCount: eligibleCandidates.length, scoredCount: candidates.length, watchedCount, issuedCount, suppressedCount: suppressedCandidates.length, reasonCountsJson: stableJson(reasonCounts), lastAttemptAt: startedAt, lastSuccessAt: now, checkpointJson: stableJson({ stage: "complete", runId, sourceStatus, accounting, items: scanItems }), createdAt: now });
+        try { await db.insert(schema.scanOperations).values({ scanKey: `market-discovery:${startedAt.toISOString()}`, strategyId: "crypto-market-discovery", strategyVersion: PHASE1_SOURCE_VERSION, status: operationStatus, requestedCount: scanUniverse.length, fetchedCount, eligibleCount: eligibleCandidates.length, scoredCount: candidates.length, watchedCount, issuedCount, suppressedCount: suppressedCandidates.length, reasonCountsJson: stableJson(reasonCounts), lastAttemptAt: startedAt, lastSuccessAt: now, checkpointJson: stableJson({ stage: "complete", runId, sourceStatus, accounting, items: scanItems }), createdAt: now }); } catch (scanWriteError) { await recordWriteFailure(ctx, { lane: "discovery", tableName: "scan_operations", statementKind: "insert", runId, attemptedKey: `market-discovery:${startedAt.toISOString()}`, error: scanWriteError, context: { stage: "persistence" } }); throw scanWriteError; }
         const linkedDiscoveryRows = await db.select({ id: schema.discoverySignals.id, coinId: schema.discoverySignals.coinId }).from(schema.discoverySignals).where(eq(schema.discoverySignals.latestRunId, runId));
         const discoveryIdByCoin = new Map(linkedDiscoveryRows.map((row) => [row.coinId, row.id]));
         await assertDiscoveryLease(ctx, lease);
@@ -9296,10 +10124,10 @@ export const Actions = {
           scanItems,
           accounting,
           reasonCounts,
-          candidates: issuanceCheckedCandidates.map((row) => ({ coinId: row.coinId, name: row.name, symbol: row.symbol, direction: row.direction, price: row.price, invalidationLevel: row.invalidationLevel, sourceAsOf: row.sourceAsOf, capturedAt: now, dimensions: row.dimensions, suppressionReason: row.suppressionReason, discoverySignalId: discoveryIdByCoin.get(row.coinId) ?? null, stage: "pre_legacy_filter", reason: row.suppressionReason ?? "Candidate reached the repaired handoff before legacy issuance filters.", driftReferenceCaptureJson: driftCaptureByCoinId.get(row.coinId) ?? null })),
+          candidates: issuanceCheckedCandidates.map((row) => ({ coinId: row.coinId, name: row.name, symbol: row.symbol, direction: row.direction, price: row.price, invalidationLevel: row.invalidationLevel, sourceAsOf: row.sourceAsOf, capturedAt: now, dimensions: row.dimensions, suppressionReason: row.suppressionReason, discoverySignalId: discoveryIdByCoin.get(row.coinId) ?? null, admissionLane: row.admissionLane, stage: "pre_legacy_filter", reason: row.suppressionReason ?? "Candidate reached the repaired handoff before legacy issuance filters.", driftReferenceCaptureJson: driftCaptureByCoinId.get(row.coinId) ?? null })),
         });
-        await discoveryCheckpoint(ctx, lease, "persistence", stageStartedAt, stageDurations, { persistedSignals: retainedSignals.length, persistedNews: synthesis.news.length, paperCandidates: issuanceCheckedCandidates.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus), summary: finalRunSummary, universeSize: scanUniverse.length, shortlisted: retainedSignals.length, signalCount: retainedSignals.length, newsCount: synthesis.news.length, theoryCount: weightedSurfaced });
-        const finalized = await db.update(schema.marketDiscoveryRuns).set({ status: runStatus, completedAt: new Date(), lastHeartbeatAt: new Date(), summary: finalRunSummary, stageDurationsJson: stableJson(stageDurations) }).where(and(eq(schema.marketDiscoveryRuns.id, runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running"))).returning({ id: schema.marketDiscoveryRuns.id });
+        await discoveryCheckpoint(ctx, lease, "persistence", stageStartedAt, stageDurations, { persistedSignals: retainedSignals.length, persistedNews: synthesis.news.length, paperCandidates: issuanceCheckedCandidates.length, pilotEvaluated: pilotRecord?.evaluatedCount ?? 0, pilotDeferred: pilotRecord?.deferredCount ?? 0, pilotUnexplainedOmissions: pilotRecord?.unexplainedOmissions ?? 0 }, { tierLaneStatus, velocityLaneStatus, admissionVersion, pilotUniverseJson, pilotLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus), summary: finalRunSummary, universeSize: scanUniverse.length, shortlisted: retainedSignals.length, signalCount: retainedSignals.length, newsCount: synthesis.news.length, theoryCount: weightedSurfaced });
+        const finalized = await db.update(schema.marketDiscoveryRuns).set({ status: runStatus, completedAt: new Date(), lastHeartbeatAt: new Date(), summary: finalRunSummary, admissionVersion, pilotUniverseJson, pilotLaneStatus, stageDurationsJson: stableJson(stageDurations) }).where(and(eq(schema.marketDiscoveryRuns.id, runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running"))).returning({ id: schema.marketDiscoveryRuns.id });
         if (finalized.length !== 1) throw new Error(`Discovery lease ${lease.leaseId} was fenced before finalization.`);
         // Batch 2 funnel instrumentation (measurement only): counters are
         // computed here, after the run is finalized, strictly from values
@@ -9359,8 +10187,19 @@ export const Actions = {
       } catch (error) {
         const completedAt = new Date(); const message = `Market discovery failed — ${compactError(error, "unknown error")}`;
         const current = (await db.select().from(schema.marketDiscoveryRuns).where(eq(schema.marketDiscoveryRuns.id, lease.runId)).limit(1))[0] ?? null;
-        if (current?.status === "running" && current.leaseId === lease.leaseId) await db.update(schema.marketDiscoveryRuns).set({ status: error instanceof NamedTimeoutError ? "timeout" : "failed", summary: error instanceof NamedTimeoutError ? namedTimeoutSummary(current.lastCheckpointStage, lease.leaseId) : message, sourceStatusJson: JSON.stringify(sourceStatus), tierLaneStatus, velocityLaneStatus, stageDurationsJson: stableJson(stageDurations), completedAt, lastHeartbeatAt: completedAt }).where(and(eq(schema.marketDiscoveryRuns.id, lease.runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running")));
-        try { await db.insert(schema.scanOperations).values({ scanKey: `market-discovery:${startedAt.toISOString()}`, strategyId: "crypto-market-discovery", strategyVersion: PHASE1_SOURCE_VERSION, status: "failed", requestedCount: 0, fetchedCount: 0, eligibleCount: 0, scoredCount: 0, watchedCount: 0, issuedCount: 0, suppressedCount: 0, reasonCountsJson: stableJson({ fatal_error: 1 }), lastAttemptAt: startedAt, lastSuccessAt: null, checkpointJson: stableJson({ stage: "failed", runId: lease.runId, message, lastCheckpoint: current?.lastCheckpointStage ?? null, stageDurations, tierLaneStatus, velocityLaneStatus, sourceStatus }), createdAt: completedAt }).onConflictDoNothing(); } catch { /* run row carries the primary failure */ }
+        // FAILURE-RECORDING ISOLATION GUARD (Q4): no discovery_state write
+        // (and no other snapshot/bookkeeping write) may precede the
+        // row-status commit below. runFailureRecordingSequence awaits the
+        // row-status step FIRST and runs snapshot bookkeeping SECOND,
+        // best-effort — the failure RECORD survives a failed snapshot
+        // write; the run still reports failed.
+        await runFailureRecordingSequence({
+          rowStatus: async () => {
+            if (current?.status === "running" && current.leaseId === lease.leaseId) await retryOnce(async () => { await db.update(schema.marketDiscoveryRuns).set({ status: error instanceof NamedTimeoutError ? "timeout" : "failed", summary: error instanceof NamedTimeoutError ? namedTimeoutSummary(current.lastCheckpointStage, lease.leaseId) : message, sourceStatusJson: JSON.stringify(sourceStatus), tierLaneStatus, velocityLaneStatus, admissionVersion, pilotUniverseJson, pilotLaneStatus, stageDurationsJson: stableJson(stageDurations), completedAt, lastHeartbeatAt: completedAt }).where(and(eq(schema.marketDiscoveryRuns.id, lease.runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running"))); });
+          },
+          snapshotBookkeeping: async () => { await db.insert(schema.scanOperations).values({ scanKey: `market-discovery:${startedAt.toISOString()}`, strategyId: "crypto-market-discovery", strategyVersion: PHASE1_SOURCE_VERSION, status: "failed", requestedCount: 0, fetchedCount: 0, eligibleCount: 0, scoredCount: 0, watchedCount: 0, issuedCount: 0, suppressedCount: 0, reasonCountsJson: stableJson({ fatal_error: 1 }), lastAttemptAt: startedAt, lastSuccessAt: null, checkpointJson: stableJson({ stage: "failed", runId: lease.runId, message, lastCheckpoint: current?.lastCheckpointStage ?? null, stageDurations, tierLaneStatus, velocityLaneStatus, sourceStatus }), createdAt: completedAt }).onConflictDoNothing(); },
+          capture: async (captureError, stage) => recordWriteFailure(ctx, { lane: "discovery", tableName: stage === "row-status" ? "market_discovery_runs" : "scan_operations", statementKind: stage === "row-status" ? "update" : "insert", runId: lease.runId, attemptedKey: stage === "row-status" ? String(lease.runId) : `market-discovery:${startedAt.toISOString()}`, error: captureError, context: { stage, originalError: fullErrorText(error) } }),
+        });
         ctx.invalidateQueries(); return { ok: false, status: "failed", runId: lease.runId, universeSize: 0, signalCount: 0, newsCount: 0, theoryCount: 0, message, computedAt: new Date().toISOString(), dataThrough: null };
       }
       });
@@ -9368,7 +10207,7 @@ export const Actions = {
   }),
 
   getMarketDiscovery: defineAction({
-    request: z.object({}), response: z.object({ run: z.any().nullable(), activeRun: z.any().nullable(), signals: z.array(z.any()), news: z.array(z.any()), previousSynthesis: z.any().nullable(), coverageGaps: z.array(z.object({ runId: z.number(), status: z.string(), startedAt: z.string(), completedAt: z.string(), summary: z.string(), failedSources: z.array(z.string()) })), error: z.string().nullable() }),
+    request: z.object({}), response: z.object({ run: z.any().nullable(), activeRun: z.any().nullable(), signals: z.array(z.any()), news: z.array(z.any()), previousSynthesis: z.any().nullable(), coverageGaps: z.array(z.object({ runId: z.number(), status: z.string(), startedAt: z.string(), completedAt: z.string(), summary: z.string(), failedSources: z.array(z.string()) })), certification: z.object({ certified: z.boolean(), schedulerStatus: z.enum(["completed", "degraded"]).nullable(), runId: z.number().nullable(), handoffRunId: z.number().nullable(), reason: z.string() }).nullable(), error: z.string().nullable() }),
     async handler(ctx) {
       try {
         const db = ctx.db<typeof schema>(); const latest = await db.select().from(schema.marketDiscoveryRuns).orderBy(desc(schema.marketDiscoveryRuns.id)).limit(1); const latestRow = latest[0] ?? null;
@@ -9406,7 +10245,19 @@ export const Actions = {
           failedSources: parseStored<Array<{ source?: string; status?: string; detail?: string }>>(gap.sourceStatusJson, []).filter((source) => source.status === "unavailable").map((source) => `${source.source ?? "source"}: ${source.detail ?? source.status}`),
         }));
         const activeRunView = activeRun ? { ...activeRun, sourceStatus: parseStored(activeRun.sourceStatusJson, []), startedAt: activeRun.startedAt.toISOString(), completedAt: activeRun.completedAt.toISOString() } : null;
-        if (!run) return { run: null, activeRun: activeRunView, signals: [], news: [], previousSynthesis: null, coverageGaps, error: null };
+        if (!run) return { run: null, activeRun: activeRunView, signals: [], news: [], previousSynthesis: null, coverageGaps, certification: null, error: null };
+        // Certification at the consumer boundary (2026-10-26): the
+        // producer's terminal status ("complete" / "degraded") is
+        // normalized into the scheduler's vocabulary ("completed" /
+        // "degraded") and certification additionally requires the
+        // slot's OWN run and a recorded handoff for it. Unknown statuses
+        // stay unverified. This is what certifies a slot like run 196 —
+        // executed successfully (handoff 104, issuance run 151) but
+        // marked failed because "complete" was not recognized. A failed
+        // receipt never replays the completed discovery work.
+        const certificationHandoff = (await db.select({ id: schema.paperHandoffRuns.id }).from(schema.paperHandoffRuns).where(eq(schema.paperHandoffRuns.discoveryRunId, run.id)).orderBy(desc(schema.paperHandoffRuns.id)).limit(1))[0] ?? null;
+        const certificationVerdict = certifyDiscoverySlot({ rawStatus: run.status, runId: run.id, slotRunId: run.id, handoffRunId: certificationHandoff?.id ?? null });
+        const certification = { certified: certificationVerdict.certified, schedulerStatus: certificationVerdict.schedulerStatus, runId: run.id, handoffRunId: certificationHandoff?.id ?? null, reason: certificationVerdict.reason };
         const [signals, news, tracked] = await Promise.all([
           db.select().from(schema.discoverySignals).where(eq(schema.discoverySignals.runId, run.id)).orderBy(desc(schema.discoverySignals.alignment)),
           db.select().from(schema.discoveryNews).where(eq(schema.discoveryNews.runId, run.id)).orderBy(desc(schema.discoveryNews.id)),
@@ -9426,8 +10277,8 @@ export const Actions = {
             previousSynthesis = { label: "previous run", runId: prior.id, completedAt: prior.completedAt.toISOString(), ageMs: Date.now() - prior.completedAt.getTime(), newsCount: prior.newsCount, theoryCount: prior.theoryCount, news: priorNews.map((row) => ({ ...row, impacts: parseStored(row.impactsJson, []), assetTags: parseStored(row.assetTagsJson, []), retrievedAt: row.retrievedAt.toISOString(), previousRun: true })) };
           }
         }
-        return { run: { ...run, sourceStatus: parseStored(run.sourceStatusJson, []), startedAt: run.startedAt.toISOString(), completedAt: run.completedAt.toISOString() }, activeRun: activeRunView, signals: signals.map((row) => { const storedDimensions = parseStored(row.dimensionsJson, []); const dimensions = row.sourceAsOf instanceof Date && hasDimensionLedger(storedDimensions) ? storedDimensions : []; return { ...row, reasons: parseStored(row.reasonsJson, []), triggerReasons: parseStored(row.triggerReasonsJson, []), socialSnapshot: row.socialSnapshotJson ? parseStored(row.socialSnapshotJson, null) : null, memeValidation: row.memeValidationJson ? parseStored(row.memeValidationJson, null) : null, dimensions, glance: dimensions.length ? buildGlance(dimensions, row.direction, row.alignment) : null, reliability: dimensions.length ? ratingReliability(row.alignment, observations, "five-gate discovery signal") : null, sourceAsOf: row.sourceAsOf?.toISOString() ?? null, capturedAt: row.capturedAt.toISOString() }; }), news: news.map((row) => ({ ...row, impacts: parseStored(row.impactsJson, []), assetTags: parseStored(row.assetTagsJson, []), retrievedAt: row.retrievedAt.toISOString() })), previousSynthesis, coverageGaps, error: null };
-      } catch (error) { return { run: null, activeRun: null, signals: [], news: [], previousSynthesis: null, coverageGaps: [], error: compactError(error, "Market discovery unavailable") }; }
+        return { run: { ...run, sourceStatus: parseStored(run.sourceStatusJson, []), startedAt: run.startedAt.toISOString(), completedAt: run.completedAt.toISOString() }, activeRun: activeRunView, signals: signals.map((row) => { const storedDimensions = parseStored(row.dimensionsJson, []); const dimensions = row.sourceAsOf instanceof Date && hasDimensionLedger(storedDimensions) ? storedDimensions : []; return { ...row, reasons: parseStored(row.reasonsJson, []), triggerReasons: parseStored(row.triggerReasonsJson, []), socialSnapshot: row.socialSnapshotJson ? parseStored(row.socialSnapshotJson, null) : null, memeValidation: row.memeValidationJson ? parseStored(row.memeValidationJson, null) : null, dimensions, glance: dimensions.length ? buildGlance(dimensions, row.direction, row.alignment) : null, reliability: dimensions.length ? ratingReliability(row.alignment, observations, "five-gate discovery signal") : null, sourceAsOf: row.sourceAsOf?.toISOString() ?? null, capturedAt: row.capturedAt.toISOString() }; }), news: news.map((row) => ({ ...row, impacts: parseStored(row.impactsJson, []), assetTags: parseStored(row.assetTagsJson, []), retrievedAt: row.retrievedAt.toISOString() })), previousSynthesis, coverageGaps, certification, error: null };
+      } catch (error) { return { run: null, activeRun: null, signals: [], news: [], previousSynthesis: null, coverageGaps: [], certification: null, error: compactError(error, "Market discovery unavailable") }; }
     },
   }),
 
@@ -9812,7 +10663,7 @@ export const Actions = {
         const invalidated = 0;
         if (!coreReady || !newsRows.length) {
           const message = !coreReady ? "0 surfaced; 0 withheld for evidence floor; 0 contested. Candidate generation was unavailable because chart science had NO_DATA." : "0 surfaced; 0 withheld for evidence floor; 0 contested. Candidate generation was unavailable because fresh linked news had NO_DATA.";
-          await db.insert(schema.theoryDiscoveryRuns).values({ status: "degraded", summary: message, sourceStatusJson: JSON.stringify(sourceStatus), discovered: 0, contested: 0, invalidated, startedAt, completedAt: now }); ctx.invalidateQueries();
+          try { await db.insert(schema.theoryDiscoveryRuns).values({ status: "degraded", summary: message, sourceStatusJson: JSON.stringify(sourceStatus), discovered: 0, contested: 0, invalidated, startedAt, completedAt: now }); } catch (insertError) { await recordWriteFailure(ctx, { lane: "theory_discovery", tableName: "theory_discovery_runs", statementKind: "insert", attemptedKey: "degraded", error: insertError, context: { summary: message } }); throw insertError; } ctx.invalidateQueries();
           return { ok: false, status: "degraded", discovered: 0, surfaced: 0, withheldForFloor: 0, contested: 0, invalidated, message, sourceStatus };
         }
         const evidenceRows = newsRows.map((row: any, index: number) => `Source ${index}: ${row.title}\nPublisher: ${row.source ?? "Unknown"}\nPublished: ${row.published_at ?? row.last_updated_raw ?? "date unavailable"}\nSnippet: ${row.snippet ?? "No snippet"}`).join("\n\n");
@@ -9833,7 +10684,7 @@ export const Actions = {
           btc, eth, sol, okxRaw, binanceRaw, newsRows, evidenceRows, socialLive, socialText, metricsText, smartPositions,
           freshOnchain: [...freshOnchain.entries()],
         };
-        const inserted = await db.insert(schema.theoryDiscoveryCandidateBatches).values({ status: "pending", evidenceJson: JSON.stringify(payload), sourceStatusJson: JSON.stringify(sourceStatus), invalidated, collectionSummary, collectedAt: now }).returning({ id: schema.theoryDiscoveryCandidateBatches.id });
+        const inserted = await (async () => { try { return await db.insert(schema.theoryDiscoveryCandidateBatches).values({ status: "pending", evidenceJson: JSON.stringify(payload), sourceStatusJson: JSON.stringify(sourceStatus), invalidated, collectionSummary, collectedAt: now }).returning({ id: schema.theoryDiscoveryCandidateBatches.id }); } catch (insertError) { await recordWriteFailure(ctx, { lane: "theory_discovery", tableName: "theory_discovery_candidate_batches", statementKind: "insert", attemptedKey: "pending", error: insertError, context: { collectionSummary } }); throw insertError; } })();
         const batchId = inserted[0]?.id ?? null;
         if (batchId === null) throw new Error("Collected theory evidence was not stored.");
         ctx.invalidateQueries();
@@ -9841,7 +10692,7 @@ export const Actions = {
         return { ok: true, status: "complete", discovered: 0, surfaced: 0, withheldForFloor: 0, contested: 0, invalidated, message, sourceStatus };
       } catch (e) {
         const message = `0 surfaced; 0 withheld for evidence floor; 0 contested. Theory evidence collection failed — ${compactError(e, "theory evidence collection failed")}`;
-        await db.insert(schema.theoryDiscoveryRuns).values({ status: "failed", summary: message, sourceStatusJson: JSON.stringify(sourceStatus), discovered: 0, contested: 0, invalidated: 0, startedAt, completedAt: now });
+        try { await db.insert(schema.theoryDiscoveryRuns).values({ status: "failed", summary: message, sourceStatusJson: JSON.stringify(sourceStatus), discovered: 0, contested: 0, invalidated: 0, startedAt, completedAt: now }); } catch (insertError) { await recordWriteFailure(ctx, { lane: "theory_discovery", tableName: "theory_discovery_runs", statementKind: "insert", attemptedKey: "failed", error: insertError, context: { summary: message, originalError: fullErrorText(e) } }); await recordWriteFailure(ctx, { lane: "theory_discovery", tableName: "theory_discovery_runs", statementKind: "insert", attemptedKey: "failed-original", error: e, context: { summary: message, insertError: fullErrorText(insertError) } }); }
         ctx.invalidateQueries();
         return { ok: false, status: "failed", discovered: 0, surfaced: 0, withheldForFloor: 0, contested: 0, invalidated: 0, message, sourceStatus };
       }
@@ -10400,7 +11251,7 @@ export const Actions = {
       try {
         const db = ctx.db<typeof schema>();
         const now = new Date();
-        const [paperRows, discoveryRows, hitNotifications, candidateExpiryRows, intakeExpiryRows, issuanceCandidates, issuanceIntake, issuanceHandoffs, issuanceCheckpoints, issuanceSignals] = await Promise.all([
+        const [paperRows, discoveryRows, hitNotifications, candidateExpiryRows, intakeExpiryRows, issuanceCandidates, issuanceIntake, issuanceHandoffs, issuanceCheckpoints, issuanceSignals, notificationDispositions] = await Promise.all([
           db.select().from(schema.paperAlertEvents).orderBy(desc(schema.paperAlertEvents.enqueuedAt), desc(schema.paperAlertEvents.id)),
           db.select().from(schema.discoveryInformationalNotifications).orderBy(desc(schema.discoveryInformationalNotifications.createdAt), desc(schema.discoveryInformationalNotifications.id)),
           db.select().from(schema.engineHitNotifications).orderBy(desc(schema.engineHitNotifications.createdAt), desc(schema.engineHitNotifications.id)),
@@ -10415,7 +11266,12 @@ export const Actions = {
           db.select({ id: schema.paperHandoffCandidates.id, discoveryRunId: schema.paperHandoffCandidates.discoveryRunId, coinId: schema.paperHandoffCandidates.coinId, symbol: schema.paperHandoffCandidates.symbol, outcome: schema.paperHandoffCandidates.outcome, reasonCode: schema.paperHandoffCandidates.reasonCode, reason: schema.paperHandoffCandidates.reason }).from(schema.paperHandoffCandidates),
           db.select({ candidateId: schema.paperEntryCheckpoints.candidateId, contractState: schema.paperEntryCheckpoints.contractState }).from(schema.paperEntryCheckpoints),
           db.select({ candidateId: schema.paperSignals.candidateId, paperSignalId: schema.paperSignals.paperSignalId }).from(schema.paperSignals),
+          // Append-only coverage-gap dispositions (migration 0071): a
+          // dispositioned discovery notification resolves to its terminal
+          // expired-unissued state instead of AWAITING_ISSUANCE forever.
+          db.select().from(schema.discoveryNotificationDispositions),
         ]);
+        const dispositionByNotificationId = new Map(notificationDispositions.map((row) => [row.notificationId, row]));
         // Issuance-record join maps, keyed by discoveryRunId + coinId (the
         // candidateKey encodes the same pair; coinId is read from the
         // record rows themselves, never parsed out of a key string).
@@ -10513,8 +11369,25 @@ export const Actions = {
           const contractState = candidate ? issuanceCheckpointByCandidateId.get(candidate.id) ?? null : null;
           const isIssued = paperSignalId !== null || contractState === "entered" || candidate?.state === "issued";
           const defaultGroup: NotificationItem["group"] = expiresAt && expiresAt.getTime() <= now.getTime() ? "expired" : "actionable";
+          const disposition = dispositionByNotificationId.get(row.id) ?? null;
           let derived: Pick<NotificationItem, "notificationClass" | "eventType" | "title" | "blockerReason" | "disclosure" | "group" | "issuanceOutcome" | "issuanceRunId" | "paperSignalId" | "intakeReasonCode">;
-          if (isIssued && candidate) {
+          if (disposition) {
+            // Append-only coverage-gap disposition (migration 0071):
+            // the discovery slot closed without a handoff and the entry
+            // window expired unissued. The original stored notification
+            // is preserved unchanged; only this read-derived state
+            // resolves — a dead slot must not keep reading as though
+            // issuance is still coming. No failure cause is asserted
+            // beyond the recorded disposition, and no entry exists.
+            derived = {
+              notificationClass: "opportunity", eventType: "BLOCKED",
+              title: `${row.symbol} · expired — never issued (coverage gap)`,
+              blockerReason: "coverage gap — the discovery slot closed without an issuance handoff and the entry window expired unissued (coverage_gap_expired_unissued)",
+              disclosure: `INFORMATIONAL ONLY — not a trade signal, not a paper entry. ${row.name} (${row.symbol}) ${row.direction.toUpperCase()} qualified in discovery run ${row.discoveryRunId ?? "unrecorded"}; an appended coverage-gap disposition (recorded ${disposition.createdAt.toISOString()}, linked to run ${disposition.discoveryRunId ?? row.discoveryRunId ?? "unrecorded"}) closes it as expired-unissued: ${disposition.reason}`,
+              group: "expired",
+              issuanceOutcome: "blocked", issuanceRunId: null, paperSignalId: null, intakeReasonCode: "coverage_gap_expired_unissued",
+            };
+          } else if (isIssued && candidate) {
             const issuanceRunId = candidate.runId;
             derived = {
               notificationClass: "lifecycle", eventType: "ISSUED",
@@ -11609,12 +12482,388 @@ export const Actions = {
     },
   }),
 
+  // Q2 (expert direction 2026-10-25): run the expanded scoring path in the
+  // harness — built before activation as the pre-activation measurement;
+  // since 2026-10-26 the pilot it measured is ACTIVE under
+  // paper-pilot-v2.1.7, and this harness remains a writes-disabled
+  // measurement only (it activates nothing itself). Issuance and
+  // production writes are disabled by the harness guard (asserted, and
+  // proven here by before/after counts on the production tables). Verdicts
+  // are harness verdicts only — nothing here writes a production decision,
+  // a paper run, an intake row, a notification, or a monitoring
+  // enrollment. The only row written is the harness report itself.
+  runExpandedScoringHarness: defineAction({
+    request: z.object({}), response: z.object({ ok: z.literal(true), report: z.any() }),
+    async handler(ctx): Promise<{ ok: true; report: any }> {
+      const db = ctx.db<typeof schema>();
+      const startedAt = new Date();
+      const countRows = async (): Promise<ProductionRowCounts> => {
+        const one = async (table: any): Promise<number> => {
+          const rows = await db.select({ c: sql<number>`count(*)` }).from(table);
+          return Number(rows[0]?.c ?? 0);
+        };
+        const [runs, intake, alerts, hitNotifs, discoveryNotifs, paperSignalsCount, contracts] = await Promise.all([
+          one(schema.paperSignalRuns), one(schema.paperCandidateIntake), one(schema.paperAlertEvents),
+          one(schema.engineHitNotifications), one(schema.discoveryInformationalNotifications),
+          one(schema.paperSignals), one(schema.signalContracts),
+        ]);
+        return {
+          paperSignalRuns: runs,
+          paperCandidateIntake: intake,
+          notifications: alerts + hitNotifs + discoveryNotifs,
+          monitoringEnrollments: paperSignalsCount + contracts,
+        };
+      };
+      const before = await countRows();
+
+      // Shared snapshots, each loaded ONCE for the whole run (the
+      // demonstrated call-reduction: no per-asset catalog/tier/history
+      // re-reads, no external provider calls at all in the harness).
+      const snapshotRows = await db.select().from(schema.catalogSnapshots).orderBy(desc(schema.catalogSnapshots.id)).limit(1);
+      const snapshot = snapshotRows[0] ?? null;
+      const catalogRows: any[] = snapshot ? parseStored(snapshot.rowsJson, []) : [];
+      const catalogBySymbol = new Map<string, any>();
+      for (const row of catalogRows) {
+        const symbol = String(row?.symbol ?? "").toUpperCase();
+        if (symbol && !catalogBySymbol.has(symbol)) catalogBySymbol.set(symbol, row);
+      }
+      const catalogRecord: InputFreshnessRecord = snapshot
+        ? catalogFreshnessRecord({ kind: "cached", snapshotFetchedAtMs: snapshot.fetchedAt.getTime(), fetchTimeMs: startedAt.getTime() })
+        : buildInputFreshnessRecord({ input: "catalog", requirement: "required", sourceTimeMs: null, fetchTimeMs: startedAt.getTime(), maxAgeMs: DECISION_INPUT_MAX_AGE_MS, detail: "catalog: no committed catalog snapshot exists — input unavailable." });
+
+      const tierRows = await db.select().from(schema.universeTiers);
+      const tierChartSymbols = new Set<string>();
+      const tierBySymbol = new Map<string, typeof tierRows[number]>();
+      for (const row of tierRows) {
+        const symbol = row.symbol.toUpperCase();
+        if (!tierBySymbol.has(symbol)) tierBySymbol.set(symbol, row);
+        if (row.sma50 !== null || row.chartPass) tierChartSymbols.add(symbol);
+      }
+
+      const historyRows = await db.select().from(schema.historyCacheState);
+      const historyBySymbol = new Map<string, typeof historyRows[number]>();
+      const historySymbols = new Set<string>();
+      for (const row of historyRows) {
+        const symbol = row.symbol.toUpperCase();
+        historyBySymbol.set(symbol, row);
+        if (row.barCount > 0) historySymbols.add(symbol);
+      }
+
+      const discoveryRows = await db.select().from(schema.discoverySignals);
+      const discoveryByCoinId = new Map(discoveryRows.map((row) => [row.coinId, row]));
+
+      const velocityDetail: Array<{ symbol: string; change48h: number | null; velocityQualified: boolean }> = [];
+      const guard = new WritesDisabledGuard();
+      const report = await runExpandedScoringHarness({
+        now: () => Date.now(),
+        guard,
+        catalogSymbols: new Set(catalogBySymbol.keys()),
+        tierChartSymbols,
+        tierSetSize: tierRows.length,
+        historySymbols,
+        runVelocityStage: async () => {
+          // Velocity stage, timed separately by the harness: 48H change
+          // from the tier row where stored, else from the catalog
+          // sparkline (hourly points, 48 back). Uses the existing
+          // velocity qualifier (>= +15% / 48H, non-stablecoin) unchanged.
+          for (const entry of PROVISIONAL_BINANCE_SPOT_29) {
+            const tier = tierBySymbol.get(entry.symbol);
+            let change48h: number | null = tier?.change48h ?? null;
+            if (change48h === null) {
+              const spark: number[] = Array.isArray(catalogBySymbol.get(entry.symbol)?.sparkline_in_7d?.price) ? catalogBySymbol.get(entry.symbol).sparkline_in_7d.price : [];
+              const last = spark.at(-1); const prior = spark.at(-49);
+              change48h = last !== undefined && prior !== undefined && prior > 0 ? (last / prior - 1) * 100 : null;
+            }
+            velocityDetail.push({ symbol: entry.symbol, change48h, velocityQualified: isVelocityQualifier(change48h, tier?.stablecoin ?? false) });
+          }
+        },
+        loadEvidence: async (symbol, recordCall) => {
+          recordCall({ provider: "stored-snapshot", endpoint: "discovery_signals.dimensions" });
+          const catalogRow = catalogBySymbol.get(symbol);
+          const coinId = String(catalogRow?.id ?? "");
+          const history = historyBySymbol.get(symbol) ?? null;
+          const historyRecord = buildInputFreshnessRecord({
+            input: "history cache (level construction)",
+            requirement: "required",
+            sourceTimeMs: history?.lastRefreshAt ? history.lastRefreshAt.getTime() : null,
+            fetchTimeMs: startedAt.getTime(),
+            maxAgeMs: 24 * 60 * 60_000,
+            cached: true,
+            provenanceTimeMs: history?.lastRefreshAt ? history.lastRefreshAt.getTime() : null,
+            detail: history ? undefined : "history cache (level construction): no committed history_cache_state row — input unavailable.",
+          });
+          const discovery = coinId ? discoveryByCoinId.get(coinId) ?? null : null;
+          const dimensions = discovery ? parseStored(discovery.dimensionsJson, []) : null;
+          return {
+            freshnessRecords: [catalogRecord, historyRecord],
+            dimensions: Array.isArray(dimensions) && dimensions.length > 0 ? dimensions : null,
+            direction: discovery && (discovery.direction === "long" || discovery.direction === "short") ? discovery.direction : null,
+          };
+        },
+        score: (dimensions) => {
+          const scored = paperScores(dimensions as unknown as FlagDimension[]);
+          return { production: scored.production, productionDecision: scored.productionDecision };
+        },
+      });
+
+      const after = await countRows();
+      const writesProof = proveZeroProductionWrites(before, after);
+      const status = report.status === "complete" && writesProof.proven ? "complete" as const : "failed" as const;
+      const fullReport = { ...report, status, writesProof, productionCountsBefore: before, productionCountsAfter: after, velocityDetail, catalogSnapshot: snapshot ? { fetchedAt: snapshot.fetchedAt.toISOString(), rowCount: snapshot.rowCount } : null, freezeVersion: PAPER_FREEZE_VERSION, pilotActivated: PAPER_FREEZE_VERSION === PILOT_V217_VERSION };
+      const completedAt = new Date();
+      await db.insert(schema.expandedScoringHarnessRuns).values({
+        runKey: `q2-harness-${startedAt.toISOString()}`,
+        status,
+        requestedCount: report.requestedCount,
+        presentCount: report.presentInCatalogCount,
+        evaluatedCount: report.evaluatedCount,
+        notEvaluatedCount: report.notEvaluatedCount,
+        scoringMs: Math.round(report.scoringMs),
+        velocityMs: Math.round(report.velocityMs),
+        evidenceLoadMs: Math.round(report.evidenceLoadMs),
+        overBudget: report.overScoringBudget,
+        duplicateScoringDetected: report.duplicateScoringDetected,
+        guardAttempts: report.guard.attempts,
+        writesProofJson: stableJson(writesProof),
+        reportJson: stableJson(fullReport),
+        startedAt, completedAt, createdAt: completedAt,
+      });
+      ctx.invalidateQueries();
+      return { ok: true, report: fullReport };
+    },
+  }),
+
+  getExpandedScoringHarnessRuns: defineAction({
+    request: z.object({ limit: z.number().int().min(1).max(20).default(5) }), response: z.object({ ok: z.literal(true), runs: z.array(z.any()) }),
+    async handler(ctx, args): Promise<{ ok: true; runs: any[] }> {
+      const rows = await ctx.db<typeof schema>().select().from(schema.expandedScoringHarnessRuns).orderBy(desc(schema.expandedScoringHarnessRuns.id)).limit(args.limit);
+      return { ok: true, runs: rows.map((row) => ({ id: row.id, runKey: row.runKey, status: row.status, requestedCount: row.requestedCount, presentCount: row.presentCount, evaluatedCount: row.evaluatedCount, notEvaluatedCount: row.notEvaluatedCount, scoringMs: row.scoringMs, velocityMs: row.velocityMs, evidenceLoadMs: row.evidenceLoadMs, overBudget: row.overBudget, duplicateScoringDetected: row.duplicateScoringDetected, guardAttempts: row.guardAttempts, writesProof: parseStored(row.writesProofJson, null), report: parseStored(row.reportJson, null), startedAt: row.startedAt.toISOString(), completedAt: row.completedAt.toISOString() })) };
+    },
+  }),
+
+  // paper-pilot-v2.1.7 activation record + first-three-runs review
+  // (2026-10-26). Read-only apart from ensuring the v2.1.7 freeze record
+  // exists (the same ensure every paper status read performs). The
+  // review is computed ONLY from durable run records: the first three
+  // completed/degraded/empty discovery runs stamped with admission
+  // version paper-pilot-v2.1.7, each carrying its recorded pilot
+  // universe + dispositions. Issued counts join paper_signal_candidates
+  // on discoveryRunId + freezeVersion + state "issued" — the durable
+  // issuance record, never a summary string.
+  getV217ActivationStatus: defineAction({
+    request: z.object({}), response: z.object({ ok: z.literal(true), activation: z.any(), review: z.any(), runs: z.array(z.any()) }),
+    async handler(ctx): Promise<{ ok: true; activation: any; review: any; runs: any[] }> {
+      const db = ctx.db<typeof schema>();
+      const freeze = await ensurePaperPilotFreeze(ctx);
+      const reviewRows = await db.select().from(schema.marketDiscoveryRuns)
+        .where(and(eq(schema.marketDiscoveryRuns.admissionVersion, PILOT_V217_VERSION), inArray(schema.marketDiscoveryRuns.status, ["complete", "degraded", "empty"])))
+        .orderBy(asc(schema.marketDiscoveryRuns.id)).limit(10);
+      const counted = reviewRows.slice(0, 3);
+      const reviewInputs: Array<{ runId: number; status: string; record: PilotRunRecord | null; issuedCount: number | null }> = [];
+      const runViews: any[] = [];
+      for (const row of counted) {
+        const parsed = row.pilotUniverseJson ? parseStored<any>(row.pilotUniverseJson, null) : null;
+        const record: PilotRunRecord | null = parsed && Array.isArray(parsed.dispositions) && typeof parsed.evaluatedCount === "number" && typeof parsed.deferredCount === "number" ? parsed as PilotRunRecord : null;
+        const issuedRows = await db.select({ c: sql<number>`count(*)` }).from(schema.paperSignalCandidates)
+          .where(and(eq(schema.paperSignalCandidates.discoveryRunId, row.id), eq(schema.paperSignalCandidates.freezeVersion, PILOT_V217_VERSION), eq(schema.paperSignalCandidates.state, "issued")));
+        const issuedCount = Number(issuedRows[0]?.c ?? 0);
+        reviewInputs.push({ runId: row.id, status: row.status, record, issuedCount });
+        runViews.push({
+          runId: row.id, status: row.status, startedAt: row.startedAt.toISOString(), completedAt: row.completedAt.toISOString(),
+          admissionVersion: row.admissionVersion, pilotLaneStatus: row.pilotLaneStatus,
+          universeSize: row.universeSize, signalCount: row.signalCount, summary: row.summary,
+          pilotRecord: record, issuedCount,
+        });
+      }
+      const review = summarizePilotReview(reviewInputs);
+      const activation = {
+        version: PILOT_V217_VERSION,
+        supersedes: PILOT_V217_SUPERSEDES,
+        activatedAt: PILOT_V217_ACTIVATED_AT,
+        freeze: { version: freeze.version, hash: freeze.hash, frozenAt: freeze.frozenAt.toISOString(), productionHash: freeze.productionHash, challengerHash: freeze.challengerHash },
+        handlerVersion: ISSUANCE_HANDLER_VERSION,
+        universe: PILOT_V217_BINANCE_UNIVERSE.map((entry) => ({ ...entry })),
+        universeCount: PILOT_V217_BINANCE_UNIVERSE.length,
+        exclusions: PILOT_V217_EXCLUSIONS.map((row) => ({ ...row })),
+        unchangedRules: "Source-age rules, production threshold ≥ 60 with ≤ 1 severe fail among the first five dimensions, severe-fail treatment, first-print selection, the 900,000 ms receipt deadline, the 50 bps drift bound and frozen-level validation are unchanged from paper-pilot-v2.1.6. The quant-network MEXC Spot mapping is a separate versioned mapping change, not part of this pilot set; grass was not mapped.",
+        rollback: "Rollback point is paper-pilot-v2.1.6: restoring the v2.1.6 freeze version returns admission to saved-T1 + velocity only; v2.1.7 runs and their recorded universes stay on record.",
+        postActivationChecks: ["first new entry under v2.1.7 (pending by name until a candidate genuinely qualifies — never manufactured, never a reopened expired window)", "first new settlement under v2.1.7 (pending by name until a v2.1.7 entry settles through the unchanged evaluator)"],
+        reviewPlan: PILOT_V217_REVIEW_PLAN,
+      };
+      return { ok: true, activation, review, runs: runViews };
+    },
+  }),
+
+  // Live workload rehearsal (expert direction 2026-10-26): the expanded
+  // set through the PRODUCTION scorer (paperScores) and the PRODUCTION
+  // provider adapters (getJson transport with its 20s upstream timeout,
+  // fetchBinanceTradeHistory), production writes disabled by the same
+  // guard and proven by before/after counts, and ISOLATED cache state —
+  // a per-run in-memory evidence cache; the production history-cache
+  // tables are neither read nor written. The requested set is the
+  // VERIFIED set, not a target count: provisional instruments whose
+  // COVERAGE row carries a verified Binance Spot pair AND that are
+  // present in the latest committed catalog snapshot (BEAMX was absent
+  // from the harness catalog snapshot, so that snapshot's set is the
+  // present subset, whatever it numbers). External calls and stored
+  // reads are counted separately; fetch/evidence time, scoring time and
+  // total time are reported separately; evidence loading runs inside
+  // the 120s scoring scope. Verdicts are rehearsal verdicts only —
+  // nothing here writes a production decision, activates the pilot, or
+  // changes any threshold, gate, or admission rule.
+  runExpandedScoringRehearsal: defineAction({
+    request: z.object({}), response: z.object({ ok: z.literal(true), report: z.any() }),
+    async handler(ctx): Promise<{ ok: true; report: any }> {
+      const db = ctx.db<typeof schema>();
+      const startedAt = new Date();
+      const countRows = async (): Promise<ProductionRowCounts> => {
+        const one = async (table: any): Promise<number> => {
+          const rows = await db.select({ c: sql<number>`count(*)` }).from(table);
+          return Number(rows[0]?.c ?? 0);
+        };
+        const [runs, intake, alerts, hitNotifs, discoveryNotifs, paperSignalsCount, contracts] = await Promise.all([
+          one(schema.paperSignalRuns), one(schema.paperCandidateIntake), one(schema.paperAlertEvents),
+          one(schema.engineHitNotifications), one(schema.discoveryInformationalNotifications),
+          one(schema.paperSignals), one(schema.signalContracts),
+        ]);
+        return {
+          paperSignalRuns: runs,
+          paperCandidateIntake: intake,
+          notifications: alerts + hitNotifs + discoveryNotifs,
+          monitoringEnrollments: paperSignalsCount + contracts,
+        };
+      };
+      const before = await countRows();
+
+      // Stored reads (counted in the report as stored reads, never as
+      // external calls): the latest committed catalog snapshot and the
+      // stored dimension ledgers.
+      const snapshotRows = await db.select().from(schema.catalogSnapshots).orderBy(desc(schema.catalogSnapshots.id)).limit(1);
+      const snapshot = snapshotRows[0] ?? null;
+      const catalogRows: any[] = snapshot ? parseStored(snapshot.rowsJson, []) : [];
+      const catalogBySymbol = new Map<string, any>();
+      for (const row of catalogRows) {
+        const symbol = String(row?.symbol ?? "").toUpperCase();
+        if (symbol && !catalogBySymbol.has(symbol)) catalogBySymbol.set(symbol, row);
+      }
+      const discoveryRows = await db.select().from(schema.discoverySignals);
+      const discoveryByCoinId = new Map(discoveryRows.map((row) => [row.coinId, row]));
+
+      // The verified set: verified Binance Spot instrument (COVERAGE,
+      // non-empty pair) AND present in the current catalog snapshot.
+      const requested = PROVISIONAL_BINANCE_SPOT_29.flatMap((entry) => {
+        const coverage = COVERAGE.find((row) => row.symbol === entry.symbol && row.venue === "binance-spot" && row.pair !== null);
+        if (!coverage?.pair) return [];
+        return [{ symbol: entry.symbol, instrument: coverage.pair, coinId: coverage.coinId }];
+      });
+      const freezeRow = (await db.select().from(schema.methodologyFreezes).where(eq(schema.methodologyFreezes.version, PAPER_FREEZE_VERSION)).limit(1))[0] ?? null;
+
+      // Isolated cache state: per-run in-memory only.
+      const isolatedEvidenceCache = new Map<string, { klines: { barCount: number; lastCompletedCloseMs: number | null } | null; trades: { printCount: number } | null }>();
+      let marketsPromise: Promise<Map<string, { sourceTimeMs: number | null }>> | null = null;
+      const loadMarketsBatch = (record: (call: { provider: string; endpoint: string }) => void) => {
+        if (!marketsPromise) {
+          marketsPromise = (async () => {
+            record({ provider: "coingecko", endpoint: "coins/markets (batch)" });
+            const ids = requested.map((entry) => encodeURIComponent(entry.coinId)).join(",");
+            const raw = await getJson(`${CG}/coins/markets?vs_currency=usd&ids=${ids}&sparkline=false`).catch(() => null);
+            const map = new Map<string, { sourceTimeMs: number | null }>();
+            if (Array.isArray(raw)) {
+              for (const row of raw) {
+                if (typeof row?.id !== "string") continue;
+                map.set(row.id, { sourceTimeMs: typeof row.last_updated === "string" && Number.isFinite(Date.parse(row.last_updated)) ? Date.parse(row.last_updated) : null });
+              }
+            }
+            return map;
+          })();
+        }
+        return marketsPromise;
+      };
+
+      const guard = new WritesDisabledGuard();
+      const report = await runLiveScoringRehearsal({
+        now: () => Date.now(),
+        guard,
+        requested,
+        catalogSymbols: new Set(catalogBySymbol.keys()),
+        decisionAtMs: startedAt.getTime(),
+        frozenAtMs: freezeRow?.frozenAt.getTime() ?? 0,
+        loadStoredDimensions: async (symbol, recordStoredRead) => {
+          recordStoredRead({ source: "discovery_signals.dimensions" });
+          const catalogRow = catalogBySymbol.get(symbol);
+          const coinId = String(catalogRow?.id ?? "");
+          const discovery = coinId ? discoveryByCoinId.get(coinId) ?? null : null;
+          const dimensions = discovery ? parseStored(discovery.dimensionsJson, []) : null;
+          return {
+            dimensions: Array.isArray(dimensions) && dimensions.length > 0 ? dimensions : [],
+            direction: discovery && (discovery.direction === "long" || discovery.direction === "short") ? discovery.direction : null,
+          };
+        },
+        fetchEvidence: async (entry, deadlineMs, recordExternalCall) => {
+          const markets = await loadMarketsBatch(recordExternalCall);
+          const sourceTimeMs = markets.get(entry.coinId)?.sourceTimeMs ?? null;
+          const cached = isolatedEvidenceCache.get(entry.symbol);
+          if (cached) return { sourceTimeMs, klines: cached.klines, trades: cached.trades };
+          const remainingMs = Math.max(1_000, deadlineMs - Date.now());
+          const signal = AbortSignal.timeout(remainingMs);
+          recordExternalCall({ provider: "binance-spot", endpoint: "klines/1d" });
+          const klinesRaw = await getJson(`${BINANCE}/api/v3/klines?symbol=${encodeURIComponent(entry.instrument)}&interval=1d&limit=35`, signal).catch(() => null);
+          let klines: { barCount: number; lastCompletedCloseMs: number | null } | null = null;
+          if (Array.isArray(klinesRaw)) {
+            const nowMs = Date.now();
+            const completed = klinesRaw.filter((row: any) => Array.isArray(row) && Number(row[6]) < nowMs);
+            const last = completed.at(-1);
+            klines = { barCount: klinesRaw.length, lastCompletedCloseMs: last ? Number(last[6]) : null };
+          }
+          recordExternalCall({ provider: "binance-spot", endpoint: "aggTrades (windowed)" });
+          let trades: { printCount: number } | null = null;
+          try {
+            const history = await fetchBinanceTradeHistory(entry.instrument, startedAt.getTime() - PAPER_ENTRY_WINDOW_MS, startedAt.getTime());
+            trades = { printCount: history.prints.length };
+          } catch { trades = null; }
+          const evidence = { klines, trades };
+          isolatedEvidenceCache.set(entry.symbol, evidence);
+          return { sourceTimeMs, klines, trades };
+        },
+        score: (dimensions) => {
+          const scored = paperScores(dimensions as unknown as FlagDimension[]);
+          return { production: scored.production, productionDecision: scored.productionDecision };
+        },
+      });
+
+      const after = await countRows();
+      const writesProof = proveZeroProductionWrites(before, after);
+      const status = report.status === "complete" && writesProof.proven ? "complete" as const : "failed" as const;
+      const fullReport = { ...report, status, writesProof, productionCountsBefore: before, productionCountsAfter: after, catalogSnapshot: snapshot ? { fetchedAt: snapshot.fetchedAt.toISOString(), rowCount: snapshot.rowCount } : null, verifiedSetRule: "provisional instruments with a verified Binance Spot COVERAGE pair, intersected with the latest committed catalog snapshot at run time — the count is whatever is verified present, never a target", freezeVersion: PAPER_FREEZE_VERSION, pilotActivated: PAPER_FREEZE_VERSION === PILOT_V217_VERSION };
+      const completedAt = new Date();
+      await db.insert(schema.expandedScoringHarnessRuns).values({
+        runKey: `live-rehearsal-${startedAt.toISOString()}`,
+        status,
+        requestedCount: report.requestedCount,
+        presentCount: report.presentInCatalogCount,
+        evaluatedCount: report.evaluatedCount,
+        notEvaluatedCount: report.assets.filter((asset) => !asset.evaluated).length,
+        scoringMs: Math.round(report.fetchEvidenceMs + report.scoringMs),
+        velocityMs: 0,
+        evidenceLoadMs: Math.round(report.fetchEvidenceMs),
+        overBudget: report.overScoringBudget,
+        duplicateScoringDetected: report.duplicateScoringDetected,
+        guardAttempts: report.guard.attempts,
+        writesProofJson: stableJson(writesProof),
+        reportJson: stableJson(fullReport),
+        startedAt, completedAt, createdAt: completedAt,
+      });
+      ctx.invalidateQueries();
+      return { ok: true, report: fullReport };
+    },
+  }),
+
   runTimingIntegrityAudit: defineAction({
     request: z.object({}), response: z.object({ ok: z.boolean(), rows: z.array(z.any()) }),
     async handler(ctx) {
       const db = ctx.db<typeof schema>(); const target = new Set(["ZRO", "WIN", "MEGA"]); const signals = (await db.select().from(schema.generatedSignals).orderBy(desc(schema.generatedSignals.createdAt)).limit(2000)).filter((row) => target.has(row.symbol.toUpperCase())); const rows: any[] = [];
       for (const signal of signals) {
-        const cached = await ensureHistoryCache(ctx, signal.coinId, signal.symbol, false).catch(() => ({ state: null, bars: [], funding: [] })); const pre = cached.bars.filter((bar: any) => Number(bar.ts) < signal.createdAt.getTime()).length; const timestampState = signal.sourceAsOf instanceof Date && signal.createdAt instanceof Date ? "verified" as const : "unverified" as const; const candleState = pre > 0 ? "backfilled" as const : "unverifiable" as const; const factorState = hasFactorLedger(parseStored(signal.factorsJson, [])) ? "original" as const : "unverified_not_reconstructed" as const; const note = `${pre} pre-signal daily candles are available from ${String(cached.state?.source ?? "no source")}. ${factorState === "original" ? "The stored factor ledger is original." : "No factor ledger was reconstructed; it remains UNVERIFIED."}`;
+        const cached = await ensureHistoryCache(ctx, signal.coinId, signal.symbol, false).catch(() => ({ state: null, bars: [], funding: [], cacheDegraded: true, cacheFreshness: { fresh: false as const, state: "unavailable" as const, reason: "History cache read failed; freshness unproven." } })); const pre = cached.bars.filter((bar: any) => Number(bar.ts) < signal.createdAt.getTime()).length; const timestampState = signal.sourceAsOf instanceof Date && signal.createdAt instanceof Date ? "verified" as const : "unverified" as const; const candleState = pre > 0 ? "backfilled" as const : "unverifiable" as const; const factorState = hasFactorLedger(parseStored(signal.factorsJson, [])) ? "original" as const : "unverified_not_reconstructed" as const; const note = `${pre} pre-signal daily candles are available from ${String(cached.state?.source ?? "no source")}. ${factorState === "original" ? "The stored factor ledger is original." : "No factor ledger was reconstructed; it remains UNVERIFIED."}`;
         await db.insert(schema.timingIntegrityAudits).values({ symbol: signal.symbol, signalId: signal.id, signalAt: signal.createdAt, timestampState, candleState, candleSource: cached.state?.source ?? null, preSignalBars: pre, factorLedgerState: factorState, note, checkedAt: new Date() }); rows.push({ symbol: signal.symbol, signalId: signal.id, timestampState, candleState, candleSource: cached.state?.source ?? null, preSignalBars: pre, factorLedgerState: factorState, note });
       }
       ctx.invalidateQueries(); return { ok: true, rows };

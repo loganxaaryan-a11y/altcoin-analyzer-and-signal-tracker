@@ -1,0 +1,35 @@
+[input text: Search any coin]
+[button: Analyze]
+[button: The Read] [button: Opportunities] [button: The Book] [button: Research]
+[button: Outlook] [button: Notifications]
+The Read · market outlook
+## Loading the stored market read…
+The outlook appears when the market read lands; opening this section never starts a scan.
+Theory updates
+## What changed in active theories
+[button: Open theories →]
+Reading stored theory updates…
+Highlighting follows the stored last-checked time — a theory re-checked in the last 24 hours is lit; quiet theories stay listed in Research with their full history.
+Market read
+## Coverage is loading
+PARTIAL FEED
+Refreshing CoinGecko prices and OKX instrument coverage…
+BTC cycle study
+## Regime compass
+[button: Open BTC]
+Cycle data loading…
+/BTC ratio table
+## Rotation breadth
+CoinGecko
+Ratio breadth is loading…
+Ratio data loading…
+Narrative rotation
+## Leaders and laggards
+CoinGecko
+Rotation data loading…
+Status & source diagnostics
+Source health · stored state only
+## What each source last did
+[button: Reloading…]
+Built only from stored records — recorded fetch outcomes, the latest discovery run's source statuses, and stored credit budgets. A field with no stored value reads "not tracked"; nothing is estimated.
+Reading stored source state…

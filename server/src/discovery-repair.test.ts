@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { assertTierRefreshComplete, classifyDiscoveryLanes, healthyEmptyStatus, namedTimeoutSummary, validationBeforeScoring } from "./discovery-repair";
+import { assertTierRefreshComplete, certifyDiscoverySlot, classifyDiscoveryLanes, healthyEmptyStatus, namedTimeoutSummary, normalizeDiscoveryTerminalStatus, validationBeforeScoring } from "./discovery-repair";
 
 describe("bounded discovery repair", () => {
   test("non-empty saved T1 with zero fresh-catalog intersection pauses only the tier lane", () => {
@@ -157,5 +157,38 @@ describe("batch 5 part A — discovery survival", () => {
     }
     expect(checkpoints.at(-1)).toEqual({ processed: 80, total: 160 });
     expect(`charts partial: ${processed}/${targets.length} (budget)`).toBe("charts partial: 80/160 (budget)");
+  });
+});
+
+describe("discovery certification at the consumer boundary", () => {
+  test("the producer's verified 'complete' terminal status normalizes to the scheduler's 'completed'", () => {
+    expect(normalizeDiscoveryTerminalStatus("complete")).toBe("completed");
+    expect(normalizeDiscoveryTerminalStatus("degraded")).toBe("degraded");
+  });
+
+  test("unknown or non-terminal statuses stay unverified — never promoted to a success word", () => {
+    for (const status of ["running", "failed", "timeout", "missed", "empty", "complete-ish", "", null, undefined]) {
+      expect(normalizeDiscoveryTerminalStatus(status)).toBeNull();
+    }
+  });
+
+  test("run 196 shape: 'complete' + the slot's own run + a recorded handoff certifies as completed", () => {
+    const result = certifyDiscoverySlot({ rawStatus: "complete", runId: 196, slotRunId: 196, handoffRunId: 104 });
+    expect(result.certified).toBe(true);
+    expect(result.schedulerStatus).toBe("completed");
+    expect(result.reason).toContain("handoff 104");
+  });
+
+  test("a terminal status without the slot's own handoff does not certify", () => {
+    const result = certifyDiscoverySlot({ rawStatus: "complete", runId: 196, slotRunId: 196, handoffRunId: null });
+    expect(result.certified).toBe(false);
+    expect(result.schedulerStatus).toBe("completed");
+    expect(result.reason).toContain("no handoff is recorded");
+  });
+
+  test("a terminal run that is not the slot's own run does not certify the slot", () => {
+    const result = certifyDiscoverySlot({ rawStatus: "degraded", runId: 197, slotRunId: 196, handoffRunId: 104 });
+    expect(result.certified).toBe(false);
+    expect(result.schedulerStatus).toBe("degraded");
   });
 });

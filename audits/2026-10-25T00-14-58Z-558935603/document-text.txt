@@ -1,0 +1,148 @@
+[input text: Search any coin]
+[button: Analyze]
+[button: The Read] [button: Opportunities] [button: The Book] [button: Research]
+[button: Outlook] [button: Notifications]
+The Read · market outlook
+## Loading the stored market read…
+The outlook appears when the market read lands; opening this section never starts a scan.
+Theory updates
+## What changed in active theories
+[button: Open theories →]
+Reading stored theory updates…
+Highlighting follows the stored last-checked time — a theory re-checked in the last 24 hours is lit; quiet theories stay listed in Research with their full history.
+Market read
+## Coverage is loading
+PARTIAL FEED
+Refreshing CoinGecko prices and OKX instrument coverage…
+BTC cycle study
+## Regime compass
+[button: Open BTC]
+Cycle data loading…
+/BTC ratio table
+## Rotation breadth
+CoinGecko
+Ratio breadth is loading…
+Ratio data loading…
+Narrative rotation
+## Leaders and laggards
+CoinGecko
+Rotation data loading…
+Status & source diagnostics
+Source health · stored state only
+## What each source last did
+[button: Reload]
+Built only from stored records — recorded fetch outcomes, the latest discovery run's source statuses, and stored credit budgets. A field with no stored value reads "not tracked"; nothing is estimated. Read 10/25/2026, 12:15:11 AM.
+altfins · scheduled_discovery_calls
+last success not tracked
+freshness not tracked
+errors not tracked
+quota used 9 · remaining not tracked
+fallback not tracked
+altFINS signals feed
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+CoinGecko attention
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+CoinGecko meme category
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+CoinGecko ranked catalog
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+CoinMarketCap keyless top 100
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+DeFiLlama
+last success 10/24/2026, 3:11:05 AM
+freshness aging (<24h)
+errors 0
+quota used not tracked · remaining not tracked
+fallback not tracked
+Deribit
+last success 10/25/2026, 12:05:56 AM
+freshness recent (<1h)
+errors 0
+quota used not tracked · remaining not tracked
+fallback not tracked
+elfa · scheduled_discovery_calls
+last success not tracked
+freshness not tracked
+errors not tracked
+quota used 20 · remaining not tracked
+fallback not tracked
+Elfa scheduled discovery
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+Fundamentals weekly scores
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+Hyperliquid
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+Linked news search
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+OKX
+last success 10/20/2026, 6:00:01 PM
+freshness stale (>24h)
+errors 0
+quota used not tracked · remaining not tracked
+fallback not tracked
+Polymarket
+last success 10/20/2026, 5:59:10 PM
+freshness stale (>24h)
+errors 0
+quota used not tracked · remaining not tracked
+fallback not tracked
+Rotation leadership
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+Silent-hint mentions
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+Universe freshness guard
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
+Weekly universe tiers
+last success 10/24/2026, 11:00:39 PM
+freshness aging (<24h)
+errors not tracked
+quota used not tracked · remaining not tracked
+fallback not tracked
