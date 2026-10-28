@@ -1,0 +1,11 @@
+[Unit]
+Description=Research terminal crypto core (monitor + settle + snapshot) — zero-agent execution proof
+After=network.target
+
+[Service]
+Type=oneshot
+# No User= line: this guest has no 'hatch' passwd entry (the workspace is
+# root-owned and every process here runs as root). User=hatch failed with
+# status 217/USER on the first two firings — removed 2026-10-22.
+ExecStart=/home/hatch/workspace/goals/research-terminal/engine/run-core.sh
+TimeoutStartSec=1200

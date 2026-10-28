@@ -1,0 +1,10 @@
+[Unit]
+Description=Run rt-equity twice daily, pre-open and post-close (local time)
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+OnCalendar=*-*-* 16:35:00
+Persistent=false
+
+[Install]
+WantedBy=default.target

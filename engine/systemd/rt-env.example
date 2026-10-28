@@ -1,0 +1,17 @@
+# /etc/rt-engine/env — created by engine/install-units.sh from the live
+# agent environment. NEVER commit real values anywhere.
+#
+# Why this file exists: this VM egresses through a proxy. Python urllib
+# clients (monitor.py, settle.py, hl_cache.py) pick the proxy up from these
+# environment variables automatically. systemd services start with a clean
+# environment, so without this file every fetch fails with
+# "SSL: WRONG_VERSION_NUMBER" (direct TLS egress is broken on this VM).
+# engine/lib.sh sources this file at the top of every module runner.
+#
+# Variables captured (values come from the environment at install time):
+#   http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+#   ALL_PROXY all_proxy no_proxy NO_PROXY
+#
+# After a VM replacement the proxy credential may rotate; if module fetches
+# start failing with WRONG_VERSION_NUMBER again, re-run install-units.sh
+# from an agent shell to refresh this file.

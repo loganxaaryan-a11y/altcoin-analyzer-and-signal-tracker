@@ -1,0 +1,8 @@
+{
+  "module": "crypto-core",
+  "started_at_utc": "2026-10-28T19:47:47Z",
+  "finished_at_utc": "2026-10-28T19:50:03Z",
+  "duration_s": 136,
+  "steps": {"monitor": 0, "settle": 0, "snapshot": 0, "enroll": 0, "snapshot_after_enroll": 0},
+  "route": "systemd (zero agent launches)"
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run rt-research every 30 minutes at :24/:54 (offset from crypto core so the two never contend)
+
+[Timer]
+OnCalendar=*:24:00
+OnCalendar=*:54:00
+Persistent=false
+
+[Install]
+WantedBy=default.target

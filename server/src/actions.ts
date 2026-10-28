@@ -47,13 +47,15 @@ import { PACKAGE_SOURCE_FILES } from "./phase2a-package-sources";
 import { MARKET_FRESHNESS_VERSION, QUOTE_STALE_AFTER_MS, MarketFetchError, RefreshDeduplicator, currentObservationsFromPointers, fetchMarketJson, freshnessState, normalizeBinanceKline, normalizeBinanceMiniTicker, observationFingerprint, observationFreshness, quoteEligibleForContract, statusEventKey, statusFromQuote, streamIdentity, type MarketObservation } from "./market-freshness";
 import { detectFundingBundles, normalizeRugCheck, panelVerdict, type HolderFunding, type RiskStatus } from "./meme-risk";
 import { reconcileMeasurement, selectMeasurementBatch, stableEvaluationFingerprint, type GradingState, type TradeState } from "./measurement-recovery";
-import { assertTierRefreshComplete, canTransitionDiscoveryRun, CATALOG_MISSED_MESSAGE, CATALOG_MISSED_SUMMARY, CATALOG_PAGE_RETRY_DELAYS_MS, certifyDiscoverySlot, chunkArray, classifyDiscoveryLanes, DISCOVERY_STAGE_BUDGET_MS, isLiveDiscoveryLease, isReapableStaleDiscoveryRun, namedTimeoutSummary, requiredFeedDeferralReason, resolveCatalog, retryOnce, runBudgetedChecks, scoringBudgetDeferralReason, shouldCarryStoredChart, skippedVenueAttempt, StageBudgetTimeoutError, stageBudgetExhaustedDetail, suppressedDuplicateMessage, withStageBudget } from "./discovery-repair";
+import { assertTierRefreshComplete, canTransitionDiscoveryRun, CATALOG_MISSED_MESSAGE, CATALOG_MISSED_SUMMARY, CATALOG_PAGE_RETRY_DELAYS_MS, certifyDiscoverySlot, chunkArray, classifyDiscoveryLanes, DISCOVERY_STAGE_BUDGET_MS, isLiveDiscoveryLease, isReapableStaleDiscoveryRun, namedTimeoutSummary, requiredFeedDeferralReason, resolveCatalog, retryOnce, runBudgetedChecks, scoringBudgetDeferralReason, shouldCarryStoredChart, skippedVenueAttempt, StageBudgetTimeoutError, stageBudgetExhaustedDetail, suppressedDuplicateMessage, withStageBudget, buildNewsAnnotationEvidence, DISCOVERY_NEWS_ANNOTATION_LIMIT, DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS } from "./discovery-repair";
 import { DEPLOYED_PAPER_PATH, ISSUANCE_HANDLER_VERSION, PAPER_DELIVERY_ARCHITECTURE, PAPER_SOURCE_HASHES, PAPER_VERSION_MAPPING, assertNoLegacyPaperIssuer, fetchBinanceTradeHistory, type BinanceCoverage, type VenueTradePrint } from "./paper-v219";
 import { fetchMexcKlines, fetchMexcTradeHistory, MEXC_VENUE_LABEL, type MexcCoverage } from "./paper-venue-mexc";
 import { PAPER_INTAKE_MAX_ITEMS_PER_INVOCATION, PAPER_INTAKE_REPAIR_ACTIVATED_AT, isTerminalIntakeStatus, runDurableIntake, type IntakeProcessResult, type IntakeWorkItem } from "./paper-intake";
 import { decideIssuanceWork, monitoringHoldExplanation, planHandoffAccounting, selectHandoffToAccount, summarizeHandoffCoverage, summarizeIntakeStatuses, type HandoffProcessingState, type IssuanceWorkDecision } from "./issuance-work-check";
 import { evaluateHistoryCacheFreshness, stateAfterMetadataWriteFailure } from "./history-cache-freshness";
 import { paperAlertReadRow, paperAlertsOnlyRead } from "./paper-alert-read-model";
+import { DISCOVERY_PIPELINE_STAGE_BUDGET_MS, pipelineCheckpointCounts, pipelineStageDef } from "./discovery-pipeline";
+import { collapseNotificationEntries } from "./notification-entries";
 import { computeMonitoringHealth, type MonitoringHealth, type MonitoringPositionInput } from "./monitoring-health";
 import { buildPaperPollLeaseAttempt, runBoundedCoalescedPoll, type PaperPollClaim as DurablePaperPollClaim, type PaperPollLeaseStore } from "./paper-poll-concurrency";
 import { fullErrorText, getFallbackWriteFailures, MAX_CAPTURE_ROWS, pruneCountFor, recordWriteFailure as recordWriteFailureRow, type WriteFailureInput } from "./write-failure-capture";
@@ -1609,6 +1611,21 @@ const marketDiscoverySynthesisShape = z.object({
     rippleChain: z.array(z.object({ from: z.string().min(1).max(100), mechanism: z.string().min(3).max(260), to: z.string().min(1).max(100), kind: z.enum(["verified", "inference"]), sourceIndices: z.array(z.number().int().nonnegative()).max(5) })).min(2).max(6),
   })).max(4),
 });
+// Run-209 repair (news-annotation path only): the early annotation call
+// uses a deliberately smaller output contract than the full synthesis
+// news shape above — a shorter why-it-matters and at most three sector
+// impacts per item — so the structured response is roughly half the
+// size and finishes inside its raised budget. Field names, field types
+// and the impact direction enum are identical to
+// marketDiscoverySynthesisShape.shape.news, so annotated items keep
+// persisting through the same discoveryNews path unchanged. Theory
+// synthesis keeps the original shape and its own budget.
+const discoveryNewsAnnotationShape = z.array(z.object({
+  index: z.number().int().nonnegative(),
+  whyItMatters: z.string().min(1).max(240),
+  assets: z.array(z.string().min(1).max(20)).max(5),
+  impacts: z.array(z.object({ sector: z.string().min(2).max(60), direction: z.enum(["positive", "negative", "mixed", "unclear"]), mechanism: z.string().min(4).max(160) })).min(1).max(3),
+})).max(DISCOVERY_NEWS_ANNOTATION_LIMIT);
 const marketDiscoveryResponse = z.object({ ok: z.boolean(), status: z.enum(["complete", "degraded", "empty", "failed", "missed"]), runId: z.number().nullable(), universeSize: z.number(), signalCount: z.number(), newsCount: z.number(), theoryCount: z.number(), message: z.string(), computedAt: z.string(), dataThrough: z.string().nullable() });
 const universeTierRowResponse = z.object({ tier: z.enum(["T1", "T2", "T3", "T4"]), coin: z.string(), coinId: z.string(), name: z.string(), reason: z.string(), assignedDate: z.string(), graduationScore: z.number().nullable(), volumeRank: z.number().nullable(), price: z.number().nullable(), volume24h: z.number().nullable(), volumeMultiple30d: z.number().nullable(), change48h: z.number().nullable(), athChangePct: z.number().nullable(), nearStructuralDowntrend: z.boolean(), sma50: z.number().nullable(), rsi14: z.number().nullable(), historyDays: z.number(), chartPass: z.boolean(), thinData: z.boolean(), rsiFlag: z.boolean(), stablecoin: z.boolean(), mover: z.boolean(), moverReason: z.string().nullable(), catalystLine: z.string().nullable(), newListing: z.boolean(), witnesses: z.object({ volume: z.number().nullable(), holders: z.number().nullable(), whales: z.number().nullable(), catalyst: z.number(), structure: z.number(), holderGrowthPct: z.number().nullable(), whaleNetflow24hUsd: z.number().nullable(), onchainSource: z.string().nullable(), onchainAsOf: z.string().nullable() }), sourceAsOf: z.string() });
 const universeTiersResponse = z.object({ rows: z.array(universeTierRowResponse), counts: z.object({ T1: z.number(), T2: z.number(), T3: z.number(), T4: z.number() }), lastRun: z.object({ id: z.number(), status: z.string(), summary: z.string(), completedAt: z.string(), sourceStatus: z.array(z.object({ source: z.string(), status: z.string(), detail: z.string() })) }).nullable(), error: z.string().nullable() });
@@ -2046,6 +2063,11 @@ const DISCOVERY_TOOL_TIMEOUT_MS = 45_000;
 // linked news; measured calls exceed the 45s generic tool race even on a
 // healthy run, so synthesis carries its own budget. It still sits far
 // inside the 20-minute run deadline and the synthesis stage budget.
+// Run-209 repair: the early news-annotation call no longer shares this
+// budget — it timed out at 120s on run 209, so it carries its own raised
+// budget (DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS = 180s in
+// discovery-repair.ts) together with a simplified output contract. This
+// 120s budget now serves theory synthesis only; it is unchanged.
 const DISCOVERY_SYNTHESIS_TIMEOUT_MS = 120_000;
 // Run-186 repair: one candidate's post-decision evidence load (history-cache
 // backfill + OHLC slice, including the bounded retry) gets one aggregate
@@ -2058,7 +2080,11 @@ const DISCOVERY_CANDIDATE_EVIDENCE_TIMEOUT_MS = 60_000;
 // deadline defers through the veto's existing UNKNOWN path.
 const DISCOVERY_VETO_POLL_DEADLINE_MS = 45_000;
 type DiscoveryLaneStatus = `active${string}` | `paused(${string})` | `shadow(${string})`;
-type DiscoveryStage = "tier-freshness" | "api-budgets" | "catalog-fetch" | "velocity" | "charts" | "hyperliquid" | "scoring" | "synthesis" | "persistence";
+type DiscoveryStage = "tier-freshness" | "api-budgets" | "catalog-fetch" | "velocity" | "charts" | "hyperliquid" | "scoring" | "synthesis" | "persistence"
+  // 2026-10-28 pipeline split: the four pipeline stages leave their own
+  // checkpoints alongside the sub-stage checkpoints above (which are
+  // unchanged). See discovery-pipeline.ts for budgets and policies.
+  | "catalog-scoring" | "news-annotation" | "theory-synthesis" | "persistence-handoff";
 type DiscoveryLease = { runId: number; leaseId: string; deadlineAt: Date };
 // Batch 5 A5a: single-flight. A blind retry after a transport timeout must
 // not start a second full execution while a live run is in flight.
@@ -4216,6 +4242,43 @@ async function persistPaperHandoffSnapshot(ctx: Ctx, args: { discoveryRunId: num
   }
 }
 
+// Persistence+handoff guarantee (2026-10-28 pipeline split): a discovery
+// run whose catalog+scoring stage completed must never end in silence —
+// it leaves either a completed handoff row or this explicit FAILED
+// handoff record naming why no handoff was minted. The record is a new
+// row for THIS run only (handoffKey/discoveryRunId are unique per run);
+// it never reopens, replays, or re-stamps an earlier run, and a failed
+// record is never selected as a completed handoff by issuance. Returns
+// the handoff row id (existing or newly recorded), or null if the write
+// itself failed — callers treat null as a recorded source-status failure,
+// never as success.
+async function recordExplicitHandoffFailure(ctx: Ctx, args: { discoveryRunId: number; reason: string; discoveredCount?: number; scoredCount?: number }): Promise<number | null> {
+  const db = ctx.db<typeof schema>();
+  const existing = (await db.select({ id: schema.paperHandoffRuns.id }).from(schema.paperHandoffRuns).where(eq(schema.paperHandoffRuns.discoveryRunId, args.discoveryRunId)).limit(1))[0];
+  if (existing) return existing.id;
+  const now = new Date();
+  const inserted = (await db.insert(schema.paperHandoffRuns).values({
+    handoffKey: `${PAPER_FREEZE_VERSION}:discovery:${args.discoveryRunId}`,
+    discoveryRunId: args.discoveryRunId,
+    status: "failed",
+    discoveredCount: args.discoveredCount ?? 0,
+    scoredCount: args.scoredCount ?? 0,
+    directionalCount: 0,
+    eligibleCount: 0,
+    rejectedCount: 0,
+    reasonCountsJson: stableJson({ persistence_handoff_failure: 1 }),
+    sourceAccountingJson: stableJson({ explicitFailureRecord: true, stage: "persistence_handoff", reason: args.reason.slice(0, 500) }),
+    handlerVersion: ISSUANCE_HANDLER_VERSION,
+    sourceHashesJson: stableJson(PAPER_SOURCE_HASHES),
+    startedAt: now,
+    completedAt: now,
+    createdAt: now,
+  }).onConflictDoNothing().returning({ id: schema.paperHandoffRuns.id }))[0];
+  if (inserted) return inserted.id;
+  const reread = (await db.select({ id: schema.paperHandoffRuns.id }).from(schema.paperHandoffRuns).where(eq(schema.paperHandoffRuns.discoveryRunId, args.discoveryRunId)).limit(1))[0];
+  return reread?.id ?? null;
+}
+
 /**
  * Every completed handoff, oldest first (2026-10-25 missed-handoff
  * repair). The previous selection returned ONLY the handoff linked to
@@ -4627,8 +4690,29 @@ const notificationItemSchema = z.object({
   intakeReasonCode: z.string().nullable(),
   issuanceSupport: z.enum(["supported", "unsupported"]).nullable(),
   issuanceSupportReason: z.string().nullable(),
+  // Single-entry view (2026-10-28): one entry per prediction (discovery
+  // run + candidate). entryKey is that prediction's key; statusHistory is
+  // the append-only, timestamped list of every stored row this entry
+  // presents — the stored rows themselves are never rewritten, and each
+  // history entry keeps its own (store, id) so ack keying is unchanged.
+  entryKey: z.string(),
+  statusHistory: z.array(z.object({
+    store: z.enum(["paper_alert", "discovery", "engine_hit"]),
+    id: z.number(),
+    eventType: z.string(),
+    at: z.string().datetime(),
+    storedAt: z.string().datetime(),
+    group: z.enum(["actionable", "lifecycle", "expired"]),
+    read: z.boolean(),
+  }).strict()),
+  updateCount: z.number(),
+  firstStoredAt: z.string().datetime(),
+  lastStoredAt: z.string().datetime(),
 }).strict();
 type NotificationItem = z.infer<typeof notificationItemSchema>;
+// The shape the three store loops build, before the single-entry
+// collapse adds the entry fields above.
+type RawNotificationItem = Omit<NotificationItem, "entryKey" | "statusHistory" | "updateCount" | "firstStoredAt" | "lastStoredAt">;
 // Unsupported-for-issuance label (display only): derived from the venue
 // mapping (the COVERAGE allowlist — the same mapping getDiscoveryIssuance-
 // Breakdown reports as mappedVenue) for the candidate's coinId. MEXC Spot
@@ -9470,15 +9554,45 @@ export const Actions = {
         // the previous-run carry-forward pointer is recorded at the late
         // synthesis checkpoint when either half failed.
         const newsEvidence = newsRows.map((row: any, index: number) => `Source ${index}: ${row.title}\nPublisher: ${row.source ?? "Unknown"}\nPublished: ${row.published_at ?? row.last_updated_raw ?? "date unavailable"}\nSnippet: ${row.snippet ?? "No snippet"}`).join("\n\n");
+        // Run-209 repair (news-annotation path only): run 209's annotation
+        // of all 12 retained items under the full synthesis output
+        // contract exceeded its 120s budget ("market discovery news
+        // annotation exceeded 120s"). The annotation now covers only the
+        // first DISCOVERY_NEWS_ANNOTATION_LIMIT retained items, with
+        // truncated snippets and the simplified annotation contract
+        // (shorter why-it-matters, at most three impacts per item),
+        // under its own raised 180s budget — still far inside the
+        // 20-minute run deadline. Retained items past the limit stay
+        // unannotated and are skipped at persistence exactly as any
+        // unannotated item was before; the full newsEvidence above
+        // still feeds theory synthesis unchanged, and the fail-isolated
+        // catch below is unchanged: an annotation timeout degrades the
+        // run, it never blocks scoring, persistence, or the handoff.
+        const annotationEvidence = buildNewsAnnotationEvidence(newsRows);
+        // Pipeline stage 2 (2026-10-28 split): news annotation is its own
+        // stage with its own budget (180s) and its own checkpoint. It is
+        // fail-isolated — its outcome is recorded here and can never drag
+        // catalog+scoring, theory synthesis, persistence, or the handoff
+        // down with it. The evidence string above is built once and the
+        // full newsEvidence is reused by theory synthesis unchanged.
+        const newsAnnotationStageStartedAt = Date.now();
+        let newsAnnotationFailed = false;
         if (newsRows.length) {
           try {
-            const annotated = await withNamedTimeout("market discovery news annotation", DISCOVERY_SYNTHESIS_TIMEOUT_MS, ctx.inference.complete(`Act as a skeptical cross-market crypto research editor. Annotate the supplied linked news with why it matters and explicit sector impacts (positive, negative, mixed, or unclear), naming the mechanism and only assets actually supported by the source text. Do not invent dates, prices, flows, wallet activity, unlocks, sources, or facts. Source indices refer to the linked news list.\n\nLINKED NEWS\n${newsEvidence}`, { schema: z.object({ news: marketDiscoverySynthesisShape.shape.news }) }));
+            const annotated = await withNamedTimeout("market discovery news annotation", DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS, ctx.inference.complete(`Act as a skeptical cross-market crypto research editor. Annotate the supplied linked news with why it matters and explicit sector impacts (positive, negative, mixed, or unclear), naming the mechanism and only assets actually supported by the source text. Keep each why-it-matters to one or two sentences and give at most three sector impacts per item. Do not invent dates, prices, flows, wallet activity, unlocks, sources, or facts. Source indices refer to the linked news list.\n\nLINKED NEWS\n${annotationEvidence}`, { schema: z.object({ news: discoveryNewsAnnotationShape }) }));
             synthesis = { ...synthesis, news: annotated.news };
           } catch (error) {
+            newsAnnotationFailed = true;
             synthesisFailed = true;
             sourceStatus.push({ source: "Research synthesis", status: "unavailable", detail: compactError(error, "Inference news annotation unavailable; measured signals remain usable.") });
           }
         }
+        try {
+          await discoveryCheckpoint(ctx, lease, "news-annotation", newsAnnotationStageStartedAt, stageDurations, pipelineCheckpointCounts(
+            { status: !newsRows.length ? "skipped" : newsAnnotationFailed ? "failed" : "completed", durationMs: Math.max(0, Date.now() - newsAnnotationStageStartedAt), budgetMs: DISCOVERY_PIPELINE_STAGE_BUDGET_MS.news_annotation, ...(newsAnnotationFailed ? { error: "news annotation failed in isolation; run continued without annotated news" } : {}) },
+            { newsInputs: newsRows.length, annotated: synthesis.news.length },
+          ), { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
+        } catch { /* pipeline checkpoint is best-effort: a checkpoint write must never take the isolated stage (or the run) down with it */ }
 
         const elfaBySymbol = new Map(elfaCombined.map((row) => [row.symbol, row]));
         const velocity48hById = new Map<string, number | null>();
@@ -9960,11 +10074,24 @@ export const Actions = {
         // this run already measured; fetch timings (veto quote poll,
         // guarded-write skips) were recorded as they happened.
         for (const [stage, durationMs] of Object.entries(stageDurations)) {
-          runTiming.record({ operation: `checkpoint:${stage}`, startedAtMs: Date.now() - durationMs, endedAtMs: Date.now(), timeoutMs: DISCOVERY_STAGE_BUDGET_MS[stage as DiscoveryStage] ?? 0, outcome: "completed", cancelled: false, cancellation: "not_needed", cancellationNote: null });
+          // Sub-stages report their discovery-repair budget; pipeline
+          // stages (2026-10-28 split) report their pipeline budget.
+          const stageTimeoutMs = (DISCOVERY_STAGE_BUDGET_MS as Record<string, number>)[stage] ?? (DISCOVERY_PIPELINE_STAGE_BUDGET_MS as Record<string, number>)[stage.replaceAll("-", "_")] ?? 0;
+          runTiming.record({ operation: `checkpoint:${stage}`, startedAtMs: Date.now() - durationMs, endedAtMs: Date.now(), timeoutMs: stageTimeoutMs, outcome: "completed", cancelled: false, cancellation: "not_needed", cancellationNote: null });
         }
         sourceStatus.push({ source: "Per-input freshness (Q1)", status: "live", detail: JSON.stringify(inputFreshness.slice(0, 120)) });
         sourceStatus.push({ source: "Fetch & checkpoint timing (Q3)", status: "live", detail: JSON.stringify(runTiming.records.slice(0, 120)) });
         await discoveryCheckpoint(ctx, lease, "scoring", stageStartedAt, stageDurations, { scored: candidates.length, eligible: eligibleCandidates.length, retained: retainedSignals.length, suppressed: suppressedCandidates.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
+        // Pipeline stage 1 checkpoint (2026-10-28 split): catalog+scoring
+        // — the core, and the only stage a handoff strictly depends on —
+        // is complete at this point. Its checkpoint aggregates the
+        // sub-stage durations this run already measured; nothing is
+        // re-fetched or re-scored to produce it.
+        const catalogScoringDurationMs = ["tier-freshness", "api-budgets", "catalog-fetch", "velocity", "charts", "hyperliquid", "scoring"].reduce((sum, stage) => sum + (stageDurations[stage] ?? 0), 0);
+        await discoveryCheckpoint(ctx, lease, "catalog-scoring", Date.now() - catalogScoringDurationMs, stageDurations, pipelineCheckpointCounts(
+          { status: "completed", durationMs: catalogScoringDurationMs, budgetMs: DISCOVERY_PIPELINE_STAGE_BUDGET_MS.catalog_scoring },
+          { catalogRows: universe.length, scored: candidates.length, eligible: eligibleCandidates.length, retained: retainedSignals.length, suppressed: suppressedCandidates.length, subStages: pipelineStageDef("catalog_scoring").subStages },
+        ), { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
         stageStartedAt = Date.now();
         // Ordering repair (2026-10-23): research synthesis runs BEFORE the
         // evidence-only drift capture below. Synthesis is a headline output
@@ -10010,6 +10137,15 @@ export const Actions = {
           }
         }
         await discoveryCheckpoint(ctx, lease, "synthesis", stageStartedAt, stageDurations, { newsInputs: newsRows.length, newsOutputs: synthesis.news.length, theories: synthesis.theories.length }, { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
+        // Pipeline stage 3 checkpoint (2026-10-28 split): theory
+        // synthesis is its own stage under its own 120s budget. Its
+        // failure (synthesisFailed) is recorded here as an isolated stage
+        // failure — it degrades the run and can never drag scoring,
+        // persistence, or the handoff down with it.
+        await discoveryCheckpoint(ctx, lease, "theory-synthesis", stageStartedAt, stageDurations, pipelineCheckpointCounts(
+          { status: synthesisFailed ? "failed" : "completed", durationMs: stageDurations.synthesis ?? 0, budgetMs: DISCOVERY_PIPELINE_STAGE_BUDGET_MS.theory_synthesis, ...(synthesisFailed ? { error: "theory synthesis failed in isolation; measured signals and the handoff are unaffected" } : {}) },
+          { newsInputs: newsRows.length, newsOutputs: synthesis.news.length, theories: synthesis.theories.length },
+        ), { tierLaneStatus, velocityLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus) });
         stageStartedAt = Date.now();
         // CHANGE B (migration 0067, evidence capture only): decision-time
         // drift reference capture for every candidate that will become a
@@ -10045,7 +10181,15 @@ export const Actions = {
         } catch { /* evidence capture only — never fails or alters the run */ }
         const now = new Date(); const optionalUnavailable = sourceStatus.some((source) => source.status === "unavailable"); const baseRunStatus: "complete" | "degraded" | "empty" = scanUniverse.length === 0 && retainedSignals.length === 0 ? "empty" : !optionalUnavailable && newsRows.length && synthesis.news.length && synthesis.theories.length ? "complete" : "degraded"; const runStatus: "complete" | "degraded" | "empty" = stageBudgetExhausted && baseRunStatus === "complete" ? "degraded" : baseRunStatus;
         // Horizon grading is intentionally excluded from discovery refreshes. The daily postmortem owns declared-horizon observations from timestamped OHLC evidence; a late current quote can never settle a past horizon.
-        const priorDiscovery = await db.select().from(schema.discoverySignals).orderBy(desc(schema.discoverySignals.id)).limit(5000);
+        // Lighter persistence (2026-10-28 split): the prior-signal lookup
+        // below only ever reads rows for coinIds this run retained, so it
+        // is scoped to exactly those coinIds instead of re-reading the
+        // newest 5,000 stored signal rows on every run. Same result for
+        // every retained candidate; a run retaining nothing reads nothing.
+        const retainedCoinIds = [...new Set(retainedSignals.map((row) => row.coinId))];
+        const priorDiscovery = retainedCoinIds.length
+          ? await db.select().from(schema.discoverySignals).where(inArray(schema.discoverySignals.coinId, retainedCoinIds))
+          : [];
         const memeCount = retainedSignals.filter((row) => row.discoveryLane === "meme").length;
         const mainCount = retainedSignals.length - memeCount;
         const summaryChartFetched = discoveryChartResults.filter((row) => row.chart.source !== "unavailable").length;
@@ -10118,7 +10262,7 @@ export const Actions = {
         const linkedDiscoveryRows = await db.select({ id: schema.discoverySignals.id, coinId: schema.discoverySignals.coinId }).from(schema.discoverySignals).where(eq(schema.discoverySignals.latestRunId, runId));
         const discoveryIdByCoin = new Map(linkedDiscoveryRows.map((row) => [row.coinId, row.id]));
         await assertDiscoveryLease(ctx, lease);
-        await persistPaperHandoffSnapshot(ctx, {
+        const persistedHandoff = await persistPaperHandoffSnapshot(ctx, {
           discoveryRunId: runId,
           completedAt: now,
           scanItems,
@@ -10126,7 +10270,25 @@ export const Actions = {
           reasonCounts,
           candidates: issuanceCheckedCandidates.map((row) => ({ coinId: row.coinId, name: row.name, symbol: row.symbol, direction: row.direction, price: row.price, invalidationLevel: row.invalidationLevel, sourceAsOf: row.sourceAsOf, capturedAt: now, dimensions: row.dimensions, suppressionReason: row.suppressionReason, discoverySignalId: discoveryIdByCoin.get(row.coinId) ?? null, admissionLane: row.admissionLane, stage: "pre_legacy_filter", reason: row.suppressionReason ?? "Candidate reached the repaired handoff before legacy issuance filters.", driftReferenceCaptureJson: driftCaptureByCoinId.get(row.coinId) ?? null })),
         });
+        // Pipeline stage 4 guarantee (2026-10-28 split): persistence +
+        // handoff minting is its own step, and it verifies its own work —
+        // the handoff is re-read after minting. A scored run can no
+        // longer silently end with no handoff (the run-209 outcome): if
+        // no handoff row exists, an explicit FAILED handoff record is
+        // written for this run instead, and the stage reports
+        // "explicit_failure_recorded" in its checkpoint.
+        const handoffReadBack = (await db.select({ id: schema.paperHandoffRuns.id, status: schema.paperHandoffRuns.status }).from(schema.paperHandoffRuns).where(eq(schema.paperHandoffRuns.discoveryRunId, runId)).limit(1))[0] ?? null;
+        let handoffStageStatus: "completed" | "explicit_failure_recorded" = handoffReadBack ? "completed" : "explicit_failure_recorded";
+        let explicitHandoffFailureId: number | null = null;
+        if (!handoffReadBack) {
+          explicitHandoffFailureId = await recordExplicitHandoffFailure(ctx, { discoveryRunId: runId, reason: "Persistence completed without a handoff row; the persistence+handoff stage wrote this explicit failure record instead of ending silently.", discoveredCount: scanItems.length, scoredCount: candidates.length });
+          sourceStatus.push({ source: "Persistence + handoff", status: "unavailable", detail: `No handoff row existed after persistence; explicit failed-handoff record ${explicitHandoffFailureId ?? "write failed"} was written for run ${runId} so the slot reads as a recorded failure, never as silent success.` });
+        }
         await discoveryCheckpoint(ctx, lease, "persistence", stageStartedAt, stageDurations, { persistedSignals: retainedSignals.length, persistedNews: synthesis.news.length, paperCandidates: issuanceCheckedCandidates.length, pilotEvaluated: pilotRecord?.evaluatedCount ?? 0, pilotDeferred: pilotRecord?.deferredCount ?? 0, pilotUnexplainedOmissions: pilotRecord?.unexplainedOmissions ?? 0 }, { tierLaneStatus, velocityLaneStatus, admissionVersion, pilotUniverseJson, pilotLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus), summary: finalRunSummary, universeSize: scanUniverse.length, shortlisted: retainedSignals.length, signalCount: retainedSignals.length, newsCount: synthesis.news.length, theoryCount: weightedSurfaced });
+        await discoveryCheckpoint(ctx, lease, "persistence-handoff", stageStartedAt, stageDurations, pipelineCheckpointCounts(
+          { status: handoffStageStatus, durationMs: stageDurations.persistence ?? 0, budgetMs: DISCOVERY_PIPELINE_STAGE_BUDGET_MS.persistence_handoff, ...(handoffStageStatus === "explicit_failure_recorded" ? { error: "no handoff row after persistence; explicit failed-handoff record written" } : {}) },
+          { handoffId: handoffReadBack?.id ?? explicitHandoffFailureId ?? persistedHandoff.id, handoffStatus: handoffReadBack?.status ?? "failed", persistedSignals: retainedSignals.length, paperCandidates: issuanceCheckedCandidates.length },
+        ), { tierLaneStatus, velocityLaneStatus, admissionVersion, pilotUniverseJson, pilotLaneStatus, sourceStatusJson: JSON.stringify(sourceStatus), summary: finalRunSummary });
         const finalized = await db.update(schema.marketDiscoveryRuns).set({ status: runStatus, completedAt: new Date(), lastHeartbeatAt: new Date(), summary: finalRunSummary, admissionVersion, pilotUniverseJson, pilotLaneStatus, stageDurationsJson: stableJson(stageDurations) }).where(and(eq(schema.marketDiscoveryRuns.id, runId), eq(schema.marketDiscoveryRuns.leaseId, lease.leaseId), eq(schema.marketDiscoveryRuns.status, "running"))).returning({ id: schema.marketDiscoveryRuns.id });
         if (finalized.length !== 1) throw new Error(`Discovery lease ${lease.leaseId} was fenced before finalization.`);
         // Batch 2 funnel instrumentation (measurement only): counters are
@@ -10186,6 +10348,19 @@ export const Actions = {
         ctx.invalidateQueries(); return { ok: true, status: runStatus, runId, universeSize: scanUniverse.length, signalCount: retainedSignals.length, newsCount: synthesis.news.length, theoryCount: weightedSurfaced, message: finalRunSummary, computedAt: new Date().toISOString(), dataThrough: runDataThrough };
       } catch (error) {
         const completedAt = new Date(); const message = `Market discovery failed — ${compactError(error, "unknown error")}`;
+        // Persistence+handoff guarantee, failure path (2026-10-28 split):
+        // if catalog+scoring completed (its pipeline checkpoint exists)
+        // but the run died before a handoff was minted, the run must not
+        // end in silence — write the explicit failed-handoff record for
+        // THIS run first. Best-effort and fully isolated: a failure here
+        // never masks the original error, and runs that never finished
+        // scoring get no handoff record (there was nothing to hand off).
+        if (stageDurations["catalog-scoring"] !== undefined) {
+          try {
+            const recordedId = await recordExplicitHandoffFailure(ctx, { discoveryRunId: lease.runId, reason: `Discovery run failed after catalog+scoring completed, before a handoff was minted: ${compactError(error, "unknown error")}` });
+            if (recordedId !== null) sourceStatus.push({ source: "Persistence + handoff", status: "unavailable", detail: `Explicit failed-handoff record ${recordedId} written for run ${lease.runId}: the run failed after scoring, so the slot carries a recorded handoff failure instead of silence.` });
+          } catch { /* isolated: the run's own failure record below is authoritative */ }
+        }
         const current = (await db.select().from(schema.marketDiscoveryRuns).where(eq(schema.marketDiscoveryRuns.id, lease.runId)).limit(1))[0] ?? null;
         // FAILURE-RECORDING ISOLATION GUARD (Q4): no discovery_state write
         // (and no other snapshot/bookkeeping write) may precede the
@@ -11324,7 +11499,7 @@ export const Actions = {
           }
           return { terminalVisibleAt: storedAt.toISOString(), chatLate: false, deliveryNote: null };
         };
-        const items: NotificationItem[] = [];
+        const items: RawNotificationItem[] = [];
         const enteredContracts = new Set(paperRows.filter((row) => row.eventType === "ENTRY_CONFIRMED" && row.contractId).map((row) => row.contractId as string));
         for (const row of paperRows) {
           const payload = parseStored<Record<string, unknown>>(row.payloadJson, {});
@@ -11487,20 +11662,31 @@ export const Actions = {
           });
         }
         items.sort((a, b) => Date.parse(b.storedAt) - Date.parse(a.storedAt) || a.store.localeCompare(b.store) || b.id - a.id);
+        // Single-entry view (2026-10-28): the stored rows above collapse
+        // into ONE entry per prediction (discovery run + candidate; the
+        // same symbol in a different run stays separate). The entry's
+        // current fields come from its latest stored row; every row's
+        // event survives inside the entry as a timestamped, append-only
+        // statusHistory entry with its own (store, id). No stored row is
+        // rewritten — this is a projection over them (see
+        // notification-entries.ts, whose key + collapse are unit-pinned).
+        // Counts are over ENTRIES now, so the total is the number of
+        // predictions, not the number of lifecycle rows.
+        const entries: NotificationItem[] = collapseNotificationEntries(items);
         const isHistorical = (item: NotificationItem) => item.group === "expired" || item.chatLate;
         const counts = {
-          total: items.length,
-          unread: items.filter((item) => !item.read).length,
-          actionable: items.filter((item) => item.group === "actionable").length,
-          actionableUnread: items.filter((item) => item.group === "actionable" && !item.read).length,
-          lifecycle: items.filter((item) => item.group === "lifecycle").length,
-          lifecycleUnread: items.filter((item) => item.group === "lifecycle" && !item.read).length,
-          expired: items.filter((item) => item.group === "expired").length,
-          expiredUnread: items.filter((item) => item.group === "expired" && !item.read).length,
-          historical: items.filter(isHistorical).length,
-          historicalUnread: items.filter((item) => isHistorical(item) && !item.read).length,
+          total: entries.length,
+          unread: entries.filter((item) => !item.read).length,
+          actionable: entries.filter((item) => item.group === "actionable").length,
+          actionableUnread: entries.filter((item) => item.group === "actionable" && !item.read).length,
+          lifecycle: entries.filter((item) => item.group === "lifecycle").length,
+          lifecycleUnread: entries.filter((item) => item.group === "lifecycle" && !item.read).length,
+          expired: entries.filter((item) => item.group === "expired").length,
+          expiredUnread: entries.filter((item) => item.group === "expired" && !item.read).length,
+          historical: entries.filter(isHistorical).length,
+          historicalUnread: entries.filter((item) => isHistorical(item) && !item.read).length,
         };
-        return { notifications: items.slice(0, args.limit), counts, error: null };
+        return { notifications: entries.slice(0, args.limit), counts, error: null };
       } catch (error) {
         return { notifications: [], counts: { total: 0, unread: 0, actionable: 0, actionableUnread: 0, lifecycle: 0, lifecycleUnread: 0, expired: 0, expiredUnread: 0, historical: 0, historicalUnread: 0 }, error: compactError(error, "Notifications unavailable") };
       }

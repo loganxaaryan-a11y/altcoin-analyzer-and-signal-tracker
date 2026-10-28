@@ -1,0 +1,8 @@
+[Unit]
+Description=Research terminal research refresh (HL cache + scanner + snapshot) - zero-agent module
+After=network.target
+
+[Service]
+Type=oneshot
+Environment=HOME=/home/hatch
+ExecStart=/home/hatch/workspace/goals/research-terminal/engine/modules/research/run.sh

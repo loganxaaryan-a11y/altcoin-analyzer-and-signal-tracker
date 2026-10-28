@@ -1,0 +1,8 @@
+{
+  "module": "equity",
+  "started_at_utc": "2026-10-28T16:35:06Z",
+  "finished_at_utc": "2026-10-28T16:35:08Z",
+  "duration_s": 2,
+  "steps": {"openbb": 0, "snapshot": 0},
+  "route": "systemd (zero agent launches)"
+}

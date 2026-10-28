@@ -1,0 +1,10 @@
+[Unit]
+Description=Fire rt-core-demo every 5 minutes (DEMO cadence — real cadence set at consolidation)
+
+[Timer]
+OnCalendar=*:0/5
+Unit=rt-core-demo.service
+Persistent=false
+
+[Install]
+WantedBy=default.target

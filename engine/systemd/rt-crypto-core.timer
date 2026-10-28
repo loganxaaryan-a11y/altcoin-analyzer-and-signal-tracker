@@ -1,0 +1,10 @@
+[Unit]
+Description=Run rt-crypto-core every 30 minutes at :13/:43 (the legacy lane's cadence, which it replaces at cutover)
+
+[Timer]
+OnCalendar=*:13:00
+OnCalendar=*:43:00
+Persistent=false
+
+[Install]
+WantedBy=default.target

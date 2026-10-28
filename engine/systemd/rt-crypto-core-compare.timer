@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the crypto-core comparison every 30 minutes at :28/:58 for the 24h comparison window (offset from the legacy production lane at :13/:43)
+
+[Timer]
+OnCalendar=*:28:00
+OnCalendar=*:58:00
+Persistent=false
+
+[Install]
+WantedBy=default.target

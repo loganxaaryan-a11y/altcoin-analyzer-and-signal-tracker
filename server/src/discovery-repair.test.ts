@@ -160,6 +160,36 @@ describe("batch 5 part A — discovery survival", () => {
   });
 });
 
+import { buildNewsAnnotationEvidence, DISCOVERY_NEWS_ANNOTATION_LIMIT, DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS, DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS } from "./discovery-repair";
+
+describe("run 209 — news annotation budget repair", () => {
+  test("the annotation budget is raised above the 120s that timed out on run 209 and stays well inside the 20-minute run deadline", () => {
+    expect(DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS).toBe(180_000);
+    expect(DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS).toBeGreaterThan(120_000);
+    expect(DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS).toBeLessThan((20 * 60_000) / 2);
+  });
+
+  test("the annotation work is capped below the 12 retained news rows", () => {
+    expect(DISCOVERY_NEWS_ANNOTATION_LIMIT).toBe(8);
+    expect(DISCOVERY_NEWS_ANNOTATION_LIMIT).toBeLessThan(12);
+  });
+
+  test("the evidence builder caps the rows, keeps their source indices, and truncates snippets", () => {
+    const rows = Array.from({ length: 12 }, (_, i) => ({ title: `T${i}`, source: "S", published_at: "2026-10-27", snippet: "x".repeat(1_000) }));
+    const evidence = buildNewsAnnotationEvidence(rows);
+    expect(evidence).toContain("Source 0: T0");
+    expect(evidence).toContain(`Source ${DISCOVERY_NEWS_ANNOTATION_LIMIT - 1}:`);
+    expect(evidence).not.toContain(`Source ${DISCOVERY_NEWS_ANNOTATION_LIMIT}:`);
+    expect(evidence).not.toContain("x".repeat(DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS + 1));
+    expect(evidence).toContain("x".repeat(DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS));
+  });
+
+  test("the evidence builder preserves the legacy format byte-for-byte for a short row", () => {
+    const evidence = buildNewsAnnotationEvidence([{ title: "Hello", source: null, published_at: null, last_updated_raw: null, snippet: null }]);
+    expect(evidence).toBe("Source 0: Hello\nPublisher: Unknown\nPublished: date unavailable\nSnippet: No snippet");
+  });
+});
+
 describe("discovery certification at the consumer boundary", () => {
   test("the producer's verified 'complete' terminal status normalizes to the scheduler's 'completed'", () => {
     expect(normalizeDiscoveryTerminalStatus("complete")).toBe("completed");

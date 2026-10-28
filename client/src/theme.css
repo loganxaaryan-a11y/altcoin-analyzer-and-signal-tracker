@@ -477,6 +477,9 @@ main{max-width:1200px;padding-top:16px}
 .notification-row .notification-blocker b{font:600 10px 'IBM Plex Mono',monospace}
 .notification-row .notification-disclosure{font-size:11px}
 .notification-times{display:block;margin-top:9px;color:var(--dim);font:9px/1.5 'IBM Plex Mono',monospace;overflow-wrap:anywhere}
+.notification-history{display:flex;flex-direction:column;gap:2px;margin-top:8px;border-top:1px dashed var(--border);padding-top:7px}
+.notification-history small{color:var(--dim);font:9px/1.5 'IBM Plex Mono',monospace;overflow-wrap:anywhere}
+.notification-history .notification-history-line{color:var(--text)}
 .notification-ack{margin-top:9px}
 .notification-expired{margin-top:14px;border-top:1px solid var(--border);padding-top:10px}
 .notification-expired summary{cursor:pointer;font:600 11px 'IBM Plex Mono',monospace;text-transform:uppercase;color:var(--dim)}

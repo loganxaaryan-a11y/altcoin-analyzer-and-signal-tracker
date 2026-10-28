@@ -320,6 +320,42 @@ export function normalizeDiscoveryTerminalStatus(rawStatus: string | null | unde
   return null;
 }
 
+// ── Run 209 repair (2026-10-27): news-annotation budget + simplification.
+// Discovery run 209's early news annotation — all 12 retained news items
+// under the full synthesis output contract (why-it-matters up to 420
+// chars and up to 6 sector impacts per item) — exceeded its 120s named
+// timeout ("market discovery news annotation exceeded 120s"). The
+// annotation is fail-isolated, so the timeout itself only degraded the
+// run, but it burned the full 120s and left the run with no annotated
+// news. The repair is confined to that stage: the annotation gets its
+// OWN raised budget (180s, still a small fraction of the 20-minute
+// discovery execution deadline; theory synthesis keeps its separate
+// 120s budget) and the work itself is smaller — at most
+// DISCOVERY_NEWS_ANNOTATION_LIMIT items, snippets truncated, and a
+// simplified output contract in actions.ts (shorter why-it-matters, at
+// most 3 impacts per item). Nothing here touches scoring, gates,
+// thresholds, the entry contract, or issuance.
+export const DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS = 180_000;
+export const DISCOVERY_NEWS_ANNOTATION_LIMIT = 8;
+export const DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS = 300;
+
+export type NewsAnnotationSourceRow = { title?: unknown; source?: unknown; published_at?: unknown; last_updated_raw?: unknown; snippet?: unknown };
+
+// Build the annotation call's evidence text from the first `limit`
+// retained news rows. Source indices match the full linked-news list
+// (the annotated rows are a prefix of it), snippet text is truncated to
+// DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS, and the line format is
+// byte-identical to the format the annotation prompt has always used,
+// so a short input produces exactly the old evidence string.
+export function buildNewsAnnotationEvidence(rows: readonly unknown[], limit: number = DISCOVERY_NEWS_ANNOTATION_LIMIT): string {
+  return rows.slice(0, Math.max(0, limit)).map((raw, index) => {
+    const row = (raw ?? {}) as NewsAnnotationSourceRow;
+    const snippetRaw = row.snippet ?? "No snippet";
+    const snippet = typeof snippetRaw === "string" ? snippetRaw.slice(0, DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS) : snippetRaw;
+    return `Source ${index}: ${String(row.title ?? "")}\nPublisher: ${String(row.source ?? "Unknown")}\nPublished: ${String(row.published_at ?? row.last_updated_raw ?? "date unavailable")}\nSnippet: ${String(snippet)}`;
+  }).join("\n\n");
+}
+
 export function certifyDiscoverySlot(input: {
   rawStatus: string | null;
   runId: number | null;
