@@ -99,6 +99,12 @@ export const privileged = definePrivilegedContracts({
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
+  writePaperEnrollmentCanonical: {
+    request: z.object({ content: z.string().min(1) }),
+    response: z.object({ ok: z.boolean(), bytes: z.number().nullable(), writtenAtUtc: z.string().nullable(), error: z.string().nullable() }),
+    capabilities: ["subprocess"],
+    timeoutMs: 120_000,
+  },
 });
 
 const PYTHON_PROVIDER = String.raw`
@@ -579,8 +585,16 @@ if snapshot:
         "candles": candles, "funding_points": funding_points,
     }
 
+# Engine core snapshot (schema core-snapshot-v1): code-computed book /
+# coverage / enrollment health published by the workspace engine. Read
+# verbatim for display only; a missing or unparseable file records an
+# error entry and yields None so the caller can show "unavailable"
+# instead of recomputing anything.
+core_snapshot = load_json("snapshots/core-snapshot.json")
+
 out = {
     "positions": positions,
+    "core_snapshot": core_snapshot,
     "monitoring_state": mon_state,
     "observations": [summarize_obs(rec) for rec in latest_obs.values()],
     "outcomes": outcomes_records,
@@ -949,6 +963,59 @@ function runOpenbbDeribit() {
   catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "OpenBB Deribit bundle read returned an unreadable response." }; }
 }
 
+const canonicalWriteResponse = z.object({ ok: z.boolean(), bytes: z.number().nullable(), writtenAtUtc: z.string().nullable(), error: z.string().nullable() });
+
+// The target path is a constant inside this bridge: the caller supplies
+// only the serialized file content, never a path, filename, or directory.
+// The write is atomic — full content to a temp file in the same directory,
+// fsync, then rename over the target — so a failure at any step leaves any
+// existing canonical-entered.json untouched and never leaves a partial file.
+const PYTHON_WRITE_CANONICAL = String.raw`
+import datetime, json, os, sys, tempfile
+
+TARGET = "/home/hatch/workspace/goals/research-terminal/paper-signals/pilot/monitoring/canonical-entered.json"
+
+def emit(ok, byte_count, written_at, error):
+    print(json.dumps({"ok": ok, "bytes": byte_count, "writtenAtUtc": written_at, "error": error}, separators=(",", ":")))
+
+try:
+    payload = json.loads(sys.stdin.read())
+    content = payload.get("content")
+    if not isinstance(content, str) or not content:
+        emit(False, None, None, "content must be a non-empty string")
+        raise SystemExit(0)
+    raw = content.encode("utf-8")
+    directory = os.path.dirname(TARGET)
+    os.makedirs(directory, exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(dir=directory, prefix=".canonical-entered-", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "wb") as fh:
+            fh.write(raw)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp_path, TARGET)
+    except Exception:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+        raise
+    written_at = datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
+    emit(True, len(raw), written_at, None)
+except SystemExit:
+    raise
+except Exception as exc:
+    emit(False, None, None, type(exc).__name__ + ": " + str(exc))
+`;
+
+function runWriteCanonical(content: string) {
+  const result = spawnSync("python3", ["-c", PYTHON_WRITE_CANONICAL], { input: JSON.stringify({ content }), encoding: "utf8", timeout: 100_000, maxBuffer: 4_000_000 });
+  if (result.error) return { ok: false, bytes: null, writtenAtUtc: null, error: result.error.message.slice(0, 500) };
+  if (result.status !== 0) return { ok: false, bytes: null, writtenAtUtc: null, error: (result.stderr || "Canonical write subprocess failed").slice(0, 500) };
+  try { return canonicalWriteResponse.parse(JSON.parse(result.stdout)); }
+  catch { return { ok: false, bytes: null, writtenAtUtc: null, error: "Canonical write returned an unreadable response." }; }
+}
+
 export const privilegedHandlers = definePrivilegedHandlers(privileged, {
   elfaRequest(args) { return runProvider({ provider: "elfa", ...args }); },
   nansenRequest(args) { return runProvider({ provider: "nansen", ...args }); },
@@ -964,4 +1031,5 @@ export const privilegedHandlers = definePrivilegedHandlers(privileged, {
   fundingSeriesStats() { return runFundingSeries(); },
   hyperliquidPositioningFiles() { return runHlPositioning(); },
   openbbDeribitFiles() { return runOpenbbDeribit(); },
+  writePaperEnrollmentCanonical(args) { return runWriteCanonical(args.content); },
 });

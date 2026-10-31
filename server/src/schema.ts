@@ -327,6 +327,27 @@ export const discoveryInformationalNotifications = sqliteTable("discovery_inform
   index("discovery_informational_notifications_status_created_idx").on(table.status, table.createdAt),
 ]);
 
+// Append-only dispositions for discovery informational notifications
+// (migration 0071): recorded when a discovery slot closes WITHOUT an
+// issuance handoff — a coverage gap — and the candidate's entry window
+// expires unissued. The original notification row is NEVER rewritten;
+// the read model resolves the notification's displayed state from this
+// disposition instead of leaving it AWAITING_ISSUANCE forever (the
+// notification-621 case: discovery run 191 stalled in scoring, no
+// handoff was ever produced, and the dead slot kept reading as though
+// issuance was still coming). One disposition per notification.
+export const discoveryNotificationDispositions = sqliteTable("discovery_notification_dispositions", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  notificationId: integer("notification_id").notNull(),
+  discoveryRunId: integer("discovery_run_id"),
+  disposition: text("disposition", { enum: ["coverage_gap_expired_unissued"] }).notNull(),
+  reason: text("reason").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [
+  uniqueIndex("discovery_notification_dispositions_notification_uidx").on(table.notificationId),
+  index("discovery_notification_dispositions_run_idx").on(table.discoveryRunId),
+]);
+
 export const schedulerInvocationReceipts = sqliteTable("scheduler_invocation_receipts", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   jobKey: text("job_key", { enum: ["market_data_refresh", "market_discovery_scan", "signal_status_monitor", "history_layer_refresh", "paper_entry_watch", "theory_discovery", "universe_daily_snapshot", "universe_weekly_refresh", "signal_daily_postmortem"] }).notNull(),
@@ -405,6 +426,13 @@ export const marketDiscoveryRuns = sqliteTable("market_discovery_runs", {
   lastHeartbeatAt: integer("last_heartbeat_at", { mode: "timestamp_ms" }),
   tierLaneStatus: text("tier_lane_status"),
   velocityLaneStatus: text("velocity_lane_status"),
+  // paper-pilot-v2.1.7 activation (migration 0072): every discovery run
+  // records the active mapping/admission version, the frozen pilot
+  // universe with per-run present/deferred dispositions, and the pilot
+  // lane status. Null on pre-activation runs — never backfilled.
+  admissionVersion: text("admission_version"),
+  pilotUniverseJson: text("pilot_universe_json"),
+  pilotLaneStatus: text("pilot_lane_status"),
   stageDurationsJson: text("stage_durations_json").notNull().default("{}"),
   dependencyValidationJson: text("dependency_validation_json").notNull().default("{}"),
   startedAt: integer("started_at", { mode: "timestamp_ms" }).notNull().$defaultFn(() => new Date()),
@@ -475,6 +503,11 @@ export const discoverySignals = sqliteTable("discovery_signals", {
   researchState: text("research_state", { enum: ["validated", "research_required", "monitor"] }).notNull().default("research_required"),
   dimensionsJson: text("dimensions_json").notNull().default("[]"),
   discoveryTier: text("discovery_tier", { enum: ["tier1", "tier2"] }).notNull().default("tier1"),
+  // paper-pilot-v2.1.7 (migration 0072): the admission lane(s) this
+  // signal entered full scoring through — t1 / velocity keep their
+  // v2.1.6 meanings, binance_pilot is the v2.1.7 addition. Plain text:
+  // combined lanes are stored joined with "+". 'legacy' on old rows.
+  admissionLane: text("admission_lane").default("legacy"),
   discoveryLane: text("discovery_lane", { enum: ["main", "meme"] }).notNull().default("main"),
   triggerReasonsJson: text("trigger_reasons_json").notNull().default("[]"),
   socialSnapshotJson: text("social_snapshot_json"),
@@ -1348,7 +1381,18 @@ export const paperIssuanceWorkChecks = sqliteTable("paper_issuance_work_checks",
   // resultStatus "coalesced" instead of recording nothing. The underlying
   // column is plain text (no SQL CHECK constraint), so this enum widening
   // needs no DDL migration; historical rows are untouched.
-  decision: text("decision", { enum: ["skipped_completed", "processed_new", "recovered_incomplete", "no_handoff", "coalesced"] }).notNull(),
+  // "monitoring_hold" (2026-10-23 issuance inspection): a cycle refused by
+  // the monitoring-health gate records decision "monitoring_hold" with
+  // resultStatus "held" and the gate's full explanation, instead of the
+  // hold branch returning without recording anything — the gap that made
+  // a designed hold (coverage stale past its 45-minute bound) read as a
+  // dispatch failure. Same plain-text column, no DDL migration.
+  // "coverage_gap_closed" (2026-10-25 missed-handoff repair): the
+  // append-only disposition row recorded when an expired, never-selected
+  // handoff is closed as missed_processing by
+  // closeMissedHandoffCoverageGap. Same plain-text column, no DDL
+  // migration; historical rows are untouched.
+  decision: text("decision", { enum: ["skipped_completed", "processed_new", "recovered_incomplete", "no_handoff", "coalesced", "monitoring_hold", "coverage_gap_closed"] }).notNull(),
   resultStatus: text("result_status").notNull(),
   priorRunId: integer("prior_run_id"),
   priorRunStatus: text("prior_run_status"),
@@ -1362,4 +1406,59 @@ export const paperIssuanceWorkChecks = sqliteTable("paper_issuance_work_checks",
 }, (table) => [
   index("paper_issuance_work_checks_checked_idx").on(table.checkedAt),
   index("paper_issuance_work_checks_handoff_idx").on(table.handoffRunId, table.checkedAt),
+]);
+
+// Write-failure captures (migration 0068; Q6 hardening 0069): the original
+// driver error + cause chain for failed writes, captured after retries
+// exhaust — one row per occurrence. Stored text is bounded at the capture
+// layer (8,000 chars with a truncation marker) and secrets-redacted — it
+// never goes through compactError's 220-char slice (that cap is why
+// verbatim text was missing from receipts, discovery/theory summaries, and
+// intake reasons). Operation + schema version are recorded per capture
+// (0069). Fix-neutral: no decision path reads this table.
+// Q2 expanded-scoring harness runs (migration 0070): HARNESS-ONLY report
+// rows for the pre-activation expanded scoring measurement. No production
+// decision, gate, threshold, or issuance path ever reads this table; the
+// harness itself writes ONLY here, and its writes-disabled proof counts
+// the production tables (paper_signal_runs, paper_candidate_intake,
+// notification tables, monitoring enrollment tables) before vs after.
+export const expandedScoringHarnessRuns = sqliteTable("expanded_scoring_harness_runs", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  runKey: text("run_key").notNull().unique(),
+  status: text("status", { enum: ["complete", "failed"] }).notNull(),
+  requestedCount: integer("requested_count").notNull().default(0),
+  presentCount: integer("present_count").notNull().default(0),
+  evaluatedCount: integer("evaluated_count").notNull().default(0),
+  notEvaluatedCount: integer("not_evaluated_count").notNull().default(0),
+  scoringMs: integer("scoring_ms").notNull().default(0),
+  velocityMs: integer("velocity_ms").notNull().default(0),
+  evidenceLoadMs: integer("evidence_load_ms").notNull().default(0),
+  overBudget: integer("over_budget", { mode: "boolean" }).notNull().default(false),
+  duplicateScoringDetected: integer("duplicate_scoring_detected", { mode: "boolean" }).notNull().default(false),
+  guardAttempts: integer("guard_attempts").notNull().default(0),
+  writesProofJson: text("writes_proof_json").notNull(),
+  reportJson: text("report_json").notNull(),
+  startedAt: integer("started_at", { mode: "timestamp_ms" }).notNull(),
+  completedAt: integer("completed_at", { mode: "timestamp_ms" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+}, (table) => [
+  uniqueIndex("expanded_scoring_harness_runs_run_key_uidx").on(table.runKey),
+  index("expanded_scoring_harness_runs_created_idx").on(table.createdAt),
+]);
+
+export const writeFailureCaptures = sqliteTable("write_failure_captures", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  occurredAt: integer("occurred_at", { mode: "timestamp_ms" }).notNull(),
+  lane: text("lane").notNull(),
+  tableName: text("table_name").notNull(),
+  statementKind: text("statement_kind").notNull(),
+  operation: text("operation").notNull().default("unknown"),
+  schemaVersion: text("schema_version").notNull().default("0068"),
+  runId: text("run_id"),
+  attemptedKey: text("attempted_key"),
+  errorText: text("error_text").notNull(),
+  errorKind: text("error_kind").notNull(),
+  contextJson: text("context_json"),
+}, (table) => [
+  index("write_failure_captures_lane_occurred_idx").on(table.lane, table.occurredAt),
 ]);

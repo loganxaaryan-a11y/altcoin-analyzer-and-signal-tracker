@@ -165,3 +165,212 @@ export async function retryOnce<T>(work: () => Promise<T>, opts: { delayMs?: num
     }
   }
 }
+
+// ── Run 186 repair (2026-10-25): bounded deadlines past the hyperliquid
+// checkpoint. Run 186's last heartbeat sat at "hyperliquid", but that stage
+// is parse + checkpoint only (2ms in run 187) — the Hyperliquid contexts are
+// fetched earlier, inside the catalog-fetch stage. The unbudgeted section
+// AFTER that checkpoint — the veto quote poll plus the per-candidate
+// post-decision evidence checks, whose history-cache backfills chain many
+// transport-bounded calls into an aggregate with no bound, no intermediate
+// heartbeat, and no lease assertion until every candidate finished — is
+// where the run died: the worker was killed before the run's own deadline
+// and the row sat "running" until a later reaper fenced it as a coverage
+// gap. The helpers below are the pure cores of the repair; actions.ts wires
+// them to the network and the DB. Nothing here touches thresholds, scores,
+// gates, the entry contract, or the production admission rule.
+
+export class FeedDeadlineTimeoutError extends Error {
+  constructor(readonly operation: string, readonly timeoutMs: number) {
+    super(`timeout: ${operation} exceeded ${Math.round(timeoutMs / 1000)}s`);
+    this.name = "FeedDeadlineTimeoutError";
+  }
+}
+
+export type FeedSettlement<T> =
+  | { status: "available"; value: T }
+  | { status: "unavailable"; reason: string };
+
+// Settle one external feed call against a hard deadline. NEVER throws: a
+// failed or stalled call comes back as explicitly unavailable with the
+// reason, so an optional feed degrades in the open (the caller records it
+// in sourceStatus) instead of hanging the run or vanishing silently. The
+// underlying work is not cancelled (same race semantics as withStageBudget);
+// the await is what is bounded. Cancellation record for this transport:
+// UNSUPPORTED — settleFeedWithDeadline receives an already-started
+// promise, so no AbortSignal can reach the underlying work. Callers that
+// need verified cancellation use settleFeedWithAbort (fetch-timing.ts),
+// which passes an AbortSignal into the work factory; the veto quote poll
+// in runMarketDiscovery is wired that way (Q3, 2026-10-25).
+export async function settleFeedWithDeadline<T>(operation: string, timeoutMs: number, work: Promise<T>): Promise<FeedSettlement<T>> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => { timer = setTimeout(() => reject(new FeedDeadlineTimeoutError(operation, timeoutMs)), timeoutMs); });
+  try {
+    const value = await Promise.race([work, timeout]);
+    return { status: "available", value };
+  } catch (error) {
+    return { status: "unavailable", reason: error instanceof Error ? error.message.slice(0, 220) : `${operation} failed` };
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
+  }
+}
+
+// Canonical deferral record for a candidate whose REQUIRED feed did not
+// settle: the candidate is deferred — not scored around, not dropped — and
+// the reason names the feed and why it is unavailable.
+export function requiredFeedDeferralReason(feed: string, reason: string): string {
+  return `deferred — required feed unavailable (${feed}): ${reason}`;
+}
+
+export function scoringBudgetDeferralReason(feed: string, budgetMs: number): string {
+  return requiredFeedDeferralReason(feed, `scoring stage budget exhausted after ${Math.round(budgetMs / 1000)}s before this candidate's check completed; candidate not evaluated this run`);
+}
+
+export type BudgetedCheckControl = { aborted: () => boolean };
+export type BudgetedCheckOutcome<R> = { results: Map<string, R>; deferredKeys: string[]; budgetExhausted: boolean };
+
+// Run per-item checks under one hard stage budget. The returned promise
+// resolves at the budget deadline even if a worker is stalled on an
+// external call: items that never completed are reported in deferredKeys
+// (the caller defers those candidates with the reason — they are never
+// silently dropped and never scored around missing evidence). Workers
+// receive a cooperative abort signal: once the budget fires, no new item
+// starts, and a worker that reaches a write after the deadline can check
+// control.aborted() and skip run-scoped writes instead of writing into a
+// run that has already moved on and fenced its lease.
+export async function runBudgetedChecks<I, R>(args: {
+  items: readonly I[];
+  keyOf: (item: I) => string;
+  budgetMs: number;
+  concurrency: number;
+  worker: (item: I, control: BudgetedCheckControl) => Promise<R>;
+  onProgress?: (completedCount: number, totalCount: number) => void;
+}): Promise<BudgetedCheckOutcome<R>> {
+  const results = new Map<string, R>();
+  let abortedFlag = false;
+  const control: BudgetedCheckControl = { aborted: () => abortedFlag };
+  let cursor = 0;
+  const total = args.items.length;
+  const runners = Array.from({ length: Math.max(1, Math.min(args.concurrency, Math.max(total, 1))) }, async () => {
+    while (!abortedFlag && cursor < total) {
+      const index = cursor++;
+      const item = args.items[index];
+      if (item === undefined) continue;
+      const value = await args.worker(item, control);
+      results.set(args.keyOf(item), value);
+      args.onProgress?.(results.size, total);
+    }
+  });
+  const allDone = Promise.all(runners).then(() => false);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const budgetFired = new Promise<boolean>((resolve) => { timer = setTimeout(() => { abortedFlag = true; resolve(true); }, args.budgetMs); });
+  const budgetExhausted = await Promise.race([allDone, budgetFired]);
+  if (timer !== undefined) clearTimeout(timer);
+  // Snapshot at the deadline: a worker still in flight may finish later in
+  // the background, but its result can no longer enter this outcome — the
+  // item stays deferred, and the worker's own writes are gated on
+  // control.aborted().
+  const snapshot = new Map(results);
+  const deferredKeys = args.items.map((item) => args.keyOf(item)).filter((key) => !snapshot.has(key));
+  return { results: snapshot, deferredKeys, budgetExhausted };
+}
+
+// ── Run-state transitions: a terminal run is never reopened. The 1300 slot
+// of 2026-10-25 (run 186) closed as a named timeout — a coverage gap. That
+// record is final: no later code path may transition it back to "running",
+// re-dispatch it, or turn it into a handoff or position. New work is always
+// a NEW run row; the only legal exit from "running" is a terminal status.
+export const DISCOVERY_RUN_TERMINAL_STATUSES: ReadonlySet<string> = new Set(["complete", "degraded", "empty", "missed", "timeout", "failed"]);
+
+export function canTransitionDiscoveryRun(from: string, to: string): boolean {
+  if (from === to) return false;
+  if (DISCOVERY_RUN_TERMINAL_STATUSES.has(from)) return false;
+  return from === "running" && DISCOVERY_RUN_TERMINAL_STATUSES.has(to);
+}
+
+// The stale-lease reaper may fence ONLY a row that is still "running" and
+// past its deadline. A terminal row — above all a "timeout" coverage gap —
+// is never reapable, so it can never be reopened or re-executed.
+export function isReapableStaleDiscoveryRun(row: { status: string; deadlineAtMs: number | null; startedAtMs: number }, nowMs: number, executionDeadlineMs: number): boolean {
+  if (row.status !== "running") return false;
+  if (!canTransitionDiscoveryRun(row.status, "timeout")) return false;
+  if (row.deadlineAtMs !== null) return row.deadlineAtMs < nowMs;
+  return row.startedAtMs < nowMs - executionDeadlineMs;
+}
+
+// ── Discovery certification at the consumer boundary (2026-10-26) ──────
+//
+// The discovery producer's verified terminal success status is "complete"
+// (marketDiscoveryResponse / market_discovery_runs). The scheduler's
+// certification vocabulary is "completed" / "degraded". Run 196
+// (2026-10-26) executed successfully — terminal run, handoff 104,
+// issuance run 151 — but the slot was marked failed because the consumer
+// did not recognize "complete". The fix lives HERE, at the consumer
+// boundary: normalize the producer's known terminal statuses into the
+// scheduler's vocabulary. Unknown statuses stay unverified (null) — they
+// are never promoted to a success word. Certification additionally
+// requires the slot's OWN run (id match) and a recorded handoff for that
+// run; a normalized status alone never certifies a slot, and a failed
+// receipt never replays completed business work.
+export type SchedulerTerminalStatus = "completed" | "degraded";
+
+export function normalizeDiscoveryTerminalStatus(rawStatus: string | null | undefined): SchedulerTerminalStatus | null {
+  if (rawStatus === "complete") return "completed";
+  if (rawStatus === "degraded") return "degraded";
+  return null;
+}
+
+// ── Run 209 repair (2026-10-27): news-annotation budget + simplification.
+// Discovery run 209's early news annotation — all 12 retained news items
+// under the full synthesis output contract (why-it-matters up to 420
+// chars and up to 6 sector impacts per item) — exceeded its 120s named
+// timeout ("market discovery news annotation exceeded 120s"). The
+// annotation is fail-isolated, so the timeout itself only degraded the
+// run, but it burned the full 120s and left the run with no annotated
+// news. The repair is confined to that stage: the annotation gets its
+// OWN raised budget (180s, still a small fraction of the 20-minute
+// discovery execution deadline; theory synthesis keeps its separate
+// 120s budget) and the work itself is smaller — at most
+// DISCOVERY_NEWS_ANNOTATION_LIMIT items, snippets truncated, and a
+// simplified output contract in actions.ts (shorter why-it-matters, at
+// most 3 impacts per item). Nothing here touches scoring, gates,
+// thresholds, the entry contract, or issuance.
+export const DISCOVERY_NEWS_ANNOTATION_TIMEOUT_MS = 180_000;
+export const DISCOVERY_NEWS_ANNOTATION_LIMIT = 8;
+export const DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS = 300;
+
+export type NewsAnnotationSourceRow = { title?: unknown; source?: unknown; published_at?: unknown; last_updated_raw?: unknown; snippet?: unknown };
+
+// Build the annotation call's evidence text from the first `limit`
+// retained news rows. Source indices match the full linked-news list
+// (the annotated rows are a prefix of it), snippet text is truncated to
+// DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS, and the line format is
+// byte-identical to the format the annotation prompt has always used,
+// so a short input produces exactly the old evidence string.
+export function buildNewsAnnotationEvidence(rows: readonly unknown[], limit: number = DISCOVERY_NEWS_ANNOTATION_LIMIT): string {
+  return rows.slice(0, Math.max(0, limit)).map((raw, index) => {
+    const row = (raw ?? {}) as NewsAnnotationSourceRow;
+    const snippetRaw = row.snippet ?? "No snippet";
+    const snippet = typeof snippetRaw === "string" ? snippetRaw.slice(0, DISCOVERY_NEWS_ANNOTATION_SNIPPET_MAX_CHARS) : snippetRaw;
+    return `Source ${index}: ${String(row.title ?? "")}\nPublisher: ${String(row.source ?? "Unknown")}\nPublished: ${String(row.published_at ?? row.last_updated_raw ?? "date unavailable")}\nSnippet: ${String(snippet)}`;
+  }).join("\n\n");
+}
+
+export function certifyDiscoverySlot(input: {
+  rawStatus: string | null;
+  runId: number | null;
+  slotRunId: number | null;
+  handoffRunId: number | null;
+}): { certified: boolean; schedulerStatus: SchedulerTerminalStatus | null; reason: string } {
+  const schedulerStatus = normalizeDiscoveryTerminalStatus(input.rawStatus);
+  if (schedulerStatus === null) {
+    return { certified: false, schedulerStatus: null, reason: `producer status ${input.rawStatus === null ? "(none)" : `"${input.rawStatus}"`} is not a recognized terminal status — the slot stays unverified.` };
+  }
+  if (input.runId === null || input.slotRunId === null || input.runId !== input.slotRunId) {
+    return { certified: false, schedulerStatus, reason: `terminal run ${input.runId ?? "(none)"} is not the slot's own run ${input.slotRunId ?? "(unknown)"} — the slot stays unverified.` };
+  }
+  if (input.handoffRunId === null) {
+    return { certified: false, schedulerStatus, reason: `run ${input.runId} reached terminal status "${input.rawStatus}" (normalized "${schedulerStatus}") but no handoff is recorded for it — execution is proven, certification is withheld until the handoff check passes.` };
+  }
+  return { certified: true, schedulerStatus, reason: `run ${input.runId} terminal status "${input.rawStatus}" normalized to scheduler status "${schedulerStatus}"; the slot's own handoff ${input.handoffRunId} is recorded.` };
+}

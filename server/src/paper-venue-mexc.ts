@@ -126,7 +126,18 @@ export async function fetchMexcTradeHistory(symbol: string, sinceMs: number, unt
 // [openTime, open, high, low, close, volume, closeTime, quoteVolume].
 export async function fetchMexcKlines(symbol: string, interval: string, startTimeMs: number, limit = 1000): Promise<unknown[]> {
   const url = `${MEXC_BASE}/api/v3/klines?symbol=${encodeURIComponent(symbol)}&interval=${encodeURIComponent(interval)}&limit=${limit}&startTime=${Math.trunc(startTimeMs)}`;
-  const response = await fetch(url, { headers: { Accept: "application/json" } });
+  // Bounded deadline (run-186 repair): this fetch sits inside discovery's
+  // per-candidate history-cache backfill, where a raw fetch with no abort
+  // signal could hang the whole scoring section indefinitely.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 20_000);
+  let response: Response;
+  try {
+    response = await fetch(url, { headers: { Accept: "application/json" }, signal: controller.signal });
+  } catch (error) {
+    if (controller.signal.aborted) throw new Error("timeout: MEXC klines request exceeded 20s");
+    throw error;
+  } finally { clearTimeout(timer); }
   if (!response.ok) throw new Error(`MEXC klines returned HTTP ${response.status}`);
   const parsed: unknown = await response.json();
   if (!Array.isArray(parsed)) throw new Error("MEXC klines were not an array");

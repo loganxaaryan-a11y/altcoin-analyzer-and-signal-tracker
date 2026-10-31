@@ -470,6 +470,41 @@
       "when": 1792606270015,
       "tag": "0067_add_ath_gate_records_and_drift_reference_capture",
       "breakpoints": true
+    },
+    {
+      "idx": 67,
+      "version": "6",
+      "when": 1792887236884,
+      "tag": "0068_add_write_failure_captures",
+      "breakpoints": true
+    },
+    {
+      "idx": 68,
+      "version": "6",
+      "when": 1792963507754,
+      "tag": "0069_add_write_failure_operation_and_schema_version",
+      "breakpoints": true
+    },
+    {
+      "idx": 69,
+      "version": "6",
+      "when": 1792964522980,
+      "tag": "0070_add_expanded_scoring_harness_runs",
+      "breakpoints": true
+    },
+    {
+      "idx": 70,
+      "version": "6",
+      "when": 1793040932200,
+      "tag": "0071_add_discovery_notification_dispositions",
+      "breakpoints": true
+    },
+    {
+      "idx": 71,
+      "version": "6",
+      "when": 1793041935144,
+      "tag": "0072_activate_v217_pilot_admission_recording",
+      "breakpoints": true
     }
   ]
 }
