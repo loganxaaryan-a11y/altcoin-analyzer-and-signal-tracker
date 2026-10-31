@@ -5,12 +5,12 @@
   "packageManager": "bun@1.3.10",
   "scripts": {
     "typecheck": "bun x tsc --noEmit -p client/tsconfig.json && bun x tsc --noEmit -p server/tsconfig.json",
+    "test": "bun test server/src",
     "test:module": "bun test server/src/signal-methodology.test.ts",
     "test:integration": "bun test server/src/signal-persistence.integration.test.ts",
     "test:action": "bun test server/src/signal-action-contract.integration.test.ts",
     "test:measurement": "bun test server/src/measurement-recovery.test.ts server/src/measurement-database.integration.test.ts server/src/measurement-action.integration.test.ts server/src/factor-ledger-compat.test.ts server/src/signal-methodology.test.ts",
     "test:phase2a": "bun test server/src/phase2a-research.test.ts",
-    "test:phase2a1": "bun test server/src/phase2a-research.test.ts",
     "test:freshness": "bun test server/src/market-freshness.test.ts",
     "test:discovery-repair": "bun test server/src/discovery-repair.test.ts",
     "research:phase2a": "bun research/phase2a/cli.ts",

@@ -1,4 +1,6 @@
 import { spawnSync } from "node:child_process";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import {
 definePrivilegedContracts,
 definePrivilegedHandlers,
@@ -17,85 +19,85 @@ const providerResponse = z.object({
 export const privileged = definePrivilegedContracts({
   elfaRequest: {
     request: z.object({ endpoint: z.enum(["trending_tokens", "trending_contracts", "top_mentions"]), ticker: z.string().trim().min(1).max(30).nullable().default(null), limit: z.number().int().min(1).max(25).default(10) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.elfa", "network.api.elfa.ai"],
     timeoutMs: 90_000,
   },
   nansenRequest: {
     request: z.object({ endpoint: z.enum(["smart_money_netflow", "wallet_pnl"]), chain: z.string().trim().min(1).max(40), symbol: z.string().trim().min(1).max(30).nullable().default(null), address: z.string().trim().min(1).max(120).nullable().default(null), limit: z.number().int().min(1).max(25).default(10) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.nansen", "network.api.nansen.ai"],
     timeoutMs: 120_000,
   },
   altfinsRequest: {
     request: z.object({ endpoint: z.enum(["signals", "screener"]), direction: z.enum(["BULLISH", "BEARISH"]).nullable().default(null), symbols: z.array(z.string().trim().min(1).max(30)).max(25).default([]), limit: z.number().int().min(1).max(25).default(10) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.altfins", "network.altfins.com"],
     timeoutMs: 90_000,
   },
   alchemySolanaRequest: {
     request: z.object({ mint: z.string().trim().min(20).max(80), limit: z.number().int().min(1).max(20).default(10) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.alchemy", "network.solana-mainnet.g.alchemy.com"],
     timeoutMs: 90_000,
   },
   memeRiskRequest: {
     request: z.object({ mint: z.string().trim().regex(/^[1-9A-HJ-NP-Za-km-z]{32,44}$/), topN: z.number().int().min(5).max(12).default(12) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.fluxrpc", "credential.custom.alchemy", "network.eu.fluxrpc.com", "network.solana-mainnet.g.alchemy.com", "network.api.rugcheck.xyz"],
     timeoutMs: 180_000,
   },
   coinstatsRequest: {
     request: z.object({ coinIds: z.array(z.string().trim().min(1).max(100)).min(1).max(20) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.coinstats", "network.api.coinstats.app"],
     timeoutMs: 45_000,
   },
   anchainRequest: {
     request: z.object({ endpoint: z.enum(["label", "risk"]), proto: z.enum(["btc", "eth", "xlm", "xmr", "bnb", "matic", "avax", "sol", "trx", "ada", "dot", "ltc", "bch", "algo", "xrp"]), address: z.string().trim().min(20).max(120) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.anchain-data", "network.api.anchainai.com"],
     timeoutMs: 45_000,
   },
   alchemyEthRequest: {
     request: z.object({ address: z.string().trim().regex(/^0x[a-fA-F0-9]{40}$/), limit: z.number().int().min(1).max(20).default(10) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess", "credential.custom.alchemy-eth", "network.eth-mainnet.g.alchemy.com"],
     timeoutMs: 90_000,
   },
   paperPilotFiles: {
     request: z.object({}),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
   hyperliquidScannerRun: {
     request: z.object({}),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
   assetEvidenceFiles: {
     request: z.object({ symbol: z.string().trim().regex(/^[A-Za-z0-9][A-Za-z0-9.=\-]{0,14}$/) }),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
   fundingSeriesStats: {
     request: z.object({}),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
   hyperliquidPositioningFiles: {
     request: z.object({}),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
   openbbDeribitFiles: {
     request: z.object({}),
-    response: z.object({ ok: z.boolean(), status: z.number().nullable(), data: z.unknown().nullable(), creditsCost: z.string().nullable(), creditsRemaining: z.string().nullable(), error: z.string().nullable() }),
+    response: providerResponse,
     capabilities: ["subprocess"],
     timeoutMs: 60_000,
   },
@@ -447,13 +449,20 @@ except Exception as exc:
     print(json.dumps({"ok":False,"status":None,"data":None,"creditsCost":None,"creditsRemaining":None,"error":str(exc)[:500]}, separators=(",",":")))
 `;
 
-function runProvider(payload: Record<string, unknown>) {
-  const result = spawnSync("python3", ["-c", PYTHON_PROVIDER], { input: JSON.stringify(payload), encoding: "utf8", timeout: 100_000, maxBuffer: 4_000_000 });
-  if (result.error) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: result.error.message.slice(0, 500) };
-  if (result.status !== 0) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: (result.stderr || "Provider subprocess failed").replace(/hsurr:[A-Za-z0-9:_-]+/g, "[credential]").slice(0, 500) };
-  try { return providerResponse.parse(JSON.parse(result.stdout)); }
-  catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "Provider returned an unreadable response." }; }
+const fail = (error: string) => ({ ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: error.slice(0, 500) });
+
+function runPython(script: string, o: { label: string; input?: unknown; timeoutMs?: number; maxBuffer?: number; stderrFallback?: string }) {
+  const r = spawnSync("python3", ["-c", script], {
+    input: o.input === undefined ? undefined : JSON.stringify(o.input),
+    encoding: "utf8", timeout: o.timeoutMs ?? 60_000, maxBuffer: o.maxBuffer ?? 8_000_000,
+  });
+  if (r.error) return fail(r.error.message);
+  if (r.status !== 0) return fail((r.stderr || o.stderrFallback || `${o.label} failed`).replace(/hsurr:[A-Za-z0-9:_-]+/g, "[credential]"));
+  try { return providerResponse.parse(JSON.parse(r.stdout)); }
+  catch { return fail(`${o.label} returned an unreadable response.`); }
 }
+
+const runProvider = (payload: Record<string, unknown>) => runPython(PYTHON_PROVIDER, { label: "Provider", input: payload, timeoutMs: 100_000, maxBuffer: 4_000_000, stderrFallback: "Provider subprocess failed" });
 
 const PYTHON_PAPER_FILES = String.raw`
 import datetime, json, os, sys
@@ -611,13 +620,7 @@ out = {
 print(json.dumps({"ok": True, "status": 200, "data": out, "creditsCost": None, "creditsRemaining": None, "error": None}, separators=(",", ":")))
 `;
 
-function runPaperFiles() {
-  const result = spawnSync("python3", ["-c", PYTHON_PAPER_FILES], { encoding: "utf8", timeout: 60_000, maxBuffer: 8_000_000 });
-  if (result.error) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: result.error.message.slice(0, 500) };
-  if (result.status !== 0) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: (result.stderr || "Paper pilot file read failed").slice(0, 500) };
-  try { return providerResponse.parse(JSON.parse(result.stdout)); }
-  catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "Paper pilot file read returned an unreadable response." }; }
-}
+const runPaperFiles = () => runPython(PYTHON_PAPER_FILES, { label: "Paper pilot file read" });
 
 const PYTHON_SCANNER_RUN = String.raw`
 import json, os, re
@@ -646,13 +649,7 @@ except Exception as exc:
 print(json.dumps({"ok": True, "status": 200, "data": {"runFile": latest, "run": run}, "creditsCost": None, "creditsRemaining": None, "error": None}, separators=(",", ":")))
 `;
 
-function runScannerRun() {
-  const result = spawnSync("python3", ["-c", PYTHON_SCANNER_RUN], { encoding: "utf8", timeout: 60_000, maxBuffer: 8_000_000 });
-  if (result.error) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: result.error.message.slice(0, 500) };
-  if (result.status !== 0) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: (result.stderr || "Scanner run read failed").slice(0, 500) };
-  try { return providerResponse.parse(JSON.parse(result.stdout)); }
-  catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "Scanner run read returned an unreadable response." }; }
-}
+const runScannerRun = () => runPython(PYTHON_SCANNER_RUN, { label: "Scanner run read" });
 
 const PYTHON_ASSET_EVIDENCE = String.raw`
 import datetime, json, os, re, sys
@@ -809,71 +806,42 @@ out = {"dossier": dossier, "crossStream": cross, "smartMoney": {"entries": entri
 print(json.dumps({"ok": True, "status": 200, "data": out, "creditsCost": None, "creditsRemaining": None, "error": None}, separators=(",", ":")))
 `;
 
-function runAssetEvidence(symbol: string) {
-  const result = spawnSync("python3", ["-c", PYTHON_ASSET_EVIDENCE], { input: JSON.stringify({ symbol }), encoding: "utf8", timeout: 60_000, maxBuffer: 8_000_000 });
-  if (result.error) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: result.error.message.slice(0, 500) };
-  if (result.status !== 0) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: (result.stderr || "Asset evidence file read failed").slice(0, 500) };
-  try { return providerResponse.parse(JSON.parse(result.stdout)); }
-  catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "Asset evidence file read returned an unreadable response." }; }
-}
+const runAssetEvidence = (symbol: string) => runPython(PYTHON_ASSET_EVIDENCE, { label: "Asset evidence file read", input: { symbol } });
 
-const PYTHON_FUNDING_SERIES = String.raw`
-import json, math, os, re
-
-SERIES_DIR = "/home/hatch/workspace/goals/research-terminal/paper-signals/pilot/marketdata/series"
-series = {}
-errors = {}
-try:
-    names = sorted(os.listdir(SERIES_DIR))
-except Exception as exc:
-    print(json.dumps({"ok": False, "status": None, "data": None, "creditsCost": None, "creditsRemaining": None, "error": type(exc).__name__ + ": " + str(exc)}, separators=(",", ":")))
-    raise SystemExit(0)
-
-for name in names:
-    match = re.match(r"^funding-([A-Za-z0-9]+)\.jsonl$", name)
-    if not match:
-        continue
-    sym = match.group(1).upper()
-    points = []
-    try:
-        with open(os.path.join(SERIES_DIR, name), "r", encoding="utf-8") as fh:
-            for line in fh:
-                line = line.strip()
-                if not line or line.startswith("#"):
-                    continue
-                try:
-                    rec = json.loads(line)
-                    value = float(rec.get("value"))
-                except Exception:
-                    continue
-                points.append((str(rec.get("t_utc") or ""), value))
-    except Exception as exc:
-        errors[sym] = type(exc).__name__ + ": " + str(exc)
-        continue
-    points = points[-168:]
-    if not points:
-        continue
-    values = [value for _, value in points]
-    n = len(values)
-    latest = values[-1]
-    mean = sum(values) / n
-    variance = sum((value - mean) ** 2 for value in values) / n
-    sd = math.sqrt(variance)
-    z_score = (latest - mean) / sd if sd > 0 else None
-    below = sum(1 for value in values if value < latest)
-    equal = sum(1 for value in values if value == latest)
-    percentile = (below + 0.5 * equal) / n * 100
-    series[sym] = {"symbol": sym, "points": n, "firstAt": points[0][0] or None, "latestAt": points[-1][0] or None, "latest": latest, "zScore": z_score, "percentile": percentile}
-
-print(json.dumps({"ok": True, "status": 200, "data": {"series": series, "errors": errors}, "creditsCost": None, "creditsRemaining": None, "error": None}, separators=(",", ":")))
-`;
+const RT_ROOT = process.env.RT_ROOT ?? "/home/hatch/workspace/goals/research-terminal";
+const SERIES_DIR = join(RT_ROOT, "paper-signals/pilot/marketdata/series");
 
 function runFundingSeries() {
-  const result = spawnSync("python3", ["-c", PYTHON_FUNDING_SERIES], { encoding: "utf8", timeout: 60_000, maxBuffer: 8_000_000 });
-  if (result.error) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: result.error.message.slice(0, 500) };
-  if (result.status !== 0) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: (result.stderr || "Funding series read failed").slice(0, 500) };
-  try { return providerResponse.parse(JSON.parse(result.stdout)); }
-  catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "Funding series read returned an unreadable response." }; }
+  let names: string[];
+  try { names = readdirSync(SERIES_DIR).sort(); }
+  catch (e) { return fail(`${(e as Error).name}: ${(e as Error).message}`); }
+  const series: Record<string, unknown> = {};
+  const errors: Record<string, string> = {};
+  for (const name of names) {
+    const m = /^funding-([A-Za-z0-9]+)\.jsonl$/.exec(name);
+    if (!m) continue;
+    const sym = m[1].toUpperCase();
+    const pts: { t: string; v: number }[] = [];
+    try {
+      for (const raw of readFileSync(join(SERIES_DIR, name), "utf8").split("\n")) {
+        const line = raw.trim();
+        if (!line || line.startsWith("#")) continue;
+        try {
+          const rec = JSON.parse(line);
+          const v = rec.value == null || rec.value === "" ? NaN : Number(rec.value);
+          if (Number.isFinite(v)) pts.push({ t: String(rec.t_utc ?? ""), v });
+        } catch { /* skip bad line */ }
+      }
+    } catch (e) { errors[sym] = `${(e as Error).name}: ${(e as Error).message}`; continue; }
+    const last = pts.slice(-168);
+    if (!last.length) continue;
+    const vals = last.map((p) => p.v), n = vals.length, latest = vals[n - 1];
+    const mean = vals.reduce((a, b) => a + b, 0) / n;
+    const sd = Math.sqrt(vals.reduce((a, v) => a + (v - mean) ** 2, 0) / n);
+    const below = vals.filter((v) => v < latest).length, equal = vals.filter((v) => v === latest).length;
+    series[sym] = { symbol: sym, points: n, firstAt: last[0].t || null, latestAt: last[n - 1].t || null, latest, zScore: sd > 0 ? (latest - mean) / sd : null, percentile: ((below + 0.5 * equal) / n) * 100 };
+  }
+  return { ok: true, status: 200, data: { series, errors }, creditsCost: null, creditsRemaining: null, error: null };
 }
 
 const PYTHON_HL_POSITIONING = String.raw`
@@ -931,13 +899,7 @@ out = {
 print(json.dumps({"ok": True, "status": 200, "data": out, "creditsCost": None, "creditsRemaining": None, "error": None}, separators=(",", ":")))
 `;
 
-function runHlPositioning() {
-  const result = spawnSync("python3", ["-c", PYTHON_HL_POSITIONING], { encoding: "utf8", timeout: 60_000, maxBuffer: 16_000_000 });
-  if (result.error) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: result.error.message.slice(0, 500) };
-  if (result.status !== 0) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: (result.stderr || "Hyperliquid positioning file read failed").slice(0, 500) };
-  try { return providerResponse.parse(JSON.parse(result.stdout)); }
-  catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "Hyperliquid positioning file read returned an unreadable response." }; }
-}
+const runHlPositioning = () => runPython(PYTHON_HL_POSITIONING, { label: "Hyperliquid positioning file read", maxBuffer: 16_000_000 });
 
 const PYTHON_OPENBB_DERIBIT = String.raw`
 import json, os
@@ -955,13 +917,7 @@ out = {"bundle": bundle, "errors": errors}
 print(json.dumps({"ok": bundle is not None, "status": 200 if bundle is not None else None, "data": out, "creditsCost": None, "creditsRemaining": None, "error": errors.get("deribit.json")}, separators=(",", ":")))
 `;
 
-function runOpenbbDeribit() {
-  const result = spawnSync("python3", ["-c", PYTHON_OPENBB_DERIBIT], { encoding: "utf8", timeout: 60_000, maxBuffer: 8_000_000 });
-  if (result.error) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: result.error.message.slice(0, 500) };
-  if (result.status !== 0) return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: (result.stderr || "OpenBB Deribit bundle read failed").slice(0, 500) };
-  try { return providerResponse.parse(JSON.parse(result.stdout)); }
-  catch { return { ok: false, status: null, data: null, creditsCost: null, creditsRemaining: null, error: "OpenBB Deribit bundle read returned an unreadable response." }; }
-}
+const runOpenbbDeribit = () => runPython(PYTHON_OPENBB_DERIBIT, { label: "OpenBB Deribit bundle read" });
 
 const canonicalWriteResponse = z.object({ ok: z.boolean(), bytes: z.number().nullable(), writtenAtUtc: z.string().nullable(), error: z.string().nullable() });
 
